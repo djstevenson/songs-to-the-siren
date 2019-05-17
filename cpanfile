@@ -6,3 +6,4 @@ requires 'Mojolicious';
 requires 'Mojo::Pg';
 requires 'DBIx::Class';
 requires 'DBD::Pg';
+requires 'DateTime';
