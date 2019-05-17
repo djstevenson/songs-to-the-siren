@@ -1,5 +1,5 @@
-Songs I'll Never Tire Of blog
------------------------------
+The code behing the "Songs I'll Never Tire Of" blog
+---------------------------------------------------
 
 INIT test DB
 ============
@@ -22,18 +22,12 @@ Run app
 
 Optional overrides via the environment:
 
- * TEST_BCRYPT_COST=4 (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
-
-Show routes
-===========
-
-`carton exec -- script/never-tire routes`
+ * `TEST_BCRYPT_COST=4` (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
 
 Rebuild deps
 ============
 
 `rm -rf local vendor cpanfile.snapshot ; carton install ; carton bundle`
-
 
 TESTS
 =====
