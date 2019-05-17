@@ -1,4 +1,4 @@
-package Forum;
+package NeverTire;
 use Mojo::Base 'Mojolicious';
 
 # POD docs at end of source
