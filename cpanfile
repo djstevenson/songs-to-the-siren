@@ -8,3 +8,4 @@ requires 'DBIx::Class';
 requires 'DBD::Pg';
 requires 'DateTime';
 requires 'Authen::Passphrase::BlowfishCrypt';
+requires 'Digest::SHA3';
