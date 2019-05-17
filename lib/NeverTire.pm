@@ -12,6 +12,8 @@ sub startup {
 
     $self->secrets($self->config->{secrets});
 
+    $self->plugin('NeverTire::Helper::DB');
+
     $self->_migrate_db;
 }
 
