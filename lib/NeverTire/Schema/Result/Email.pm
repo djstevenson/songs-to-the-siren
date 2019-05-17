@@ -1,4 +1,4 @@
-package Forum::Schema::Result::Email;
+package NeverTire::Schema::Result::Email;
 use Moose;
 use namespace::autoclean;
 

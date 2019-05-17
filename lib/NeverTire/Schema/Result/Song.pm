@@ -31,8 +31,8 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->belongs_to(author => 'Forum::Schema::Result::User',   { 'foreign.id' => 'self.author_id' });
-__PACKAGE__->belongs_to(artist => 'Forum::Schema::Result::Artist', { 'foreign.id' => 'self.artist_id' });
+__PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',   { 'foreign.id' => 'self.author_id' });
+__PACKAGE__->belongs_to(artist => 'NeverTire::Schema::Result::Artist', { 'foreign.id' => 'self.artist_id' });
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);

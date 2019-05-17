@@ -1,11 +1,11 @@
-package Forum::Schema::Result::UserKey;
+package NeverTire::Schema::Result::UserKey;
 use Moose;
 use namespace::autoclean;
 
 extends 'NeverTire::Schema::Base::Result';
 
 use DateTime;
-use Forum::Util::Password;
+use NeverTire::Util::Password;
 
 # TODO POD
 

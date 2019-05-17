@@ -20,6 +20,10 @@ Run app
 
 `carton exec -- morbo script/never-tire`
 
+Optional overrides via the environment:
+
+ * TEST_BCRYPT_COST=4 (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
+
 Show routes
 ===========
 

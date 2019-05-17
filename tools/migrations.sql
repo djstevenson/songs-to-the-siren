@@ -62,11 +62,11 @@ CREATE TABLE songs (
     date_released TEXT NOT NULL,
 
      -- null = "not published, so don't show it"
-    date_published TIMESTAMP WITH TIME ZONE NULL 
+    date_published TIMESTAMP WITH TIME ZONE
 );
 
 -- For sorting by publication date
-CREATE INDEX songs_date_published_idx ON users USING BTREE(date_published);
+CREATE INDEX songs_date_published_idx ON songs USING BTREE(date_published);
 
 -- Support for cascade on foreign key constraints
 CREATE INDEX songs_artist_id_idx ON songs USING BTREE(artist_id);

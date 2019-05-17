@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 # POD at end of source file
 
-use Forum::Schema;
+use NeverTire::Schema;
 
 sub register {
     my ($self, $app) = @_;
@@ -14,7 +14,7 @@ sub register {
         return $c->config->{db_name};
     });
 
-    my $conn = Forum::Schema->connect('dbi:Pg:dbname=' . $app->db_name, 'newforum', undef);
+    my $conn = NeverTire::Schema->connect('dbi:Pg:dbname=' . $app->db_name, undef, undef);
     $app->helper(schema => sub {
         # TODO Check connection is still alive, reconnect if not?
         return $conn;
@@ -31,12 +31,12 @@ __END__
 
 =head1 NAME
 
-Forum::Helper::DB : helper to get a DB schema
+NeverTire::Helper::DB : helper to get a DB schema
 
 =head1 SYNOPSIS
 
     # In app startup()
-    $self->plugin('Forum::Helper::DB');
+    $self->plugin('NeverTire::Helper::DB');
 
     # To get a DBIx::Class schema
     my $schema = $c->schema;
