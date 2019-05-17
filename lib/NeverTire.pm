@@ -15,6 +15,11 @@ sub startup {
     $self->plugin('NeverTire::Helper::DB');
 
     $self->_migrate_db;
+
+    # Routing
+    # Router
+    my $r = $self->routes;
+    $r->get('/')->to('home#default_action')->name('home');
 }
 
 use Mojo::Pg;
