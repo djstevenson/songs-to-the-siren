@@ -19,6 +19,67 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
+  Authen-DecHpwd-2.007
+    pathname: Z/ZE/ZEFRAM/Authen-DecHpwd-2.007.tar.gz
+    provides:
+      Authen::DecHpwd 2.007
+    requirements:
+      Data::Integer 0.003
+      Digest::CRC 0.14
+      Exporter 0
+      Module::Build 0
+      Scalar::String 0
+      Test::More 0
+      constant 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Authen-Passphrase-0.008
+    pathname: Z/ZE/ZEFRAM/Authen-Passphrase-0.008.tar.gz
+    provides:
+      Authen::Passphrase 0.008
+      Authen::Passphrase::AcceptAll 0.008
+      Authen::Passphrase::BigCrypt 0.008
+      Authen::Passphrase::BlowfishCrypt 0.008
+      Authen::Passphrase::Clear 0.008
+      Authen::Passphrase::Crypt16 0.008
+      Authen::Passphrase::DESCrypt 0.008
+      Authen::Passphrase::EggdropBlowfish 0.008
+      Authen::Passphrase::LANManager 0.008
+      Authen::Passphrase::LANManagerHalf 0.008
+      Authen::Passphrase::MD5Crypt 0.008
+      Authen::Passphrase::MySQL323 0.008
+      Authen::Passphrase::MySQL41 0.008
+      Authen::Passphrase::NTHash 0.008
+      Authen::Passphrase::NetscapeMail 0.008
+      Authen::Passphrase::PHPass 0.008
+      Authen::Passphrase::RejectAll 0.008
+      Authen::Passphrase::SaltedDigest 0.008
+      Authen::Passphrase::VMSPurdy 0.008
+    requirements:
+      Authen::DecHpwd 2.003
+      Carp 0
+      Crypt::DES 0
+      Crypt::Eksblowfish::Bcrypt 0.008
+      Crypt::Eksblowfish::Uklblowfish 0.008
+      Crypt::MySQL 0.03
+      Crypt::PasswdMD5 1.0
+      Crypt::UnixCrypt_XS 0.08
+      Data::Entropy::Algorithms 0
+      Digest 1.00
+      Digest::MD4 1.2
+      Digest::MD5 1.9953
+      Digest::SHA 0
+      MIME::Base64 2.21
+      Module::Build 0
+      Module::Runtime 0.011
+      Params::Classify 0
+      Test::More 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
   B-Hooks-EndOfScope-0.24
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.24.tar.gz
     provides:
@@ -144,6 +205,22 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Class-Mix-0.006
+    pathname: Z/ZE/ZEFRAM/Class-Mix-0.006.tar.gz
+    provides:
+      Class::Mix 0.006
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build 0
+      Params::Classify 0
+      Test::More 0
+      constant 0
+      if 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
   Class-Singleton-1.5
     pathname: S/SH/SHAY/Class-Singleton-1.5.tar.gz
     provides:
@@ -211,6 +288,65 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Text 2.08
+  Crypt-DES-2.07
+    pathname: D/DP/DPARIS/Crypt-DES-2.07.tar.gz
+    provides:
+      Crypt::DES 2.07
+    requirements:
+      ExtUtils::MakeMaker 0
+  Crypt-Eksblowfish-0.009
+    pathname: Z/ZE/ZEFRAM/Crypt-Eksblowfish-0.009.tar.gz
+    provides:
+      Crypt::Eksblowfish 0.009
+      Crypt::Eksblowfish::Bcrypt 0.009
+      Crypt::Eksblowfish::Blowfish 0.009
+      Crypt::Eksblowfish::Family 0.009
+      Crypt::Eksblowfish::Subkeyed 0.009
+      Crypt::Eksblowfish::Uklblowfish 0.009
+    requirements:
+      Carp 0
+      Class::Mix 0.001
+      Exporter 0
+      ExtUtils::CBuilder 0.15
+      MIME::Base64 2.21
+      Module::Build 0
+      Test::More 0
+      XSLoader 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Crypt-MySQL-0.04
+    pathname: I/IK/IKEBE/Crypt-MySQL-0.04.tar.gz
+    provides:
+      Crypt::MySQL 0.04
+    requirements:
+      Digest::SHA1 0
+      ExtUtils::CBuilder 0
+      Test::More 0
+  Crypt-PasswdMD5-1.40
+    pathname: R/RS/RSAVAGE/Crypt-PasswdMD5-1.40.tgz
+    provides:
+      Crypt::PasswdMD5 1.40
+    requirements:
+      Digest::MD5 2.53
+      Module::Build 0
+      Test::More 0.94
+      strict 0
+      warnings 0
+  Crypt-Rijndael-1.13
+    pathname: L/LE/LEONT/Crypt-Rijndael-1.13.tar.gz
+    provides:
+      Crypt::Rijndael 1.13
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.006
+  Crypt-UnixCrypt_XS-0.11
+    pathname: B/BO/BORISZ/Crypt-UnixCrypt_XS-0.11.tar.gz
+    provides:
+      Crypt::UnixCrypt_XS 0.11
+    requirements:
+      ExtUtils::MakeMaker 0
   DBD-Pg-3.8.0
     pathname: T/TU/TURNSTEP/DBD-Pg-3.8.0.tar.gz
     provides:
@@ -476,6 +612,63 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::MakeMaker 0
       perl 5.006
+  Data-Entropy-0.007
+    pathname: Z/ZE/ZEFRAM/Data-Entropy-0.007.tar.gz
+    provides:
+      Data::Entropy 0.007
+      Data::Entropy::Algorithms 0.007
+      Data::Entropy::RawSource::CryptCounter 0.007
+      Data::Entropy::RawSource::Local 0.007
+      Data::Entropy::RawSource::RandomOrg 0.007
+      Data::Entropy::RawSource::RandomnumbersInfo 0.007
+      Data::Entropy::Source 0.007
+    requirements:
+      Carp 0
+      Crypt::Rijndael 0
+      Data::Float 0.008
+      Errno 1.00
+      Exporter 0
+      HTTP::Lite 2.2
+      IO::File 1.03
+      Module::Build 0
+      Params::Classify 0
+      Test::More 0
+      constant 0
+      integer 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Data-Float-0.013
+    pathname: Z/ZE/ZEFRAM/Data-Float-0.013.tar.gz
+    provides:
+      Data::Float 0.013
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build 0
+      Test::More 0
+      constant 0
+      integer 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Data-Integer-0.006
+    pathname: Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
+    provides:
+      Data::Integer 0.006
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build 0
+      Test::More 0
+      constant 0
+      integer 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
   Data-OptList-0.110
     pathname: R/RJ/RJBS/Data-OptList-0.110.tar.gz
     provides:
@@ -1001,6 +1194,27 @@ DISTRIBUTIONS
     requirements:
       Devel::StackTrace 0
       ExtUtils::MakeMaker 0
+  Digest-CRC-0.22.2
+    pathname: O/OL/OLIMAUL/Digest-CRC-0.22.2.tar.gz
+    provides:
+      Digest::CRC 0.22
+    requirements:
+      ExtUtils::MakeMaker 0
+  Digest-MD4-1.9
+    pathname: M/MI/MIKEM/DigestMD4/Digest-MD4-1.9.tar.gz
+    provides:
+      Digest::MD4 1.9
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+  Digest-SHA1-2.13
+    pathname: G/GA/GAAS/Digest-SHA1-2.13.tar.gz
+    provides:
+      Digest::SHA1 2.13
+    requirements:
+      Digest::base 1.00
+      ExtUtils::MakeMaker 0
+      perl 5.004
   Dist-CheckConflicts-0.11
     pathname: D/DO/DOY/Dist-CheckConflicts-0.11.tar.gz
     provides:
@@ -1156,6 +1370,17 @@ DISTRIBUTIONS
       HTTP::Date 0
       Module::Build::Tiny 0.035
       perl 5.008001
+  HTTP-Lite-2.44
+    pathname: N/NE/NEILB/HTTP-Lite-2.44.tar.gz
+    provides:
+      HTTP::Lite 2.44
+    requirements:
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      Socket 1.3
+      perl 5.005
+      strict 0
+      warnings 0
   HTTP-Message-6.18
     pathname: O/OA/OALDERS/HTTP-Message-6.18.tar.gz
     provides:
@@ -1992,6 +2217,19 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Params-Classify-0.015
+    pathname: Z/ZE/ZEFRAM/Params-Classify-0.015.tar.gz
+    provides:
+      Params::Classify 0.015
+    requirements:
+      Exporter 0
+      Module::Build 0
+      Scalar::Util 1.01
+      Test::More 0
+      parent 0
+      perl 5.006001
+      strict 0
+      warnings 0
   Params-Util-1.07
     pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
     provides:
@@ -2170,6 +2408,22 @@ DISTRIBUTIONS
       Sub::Quote 2.000001
       Text::Balanced 2.00
       perl 5.006
+  Scalar-String-0.003
+    pathname: Z/ZE/ZEFRAM/Scalar-String-0.003.tar.gz
+    provides:
+      Scalar::String 0.003
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build 0
+      Test::More 0
+      bytes 0
+      if 0
+      parent 0
+      perl 5.006
+      strict 0
+      utf8 0
+      warnings 0
   Scope-Guard-0.21
     pathname: C/CH/CHOCOLATE/Scope-Guard-0.21.tar.gz
     provides:
