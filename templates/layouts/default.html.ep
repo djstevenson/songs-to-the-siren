@@ -3,9 +3,19 @@
     %= include 'layouts/_headers'
 <body>
 
-<section class="content">
-    <%= content %>
-</section>
+<header>
+    <h1>Songs I&#x2019;ll Never Tire of...</h1>
+    <p>About this blog...</p>
+</header>
+
+<main>
+<%= content %>
+</main>
+
+<footer>
+    Footer here.
+</footer>
+
 
 </body>
 </html>

@@ -7,10 +7,13 @@ sub add_routes {
     $r->get('/')->to('home#front_page')->name('home');
 }
 
-sub default_action {
+sub front_page {
     my $c = shift;
 
-    # $c->stash(template => 'home');
+    # Add pagination
+    print STDERR "ARSE!!\n";
+    my $songs = $c->schema->resultset('Song')->home_page_songs;
+    $c->stash(songs => $songs);
 }
 
 1;

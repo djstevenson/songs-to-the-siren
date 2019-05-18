@@ -8,7 +8,7 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL, -- BCrypt
 
     date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_updated TIMESTAMP WITH TIME ZONE NULL
+    date_password TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
 CREATE UNIQUE INDEX users_name_unique_idx ON users USING BTREE(LOWER(name));
@@ -42,7 +42,7 @@ CREATE TABLE artists (
     "name" TEXT NOT NULL,
 
     date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_modified TIMESTAMP WITH TIME ZONE NOT NULL
+    date_updated TIMESTAMP WITH TIME ZONE
 );
 
 DROP TABLE IF EXISTS songs;
@@ -58,7 +58,7 @@ CREATE TABLE songs (
     author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 
     date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_modified TIMESTAMP WITH TIME ZONE NOT NULL,
+    date_updated TIMESTAMP WITH TIME ZONE,
     date_released TEXT NOT NULL,
 
      -- null = "not published, so don't show it"

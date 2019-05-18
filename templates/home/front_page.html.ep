@@ -1,4 +1,6 @@
 % layout 'default';
-% title 'Songs I\'ll Never Tire of';
+% title "Songs I\x{2019}ll Never Tire of";
 
-<p>Templated HTML Hello World home page</p>
+<p>Hello world with sections</p>
+
+<p>Song count = <%= $songs->count %></p>

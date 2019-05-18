@@ -8,7 +8,7 @@ extends 'NeverTire::Schema::Base::Result';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
-__PACKAGE__->table('songs');
+__PACKAGE__->table('users');
 
 __PACKAGE__->add_columns(
     id            => {data_type => 'INTEGER'},
@@ -16,7 +16,7 @@ __PACKAGE__->add_columns(
     email         => {data_type => 'TEXT'},
     password_hash => {data_type => 'TEXT'},   # Bcrypt 2a with random salt
     date_created  => {data_type => 'DATETIME'},
-    date_modified => {data_type => 'DATETIME'},
+    date_password => {data_type => 'DATETIME'},
 );
 
 __PACKAGE__->set_primary_key('id');
