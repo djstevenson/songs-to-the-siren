@@ -8,5 +8,6 @@ requires 'Mojo::Pg';
 requires 'DBIx::Class';
 requires 'DBD::Pg';
 requires 'DateTime';
+requires 'DateTime::Format::Pg';
 requires 'Authen::Passphrase::BlowfishCrypt';
 requires 'Digest::SHA3';
