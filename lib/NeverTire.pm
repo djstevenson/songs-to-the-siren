@@ -3,6 +3,10 @@ use Mojo::Base 'Mojolicious';
 
 # POD docs at end of source
 
+use NeverTire::Schema;
+
+use NeverTire::Controller::Home;
+
 # This method will run once at server start
 sub startup {
     my $self = shift;
@@ -19,7 +23,10 @@ sub startup {
     # Routing
     # Router
     my $r = $self->routes;
-    $r->get('/')->to('home#default_action')->name('home');
+
+    my $home_controller = NeverTire::Controller::Home->new;
+
+    $home_controller->add_routes($r);
 }
 
 use Mojo::Pg;
