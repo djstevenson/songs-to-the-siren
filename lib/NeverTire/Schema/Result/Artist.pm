@@ -8,12 +8,12 @@ extends 'NeverTire::Schema::Base::Result';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
-__PACKAGE__->table('songs');
+__PACKAGE__->table('artists');
 
 __PACKAGE__->add_columns(
     id             => {data_type => 'INTEGER'},
     date_created   => {data_type => 'DATETIME'},
-    date_modified  => {data_type => 'DATETIME'},
+    date_updated   => {data_type => 'DATETIME'},
 );
 
 __PACKAGE__->set_primary_key('id');

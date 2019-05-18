@@ -22,7 +22,7 @@ __PACKAGE__->add_columns(
     author_id      => {data_type => 'INTEGER'},
 
     date_created   => {data_type => 'DATETIME'},
-    date_modified  => {data_type => 'DATETIME'},
+    date_updated   => {data_type => 'DATETIME'},
     date_published => {data_type => 'DATETIME'},
 
     # TEXT so it can be free-format, e.g. "summer 1991"
