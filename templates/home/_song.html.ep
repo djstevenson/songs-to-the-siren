@@ -2,7 +2,7 @@
 <section class="song">
     <header>
         <h2 class="header">
-            <%= $song->title %> by <%= $song->get_column('artist_name') %>
+            <%= $song->title %> by <%= $song->artist %>
         </h2>
         <p>
             Written by <%= $song->get_column('author_name') %> at <%= $song->date_created %>.

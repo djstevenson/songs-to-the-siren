@@ -24,10 +24,8 @@ has_column title => (
     sortable    => 1,
 );
 
-has_column artist_name => (
-    header       => 'Artist',
+has_column artist => (
     sortable     => 1,
-    sort_by      => 'artist_name',
 );
 
 has_column date_created => (

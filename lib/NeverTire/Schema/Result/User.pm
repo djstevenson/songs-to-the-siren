@@ -6,6 +6,8 @@ extends 'NeverTire::Schema::Base::Result';
 
 # TODO POD
 
+use DateTime;
+
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
 __PACKAGE__->table('users');
@@ -22,7 +24,17 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key('id');
 
 # Relation for the song descriptions created by this user.
-__PACKAGE__->has_many(has_many => 'NeverTire::Schema::Result::Song', { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(song => 'NeverTire::Schema::Result::Song', { 'foreign.author_id' => 'self.id' });
+
+
+sub create_song {
+    my ($self, $args) = @_;
+
+    # TODO Render html properly!
+    $args->{html}         = 'html here';
+    $args->{date_created} = DateTime->now;
+    return $self->create_related('song', $args);
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
