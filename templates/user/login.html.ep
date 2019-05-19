@@ -1,0 +1,6 @@
+% layout 'admin';
+% title 'Login';
+
+<%== $form->render %>
+
+<p>TODO Forgot password links, etc</p>

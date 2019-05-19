@@ -28,6 +28,9 @@ sub create_user {
 	# TODO Probably don't set password here when we
 	#      create the user, but get them to set one
 	#      when they confirm.
+	# TODO Or, make this an initial password that
+	#      is marked as expired, so they have to 
+	#      change it when they log in.
 	# $user->send_registration_email;
 
 	return $user;

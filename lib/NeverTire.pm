@@ -6,6 +6,7 @@ use Mojo::Base 'Mojolicious';
 use NeverTire::Schema;
 
 use NeverTire::Controller::Home;
+use NeverTire::Controller::User;
 
 # This method will run once at server start
 sub startup {
@@ -20,6 +21,7 @@ sub startup {
     $app->secrets($app->config->{secrets});
 
     $app->plugin('NeverTire::Helper::DB');
+    $app->plugin('NeverTire::Helper::Form');
 
     $app->_migrate_db;
 
@@ -27,9 +29,32 @@ sub startup {
     # Router
     my $r = $app->routes;
 
-    my $home_controller = NeverTire::Controller::Home->new;
+    my $user_controller = NeverTire::Controller::User->new;
+    my $rl = $r->under('/' => sub {
+    	my $c = shift;
 
-    $home_controller->add_routes($r);
+        # Logged in?
+        if (my $user_id = $c->session->{user}) {
+            if (my $user = $c->schema->resultset('User')->find($user_id)) {
+                if (!$user->banned) {
+                    $c->stash->{auth_user} = $user;
+                    return 1;
+                }
+            }
+        }
+
+        delete $c->session->{user};
+        $c->stash->{auth_user} = undef;
+        $c->redirect_to('login');
+        return undef;
+    });
+
+	$user_controller->add_routes($r, $rl);
+
+    my $home_controller = NeverTire::Controller::Home->new;
+    $home_controller->add_routes($r, $rl);
+
+
 }
 
 use Mojo::Pg;
