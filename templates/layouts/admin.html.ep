@@ -16,6 +16,6 @@
     Footer here.
 </footer>
 
-
+<p><a href="<%= url_for('/user/logout') %>">Logout</a></p>
 </body>
 </html>

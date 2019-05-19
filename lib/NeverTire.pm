@@ -7,6 +7,7 @@ use NeverTire::Schema;
 
 use NeverTire::Controller::Home;
 use NeverTire::Controller::User;
+use NeverTire::Controller::Song;
 
 # This method will run once at server start
 sub startup {
@@ -22,6 +23,7 @@ sub startup {
 
     $app->plugin('NeverTire::Helper::DB');
     $app->plugin('NeverTire::Helper::Form');
+    $app->plugin('NeverTire::Helper::Table');
 
     $app->_migrate_db;
 
@@ -36,10 +38,8 @@ sub startup {
         # Logged in?
         if (my $user_id = $c->session->{user}) {
             if (my $user = $c->schema->resultset('User')->find($user_id)) {
-                if (!$user->banned) {
-                    $c->stash->{auth_user} = $user;
-                    return 1;
-                }
+                $c->stash->{auth_user} = $user;
+                return 1;
             }
         }
 
@@ -54,7 +54,8 @@ sub startup {
     my $home_controller = NeverTire::Controller::Home->new;
     $home_controller->add_routes($r, $rl);
 
-
+    my $song_controller = NeverTire::Controller::Song->new;
+    $song_controller->add_routes($r, $rl);
 }
 
 use Mojo::Pg;

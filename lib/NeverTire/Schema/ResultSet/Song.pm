@@ -56,8 +56,15 @@ sub by_pubdate {
     my ($self, $order) = @_;
 
     $order //= '-desc';
+
+    # Make some plain SQL so we can do NULLS FIRST
+    # We won't see the NULL (unpublished) cases if
+    # where_published() was called. But it's not
+    # called when listing songs for admin user, so
+    # we want the unpublished ones at the top.
+    my $sql_order = $order eq '-desc' ? 'DESC' : 'ASC';
     return $self->search(undef, {
-        order_by => { $order => 'date_published' },
+        order_by => \" date_published ${sql_order} NULLS FIRST",
     });
 }
 
