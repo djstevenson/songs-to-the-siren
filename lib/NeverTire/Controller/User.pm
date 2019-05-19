@@ -21,7 +21,7 @@ sub login {
     my $form = $c->form('User::Login');
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
-        $c->redirect_to('home');  # TODO Redirect to song "CRUD" pages
+        $c->redirect_to('list_songs');
     }
     else {
         $c->stash(form => $form);

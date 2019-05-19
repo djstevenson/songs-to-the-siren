@@ -1,0 +1,6 @@
+% layout 'admin';
+% title "Songs I\x{2019}ll Never Tire of";
+
+% while (my $song = $songs->next ) {
+    %= include 'home/_song', song => $song
+% }
