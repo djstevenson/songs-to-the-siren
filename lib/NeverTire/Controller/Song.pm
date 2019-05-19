@@ -20,15 +20,31 @@ sub add_routes {
     #      and possibly allowing a future pub date
     $song_action->route('/show')->name('show_song')->via('GET')->to(action => 'show');
     $song_action->route('/hide')->name('hide_song')->via('GET')->to(action => 'hide');
+    $song_action->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
 }
 
 sub create {
     my $c = shift;
 
     my $form = $c->form('Song::Create');
-    if (my $song = $form->process) {
+    if ($form->process) {
         $c->flash(msg => 'Song created');
-        # TODO Probably redirect to song view really?
+
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+sub edit {
+    my $c = shift;
+
+    my $song = $c->stash->{song};
+    my $form = $c->form('Song::Edit', song => $song);
+    if ($form->process) {
+        $c->flash(msg => 'Song updated');
+
         $c->redirect_to('list_songs');
     }
     else {
