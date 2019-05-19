@@ -48,9 +48,9 @@ has database => (
 
 # Low-level create, bypassses registration
 sub create_user {
-    my $self = shift;
+    my ($self, $user_data) = @_;
 
-    my $user_data = $self->get_user_data;
+    $user_data //= $self->get_user_data;
 
     my $schema = $self->schema;
     my $user_rs = $schema->resultset('User');
