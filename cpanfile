@@ -12,3 +12,4 @@ requires 'DateTime';
 requires 'DateTime::Format::Pg';
 requires 'Authen::Passphrase::BlowfishCrypt';
 requires 'Digest::SHA3';
+requires 'App::ForkProve';

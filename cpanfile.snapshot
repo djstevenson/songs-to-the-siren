@@ -2968,6 +2968,19 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
+  forkprove-v0.4.10
+    pathname: M/MI/MIYAGAWA/forkprove-v0.4.10.tar.gz
+    provides:
+      App::ForkProve 0.004010
+      App::ForkProve::PipeIterator undef
+      App::ForkProve::SourceHandler undef
+      forkprove undef
+    requirements:
+      App::Prove 3.25
+      ExtUtils::MakeMaker 6.30
+      TAP::Harness 3.25
+      parent 0.221
+      version 0.77
   namespace-autoclean-0.28
     pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
     provides:
