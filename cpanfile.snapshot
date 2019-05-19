@@ -1436,6 +1436,27 @@ DISTRIBUTIONS
       Test::More 0
       strict 0
       version 0
+  HTML-Parser-3.72
+    pathname: G/GA/GAAS/HTML-Parser-3.72.tar.gz
+    provides:
+      HTML::Entities 3.69
+      HTML::Filter 3.72
+      HTML::HeadParser 3.71
+      HTML::LinkExtor 3.69
+      HTML::Parser 3.72
+      HTML::PullParser 3.57
+      HTML::TokeParser 3.69
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTML::Tagset 3
+      XSLoader 0
+      perl 5.008
+  HTML-Tagset-3.20
+    pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
+    provides:
+      HTML::Tagset 3.20
+    requirements:
+      ExtUtils::MakeMaker 0
   HTTP-Date-6.02
     pathname: G/GA/GAAS/HTTP-Date-6.02.tar.gz
     provides:
@@ -2300,6 +2321,22 @@ DISTRIBUTIONS
       Moose::Util 0
       Try::Tiny 0
       warnings 0
+  MooseX-Traits-0.13
+    pathname: E/ET/ETHER/MooseX-Traits-0.13.tar.gz
+    provides:
+      MooseX::Traits 0.13
+      MooseX::Traits::Util 0.13
+    requirements:
+      Carp 0
+      Class::Load 0
+      Module::Build::Tiny 0.007
+      Moose::Role 0
+      Sub::Exporter 0
+      namespace::autoclean 0
+      perl 5.006
+      strict 0
+      warnings 0
+      warnings::register 0
   POSIX-strftime-Compiler-0.42
     pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.42.tar.gz
     provides:
