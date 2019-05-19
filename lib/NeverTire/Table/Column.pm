@@ -204,6 +204,7 @@ sub render_body_cell {
         ? 'class="' . $self->cell_class . '"'
         : '';
 
+    $s //= '';
     return qq{<td $class>$s</td>};
 }
 
