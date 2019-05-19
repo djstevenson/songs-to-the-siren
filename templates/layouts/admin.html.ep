@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    %= include 'layouts/_headers'
+<body>
+
+<header>
+    <h1>Songs I&#x2019;ll Never Tire of...</h1>
+    <p>ADMIN SECTION</p>
+</header>
+
+<main>
+<%= content %>
+</main>
+
+<footer>
+    Footer here.
+</footer>
+
+
+</body>
+</html>

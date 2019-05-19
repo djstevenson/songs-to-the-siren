@@ -1375,6 +1375,17 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  File-Copy-Recursive-Reduced-0.006
+    pathname: J/JK/JKEENAN/File-Copy-Recursive-Reduced-0.006.tar.gz
+    provides:
+      File::Copy::Recursive::Reduced 0.006
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Copy 0
+      File::Find 0
+      File::Path 0
+      File::Spec 0
+      perl 5.008000
   File-ShareDir-1.116
     pathname: R/RE/REHSACK/File-ShareDir-1.116.tar.gz
     provides:
@@ -1407,6 +1418,24 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
+  FindBin-libs-2.019002
+    pathname: L/LE/LEMBARK/FindBin-libs-2.019002.tar.gz
+    provides:
+      FindBin::libs 2.012001
+    requirements:
+      Carp 0
+      Cwd 3.073000
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy::Recursive::Reduced 0.006000
+      File::Spec::Functions 0
+      File::Temp 0
+      FindBin 0
+      List::Util 0
+      Symbol 0
+      Test::More 0
+      strict 0
+      version 0
   HTTP-Date-6.02
     pathname: G/GA/GAAS/HTTP-Date-6.02.tar.gz
     provides:
@@ -2939,6 +2968,19 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
+  forkprove-v0.4.10
+    pathname: M/MI/MIYAGAWA/forkprove-v0.4.10.tar.gz
+    provides:
+      App::ForkProve 0.004010
+      App::ForkProve::PipeIterator undef
+      App::ForkProve::SourceHandler undef
+      forkprove undef
+    requirements:
+      App::Prove 3.25
+      ExtUtils::MakeMaker 6.30
+      TAP::Harness 3.25
+      parent 0.221
+      version 0.77
   namespace-autoclean-0.28
     pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
     provides:

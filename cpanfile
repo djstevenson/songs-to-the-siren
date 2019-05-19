@@ -1,4 +1,5 @@
 requires 'namespace::autoclean';
+requires 'FindBin::libs';
 requires 'Cpanel::JSON::XS';
 requires 'Plack';
 requires 'Moose';
@@ -11,3 +12,4 @@ requires 'DateTime';
 requires 'DateTime::Format::Pg';
 requires 'Authen::Passphrase::BlowfishCrypt';
 requires 'Digest::SHA3';
+requires 'App::ForkProve';

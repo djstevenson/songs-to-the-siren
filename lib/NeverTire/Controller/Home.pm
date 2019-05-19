@@ -10,8 +10,7 @@ sub add_routes {
 sub front_page {
     my $c = shift;
 
-    # Add pagination
-    print STDERR "ARSE!!\n";
+    # TODO Add pagination
     my $songs = $c->schema->resultset('Song')->home_page_songs;
     $c->stash(songs => $songs);
 }
