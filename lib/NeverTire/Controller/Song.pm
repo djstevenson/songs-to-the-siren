@@ -11,6 +11,7 @@ sub add_routes {
 
     # These are admin functions, need to be logged in for all of them.
     $ul->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
+    $ul->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
 
     # Admin routes that capture a song id
     my $song_action = $ul->under('/:song_id')->to(action => 'capture');
@@ -19,6 +20,20 @@ sub add_routes {
     #      and possibly allowing a future pub date
     $song_action->route('/show')->name('show_song')->via('GET')->to(action => 'show');
     $song_action->route('/hide')->name('hide_song')->via('GET')->to(action => 'hide');
+}
+
+sub create {
+    my $c = shift;
+
+    my $form = $c->form('Song::Create');
+    if (my $song = $form->process) {
+        $c->flash(msg => 'Song created');
+        # TODO Probably redirect to song view really?
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 sub list {

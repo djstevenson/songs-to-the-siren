@@ -21,9 +21,9 @@ sub select_metadata {
     my $self = shift;
 
     return $self->search(undef, {
-        select    => [qw/ id title album date_created date_updated date_published author.name artist.name /],
-        as        => [qw/ id title album date_created date_updated date_published author_name artist_name /],
-        join      => [qw/ author artist /],
+        select    => [qw/ id title album date_created date_updated date_published author.name artist /],
+        as        => [qw/ id title album date_created date_updated date_published author_name artist /],
+        join      => 'author',
     });
 }
 
@@ -94,8 +94,8 @@ ResultSet methods for Songs
 
 Indicates that we want to fetch the metadata (basically 
 everything except the markdown and HTML), and does a join
-to other tables to get author_name and artist_name, which
-you can get via, e.g.:
+to the users table to get the author name, which you can
+access via via, e.g.:
 
   $song->get_column('author_name');
 

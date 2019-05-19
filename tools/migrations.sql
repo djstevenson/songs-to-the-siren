@@ -36,19 +36,10 @@ CREATE TABLE emails (
     date_sent TIMESTAMP WITH TIME ZONE -- NULL until actually sent.
 );
 
-DROP TABLE IF EXISTS artists;
-CREATE TABLE artists (
-    id BIGSERIAL NOT NULL PRIMARY KEY,
-    "name" TEXT NOT NULL,
-
-    date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_updated TIMESTAMP WITH TIME ZONE
-);
-
 DROP TABLE IF EXISTS songs;
 CREATE TABLE songs (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    artist_id BIGINT NOT NULL REFERENCES artists(id) ON DELETE CASCADE,
+    artist TEXT NOT NULL,
     title TEXT NOT NULL,
     album TEXT,
 
@@ -69,7 +60,6 @@ CREATE TABLE songs (
 CREATE INDEX songs_date_published_idx ON songs USING BTREE(date_published);
 
 -- Support for cascade on foreign key constraints
-CREATE INDEX songs_artist_id_idx ON songs USING BTREE(artist_id);
 CREATE INDEX songs_author_id_idx ON songs USING BTREE(author_id);
 
 DROP TABLE IF EXISTS tags;
@@ -92,7 +82,6 @@ CREATE INDEX song_tags_song_tag_idx ON song_tags USING BTREE(song_id, tag_id);
 DROP TABLE IF EXISTS song_tags;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS songs;
-DROP TABLE IF EXISTS artists;
 DROP TABLE IF EXISTS emails;
 DROP TABLE IF EXISTS user_keys;
 DROP TABLE IF EXISTS users;
