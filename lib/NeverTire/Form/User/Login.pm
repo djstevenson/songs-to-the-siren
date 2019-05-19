@@ -6,7 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-use NeverTire::Util::Password qw/ new_password_hash /;
+use NeverTire::Util::Password qw/ check_password_hash new_password_hash /;
 
 has '+submit_label' => (default => 'Login');
 has '+id'           => (default => 'user-login');
@@ -67,23 +67,13 @@ after extra_validation => sub {
 	my $user_rs = $self->c->schema->resultset('User');
 	my $name_field = $self->find_field('name');
 	my $user = $user_rs->find_by_name($name_field->value);
-	if ($user) {
+	if ( $user ) {
 		my $password_field = $self->find_field('password');
-		if ($user->check_password_hash($password_field->value)){
-			# Password ok, check if confirmed
-			if (defined($user->confirmed_at)){
-                # Check if banned
-                if ($user->banned) {
-                    $fail = 'User blocked by admins';
-                }
-                else {
-    				$self->_save_user($user);
-                }
-			}
-			else {
-				# TODO Put strings in something translatable
-				$fail = 'You have not confirmed your user registration';
-			}
+		my $plain = $password_field->value;
+		my $hash  = $user->password_hash;
+		if ( check_password_hash($plain, $hash) ) {
+			# Password ok
+			$self->_save_user($user);
 		}
 		else {
 			$fail = $login_fail;
