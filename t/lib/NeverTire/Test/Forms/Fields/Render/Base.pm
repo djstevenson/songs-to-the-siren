@@ -49,17 +49,17 @@ sub _run_test {
     my $html = $field->render($mock_form);
     my $dom = Mojo::DOM->new($html);
 
-    ok($dom->at('div')->matches('.forum-field-group'), 'Root is a div with forum-field-group class');
-    my $label = $dom->at('div.forum-field-group > label');
+    ok($dom->at('div')->matches('.form-field-group'), 'Root is a div with form-field-group class');
+    my $label = $dom->at('div.form-field-group > label');
     ok($label, 'Root div encloses a label');
     cmp_deeply($label->attr, $exp_label_attrs, 'Got expected attrs for label');
     is($label->text, $exp_label, 'Got expected label text');
 
-    my $input = $dom->at('div.forum-field-group > input');
+    my $input = $dom->at('div.form-field-group > input');
     ok($input, 'Root div encloses an input');
     cmp_deeply($input->attr, $exp_input_attrs, 'Got expected attrs for input');
 
-    my $error_span = $dom->at('div.forum-field-group > span.is-invalid');
+    my $error_span = $dom->at('div.form-field-group > span.is-invalid');
     if (exists $field_args->{error}) {
         ok($input->attr->{class} =~ / is-invalid/, 'Error CSS on input field');
         ok($error_span, 'Got error message div');
