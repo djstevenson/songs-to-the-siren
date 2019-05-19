@@ -72,7 +72,25 @@ CREATE INDEX songs_date_published_idx ON songs USING BTREE(date_published);
 CREATE INDEX songs_artist_id_idx ON songs USING BTREE(artist_id);
 CREATE INDEX songs_author_id_idx ON songs USING BTREE(author_id);
 
+DROP TABLE IF EXISTS tags;
+CREATE TABLE tags (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    date_created TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
+DROP TABLE IF EXISTS song_tags;
+CREATE TABLE song_tags (
+    tag_id  BIGINT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+    song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+    PRIMARY KEY (tag_id, song_id)
+);
+
+CREATE INDEX song_tags_song_tag_idx ON song_tags USING BTREE(song_id, tag_id);
+
 -- 1 down
+DROP TABLE IF EXISTS song_tags;
+DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS songs;
 DROP TABLE IF EXISTS artists;
 DROP TABLE IF EXISTS emails;
