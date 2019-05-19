@@ -34,6 +34,10 @@ __PACKAGE__->set_primary_key('id');
 __PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',   { 'foreign.id' => 'self.author_id' });
 __PACKAGE__->belongs_to(artist => 'NeverTire::Schema::Result::Artist', { 'foreign.id' => 'self.artist_id' });
 
+__PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'foreign.song_id' => 'self.id' });
+
+__PACKAGE__->many_to_many( tags => song_tags => 'tag');
+
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
 
