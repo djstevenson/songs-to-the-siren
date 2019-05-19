@@ -36,6 +36,15 @@ sub create_song {
     return $self->create_related('song', $args);
 }
 
+sub edit_song {
+    my ($self, $song, $args) = @_;
+
+    # TODO Render html properly!
+    $args->{html}         = 'html here';
+    $args->{date_updated} = DateTime->now;
+    return $song->update($args);
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

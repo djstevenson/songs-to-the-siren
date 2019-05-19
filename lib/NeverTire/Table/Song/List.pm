@@ -39,11 +39,22 @@ has_column date_published => (
     sortable     => 1,
 );
 
-has_column action => (
+has_column edit_action => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        # TODO Do these as links when the editor is implemented
+        my $url = $table->c->url_for('edit_song', song_id => $row->id);
+        return qq{
+            <a href="${url}">Edit</a>
+        };
+    },
+
+);
+
+has_column publish_action => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
         my $pub = $row->date_published;
         my $now = DateTime->now;
         if ( defined($pub) && DateTime->compare($pub, $now) <= 0 ) {
