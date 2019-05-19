@@ -17,12 +17,9 @@ sub list {
     my $c = shift;
 
     # TODO Pagination
-    my $songs = $c->schema
-        ->resultset('Song')
-        ->select_metadata
-        ->by_pubdate;
+    my $table = $c->table('Song::List');
 
-    $c->stash(songs => $songs);
+    $c->stash(table => $table);
 }
 
 
