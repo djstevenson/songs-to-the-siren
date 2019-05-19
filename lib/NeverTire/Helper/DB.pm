@@ -14,7 +14,6 @@ sub register {
         return $c->config->{db_name};
     });
 
-    print "DB NAME IS ", $app->db_name, "\n";
     my $conn = NeverTire::Schema->connect('dbi:Pg:dbname=' . $app->db_name, 'nevertire', undef);
     $app->helper(schema => sub {
         # TODO Check connection is still alive, reconnect if not?
