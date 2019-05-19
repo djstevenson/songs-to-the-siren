@@ -6,6 +6,8 @@ extends 'NeverTire::Schema::Base::Result';
 
 # TODO POD
 
+use DateTime;
+
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
 __PACKAGE__->table('songs');
@@ -37,6 +39,22 @@ __PACKAGE__->belongs_to(artist => 'NeverTire::Schema::Result::Artist', { 'foreig
 __PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'foreign.song_id' => 'self.id' });
 
 __PACKAGE__->many_to_many( tags => song_tags => 'tag');
+
+sub show {
+    my $self = shift;
+
+    $self->update({
+        date_published => DateTime->now,
+    });
+}
+
+sub hide {
+    my $self = shift;
+
+    $self->update({
+        date_published => undef
+    });
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);

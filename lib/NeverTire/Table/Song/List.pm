@@ -16,6 +16,10 @@ sub _build_resultset {
         ->by_pubdate;
 }
 
+has_column id => (
+    sortable    => 1,
+);
+
 has_column title => (
     sortable    => 1,
 );
@@ -44,11 +48,17 @@ has_column action => (
         # TODO Do these as links when the editor is implemented
         my $pub = $row->date_published;
         my $now = DateTime->now;
-        if ( defined($pub) && DateTime->compare($pub, $now) < 1 ) {
-            return 'Hide';
+        if ( defined($pub) && DateTime->compare($pub, $now) <= 0 ) {
+            my $url = $table->c->url_for('hide_song', song_id => $row->id);
+            return qq{
+                <a href="${url}">Hide</a>
+            };
         }
         else {
-            return 'Show';
+            my $url = $table->c->url_for('show_song', song_id => $row->id);
+            return qq{
+                <a href="${url}">Show</a>
+            };
         }
     },
 
