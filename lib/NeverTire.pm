@@ -9,20 +9,23 @@ use NeverTire::Controller::Home;
 
 # This method will run once at server start
 sub startup {
-    my $self = shift;
+    my $app = shift;
 
     # Load configuration from hash returned by "never-tire.conf"
-    $self->plugin('Config');
+    $app->plugin('Config');
 
-    $self->secrets($self->config->{secrets});
+    # Command-line plugins:
+    push @{ $app->commands->namespaces }, 'NeverTire::Command';
 
-    $self->plugin('NeverTire::Helper::DB');
+    $app->secrets($app->config->{secrets});
 
-    $self->_migrate_db;
+    $app->plugin('NeverTire::Helper::DB');
+
+    $app->_migrate_db;
 
     # Routing
     # Router
-    my $r = $self->routes;
+    my $r = $app->routes;
 
     my $home_controller = NeverTire::Controller::Home->new;
 
