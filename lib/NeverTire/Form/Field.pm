@@ -64,6 +64,13 @@ has options => (
     default     => sub { return {}; },
 );
 
+# For radio buttons (and probs can re-use for select menus)
+has selections => (
+    is          => 'ro',
+    isa         => 'ArrayRef',  # TODO also accept coderef
+    default     => sub { return []; },
+);
+
 has value => (
     is          => 'rw',
     isa         => 'Str',
