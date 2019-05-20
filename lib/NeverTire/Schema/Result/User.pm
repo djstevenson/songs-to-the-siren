@@ -7,6 +7,7 @@ extends 'NeverTire::Schema::Base::Result';
 # TODO POD
 
 use DateTime;
+use Text::Markdown qw/ markdown /;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
@@ -31,7 +32,7 @@ sub create_song {
     my ($self, $args) = @_;
 
     # TODO Render html properly!
-    $args->{html}         = 'html here';
+    $args->{html}         = markdown($args->{markdown});
     $args->{date_created} = DateTime->now;
     return $self->create_related('song', $args);
 }
@@ -40,7 +41,7 @@ sub edit_song {
     my ($self, $song, $args) = @_;
 
     # TODO Render html properly!
-    $args->{html}         = 'html here';
+    $args->{html}         = markdown($args->{markdown});
     $args->{date_updated} = DateTime->now;
     $song->update($args);
     return $song;
