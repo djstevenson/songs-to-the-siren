@@ -21,6 +21,7 @@ sub add_routes {
     $song_action->route('/show')->name('show_song')->via('GET')->to(action => 'show');
     $song_action->route('/hide')->name('hide_song')->via('GET')->to(action => 'hide');
     $song_action->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
+    $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
 }
 
 sub create {
@@ -29,21 +30,6 @@ sub create {
     my $form = $c->form('Song::Create');
     if ($form->process) {
         $c->flash(msg => 'Song created');
-
-        $c->redirect_to('list_songs');
-    }
-    else {
-        $c->stash(form => $form);
-    }
-}
-
-sub edit {
-    my $c = shift;
-
-    my $song = $c->stash->{song};
-    my $form = $c->form('Song::Edit', song => $song);
-    if ($form->process) {
-        $c->flash(msg => 'Song updated');
 
         $c->redirect_to('list_songs');
     }
@@ -89,6 +75,35 @@ sub hide {
     $c->stash->{song}->hide;
 
     $c->redirect_to('list_songs');
+}
+
+sub edit {
+    my $c = shift;
+
+    my $song = $c->stash->{song};
+    my $form = $c->form('Song::Edit', song => $song);
+    if ($form->process) {
+        $c->flash(msg => 'Song updated');
+
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+sub delete {
+    my $c = shift;
+
+    my $song = $c->stash->{song};
+    my $form = $c->form('Song::Delete', song => $song);
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 
