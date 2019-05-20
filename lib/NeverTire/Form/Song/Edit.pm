@@ -80,7 +80,7 @@ override posted => sub {
 
     # Whitelist what we extract from the submitted form
 	my $fields = $self->form_hash(qw/ title album artist date_released markdown /);
-	$user->edit_song($self->song, $fields);
+	return $user->edit_song($self->song, $fields);
 };
 
 # Prepopulate GET form from the song object

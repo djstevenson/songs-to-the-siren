@@ -2,8 +2,6 @@ package NeverTire::Form::Render::Input::TextArea;
 use Moose::Role;
 use namespace::autoclean;
 
-with 'NeverTire::Form::Render::Input::Generic';
-
 sub render {
     my ($self, $form) = @_;
 

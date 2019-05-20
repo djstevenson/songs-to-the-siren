@@ -42,7 +42,8 @@ sub edit_song {
     # TODO Render html properly!
     $args->{html}         = 'html here';
     $args->{date_updated} = DateTime->now;
-    return $song->update($args);
+    $song->update($args);
+    return $song;
 }
 
 no Moose;
