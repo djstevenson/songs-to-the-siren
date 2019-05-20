@@ -9,6 +9,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0.47
       perl 5.006
+  Algorithm-Diff-1.1903
+    pathname: T/TY/TYEMQ/Algorithm-Diff-1.1903.tar.gz
+    provides:
+      Algorithm::Diff 1.1903
+      Algorithm::Diff::_impl 1.1903
+    requirements:
+      ExtUtils::MakeMaker 0
   Apache-LogFormat-Compiler-0.35
     pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.35.tar.gz
     provides:
@@ -19,6 +26,15 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
+  Array-Iterator-0.11
+    pathname: S/SH/SHARYANTO/Array-Iterator-0.11.tar.gz
+    provides:
+      Array::Iterator 0.11
+      Array::Iterator::BiDirectional 0.11
+      Array::Iterator::Circular 0.11
+      Array::Iterator::Reusable 0.11
+    requirements:
+      ExtUtils::MakeMaker 6.30
   Authen-DecHpwd-2.007
     pathname: Z/ZE/ZEFRAM/Authen-DecHpwd-2.007.tar.gz
     provides:
@@ -96,6 +112,30 @@ DISTRIBUTIONS
       Tie::Hash 0
       Variable::Magic 0.48
       perl 5.006001
+      strict 0
+      warnings 0
+  Cache-LRU-0.04
+    pathname: K/KA/KAZUHO/Cache-LRU-0.04.tar.gz
+    provides:
+      Cache::LRU 0.04
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Test::More 0.88
+      Test::Requires 0
+      perl 5.008001
+  Capture-Tiny-0.48
+    pathname: D/DA/DAGOLDEN/Capture-Tiny-0.48.tar.gz
+    provides:
+      Capture::Tiny 0.48
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      File::Spec 0
+      File::Temp 0
+      IO::Handle 0
+      Scalar::Util 0
+      perl 5.006
       strict 0
       warnings 0
   Class-Accessor-0.51
@@ -1386,6 +1426,19 @@ DISTRIBUTIONS
       File::Path 0
       File::Spec 0
       perl 5.008000
+  File-Listing-6.04
+    pathname: G/GA/GAAS/File-Listing-6.04.tar.gz
+    provides:
+      File::Listing 6.04
+      File::Listing::apache 6.04
+      File::Listing::dosftp 6.04
+      File::Listing::netware 6.04
+      File::Listing::unix 6.04
+      File::Listing::vms 6.04
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTTP::Date 6
+      perl 5.006002
   File-ShareDir-1.116
     pathname: R/RE/REHSACK/File-ShareDir-1.116.tar.gz
     provides:
@@ -1457,6 +1510,41 @@ DISTRIBUTIONS
       HTML::Tagset 3.20
     requirements:
       ExtUtils::MakeMaker 0
+  HTTP-Cookies-6.04
+    pathname: O/OA/OALDERS/HTTP-Cookies-6.04.tar.gz
+    provides:
+      HTTP::Cookies 6.04
+      HTTP::Cookies::Microsoft 6.04
+      HTTP::Cookies::Netscape 6.04
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      HTTP::Date 6
+      HTTP::Headers::Util 6
+      HTTP::Request 0
+      Time::Local 0
+      locale 0
+      perl 5.008001
+      strict 0
+      vars 0
+  HTTP-Daemon-6.04
+    pathname: O/OA/OALDERS/HTTP-Daemon-6.04.tar.gz
+    provides:
+      HTTP::Daemon 6.04
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      HTTP::Date 6
+      HTTP::Request 6
+      HTTP::Response 6
+      HTTP::Status 6
+      IO::Socket 0
+      LWP::MediaTypes 6
+      Module::Build::Tiny 0.034
+      Sys::Hostname 0
+      perl 5.006
+      strict 0
+      warnings 0
   HTTP-Date-6.02
     pathname: G/GA/GAAS/HTTP-Date-6.02.tar.gz
     provides:
@@ -1551,6 +1639,14 @@ DISTRIBUTIONS
       Scalar::Util 0
       Test::Deep 0
       Test::More 0.88
+      perl 5.008001
+  HTTP-Negotiate-6.01
+    pathname: G/GA/GAAS/HTTP-Negotiate-6.01.tar.gz
+    provides:
+      HTTP::Negotiate 6.01
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTTP::Headers 6
       perl 5.008001
   Hash-Merge-0.300
     pathname: R/RE/REHSACK/Hash-Merge-0.300.tar.gz
@@ -2337,6 +2433,25 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
+  Net-HTTP-6.19
+    pathname: O/OA/OALDERS/Net-HTTP-6.19.tar.gz
+    provides:
+      Net::HTTP 6.19
+      Net::HTTP::Methods 6.19
+      Net::HTTP::NB 6.19
+      Net::HTTPS 6.19
+    requirements:
+      Carp 0
+      Compress::Raw::Zlib 0
+      ExtUtils::MakeMaker 0
+      IO::Socket::INET 0
+      IO::Uncompress::Gunzip 0
+      URI 0
+      base 0
+      perl 5.006002
+      strict 0
+      vars 0
+      warnings 0
   POSIX-strftime-Compiler-0.42
     pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.42.tar.gz
     provides:
@@ -2480,6 +2595,68 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
+  Pithub-0.01034
+    pathname: O/OA/OALDERS/Pithub-0.01034.tar.gz
+    provides:
+      Pithub 0.01034
+      Pithub::Base 0.01034
+      Pithub::Events 0.01034
+      Pithub::Gists 0.01034
+      Pithub::Gists::Comments 0.01034
+      Pithub::GitData 0.01034
+      Pithub::GitData::Blobs 0.01034
+      Pithub::GitData::Commits 0.01034
+      Pithub::GitData::References 0.01034
+      Pithub::GitData::Tags 0.01034
+      Pithub::GitData::Trees 0.01034
+      Pithub::Issues 0.01034
+      Pithub::Issues::Assignees 0.01034
+      Pithub::Issues::Comments 0.01034
+      Pithub::Issues::Events 0.01034
+      Pithub::Issues::Labels 0.01034
+      Pithub::Issues::Milestones 0.01034
+      Pithub::Markdown 0.01034
+      Pithub::Orgs 0.01034
+      Pithub::Orgs::Members 0.01034
+      Pithub::Orgs::Teams 0.01034
+      Pithub::PullRequests 0.01034
+      Pithub::PullRequests::Comments 0.01034
+      Pithub::Repos 0.01034
+      Pithub::Repos::Collaborators 0.01034
+      Pithub::Repos::Commits 0.01034
+      Pithub::Repos::Contents 0.01034
+      Pithub::Repos::Downloads 0.01034
+      Pithub::Repos::Forks 0.01034
+      Pithub::Repos::Hooks 0.01034
+      Pithub::Repos::Keys 0.01034
+      Pithub::Repos::Releases 0.01034
+      Pithub::Repos::Releases::Assets 0.01034
+      Pithub::Repos::Starring 0.01034
+      Pithub::Repos::Stats 0.01034
+      Pithub::Repos::Statuses 0.01034
+      Pithub::Repos::Watching 0.01034
+      Pithub::Result 0.01034
+      Pithub::Result::SharedCache 0.01034
+      Pithub::Search 0.01034
+      Pithub::SearchV3 0.01034
+      Pithub::Users 0.01034
+      Pithub::Users::Emails 0.01034
+      Pithub::Users::Followers 0.01034
+      Pithub::Users::Keys 0.01034
+    requirements:
+      Array::Iterator 0
+      Cache::LRU 0
+      Carp 0
+      ExtUtils::MakeMaker 0
+      HTTP::Headers 0
+      HTTP::Request 0
+      HTTP::Request::Common 0
+      JSON::MaybeXS 0
+      LWP::UserAgent 0
+      Moo 0
+      Moo::Role 0
+      URI 0
+      perl 5.010
   Plack-1.0047
     pathname: M/MI/MIYAGAWA/Plack-1.0047.tar.gz
     provides:
@@ -2834,6 +3011,16 @@ DISTRIBUTIONS
       List::Util 1.09
       Scalar::Util 1.09
       Test::Builder 0
+  Test-Differences-0.67
+    pathname: D/DC/DCANTRELL/Test-Differences-0.67.tar.gz
+    provides:
+      Test::Differences 0.67
+    requirements:
+      Capture::Tiny 0.24
+      Data::Dumper 2.126
+      ExtUtils::MakeMaker 0
+      Test::More 0.88
+      Text::Diff 1.43
   Test-Exception-0.43
     pathname: E/EX/EXODIST/Test-Exception-0.43.tar.gz
     provides:
@@ -2862,6 +3049,15 @@ DISTRIBUTIONS
       Try::Tiny 0.07
       strict 0
       warnings 0
+  Test-Requires-0.10
+    pathname: T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
+    provides:
+      Test::Requires 0.10
+    requirements:
+      ExtUtils::MakeMaker 6.64
+      Test::Builder::Module 0
+      Test::More 0.47
+      perl 5.006
   Test-SharedFork-0.35
     pathname: E/EX/EXODIST/Test-SharedFork-0.35.tar.gz
     provides:
@@ -2901,6 +3097,32 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
+  Text-Diff-1.45
+    pathname: N/NE/NEILB/Text-Diff-1.45.tar.gz
+    provides:
+      Text::Diff 1.45
+      Text::Diff::Base 1.45
+      Text::Diff::Config 1.44
+      Text::Diff::Table 1.44
+    requirements:
+      Algorithm::Diff 1.19
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      perl 5.006
+  Text-Markdown-1.000031
+    pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
+    provides:
+      Text::Markdown 1.000031
+    requirements:
+      Digest::MD5 0
+      Encode 0
+      ExtUtils::MakeMaker 6.42
+      FindBin 0
+      List::MoreUtils 0
+      Test::Differences 0
+      Test::Exception 0
+      Test::More 0.42
+      Text::Balanced 0
   Try-Tiny-0.30
     pathname: E/ET/ETHER/Try-Tiny-0.30.tar.gz
     provides:
@@ -3005,6 +3227,18 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
+  WWW-RobotRules-6.02
+    pathname: G/GA/GAAS/WWW-RobotRules-6.02.tar.gz
+    provides:
+      WWW::RobotRules 6.02
+      WWW::RobotRules::AnyDBM_File 6.00
+      WWW::RobotRules::InCore 6.02
+    requirements:
+      AnyDBM_File 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      URI 1.10
+      perl 5.008001
   forkprove-v0.4.10
     pathname: M/MI/MIYAGAWA/forkprove-v0.4.10.tar.gz
     provides:
@@ -3018,6 +3252,68 @@ DISTRIBUTIONS
       TAP::Harness 3.25
       parent 0.221
       version 0.77
+  libwww-perl-6.39
+    pathname: O/OA/OALDERS/libwww-perl-6.39.tar.gz
+    provides:
+      LWP 6.39
+      LWP::Authen::Basic 6.39
+      LWP::Authen::Digest 6.39
+      LWP::Authen::Ntlm 6.39
+      LWP::ConnCache 6.39
+      LWP::Debug 6.39
+      LWP::Debug::TraceHTTP 6.39
+      LWP::DebugFile 6.39
+      LWP::MemberMixin 6.39
+      LWP::Protocol 6.39
+      LWP::Protocol::cpan 6.39
+      LWP::Protocol::data 6.39
+      LWP::Protocol::file 6.39
+      LWP::Protocol::ftp 6.39
+      LWP::Protocol::gopher 6.39
+      LWP::Protocol::http 6.39
+      LWP::Protocol::loopback 6.39
+      LWP::Protocol::mailto 6.39
+      LWP::Protocol::nntp 6.39
+      LWP::Protocol::nogo 6.39
+      LWP::RobotUA 6.39
+      LWP::Simple 6.39
+      LWP::UserAgent 6.39
+      libwww::perl undef
+    requirements:
+      CPAN::Meta::Requirements 2.120620
+      Digest::MD5 0
+      Encode 2.12
+      Encode::Locale 0
+      ExtUtils::MakeMaker 0
+      File::Copy 0
+      File::Listing 6
+      Getopt::Long 0
+      HTML::Entities 0
+      HTML::HeadParser 0
+      HTTP::Cookies 6
+      HTTP::Daemon 6
+      HTTP::Date 6
+      HTTP::Negotiate 6
+      HTTP::Request 6
+      HTTP::Request::Common 6
+      HTTP::Response 6
+      HTTP::Status 6.18
+      IO::Select 0
+      IO::Socket 0
+      LWP::MediaTypes 6
+      MIME::Base64 2.1
+      Module::Metadata 0
+      Net::FTP 2.58
+      Net::HTTP 6.18
+      Scalar::Util 0
+      Try::Tiny 0
+      URI 1.10
+      URI::Escape 0
+      WWW::RobotRules 6
+      base 0
+      perl 5.008001
+      strict 0
+      warnings 0
   namespace-autoclean-0.28
     pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
     provides:

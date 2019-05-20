@@ -15,3 +15,4 @@ requires 'Authen::Passphrase::BlowfishCrypt';
 requires 'Digest::SHA3';
 requires 'HTML::Entities';
 requires 'App::ForkProve';
+requires 'Text::Markdown';
