@@ -2,3 +2,7 @@
 % title "Songs I\x{2019}ll Never Tire of";
 
 <%== $table->render %>
+
+<p>
+    <a href="<%= $c->url_for('create_song') %>">New song</a>
+</p>

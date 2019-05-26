@@ -13,19 +13,21 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('songs');
 
 __PACKAGE__->add_columns(
-    id             => {data_type => 'INTEGER'},
-    artist         => {data_type => 'TEXT'},
-    title          => {data_type => 'TEXT'},
-    album          => {data_type => 'TEXT'},
+    id               => {data_type => 'INTEGER'},
+    artist           => {data_type => 'TEXT'},
+    title            => {data_type => 'TEXT'},
+    album            => {data_type => 'TEXT'},
 
-    markdown       => {data_type => 'TEXT'},
-    html           => {data_type => 'TEXT'},
+    summary_markdown => {data_type => 'TEXT'},
+    summary_html     => {data_type => 'TEXT'},
+    full_markdown    => {data_type => 'TEXT'},
+    full_html        => {data_type => 'TEXT'},
 
-    author_id      => {data_type => 'INTEGER'},
+    author_id        => {data_type => 'INTEGER'},
 
-    date_created   => {data_type => 'DATETIME'},
-    date_updated   => {data_type => 'DATETIME'},
-    date_published => {data_type => 'DATETIME'},
+    date_created     => {data_type => 'DATETIME'},
+    date_updated     => {data_type => 'DATETIME'},
+    date_published   => {data_type => 'DATETIME'},
 
     # TEXT so it can be free-format, e.g. "summer 1991"
     date_released  => {data_type => 'TEXT'},
@@ -42,17 +44,13 @@ __PACKAGE__->many_to_many( tags => song_tags => 'tag');
 sub show {
     my $self = shift;
 
-    $self->update({
-        date_published => DateTime->now,
-    });
+    $self->update({ date_published => DateTime->now });
 }
 
 sub hide {
     my $self = shift;
 
-    $self->update({
-        date_published => undef
-    });
+    $self->update({ date_published => undef });
 }
 
 no Moose;
