@@ -21,8 +21,8 @@ sub select_metadata {
     my $self = shift;
 
     return $self->search(undef, {
-        select    => [qw/ id title album date_created date_updated date_published author.name artist /],
-        as        => [qw/ id title album date_created date_updated date_published author_name artist /],
+        select    => [qw/ id title album date_created date_updated date_published date_released author.name artist /],
+        as        => [qw/ id title album date_created date_updated date_published date_released author_name artist /],
         join      => 'author',
     });
 }

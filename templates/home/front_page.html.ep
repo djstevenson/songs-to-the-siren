@@ -1,10 +1,6 @@
 % layout 'default';
 % title "Songs I\x{2019}ll Never Tire of";
 
-<p>Hello world with sections</p>
-
-<p>Song count = <%= $songs->count %></p>
-
 % while (my $song = $songs->next ) {
     %= include 'home/_song', song => $song
 % }
