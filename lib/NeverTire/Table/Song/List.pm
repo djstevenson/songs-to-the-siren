@@ -17,11 +17,13 @@ sub _build_resultset {
 }
 
 has_column id => (
-    sortable    => 1,
+    sortable     => 1,
+    is_header    => 1,
+    header       => 'ID',
 );
 
 has_column title => (
-    sortable    => 1,
+    sortable     => 1,
 );
 
 has_column artist => (
@@ -39,7 +41,7 @@ has_column date_published => (
     sortable     => 1,
 );
 
-has_column edit_action => (
+has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
@@ -51,7 +53,7 @@ has_column edit_action => (
 
 );
 
-has_column publish_action => (
+has_column publish => (
     content => sub {
         my ($col, $table, $row) = @_;
 
@@ -76,6 +78,13 @@ has_column publish_action => (
 has '+empty_text' => (default => 'No songs are in the datbase');
 
 has '+default_order_by'   => (default => 'date_published');
+
+override class_for_row_data => sub {
+    my ($self, $row_data) = @_;
+
+    return 'table-warning' 
+        unless $row_data->date_published;
+};
 
 __PACKAGE__->meta->make_immutable;
 1;
