@@ -24,7 +24,7 @@ sub _input_render {
         $text = $self->error;
         $error_class = ' is-invalid';
     }
-    my $error = qq{<span id="${error_id}" class="pure-form-message ${error_class}">${text}</span>};
+    my $error = qq{<span id="${error_id}" class="" ${error_class}">${text}</span>};
 
     if ($self->has_value && $type ne 'password') {
         $value = $self->value;
@@ -34,7 +34,7 @@ sub _input_render {
     return qq{
         <div class="form-field-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" name="${name}" $autofocus class="pure-input-1${error_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" name="${name}" $autofocus class="${error_class}" placeholder="${placeholder}" value="${value}"/>
             ${error}
         </div>
     };
