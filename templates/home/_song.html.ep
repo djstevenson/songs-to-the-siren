@@ -13,10 +13,11 @@
     </div>
     <footer>
         <p>
-            Written by <%= $song->get_column('author_name') %> at <%= $song->date_created %>
+            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->date_created) %>
             % my $updated = $song->date_updated;
             % if ($updated) {
-                Updated at <%= $updated %>
+                <br />
+                Last updated at <%= datetime($updated) %>
             % }
         </p>
     </footer>
