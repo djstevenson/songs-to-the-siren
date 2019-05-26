@@ -184,7 +184,7 @@ sub _data_render {
     my $header = $self->show_header ? $self->_render_header : '';
 
     return
-        '<table class="pure-table pure-table-striped">'
+        '<table class="table table-hover table-sm">'
             . $header
             . $self->_render_body
         . '</table>'
@@ -199,7 +199,7 @@ sub _render_header {
         $s .= $col->render_header_cell($self);
     }
 
-    return '<thead><tr>' . $s . '</tr></thead>';
+    return '<thead class="thead-dark"><tr>' . $s . '</tr></thead>';
 }
 
 sub _render_body {
@@ -209,7 +209,11 @@ sub _render_body {
 
     my $rs = $self->paginator->paginate_rs($self->resultset);
     while (my $row = $rs->next) {
-        $s .= '<tr>';
+        my $row_class = '';
+        if (my $class = $self->class_for_row_data($row)) {
+            $row_class = qq{class="$class"};
+        }
+        $s .= qq{<tr ${row_class}">};
         foreach my $col (@{ $self->table_columns }) {
             $s .= $col->render_body_cell($self, $row);
         }
@@ -224,6 +228,13 @@ sub BUILD {
 
     my $sort_dir = $self->sort_dir;
     die 'Invalid sort options' unless $sort_dir eq 'u' || $sort_dir eq 'd';
+}
+
+
+# Override this if you want to return a different TR class
+# depending on row data.
+sub class_for_row_data {
+    return undef;
 }
 
 __PACKAGE__->meta->make_immutable;
