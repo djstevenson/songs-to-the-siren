@@ -8,8 +8,15 @@
     <p>ADMIN SECTION</p>
 </header>
 
-<main>
-<%= content %>
+<main class=".container-fluid">
+    <div class="row">
+        <div class="col-sm">
+          Lefty
+        </div>
+        <div class="col-sm">
+            <%= content %>
+        </div>
+    </div>
 </main>
 
 <footer>

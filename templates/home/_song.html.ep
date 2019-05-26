@@ -5,16 +5,19 @@
             <%= $song->title %> by <%= $song->artist %>
         </h2>
         <p>
-            Written by <%= $song->get_column('author_name') %> at <%= $song->date_created %>.
+            Released: <%= $song->date_released %>
         </p>
-        % my $updated = $song->date_updated;
-        % if ($updated) {
-            <p>Updated at <%= $updated %></p>
-        % }
     </header>
     <div class="description">
         <%== $song->html %>
     </div>
     <footer>
+        <p>
+            Written by <%= $song->get_column('author_name') %> at <%= $song->date_created %>
+            % my $updated = $song->date_updated;
+            % if ($updated) {
+                Updated at <%= $updated %>
+            % }
+        </p>
     </footer>
 </section>
