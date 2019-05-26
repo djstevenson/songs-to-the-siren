@@ -5,6 +5,7 @@ extends 'DBIx::Class::ResultSet';
 
 # POD docs at end of this source file
 
+use Carp qw/ croak /;
 
 use DateTime;
 
@@ -12,7 +13,7 @@ sub home_page_songs {
     my $self = shift;
 
     return $self->select_metadata
-        ->select_html
+        ->select_text(summary => 'html')
         ->where_published
         ->by_pubdate;
 }
@@ -27,21 +28,18 @@ sub select_metadata {
     });
 }
 
-sub select_markdown {
-    my $self = shift;
+sub select_text {
+    my ($self, $version, $format) = @_;
 
+    croak 'Bad text version request'
+        unless $version eq 'summary' || $version eq 'full';
+    croak 'Bad text format request'
+        unless $format eq 'html' || $format eq 'markdown';
+
+    my $field = $version . '_' . $format;
     return $self->search(undef, {
-        '+select' => [qw/ markdown /],
-        '+as'     => [qw/ markdown /],
-    });
-}
-
-sub select_html {
-    my $self = shift;
-
-    return $self->search(undef, {
-        '+select' => [qw/ html /],
-        '+as'     => [qw/ html /],
+        '+select' => [ $field ],
+        '+as'     => [ $field ],
     });
 }
 
@@ -103,23 +101,19 @@ Usage:
 
   $song_rs->select_metadata
 
-=item select_markdown
+=item select_text($version, $format)
 
-Indicates that we want to fetch the markdown, which you'll
-want to do when editing a song.
+Indicates that we want to fetch the some form of the
+description of the song. $version will be 'full' or
+'summary', and $format will be 'html' or 'markdown.
 
-  $song_rs->select_markdown
+  $song_rs->select_text(summary => 'html')
 
-It can be a big field so it's not selected by default.
+In this example, the result is available as:
 
-=item select_html
+  $result->summary_html;
 
-Indicates that we want to fetch the rendered html, which you'll
-want to do when displaying a song.
-
-  $song_rs->select_html
-
-It can be a big field so it's not selected by default.
+These fields can be big so are not selected by default.
 
 =item where_published
 

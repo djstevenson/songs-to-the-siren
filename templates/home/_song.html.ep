@@ -9,7 +9,7 @@
         </p>
     </header>
     <div class="description">
-        <%== $song->html %>
+        <%== $song->summary_html %>
     </div>
     <footer>
         <p>

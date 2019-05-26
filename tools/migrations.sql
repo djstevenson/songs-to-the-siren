@@ -43,8 +43,10 @@ CREATE TABLE songs (
     title TEXT NOT NULL,
     album TEXT,
 
-    markdown TEXT NOT NULL,
-    html TEXT NOT NULL,
+    summary_markdown TEXT NOT NULL,
+    summary_html TEXT NOT NULL,
+    full_markdown TEXT NOT NULL,
+    full_html TEXT NOT NULL,
 
     author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 

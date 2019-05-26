@@ -31,19 +31,28 @@ __PACKAGE__->has_many(song => 'NeverTire::Schema::Result::Song', { 'foreign.auth
 sub create_song {
     my ($self, $args) = @_;
 
-    # TODO Render html properly!
-    $args->{html}         = markdown($args->{markdown});
-    $args->{date_created} = DateTime->now;
-    return $self->create_related('song', $args);
+    my $full_args = {
+        %$args,
+        full_html    => markdown($args->{full_markdown}),
+        summary_html => markdown($args->{summary_markdown}),
+        date_created => DateTime->now,
+    };
+
+    return $self->create_related('song', $full_args);
 }
 
 sub edit_song {
     my ($self, $song, $args) = @_;
 
-    # TODO Render html properly!
-    $args->{html}         = markdown($args->{markdown});
-    $args->{date_updated} = DateTime->now;
-    $song->update($args);
+    my $full_args = {
+        %$args,
+        full_html    => markdown($args->{full_markdown}),
+        summary_html => markdown($args->{summary_markdown}),
+        date_updated => DateTime->now,
+    };
+
+    $song->update($full_args);
+    
     return $song;
 }
 
