@@ -1,21 +1,22 @@
 /* Nothing yet */
 body {
-  background-color: rgb(20, 74, 20);
-  color: rgb(174, 174, 174);
+  background-color: rgb(240,240,240);
+  color: rgb(17, 17, 17);
   margin: 1rem;
 }
 
 section.song {
-  border-bottom: 0.5rem solid #003300;
+  border-bottom: 3px solid #aaaaaa;
   margin-bottom: 3rem;
 }
 
 section.song header {
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid #cccccc;
   margin-bottom: 1rem;
 }
 
 section.song footer {
   font-style: italic;
   text-align: right;
+  font-size: 87%;
 }
