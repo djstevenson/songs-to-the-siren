@@ -1,22 +1,29 @@
-/* Nothing yet */
+/* TODO: Use SCSS? */
+
 body {
-  background-color: rgb(240,240,240);
-  color: rgb(17, 17, 17);
-  margin: 1rem;
+    background-color: rgb(240,240,240);
+    color: rgb(17, 17, 17);
+    margin: 1rem;
 }
 
 section.song {
-  border-bottom: 3px solid #aaaaaa;
-  margin-bottom: 3rem;
+    border-bottom: 3px solid #aaaaaa;
+    margin-bottom: 3rem;
 }
 
 section.song header {
-  border-bottom: 1px solid #cccccc;
-  margin-bottom: 1rem;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 1rem;
 }
 
 section.song footer {
-  font-style: italic;
-  text-align: right;
-  font-size: 87%;
+    font-style: italic;
+    text-align: right;
+    font-size: 87%;
+}
+
+.markdown-preview {
+    background-color: red;
+    border: 5px solid black;
+    margin-bottom: 2rem;
 }

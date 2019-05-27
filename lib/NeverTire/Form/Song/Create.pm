@@ -46,7 +46,7 @@ has_field summary_markdown => (
 has_field summary_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div class="markdown summary">Summary preview here</div>},
+        html => q{<div class="markdown summary markdown-preview">Summary preview here</div>},
     },
 );
 
@@ -60,7 +60,7 @@ has_field full_markdown => (
 has_field full_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div class="markdown full">Full preview here</div>},
+        html => q{<div class="markdown full markdown-preview">Full preview here</div>},
     },
 );
 
