@@ -24,7 +24,6 @@ sub _input_render {
 
     if ($self->has_error) {
         $text = $self->error;
-        # $error_class = 'bg-error';
         $input_class = 'is-invalid';
         $error_class = 'text-danger';
     }
