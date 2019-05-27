@@ -170,7 +170,7 @@ sub render {
     $legend = q{<legend>} . $self->legend . q{</legend>};
     return qq{
         <div class="main-panel">
-    		<form class="pure-form pure-form-stacked" accept-charset="utf-8" method="POST" novalidate>
+    		<form accept-charset="utf-8" method="POST" novalidate>
                 $legend
                 <fieldset>
                 	$fields
@@ -199,7 +199,7 @@ sub _render_buttons {
     # TODO Allow more than one button
     my $label = $self->submit_label;
 	my $id = $self->_make_button_id($label);
-    return qq{<div class="buttons"><button type="submit" id="${id}" class="pure-button pure-button-primary">${label}</button></div>};
+    return qq{<div class="buttons"><button type="submit" id="${id}" class="btn btn-primary">${label}</button></div>};
 }
 
 sub _make_button_id {
