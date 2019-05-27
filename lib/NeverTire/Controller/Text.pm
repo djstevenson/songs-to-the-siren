@@ -19,9 +19,7 @@ sub render_markdown {
     my $c = shift;
 
     my $markdown = $c->param('markdown');
-    print STDERR "M=", $markdown, "\n\n";
     my $html = markdown($markdown);
-    print STDERR "H=", $html, "\n\n";
     $c->render(text => $html);
 }
 
