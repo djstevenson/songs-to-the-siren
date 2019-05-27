@@ -23,7 +23,6 @@ section.song footer {
 }
 
 .markdown-preview {
-    background-color: red;
-    border: 5px solid black;
+    border: 1px solid black;
     margin-bottom: 2rem;
 }
