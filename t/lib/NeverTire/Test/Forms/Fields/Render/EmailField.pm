@@ -15,6 +15,7 @@ sub run {
 
     $self->_run_test('Input::Email', {
         field_args      => {name => 'email', value => 'xyzzy@example.com'},
+        field_type      => 'input',
         exp_label_attrs => {for => 'test-form-email'},
         exp_label       => 'Email',
         exp_input_attrs => {

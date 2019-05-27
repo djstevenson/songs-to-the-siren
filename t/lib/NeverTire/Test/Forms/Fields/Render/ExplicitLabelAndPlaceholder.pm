@@ -15,6 +15,7 @@ sub run {
 
     $self->_run_test('Input::Text', {
         field_args      => {name => 'your-name', label => 'abc', placeholder => 'PPP'},
+        field_type      => 'input',
         exp_label_attrs => {for => 'test-form-your-name'},
         exp_label       => 'abc',
         exp_input_attrs => {

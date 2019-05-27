@@ -40,6 +40,7 @@ sub _run_test {
 	my $mock_form = NeverTire::Test::Forms::MockForm->new;
 
     my $field_args      = $args->{field_args};
+    my $field_type      = $args->{field_type};
     my $exp_label_attrs = $args->{exp_label_attrs};
     my $exp_label       = $args->{exp_label};
     my $exp_input_attrs = $args->{exp_input_attrs};
@@ -55,8 +56,9 @@ sub _run_test {
     cmp_deeply($label->attr, $exp_label_attrs, 'Got expected attrs for label');
     is($label->text, $exp_label, 'Got expected label text');
 
-    my $input = $dom->at('div.form-group > input.form-control');
-    ok($input, 'Root div encloses an input with .form-control');
+    my $sel = qq{div.form-group > ${field_type}.form-control};
+    my $input = $dom->at($sel);
+    ok($input, qq{Root div encloses ${field_type} with .form-control});
     cmp_deeply($input->attr, $exp_input_attrs, 'Got expected attrs for input');
 
     my $error_span = $dom->at('div.form-group > span.text-danger');

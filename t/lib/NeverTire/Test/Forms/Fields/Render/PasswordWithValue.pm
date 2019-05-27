@@ -15,6 +15,7 @@ sub run {
 
     $self->_run_test('Input::Password', {
         field_args      => {name => 'password', value => 'xyzzy'},
+        field_type      => 'input',
         exp_label_attrs => {for => 'test-form-password'},
         exp_label       => 'Password',
         exp_input_attrs => {

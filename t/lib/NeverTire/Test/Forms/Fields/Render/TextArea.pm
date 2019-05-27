@@ -2,7 +2,7 @@ package NeverTire::Test::Forms::Fields::Render::TextArea;
 use Moose;
 use namespace::autoclean;
 
-extends 'NeverTire::Test::Forms::Fields::Render::TextAreaBase';
+extends 'NeverTire::Test::Forms::Fields::Render::Base';
 with 'NeverTire::Test::Role';
 
 use Test::More;
@@ -14,6 +14,7 @@ sub run {
 
     $self->_run_test('Input::TextArea', {
         field_args      => {name => 'your-name'},
+        field_type      => 'textarea',
         exp_label_attrs => {for => 'test-form-your-name'},
         exp_label       => 'Your name',
         exp_input_attrs => {
