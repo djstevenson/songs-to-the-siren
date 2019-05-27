@@ -20,7 +20,7 @@ sub run {
         exp_input_attrs => {
             type => 'password',
             name => 'password',
-            class => 'pure-input-1',
+            class => 'form-control',
             placeholder => 'Password',
             value => '',
 			id => 'test-form-password',

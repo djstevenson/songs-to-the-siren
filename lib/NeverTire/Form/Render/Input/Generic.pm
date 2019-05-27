@@ -17,14 +17,14 @@ sub _input_render {
     my $placeholder = $self->placeholder;
 
     my $value       = '';
-    my $input_class = '';
+    my $input_class = 'form-control';
     my $error_class = '';
     my $error_id    = 'error-' . $id;
     my $text        = '';
 
     if ($self->has_error) {
         $text = $self->error;
-        $input_class = 'is-invalid';
+        $input_class .= ' is-invalid';
         $error_class = 'text-danger';
     }
     my $error = qq{<span id="${error_id}" class="${error_class}">${text}</span>};
@@ -38,7 +38,7 @@ sub _input_render {
     return qq{
         <div class="form-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" name="${name}" $autofocus class="form-control ${input_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" name="${name}" $autofocus class="${input_class}" placeholder="${placeholder}" value="${value}"/>
             ${error}
         </div>
     };

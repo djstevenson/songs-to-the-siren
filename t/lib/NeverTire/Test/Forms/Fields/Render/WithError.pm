@@ -20,7 +20,7 @@ sub run {
         exp_input_attrs => {
             type => 'text',
             name => 'your-name',
-            class => 'pure-input-1 is-invalid',
+            class => 'form-control is-invalid',
             placeholder => 'Your name',
             value => '',
 			id => 'test-form-your-name',

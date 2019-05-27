@@ -20,7 +20,7 @@ sub run {
         exp_input_attrs => {
             type => 'text',
             name => 'your-name',
-            class => 'pure-input-1',
+            class => 'form-control',
             placeholder => 'Your name',
             value => '',
             autofocus => 'autofocus',

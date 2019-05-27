@@ -20,7 +20,7 @@ sub run {
         exp_input_attrs => {
             type => 'email',
             name => 'email',
-            class => 'pure-input-1',
+            class => 'form-control',
             placeholder => 'Email',
             value => 'xyzzy@example.com',
 			id => 'test-form-email',
