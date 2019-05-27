@@ -55,12 +55,27 @@ has_field summary_markdown => (
     validators  => [qw/ Required  /],
 );
 
+has_field summary_preview => (
+    type        => 'Html',
+    options     => {
+        html => q{<div id="markdown-preview-summary" class="markdown summary markdown-preview">Summary preview here</div>},
+    },
+);
+
 has_field full_markdown => (
     label       => 'Full Description',
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
 );
+
+has_field full_preview => (
+    type        => 'Html',
+    options     => {
+        html => q{<div id="markdown-preview-full" class="markdown full markdown-preview">Full preview here</div>},
+    },
+);
+
 
 
 override posted => sub {

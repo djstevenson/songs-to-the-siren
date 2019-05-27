@@ -3,9 +3,6 @@
 
 <%== $form->render %>
 
-
-<!-- TODO Put this in a function in our own JS lib as we're going to need it in a number of places -->
-
 <script type="text/javascript">
     $(window).on('load', function() {
         markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");

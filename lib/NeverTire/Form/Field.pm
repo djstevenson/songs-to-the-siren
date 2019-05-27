@@ -132,6 +132,8 @@ sub set_initial_value {
 sub _get_initial_value {
 	my ($self, $form) = @_;
 
+    return '' if $self->type eq 'Html';
+
 	# Get from initial_value option if we have one.
 	# Else get from data_object if we have one.
 	# Else blank.
