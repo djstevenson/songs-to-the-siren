@@ -12,14 +12,17 @@ sub render {
     my $label       = $self->label;
     my $placeholder = $self->placeholder;
 
-    my $error = '';
-	my $value = $self->has_value ? $self->value : '';
+	my $value       = $self->has_value ? $self->value : '';
+    my $input_class = '';
     my $error_class = '';
+    my $error_id    = 'error-' . $id;
+    my $text        = '';
     if ($self->has_error) {
-        my $text = $self->error;
-        $error = qq{<div class="invalid-feedback">${text}</div>};
-        $error_class = ' is-invalid';
+        $text = $self->error;
+        $input_class = 'is-invalid';
+        $error_class = 'text-danger';
     }
+    my $error = qq{<span id="${error_id}" class="${error_class}">${text}</span>};
 
     my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';
 
@@ -29,7 +32,7 @@ sub render {
     return qq{
 		<div class="form-group">
 			<label for="${id}">${label}</label>
-			<textarea id="${id}" name="${name}" $autofocus class="form-control${error_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
+			<textarea id="${id}" name="${name}" $autofocus class="form-control ${input_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
 			${error}
 		</div>
 	};

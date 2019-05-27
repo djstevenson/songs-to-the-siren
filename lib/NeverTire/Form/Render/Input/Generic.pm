@@ -16,25 +16,30 @@ sub _input_render {
     my $label       = $self->label;
     my $placeholder = $self->placeholder;
 
-    my $value = '';
+    my $value       = '';
+    my $input_class = '';
     my $error_class = '';
-    my $text = '';
-    my $error_id = 'error-' . $id;
+    my $error_id    = 'error-' . $id;
+    my $text        = '';
+
     if ($self->has_error) {
         $text = $self->error;
-        $error_class = ' is-invalid';
+        # $error_class = 'bg-error';
+        $input_class = 'is-invalid';
+        $error_class = 'text-danger';
     }
-    my $error = qq{<span id="${error_id}" class="" ${error_class}">${text}</span>};
+    my $error = qq{<span id="${error_id}" class="${error_class}">${text}</span>};
 
     if ($self->has_value && $type ne 'password') {
         $value = $self->value;
     }
 
+    # TODO If the form has errors, consider patching autofocus to go to the first error field?
     my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';
     return qq{
         <div class="form-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" name="${name}" $autofocus class="form-control${error_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" name="${name}" $autofocus class="form-control ${input_class}" placeholder="${placeholder}" value="${value}"/>
             ${error}
         </div>
     };
