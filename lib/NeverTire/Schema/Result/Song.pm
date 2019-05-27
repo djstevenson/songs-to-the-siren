@@ -39,7 +39,7 @@ __PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',   { 'foreig
 
 __PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'foreign.song_id' => 'self.id' });
 
-__PACKAGE__->many_to_many( tags => song_tags => 'tag');
+__PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
 sub show {
     my $self = shift;

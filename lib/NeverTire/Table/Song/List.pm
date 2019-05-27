@@ -41,6 +41,18 @@ has_column date_published => (
     sortable     => 1,
 );
 
+has_column tags => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        my $url = $table->c->url_for('edit_song_tags', song_id => $row->id);
+        return qq{
+            <a href="${url}">Tags</a>
+        };
+    },
+
+);
+
 has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
