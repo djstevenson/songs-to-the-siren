@@ -14,20 +14,20 @@ use NeverTire::Test::Forms::MockForm;
 # a div.form_group
 #
 # Example simple render (reformatted):
-# <div>
-#   <label for="your-name-name">Name</label>
-#   <input type="text" id="your-name-name" name="name" autofocus="autofocus" class="pure-input-1" placeholder="Name" value=""/>
-# </div>
+#  <div class="form-group">
+#     <label for="new-song-artist">Artist</label>
+#     <input type="text" id="new-song-artist" name="artist"  class="form-control " placeholder="Artist" value=""/>
+#     <span id="error-new-song-artist" class=""></span>
+#  </div>
 #
 # If the field has an error, this becomes:
-# <div>
-#   <label for="your-name-name">Name</label>
-#   <input type="text" id="your-name-name" name="name" autofocus="autofocus" class="pure-input-1 is-invalid" placeholder="Name" value=""/>
-#   <span class="pure-form-message is-invalid">Required</span>
-# </div>
+#  <div class="form-group">
+#     <label for="new-song-artist">Artist</label>
+#     <input type="text" id="new-song-artist" name="artist"  class="form-control is-invalid" placeholder="Artist" value=""/>
+#     <span id="error-new-song-artist" class="text-danger"></span>
+#  </div>
 #
-# Note the extra class on the field, and the extra span.
-# Class names here are from Pure CSS
+# Class names here are from Bootstrap forms CSS
 
 
 
@@ -49,17 +49,17 @@ sub _run_test {
     my $html = $field->render($mock_form);
     my $dom = Mojo::DOM->new($html);
 
-    ok($dom->at('div')->matches('.form-field-group'), 'Root is a div with form-field-group class');
-    my $label = $dom->at('div.form-field-group > label');
+    ok($dom->at('div')->matches('.form-group'), 'Root is a div with form-group class');
+    my $label = $dom->at('div.form-group > label');
     ok($label, 'Root div encloses a label');
     cmp_deeply($label->attr, $exp_label_attrs, 'Got expected attrs for label');
     is($label->text, $exp_label, 'Got expected label text');
 
-    my $input = $dom->at('div.form-field-group > input');
+    my $input = $dom->at('div.form-group > input');
     ok($input, 'Root div encloses an input');
     cmp_deeply($input->attr, $exp_input_attrs, 'Got expected attrs for input');
 
-    my $error_span = $dom->at('div.form-field-group > span.is-invalid');
+    my $error_span = $dom->at('div.form-group > span.text-danger');
     if (exists $field_args->{error}) {
         ok($input->attr->{class} =~ / is-invalid/, 'Error CSS on input field');
         ok($error_span, 'Got error message div');
