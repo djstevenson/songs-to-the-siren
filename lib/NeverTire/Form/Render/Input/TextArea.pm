@@ -29,7 +29,7 @@ sub render {
     return qq{
 		<div class="form-group">
 			<label for="${id}">${label}</label>
-			<textarea id="${id}" name="${name}" $autofocus class="${error_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
+			<textarea id="${id}" name="${name}" $autofocus class="form-control${error_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
 			${error}
 		</div>
 	};

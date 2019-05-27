@@ -32,9 +32,9 @@ sub _input_render {
 
     my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';
     return qq{
-        <div class="form-field-group">
+        <div class="form-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" name="${name}" $autofocus class="${error_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" name="${name}" $autofocus class="form-control${error_class}" placeholder="${placeholder}" value="${value}"/>
             ${error}
         </div>
     };
