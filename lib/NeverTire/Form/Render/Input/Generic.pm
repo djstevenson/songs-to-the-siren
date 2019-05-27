@@ -5,7 +5,9 @@ use namespace::autoclean;
 sub _name_to_id {
     my ($self, $form, $name) = @_;
 
-    return $form->id . '-' . $name;
+    my $id = $form->id . '-' . $name;
+    $id =~ s/_/-/g;
+    return $id;
 }
 
 sub _input_render {

@@ -13,7 +13,7 @@ sub render {
     my $placeholder = $self->placeholder;
 
 	my $value       = $self->has_value ? $self->value : '';
-    my $input_class = '';
+    my $input_class = 'form-control';
     my $error_class = '';
     my $error_id    = 'error-' . $id;
     my $text        = '';

@@ -3,3 +3,26 @@
 
 <%== $form->render %>
 
+
+<!-- TODO Put this in a function in our own JS lib as we're going to need it in a number of places -->
+
+<script type="text/javascript">
+    var oldVal="";
+    $("#new-song-summary-markdown").on('change keyup paste', function() {
+        var currentVal = $(this).val();
+        if (currentVal == oldVal) {
+            return;
+        }
+
+        oldVal = currentVal;
+        /* Rate limit these? */
+        $.ajax({
+            type: "POST",
+            url: "/text/render",
+            data: {markdown: currentVal},
+            success: function(data) {
+                $("#markdown-preview-summary").html(data);
+            },
+        });
+    })
+</script>

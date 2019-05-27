@@ -55,8 +55,8 @@ sub _run_test {
     cmp_deeply($label->attr, $exp_label_attrs, 'Got expected attrs for label');
     is($label->text, $exp_label, 'Got expected label text');
 
-    my $input = $dom->at('div.form-group > input');
-    ok($input, 'Root div encloses an input');
+    my $input = $dom->at('div.form-group > input.form-control');
+    ok($input, 'Root div encloses an input with .form-control');
     cmp_deeply($input->attr, $exp_input_attrs, 'Got expected attrs for input');
 
     my $error_span = $dom->at('div.form-group > span.text-danger');
