@@ -10,3 +10,17 @@ function markdownPreview(textAreaID, previewAreaID) {
         });
     }));
 }
+
+function deleteSongTag(songID, tagID) {
+    var url = "/song/" + songID + "/tag/" + tagID;
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        success: function(data) {
+            var buttonID = "#song-tag-" + songID + "-" + tagID;
+            $(buttonID).hide(125, function(){ this.remove(); });
+        },
+    });
+}
+
+

@@ -27,3 +27,11 @@ section.song footer {
     margin-bottom: 2rem;
     display: none;
 }
+
+.tag-list {
+    list-style: none;
+}
+
+.tag-button {
+    margin-bottom: 0.5rem;
+}

@@ -28,10 +28,10 @@ INSERT INTO tags (name) VALUES ('Female vox');               -- 7
 INSERT INTO tags (name) VALUES ('Band');                     -- 8
 INSERT INTO tags (name) VALUES ('British');                  -- 9
 INSERT INTO tags (name) VALUES ('American');                 -- 10
-INSERT INTO tags (name) VALUES ('Label: 4AD');               -- 11
+INSERT INTO tags (name) VALUES ('4AD');                      -- 11
 INSERT INTO tags (name) VALUES ('Kristin Hersh');            -- 12
 INSERT INTO tags (name) VALUES ('Tanya Donelly');            -- 13
-INSERT INTO tags (name) VALUES ('Label: One Little Indian'); -- 14
+INSERT INTO tags (name) VALUES ('One Little Indian');        -- 14
 INSERT INTO tags (name) VALUES ('Instrumental');             -- 15
 INSERT INTO tags (name) VALUES ('Mostly-instrumental');      -- 16
 INSERT INTO tags (name) VALUES ('Sample-based');             -- 17

@@ -1,5 +1,12 @@
-<ul>
+% layout 'admin';
+% title 'Edit tags for ' . $song->title;
+
+<h2>Edit tags for <%= $song->title %></h2>
+
+<ul class="tag-list">
     % foreach my $tag ( @$tags ) {
-        <li><%= $tag->name %>
+        <li>
+            %= include 'song/tag/_deletable_tag', tag => $tag
+        </li>
     % }
 </ul>
