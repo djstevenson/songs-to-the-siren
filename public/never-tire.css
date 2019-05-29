@@ -25,4 +25,5 @@ section.song footer {
 .markdown-preview {
     border: 1px solid black;
     margin-bottom: 2rem;
+    display: none;
 }

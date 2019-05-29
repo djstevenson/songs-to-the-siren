@@ -8,7 +8,7 @@ use NeverTire::Schema;
 use NeverTire::Controller::Home;
 use NeverTire::Controller::User;
 use NeverTire::Controller::Song;
-use NeverTire::Controller::Text;
+use NeverTire::Controller::Markdown;
 
 # This method will run once at server start
 sub startup {
@@ -59,8 +59,8 @@ sub startup {
     my $song_controller = NeverTire::Controller::Song->new;
     $song_controller->add_routes($r, $rl);
 
-    my $text_controller = NeverTire::Controller::Text->new;
-    $text_controller->add_routes($r, $rl);
+    my $markdown_controller = NeverTire::Controller::Markdown->new;
+    $markdown_controller->add_routes($r, $rl);
 }
 
 use Mojo::Pg;
