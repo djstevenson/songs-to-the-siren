@@ -29,7 +29,13 @@ section.song footer {
 }
 
 .tag-list {
+    margin-top: 1rem;
+    margin-left: -2.4rem;
     list-style: none;
+}
+
+.tag-list li {
+    display: inline-block;
 }
 
 .tag-button {

@@ -9,7 +9,7 @@ sub add_routes {
     my $ul = $rl->any('/tag')->to(controller => 'Song::Tag');
 
     # These are admin functions, need to be logged in for all of them.
-    $ul->route('/edit')->name('edit_song_tags')->via('GET')->to(action => 'edit');
+    $ul->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
 
     # Admin routes that capture a tag id
     my $tag_action = $ul->under('/:tag_id')->to(action => 'capture');
@@ -24,8 +24,18 @@ sub add_routes {
 sub edit {
     my $c = shift;
 
-    my $tags = $c->stash->{song}->tags;
-    $c->stash(tags => [ $tags->all ]);
+    my $song = $c->stash->{song};
+
+    my $form = $c->form('Tag::Create', song => $song);
+    if ($form->process) {
+        $c->flash(msg => 'Tag added');
+    }
+
+    my $tags = $song->tags;
+    $c->stash(
+        tags => [ $tags->all ],
+        form => $form
+    );
 }
 
 sub capture {

@@ -3,6 +3,8 @@
 
 <h2>Edit tags for <%= $song->title %></h2>
 
+<%== $form->render %>
+
 <ul class="tag-list">
     % foreach my $tag ( @$tags ) {
         <li>

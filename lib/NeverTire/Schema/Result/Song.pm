@@ -42,15 +42,27 @@ __PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'for
 __PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
 sub show {
-    my $self = shift;
-
-    $self->update({ date_published => DateTime->now });
+    shift->update({ date_published => DateTime->now });
 }
 
 sub hide {
-    my $self = shift;
+    shift->update({ date_published => undef });
+}
 
-    $self->update({ date_published => undef });
+sub add_tag {
+    my ($self, $data) = @_;
+
+    my $tag_name = $data->{name};
+    print STDERR scalar(localtime(time())), " CREATE TAG $tag_name\n";
+
+    my $rs = $self->result_source->schema->resultset('Tag');
+    my $tag = $rs->find_or_create({ name => $tag_name });
+
+    $rs = $self->result_source->schema->resultset('SongTag');
+    return $rs->find_or_create({
+        tag_id  => $tag->id,
+        song_id => $self->id,
+    });
 }
 
 no Moose;
