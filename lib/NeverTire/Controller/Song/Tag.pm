@@ -25,17 +25,19 @@ sub edit {
     my $c = shift;
 
     my $song = $c->stash->{song};
-
     my $form = $c->form('Tag::Create', song => $song);
+    
+    $c->stash(
+        tags => [ $song->tags->all ],
+        form => $form,
+    );
     if ($form->process) {
         $c->flash(msg => 'Tag added');
+        
+        # Redirect so that form is reinitialised
+        $c->redirect_to('edit_song_tags', song_id => $song->id);
     }
 
-    my $tags = $song->tags;
-    $c->stash(
-        tags => [ $tags->all ],
-        form => $form
-    );
 }
 
 sub capture {

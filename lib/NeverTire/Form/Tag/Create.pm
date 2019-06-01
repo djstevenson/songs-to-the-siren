@@ -14,6 +14,9 @@ has_field name => (
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    options     => {
+        initial_value => '',
+    },
 );
 
 has song => (
