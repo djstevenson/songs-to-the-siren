@@ -23,6 +23,7 @@ sub add_routes {
     $song_action->route('/show')->name('show_song')->via('GET')->to(action => 'show');
     $song_action->route('/hide')->name('hide_song')->via('GET')->to(action => 'hide');
     $song_action->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
+    # Method=DELETE?
     $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
 
     my $tag_controller = NeverTire::Controller::Song::Tag->new;

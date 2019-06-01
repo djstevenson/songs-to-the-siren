@@ -70,6 +70,7 @@ CREATE TABLE tags (
     "name" TEXT NOT NULL,
     date_created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
+CREATE UNIQUE INDEX tags_name_idx ON tags USING BTREE(name);
 
 DROP TABLE IF EXISTS song_tags;
 CREATE TABLE song_tags (
