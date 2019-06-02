@@ -1,6 +1,12 @@
 % layout 'default';
 % title "Songs I\x{2019}ll Never Tire of";
 
+% if ( defined $filter ) {
+    <p class="filter">
+        Filtered by: <a class="btn btn-outline-dark btn-sm song-tag-remove" href="<%= url_for('home') %>"><sup>x</sup> <%= $filter->name %></a>
+    </p>
+% }
+
 % while (my $song = $songs->next ) {
     %= include 'home/_song', song => $song
 % }

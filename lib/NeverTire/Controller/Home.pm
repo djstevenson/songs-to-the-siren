@@ -14,8 +14,15 @@ sub front_page {
     my $tag_id = $c->param('tag');
     my $songs = $c->schema->resultset('Song')
         ->home_page_songs($tag_id);
-        
-    $c->stash(songs => $songs);
+
+    $c->stash(
+        songs => $songs,
+        filter => undef,
+    );
+
+    if ($tag_id) {
+        $c->stash(filter => $c->schema->resultset('Tag')->find($tag_id));
+    }
 }
 
 1;
