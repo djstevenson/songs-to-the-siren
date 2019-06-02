@@ -16,4 +16,4 @@ my $test = NeverTire::Test->new;
 
 ##### END BOILERPLATE
 
-$test->run('Model::UpdateSong');
+$test->run('Model::Song::New');

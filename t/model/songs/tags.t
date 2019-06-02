@@ -16,4 +16,4 @@ my $test = NeverTire::Test->new;
 
 ##### END BOILERPLATE
 
-$test->run('Model::NonAdmin');
+$test->run('Model::Song::Tags');

@@ -1,4 +1,4 @@
-package NeverTire::Test::Model::NewSong;
+package NeverTire::Test::Model::Song::New;
 use Moose;
 use namespace::autoclean;
 
