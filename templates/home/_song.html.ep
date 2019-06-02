@@ -14,9 +14,9 @@
     <footer>
         % my @song_tags = $song->tags->all;
         % if ( scalar @song_tags ) {
-            <p class="song-tags">
+            <p class="song-tags">Tags:
                 % foreach my $tag ( @song_tags ) {
-                    <button class="btn btn-secondary song-tag"><%= $tag->name %></button>
+                    <a class="btn btn-outline-dark btn-sm song-tag" href="" role="button"><%= $tag->name %></a>
                 % }
             </p>
         % }
