@@ -16,8 +16,6 @@ has '+user_base' => (default => 'model_2');
 sub run {
 	my $self = shift;
 	
-	my $schema = $self->schema;
-
     my $user = $self->create_user;
 
 	my $song = $user->create_song({

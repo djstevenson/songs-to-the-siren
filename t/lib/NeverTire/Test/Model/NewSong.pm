@@ -16,8 +16,6 @@ has '+user_base' => (default => 'model_1');
 sub run {
 	my $self = shift;
 	
-	my $schema = $self->schema;
-
     my $user = $self->create_user;
 
 	is($user->songs->count, 0, 'New user has no songs');

@@ -30,7 +30,7 @@ override posted => sub {
 
     # Whitelist what we extract from the submitted form
 	my $fields = $self->form_hash(qw/ name /);
-	return $self->song->add_tag($fields);
+	return $self->song->add_tag($fields->{name});
 };
 
 __PACKAGE__->meta->make_immutable;

@@ -50,10 +50,7 @@ sub hide {
 }
 
 sub add_tag {
-    my ($self, $data) = @_;
-
-    my $tag_name = $data->{name};
-    print STDERR scalar(localtime(time())), " CREATE TAG $tag_name\n";
+    my ($self, $tag_name) = @_;
 
     my $rs = $self->result_source->schema->resultset('Tag');
     my $tag = $rs->find_or_create({ name => $tag_name });
@@ -63,6 +60,17 @@ sub add_tag {
         tag_id  => $tag->id,
         song_id => $self->id,
     });
+}
+
+sub delete_tag {
+    my ($self, $tag) = @_;
+
+    $self->song_tags->search({
+        tag_id => $tag->id
+    })->delete;
+
+    # Remove if no-longer associated with any songs
+    $tag->delete if $tag->songs->count == 0;
 }
 
 no Moose;
