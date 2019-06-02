@@ -10,13 +10,20 @@ use Carp qw/ croak /;
 use DateTime;
 
 sub home_page_songs {
-    my ($self, $tag_id) = @_;
+    my ($self, $tags) = @_;
 
-    return $self->select_metadata
+    my $rs = $self->select_metadata
         ->select_text(summary => 'html')
-        ->where_has_tag($tag_id)
         ->where_published
         ->by_pubdate;
+
+    if ($tags) {
+        foreach my $tag (@$tags) {
+            $rs = $rs->where_has_tag($tag);
+        }
+    }
+
+    return $rs;
 }
 
 sub select_metadata {
@@ -53,13 +60,12 @@ sub where_published {
 }
 
 sub where_has_tag {
-    my ($self, $tag_id) = @_;
-
-    return $self unless defined $tag_id;
+    my ($self, $tag) = @_;
 
     my $tag_sql = '(SELECT 1 FROM song_tags ST WHERE ST.tag_id=? AND ST.song_id=me.id)';
+
     return $self->search({
-        '-exists' => \[$tag_sql, $tag_id]
+        '-exists' => \[$tag_sql, $tag->id]
     });
 }
 
@@ -106,12 +112,13 @@ ResultSet methods for Songs
 Shortcut for getting all the songs you want to list on the 
 home page. Returns a result set.
 
-Optional arg: tag_id, restricts the songs to ones that have
-that tag.
+Optional arg: tags, a reference to an array of Tag
+result objects. Restricts the songs to ones that have
+one or more of these tags.
 
-  $song_rs->home_page_songs($tag_id);
+  $song_rs->home_page_songs($tags);
 
-Leave out $tag_id, or pass undef, to search for all songs
+Leave out $tags, or pass undef, to search for all songs
 regardless of tags.
 
 Usage:
@@ -147,11 +154,10 @@ These fields can be big so are not selected by default.
 
 =item where_has_tag
 
-Adds a WHERE clause to select only songs that have a
-specified tag. Pass in a tag_id (or undef for no
-filtering).
+Adds a WHERE clause to select only songs that have the
+specified tag. Pass in a Tag result object.
   
-  $song_rs->where_has_tag(4);
+  $song_rs->where_has_tag($tag_object);
 
 =item where_published
 
