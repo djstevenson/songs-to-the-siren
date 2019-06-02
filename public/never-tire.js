@@ -18,7 +18,11 @@ function deleteSongTag(songID, tagID) {
         url: url,
         success: function(data) {
             var buttonID = "#song-tag-" + songID + "-" + tagID;
-            $(buttonID).hide(425, function(){ this.remove(); });
+            var listItemID = buttonID + "-li";
+            $(buttonID).hide(150, function(){
+                this.remove();
+                $(listItemID).remove();
+            });
         },
     });
 }

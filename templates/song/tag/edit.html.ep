@@ -7,8 +7,8 @@
 
 <ul class="tag-list">
     % foreach my $tag ( @$tags ) {
-        <li>
-            %= include 'song/tag/_deletable_tag', tag => $tag
+        <li id="song-tag-<%= $song->id %>-<%= $tag->id %>-li">
+            <button id="song-tag-<%= $song->id %>-<%= $tag->id %>" onclick="deleteSongTag(<%= $song->id %>, <%= $tag->id %>)" class="btn btn-danger rounded-pill tag-button">x <%= $tag->name %></button>
         </li>
     % }
 </ul>
