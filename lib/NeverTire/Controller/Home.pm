@@ -11,7 +11,10 @@ sub front_page {
     my $c = shift;
 
     # TODO Add pagination
-    my $songs = $c->schema->resultset('Song')->home_page_songs;
+    my $tag_id = $c->param('tag');
+    my $songs = $c->schema->resultset('Song')
+        ->home_page_songs($tag_id);
+        
     $c->stash(songs => $songs);
 }
 

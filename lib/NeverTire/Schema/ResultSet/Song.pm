@@ -10,10 +10,11 @@ use Carp qw/ croak /;
 use DateTime;
 
 sub home_page_songs {
-    my $self = shift;
+    my ($self, $tag_id) = @_;
 
     return $self->select_metadata
         ->select_text(summary => 'html')
+        ->where_has_tag($tag_id)
         ->where_published
         ->by_pubdate;
 }
@@ -48,7 +49,19 @@ sub where_published {
 
     return $self->search({
         date_published => \' <= NOW()'
-    });}
+    });
+}
+
+sub where_has_tag {
+    my ($self, $tag_id) = @_;
+
+    return $self unless defined $tag_id;
+
+    my $tag_sql = '(SELECT 1 FROM song_tags ST WHERE ST.tag_id=? AND ST.song_id=me.id)';
+    return $self->search({
+        '-exists' => \[$tag_sql, $tag_id]
+    });
+}
 
 sub by_pubdate {
     my ($self, $order) = @_;
@@ -88,6 +101,23 @@ ResultSet methods for Songs
 
 =over
 
+=item home_page_songs
+
+Shortcut for getting all the songs you want to list on the 
+home page. Returns a result set.
+
+Optional arg: tag_id, restricts the songs to ones that have
+that tag.
+
+  $song_rs->home_page_songs($tag_id);
+
+Leave out $tag_id, or pass undef, to search for all songs
+regardless of tags.
+
+Usage:
+
+  $song_rs->select_metadata
+
 =item select_metadata
 
 Indicates that we want to fetch the metadata (basically 
@@ -114,6 +144,14 @@ In this example, the result is available as:
   $result->summary_html;
 
 These fields can be big so are not selected by default.
+
+=item where_has_tag
+
+Adds a WHERE clause to select only songs that have a
+specified tag. Pass in a tag_id (or undef for no
+filtering).
+  
+  $song_rs->where_has_tag(4);
 
 =item where_published
 
