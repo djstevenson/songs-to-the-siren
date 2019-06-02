@@ -1,15 +1,12 @@
 package NeverTire::Controller::Song;
 use Mojo::Base 'Mojolicious::Controller';
 
-# $r  = routes
-# $rl = routes for which you need to be logged-in
-
 use NeverTire::Controller::Song::Tag;
 
 sub add_routes {
-    my ($c, $r, $rl) = @_;
+    my ($c, $routes) = @_;
 
-    my $ul = $rl->any('/song')->to(controller => 'song');
+    my $ul = $routes->{admin} ->any('/song')->to(controller => 'song');
 
     # These are admin functions, need to be logged in for all of them.
     $ul->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
@@ -27,7 +24,8 @@ sub add_routes {
     $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
 
     my $tag_controller = NeverTire::Controller::Song::Tag->new;
-    $tag_controller->add_routes($song_action);
+    $routes->{song} = $song_action;
+    $tag_controller->add_routes($routes);
 }
 
 sub create {
