@@ -17,7 +17,7 @@ has '+user_base' => (default => 'model_3');
 sub run {
 	my $self = shift;
 	
-    my $user = $self->create_user;
+    my $user = $self->create_admin_user;
 
 	my $song1 = $user->create_song({
 		summary_markdown => 'summary',

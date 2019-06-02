@@ -8,6 +8,7 @@ extends 'NeverTire::Schema::Base::Result';
 
 use DateTime;
 use Text::Markdown qw/ markdown /;
+use Carp qw/ croak /;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
@@ -18,6 +19,7 @@ __PACKAGE__->add_columns(
     name          => {data_type => 'TEXT'},
     email         => {data_type => 'TEXT'},
     password_hash => {data_type => 'TEXT'},   # Bcrypt 2a with random salt
+    admin         => {data_type => 'BOOLEAN'},
     date_created  => {data_type => 'DATETIME'},
     date_password => {data_type => 'DATETIME'},
 );
@@ -31,6 +33,8 @@ __PACKAGE__->has_many(songs => 'NeverTire::Schema::Result::Song', { 'foreign.aut
 sub create_song {
     my ($self, $args) = @_;
 
+    croak 'Permission denied' unless $self->admin;
+
     my $full_args = {
         %$args,
         full_html    => markdown($args->{full_markdown}),
@@ -43,6 +47,8 @@ sub create_song {
 
 sub edit_song {
     my ($self, $song, $args) = @_;
+
+    croak 'Permission denied' unless $self->admin;
 
     my $full_args = {
         %$args,

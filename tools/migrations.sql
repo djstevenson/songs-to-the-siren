@@ -6,6 +6,7 @@ CREATE TABLE users (
     "name" TEXT NOT NULL,
     email TEXT NOT NULL,
     password_hash TEXT NOT NULL, -- BCrypt
+    admin BOOLEAN NOT NULL DEFAULT false,
 
     date_created TIMESTAMP WITH TIME ZONE NOT NULL,
     date_password TIMESTAMP WITH TIME ZONE NOT NULL

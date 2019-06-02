@@ -58,6 +58,23 @@ sub create_user {
         name          => $user_data->{name},
         email         => lc($user_data->{email}),
         password      => $user_data->{password},
+        admin         => 0,
+    });
+}
+
+# Low-level create, bypassses registration
+sub create_admin_user {
+    my ($self, $user_data) = @_;
+
+    $user_data //= $self->get_user_data;
+
+    my $schema = $self->schema;
+    my $user_rs = $schema->resultset('User');
+    return $user_rs->create_user({
+        name          => $user_data->{name},
+        email         => lc($user_data->{email}),
+        password      => $user_data->{password},
+        admin         => 1,
     });
 }
 

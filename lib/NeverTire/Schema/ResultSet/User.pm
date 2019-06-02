@@ -22,6 +22,7 @@ sub create_user {
 		password_hash => $passwd,
 		date_created  => $now,
 		date_password => $now,
+		admin         => $args->{admin} // 0,
 	});
 
 	# TODO Users should confirm

@@ -16,7 +16,7 @@ has '+user_base' => (default => 'model_1');
 sub run {
 	my $self = shift;
 	
-    my $user = $self->create_user;
+    my $user = $self->create_admin_user;
 
 	is($user->songs->count, 0, 'New user has no songs');
 
@@ -68,6 +68,8 @@ sub run {
 	is($song->tags->count, 0, 'New song has no tags');
 
 	is($user->songs->count, 1, 'User now has one song');
+    my $user2 = $self->create_admin_user;
+	is($user2->songs->count, 0, 'New user2 has no songs');
 
     done_testing;
 }

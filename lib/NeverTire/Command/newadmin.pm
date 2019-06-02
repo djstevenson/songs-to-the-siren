@@ -27,6 +27,7 @@ sub run {
             name     => $name,
             email    => $email,
             password => $password,
+            admin    => 1,
         });
     }
 }
