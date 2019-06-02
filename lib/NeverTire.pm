@@ -26,6 +26,7 @@ sub startup {
     $app->plugin('NeverTire::Helper::Form');
     $app->plugin('NeverTire::Helper::Table');
     $app->plugin('NeverTire::Helper::Render');
+    $app->plugin('NeverTire::Helper::TagQueryParams');
 
     $app->_migrate_db;
 
