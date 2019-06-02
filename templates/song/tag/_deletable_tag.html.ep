@@ -1,1 +1,0 @@
-<button id="song-tag-<%= $song->id %>-<%= $tag->id %>" onclick="deleteSongTag(<%= $song->id %>, <%= $tag->id %>)" class="btn btn-danger rounded-pill tag-button">x <%= $tag->name %></button>
