@@ -2,9 +2,9 @@ package NeverTire::Controller::Home;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
-    my ($c, $r) = @_;
+    my ($c, $routes) = @_;
 
-    $r->get('/')->to('home#front_page')->name('home');
+    $routes->{all} ->get('/')->to('home#front_page')->name('home');
 }
 
 sub front_page {

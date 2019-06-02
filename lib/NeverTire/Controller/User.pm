@@ -1,14 +1,10 @@
 package NeverTire::Controller::User;
 use Mojo::Base 'Mojolicious::Controller';
 
-# $r  = routes
-# $rl = routes for which you need to be logged-in
-
 sub add_routes {
-    my ($c, $r, $rl) = @_;
+    my ($c, $routes) = @_;
 
-    my $u  = $r ->any('/user')->to(controller => 'user');
-    my $ul = $rl->any('/user')->to(controller => 'user');
+    my $u  = $routes->{all} ->any('/user')->to(controller => 'user');
 
     # Don't need to be logged-in for these:
     $u->route('/login')->name('login')->via('GET', 'POST')->to(action => 'login');

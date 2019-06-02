@@ -29,12 +29,33 @@ sub startup {
 
     $app->_migrate_db;
 
-    # Routing
-    # Router
-    my $r = $app->routes;
+    my $routes = $app->_base_routes;
 
     my $user_controller = NeverTire::Controller::User->new;
-    my $rl = $r->under('/' => sub {
+	$user_controller->add_routes($routes);
+
+    my $home_controller = NeverTire::Controller::Home->new;
+    $home_controller->add_routes($routes);
+
+    my $song_controller = NeverTire::Controller::Song->new;
+    $song_controller->add_routes($routes);
+
+    my $markdown_controller = NeverTire::Controller::Markdown->new;
+    $markdown_controller->add_routes($routes);
+}
+
+use Mojo::Pg;
+use Mojo::Pg::Migrations;
+use Mojo::Home;
+
+# TODO docs
+sub _base_routes {
+    my $app = shift;
+
+    my $route_all = $app->routes;
+
+    # Route for "must be logged in"
+    my $route_login = $route_all->under('/' => sub {
     	my $c = shift;
 
         # Logged in?
@@ -47,31 +68,35 @@ sub startup {
 
         delete $c->session->{user};
         $c->stash->{auth_user} = undef;
-        $c->redirect_to('login');
+        $c->reply->not_found;
         return undef;
     });
 
-	$user_controller->add_routes($r, $rl);
+    # Route for "must be logged in"
+    my $route_admin = $route_login->under('/' => sub {
+    	my $c = shift;
 
-    my $home_controller = NeverTire::Controller::Home->new;
-    $home_controller->add_routes($r, $rl);
+        # Already logged-in because coming via $route_login
+        if (! $c->stash->{auth_user}->admin) {
+            $c->reply->not_found;
+            return undef;
+        }
 
-    my $song_controller = NeverTire::Controller::Song->new;
-    $song_controller->add_routes($r, $rl);
+        return 1;
+    });
 
-    my $markdown_controller = NeverTire::Controller::Markdown->new;
-    $markdown_controller->add_routes($r, $rl);
+    return {
+        all   => $route_all,
+        login => $route_login,
+        admin => $route_admin,
+    }
 }
 
-use Mojo::Pg;
-use Mojo::Pg::Migrations;
-use Mojo::Home;
-
 sub _migrate_db {
-    my $self = shift;
+    my $app = shift;
 
-    my $schema = $self->schema;
-    my $db_name = $self->db_name;
+    my $schema = $app->schema;
+    my $db_name = $app->db_name;
 
     my $pg = Mojo::Pg->new("postgresql://nevertire\@localhost/$db_name");
     my $migrations = Mojo::Pg::Migrations->new(pg => $pg);
