@@ -16,7 +16,7 @@
         % if ( scalar @song_tags ) {
             <p class="song-tags">Tags:
                 % foreach my $tag ( @song_tags ) {
-                    <a class="btn btn-outline-dark btn-sm song-tag" href="<%= url_for('home') %>?tag=<%= $tag->id %>" role="button"><%= $tag->name %></a>
+                    <a class="btn btn-outline-dark btn-sm song-tag" href="<%= url_for('home') %>?tags=<%= $tag->id %>" role="button"><%= $tag->name %></a>
                 % }
             </p>
         % }

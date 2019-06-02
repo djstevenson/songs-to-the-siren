@@ -11,18 +11,16 @@ sub front_page {
     my $c = shift;
 
     # TODO Add pagination
-    my $tag_id = $c->param('tag');
+    my $tags  = $c->schema->resultset('Tag')
+        ->search_by_ids($c->param('tags'));
+
     my $songs = $c->schema->resultset('Song')
-        ->home_page_songs($tag_id);
+        ->home_page_songs($tags);
 
     $c->stash(
         songs => $songs,
-        filter => undef,
+        tags  => $tags,
     );
-
-    if ($tag_id) {
-        $c->stash(filter => $c->schema->resultset('Tag')->find($tag_id));
-    }
 }
 
 1;

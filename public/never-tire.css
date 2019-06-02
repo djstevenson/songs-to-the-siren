@@ -26,7 +26,7 @@ section.song footer .song-tags {
     font-size: 87%;
 }
 
-.song-tag {
+.song-tag, .song-tag-remove {
     margin-left: 0.2rem;
     margin-bottom: 0.5rem;
 }

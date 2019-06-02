@@ -1,9 +1,22 @@
 % layout 'default';
 % title "Songs I\x{2019}ll Never Tire of";
 
-% if ( defined $filter ) {
-    <p class="filter">
-        Filtered by: <a class="btn btn-outline-dark btn-sm song-tag-remove" href="<%= url_for('home') %>"><sup>x</sup> <%= $filter->name %></a>
+% my $tag_count = scalar @$tags;
+% if ( $tag_count ) {
+    <p class="filter-tags">
+        Filtered by:
+        %# TODO Make a helper to do this URL mangling!
+        % my $base_url = url_for('home');
+        % my %tagh = map {$_->id => 1} @$tags;
+        % foreach my $tag (@$tags) {
+            %# Concoct a query string that removes this tag, and removes the query string altogether if none left.
+            %# Copy the tag hash and delete this tag's id
+            % my %tagh_copy = %tagh;
+            % delete $tagh_copy{$tag->id};
+            % my $query_string = scalar(keys(%tagh_copy)) == 0 ? '' : '?tags=' . join(',', sort keys %tagh_copy);
+            % my $href = $base_url . $query_string;
+            <a class="btn btn-outline-dark btn-sm song-tag-remove" href="<%= $href %>"><sup>x</sup> <%= $tag->name %></a>
+        % }
     </p>
 % }
 
