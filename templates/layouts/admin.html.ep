@@ -39,5 +39,13 @@
     </footer>
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");
+        markdownPreview("#new-song-full-markdown", "#markdown-preview-full");
+    });
+</script>
+
+
 </body>
 </html>

@@ -27,4 +27,9 @@ function deleteSongTag(songID, tagID) {
     });
 }
 
+$(function() {
+    $('button.song-tag').hover(
+        function(){ $(this).toggleClass('btn-primary');  $(this).toggleClass('btn-secondary') }
+    );
+});
 

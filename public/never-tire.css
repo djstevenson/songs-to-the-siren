@@ -17,6 +17,16 @@ section.song header {
 }
 
 section.song footer {
+    border-top: 1px solid #cccccc;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+section.song footer .song-tags {
+    font-size: 87%;
+}
+
+section.song footer .metadata {
     font-style: italic;
     text-align: right;
     font-size: 87%;
