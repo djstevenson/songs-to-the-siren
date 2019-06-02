@@ -16,12 +16,6 @@ has_field title => (
     validators  => [qw/ Required  /],
 );
 
-has_field album => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
-);
-
 has_field artist => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -71,7 +65,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title album artist date_released summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title artist album date_released summary_markdown full_markdown /);
 	return $user->create_song($fields);
 };
 

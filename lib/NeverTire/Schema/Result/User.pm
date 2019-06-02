@@ -25,7 +25,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key('id');
 
 # Relation for the song descriptions created by this user.
-__PACKAGE__->has_many(song => 'NeverTire::Schema::Result::Song', { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(songs => 'NeverTire::Schema::Result::Song', { 'foreign.author_id' => 'self.id' });
 
 
 sub create_song {
@@ -38,7 +38,7 @@ sub create_song {
         date_created => DateTime->now,
     };
 
-    return $self->create_related('song', $full_args);
+    return $self->create_related('songs', $full_args);
 }
 
 sub edit_song {
@@ -51,6 +51,7 @@ sub edit_song {
         date_updated => DateTime->now,
     };
 
+    # TODO Record who did the update
     $song->update($full_args);
     
     return $song;

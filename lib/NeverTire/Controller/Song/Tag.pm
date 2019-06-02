@@ -57,9 +57,7 @@ sub capture {
 sub remove {
     my $c = shift;
 
-    $c->stash->{song}->song_tags->search({
-        tag_id => $c->stash->{tag}->id
-    })->delete;
+    $c->stash->{song}->delete_tag($c->stash->{tag});
 
     $c->render(text => '');
 }
