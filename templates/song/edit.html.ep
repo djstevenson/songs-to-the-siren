@@ -2,10 +2,3 @@
 % title 'Edit song: ' . $song->title;
 
 <%== $form->render %>
-
-<script type="text/javascript">
-    $(window).on('load', function() {
-        markdownPreview("#edit-song-summary-markdown", "#markdown-preview-summary");
-        markdownPreview("#edit-song-full-markdown", "#markdown-preview-full");
-    });
-</script>

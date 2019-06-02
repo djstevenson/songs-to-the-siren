@@ -12,7 +12,15 @@
         <%== $song->summary_html %>
     </div>
     <footer>
-        <p>
+        % my @song_tags = $song->tags->all;
+        % if ( scalar @song_tags ) {
+            <p class="song-tags">Tags:
+                % foreach my $tag ( @song_tags ) {
+                    <a class="btn btn-outline-dark btn-sm song-tag" href="<%= url_for('home') %>?tag=<%= $tag->id %>" role="button"><%= $tag->name %></a>
+                % }
+            </p>
+        % }
+        <p class="metadata">
             Written by <%= $song->get_column('author_name') %> at <%= datetime($song->date_created) %>
             % my $updated = $song->date_updated;
             % if ($updated) {
