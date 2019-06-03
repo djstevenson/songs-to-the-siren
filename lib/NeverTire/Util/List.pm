@@ -1,4 +1,7 @@
 package NeverTire::Util::List;
+use strict;
+use warnings;
+
 
 # TODO POD
 use Sub::Exporter -setup => {

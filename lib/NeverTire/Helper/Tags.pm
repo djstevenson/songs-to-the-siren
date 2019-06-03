@@ -1,7 +1,7 @@
 package NeverTire::Helper::Tags;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use NeverTire::Util::List qw/ add_id_to_list remove_id_from_list /;
+use NeverTire::Util::QueryParams qw/ add_id_to_param remove_id_from_param /;
 
 sub register {
     my ($self, $app) = @_;
@@ -11,11 +11,7 @@ sub register {
     $app->helper(remove_tag_from_query_params => sub {
         my ($c, $tag) = @_;
 
-        my @ids = remove_id_from_list($c->param('tags'), $tag->id);
-
-        return '' unless scalar(@ids);
-
-        return '?tags=' . join(',', @ids);
+        return remove_id_from_param($c->param('tags'), 'tags', $tag->id);
     });
 
     # $tag is a Tag result object
@@ -23,9 +19,7 @@ sub register {
     $app->helper(add_tag_to_query_params => sub {
         my ($c, $tag) = @_;
 
-        my @ids = add_id_to_list($c->param('tags'), $tag->id);
-
-        return '?tags=' . join(',', @ids);
+        return add_id_to_param($c->param('tags'), 'tags', $tag->id);
     });
 
   
