@@ -12,6 +12,22 @@ has skip_test_db => (
     default     => 0,
 );
 
+has test_app => (
+    is          => 'ro',
+    isa         => 'Test::Mojo',
+    lazy        => 1,
+    init_arg    => undef,
+    default     => sub {
+        my $self = shift;
+
+        return Test::Mojo->new('NeverTire')
+            if $self->skip_test_db;
+
+        my $opts = {db_name => $self->database->db_name};
+        return Test::Mojo->new(NeverTire => $opts)
+    },
+);
+
 has app => (
     is          => 'ro',
     isa         => 'NeverTire',
@@ -20,11 +36,7 @@ has app => (
     default     => sub {
         my $self = shift;
 
-        return Test::Mojo->new('NeverTire')->app
-            if $self->skip_test_db;
-
-        my $opts = {db_name => $self->database->db_name};
-        return Test::Mojo->new(NeverTire => $opts)->app;
+        return $self->test_app->app;
     },
 );
 

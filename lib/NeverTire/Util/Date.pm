@@ -1,4 +1,7 @@
 package NeverTire::Util::Date;
+use strict;
+use warnings;
+
 
 use Sub::Exporter -setup => {
     exports => [qw/ format_date format_pg_date /]
