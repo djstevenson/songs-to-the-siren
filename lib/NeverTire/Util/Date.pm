@@ -3,8 +3,6 @@ use strict;
 use warnings;
 
 
-# TODO Tests
-# TODO Tests that take different timezones into account
 use Sub::Exporter -setup => {
     exports => [qw/ format_date format_pg_date /]
 };
