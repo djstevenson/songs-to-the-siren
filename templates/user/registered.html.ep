@@ -1,0 +1,12 @@
+% layout 'default';
+% title 'Registered';
+<h2>Registered</h2>
+
+<div class="notification">
+    <p>
+        Thank you for your registration request.
+    </p>
+    <p>
+        An email has been sent to you, and your registration will be complete as soon as you click the confirmation link in that email.
+    </p>
+</div>

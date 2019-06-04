@@ -9,6 +9,9 @@ use DateTime;
 
 # TODO POD
 
+# TODO Dupe user creation methods
+# This one bypasses the registration confirmation, so drop it
+# (except maybe for creating initial admin user?)
 sub create_user {
 	my ($self, $args) = @_;
 
@@ -20,8 +23,9 @@ sub create_user {
 		name          => lc($args->{name}),
 		email         => lc($args->{email}),
 		password_hash => $passwd,
-		date_created  => $now,
-		date_password => $now,
+		registered_at => $now,
+		confirmed_at  => $now,
+		password_at   => $now,
 		admin         => $args->{admin} // 0,
 	});
 
@@ -37,7 +41,24 @@ sub create_user {
 	return $user;
 }
 
+sub register {
+	my ($self, $args) = @_;
 
+	my $passwd = new_password_hash($args->{password});
+
+	my $now = DateTime->now;
+	my $user = $self->create({
+		name          => $args->{name},
+		email         => lc($args->{email}),
+		password_hash => $passwd,
+		registered_at => $now,
+		password_at   => $now,
+	});
+
+	$user->send_registration_email;
+
+	return $user;
+}
 sub find_by_email{
 	my ($self, $email) = @_;
 
