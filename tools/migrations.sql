@@ -8,8 +8,9 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL, -- BCrypt
     admin BOOLEAN NOT NULL DEFAULT false,
 
-    date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_password TIMESTAMP WITH TIME ZONE NOT NULL
+    registered_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    confirmed_at TIMESTAMP WITH TIME ZONE,  -- NULL until confirmed
+    password_at TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
 CREATE UNIQUE INDEX users_name_unique_idx ON users USING BTREE(LOWER(name));
@@ -21,7 +22,7 @@ CREATE TABLE user_keys (
     user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     purpose TEXT NOT NULL,
     key_hash TEXT NOT NULL,
-    date_expires TIMESTAMP WITH TIME ZONE NOT NULL,
+    expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
     PRIMARY KEY (user_id, purpose)
 );
 
@@ -29,12 +30,12 @@ CREATE TABLE user_keys (
 DROP TABLE IF EXISTS emails;
 CREATE TABLE emails (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    "from" TEXT NOT NULL,
-    "to" TEXT NOT NULL,
+    email_from TEXT NOT NULL,
+    email_to TEXT NOT NULL,
     template_name TEXT NOT NULL,
     "data" JSON NOT NULL,
-    date_queued TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_sent TIMESTAMP WITH TIME ZONE -- NULL until actually sent.
+    queued_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    sent_at TIMESTAMP WITH TIME ZONE -- NULL until actually sent.
 );
 
 DROP TABLE IF EXISTS songs;

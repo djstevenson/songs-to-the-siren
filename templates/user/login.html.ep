@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Login';
 
 <%== $form->render %>
