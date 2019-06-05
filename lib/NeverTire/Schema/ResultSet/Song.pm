@@ -30,8 +30,8 @@ sub select_metadata {
     my $self = shift;
 
     return $self->search(undef, {
-        select    => [qw/ id title album date_created date_updated date_published date_released author.name artist /],
-        as        => [qw/ id title album date_created date_updated date_published date_released author_name artist /],
+        select    => [qw/ id title album created_at updated_at published_at released_at author.name artist /],
+        as        => [qw/ id title album created_at updated_at published_at released_at author_name artist /],
         join      => 'author',
     });
 }
@@ -55,7 +55,7 @@ sub where_published {
     my $self = shift;
 
     return $self->search({
-        date_published => \' <= NOW()'
+        published_at => \' <= NOW()'
     });
 }
 
@@ -81,7 +81,7 @@ sub by_pubdate {
     # we want the unpublished ones at the top.
     my $sql_order = $order eq '-desc' ? 'DESC' : 'ASC';
     return $self->search(undef, {
-        order_by => \" date_published ${sql_order} NULLS FIRST",
+        order_by => \" published_at ${sql_order} NULLS FIRST",
     });
 }
 

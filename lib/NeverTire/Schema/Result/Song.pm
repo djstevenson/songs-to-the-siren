@@ -25,12 +25,12 @@ __PACKAGE__->add_columns(
 
     author_id        => {data_type => 'INTEGER'},
 
-    date_created     => {data_type => 'DATETIME'},
-    date_updated     => {data_type => 'DATETIME'},
-    date_published   => {data_type => 'DATETIME'},
+    created_at       => {data_type => 'DATETIME'},
+    updated_at       => {data_type => 'DATETIME'},
+    published_at     => {data_type => 'DATETIME'},
 
     # TEXT so it can be free-format, e.g. "summer 1991"
-    date_released  => {data_type => 'TEXT'},
+    released_at      => {data_type => 'TEXT'},
 );
 
 __PACKAGE__->set_primary_key('id');
@@ -42,11 +42,11 @@ __PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'for
 __PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
 sub show {
-    shift->update({ date_published => DateTime->now });
+    shift->update({ published_at => DateTime->now });
 }
 
 sub hide {
-    shift->update({ date_published => undef });
+    shift->update({ published_at => undef });
 }
 
 sub add_tag {
