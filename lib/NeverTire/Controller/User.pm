@@ -14,11 +14,17 @@ sub add_routes {
     $u->route('/confirmed')->name('confirmed')->via('GET')->to(action => 'confirmed');
     $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
 
+    $u->route('/forgot_password')->name('forgot_password')->via('GET', 'POST')->to(action => 'forgot_password');
+    $u->route('/forgot_password/reset_sent')->name('password_reset_sent')->via('GET')->to(action => 'password_reset_sent');
+    $u->route('/reset/done')->name('password_reset_done')->via('GET')->to(action => 'password_reset_done');
+
     # Actions that require a user_id to act on that don't need to be logged-in
     # e.g. registration confirmation/declination functions
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
     $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')->to(action => 'confirm_registration');
     $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')->to(action => 'decline_registration');
+    $user_action->get('/reset/:user_key')->name('password_reset')->via('GET', 'POST')->to(action => 'password_reset');
+
 }
 
 sub register {
@@ -53,6 +59,19 @@ sub logout {
 
     delete $c->session->{user};
     $c->redirect_to('home');
+}
+
+sub forgot_password {
+    my $c = shift;
+
+    my $form = $c->form('User::ForgotPassword');
+    if (my $user = $form->process) {
+        $c->flash(msg => 'Password reset email sent');
+        $c->redirect_to('password_reset_sent');
+    }
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 
@@ -99,5 +118,25 @@ sub decline_registration {
     $c->redirect_to('declined');
 }
 
+sub password_reset {
+    my $c = shift;
 
+    my $user_key    = $c->stash->{user_key};
+    my $target_user = $c->stash->{target_user};
+
+    return $c->reply->not_found
+        unless $target_user->check_key('password_reset', $user_key);
+
+    my $form = $c->form('User::ResetPassword');
+    if ($form->process) {
+        $target_user->update_password($form->find_field('password')->value);
+
+        $c->flash(msg => 'Your password has been reset');
+        $c->redirect_to('password_reset_done');
+        # TODO Send an email notification when password is updated?
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
 1;
