@@ -1,0 +1,9 @@
+% layout 'default';
+% title 'Forgot name';
+
+<p>
+	Enter your email address here, and if there is a user registered with that address,
+	a name reminder will be sent out.
+</p>
+
+<%== $form->render %>

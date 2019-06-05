@@ -51,6 +51,30 @@ sub delete_key {
     $k->delete if $k;
 }
 
+sub update_password {
+    my ($self, $password) = @_;
+
+    $self->update({
+        password_hash => new_password_hash($password),
+    });
+
+    # Delete key to prevent re-use
+    $self->delete_key('password_reset');
+}
+
+sub send_name_reminder {
+    my ($self, $args) = @_;
+
+    $self->send_email('name_reminder', {user => $self->id, name => $self->name});
+}
+
+sub send_password_reset {
+    my ($self, $args) = @_;
+
+    my $k = $self->generate_new_user_key('password_reset', DateTime::Duration->new(hours => 1));
+    $self->send_email('password_reset', {user => $self->id, key => $k});
+}
+
 sub generate_new_user_key {
     my ($self, $purpose, $duration) = @_;
 
