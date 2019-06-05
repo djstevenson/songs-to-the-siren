@@ -18,13 +18,15 @@ sub add_routes {
     $u->route('/forgot_password/reset_sent')->name('password_reset_sent')->via('GET')->to(action => 'password_reset_sent');
     $u->route('/reset/done')->name('password_reset_done')->via('GET')->to(action => 'password_reset_done');
 
+    $u->route('/forgot_name')->name('forgot_name')->via('GET', 'POST')->to(action => 'forgot_name');
+    $u->route('/forgot_name/reminder_sent')->name('name_reminder_sent')->via('GET')->to(action => 'name_reminder_sent');
+
     # Actions that require a user_id to act on that don't need to be logged-in
     # e.g. registration confirmation/declination functions
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
     $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')->to(action => 'confirm_registration');
     $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')->to(action => 'decline_registration');
     $user_action->get('/reset/:user_key')->name('password_reset')->via('GET', 'POST')->to(action => 'password_reset');
-
 }
 
 sub register {
@@ -59,6 +61,19 @@ sub logout {
 
     delete $c->session->{user};
     $c->redirect_to('home');
+}
+
+sub forgot_name {
+    my $c = shift;
+
+    my $form = $c->form('User::ForgotName');
+    if (my $user = $form->process) {
+        $c->flash(msg => 'Name reminder email sent');
+        $c->redirect_to('name_reminder_sent');
+    }
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 sub forgot_password {

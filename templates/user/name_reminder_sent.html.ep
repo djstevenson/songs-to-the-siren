@@ -1,0 +1,9 @@
+% layout 'default';
+% title 'Name reminder';
+<h2>Name reminder</h2>
+
+<div class="notification">
+	<p>
+		If there is a user with that email address, a login name reminder has been sent by email.
+	</p>
+</div>

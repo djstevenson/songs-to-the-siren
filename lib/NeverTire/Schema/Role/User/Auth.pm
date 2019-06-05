@@ -62,6 +62,12 @@ sub update_password {
     $self->delete_key('password_reset');
 }
 
+sub send_name_reminder {
+    my ($self, $args) = @_;
+
+    $self->send_email('name_reminder', {user => $self->id, name => $self->name});
+}
+
 sub send_password_reset {
     my ($self, $args) = @_;
 
