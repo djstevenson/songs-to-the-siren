@@ -96,6 +96,23 @@ sub send_email {
     });
 }
 
+sub confirm_registration {
+    my ($self, $user_key) = @_;
+
+    return unless $self->check_key('registration', $user_key);
+
+    # Do nothing if already confirmed
+    if (!$self->confirmed_at){
+        $self->update({
+			confirmed_at => DateTime->now,
+		});
+    }
+
+    $self->delete_key('registration');
+
+    return 1;
+}
+
 sub decline_registration {
     my ($self, $user_key) = @_;
 
