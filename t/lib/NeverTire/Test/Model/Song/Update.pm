@@ -24,9 +24,9 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
-		date_released    => 'release',
+		released_at      => 'release',
 	});
-	my $dc = $song->date_created;
+	my $dc = $song->created_at;
 
 	my $summary = 'This is the summary';
 	my $full    = 'This is the full article about the song';
@@ -40,7 +40,7 @@ sub run {
 		title            => $title,
 		artist           => $artist,
 		album            => $album,
-		date_released    => $release,
+		released_at      => $release,
 	});
 
 	ok($song, 'Updated a song');
@@ -50,12 +50,12 @@ sub run {
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
 	is($song->album,         $album,                'Album is correct');
-	is($song->date_released, $release,              'Release date is correct');
+	is($song->released_at,   $release,              'Release date is correct');
 
-	is($song->date_created, $dc, 'Editing does not change date_created');
+	is($song->created_at, $dc, 'Editing does not change created_at');
 
-	my $du  = $song->date_updated;
-	ok($du, 'New song does have date_updated set');
+	my $du  = $song->updated_at;
+	ok($du, 'New song does have updated_at set');
 
 	my $now = DateTime->now(time_zone => 'Europe/London');
 	my $diff = $now->subtract_datetime($du)->in_units('seconds');

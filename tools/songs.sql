@@ -1,4 +1,4 @@
-INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,date_created,date_updated,date_released,date_published) VALUES ('Throwing Muses (USA)', 'Fish', 'Lonely Is An Eyesore (various artists)',
+INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES ('Throwing Muses (USA)', 'Fish', 'Lonely Is An Eyesore (various artists)',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
@@ -9,7 +9,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
 1, NOW(), NULL, 'June 1987', NOW());
-INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,date_created,date_updated,date_released,date_published) VALUES ('The Heart Throbs (UK)', 'Tiny Feet (my own edit!)', 'Jubilee Twist',
+INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES ('The Heart Throbs (UK)', 'Tiny Feet (my own edit!)', 'Jubilee Twist',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.',
 '<p>Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.</p>',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit. Sit amet nisl suscipit adipiscing bibendum est ultricies. Eu scelerisque felis imperdiet proin fermentum leo vel. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Aliquet risus feugiat in ante. Purus sit amet luctus venenatis. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Phasellus egestas tellus rutrum tellus pellentesque. Sed pulvinar proin gravida hendrerit lectus a. Libero justo laoreet sit amet cursus sit amet dictum sit. Condimentum id venenatis a condimentum vitae sapien pellentesque.

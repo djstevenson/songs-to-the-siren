@@ -5,7 +5,7 @@
             <%= $song->title %> by <%= $song->artist %>
         </h2>
         <p>
-            Released: <%= $song->date_released %>
+            Released: <%= $song->released_at %>
         </p>
     </header>
     <div class="description">
@@ -24,8 +24,8 @@
             </p>
         % }
         <p class="metadata">
-            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->date_created) %>
-            % my $updated = $song->date_updated;
+            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->created_at) %>
+            % my $updated = $song->updated_at;
             % if ($updated) {
                 <br />
                 Last updated at <%= datetime($updated) %>

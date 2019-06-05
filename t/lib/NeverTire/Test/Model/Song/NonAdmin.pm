@@ -25,7 +25,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
-		date_released    => 'release',
+		released_at      => 'release',
 	};
 
 	throws_ok {

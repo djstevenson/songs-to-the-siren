@@ -33,7 +33,7 @@ sub run {
 		title            => $title,
 		artist           => $artist,
 		album            => $album,
-		date_released    => $release,
+		released_at      => $release,
 	});
 
 	# Full markdown tests done elsewhere, here we just
@@ -44,10 +44,10 @@ sub run {
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
 	is($song->album,         $album,                'Album is correct');
-	is($song->date_released, $release,              'Release date is correct');
+	is($song->released_at,   $release,              'Release date is correct');
 
-	my $dc  = $song->date_created;  # DateTime object
-	ok($dc,  'New song does have date_created set');
+	my $dc  = $song->created_at;  # DateTime object
+	ok($dc,  'New song does have created_at set');
 
 	my $now = DateTime->now(time_zone => 'Europe/London');
 	my $diff = $now->subtract_datetime($dc)->in_units('seconds');
@@ -63,7 +63,7 @@ sub run {
 	$diff = $now->subtract_datetime($dc)->in_units('seconds');
 	ok($diff < 4 && $diff >= 0, 'Date created is very recent, using Australia/Sydney');
 
-	ok(!$song->date_updated, 'New song does not have date_updated set');
+	ok(!$song->updated_at, 'New song does not have updated_at set');
 	
 	is($song->tags->count, 0, 'New song has no tags');
 

@@ -25,7 +25,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
-		date_released    => 'release',
+		released_at      => 'release',
 	});
 
 	my $song2 = $user->create_song({
@@ -34,7 +34,7 @@ sub run {
 		title            => 'title2',
 		artist           => 'artist2',
 		album            => 'album2',
-		date_released    => 'release2',
+		released_at      => 'release2',
 	});
 
 	is($song1->tags->count, 0, 'New song has no tags');
