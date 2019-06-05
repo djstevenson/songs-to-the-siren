@@ -89,6 +89,8 @@ CREATE TABLE comments (
     author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     comment_markdown TEXT NOT NULL,
     comment_html TEXT NOT NULL,
+    created_at  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    approved_at  TIMESTAMP WITH TIME ZONE DEFAULT NULL
 );
 CREATE INDEX comments_song_id_idx ON comments USING BTREE(song_id);
 CREATE INDEX comments_author_id_idx ON comments USING BTREE(author_id);
