@@ -11,11 +11,13 @@ sub add_routes {
     $u->route('/registered')->name('registered')->via('GET')->to(action => 'registered');
     $u->route('/login')->name('login')->via('GET', 'POST')->to(action => 'login');
     $u->route('/logout')->name('logout')->via('GET')->to(action => 'logout');
+    $u->route('/confirmed')->name('confirmed')->via('GET')->to(action => 'confirmed');
     $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
 
     # Actions that require a user_id to act on that don't need to be logged-in
     # e.g. registration confirmation/declination functions
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
+    $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')->to(action => 'confirm_registration');
     $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')->to(action => 'decline_registration');
 }
 
@@ -71,6 +73,18 @@ sub capture {
         $c->reply->not_found;
         return undef;
     }
+}
+
+sub confirm_registration {
+    my $c = shift;
+
+    my $user = $c->stash->{target_user};
+    my $user_key = $c->stash->{user_key};
+    return $c->reply->not_found
+        unless $user->confirm_registration($user_key);
+
+    $c->flash(msg => 'Registration confirmed');
+    $c->redirect_to('confirmed');
 }
 
 sub decline_registration {
