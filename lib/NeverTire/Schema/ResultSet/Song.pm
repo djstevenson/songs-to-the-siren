@@ -51,6 +51,15 @@ sub select_text {
     });
 }
 
+sub select_comment_count {
+    my $self = shift;
+
+    return $self->search(undef, {
+        '+select' => [ \q{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id) } ],
+        '+as'     => [ 'comment_count' ],
+    });
+}
+
 sub where_published {
     my $self = shift;
 
@@ -116,14 +125,14 @@ Optional arg: tags, a reference to an array of Tag
 result objects. Restricts the songs to ones that have
 one or more of these tags.
 
-  $song_rs->home_page_songs($tags);
+    $song_rs->home_page_songs($tags);
 
 Leave out $tags, or pass undef, to search for all songs
 regardless of tags.
 
 Usage:
 
-  $song_rs->select_metadata
+    $song_rs->select_metadata
 
 =item select_metadata
 
@@ -132,11 +141,11 @@ everything except the markdown and HTML), and does a join
 to the users table to get the author name, which you can
 access via via, e.g.:
 
-  $song->get_column('author_name');
+    $song->get_column('author_name');
 
 Usage:
 
-  $song_rs->select_metadata
+    $song_rs->select_metadata
 
 =item select_text($version, $format)
 
@@ -144,34 +153,44 @@ Indicates that we want to fetch the some form of the
 description of the song. $version will be 'full' or
 'summary', and $format will be 'html' or 'markdown.
 
-  $song_rs->select_text(summary => 'html')
+    $song_rs->select_text(summary => 'html')
 
 In this example, the result is available as:
 
-  $result->summary_html;
+    $result->summary_html;
 
 These fields can be big so are not selected by default.
+
+=item select_comment_count
+
+Gets the count of comments for this song:
+
+    $song_rs->select_comment_count;
+
+The result is available as:
+
+    $result->get_column('comment_count');
 
 =item where_has_tag
 
 Adds a WHERE clause to select only songs that have the
 specified tag. Pass in a Tag result object.
   
-  $song_rs->where_has_tag($tag_object);
+    $song_rs->where_has_tag($tag_object);
 
 =item where_published
 
 Adds a WHERE clause to select only published songs.
   
-  $song_rs->where_published;
+    $song_rs->where_published;
 
 =item by_pubdate
 
 Sorts the resultset by publication date, newest first. 
 Pass '-asc' as the arg if you want oldest first.
 
- $song_rs->by_pubdate;          # Sort desc
- $song_rs->by_pubdate('-asc');  # Sort asc
+    $song_rs->by_pubdate;          # Sort desc
+    $song_rs->by_pubdate('-asc');  # Sort asc
 
 =back
 
