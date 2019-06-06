@@ -13,7 +13,7 @@ __PACKAGE__->table('tags');
 __PACKAGE__->add_columns(
     id             => {data_type => 'INTEGER'},
     name           => {data_type => 'TEXT'},
-    date_created   => {data_type => 'DATETIME'},
+    created_at     => {data_type => 'DATETIME'},
 );
 
 __PACKAGE__->set_primary_key('id');

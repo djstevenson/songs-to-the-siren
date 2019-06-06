@@ -15,7 +15,8 @@ sub front_page {
         ->search_by_ids($c->param('tags'));
 
     my $songs = $c->schema->resultset('Song')
-        ->home_page_songs($tags);
+        ->home_page_songs($tags)
+        ->select_comment_count;
 
     $c->stash(
         songs => $songs,

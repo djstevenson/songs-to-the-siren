@@ -20,7 +20,7 @@ sub create_song {
         %$args,
         full_html    => markdown($args->{full_markdown}),
         summary_html => markdown($args->{summary_markdown}),
-        date_created => DateTime->now,
+        created_at   => DateTime->now,
     };
 
     return $self->create_related('songs', $full_args);
@@ -35,7 +35,7 @@ sub edit_song {
         %$args,
         full_html    => markdown($args->{full_markdown}),
         summary_html => markdown($args->{summary_markdown}),
-        date_updated => DateTime->now,
+        updated_at   => DateTime->now,
     };
 
     # TODO Record who did the update

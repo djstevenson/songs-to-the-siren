@@ -5,7 +5,7 @@
             <%= $song->title %> by <%= $song->artist %>
         </h2>
         <p>
-            Released: <%= $song->date_released %>
+            Released: <%= $song->released_at %>
         </p>
     </header>
     <div class="description">
@@ -24,12 +24,16 @@
             </p>
         % }
         <p class="metadata">
-            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->date_created) %>
-            % my $updated = $song->date_updated;
-            % if ($updated) {
-                <br />
-                Last updated at <%= datetime($updated) %>
-            % }
+            <%== pluralise($song->get_column('comment_count'), 'comment') %>.
         </p>
+        <p class="metadata">
+            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->created_at) %>
+        </p>
+        % my $updated = $song->updated_at;
+        % if ($updated) {
+            <p class="metadata">
+                Last updated at <%= datetime($updated) %>
+            </p>
+        % }
     </footer>
 </section>

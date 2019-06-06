@@ -30,13 +30,13 @@ has_column artist => (
     sortable     => 1,
 );
 
-has_column date_created => (
+has_column created_at => (
     header       => 'Created',
     sortable     => 1,
 );
 
 # TODO css to highlight whether it's in the future/past?
-has_column date_published => (
+has_column published_at => (
     header       => 'Published',
     sortable     => 1,
 );
@@ -69,7 +69,7 @@ has_column publish => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $pub = $row->date_published;
+        my $pub = $row->published_at;
         my $now = DateTime->now;
         if ( defined($pub) && DateTime->compare($pub, $now) <= 0 ) {
             my $url = $table->c->url_for('hide_song', song_id => $row->id);
@@ -89,13 +89,13 @@ has_column publish => (
 
 has '+empty_text' => (default => 'No songs are in the datbase');
 
-has '+default_order_by'   => (default => 'date_published');
+has '+default_order_by'   => (default => 'published_at');
 
 override class_for_row_data => sub {
     my ($self, $row_data) = @_;
 
     return 'table-warning' 
-        unless $row_data->date_published;
+        unless $row_data->published_at;
 };
 
 __PACKAGE__->meta->make_immutable;

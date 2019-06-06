@@ -52,16 +52,16 @@ CREATE TABLE songs (
 
     author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 
-    date_created TIMESTAMP WITH TIME ZONE NOT NULL,
-    date_updated TIMESTAMP WITH TIME ZONE,
-    date_released TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE,
+    released_at TEXT NOT NULL,
 
      -- null = "not published, so don't show it"
-    date_published TIMESTAMP WITH TIME ZONE
+    published_at TIMESTAMP WITH TIME ZONE
 );
 
 -- For sorting by publication date
-CREATE INDEX songs_date_published_idx ON songs USING BTREE(date_published);
+CREATE INDEX songs_published_at_idx ON songs USING BTREE(published_at);
 
 -- Support for cascade on foreign key constraints
 CREATE INDEX songs_author_id_idx ON songs USING BTREE(author_id);
@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    date_created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 CREATE UNIQUE INDEX tags_name_idx ON tags USING BTREE(name);
 
@@ -83,7 +83,20 @@ CREATE TABLE song_tags (
 
 CREATE INDEX song_tags_song_tag_idx ON song_tags USING BTREE(song_id, tag_id);
 
+CREATE TABLE comments (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+    author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    comment_markdown TEXT NOT NULL,
+    comment_html TEXT NOT NULL,
+    created_at  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    approved_at  TIMESTAMP WITH TIME ZONE DEFAULT NULL
+);
+CREATE INDEX comments_song_id_idx ON comments USING BTREE(song_id);
+CREATE INDEX comments_author_id_idx ON comments USING BTREE(author_id);
+
 -- 1 down
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS song_tags;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS songs;
