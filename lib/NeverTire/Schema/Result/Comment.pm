@@ -10,7 +10,7 @@ use DateTime;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
-__PACKAGE__->table('soncommentsgs');
+__PACKAGE__->table('comments');
 
 __PACKAGE__->add_columns(
     id               => {data_type => 'INTEGER'},
@@ -21,8 +21,6 @@ __PACKAGE__->add_columns(
 
     comment_markdown => {data_type => 'TEXT'},
     comment_html     => {data_type => 'TEXT'},
-    full_markdown    => {data_type => 'TEXT'},
-    full_html        => {data_type => 'TEXT'},
 
     created_at       => {data_type => 'DATETIME'},
     approved_at      => {data_type => 'DATETIME'},

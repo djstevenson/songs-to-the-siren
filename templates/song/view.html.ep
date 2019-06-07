@@ -16,6 +16,20 @@
             Do navigation links
         </p>
     </div>
+    % if ( scalar @$comments ) {
+        <div class="comments">
+            <ul>
+                % foreach my $comment (@$comments) {
+                    <li>
+                        <p>Comment by <%= $comment->author->name %>
+                    </li>
+                % }
+            </ul>
+        </div>
+    % }
+    <div class="comments">
+
+    </div>
     <footer>
         % my @song_tags = $song->tags->all;
         % if ( scalar @song_tags ) {
