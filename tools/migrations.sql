@@ -87,6 +87,7 @@ CREATE TABLE comments (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
     author_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    parent_id BIGINT REFERENCES comments(id) ON DELETE CASCADE,
     comment_markdown TEXT NOT NULL,
     comment_html TEXT NOT NULL,
     created_at  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
@@ -94,6 +95,7 @@ CREATE TABLE comments (
 );
 CREATE INDEX comments_song_id_idx ON comments USING BTREE(song_id);
 CREATE INDEX comments_author_id_idx ON comments USING BTREE(author_id);
+CREATE INDEX comments_parent_id_idx ON comments USING BTREE(parent_id);
 
 -- 1 down
 DROP TABLE IF EXISTS comments;

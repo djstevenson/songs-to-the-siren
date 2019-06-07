@@ -42,6 +42,12 @@ __PACKAGE__->has_many( comments  => 'NeverTire::Schema::Result::Comment', { 'for
 
 __PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
+sub approved_comments {
+    my $self = shift;
+
+    return $self->comments->search({ approved_at => { '!=' => undef }});
+}
+
 sub show {
     shift->update({ published_at => DateTime->now });
 }

@@ -33,7 +33,7 @@ sub full_song_data {
     return $self->select_metadata
         ->select_text(full => 'html')
         ->where_published
-        ->select_comment_count
+        ->select_comment_count(approved => 1)
         ->find($song_id);
 }
 
@@ -63,10 +63,13 @@ sub select_text {
 }
 
 sub select_comment_count {
-    my $self = shift;
+    my ($self, %options) = @_;
+
+    my $approved = exists $options{approved} ? 'AND C.approved_at IS NOT NULL' : '';
+    my $sql = qq{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id ${approved} ) };
 
     return $self->search(undef, {
-        '+select' => [ \q{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id) } ],
+        '+select' => [ \$sql ],
         '+as'     => [ 'comment_count' ],
     });
 }
