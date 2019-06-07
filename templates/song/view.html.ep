@@ -13,8 +13,7 @@
     <div class="description">
         <%== $song->full_html %>
         <p class="navigation">
-            <a href="<%= url_for('view_song', song_id => $song->id) %>">Next</a>
-            <a href="<%= url_for('view_song', song_id => $song->id) %>">Prev</a>
+            Do navigation links
         </p>
     </div>
     <footer>
