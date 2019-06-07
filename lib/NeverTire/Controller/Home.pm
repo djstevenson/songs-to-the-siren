@@ -16,7 +16,7 @@ sub front_page {
 
     my $songs = $c->schema->resultset('Song')
         ->home_page_songs($tags)
-        ->select_comment_count;
+        ->select_comment_count(approved => 1);
 
     $c->stash(
         songs => $songs,
