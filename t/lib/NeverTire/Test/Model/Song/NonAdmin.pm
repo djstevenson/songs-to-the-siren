@@ -38,7 +38,7 @@ sub run {
 	} 'Admin can create a song';
 
 	throws_ok {
-		$non_admin_user->edit_song($song, $song_data)
+		$non_admin_user->admin_edit_song($song, $song_data)
 	} qr/Permission denied/, 'Non-admin cannot edit a song';
 
     done_testing;

@@ -58,4 +58,20 @@ INSERT INTO song_tags (song_id, tag_id) VALUES (2, 8);
 INSERT INTO song_tags (song_id, tag_id) VALUES (2, 9);
 INSERT INTO song_tags (song_id, tag_id) VALUES (2, 14);
 
+-- A non-admin user. The admin user (1) should be created outside this file
+INSERT INTO users ("name",email,password_hash,"admin",registered_at,confirmed_at,password_at) 
+VALUES
+('hoagy', 'hoagy@ytfc.com', '$2a$13$DxMrrkG0.HdQ9L8itYNW9udfr0OBWiDqm0Fb76.PbMra7/qqTvbiO', false, NOW(), NOW(), NOW()),
+('jelie', 'jelie@ytfc.com', '$2a$13$DxMrrkG0.HdQ9L8itYNW9udfr0OBWiDqm0Fb76.PbMra7/qqTvbiO', false, NOW(), NOW(), NOW());
+
+
+INSERT INTO comments (song_id, author_id, comment_markdown, comment_html, created_at, approved_at)
+VALUES
+(1, 2, 'Best band ever', '<p>Best band ever</p>', NOW(), NOW()),
+(1, 3, 'Yeah. Best. Band. Ever', '<p>Yeah. Best. Band. Ever</p>', NOW(), NOW());
+
+INSERT INTO comments (song_id, author_id, comment_markdown, comment_html, created_at, approved_at)
+VALUES
+(2, 2, 'Best British band ever', '<p>Best British band ever</p>', NOW(), NOW()),
+(2, 3, 'Apart from New Order', '<p>Apart from New Order</p>', NOW(), NULL);
 

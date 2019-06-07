@@ -4,10 +4,10 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $routes) = @_;
 
-    my $ul = $routes->{song} ->any('/tag')->to(controller => 'Song::Tag');
+    my $ul = $routes->{admin_song} ->any('/tag')->to(controller => 'Song::Tag');
 
     # These are admin functions, need to be logged in for all of them.
-    $ul->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
+    $ul->route('/edit')->name('admin_edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
 
     # Admin routes that capture a tag id
     my $tag_action = $ul->under('/:tag_id')->to(action => 'capture');
@@ -33,7 +33,7 @@ sub edit {
         $c->flash(msg => 'Tag added');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('edit_song_tags', song_id => $song->id);
+        $c->redirect_to('admin_edit_song_tags', song_id => $song->id);
     }
 
 }
