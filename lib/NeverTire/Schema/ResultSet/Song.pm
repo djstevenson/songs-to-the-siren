@@ -26,6 +26,17 @@ sub home_page_songs {
     return $rs;
 }
 
+sub full_song_data {
+    my ($self, $song_id) = @_;
+
+    # TODO Prefetch tags?
+    return $self->select_metadata
+        ->select_text(full => 'html')
+        ->where_published
+        ->select_comment_count
+        ->find($song_id);
+}
+
 sub select_metadata {
     my $self = shift;
 

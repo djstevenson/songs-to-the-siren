@@ -26,7 +26,7 @@ sub create_song {
     return $self->create_related('songs', $full_args);
 }
 
-sub edit_song {
+sub admin_edit_song {
     my ($self, $song, $args) = @_;
 
     croak 'Permission denied' unless $self->admin;

@@ -1,3 +1,5 @@
+% layout 'default';
+% title $song->title;
 
 <section class="song">
     <header>
@@ -9,9 +11,10 @@
         </p>
     </header>
     <div class="description">
-        <%== $song->summary_html %>
-        <p class="more">
-            <a href="<%= url_for('view_song', song_id => $song->id) %>">Read more...</a>
+        <%== $song->full_html %>
+        <p class="navigation">
+            <a href="<%= url_for('view_song', song_id => $song->id) %>">Next</a>
+            <a href="<%= url_for('view_song', song_id => $song->id) %>">Prev</a>
         </p>
     </div>
     <footer>

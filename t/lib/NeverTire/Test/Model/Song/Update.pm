@@ -34,7 +34,7 @@ sub run {
 	my $artist  = 'The artist name';
 	my $album   = 'Greatest hits';
 	my $release = 'Last week';
-	my $edited_song = $user->edit_song($song => {
+	my $edited_song = $user->admin_edit_song($song => {
 		summary_markdown => $summary,
 		full_markdown    => $full,
 		title            => $title,
