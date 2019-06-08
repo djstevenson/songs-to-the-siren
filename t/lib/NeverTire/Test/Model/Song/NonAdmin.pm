@@ -29,12 +29,12 @@ sub run {
 	};
 
 	throws_ok {
-		$non_admin_user->create_song($song_data)
+		$non_admin_user->admin_create_song($song_data)
 	} qr/Permission denied/, 'Non-admin cannot create a song';
 
 	my $song;
 	lives_ok {
-		$song = $admin_user->create_song($song_data)
+		$song = $admin_user->admin_create_song($song_data)
 	} 'Admin can create a song';
 
 	throws_ok {

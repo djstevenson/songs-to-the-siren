@@ -27,7 +27,7 @@ sub run {
 	my $album   = 'Greatest hits';
 	my $release = 'Last week';
 	
-	my $song = $user->create_song({
+	my $song = $user->admin_create_song({
 		summary_markdown => $summary,
 		full_markdown    => $full,
 		title            => $title,

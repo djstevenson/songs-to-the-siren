@@ -1,20 +1,25 @@
 package NeverTire::Model::Comment::Forest;
-use Moose;
-use namespace::autoclean;
+use strict;
+use warnings;
 
 # TODO POD
 
 use NeverTire::Model::Comment::Node;
 
+use Sub::Exporter -setup => {
+    exports => [qw/ make_forest /]
+};
+
+# Called as a class method
 # $song is a NeverTire::Schema::ResultSet::Comment
 sub make_forest {
-    my ($self, $song) = @_;
+    my $song = shift;
 
     # Get them in ascending order.
     # Because we 'push' onto the node
     # list, we end up with newest at the
     # top, which is what we want.
-    my $comment_rs => $song
+    my $comment_rs = $song
         ->comments
         ->where_approved
         ->id_order;
@@ -43,8 +48,7 @@ sub make_forest {
         $all_nodes->{ $comment->id } = $node;
     }
 
+    return $root_nodes;
 }
 
-
-__PACKAGE__->meta->make_immutable;
 1;
