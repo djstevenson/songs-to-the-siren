@@ -27,9 +27,6 @@
             </ul>
         </div>
     % }
-    <div class="comments">
-
-    </div>
     <footer>
         % my @song_tags = $song->tags->all;
         % if ( scalar @song_tags ) {

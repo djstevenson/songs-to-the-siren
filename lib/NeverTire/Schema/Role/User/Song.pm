@@ -7,14 +7,17 @@ use DateTime;
 use Text::Markdown qw/ markdown /;
 use Carp qw/ croak /;
 
+use Readonly;
+
+Readonly my $NOT_ADMIN => 'Not admin - permission denied';
 
 # This exists just to keep Result::User down to a more managable size.
 # It extracts the methods relating to songs etc
 
-sub create_song {
+sub admin_create_song {
     my ($self, $args) = @_;
 
-    croak 'Permission denied' unless $self->admin;
+    croak $NOT_ADMIN unless $self->admin;
 
     my $full_args = {
         %$args,
@@ -29,7 +32,7 @@ sub create_song {
 sub admin_edit_song {
     my ($self, $song, $args) = @_;
 
-    croak 'Permission denied' unless $self->admin;
+    croak $NOT_ADMIN unless $self->admin;
 
     my $full_args = {
         %$args,
@@ -42,6 +45,39 @@ sub admin_edit_song {
     $song->update($full_args);
     
     return $song;
+}
+
+# TODO Add a 'permission' such that we can stop people posting
+#      if they get nasty/spammy/etc.
+#
+# $song = NeverTire::Schema::Result::Song
+# $reply_to = Maybe[NeverTire::Schema::Result::Comment]
+sub comment_on_song {
+    my ($self, $song, $markdown) = @_;
+
+    # die 'blah' unless $user->can_comment;  # TODO
+
+    $song->add_comment($self, undef, $markdown);
+}
+
+sub reply_to_comment {
+    my ($self, $reply_to, $markdown) = @_;
+
+    # die 'blah' unless $user->can_comment;  # TODO
+    my $song = $reply_to->song;
+    $song->add_comment($self, $reply_to, $markdown);
+}
+
+# Admin only
+sub approve_comment {
+    my ($self, $comment) = @_;
+
+    croak $NOT_ADMIN unless $self->admin;
+
+# TODO Add 'approved_by'
+    $comment->update({ approved_at  => DateTime->now });
+
+    return $comment;
 }
 
 no Moose::Role;

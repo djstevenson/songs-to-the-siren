@@ -66,7 +66,7 @@ override posted => sub {
 
     # Whitelist what we extract from the submitted form
 	my $fields = $self->form_hash(qw/ title artist album released_at summary_markdown full_markdown /);
-	return $user->create_song($fields);
+	return $user->admin_create_song($fields);
 };
 
 __PACKAGE__->meta->make_immutable;

@@ -1,4 +1,5 @@
 requires 'namespace::autoclean';
+requires 'Readonly';
 requires 'FindBin::libs';
 requires 'Cpanel::JSON::XS';
 requires 'Plack';

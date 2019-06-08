@@ -19,7 +19,7 @@ sub run {
 	
     my $user = $self->create_admin_user;
 
-	my $song1 = $user->create_song({
+	my $song1 = $user->admin_create_song({
 		summary_markdown => 'summary',
 		full_markdown    => 'full',
 		title            => 'title',
@@ -28,7 +28,7 @@ sub run {
 		released_at      => 'release',
 	});
 
-	my $song2 = $user->create_song({
+	my $song2 = $user->admin_create_song({
 		summary_markdown => 'summary2',
 		full_markdown    => 'full2',
 		title            => 'title2',
