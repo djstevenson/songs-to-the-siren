@@ -6,6 +6,8 @@ extends 'NeverTire::Schema::Base::Result';
 
 # TODO POD
 
+use NeverTire::Model::Comment::Forest;
+
 use DateTime;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
@@ -79,6 +81,18 @@ sub delete_tag {
     # Remove if no-longer associated with any songs
     $tag->delete if $tag->songs->count == 0;
 }
+
+# TODO DOCUMENT THIS
+# Returns reference to ordered array of
+# NeverTire::Model::Comment::Node
+sub comment_tree {
+    my $self = shift;
+
+    return NeverTire::Model::Comment::Forest
+        ->new
+        ->make_forest($self);
+}
+
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
