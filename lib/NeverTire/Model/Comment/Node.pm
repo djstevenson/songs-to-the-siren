@@ -19,7 +19,7 @@ has children => (
     init_arg    => undef,
     default     => sub{ return []; },
     handles     => {
-        add_child => 'push',
+        add_child => 'unshift',
     },
 );
 

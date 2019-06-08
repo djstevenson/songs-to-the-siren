@@ -54,7 +54,7 @@ approved comments are selected.
 
 =item id_order
 
-Order by id ascending.
+Order by id ascending - oldest comments first.
 
 =back
 

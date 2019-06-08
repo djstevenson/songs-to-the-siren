@@ -15,10 +15,11 @@ use Sub::Exporter -setup => {
 sub make_forest {
     my $song = shift;
 
-    # Get them in ascending order.
-    # Because we 'push' onto the node
-    # list, we end up with newest at the
-    # top, which is what we want.
+    # Get them in ascending order so we process the
+    # oldest first. But we add nodes to the root list,
+    # or to their parent's children list, in reverse
+    # order (unshift rather than push).
+    # This gives us the right order for display.
     my $comment_rs = $song
         ->comments
         ->where_approved
@@ -43,7 +44,7 @@ sub make_forest {
         }
         else {
             # New top-level comment.
-            push @{ $root_nodes }, $node;
+            unshift @{ $root_nodes }, $node;
         }
         $all_nodes->{ $comment->id } = $node;
     }
