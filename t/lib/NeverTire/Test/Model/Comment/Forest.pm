@@ -10,6 +10,8 @@ use Test::Deep qw/ cmp_deeply /;
 
 use DateTime;
 
+use NeverTire::View::Comment::Render qw/ render_node /;
+
 extends 'NeverTire::Test::Base';
 with 'NeverTire::Test::Role';
 
@@ -156,13 +158,16 @@ sub run {
 			'Comment7 has no children',
 		);
 
-		# So we've already tested the structure, but let's make a string out
-		# of it as we'll want to be able to do this to render it later.
-		#
-		# We're gonna make a string via recursion.
-		my $s = $self->_stringify_nodes($forest->[0]);
+		# Test the Node renderer too
+		my $nr = sub {
+			my $node = shift;
+
+			return $node->comment->id;
+		};
+
+		my $s = render_node($nr, $forest->[0], '[', ']', ',');
 		is ($s, '3[8,5,4[6[7]]]', 'Correct structure for comment3 implied by recursion');
-		my $t = $self->_stringify_nodes($forest->[1]);
+		my $t = render_node($nr, $forest->[1], '[', ']', ',');
 		is ($t, '1',              'Correct structure for comment1 implied by recursion');
 	};
     done_testing;
@@ -203,18 +208,6 @@ sub _compare_children {
 	];
 
 	cmp_deeply($actual_reply_ids, $expected_reply_ids, $desc);
-}
-
-sub _stringify_nodes {
-	my ($self, $node) = @_;
-	
-	my $s = $node->comment->id;
-	if ( scalar @{ $node->children } ) {
-		$s .= '[';
-		$s .= join(',', map { $self->_stringify_nodes($_) } @{ $node->children });
-		$s .= ']';
-	}
-	return $s;
 }
 
 __PACKAGE__->meta->make_immutable;

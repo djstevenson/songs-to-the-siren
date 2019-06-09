@@ -23,5 +23,21 @@ has children => (
     },
 );
 
+# Document this, walks a tree
+# executing the coderef on the current
+# node, then calls itself recursively on
+# the children.  Returns the
+# accumulated string.
+
+sub evaluate {
+    my ($self, $coderef) = @_;
+
+	my $s = $coderef->($self);
+	if ( scalar @{ $self->children } ) {
+		$s .= join('', map { $coderef->($_) } @{ $self->children });
+	}
+	return $s;
+}
+
 __PACKAGE__->meta->make_immutable;
 1;
