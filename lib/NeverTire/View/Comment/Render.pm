@@ -5,24 +5,26 @@ use Sub::Exporter -setup => {
 };
 
 sub render_comments {
-    my ($root_node, $draw_node) = @_;
+    my ($app, $root_node, $draw_node) = @_;
 
     # $root_node = NeverTire::Model::Comment::Node
 
-    return '<ul>' . _render_node($root_node, $draw_node) . '</ul>';
+    $draw_node //= \&_default_renderer;
+
+    return '<ul>' . _render_node($app, $root_node, $draw_node) . '</ul>';
 }
 
 sub _render_node {
-    my ($node, $draw_node) = @_;
+    my ($app, $node, $draw_node) = @_;
 
     # $node = NeverTire::Model::Comment::Node
 
-	my $s = '<li>' . $draw_node->($node);
+	my $s = '<li>' . $draw_node->($app, $node);
 	if ( scalar @{ $node->children } ) {
         $s .= '<ul>';
 		$s .= join('', 
             map {
-                _render_node($_, $draw_node);
+                _render_node($app, $_, $draw_node);
             }
             @{ $node->children });
         $s .= '</ul>';
@@ -31,6 +33,22 @@ sub _render_node {
     $s .= '</li>';
 
 	return $s;
+}
+
+sub _default_renderer {
+    my ($app, $node) = @_;
+
+    my $comment = $node->comment;
+
+    my $s = '<div class="comment">';
+
+    $s .= '<span class="author">By ' . $comment->author_id    . '</span>';
+    $s .= '<span class="date">At ' .   $app->datetime($comment->created_at)   . '</span>';
+    $s .= '<p class="comment-body">' . $comment->comment_html . '</p>';
+    
+    $s .= '</div>';
+
+    return $s;
 }
 
 1;
