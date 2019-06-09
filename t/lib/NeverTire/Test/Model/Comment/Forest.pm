@@ -10,7 +10,7 @@ use Test::Deep qw/ cmp_deeply /;
 
 use DateTime;
 
-use NeverTire::View::Comment::Render qw/ render_node /;
+use NeverTire::View::Comment::Render qw/ render_comments /;
 
 extends 'NeverTire::Test::Base';
 with 'NeverTire::Test::Role';
@@ -165,10 +165,39 @@ sub run {
 			return $node->comment->id;
 		};
 
-		my $s = render_node($nr, $forest->[0], '[', ']', ',');
-		is ($s, '3[8,5,4[6[7]]]', 'Correct structure for comment3 implied by recursion');
-		my $t = render_node($nr, $forest->[1], '[', ']', ',');
-		is ($t, '1',              'Correct structure for comment1 implied by recursion');
+		my $s = render_comments($forest->[0], sub { return shift->comment->id});
+		my $exp1 = <<'EXP1';
+		<ul>
+			<li>
+				3
+				<ul>
+					<li>
+						8
+					</li>
+					<li>
+						5
+					</li>
+					<li>
+						4
+						<ul>
+							<li>6
+								<ul>
+									<li>
+										7
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+EXP1
+		$exp1 =~ s/\s//g;
+		is ($s, $exp1,                 'Basic "id" render shows right structure, node 0');
+		my $t = render_comments($forest->[1], sub { return shift->comment->id});
+		is ($t, '<ul><li>1</li></ul>', 'Basic "id" render shows right structure, node 1');
+
 	};
     done_testing;
 }

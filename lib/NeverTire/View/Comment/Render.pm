@@ -1,26 +1,35 @@
 package NeverTire::View::Comment::Render;
 
 use Sub::Exporter -setup => {
-    exports => [qw/ render_node /]
+    exports => [qw/ render_comments /]
 };
 
-# TODO Curry this, so we can construct a renderer function
-# based on test requirements and on production requirements.
-sub render_node {
-    my ($visitor, $node, $pre_child, $post_child, $child_sep) = @_;
+sub render_comments {
+    my ($root_node, $draw_node) = @_;
+
+    # $root_node = NeverTire::Model::Comment::Node
+
+    return '<ul>' . _render_node($root_node, $draw_node) . '</ul>';
+}
+
+sub _render_node {
+    my ($node, $draw_node) = @_;
 
     # $node = NeverTire::Model::Comment::Node
 
-	my $s = $visitor->($node);
+	my $s = '<li>' . $draw_node->($node);
 	if ( scalar @{ $node->children } ) {
-		$s .= $pre_child;
-		$s .= join($child_sep, 
+        $s .= '<ul>';
+		$s .= join('', 
             map {
-                render_node($visitor, $_, $pre_child, $post_child, $child_sep)
+                _render_node($_, $draw_node);
             }
             @{ $node->children });
-		$s .= $post_child;
+        $s .= '</ul>';
 	}
+    
+    $s .= '</li>';
+
 	return $s;
 }
 
