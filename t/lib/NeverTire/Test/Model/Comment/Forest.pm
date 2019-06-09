@@ -193,7 +193,7 @@ sub run {
 			</li>
 		</ul>
 EXP1
-		$exp1 =~ s/\s//g;
+		$exp1 =~ s/\s//g; # Whitespace isn't rendered
 		is ($s, $exp1,                 'Basic "id" render shows right structure, node 0');
 		my $t = render_comments($forest->[1], sub { return shift->comment->id});
 		is ($t, '<ul><li>1</li></ul>', 'Basic "id" render shows right structure, node 1');
