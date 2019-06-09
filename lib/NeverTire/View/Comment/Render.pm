@@ -42,7 +42,7 @@ sub _default_renderer {
 
     my $s = '<div class="comment">';
 
-    $s .= '<span class="author">By ' . $comment->author_id    . '</span>';
+    $s .= '<span class="author">By ' . $comment->get_column('author_name')    . '</span>';
     $s .= '<span class="date">At ' .   $app->datetime($comment->created_at)   . '</span>';
     $s .= '<p class="comment-body">' . $comment->comment_html . '</p>';
     
