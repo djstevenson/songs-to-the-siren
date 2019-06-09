@@ -9,6 +9,20 @@ use Carp qw/ croak /;
 
 use DateTime;
 
+# TODO Use this pattern for songs etc too?
+#      for_display reads better than the lower-level
+#      methods currently implemented there.
+sub for_display {
+    my $self = shift;
+
+    # Add the author name to the search
+    return $self->search(undef, {
+        '+select' => [ 'author.name' ],
+        '+as'     => [ 'author_name' ],
+        join      => 'author',
+    });
+}
+
 sub where_approved {
     my $self = shift;
 

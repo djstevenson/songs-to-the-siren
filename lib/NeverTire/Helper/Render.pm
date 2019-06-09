@@ -1,9 +1,10 @@
 package NeverTire::Helper::Render;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use NeverTire::Util::Date qw/ format_date     /;
+use NeverTire::Util::Date            qw/ format_date     /;
+use NeverTire::View::Comment::Render qw/ render_comments /;
 
-use HTML::Entities    qw/ encode_entities /;
+use HTML::Entities                   qw/ encode_entities /;
 
 # TODO POD
 
@@ -72,6 +73,24 @@ sub register {
     });
 
     # TODO Tests for helpers
+
+    $app->helper(render_comments => sub {
+        my ($c, $song) = @_;
+
+        my $comments = $song->comment_forest;
+        return '' unless scalar @$comments;
+
+        my $s = '<div class="comments">';
+        foreach my $comment ( @$comments ) {
+            $s .= '<div class="comment-tree">';
+            $s .= render_comments($c, $comment);
+            $s .= '</div>';
+        }
+
+        $s .= '</div>';
+
+        return $s;
+    });
 }
 
 sub _label_to_id {

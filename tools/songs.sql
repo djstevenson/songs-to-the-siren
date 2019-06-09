@@ -68,7 +68,7 @@ VALUES
 INSERT INTO comments (song_id, author_id, parent_id, comment_markdown, comment_html, created_at, approved_at)
 VALUES
 (1, 2, NULL, 'Best band ever', '<p>Best band ever</p>', NOW(), NOW()),
-(1, 3, 1, 'Yeah. Best. Band. Ever', '<p>Yeah. Best. Band. Ever</p>', NOW(), NOW());
+(1, 3, 1, 'Yeah. Best. Band. *Ever*', '<p>Yeah. Best. Band. <em>Ever</em></p>', NOW(), NOW());
 
 INSERT INTO comments (song_id, author_id, parent_id, comment_markdown, comment_html, created_at, approved_at)
 VALUES

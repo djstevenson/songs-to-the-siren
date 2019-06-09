@@ -165,7 +165,8 @@ sub run {
 			return $node->comment->id;
 		};
 
-		my $s = render_comments($forest->[0], sub { return shift->comment->id});
+		my $app = $self->app;
+		my $s = render_comments($app, $forest->[0], sub { shift; return shift->comment->id});
 		my $exp1 = <<'EXP1';
 		<ul>
 			<li>
@@ -195,7 +196,7 @@ sub run {
 EXP1
 		$exp1 =~ s/\s//g; # Whitespace isn't rendered
 		is ($s, $exp1,                 'Basic "id" render shows right structure, node 0');
-		my $t = render_comments($forest->[1], sub { return shift->comment->id});
+		my $t = render_comments($app, $forest->[1], sub { shift; return shift->comment->id});
 		is ($t, '<ul><li>1</li></ul>', 'Basic "id" render shows right structure, node 1');
 
 	};

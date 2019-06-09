@@ -22,6 +22,7 @@ sub make_forest {
     # This gives us the right order for display.
     my $comment_rs = $song
         ->comments
+        ->for_display
         ->where_approved
         ->id_order;
 

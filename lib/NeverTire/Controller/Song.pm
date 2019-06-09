@@ -122,10 +122,6 @@ sub delete {
 }
 
 sub view {
-    my $c = shift;
-
-    my $song = $c->stash->{song};
-    $c->stash(comments => [ $song->approved_comments->all ]);
 }
 
 1;
