@@ -302,10 +302,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.11
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.11.tar.gz
+  Cpanel-JSON-XS-4.12
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.12.tar.gz
     provides:
-      Cpanel::JSON::XS 4.11
+      Cpanel::JSON::XS 4.12
       Cpanel::JSON::XS::Type undef
     requirements:
       ExtUtils::MakeMaker 0
