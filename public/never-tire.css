@@ -59,14 +59,16 @@ section.song footer .metadata {
 h2.title {
     font-weight: 800;
     font-size: 2rem;
+    display: inline-block;
 }
 
 h3.artist {
-    font-weight: 500;
+    font-weight: 300;
     font-size: 1.5rem;
+    font-style: oblique;
 }
 
-h4.release, h3.artist em {
+h4.release {
     font-weight: 200;
     font-size: 1rem;
 }

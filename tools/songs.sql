@@ -38,7 +38,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 1, NOW(), NULL, 'June 1987', NOW());
 
 INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('The Heart Throbs', 'Tiny Feet (my own edit!)', 'Jubilee Twist', 'UK',
+('The Heart Throbs', 'Tiny Feet', 'Jubilee Twist', 'UK',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.',
 '<p>Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.</p>',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit. Sit amet nisl suscipit adipiscing bibendum est ultricies. Eu scelerisque felis imperdiet proin fermentum leo vel. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Aliquet risus feugiat in ante. Purus sit amet luctus venenatis. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Phasellus egestas tellus rutrum tellus pellentesque. Sed pulvinar proin gravida hendrerit lectus a. Libero justo laoreet sit amet cursus sit amet dictum sit. Condimentum id venenatis a condimentum vitae sapien pellentesque.

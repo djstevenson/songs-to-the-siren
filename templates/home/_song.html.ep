@@ -7,7 +7,6 @@
                 <%= $song->title %>
             </h2>
             <h3 class="artist">
-                <em>by</em>
                 <%= $song->artist %>
                 <span class="country-<%= $song->country %>">(<%= $song->country %>)</span>
             </h3>
