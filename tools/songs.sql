@@ -1,4 +1,31 @@
-INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES ('Throwing Muses (USA)', 'Fish', 'Lonely Is An Eyesore (various artists)',
+INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('The Dears', 'Lost in the Plot', 'No Cities Left',  'Canada',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam.',
+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+1, NOW(), NULL, '2003', NOW());
+
+INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('Flowered Up', 'It''s On', 'A Life with Brian, 1991', 'UK',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam.',
+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+1, NOW(), NULL, '1990 (single)', NOW());
+
+INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('Throwing Muses', 'Fish', 'Lonely Is An Eyesore (various artists)', 'US',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
@@ -9,7 +36,9 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
 1, NOW(), NULL, 'June 1987', NOW());
-INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES ('The Heart Throbs (UK)', 'Tiny Feet (my own edit!)', 'Jubilee Twist',
+
+INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('The Heart Throbs', 'Tiny Feet', 'Jubilee Twist', 'UK',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.',
 '<p>Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.</p>',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit. Sit amet nisl suscipit adipiscing bibendum est ultricies. Eu scelerisque felis imperdiet proin fermentum leo vel. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Aliquet risus feugiat in ante. Purus sit amet luctus venenatis. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Phasellus egestas tellus rutrum tellus pellentesque. Sed pulvinar proin gravida hendrerit lectus a. Libero justo laoreet sit amet cursus sit amet dictum sit. Condimentum id venenatis a condimentum vitae sapien pellentesque.
@@ -17,6 +46,14 @@ INSERT INTO songs (artist,title,album,summary_markdown,summary_html,full_markdow
 Arcu vitae elementum curabitur vitae nunc sed velit dignissim. Ultrices sagittis orci a scelerisque purus. Ipsum dolor sit amet consectetur. Nibh mauris cursus mattis molestie. Diam vel quam elementum pulvinar etiam non quam lacus. Quam adipiscing vitae proin sagittis nisl. Turpis cursus in hac habitasse platea dictumst quisque sagittis purus. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Et tortor at risus viverra adipiscing at in. Mauris a diam maecenas sed enim ut sem. Amet volutpat consequat mauris nunc. Ultricies leo integer malesuada nunc vel risus commodo. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Eu turpis egestas pretium aenean pharetra magna ac.',
 '<p>Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit. Sit amet nisl suscipit adipiscing bibendum est ultricies. Eu scelerisque felis imperdiet proin fermentum leo vel. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Aliquet risus feugiat in ante. Purus sit amet luctus venenatis. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Phasellus egestas tellus rutrum tellus pellentesque. Sed pulvinar proin gravida hendrerit lectus a. Libero justo laoreet sit amet cursus sit amet dictum sit. Condimentum id venenatis a condimentum vitae sapien pellentesque.</p><p>Arcu vitae elementum curabitur vitae nunc sed velit dignissim. Ultrices sagittis orci a scelerisque purus. Ipsum dolor sit amet consectetur. Nibh mauris cursus mattis molestie. Diam vel quam elementum pulvinar etiam non quam lacus. Quam adipiscing vitae proin sagittis nisl. Turpis cursus in hac habitasse platea dictumst quisque sagittis purus. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Et tortor at risus viverra adipiscing at in. Mauris a diam maecenas sed enim ut sem. Amet volutpat consequat mauris nunc. Ultricies leo integer malesuada nunc vel risus commodo. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Eu turpis egestas pretium aenean pharetra magna ac.</p>',
 1, NOW(), NULL, 'Summer 1992', NOW());
+
+INSERT INTO songs (artist,title,album,country,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('Pixies', 'Planet of Sound', 'Trompe le Monde', 'US',
+'I met this guy in a rover',
+'<p>I met this guy in a rover</p>',
+'I met this guy in a rover. He said it''s one more over',
+'<p>I met this guy in a rover. He said it''s one more over</p>',
+1, NOW(), NULL, '28th May 1991 (single), 23rd September 1991 (LP)', NOW());
 
 INSERT INTO tags (name) VALUES ('1990s');                    -- 1
 INSERT INTO tags (name) VALUES ('1980s');                    -- 2
@@ -38,6 +75,7 @@ INSERT INTO tags (name) VALUES ('Sample-based');             -- 17
 INSERT INTO tags (name) VALUES ('Solo artist');              -- 18
 INSERT INTO tags (name) VALUES ('DJ');                       -- 19
 INSERT INTO tags (name) VALUES ('Producer');                 -- 20
+INSERT INTO tags (name) VALUES ('Elektra');                  -- 21
 
 INSERT INTO song_tags (song_id, tag_id) VALUES (1, 2);
 INSERT INTO song_tags (song_id, tag_id) VALUES (1, 3);
@@ -57,6 +95,13 @@ INSERT INTO song_tags (song_id, tag_id) VALUES (2, 7);
 INSERT INTO song_tags (song_id, tag_id) VALUES (2, 8);
 INSERT INTO song_tags (song_id, tag_id) VALUES (2, 9);
 INSERT INTO song_tags (song_id, tag_id) VALUES (2, 14);
+
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 1);
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 3);
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 4);
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 6);
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 10);
+INSERT INTO song_tags (song_id, tag_id) VALUES (3, 11);
 
 -- A non-admin user. The admin user (1) should be created outside this file
 INSERT INTO users ("name",email,password_hash,"admin",registered_at,confirmed_at,password_at) 

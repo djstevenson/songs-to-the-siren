@@ -44,6 +44,7 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     title TEXT NOT NULL,
     album TEXT,
+    country TEXt NOT NULL,
 
     summary_markdown TEXT NOT NULL,
     summary_html TEXT NOT NULL,

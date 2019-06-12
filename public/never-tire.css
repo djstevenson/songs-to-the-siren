@@ -55,3 +55,20 @@ section.song footer .metadata {
 .tag-button {
     margin-bottom: 0.5rem;
 }
+
+h2.title {
+    font-weight: 800;
+    font-size: 2rem;
+    display: inline-block;
+}
+
+h3.artist {
+    font-weight: 300;
+    font-size: 1.5rem;
+    font-style: oblique;
+}
+
+h4.release {
+    font-weight: 200;
+    font-size: 1rem;
+}

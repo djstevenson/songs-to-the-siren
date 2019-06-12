@@ -20,6 +20,7 @@ __PACKAGE__->add_columns(
     artist           => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
     album            => {data_type => 'TEXT'},
+    country          => {data_type => 'TEXT'},
 
     summary_markdown => {data_type => 'TEXT'},
     summary_html     => {data_type => 'TEXT'},
