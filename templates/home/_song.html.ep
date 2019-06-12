@@ -1,42 +1,50 @@
 
-<section class="song">
-    <header>
-        <h2 class="header">
-            <%= $song->title %> by <%= $song->artist %>
-        </h2>
-        <p>
-            Released: <%= $song->released_at %>
-        </p>
-    </header>
-    <div class="description">
-        <%== $song->summary_html %>
-        <p class="more">
-            <a href="<%= url_for('view_song', song_id => $song->id) %>">Read more...</a>
-        </p>
-    </div>
-    <footer>
-        % my @song_tags = $song->tags->all;
-        % if ( scalar @song_tags ) {
-            % my $base_url = url_for('home');
-            <p class="song-tags">Tags:
-                % foreach my $tag ( @song_tags ) {
-                    % my $query_string = add_tag_to_query_params($tag);
-                    % my $href = $base_url . $query_string;
-                    <a class="btn btn-outline-dark btn-sm song-tag" href="<%= $href %>" role="button"><%= $tag->name %></a>
-                % }
+<section class="song row">
+    <div class="col-12">
+
+        <header>
+            <h2 class="title">
+                <%= $song->title %>
+            </h2>
+            <h3 class="artist">
+                <em>by</em>
+                <%= $song->artist %>
+                <span class="country-<%= $song->country %>">(<%= $song->country %>)</span>
+            </h3>
+            <h4 class="release">
+                <%= $song->released_at %>
+            </h4>
+        </header>
+        <div class="description">
+            <%== $song->summary_html %>
+            <p class="more">
+                <a href="<%= url_for('view_song', song_id => $song->id) %>">Read more...</a>
             </p>
-        % }
-        <p class="metadata">
-            <%== pluralise($song->get_column('comment_count'), 'comment') %>.
-        </p>
-        <p class="metadata">
-            Written by <%= $song->get_column('author_name') %> at <%= datetime($song->created_at) %>
-        </p>
-        % my $updated = $song->updated_at;
-        % if ($updated) {
+        </div>
+        <footer>
+            % my @song_tags = $song->tags->all;
+            % if ( scalar @song_tags ) {
+                % my $base_url = url_for('home');
+                <p class="song-tags">Tags:
+                    % foreach my $tag ( @song_tags ) {
+                        % my $query_string = add_tag_to_query_params($tag);
+                        % my $href = $base_url . $query_string;
+                        <a class="btn btn-outline-dark btn-sm song-tag" href="<%= $href %>" role="button"><%= $tag->name %></a>
+                    % }
+                </p>
+            % }
             <p class="metadata">
-                Last updated at <%= datetime($updated) %>
+                <%== pluralise($song->get_column('comment_count'), 'comment') %>.
             </p>
-        % }
-    </footer>
+            <p class="metadata">
+                Written by <%= $song->get_column('author_name') %> at <%= datetime($song->created_at) %>
+            </p>
+            % my $updated = $song->updated_at;
+            % if ($updated) {
+                <p class="metadata">
+                    Last updated at <%= datetime($updated) %>
+                </p>
+            % }
+        </footer>
+    </div>
 </section>
