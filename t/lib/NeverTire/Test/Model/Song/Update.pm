@@ -24,6 +24,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
+		country          => 'CO',
 		released_at      => 'release',
 	});
 	my $dc = $song->created_at;
@@ -32,6 +33,7 @@ sub run {
 	my $full    = 'This is the full article about the song';
 	my $title   = 'The song title';
 	my $artist  = 'The artist name';
+	my $country = 'XX';
 	my $album   = 'Greatest hits';
 	my $release = 'Last week';
 	my $edited_song = $user->admin_edit_song($song => {
@@ -40,6 +42,7 @@ sub run {
 		title            => $title,
 		artist           => $artist,
 		album            => $album,
+		country          => $country,
 		released_at      => $release,
 	});
 
@@ -49,6 +52,7 @@ sub run {
 	is($song->full_html,     "<p>${full}</p>\n",    'Full html is correct');
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
+	is($song->country,       $country,              'Country is correct');
 	is($song->album,         $album,                'Album is correct');
 	is($song->released_at,   $release,              'Release date is correct');
 

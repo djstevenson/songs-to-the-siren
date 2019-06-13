@@ -25,16 +25,19 @@ has_field title => (
     validators  => [qw/ Required  /],
 );
 
+has_field artist => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
+);
+
 has_field album => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
 );
 
-# TODO At the moment, artists are in a separate table.
-#      Change that cos we're not gonna do a whole load of
-#      tracks from one artist.
-has_field artist => (
+has_field country => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
@@ -84,7 +87,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title album artist released_at summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title album country artist released_at summary_markdown full_markdown /);
 	return $user->admin_edit_song($self->song, $fields);
 };
 

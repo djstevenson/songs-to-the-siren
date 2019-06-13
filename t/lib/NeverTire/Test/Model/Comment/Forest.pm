@@ -29,6 +29,7 @@ sub run {
 		title            => 'The song title',
 		artist           => 'The artist name',
 		album            => 'Greatest hits',
+		country          => 'CO',
 		released_at      => 'Last week',
 	};
 

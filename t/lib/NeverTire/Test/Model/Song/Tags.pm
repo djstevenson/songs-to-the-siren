@@ -25,6 +25,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
+		country          => 'CO',
 		released_at      => 'release',
 	});
 
@@ -34,6 +35,7 @@ sub run {
 		title            => 'title2',
 		artist           => 'artist2',
 		album            => 'album2',
+		country          => 'CX',
 		released_at      => 'release2',
 	});
 
