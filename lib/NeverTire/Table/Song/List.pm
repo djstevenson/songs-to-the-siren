@@ -87,6 +87,18 @@ has_column publish => (
 
 );
 
+has_column delete => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        my $url = $table->c->url_for('admin_delete_song', song_id => $row->id);
+        return qq{
+            <a href="${url}">Delete</a>
+        };
+    },
+
+);
+
 has '+empty_text' => (default => 'No songs are in the datbase');
 
 has '+default_order_by'   => (default => 'published_at');
