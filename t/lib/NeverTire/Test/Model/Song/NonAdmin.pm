@@ -27,6 +27,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
+		country          => 'CO',
 		released_at      => 'release',
 	};
 
