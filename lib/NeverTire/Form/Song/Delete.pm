@@ -6,8 +6,14 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Submit');
 has '+id'           => (default => 'delete-song');
+has '+submit_label' => (default => 'Delete');
+has '+legend'       => (default => sub {
+    my $self = shift;
+
+    my $title = $self->song->title;
+    return qq/Delete song '${title}'/;
+});
 
 has song => (
     is          => 'ro',

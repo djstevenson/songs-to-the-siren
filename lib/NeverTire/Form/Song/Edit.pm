@@ -9,8 +9,14 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Edit song');
 has '+id'           => (default => 'edit-song');
+has '+submit_label' => (default => 'Edit song');
+has '+legend'       => (default => sub {
+    my $self = shift;
+
+    my $title = $self->song->title;
+    return qq/Edit song '${title}'/;
+});
 
 has song => (
     is          => 'ro',
