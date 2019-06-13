@@ -12,7 +12,7 @@ function markdownPreview(textAreaID, previewAreaID) {
 }
 
 function deleteSongTag(songID, tagID) {
-    var url = "/song/" + songID + "/tag/" + tagID;
+    var url = "/admin/song/" + songID + "/tag/" + tagID;
     $.ajax({
         type: "DELETE",
         url: url,

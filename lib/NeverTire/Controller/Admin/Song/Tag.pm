@@ -1,10 +1,10 @@
-package NeverTire::Controller::Song::Tag;
+package NeverTire::Controller::Admin::Song::Tag;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
     my ($c, $routes) = @_;
 
-    my $ul = $routes->{admin_song} ->any('/tag')->to(controller => 'Song::Tag');
+    my $ul = $routes->{admin_song_tag} ->any('/tag')->to(controller => 'Admin::Song::Tag');
 
     # These are admin functions, need to be logged in for all of them.
     $ul->route('/edit')->name('admin_edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
