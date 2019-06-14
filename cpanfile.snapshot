@@ -356,10 +356,10 @@ DISTRIBUTIONS
       Test::More 0.94
       strict 0
       warnings 0
-  Crypt-Rijndael-1.13
-    pathname: L/LE/LEONT/Crypt-Rijndael-1.13.tar.gz
+  Crypt-Rijndael-1.14
+    pathname: L/LE/LEONT/Crypt-Rijndael-1.14.tar.gz
     provides:
-      Crypt::Rijndael 1.13
+      Crypt::Rijndael 1.14
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
