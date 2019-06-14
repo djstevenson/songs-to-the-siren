@@ -3,7 +3,7 @@
     %= include 'layouts/_headers'
 <body>
 
-<div class=".container-fluid">
+<div class="container">
     <header>
         <div class="row">
             <div class="col-12">
