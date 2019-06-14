@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Songs I&#x2019;ll Never Tire of...</h1>
-                <p><a href="<%= url_for('/user/logout') %>">Logout</a></p>
+                %= include "user/_loginout"
             </div>
         </div>
     </header>

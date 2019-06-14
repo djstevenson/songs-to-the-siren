@@ -57,13 +57,13 @@ use Mojo::Home;
 sub _base_routes {
     my $app = shift;
 
-    my $route_all = $app->routes;
-
-    # Route for "must be logged in"
-    my $route_login = $route_all->under('/' => sub {
+    # Base of all routes. Works out if you're logged in,
+    # but accepts either yes or no as valid
+    my $route_all = $app->routes->under('/' => sub {
     	my $c = shift;
 
         # Logged in?
+        $c->stash->{auth_user} = undef;
         if (my $user_id = $c->session->{user}) {
             if (my $user = $c->schema->resultset('User')->find($user_id)) {
                 $c->stash->{auth_user} = $user;
@@ -71,24 +71,39 @@ sub _base_routes {
             }
         }
 
+        # Not logged in so empty user from stash
+        # but allow to continue. If we NEED to be
+        # logged in, use $route_login or $route_admin
         delete $c->session->{user};
-        $c->stash->{auth_user} = undef;
+
+        return 1;
+    });
+
+    # Route for "must be logged in"
+    # So, there must be a defined auth_user in the stash
+    my $route_login = $route_all->under('/' => sub {
+    	my $c = shift;
+
+        return 1 if $c->stash->{auth_user};
+
+        # TODO maybe redirect to login?
         $c->reply->not_found;
         return undef;
     });
 
-    # Route for "must be logged in"
+    # Route for "must be logged in" as admin
     # TODO Do this further down the path, e.g. in /admin
     my $route_admin = $route_login->under('/' => sub {
     	my $c = shift;
 
-        # Already logged-in because coming via $route_login
-        if (! $c->stash->{auth_user}->admin) {
-            $c->reply->not_found;
-            return undef;
+        if ( my $auth_user = $c->stash->{auth_user} ) {
+            if ( $auth_user->admin ) {
+                return 1;
+            }
         }
 
-        return 1;
+        $c->reply->not_found;
+        return undef;
     });
 
     return {
