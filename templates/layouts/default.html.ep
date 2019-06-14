@@ -9,6 +9,7 @@
             <div class="col-12">
                 <h1>Songs I&#x2019;ll Never Tire of...</h1>
                 <p>About this blog...</p>
+                %= include "user/_loginout"
             </div>
         </div>
     </header>

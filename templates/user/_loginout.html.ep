@@ -1,0 +1,12 @@
+<p class="login-status">
+% if ($auth_user) {
+    Logged-in as <%= $auth_user->name %>
+    % if ($auth_user->admin) {
+        (ADMIN)
+    % }
+    <a href="<%= url_for('logout') %>">Logout</a>
+% }
+% else {
+    <a href="<%= url_for('login') %>">Login</a> to add comments
+% }
+</p>
