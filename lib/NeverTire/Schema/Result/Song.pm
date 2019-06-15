@@ -20,7 +20,7 @@ __PACKAGE__->add_columns(
     artist           => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
     album            => {data_type => 'TEXT'},
-    country          => {data_type => 'TEXT'},
+    country_id       => {data_type => 'INTEGER'},
 
     summary_markdown => {data_type => 'TEXT'},
     summary_html     => {data_type => 'TEXT'},
@@ -39,10 +39,11 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',   { 'foreign.id' => 'self.author_id' });
+__PACKAGE__->belongs_to( author    => 'NeverTire::Schema::Result::User',     { 'foreign.id' => 'self.author_id'  }, { join_type	=> 'LEFT' } );
+__PACKAGE__->belongs_to( country   => 'NeverTire::Schema::Result::Country',  { 'foreign.id' => 'self.country_id' }, { join_type	=> 'LEFT' } );
 
-__PACKAGE__->has_many( song_tags => 'NeverTire::Schema::Result::SongTag', { 'foreign.song_id' => 'self.id' });
-__PACKAGE__->has_many( comments  => 'NeverTire::Schema::Result::Comment', { 'foreign.song_id' => 'self.id' });
+__PACKAGE__->has_many  ( song_tags => 'NeverTire::Schema::Result::SongTag',  { 'foreign.song_id' => 'self.id'    });
+__PACKAGE__->has_many  ( comments  => 'NeverTire::Schema::Result::Comment',  { 'foreign.song_id' => 'self.id'    });
 
 __PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
