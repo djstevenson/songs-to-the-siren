@@ -59,6 +59,14 @@ INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summar
 '<p>I met this guy in a rover. He said it''s one more over</p>',
 1, NOW(), NULL, '28th May 1991 (single), 23rd September 1991 (LP)', NOW());
 
+INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
+('This Mortal Coil', 'Song to the Siren', 'It''ll End in Tears', 'song-to-the-siren', 2,
+'I met this guy in a rover...',
+'<p>I met this guy in a rover...</p>',
+'I met this guy in a rover. He said it''s one song over',
+'<p>I met this guy in a rover. He said it''s one song over</p>',
+1, NOW(), NULL, 'September 1983 (single), October 1984 (LP)', NOW());
+
 INSERT INTO tags (name) VALUES ('1990s');                    -- 1
 INSERT INTO tags (name) VALUES ('1980s');                    -- 2
 INSERT INTO tags (name) VALUES ('Indie');                    -- 3
