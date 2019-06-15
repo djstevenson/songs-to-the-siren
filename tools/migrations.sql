@@ -13,7 +13,7 @@ CREATE TABLE users (
     password_at TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
-CREATE UNIQUE INDEX users_name_unique_idx ON users USING BTREE(LOWER(name));
+CREATE UNIQUE INDEX users_name_unique_idx ON users USING BTREE(LOWER("name"));
 CREATE UNIQUE INDEX users_email_unique_idx ON users USING BTREE(LOWER(email));
 
 -- Codes for password reset URLs etc.
@@ -25,6 +25,7 @@ CREATE TABLE user_keys (
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
     PRIMARY KEY (user_id, purpose)
 );
+CREATE UNIQUE INDEX user_keys_user_id_purpose_unique_idx ON user_keys USING BTREE(user_id, purpose);
 
 -- Data for emails we send (password reset for example)
 DROP TABLE IF EXISTS emails;
@@ -38,13 +39,21 @@ CREATE TABLE emails (
     sent_at TIMESTAMP WITH TIME ZONE -- NULL until actually sent.
 );
 
+DROP TABLE IF EXISTS countries;
+CREATE TABLE countries (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    emoji TEXT NOT NULL
+);
+CREATE UNIQUE INDEX countries_name_unique_idx ON countries USING BTREE("name");
+
 DROP TABLE IF EXISTS songs;
 CREATE TABLE songs (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     artist TEXT NOT NULL,
     title TEXT NOT NULL,
     album TEXT,
-    country TEXt NOT NULL,
+    country_id BIGINT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
 
     summary_markdown TEXT NOT NULL,
     summary_html TEXT NOT NULL,
