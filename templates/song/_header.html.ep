@@ -1,0 +1,16 @@
+<header class="col-12">
+    <img class="float-left mr-3 mb-1" src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" />
+    <h2 class="title">
+        <%= $song->title %>
+    </h2>
+    <h3 class="artist">
+        <%= $song->artist %>
+        <span class="country"><%== $song->get_column('country_emoji') %></span>
+    </h3>
+    <h4 class="release">
+        <%= $song->released_at %>
+    </h4>
+    <p class="metadata">
+        <%== pluralise($song->get_column('comment_count'), 'comment') %>.
+    </p>
+</header>
