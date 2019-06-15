@@ -1,6 +1,9 @@
 
 <section class="song row">
-    <div class="col-12">
+    <div class="col-2">
+        <img src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" />
+    </div>
+    <div class="col-10">
 
         <header>
             <h2 class="title">
