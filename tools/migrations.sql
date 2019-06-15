@@ -53,6 +53,7 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     title TEXT NOT NULL,
     album TEXT,
+    "image" TEXT,    -- /public/images/160/${image} - size is 160x160
     country_id BIGINT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
 
     summary_markdown TEXT NOT NULL,
@@ -112,6 +113,7 @@ DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS song_tags;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS songs;
+DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS emails;
 DROP TABLE IF EXISTS user_keys;
 DROP TABLE IF EXISTS users;
