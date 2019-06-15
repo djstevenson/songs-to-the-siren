@@ -27,7 +27,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
-		country          => 'CO',
+		country          => $self->create_country('CO'),
 		released_at      => 'release',
 	};
 
