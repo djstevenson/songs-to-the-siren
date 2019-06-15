@@ -58,6 +58,17 @@ has database => (
     builder     => '_build_database',
 );
 
+sub create_country {
+    my ($self, $name) = @_;
+
+    my $schema = $self->schema;
+    my $country_rs = $schema->resultset('Country');
+    return $country_rs->create({
+        name          => $name,
+        emoji         => "$name$name",
+    });
+}
+
 # Low-level create, bypassses registration
 sub create_user {
     my ($self, $user_data) = @_;

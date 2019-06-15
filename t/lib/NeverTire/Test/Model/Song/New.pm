@@ -16,7 +16,7 @@ has '+user_base' => (default => 'model_1');
 sub run {
 	my $self = shift;
 	
-    my $user = $self->create_admin_user;
+    my $user     = $self->create_admin_user;
 
 	is($user->songs->count, 0, 'New user has no songs');
 
@@ -24,7 +24,7 @@ sub run {
 	my $full    = 'This is the full article about the song';
 	my $title   = 'The song title';
 	my $artist  = 'The artist name';
-	my $country = 'CO';
+	my $country = $self->create_country('CO');
 	my $album   = 'Greatest hits';
 	my $release = 'Last week';
 	
@@ -45,7 +45,7 @@ sub run {
 	is($song->full_html,     "<p>${full}</p>\n",    'Full html is correct');
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
-	is($song->country,       $country,              'Country is correct');
+	is($song->country_id,    $country->id,          'Country is correct');
 	is($song->album,         $album,                'Album is correct');
 	is($song->released_at,   $release,              'Release date is correct');
 
