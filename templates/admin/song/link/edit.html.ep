@@ -1,0 +1,6 @@
+% layout 'admin';
+% title 'Edit ' . $link->name . ' link for ' . $song->title;
+
+<h2>Edit <%= $link->name %> link for <%= $song->title %></h2>
+
+<%== $form->render %>

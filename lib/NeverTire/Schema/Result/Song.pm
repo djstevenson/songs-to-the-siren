@@ -126,6 +126,18 @@ sub get_links {
     return \%links;
 }
 
+sub add_link {
+    my ($self, $values) = @_;
+
+    return $self->links->create({
+        name     => $values->{name},
+        url      => $values->{url},
+        priority => $values->{priority},
+        extras   => $values->{extras},
+    });
+}
+
+
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

@@ -1,0 +1,6 @@
+% layout 'admin';
+% title 'Create link for ' . $song->title;
+
+<h2>Create link for <%= $song->title %></h2>
+
+<%== $form->render %>
