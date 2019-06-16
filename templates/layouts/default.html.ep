@@ -14,6 +14,7 @@
         </div>
     </header>
 
+    <!-- TODO This is almost the same as front_page_layout and the two can/should become one -->
     <main>
         <div class="row">
             <div class="col-12">
