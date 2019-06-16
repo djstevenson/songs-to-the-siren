@@ -1,5 +1,5 @@
 <header class="col-12">
-    <img class="float-left mr-3 mb-1" src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" />
+    <img class="rounded float-left mr-3 mb-1" src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" />
     <h2 class="title">
         <%= $song->title %>
     </h2>
