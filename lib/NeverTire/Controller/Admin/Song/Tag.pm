@@ -14,7 +14,7 @@ sub add_routes {
 
     # Remove a tag from a song. The tag isn't deleted from the DB
     # but is disassociated with this song.
-    $tag_action->route->name('remove_song_tag')->via('DELETE')->to(action => 'remove');
+    $tag_action->route->name('delete_song_tag')->via('DELETE')->to(action => 'delete');
 
 }
 
@@ -52,10 +52,11 @@ sub capture {
     }
 }
 
-sub remove {
+sub delete {
     my $c = shift;
 
-    $c->stash->{song}->delete_tag($c->stash->{tag});
+    my $tag = $c->stash->{tag};
+    $c->stash->{song}->delete_tag($tag);
 
     $c->render(text => '');
 }

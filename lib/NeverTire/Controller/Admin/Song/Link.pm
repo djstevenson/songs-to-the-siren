@@ -37,14 +37,14 @@ sub create {
     my $song = $c->stash->{song};
     my $form = $c->form('Link::Create', song => $song);
     
-    $c->stash(
-        form => $form,
-    );
     if ($form->process) {
         $c->flash(msg => 'Link added');
         
         # Redirect so that form is reinitialised
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
+    }
+    else {
+        $c->stash(form => $form);
     }
 
 }
@@ -70,15 +70,15 @@ sub edit {
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Edit', song => $song, link => $link);
     
-    $c->stash(form => $form);
-
     if ($form->process) {
         $c->flash(msg => 'Link edited');
         
         # Redirect so that form is reinitialised
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
-
+    else {
+            $c->stash(form => $form);
+    }
 }
 
 sub delete {
@@ -88,13 +88,13 @@ sub delete {
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Delete', song => $song, link => $link);
 
-    $c->stash(form => $form);
-
-    if ($form->process) {
-        $c->flash(msg => 'Link deleted');
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
-
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 1;
