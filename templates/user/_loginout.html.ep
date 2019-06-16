@@ -1,5 +1,5 @@
 <p class="login-status">
-% if ($auth_user) {
+% if (my $auth_user = stash 'auth_user') {
     Logged-in as <%= $auth_user->name %>
     % if ($auth_user->admin) {
         (ADMIN)

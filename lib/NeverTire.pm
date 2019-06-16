@@ -63,7 +63,6 @@ sub _base_routes {
     	my $c = shift;
 
         # Logged in?
-        $c->stash->{auth_user} = undef;
         if (my $user_id = $c->session->{user}) {
             if (my $user = $c->schema->resultset('User')->find($user_id)) {
                 $c->stash->{auth_user} = $user;
@@ -84,7 +83,7 @@ sub _base_routes {
     my $route_login = $route_all->under('/' => sub {
     	my $c = shift;
 
-        return 1 if $c->stash->{auth_user};
+        return 1 if exists $c->stash->{auth_user};
 
         # TODO maybe redirect to login?
         $c->reply->not_found;
@@ -96,12 +95,10 @@ sub _base_routes {
     my $route_admin = $route_login->under('/' => sub {
     	my $c = shift;
 
-        if ( my $auth_user = $c->stash->{auth_user} ) {
-            if ( $auth_user->admin ) {
-                return 1;
-            }
+        if ( exists $c->stash->{auth_user} ) {
+            return 1 if $c->stash->{auth_user}->admin;
         }
-
+        
         $c->reply->not_found;
         return undef;
     });
