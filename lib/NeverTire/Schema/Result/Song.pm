@@ -45,6 +45,7 @@ __PACKAGE__->belongs_to( country   => 'NeverTire::Schema::Result::Country',  { '
 
 __PACKAGE__->has_many  ( song_tags => 'NeverTire::Schema::Result::SongTag',  { 'foreign.song_id' => 'self.id'    });
 __PACKAGE__->has_many  ( comments  => 'NeverTire::Schema::Result::Comment',  { 'foreign.song_id' => 'self.id'    });
+__PACKAGE__->has_many  ( links     => 'NeverTire::Schema::Result::Link',     { 'foreign.song_id' => 'self.id'    });
 
 __PACKAGE__->many_to_many( tags => song_tags => 'tags');
 
@@ -112,6 +113,17 @@ sub add_comment {
     };
 
     return $self->create_related(comments => $comment_data);
+}
+
+# Gets links as a hashref, keyed by link name
+sub get_links {
+    my $self = shift;
+
+    my %links = map {
+        ($_->name => $_)
+    } $self->links->all;
+
+    return \%links;
 }
 
 no Moose;

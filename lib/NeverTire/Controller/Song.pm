@@ -33,6 +33,11 @@ sub capture {
 }
 
 
-sub view {}
+sub view {
+    my $c = shift;
+
+    my $song = $c->stash->{song};
+    $c->stash(links => $song->get_links);
+}
 
 1;

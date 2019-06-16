@@ -108,7 +108,18 @@ CREATE INDEX comments_song_id_idx ON comments USING BTREE(song_id);
 CREATE INDEX comments_author_id_idx ON comments USING BTREE(author_id);
 CREATE INDEX comments_parent_id_idx ON comments USING BTREE(parent_id);
 
+CREATE TABLE links (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+    "name" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    extras TEXT
+);
+
+CREATE INDEX links_song_id_name_idx ON links USING BTREE(song_id, "name");
+
 -- 1 down
+DROP TABLE IF EXISTS links;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS song_tags;
 DROP TABLE IF EXISTS tags;

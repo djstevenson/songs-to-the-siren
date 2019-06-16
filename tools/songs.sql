@@ -60,7 +60,7 @@ INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summar
 1, NOW(), NULL, '28th May 1991 (single), 23rd September 1991 (LP)', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('This Mortal Coil', 'Song to the Siren', 'It''ll End in Tears', 'song-to-the-siren', 2,
+('This Mortal Coil', 'Song to the Siren', 'It''ll End in Tears', 'song-to-the-siren', 1,
 'I met this guy in a rover...',
 '<p>I met this guy in a rover...</p>',
 'I met this guy in a rover. He said it''s one song over',
@@ -132,3 +132,6 @@ VALUES
 (2, 2, NULL, 'Best British band ever', '<p>Best British band ever</p>', NOW(), NOW()),
 (2, 3, 3, 'Apart from New Order', '<p>Apart from New Order</p>', NOW(), NULL);
 
+INSERT INTO links (song_id, "name", "url", extras)
+VALUES
+(6, 'YouTube', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', '16by9');
