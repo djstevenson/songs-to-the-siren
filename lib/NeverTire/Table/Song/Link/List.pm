@@ -33,6 +33,10 @@ has_column url => (
     sortable     => 1,
 );
 
+has_column extras => (
+    sortable     => 1,
+);
+
 has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;

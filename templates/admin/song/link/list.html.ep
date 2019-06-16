@@ -4,5 +4,5 @@
 <%== $table->render %>
 
 <p>
-    <a href="TODO">New link</a>
+    <a href="<%= url_for('admin_create_song_link', song_id => $song->id) %>">New link</a>
 </p>
