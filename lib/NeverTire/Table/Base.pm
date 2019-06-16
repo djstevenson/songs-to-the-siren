@@ -201,7 +201,7 @@ sub _render_header {
         $s .= $col->render_header_cell($self);
     }
 
-    return '<thead class="thead-dark"><tr>' . $s . '</tr></thead>';
+    return '<thead class="thead-light"><tr>' . $s . '</tr></thead>';
 }
 
 sub _render_body {
