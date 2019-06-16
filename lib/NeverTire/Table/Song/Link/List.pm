@@ -7,10 +7,16 @@ extends 'NeverTire::Table::Base';
 
 use DateTime;
 
+has song => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Song',
+    required    => 1,
+);
+
 sub _build_resultset {
     my $self = shift;
 
-    return $self->c->stash->{song}
+    return $self->song
         ->links
         ->by_priority;
 }
@@ -41,8 +47,10 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        # my $url = $table->c->url_for('admin_edit_song_tags', song_id => $row->id);
-        my $url = 'TODO';
+        my $url = $table->c->url_for('admin_edit_song_link',
+            song_id => $table->song->id,
+            link_id => $row->id,
+        );
         return qq{
             <a href="${url}">Edit</a>
         };

@@ -1,22 +1,21 @@
-package NeverTire::Form::Link::Create;
+package NeverTire::Form::Link::Edit;
 use Moose;
 use namespace::autoclean;
+
+# TODO Loadsa dupe code with Link::Create form, can we put most of this in a base class or something?
 
 use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Create link');
-has '+id'           => (default => 'add-link');
+has '+submit_label' => (default => 'Edit link');
+has '+id'           => (default => 'edit-link');
 
 has_field name => (
     type        => 'Input::Text',
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 # TODO Add URL validation
@@ -25,9 +24,6 @@ has_field url => (
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 # TODO Add integer validation
@@ -36,9 +32,6 @@ has_field priority => (
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 # TODO Add integer validation
@@ -46,9 +39,6 @@ has_field extras => (
     type        => 'Input::Text',
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 has song => (
@@ -57,13 +47,26 @@ has song => (
     required    => 1,
 );
 
+has link => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Link',
+    required    => 1,
+);
+
 override posted => sub {
 	my $self = shift;
 
     # Whitelist what we extract from the submitted form
 	my $fields = $self->form_hash(qw/ name url priority extras /);
-	return $self->song->add_link($fields);
+	return $self->link->update($fields);
 };
+
+# Prepopulate GET form from the song object
+sub BUILD {
+    my $self = shift;
+
+ 	$self->data_object($self->link);
+}
 
 __PACKAGE__->meta->make_immutable;
 1;

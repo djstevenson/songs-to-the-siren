@@ -17,6 +17,7 @@ has resultset => (
 	isa			=> 'DBIx::Class::ResultSet',
 	required    => 1,
     builder     => '_build_resultset',
+    lazy        => 1,
 );
 
 has table_columns => (
@@ -25,6 +26,7 @@ has table_columns => (
 	required	=> 1,
     writer      => '_set_columns',
 	default		=>  sub{ ref(shift)->meta->table_columns },
+    lazy        => 1,
 );
 
 has show_header => (

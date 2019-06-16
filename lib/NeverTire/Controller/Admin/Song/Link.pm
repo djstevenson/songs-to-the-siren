@@ -12,11 +12,9 @@ sub add_routes {
     $ul->route('/create')->name('admin_create_song_link')->via('GET', 'POST')->to(action => 'create');
 
     # # Admin routes that capture a tag id
-    # my $link_action = $ul->under('/:link_id')->to(action => 'capture');
+    my $link_action = $ul->under('/:link_id')->to(action => 'capture');
 
-    # # Remove a tag from a song. The tag isn't deleted from the DB
-    # # but is disassociated with this song.
-    # $link_action->route->name('remove_song_link')->via('DELETE')->to(action => 'remove');
+    $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action => 'edit');
 
 }
 
@@ -25,7 +23,8 @@ sub list {
     my $c = shift;
 
     # TODO Pagination
-    my $table = $c->table('Song::Link::List');
+    my $song = $c->stash->{song};
+    my $table = $c->table('Song::Link::List', song => $song);
 
     $c->stash(table => $table);
 }
@@ -60,6 +59,25 @@ sub capture {
         $c->reply->not_found;
         return undef;
     }
+}
+
+sub edit {
+    my $c = shift;
+
+    my $song = $c->stash->{song};
+    my $link = $c->stash->{link};
+    my $form = $c->form('Link::Edit', song => $song, link => $link);
+    
+    $c->stash(
+        form => $form,
+    );
+    if ($form->process) {
+        $c->flash(msg => 'Link edited');
+        
+        # Redirect so that form is reinitialised
+        $c->redirect_to('admin_list_song_links', song_id => $song->id);
+    }
+
 }
 
 sub remove {
