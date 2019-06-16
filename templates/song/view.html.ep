@@ -5,6 +5,7 @@
 <section class="song row">
     %= include 'song/_header'
     <div class="description col-12">
+        %= include 'song/_youtube'
         <%== $song->full_html %>
         <p class="navigation">
             Do navigation links
@@ -12,4 +13,13 @@
     </div>
     %== render_comments($song);
     %= include 'song/_footer'
+    <p>
+        <ul>
+            % foreach my $k (keys %$links) {
+                <li>
+                    <%= $k %> = <%= $links->{$k}->url %>
+                </li>
+            % }
+        </ul>
+    </p>
 </section>
