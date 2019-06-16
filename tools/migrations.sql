@@ -112,7 +112,8 @@ CREATE TABLE links (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
     "name" TEXT NOT NULL,
-    "url" TEXT NOT NULL
+    "url" TEXT NOT NULL,
+    extras TEXT
 );
 
 CREATE INDEX links_song_id_name_idx ON links USING BTREE(song_id, "name");
