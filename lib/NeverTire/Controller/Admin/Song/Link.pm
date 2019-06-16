@@ -14,7 +14,9 @@ sub add_routes {
     # # Admin routes that capture a tag id
     my $link_action = $ul->under('/:link_id')->to(action => 'capture');
 
+    # TODO GET/DELETE rather than GET/POST?
     $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action => 'edit');
+    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete');
 
 }
 
@@ -68,9 +70,8 @@ sub edit {
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Edit', song => $song, link => $link);
     
-    $c->stash(
-        form => $form,
-    );
+    $c->stash(form => $form);
+
     if ($form->process) {
         $c->flash(msg => 'Link edited');
         
@@ -80,12 +81,20 @@ sub edit {
 
 }
 
-sub remove {
+sub delete {
     my $c = shift;
 
-    $c->stash->{song}->delete_link($c->stash->{link});
+    my $song = $c->stash->{song};
+    my $link = $c->stash->{link};
+    my $form = $c->form('Link::Delete', song => $song, link => $link);
 
-    $c->render(text => '');
+    $c->stash(form => $form);
+
+    if ($form->process) {
+        $c->flash(msg => 'Link deleted');
+        $c->redirect_to('admin_list_song_links', song_id => $song->id);
+    }
+
 }
 
 1;

@@ -1,6 +1,11 @@
-package NeverTire::Form::Song::Delete;
+package NeverTire::Form::Link::Delete;
 use Moose;
 use namespace::autoclean;
+
+# TODO Be more consistent.  Link forms are 
+# under NT::Form::Link but link tables are
+# under NT::Table::Song::Link  - ie one
+# includes Song in the chain and one doesn't.
 
 use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
@@ -8,16 +13,16 @@ with 'NeverTire::Form::Role';
 
 use Readonly;
 Readonly my $CANCEL => 0;
-Readonly my $HIDE   => 1;
-Readonly my $DELETE => 2;
+Readonly my $DELETE => 1;
 
-has '+id'           => (default => 'delete-song');
-has '+submit_label' => (default => 'Delete song');
+has '+id'           => (default => 'delete-link');
+has '+submit_label' => (default => 'Delete link');
 has '+legend'       => (default => sub {
     my $self = shift;
 
-    my $title = $self->song->title;
-    return qq/Delete song '${title}'/;
+    my $song = $self->song->title;
+    my $link = $self->link->name;
+    return "Delete ${link} link for song ${song}";
 });
 
 has song => (
@@ -26,15 +31,19 @@ has song => (
     required    => 1,
 );
 
+has link => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Link',
+    required    => 1,
+);
+
 has_field action => (
     type        => 'RadioButtonGroup',
     selections => [
         { value => $CANCEL, text => 'Do nothing', checked => 1, },
-        { value => $HIDE,   text => 'Hide from public, but leave in DB' },
-        { value => $DELETE, text => 'Remove from DB' },
+        { value => $DELETE, text => 'Delete link' },
     ],
 );
-
 
 override posted => sub {
 	my $self = shift;
@@ -42,13 +51,8 @@ override posted => sub {
     my $fields = $self->form_hash(qw/ action /);
     my $action = $fields->{action};
 
-    my $song = $self->song;
-    if ($action == $HIDE) {
-        $song->hide;
-        return 'Song hidden';
-    }
-    elsif ($action == $DELETE) {
-        $song->delete;
+    if ($action == $DELETE) {
+        $self->link->delete;
         return 'Song deleted';
     }
 

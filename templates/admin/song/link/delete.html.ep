@@ -1,0 +1,5 @@
+% layout 'admin';
+% title 'Delete ' . $link->name . ' link  for ' . $song->title;
+
+<%== $form->render %>
+

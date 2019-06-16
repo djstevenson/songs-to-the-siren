@@ -61,8 +61,10 @@ has_column delete => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        # my $url = $table->c->url_for('admin_edit_song_tags', song_id => $row->id);
-        my $url = 'TODO';
+        my $url = $table->c->url_for('admin_delete_song_link',
+            song_id => $table->song->id,
+            link_id => $row->id,
+        );
         return qq{
             <a href="${url}">Delete</a>
         };
@@ -70,7 +72,8 @@ has_column delete => (
 );
 has '+empty_text' => (default => 'No links for this song');
 
-has '+default_order_by'   => (default => 'priority');
+has '+default_order_by' => (default => 'priority');
+has '+default_sort_dir' => (default => 'u');
 
 __PACKAGE__->meta->make_immutable;
 1;
