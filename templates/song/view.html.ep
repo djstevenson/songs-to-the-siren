@@ -12,14 +12,6 @@
         </p>
     </div>
     %== render_comments($song);
+    %= include 'song/_links'
     %= include 'song/_footer'
-    <p>
-        <ul>
-            % foreach my $k (keys %$links) {
-                <li>
-                    <%= $k %> = <%= $links->{$k}->url %>
-                </li>
-            % }
-        </ul>
-    </p>
 </section>
