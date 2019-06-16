@@ -2,6 +2,7 @@ package NeverTire::Controller::Admin::Song;
 use Mojo::Base 'Mojolicious::Controller';
 
 use NeverTire::Controller::Admin::Song::Tag;
+use NeverTire::Controller::Admin::Song::Link;
 
 sub add_routes {
     my ($c, $routes) = @_;
@@ -24,9 +25,15 @@ sub add_routes {
     # Method=DELETE?
     $admin_song_action->route('/delete')->name('admin_delete_song')->via('GET', 'POST')->to(action => 'delete');
 
+    # Routes for editing tags
     my $tag_controller = NeverTire::Controller::Admin::Song::Tag->new;
     $routes->{admin_song_tag} = $admin_song_action;
     $tag_controller->add_routes($routes);
+
+    # Routes for editing links
+    my $link_controller = NeverTire::Controller::Admin::Song::Link->new;
+    $routes->{admin_song_link} = $admin_song_action;
+    $link_controller->add_routes($routes);
 }
 
 sub create {

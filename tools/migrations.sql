@@ -113,6 +113,7 @@ CREATE TABLE links (
     song_id BIGINT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
     "name" TEXT NOT NULL,
     "url" TEXT NOT NULL,
+    priority INTEGER NOT NULL DEFAULT 0,
     extras TEXT
 );
 

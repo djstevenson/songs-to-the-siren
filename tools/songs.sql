@@ -132,6 +132,6 @@ VALUES
 (2, 2, NULL, 'Best British band ever', '<p>Best British band ever</p>', NOW(), NOW()),
 (2, 3, 3, 'Apart from New Order', '<p>Apart from New Order</p>', NOW(), NULL);
 
-INSERT INTO links (song_id, "name", "url", extras)
+INSERT INTO links (song_id, "name", "url", extras, priority)
 VALUES
-(6, 'YouTube', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', '16by9');
+(6, 'YouTube', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', '16by9', 10);

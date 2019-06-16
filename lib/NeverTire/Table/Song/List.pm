@@ -53,6 +53,18 @@ has_column tags => (
 
 );
 
+has_column links => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        my $url = $table->c->url_for('admin_list_song_links', song_id => $row->id);
+        return qq{
+            <a href="${url}">Links</a>
+        };
+    },
+
+);
+
 has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
@@ -99,7 +111,7 @@ has_column delete => (
 
 );
 
-has '+empty_text' => (default => 'No songs are in the datbase');
+has '+empty_text' => (default => 'No songs yet defined');
 
 has '+default_order_by'   => (default => 'published_at');
 

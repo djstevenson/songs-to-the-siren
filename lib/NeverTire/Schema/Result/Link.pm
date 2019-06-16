@@ -17,6 +17,7 @@ __PACKAGE__->add_columns(
     song_id          => {data_type => 'INTEGER'},
     name             => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
+    priority         => {data_type => 'INTEGER'},
 
     # e.g. ratio ("16x9" etc) for the youtubes.
     extras           => {data_type => 'TEXT'},
