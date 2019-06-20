@@ -6,8 +6,8 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Request password reset');
-has '+id'           => (default => 'user-forgot-password');
+has '+legend' => (default => 'Password reset');
+has '+id'     => (default => 'user-forgot-password');
 
 has_field email => (
     type        => 'Input::Email',
@@ -20,6 +20,10 @@ has_field email => (
     	[ MaxLength => {max => 999} ],
     	'ValidEmail',
 	],
+);
+
+has_button login => (
+	label => 'Request password reset',
 );
 
 override posted => sub {
