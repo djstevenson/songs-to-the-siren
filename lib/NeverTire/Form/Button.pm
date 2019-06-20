@@ -31,7 +31,8 @@ has id => (
         my $label = ucfirst($self->name);
 
     	my $id = lc($label) . '-button';
-	    $id =~ s/\s+/-/g;
+	    $id =~ s/[_\s]+/-/g;
+
         return $id;
     },
 );
