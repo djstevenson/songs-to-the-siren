@@ -6,8 +6,8 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Send me my login name');
-has '+id'           => (default => 'user-forgot-name');
+has '+legend' => (default => 'Forgot name');
+has '+id'     => (default => 'user-forgot-name');
 
 has_field email => (
     type        => 'Input::Email',
@@ -20,6 +20,10 @@ has_field email => (
     	[ MaxLength => {max => 999} ],
     	'ValidEmail',
 	],
+);
+
+has_button login => (
+	label => 'Send me my login name',
 );
 
 override posted => sub {
