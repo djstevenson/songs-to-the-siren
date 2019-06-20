@@ -16,8 +16,7 @@ has label => (
         my $self = shift;
         my $label = ucfirst($self->name);
 
-        $label =~ s/_/ /;
-        $label =~ s/\-/ /;
+        $label =~ s/[_\-]/ /g;
 
         return $label;
     },

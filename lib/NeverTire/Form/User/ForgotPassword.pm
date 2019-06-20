@@ -22,9 +22,7 @@ has_field email => (
 	],
 );
 
-has_button login => (
-	label => 'Request password reset',
-);
+has_button request_password_reset => ();
 
 override posted => sub {
 	my $self = shift;

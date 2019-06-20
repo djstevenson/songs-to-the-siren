@@ -22,9 +22,7 @@ has_field email => (
 	],
 );
 
-has_button login => (
-	label => 'Send me my login name',
-);
+has_button send_me_my_login_name => ();
 
 override posted => sub {
 	my $self = shift;
