@@ -6,8 +6,8 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Register user');
-has '+id'           => (default => 'register-user');
+has '+legend' => (default => 'Register user');
+has '+id'     => (default => 'register-user');
 
 has_field name => (
     type        => 'Input::Text',
@@ -46,6 +46,8 @@ has_field password => (
     	[ MaxLength => {max => 99} ],
 	],
 );
+
+has_button register_user => ();
 
 override posted => sub {
 	my $self = shift;
