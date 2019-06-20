@@ -16,14 +16,13 @@ Readonly my $CANCEL => 0;
 Readonly my $DELETE => 1;
 
 has '+id'           => (default => 'delete-link');
-has '+submit_label' => (default => 'Delete link');
 has '+legend'       => (default => sub {
     my $self = shift;
 
     my $song = $self->song->title;
     my $link = $self->link->name;
     return "Delete ${link} link for song ${song}";
-});
+}, lazy => 1);
 
 has song => (
     is          => 'ro',
@@ -44,6 +43,8 @@ has_field action => (
         { value => $DELETE, text => 'Delete link' },
     ],
 );
+
+has_button delete_link => ();
 
 override posted => sub {
 	my $self = shift;
