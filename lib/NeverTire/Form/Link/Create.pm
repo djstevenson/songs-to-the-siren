@@ -6,8 +6,8 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Create link');
-has '+id'           => (default => 'add-link');
+has '+legend' => (default => 'Create link');
+has '+id'     => (default => 'add-link');
 
 has_field name => (
     type        => 'Input::Text',
@@ -56,6 +56,8 @@ has song => (
     isa         => 'NeverTire::Schema::Result::Song',
     required    => 1,
 );
+
+has_button create_link => ();
 
 override posted => sub {
 	my $self = shift;
