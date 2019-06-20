@@ -15,7 +15,7 @@ use Readonly;
 Readonly my $CANCEL => 0;
 Readonly my $DELETE => 1;
 
-has '+id'           => (default => 'delete-link');
+has '+id' => (default => 'delete-link');
 
 has song => (
     is          => 'ro',

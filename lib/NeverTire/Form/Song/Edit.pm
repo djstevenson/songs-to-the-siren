@@ -9,7 +9,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id'           => (default => 'edit-song');
+has '+id' => (default => 'edit-song');
 
 has song => (
     is          => 'ro',

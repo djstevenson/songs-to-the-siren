@@ -11,7 +11,7 @@ Readonly my $CANCEL => 0;
 Readonly my $HIDE   => 1;
 Readonly my $DELETE => 2;
 
-has '+id'           => (default => 'delete-song');
+has '+id' => (default => 'delete-song');
 
 has song => (
     is          => 'ro',

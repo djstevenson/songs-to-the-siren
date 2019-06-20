@@ -8,7 +8,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id'           => (default => 'edit-link');
+has '+id' => (default => 'edit-link');
 
 has_field name => (
     type        => 'Input::Text',

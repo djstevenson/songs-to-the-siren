@@ -6,7 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id'     => (default => 'new-song');
+has '+id' => (default => 'new-song');
 
 has_field title => (
     type        => 'Input::Text',
@@ -69,7 +69,7 @@ has_field full_preview => (
     },
 );
 
-has_button update_song => ();
+has_button create_song => ();
 
 override posted => sub {
 	my $self = shift;
