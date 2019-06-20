@@ -11,10 +11,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-use Readonly;
-Readonly my $CANCEL => 0;
-Readonly my $DELETE => 1;
-
 has '+id' => (default => 'delete-link');
 
 has song => (
@@ -29,23 +25,16 @@ has link => (
     required    => 1,
 );
 
-has_field action => (
-    type        => 'RadioButtonGroup',
-    selections => [
-        { value => $CANCEL, text => 'Do nothing', checked => 1, },
-        { value => $DELETE, text => 'Delete link' },
-    ],
-);
-
 has_button delete_link => ();
+has_button cancel => (
+    style => 'light',
+);
 
 override posted => sub {
 	my $self = shift;
 	
-    my $fields = $self->form_hash(qw/ action /);
-    my $action = $fields->{action};
-
-    if ($action == $DELETE) {
+    my $delete_button = $self->find_button('delete_link');
+    if ( $delete_button->clicked ) {
         $self->link->delete;
         return 'Song deleted';
     }

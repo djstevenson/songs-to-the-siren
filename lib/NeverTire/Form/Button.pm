@@ -53,38 +53,11 @@ has type => (
     default     => 'submit',
 );
 
-# sub process {
-#     my ($self, $schema, $value) = @_;
-
-#     my $filtered_value = $value // '';
-#     my $filters = NeverTire::Form::Utils::load_form_objects(
-#         $self->filters,
-#         'NeverTire::Form::Field::Filter',
-#         {schema => $schema},
-#     );
-
-#     foreach my $filter (@$filters) {
-#         $filtered_value = $filter->filter($filtered_value);
-#     }
-#     $self->value($filtered_value);
-
-#     # TODO Instantiate these once, not on every form POST
-#     #      e.g. get them via a factory, they can be cached
-#     #           so can actual forms if we init them right...
-#     my $validators = NeverTire::Form::Utils::load_form_objects(
-#         $self->validators,
-#         'NeverTire::Form::Field::Validator',
-#         {schema => $schema},
-#     );
-#     $self->clear_error;
-#     foreach my $validator (@$validators) {
-#         my $error_value = $validator->validate($filtered_value);
-#         if ($error_value){
-#             $self->error($error_value);
-#             last;
-#         }
-#     }
-# }
+has clicked => (
+    is          => 'rw',
+    isa         => 'Bool',
+    default     => 0,
+);
 
 __PACKAGE__->meta->make_immutable;
 1;

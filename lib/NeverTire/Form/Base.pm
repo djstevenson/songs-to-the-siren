@@ -75,6 +75,12 @@ sub process {
 		$field->process($schema, $value);
 	}
 
+	my $selected_button = $params->param('submit-button');
+	foreach my $button (@{$self->form_buttons}) {
+		my $name = $button->name;
+		$button->clicked(1) if $name eq $selected_button;
+	}
+
 	# Allow extra validation in a subclass
 	$self->extra_validation;
 
@@ -92,6 +98,17 @@ sub find_field {
 
 	foreach my $field (@{$self->form_fields}) {
 		return $field if $name eq $field->name;
+	}
+
+	return undef;
+}
+
+# Does a linear search of buttons. The list is short, so this is good enough.
+sub find_button {
+	my ($self, $name) = @_;
+
+	foreach my $button (@{$self->form_buttons}) {
+		return $button if $name eq $button->name;
 	}
 
 	return undef;
@@ -156,23 +173,26 @@ sub render {
 	#       sucks at the moment. A beneficial side-effect is that it's
 	#       now easier to use Selenium to test server-side validations which
 	#       we need to maintain/test regardless of front-end gubbins.
-	my $fields  = $self->_render_fields;
-	my $buttons = $self->_render_buttons;
+	my $fields  = $self->_fieldset($self->_render_fields);
+	my $buttons = $self->_fieldset($self->_render_buttons);
 
     return qq{
         <div class="main-panel">
     		<form accept-charset="utf-8" method="POST" novalidate>
-                <fieldset>
-                	$fields
-                </fieldset>
-                <fieldset>
-        			$buttons
-                </fieldset>
+				$fields
+				$buttons
     		</form>
         </div>
 	};
 }
 
+sub _fieldset {
+	my ($self, $s) = @_;
+
+	return '' unless defined $s;
+
+	return '<fieldset>' . $s . '</fieldset>';
+}
 
 sub _render_fields {
     my $self = shift;
@@ -193,10 +213,11 @@ sub _render_buttons {
 
 	foreach my $button (@{$self->form_buttons}) {
 		my $type  = $button->type;
+		my $name  = $button->name;
 		my $style = $button->style;
 		my $label = $button->label;
 		my $id    = $button->id;
-        $s .= qq{<button id="${id}" type="${type}" class="btn btn-${style}">${label}</button>};
+        $s .= qq{<button name="submit-button" value="${name}" id="${id}" type="${type}" class="btn btn-${style}">${label}</button>};
     }
 
     return $s;
