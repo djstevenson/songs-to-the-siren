@@ -22,25 +22,18 @@ has id => (
 	required    => 1,
 );
 
-has submit_label => (
-    is          => 'ro',
-    isa         => 'Str',
-    required    => 1,
-);
-
-has legend => (
-    is          => 'ro',
-    isa         => 'Str',
-    lazy        => 1,
-    default     => sub { return shift->submit_label; },
-);
-
 has form_fields => (
 	is			=> 'ro',
 	isa			=> 'ArrayRef[NeverTire::Form::Field]',
 	required	=> 1,
-    writer      => '_set_columns',
 	default		=>  sub{ ref(shift)->meta->form_fields },
+);
+
+has form_buttons => (
+	is			=> 'ro',
+	isa			=> 'ArrayRef[NeverTire::Form::Button]',
+	required	=> 1,
+	default		=>  sub{ ref(shift)->meta->form_buttons },
 );
 
 has data_object => (
@@ -82,6 +75,12 @@ sub process {
 		$field->process($schema, $value);
 	}
 
+	my $selected_button = $params->param('submit-button');
+	foreach my $button (@{$self->form_buttons}) {
+		my $name = $button->name;
+		$button->clicked(1) if $name eq $selected_button;
+	}
+
 	# Allow extra validation in a subclass
 	$self->extra_validation;
 
@@ -99,6 +98,17 @@ sub find_field {
 
 	foreach my $field (@{$self->form_fields}) {
 		return $field if $name eq $field->name;
+	}
+
+	return undef;
+}
+
+# Does a linear search of buttons. The list is short, so this is good enough.
+sub find_button {
+	my ($self, $name) = @_;
+
+	foreach my $button (@{$self->form_buttons}) {
+		return $button if $name eq $button->name;
 	}
 
 	return undef;
@@ -163,24 +173,26 @@ sub render {
 	#       sucks at the moment. A beneficial side-effect is that it's
 	#       now easier to use Selenium to test server-side validations which
 	#       we need to maintain/test regardless of front-end gubbins.
-	my $fields  = $self->_render_fields;
-	my $buttons = $self->_render_buttons;
+	my $fields  = $self->_fieldset($self->_render_fields);
+	my $buttons = $self->_fieldset($self->_render_buttons);
 
-    my $legend = '';
-    $legend = q{<legend>} . $self->legend . q{</legend>};
     return qq{
         <div class="main-panel">
     		<form accept-charset="utf-8" method="POST" novalidate>
-                $legend
-                <fieldset>
-                	$fields
-        			$buttons
-                </fieldset>
+				$fields
+				$buttons
     		</form>
         </div>
 	};
 }
 
+sub _fieldset {
+	my ($self, $s) = @_;
+
+	return '' unless defined $s;
+
+	return '<fieldset>' . $s . '</fieldset>';
+}
 
 sub _render_fields {
     my $self = shift;
@@ -193,21 +205,22 @@ sub _render_fields {
     return $s;
 }
 
+# TODO Tests for multiple buttons
 sub _render_buttons {
     my $self = shift;
 
-    # TODO Allow more than one button
-    my $label = $self->submit_label;
-	my $id = $self->_make_button_id($label);
-    return qq{<div class="buttons"><button type="submit" id="${id}" class="btn btn-primary">${label}</button></div>};
-}
+	my $s;
 
-sub _make_button_id {
-	my ($self, $label) = @_;
+	foreach my $button (@{$self->form_buttons}) {
+		my $type  = $button->type;
+		my $name  = $button->name;
+		my $style = $button->style;
+		my $label = $button->label;
+		my $id    = $button->id;
+        $s .= qq{<button name="submit-button" value="${name}" id="${id}" type="${type}" class="btn btn-${style}">${label}</button>};
+    }
 
-	my $id = lc($label) . '-button';
-	$id =~ s/\s+/-/g;
-	return $id;
+    return $s;
 }
 
 __PACKAGE__->meta->make_immutable;

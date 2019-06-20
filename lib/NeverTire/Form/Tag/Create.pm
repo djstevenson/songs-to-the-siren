@@ -6,8 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Create tag');
-has '+id'           => (default => 'add-tag');
+has '+id' => (default => 'add-tag');
 
 has_field name => (
     type        => 'Input::Text',
@@ -24,6 +23,8 @@ has song => (
     isa         => 'NeverTire::Schema::Result::Song',
     required    => 1,
 );
+
+has_button create_tag => ();
 
 override posted => sub {
 	my $self = shift;

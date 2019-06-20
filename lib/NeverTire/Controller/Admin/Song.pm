@@ -101,10 +101,8 @@ sub edit {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    
-    # We already know song exists
-    my $rs = $c->schema->resultset('Song');
     my $form = $c->form('Song::Edit', song => $song);
+    
     if ($form->process) {
         $c->flash(msg => 'Song updated');
 

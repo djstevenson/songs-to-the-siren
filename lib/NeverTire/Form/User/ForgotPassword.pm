@@ -6,8 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Request password reset');
-has '+id'           => (default => 'user-forgot-password');
+has '+id'     => (default => 'user-forgot-password');
 
 has_field email => (
     type        => 'Input::Email',
@@ -21,6 +20,8 @@ has_field email => (
     	'ValidEmail',
 	],
 );
+
+has_button request_password_reset => ();
 
 override posted => sub {
 	my $self = shift;

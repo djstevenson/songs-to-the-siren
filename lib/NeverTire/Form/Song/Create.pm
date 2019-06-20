@@ -6,8 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'New song');
-has '+id'           => (default => 'new-song');
+has '+id' => (default => 'new-song');
 
 has_field title => (
     type        => 'Input::Text',
@@ -28,7 +27,7 @@ has_field album => (
     validators  => [qw/ Required  /],
 );
 
-has_field country => (
+has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
@@ -70,6 +69,7 @@ has_field full_preview => (
     },
 );
 
+has_button create_song => ();
 
 override posted => sub {
 	my $self = shift;
@@ -77,7 +77,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title artist album country released_at summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title artist album country_id released_at summary_markdown full_markdown /);
 	return $user->admin_create_song($fields);
 };
 

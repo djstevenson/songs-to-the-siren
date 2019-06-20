@@ -6,8 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Send me my login name');
-has '+id'           => (default => 'user-forgot-name');
+has '+id'     => (default => 'user-forgot-name');
 
 has_field email => (
     type        => 'Input::Email',
@@ -21,6 +20,8 @@ has_field email => (
     	'ValidEmail',
 	],
 );
+
+has_button send_me_my_login_name => ();
 
 override posted => sub {
 	my $self = shift;

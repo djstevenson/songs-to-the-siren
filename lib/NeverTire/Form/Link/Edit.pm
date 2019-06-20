@@ -8,8 +8,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Edit link');
-has '+id'           => (default => 'edit-link');
+has '+id' => (default => 'edit-link');
 
 has_field name => (
     type        => 'Input::Text',
@@ -52,6 +51,8 @@ has link => (
     isa         => 'NeverTire::Schema::Result::Link',
     required    => 1,
 );
+
+has_button update_link => ();
 
 override posted => sub {
 	my $self = shift;

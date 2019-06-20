@@ -9,14 +9,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id'           => (default => 'edit-song');
-has '+submit_label' => (default => 'Edit song');
-has '+legend'       => (default => sub {
-    my $self = shift;
-
-    my $title = $self->song->title;
-    return qq/Edit song '${title}'/;
-});
+has '+id' => (default => 'edit-song');
 
 has song => (
     is          => 'ro',
@@ -43,7 +36,8 @@ has_field album => (
     validators  => [qw/ Required  /],
 );
 
-has_field country => (
+# TODO Proper select menu for countries
+has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
@@ -85,7 +79,7 @@ has_field full_preview => (
     },
 );
 
-
+has_button update_song => ();
 
 override posted => sub {
 	my $self = shift;
@@ -93,7 +87,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title album country artist released_at summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title album artist country_id released_at summary_markdown full_markdown /);
 	return $user->admin_edit_song($self->song, $fields);
 };
 

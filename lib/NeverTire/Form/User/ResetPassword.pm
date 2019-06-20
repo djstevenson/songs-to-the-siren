@@ -6,8 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Set new password');
-has '+id'           => (default => 'user-new-password');
+has '+id'     => (default => 'user-new-password');
 
 has_field password => (
     type        => 'Input::Password',
@@ -21,6 +20,8 @@ has_field password => (
         [ MaxLength => {max => 99} ],
 	],
 );
+
+has_button set_new_password => ();
 
 # TODO Tests
 after extra_validation => sub {

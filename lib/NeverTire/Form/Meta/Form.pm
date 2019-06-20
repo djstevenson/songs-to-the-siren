@@ -12,6 +12,16 @@ has form_fields => (
     },
 );
 
+has form_buttons => (
+    traits      => ['Array'],
+    is			=> 'rw',
+    isa			=> 'ArrayRef[NeverTire::Form::Button]',
+    default		=> sub{ [] },
+    handles     => {
+        add_button => 'push',
+    },
+);
+
 
 no Moose::Role;
 
