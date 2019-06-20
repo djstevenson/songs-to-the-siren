@@ -8,8 +8,8 @@ with 'NeverTire::Form::Role';
 
 use NeverTire::Util::Password qw/ check_password_hash new_password_hash /;
 
-has '+submit_label' => (default => 'Login');
-has '+id'           => (default => 'user-login');
+has '+id'     => (default => 'user-login');
+has '+legend' => (default => 'Login');
 
 has_field name => (
     type        => 'Input::Text',
@@ -35,6 +35,7 @@ has_field password => (
 	],
 );
 
+has_button login => ();
 
 has _save_user => (
     is          => 'rw',

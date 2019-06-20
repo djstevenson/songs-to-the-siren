@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 use NeverTire::Form::Field;
+use NeverTire::Form::Button;
 
 use Moose::Exporter;
 use Moose::Util::MetaRole;
@@ -12,11 +13,12 @@ use Moose::Util;
 Moose::Exporter->setup_import_methods(
     with_meta => [qw(
         has_field
+        has_button
     )],
     also => 'Moose',
 );
 
-sub init_meta{
+sub init_meta {
     my ($class, %options) = @_;
 	
     # Setting up the moose stuff
@@ -31,7 +33,7 @@ sub init_meta{
     );
 }
 
-sub has_field{
+sub has_field {
     my ($meta, $name, %options) = @_;
 
     my $field = NeverTire::Form::Field->new(
@@ -44,6 +46,18 @@ sub has_field{
     
     $meta->add_field($field);
     return $field;
+}
+
+sub has_button {
+    my ($meta, $name, %options) = @_;
+
+    my $button = NeverTire::Form::Button->new(
+        name    => $name,
+        %options,
+    );
+
+    $meta->add_button($button);
+    return $button;
 }
 
 1;

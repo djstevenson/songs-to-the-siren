@@ -22,25 +22,24 @@ has id => (
 	required    => 1,
 );
 
-has submit_label => (
-    is          => 'ro',
-    isa         => 'Str',
-    required    => 1,
-);
-
 has legend => (
     is          => 'ro',
     isa         => 'Str',
-    lazy        => 1,
-    default     => sub { return shift->submit_label; },
+    required    => 1,
 );
 
 has form_fields => (
 	is			=> 'ro',
 	isa			=> 'ArrayRef[NeverTire::Form::Field]',
 	required	=> 1,
-    writer      => '_set_columns',
 	default		=>  sub{ ref(shift)->meta->form_fields },
+);
+
+has form_buttons => (
+	is			=> 'ro',
+	isa			=> 'ArrayRef[NeverTire::Form::Button]',
+	required	=> 1,
+	default		=>  sub{ ref(shift)->meta->form_buttons },
 );
 
 has data_object => (
@@ -174,6 +173,8 @@ sub render {
                 $legend
                 <fieldset>
                 	$fields
+                </fieldset>
+                <fieldset>
         			$buttons
                 </fieldset>
     		</form>
@@ -196,18 +197,18 @@ sub _render_fields {
 sub _render_buttons {
     my $self = shift;
 
-    # TODO Allow more than one button
-    my $label = $self->submit_label;
-	my $id = $self->_make_button_id($label);
-    return qq{<div class="buttons"><button type="submit" id="${id}" class="btn btn-primary">${label}</button></div>};
-}
 
-sub _make_button_id {
-	my ($self, $label) = @_;
+	my $s;
 
-	my $id = lc($label) . '-button';
-	$id =~ s/\s+/-/g;
-	return $id;
+	foreach my $button (@{$self->form_buttons}) {
+		my $type  = $button->type;
+		my $style = $button->style;
+		my $label = $button->label;
+		my $id    = $button->id;
+        $s .= qq{<button id="${id}" type="${type}" class="btn btn-${style}">${label}</button>};
+    }
+
+    return $s;
 }
 
 __PACKAGE__->meta->make_immutable;

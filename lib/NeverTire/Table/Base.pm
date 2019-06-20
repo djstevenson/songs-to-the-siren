@@ -24,7 +24,6 @@ has table_columns => (
 	is			=> 'ro',
 	isa			=> 'ArrayRef[NeverTire::Table::Column]',
 	required	=> 1,
-    writer      => '_set_columns',
 	default		=>  sub{ ref(shift)->meta->table_columns },
     lazy        => 1,
 );
