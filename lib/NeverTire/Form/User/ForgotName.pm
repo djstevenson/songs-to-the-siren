@@ -6,7 +6,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+legend' => (default => 'Forgot name');
 has '+id'     => (default => 'user-forgot-name');
 
 has_field email => (

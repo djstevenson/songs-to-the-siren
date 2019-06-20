@@ -9,13 +9,6 @@ extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
 has '+id'           => (default => 'edit-link');
-has '+legend'       => (default => sub {
-    my $self = shift;
-
-    my $song = $self->song->title;
-    my $link = $self->link->name;
-    return "Edit ${link} link for song ${song}";
-}, lazy => 1);
 
 has_field name => (
     type        => 'Input::Text',

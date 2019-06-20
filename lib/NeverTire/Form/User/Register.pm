@@ -6,7 +6,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+legend' => (default => 'Register user');
 has '+id'     => (default => 'register-user');
 
 has_field name => (

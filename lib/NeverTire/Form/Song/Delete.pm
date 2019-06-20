@@ -12,13 +12,6 @@ Readonly my $HIDE   => 1;
 Readonly my $DELETE => 2;
 
 has '+id'           => (default => 'delete-song');
-has '+submit_label' => (default => 'Delete song');
-has '+legend'       => (default => sub {
-    my $self = shift;
-
-    my $title = $self->song->title;
-    return qq/Delete song '${title}'/;
-});
 
 has song => (
     is          => 'ro',

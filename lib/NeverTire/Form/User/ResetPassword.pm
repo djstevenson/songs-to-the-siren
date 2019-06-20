@@ -6,7 +6,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+legend' => (default => 'Set new password');
 has '+id'     => (default => 'user-new-password');
 
 has_field password => (

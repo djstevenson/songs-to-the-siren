@@ -9,7 +9,6 @@ with 'NeverTire::Form::Role';
 use NeverTire::Util::Password qw/ check_password_hash new_password_hash /;
 
 has '+id'     => (default => 'user-login');
-has '+legend' => (default => 'Login');
 
 has_field name => (
     type        => 'Input::Text',

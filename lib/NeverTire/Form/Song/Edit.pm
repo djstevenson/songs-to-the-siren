@@ -10,12 +10,6 @@ extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
 has '+id'           => (default => 'edit-song');
-has '+legend'       => (default => sub {
-    my $self = shift;
-
-    my $title = $self->song->title;
-    return qq/Edit song '${title}'/;
-}, lazy => 1);
 
 has song => (
     is          => 'ro',

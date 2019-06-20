@@ -6,7 +6,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+legend' => (default => 'Create link');
 has '+id'     => (default => 'add-link');
 
 has_field name => (

@@ -22,12 +22,6 @@ has id => (
 	required    => 1,
 );
 
-has legend => (
-    is          => 'ro',
-    isa         => 'Str',
-    required    => 1,
-);
-
 has form_fields => (
 	is			=> 'ro',
 	isa			=> 'ArrayRef[NeverTire::Form::Field]',
@@ -165,12 +159,9 @@ sub render {
 	my $fields  = $self->_render_fields;
 	my $buttons = $self->_render_buttons;
 
-    my $legend = '';
-    $legend = q{<legend>} . $self->legend . q{</legend>};
     return qq{
         <div class="main-panel">
     		<form accept-charset="utf-8" method="POST" novalidate>
-                $legend
                 <fieldset>
                 	$fields
                 </fieldset>

@@ -6,7 +6,6 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+submit_label' => (default => 'Create tag');
 has '+id'           => (default => 'add-tag');
 
 has_field name => (
