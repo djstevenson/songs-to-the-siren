@@ -38,14 +38,14 @@ sub run {
 	my $first_root_comment;
 	my $second_root_comment;
 	subtest 'Test without any comments' => sub {
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 0, 'No comments -> empty forest');
 	};
 
 	subtest 'Add one "root" comment as admin, don\'t approve it' => sub {
 		$first_root_comment = $self->_create_comment($admin, $song, undef, 'Markdown 1');
 
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 0, 'Only unapproved comments -> empty forest');
 	};
 
@@ -53,7 +53,7 @@ sub run {
 		$admin->approve_comment($first_root_comment);
 		ok($first_root_comment->approved_at, "Comment is NOW approved");
 
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 1, 'Forest now has one root comment');
 		is($forest->[0]->comment->id, $first_root_comment->id, 'Root comment is right id')
 	};
@@ -63,7 +63,7 @@ sub run {
 		my $other_song_comment = $self->_create_comment($admin, $song2, undef, 'Markdown 2');
 		$admin->approve_comment($other_song_comment);
 
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 1, 'Forest still has one root comment');
 		is($forest->[0]->comment->id, $first_root_comment->id, 'Root comment is still right id');
 	};
@@ -72,7 +72,7 @@ sub run {
 		$second_root_comment = $self->_create_comment($admin, $song, undef, 'Markdown 3');
 		$admin->approve_comment($second_root_comment);
 
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 2, 'Forest now has two root comments');
 		is($forest->[0]->comment->id, $second_root_comment->id, 'First root comment is newest id');
 		is($forest->[1]->comment->id, $first_root_comment->id, 'Second root comment is oldest id');
@@ -112,7 +112,7 @@ sub run {
 		$admin->approve_comment($comment7);
 		$admin->approve_comment($comment8);
 
-		my $forest = $song->comment_forest;
+		my $forest = $song->get_comment_forest;
 		is(scalar @$forest, 2, 'Forest still has two root comments');
 		is($forest->[0]->comment->id, $second_root_comment->id, 'First root comment is 2nd root id');
 		is($forest->[1]->comment->id, $first_root_comment->id,  'Second root comment is 1st root id');

@@ -1,0 +1,7 @@
+% if ( scalar @$forest ) {
+    <section class="comments col-12">
+        % foreach my $tree ( @$forest ) {
+            %== render_comment_tree($tree);
+        % }
+    </section>
+% }

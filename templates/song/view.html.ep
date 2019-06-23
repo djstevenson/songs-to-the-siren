@@ -11,7 +11,7 @@
             Do navigation links
         </p>
     </div>
-    %== render_comments($song);
+    %= include 'song/_comments'
     %= include 'song/_links'
     %= include 'song/_footer'
 </section>

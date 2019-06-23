@@ -74,22 +74,10 @@ sub register {
 
     # TODO Tests for helpers
 
-    $app->helper(render_comments => sub {
-        my ($c, $song) = @_;
+    $app->helper(render_comment_tree => sub {
+        my ($c, $tree) = @_;
 
-        my $comments = $song->comment_forest;
-        return '' unless scalar @$comments;
-
-        my $s = '<div class="comments">';
-        foreach my $comment ( @$comments ) {
-            $s .= '<div class="comment-tree">';
-            $s .= render_comments($c, $comment);
-            $s .= '</div>';
-        }
-
-        $s .= '</div>';
-
-        return $s;
+        return render_comments($c, $tree);
     });
 }
 

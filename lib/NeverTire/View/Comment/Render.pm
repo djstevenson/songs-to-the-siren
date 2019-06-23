@@ -1,4 +1,6 @@
 package NeverTire::View::Comment::Render;
+use strict;
+use warnings;
 
 use Sub::Exporter -setup => {
     exports => [qw/ render_comments /]
@@ -11,20 +13,20 @@ sub render_comments {
 
     $draw_node //= \&_default_renderer;
 
-    return '<ul>' . _render_node($app, $root_node, $draw_node) . '</ul>';
+    return '<ul>' . _render_node($app, $root_node, $draw_node, 0) . '</ul>';
 }
 
 sub _render_node {
-    my ($app, $node, $draw_node) = @_;
+    my ($app, $node, $draw_node, $level) = @_;
 
     # $node = NeverTire::Model::Comment::Node
 
-	my $s = '<li>' . $draw_node->($app, $node);
+	my $s = '<li>' . $draw_node->($app, $node, $level);
 	if ( scalar @{ $node->children } ) {
         $s .= '<ul>';
 		$s .= join('', 
             map {
-                _render_node($app, $_, $draw_node);
+                _render_node($app, $_, $draw_node, $level+1);
             }
             @{ $node->children });
         $s .= '</ul>';
@@ -36,17 +38,20 @@ sub _render_node {
 }
 
 sub _default_renderer {
-    my ($app, $node) = @_;
+    my ($app, $node, $level) = @_;
 
     my $comment = $node->comment;
 
-    my $s = '<div class="comment">';
+    my $noun = $level == 0 ? 'Comment' : 'Reply';
 
-    $s .= '<span class="author">By ' . $comment->get_column('author_name')    . '</span>';
-    $s .= '<span class="date">At ' .   $app->datetime($comment->created_at)   . '</span>';
-    $s .= '<p class="comment-body">' . $comment->comment_html . '</p>';
-    
-    $s .= '</div>';
+    my $author    = $comment->get_column('author_name');
+    my $timestamp = $app->datetime($comment->created_at);
+    my $html      = $comment->comment_html;
+
+    my $s .= q{<h4 class="comment-header">};
+    $s .= qq{<span class="author">${noun} by <strong>${author}</strong></span>};
+    $s .= qq{<span class="date">at ${timestamp}</span>};
+    $s .= qq{</h4><p class="comment-body">${html}</p>};
 
     return $s;
 }
