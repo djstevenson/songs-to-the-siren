@@ -43,11 +43,15 @@ sub _default_renderer {
     my $comment = $node->comment;
 
     my $noun = $level == 0 ? 'Comment' : 'Reply';
-    my $s .= '<h4 class="comment-header">';
-    $s .= $noun . ' by <span class="author">' . $comment->get_column('author_name')    . '</span>';
-    $s .= 'at <span class="date">' .   $app->datetime($comment->created_at)   . '</span>';
-    $s .= '</h4>';
-    $s .= '<p class="comment-body">' . $comment->comment_html . '</p>';
+
+    my $author    = $comment->get_column('author_name');
+    my $timestamp = $app->datetime($comment->created_at);
+    my $html      = $comment->comment_html;
+
+    my $s .= q{<h4 class="comment-header">};
+    $s .= qq{<span class="author">${noun} by <strong>${author}</strong></span>};
+    $s .= qq{<span class="date">at ${timestamp}</span>};
+    $s .= qq{</h4><p class="comment-body">${html}</p>};
 
     return $s;
 }

@@ -77,11 +77,7 @@ sub register {
     $app->helper(render_comment_tree => sub {
         my ($c, $tree) = @_;
 
-    use Data::Dumper;
-    print Dumper($tree);
-        my $s =  render_comments($c, $tree);
-        print "\n\n", scalar(localtime(time())), ' ', $s, "\n\n";
-        return $s;
+        return render_comments($c, $tree);
     });
 }
 

@@ -75,20 +75,34 @@ h4.release {
 
 /* COMMENTS */
 .comments {
-    background-color: #999999;
+    /* background-color: #999999; */
+}
+
+.comments > ul > li {
+    border-bottom: 2px solid green;
+    margin-bottom: 2rem;
 }
 
 .comments ul {
     list-style: none;
 }
 
+.comments li {
+    border-left: 1px solid #cccccc;
+    padding-left: 4px;
+}
+
 .comment-header {
-    background-color: red;
     font-weight: normal;
     font-size: 1rem;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 2px;
 }
 
 .comment-header .author {
-    font-weight: bold;
-    margin-right: 3rem;
+    margin-right: 1.5rem;
+}
+
+.comment-header .date {
+    font-size: 0.87rem;
 }
