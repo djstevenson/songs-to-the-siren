@@ -90,7 +90,7 @@ sub delete_tag {
 # TODO DOCUMENT THIS
 # Returns reference to ordered array of
 # NeverTire::Model::Comment::Node
-sub comment_forest {
+sub get_comment_forest {
     my $self = shift;
 
     return make_forest($self);

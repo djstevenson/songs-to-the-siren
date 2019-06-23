@@ -37,7 +37,10 @@ sub view {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    $c->stash(links => $song->get_links);
+    $c->stash(
+        links  => $song->get_links,
+        forest => $song->get_comment_forest,
+    );
 }
 
 1;

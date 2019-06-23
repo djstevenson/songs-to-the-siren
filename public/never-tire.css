@@ -72,3 +72,23 @@ h4.release {
     font-weight: 200;
     font-size: 1rem;
 }
+
+/* COMMENTS */
+.comments {
+    background-color: #999999;
+}
+
+.comments ul {
+    list-style: none;
+}
+
+.comment-header {
+    background-color: red;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.comment-header .author {
+    font-weight: bold;
+    margin-right: 3rem;
+}

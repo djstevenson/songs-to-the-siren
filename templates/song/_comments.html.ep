@@ -1,8 +1,7 @@
-% if ( my $forest = $song->comment_forest ) {
-    <div class="comments">
-        <h4>Comments</h4>
+% if ( scalar @$forest ) {
+    <section class="comments col-12">
         % foreach my $tree ( @$forest ) {
             %== render_comment_tree($tree);
         % }
-    </div>
+    </section>
 % }
