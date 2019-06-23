@@ -1,0 +1,8 @@
+% if ( my $forest = $song->comment_forest ) {
+    <div class="comments">
+        <h4>Comments</h4>
+        % foreach my $tree ( @$forest ) {
+            %== render_comment_tree($tree);
+        % }
+    </div>
+% }

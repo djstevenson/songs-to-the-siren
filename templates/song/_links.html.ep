@@ -1,12 +1,14 @@
-<div class="links">
-    <h4>Links</h4>
-    <p>
-        <ul>
-            % foreach my $k (keys %$links) {
-                <li>
-                    <a href="<%= $links->{$k}->url %>"><%= $k %></a>
-                </li>
-            % }
-        </ul>
-    </p>
-</div>
+% if ( scalar keys %$links ) {
+    <div class="links">
+        <h4>Links</h4>
+        <p>
+            <ul>
+                % foreach my $k (keys %$links) {
+                    <li>
+                        <a href="<%= $links->{$k}->url %>"><%= $k %></a>
+                    </li>
+                % }
+            </ul>
+        </p>
+    </div>
+% }

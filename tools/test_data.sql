@@ -130,7 +130,10 @@ VALUES
 INSERT INTO comments (song_id, author_id, parent_id, comment_markdown, comment_html, created_at, approved_at)
 VALUES
 (2, 2, NULL, 'Best British band ever', '<p>Best British band ever</p>', NOW(), NOW()),
-(2, 3, 3, 'Apart from New Order', '<p>Apart from New Order</p>', NOW(), NULL);
+(2, 3,    3, 'Apart from New Order', '<p>Apart from New Order</p>', NOW(), NULL),
+(2, 2, NULL, '2nd thread c5', '<p>2nd thread c5</p>', NOW(), NOW()),
+(2, 1, NULL, '3rd thread c6', '<p>3rd thread c6</p>', NOW(), NOW()),
+(2, 2,    5, 'reply to c5 = c7', '<p>reply to c5 = c7</p>', NOW(), NOW());
 
 INSERT INTO links (song_id, "name", "url", extras, priority)
 VALUES
