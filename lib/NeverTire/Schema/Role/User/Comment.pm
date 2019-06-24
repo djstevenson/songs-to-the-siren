@@ -13,9 +13,22 @@ use Carp qw/ croak /;
 sub new_song_comment {
     my ($self, $song, $data) = @_;
 
+    return $self->_new_comment($song->id, undef, $data);
+}
+
+sub new_song_reply {
+    my ($self, $parent_comment, $data) = @_;
+
+    return $self->_new_comment($parent_comment->song_id, $parent_comment->id, $data);
+}
+
+sub _new_comment {
+    my ($self, $song_id, $parent_id, $data) = @_;
+
     my $full_args = {
         %$data,
-        song_id      => $song->id,
+        parent_id    => $parent_id,
+        song_id      => $song_id,
         comment_html => markdown($data->{comment_markdown}),
         created_at   => DateTime->now,
     };
