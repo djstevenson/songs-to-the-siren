@@ -1,7 +1,15 @@
-% if ( scalar @$forest ) {
-    <section class="comments col-12">
+<section class="comments col-12">
+
+    % if ( scalar @$forest ) {
         % foreach my $tree ( @$forest ) {
             %== render_comment_tree($tree);
         % }
-    </section>
-% }
+    % }
+
+    % if ( stash 'auth_user') {
+        <p><a href="">New comment</a></p>
+    % }
+    % else {
+        <p><a href="<%= url_for 'login' %>">Log in</a> to add a comment</p>
+    % }
+</section>

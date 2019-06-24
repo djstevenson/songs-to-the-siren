@@ -37,6 +37,9 @@ sub _render_node {
 	return $s;
 }
 
+# TODO This'd be better in a template, given that
+#      it's basically HTML with minor logic and
+#      the comment count will be low.
 sub _default_renderer {
     my ($app, $node, $level) = @_;
 
@@ -52,6 +55,9 @@ sub _default_renderer {
     $s .= qq{<span class="author">${noun} by <strong>${author}</strong></span>};
     $s .= qq{<span class="date">at ${timestamp}</span>};
     $s .= qq{</h4><p class="comment-body">${html}</p>};
+    if (my $auth_user = $app->stash->{auth_user}) {
+        $s .= '<p><a href="">Reply to this comment</a></p>';
+    }
 
     return $s;
 }
