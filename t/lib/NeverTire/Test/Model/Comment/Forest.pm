@@ -211,11 +211,11 @@ sub _create_comment {
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->reply_to_comment($parent, $markdown);
+		$comment = $user->new_song_reply($parent, {comment_markdown => $markdown});
 		is($comment->parent_id, $parent->id, "Comment has correct parent");	
 	}
 	else {
-		$comment = $user->comment_on_song($song, $markdown);
+		$comment = $user->new_song_comment($song, {comment_markdown => $markdown});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 

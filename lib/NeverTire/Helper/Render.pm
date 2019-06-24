@@ -74,6 +74,10 @@ sub register {
 
     # TODO Tests for helpers
 
+    # TODO This'd be better in a template, given that
+    #      it's basically HTML with minor logic and
+    #      the comment count will be low.
+
     $app->helper(render_comment_tree => sub {
         my ($c, $tree) = @_;
 

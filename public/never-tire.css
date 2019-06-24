@@ -6,6 +6,8 @@ body {
     margin: 1rem;
 }
 
+img { border: none; }
+
 section.song {
     border-bottom: 3px solid #aaaaaa;
     margin-bottom: 3rem;

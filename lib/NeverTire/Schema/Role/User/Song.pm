@@ -47,27 +47,6 @@ sub admin_edit_song {
     return $song;
 }
 
-# TODO Add a 'permission' such that we can stop people posting
-#      if they get nasty/spammy/etc.
-#
-# $song = NeverTire::Schema::Result::Song
-# $reply_to = Maybe[NeverTire::Schema::Result::Comment]
-sub comment_on_song {
-    my ($self, $song, $markdown) = @_;
-
-    # die 'blah' unless $user->can_comment;  # TODO
-
-    $song->add_comment($self, undef, $markdown);
-}
-
-sub reply_to_comment {
-    my ($self, $reply_to, $markdown) = @_;
-
-    # die 'blah' unless $user->can_comment;  # TODO
-    my $song = $reply_to->song;
-    $song->add_comment($self, $reply_to, $markdown);
-}
-
 # Admin only
 sub approve_comment {
     my ($self, $comment) = @_;

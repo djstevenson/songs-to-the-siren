@@ -10,6 +10,7 @@ extends 'NeverTire::Schema::Base::Result';
 # file sizes more managable, and to group related methods
 with 'NeverTire::Schema::Role::User::Auth';
 with 'NeverTire::Schema::Role::User::Song';
+with 'NeverTire::Schema::Role::User::Comment';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
