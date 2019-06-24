@@ -8,7 +8,7 @@ with 'NeverTire::Form::Role';
 
 has '+id' => (default => 'new-song-comment');
 
-has_field markdown => (
+has_field comment_markdown => (
     type        => 'Input::TextArea',
     label       => 'Comment (plain text or Markdown format)',
     autofocus   => 1,
@@ -25,15 +25,20 @@ has_field comment_preview => (
 
 has_button add_comment => ();
 
+has song => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Song',
+    required    => 1,
+);
+
 override posted => sub {
 	my $self = shift;
 
-    die "NYI";
-	# my $user = $self->c->stash->{auth_user};
+    my $user = $self->c->stash->{auth_user};
 
-    # # Whitelist what we extract from the submitted form
-	# my $fields = $self->form_hash(qw/ title artist album country_id released_at summary_markdown full_markdown /);
-	# return $user->admin_create_song($fields);
+    # Whitelist what we extract from the submitted form
+	my $fields = $self->form_hash(qw/ comment_markdown /);
+	return $user->new_song_comment($self->song, $fields);
 };
 
 __PACKAGE__->meta->make_immutable;
