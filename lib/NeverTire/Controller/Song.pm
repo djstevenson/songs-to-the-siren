@@ -3,14 +3,23 @@ use Mojo::Base 'Mojolicious::Controller';
 
 # Controller for NON-ADMIN song things.
 
+use NeverTire::Controller::Song::Comment;
+
 sub add_routes {
     my ($c, $routes) = @_;
 
     my $u  = $routes->{all}   ->any('/song')->to(controller => 'song');
+    my $ul = $routes->{login} ->any('/song')->to(controller => 'song');
     
     # Non-admin routes that capture a song id
     my $song_action = $u->under('/:song_id')->to(action => 'capture');
     $song_action->route('/view')->name('view_song')->via('GET')->to(action => 'view');
+
+    # Routes where we capture a song_id but you need to be logged in
+    $routes->{login_song} = $ul->under('/:song_id')->to(action => 'capture');
+
+    my $comment_controller = NeverTire::Controller::Song::Comment->new;
+    $comment_controller->add_routes($routes);
 }
 
 sub capture {
