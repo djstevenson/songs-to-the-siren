@@ -24,15 +24,11 @@ has_column id => (
 
 has_column title => (
     sortable     => 1,
-);
+    link         => sub {
+        my ($col, $table, $row) = @_;
 
-has_column artist => (
-    sortable     => 1,
-);
-
-has_column created_at => (
-    header       => 'Created',
-    sortable     => 1,
+        return $table->c->url_for('view_song', song_id => $row->id);
+    },
 );
 
 # TODO css to highlight whether it's in the future/past?
