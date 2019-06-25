@@ -51,12 +51,18 @@ sub _default_renderer {
     my $timestamp = $app->datetime($comment->created_at);
     my $html      = $comment->comment_html;
 
-    my $s .= q{<h4 class="comment-header">};
+    my $approved   = $comment->approved_at;
+    my $mod_status = $approved ? 'moderated' : 'unmoderated';
+    my $s .= qq{<h4 class="comment-header ${mod_status}">};
     $s .= qq{<span class="author">${noun} by <strong>${author}</strong></span>};
     $s .= qq{<span class="date">at ${timestamp}</span>};
     $s .= qq{</h4><p class="comment-body">${html}</p>};
-    if (my $auth_user = $app->stash->{auth_user}) {
-        $s .= '<p><a href="">Reply to this comment</a></p>';
+    if ( my $auth_user = $app->stash->{auth_user} ) {
+        if ( $approved ) {
+            $s .= '<p><a href="">Reply to this comment</a></p>';
+        } elsif ( $auth_user->admin ) {
+            $s .= '<p><a href="">Approve</a> --- <a href="">Reject</a></p>';
+        }
     }
 
     return $s;
