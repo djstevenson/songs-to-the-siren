@@ -12,8 +12,11 @@ use Sub::Exporter -setup => {
 
 # Called as a class method
 # $song is a NeverTire::Schema::ResultSet::Comment
+#
+# Unmoderated comments are included IFF $admin is
+# true.
 sub make_forest {
-    my $song = shift;
+    my ($song, $admin) = @_;
 
     # Get them in ascending order so we process the
     # oldest first. But we add nodes to the root list,
@@ -23,8 +26,10 @@ sub make_forest {
     my $comment_rs = $song
         ->comments
         ->for_display
-        ->where_approved
         ->id_order;
+
+    $comment_rs = $comment_rs->where_approved
+        unless $admin;
 
     my $root_nodes = [];
     my $all_nodes  = {};

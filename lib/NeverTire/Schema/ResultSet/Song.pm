@@ -33,7 +33,7 @@ sub full_song_data {
     return $self->select_metadata
         ->select_text(full => 'html')
         ->where_published
-        ->select_comment_count(approved => 1)
+        ->select_comment_count('approved')
         ->find($song_id);
 }
 
@@ -63,10 +63,20 @@ sub select_text {
 }
 
 sub select_comment_count {
-    my ($self, %options) = @_;
+    my ($self, $approved_option) = @_;
 
-    my $approved = exists $options{approved} ? 'AND C.approved_at IS NOT NULL' : '';
-    my $sql = qq{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id ${approved} ) };
+    $approved_option //= 'all';
+
+    my $sql_map = {
+        approved   => 'AND C.approved_at IS NOT NULL',
+        unapproved => 'AND C.approved_at IS NULL',
+    };
+
+    my $approved_sql = exists $sql_map->{$approved_option}
+        ? $sql_map->{$approved_option}
+        : '';
+
+    my $sql = qq{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id ${approved_sql}) AS comment_count };
 
     return $self->search(undef, {
         '+select' => [ \$sql ],
@@ -153,7 +163,7 @@ Usage:
 Indicates that we want to fetch the metadata (basically 
 everything except the markdown and HTML), and does a join
 to the users table to get the author name, which you can
-access via via, e.g.:
+access via, e.g.:
 
     $song->get_column('author_name');
 
@@ -179,11 +189,15 @@ These fields can be big so are not selected by default.
 
 Gets the count of comments for this song:
 
-    $song_rs->select_comment_count;
+    $song_rs->select_comment_count($option);
 
 The result is available as:
 
     $result->get_column('comment_count');
+
+If $option is 'approved', only approved comments are
+counted. If it is 'unapproved', then only unapproved
+comments are counted. Otherwise, all are counted.
 
 =item where_has_tag
 

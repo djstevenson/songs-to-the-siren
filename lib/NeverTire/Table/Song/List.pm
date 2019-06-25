@@ -13,6 +13,7 @@ sub _build_resultset {
     return $self->c->schema
         ->resultset('Song')
         ->select_metadata
+        ->select_comment_count('unapproved')
         ->by_pubdate;
 }
 
@@ -24,15 +25,22 @@ has_column id => (
 
 has_column title => (
     sortable     => 1,
+    link         => sub {
+        my ($col, $table, $row) = @_;
+
+        return $table->c->url_for('view_song', song_id => $row->id);
+    },
 );
 
-has_column artist => (
+has_column comment_count => (
+    header       => 'Unapproved',
     sortable     => 1,
-);
+    sort_by      => 'comment_count',
+    content => sub {
+        my ($col, $table, $row) = @_;
 
-has_column created_at => (
-    header       => 'Created',
-    sortable     => 1,
+        return $row->get_column('comment_count');
+    },
 );
 
 # TODO css to highlight whether it's in the future/past?
