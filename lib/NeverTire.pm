@@ -24,6 +24,7 @@ sub startup {
     $app->secrets($app->config->{secrets});
 
     $app->plugin('NeverTire::Helper::DB');
+    $app->plugin('NeverTire::Helper::Auth');
     $app->plugin('NeverTire::Helper::Form');
     $app->plugin('NeverTire::Helper::Table');
     $app->plugin('NeverTire::Helper::Render');
@@ -31,22 +32,22 @@ sub startup {
 
     $app->_migrate_db;
 
-    my $routes = $app->_base_routes;
+    my $route = $app->_base_route;
 
     my $user_controller = NeverTire::Controller::User->new;
-	$user_controller->add_routes($routes);
+	$user_controller->add_routes($route);
 
     my $home_controller = NeverTire::Controller::Home->new;
-    $home_controller->add_routes($routes);
+    $home_controller->add_routes($route);
 
     my $song_controller = NeverTire::Controller::Song->new;
-    $song_controller->add_routes($routes);
+    $song_controller->add_routes($route);
 
     my $admin_controller = NeverTire::Controller::Admin->new;
-    $admin_controller->add_routes($routes);
+    $admin_controller->add_routes($route);
 
     my $markdown_controller = NeverTire::Controller::Markdown->new;
-    $markdown_controller->add_routes($routes);
+    $markdown_controller->add_routes($route);
 }
 
 use Mojo::Pg;
@@ -54,12 +55,14 @@ use Mojo::Pg::Migrations;
 use Mojo::Home;
 
 # TODO docs
-sub _base_routes {
+sub _base_route {
     my $app = shift;
 
     # Base of all routes. Works out if you're logged in,
-    # but accepts either yes or no as valid
-    my $route_all = $app->routes->under('/' => sub {
+    # but doesn't fail if you're not. Stores the logged-in
+    # user (if exists) in $c->stash->{auth_user}.
+
+    return $app->routes->under('/' => sub {
     	my $c = shift;
 
         # Logged in?
@@ -70,44 +73,12 @@ sub _base_routes {
             }
         }
 
-        # Not logged in so empty user from stash
-        # but allow to continue. If we NEED to be
-        # logged in, use $route_login or $route_admin
+        # Not logged in. Delete any lingering user data
+        # in session.
         delete $c->session->{user};
 
         return 1;
     });
-
-    # Route for "must be logged in"
-    # So, there must be a defined auth_user in the stash
-    my $route_login = $route_all->under('/' => sub {
-    	my $c = shift;
-
-        return 1 if exists $c->stash->{auth_user};
-
-        # TODO maybe redirect to login?
-        $c->reply->not_found;
-        return undef;
-    });
-
-    # Route for "must be logged in" as admin
-    # TODO Do this further down the path, e.g. in /admin
-    my $route_admin = $route_login->under('/' => sub {
-    	my $c = shift;
-
-        if ( exists $c->stash->{auth_user} ) {
-            return 1 if $c->stash->{auth_user}->admin;
-        }
-        
-        $c->reply->not_found;
-        return undef;
-    });
-
-    return {
-        all   => $route_all,
-        login => $route_login,
-        admin => $route_admin,
-    }
 }
 
 sub _migrate_db {
