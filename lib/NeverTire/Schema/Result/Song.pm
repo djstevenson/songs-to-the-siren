@@ -90,10 +90,13 @@ sub delete_tag {
 # TODO DOCUMENT THIS
 # Returns reference to ordered array of
 # NeverTire::Model::Comment::Node
+#
+# Unmoderated comments are included IFF $admin is
+# true.
 sub get_comment_forest {
-    my $self = shift;
+    my ($self, $admin) = @_;
 
-    return make_forest($self);
+    return make_forest($self, $admin);
 }
 
 sub add_comment {

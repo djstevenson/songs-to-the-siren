@@ -46,9 +46,14 @@ sub view {
     my $c = shift;
 
     my $song = $c->stash->{song};
+    my $admin;
+    if ( my $user = $c->stash->{auth_user} ) {
+        $admin = $user->admin;
+    }
+
     $c->stash(
         links  => $song->get_links,
-        forest => $song->get_comment_forest,
+        forest => $song->get_comment_forest($admin),
     );
 }
 
