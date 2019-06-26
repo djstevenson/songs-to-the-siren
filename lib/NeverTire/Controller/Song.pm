@@ -2,6 +2,8 @@ package NeverTire::Controller::Song;
 use Mojo::Base 'Mojolicious::Controller';
 
 use NeverTire::Controller::Song::Comment;
+use NeverTire::Controller::Song::Link;
+use NeverTire::Controller::Song::Tag;
 
 sub add_routes {
     my ($c, $r) = @_;
@@ -21,8 +23,9 @@ sub add_routes {
     # Method=DELETE?
     $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
 
-    # my $comment_controller = NeverTire::Controller::Song::Comment->new;
-    # $comment_controller->add_routes($routes);
+    NeverTire::Controller::Song::Comment ->new ->add_routes($song_action);
+    NeverTire::Controller::Song::Link    ->new ->add_routes($song_action);
+    NeverTire::Controller::Song::Tag     ->new ->add_routes($song_action);
 }
 
 sub create {

@@ -1,30 +1,27 @@
-package NeverTire::Controller::Admin::Song::Link;
+package NeverTire::Controller::Song::Link;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
-    my ($c, $routes) = @_;
+    my ($c, $song_action) = @_;
 
-    my $ul = $routes->{admin_song_link} ->any('/link')->to(controller => 'Admin::Song::Link');
+    my $u = $song_action->any('/link')->to(controller => 'Song::Link');
 
-    $ul->route('/list')->name('admin_list_song_links')->via('GET')->to(action => 'list');
+    # Admin routes that do not capture a link id
+    $u->route('/list')->name('list_song_links')->via('GET')->to(action => 'list');
+    $u->route('/create')->name('create_song_link')->via('GET', 'POST')->to(action => 'create');
 
-    # These are admin functions, need to be logged in for all of them.
-    $ul->route('/create')->name('admin_create_song_link')->via('GET', 'POST')->to(action => 'create');
-
-    # # Admin routes that capture a tag id
-    my $link_action = $ul->under('/:link_id')->to(action => 'capture');
-
-    # TODO GET/DELETE rather than GET/POST?
-    $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action => 'edit');
-    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete');
-
+    # Admin routes that capture a link id
+    my $link_action = $u->under('/:link_id')->to(action => 'capture');
+    $link_action->route('/edit')->name('edit_song_link')->via('GET', 'POST')->to(action => 'edit');
+    $link_action->route('/delete')->name('delete_song_link')->via('GET', 'POST')->to(action => 'delete'); # DELETE method?
 }
 
 
 sub list {
     my $c = shift;
 
-    # TODO Pagination
+    $c->assert_admin;
+
     my $song = $c->stash->{song};
     my $table = $c->table('Song::Link::List', song => $song);
 
@@ -34,6 +31,8 @@ sub list {
 sub create {
     my $c = shift;
 
+    $c->assert_admin;
+    
     my $song = $c->stash->{song};
     my $form = $c->form('Link::Create', song => $song);
     
@@ -41,7 +40,7 @@ sub create {
         $c->flash(msg => 'Link added');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('admin_list_song_links', song_id => $song->id);
+        $c->redirect_to('list_song_links', song_id => $song->id);
     }
     else {
         $c->stash(form => $form);
@@ -66,6 +65,8 @@ sub capture {
 sub edit {
     my $c = shift;
 
+    $c->assert_admin;
+    
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Edit', song => $song, link => $link);
@@ -74,7 +75,7 @@ sub edit {
         $c->flash(msg => 'Link edited');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('admin_list_song_links', song_id => $song->id);
+        $c->redirect_to('list_song_links', song_id => $song->id);
     }
     else {
             $c->stash(form => $form);
@@ -84,13 +85,15 @@ sub edit {
 sub delete {
     my $c = shift;
 
+    $c->assert_admin;
+    
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Delete', song => $song, link => $link);
 
     if (my $action = $form->process) {
         $c->flash(msg => $action);
-        $c->redirect_to('admin_list_song_links', song_id => $song->id);
+        $c->redirect_to('list_song_links', song_id => $song->id);
     }
     else {
         $c->stash(form => $form);

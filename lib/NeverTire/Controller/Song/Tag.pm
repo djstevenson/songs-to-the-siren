@@ -1,19 +1,18 @@
-package NeverTire::Controller::Admin::Song::Tag;
+package NeverTire::Controller::Song::Tag;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
-    my ($c, $routes) = @_;
+    my ($c, $song_action) = @_;
 
-    my $ul = $routes->{admin_song_tag} ->any('/tag')->to(controller => 'Admin::Song::Tag');
+    my $u = $song_action->any('/tag')->to(controller => 'Song::Tag');
 
-    # These are admin functions, need to be logged in for all of them.
-    $ul->route('/edit')->name('admin_edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
+    # Actions that do not capture a tag_id
+    $u->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
 
-    # Admin routes that capture a tag id
-    my $tag_action = $ul->under('/:tag_id')->to(action => 'capture');
+    # Actions that DO capture a tag_id
+    my $tag_action = $u->under('/:tag_id')->to(action => 'capture');
 
-    # Remove a tag from a song. The tag isn't deleted from the DB
-    # but is disassociated with this song.
+    # Remove a tag from a song
     $tag_action->route->name('delete_song_tag')->via('DELETE')->to(action => 'delete');
 
 }
@@ -21,6 +20,8 @@ sub add_routes {
 
 sub edit {
     my $c = shift;
+
+    $c->assert_admin;
 
     my $song = $c->stash->{song};
     my $form = $c->form('Tag::Create', song => $song);
@@ -33,7 +34,7 @@ sub edit {
         $c->flash(msg => 'Tag added');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('admin_edit_song_tags', song_id => $song->id);
+        $c->redirect_to('edit_song_tags', song_id => $song->id);
     }
 
 }
@@ -54,6 +55,8 @@ sub capture {
 
 sub delete {
     my $c = shift;
+
+    $c->assert_admin;
 
     my $tag = $c->stash->{tag};
     $c->stash->{song}->delete_tag($tag);
