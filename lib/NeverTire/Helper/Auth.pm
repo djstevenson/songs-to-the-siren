@@ -19,8 +19,8 @@ sub register {
     $app->helper(assert_user => sub {
         my $c = shift;
 
-        my $user = $c->auth_user;
-        return $user or die;
+        my $user = $c->auth_user or die;
+        return $user;
     });
 
     $app->helper(assert_admin => sub {
