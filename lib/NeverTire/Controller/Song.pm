@@ -31,7 +31,10 @@ sub add_routes {
 sub create {
     my $c = shift;
 
-    $c->assert_admin;
+
+    # TODO This repeats in several controllers, can we "DRY" it?
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $form = $c->form('Song::Create');
     if ($form->process) {
@@ -47,7 +50,10 @@ sub create {
 sub list {
     my $c = shift;
 
-    $c->assert_admin;
+
+    # TODO This repeats in several controllers, can we "DRY" it?
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $table = $c->table('Song::List');
 
@@ -78,10 +84,7 @@ sub view {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    my $admin;
-    if ( my $user = $c->stash->{auth_user} ) {
-        $admin = $user->admin;
-    }
+    my $admin = exists $c->stash->{admin_user};
 
     $c->stash(
         links  => $song->get_links,
@@ -92,6 +95,9 @@ sub view {
 sub publish {
     my $c = shift;
 
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
+
     $c->stash->{song}->show;
 
     $c->redirect_to('list_songs');
@@ -100,7 +106,9 @@ sub publish {
 sub unpublish {
     my $c = shift;
 
-    $c->assert_admin;
+    # TODO This repeats in several controllers, can we "DRY" it?
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     $c->stash->{song}->hide;
 
@@ -110,7 +118,8 @@ sub unpublish {
 sub edit {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $song = $c->stash->{song};
     my $form = $c->form('Song::Edit', song => $song);
@@ -128,7 +137,10 @@ sub edit {
 sub delete {
     my $c = shift;
 
-    $c->assert_admin;
+
+    # TODO This repeats in several controllers, can we "DRY" it?
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $form = $c->form('Song::Delete', song => $c->stash->{song});
     if (my $action = $form->process) {

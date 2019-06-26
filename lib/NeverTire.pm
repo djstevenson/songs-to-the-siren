@@ -23,7 +23,6 @@ sub startup {
     $app->secrets($app->config->{secrets});
 
     $app->plugin('NeverTire::Helper::DB');
-    $app->plugin('NeverTire::Helper::Auth');
     $app->plugin('NeverTire::Helper::Form');
     $app->plugin('NeverTire::Helper::Table');
     $app->plugin('NeverTire::Helper::Render');
@@ -56,7 +55,8 @@ sub _base_route {
 
     # Base of all routes. Works out if you're logged in,
     # but doesn't fail if you're not. Stores the logged-in
-    # user (if exists) in $c->stash->{auth_user}.
+    # user (if exists) in $c->stash->{auth_user}. If that user
+    # is admin, it's also stored in $c->stash->{admin_user}
 
     return $app->routes->under('/' => sub {
     	my $c = shift;
@@ -65,6 +65,7 @@ sub _base_route {
         if (my $user_id = $c->session->{user}) {
             if (my $user = $c->schema->resultset('User')->find($user_id)) {
                 $c->stash->{auth_user} = $user;
+                $c->stash->{admin_user} = $user if $user->admin;
                 return 1;
             }
         }

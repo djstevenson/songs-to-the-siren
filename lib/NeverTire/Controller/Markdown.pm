@@ -12,8 +12,11 @@ sub add_routes {
 sub render_markdown {
     my $c = shift;
 
-    $c->assert_user;
-     
+    # TODO This repeats in several controllers, can we "DRY" it?
+    # TODO e.g. an 'under' stage in the route?
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{auth_user};
+
     my $markdown = $c->param('markdown');
     my $html = markdown($markdown);
     $c->render(text => $html);

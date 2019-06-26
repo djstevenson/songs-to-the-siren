@@ -20,7 +20,8 @@ sub add_routes {
 sub list {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $song = $c->stash->{song};
     my $table = $c->table('Song::Link::List', song => $song);
@@ -31,7 +32,8 @@ sub list {
 sub create {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
     
     my $song = $c->stash->{song};
     my $form = $c->form('Link::Create', song => $song);
@@ -65,7 +67,8 @@ sub capture {
 sub edit {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
     
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
@@ -85,7 +88,8 @@ sub edit {
 sub delete {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
     
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
