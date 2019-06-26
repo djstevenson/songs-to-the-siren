@@ -4,17 +4,16 @@ use Mojo::Base 'Mojolicious::Controller';
 use Text::Markdown qw/ markdown /;
 
 sub add_routes {
-    my ($c, $routes) = @_;
+    my ($c, $r) = @_;
 
-    my $ul = $routes->{admin} ->any('/markdown')->to(controller => 'markdown');
-
-    # These are admin functions, need to be logged in for all of them.
-    $ul->route('/render')->name('render_markdown')->via('POST')->to(action => 'render_markdown');
+    $r->route('/markdown')->via('POST')->to('markdown#render');
 }
 
-sub render_markdown {
+sub render {
     my $c = shift;
 
+    $c->assert_user;
+    
     my $markdown = $c->param('markdown');
     my $html = markdown($markdown);
     $c->render(text => $html);

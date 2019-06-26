@@ -43,8 +43,8 @@ sub startup {
     my $song_controller = NeverTire::Controller::Song->new;
     $song_controller->add_routes($route);
 
-    my $admin_controller = NeverTire::Controller::Admin->new;
-    $admin_controller->add_routes($route);
+    # my $admin_controller = NeverTire::Controller::Admin->new;
+    # $admin_controller->add_routes($route);
 
     my $markdown_controller = NeverTire::Controller::Markdown->new;
     $markdown_controller->add_routes($route);
