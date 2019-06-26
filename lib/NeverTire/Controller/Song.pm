@@ -9,32 +9,30 @@ sub add_routes {
     my ($c, $r) = @_;
 
     my $u = $r->any('/song')->to(controller => 'song');
+    my $a = $u->require_admin;
 
     # Routes that do not capture a song id
-    $u->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
-    $u->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
+    $a->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
+    $a->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
 
     # Routes that capture a song id
-    my $song_action = $u->under('/:song_id')->to(action => 'capture');
-    $song_action->route('/view')->name('view_song')->via('GET')->to(action => 'view');
-    $song_action->route('/publish')->name('publish_song')->via('GET')->to(action => 'publish');
-    $song_action->route('/unpublish')->name('unpublish_song')->via('GET')->to(action => 'unpublish');
-    $song_action->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
-    # Method=DELETE?
-    $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
+    my $song_action_u = $u->under('/:song_id')->to(action => 'capture');
+    my $song_action_a = $a->under('/:song_id')->to(action => 'capture');
 
-    NeverTire::Controller::Song::Comment ->new ->add_routes($song_action);
-    NeverTire::Controller::Song::Link    ->new ->add_routes($song_action);
-    NeverTire::Controller::Song::Tag     ->new ->add_routes($song_action);
+    $song_action_u->route('/view')->name('view_song')->via('GET')->to(action => 'view');
+    $song_action_a->route('/publish')->name('publish_song')->via('GET')->to(action => 'publish');
+    $song_action_a->route('/unpublish')->name('unpublish_song')->via('GET')->to(action => 'unpublish');
+    $song_action_a->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
+    # Method=DELETE?
+    $song_action_a->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
+
+    NeverTire::Controller::Song::Comment ->new ->add_routes($song_action_u);
+    NeverTire::Controller::Song::Link    ->new ->add_routes($song_action_u);
+    NeverTire::Controller::Song::Tag     ->new ->add_routes($song_action_u);
 }
 
 sub create {
     my $c = shift;
-
-
-    # TODO This repeats in several controllers, can we "DRY" it?
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $form = $c->form('Song::Create');
     if ($form->process) {
@@ -49,11 +47,6 @@ sub create {
 
 sub list {
     my $c = shift;
-
-
-    # TODO This repeats in several controllers, can we "DRY" it?
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $table = $c->table('Song::List');
 
@@ -95,9 +88,6 @@ sub view {
 sub publish {
     my $c = shift;
 
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-
     $c->stash->{song}->show;
 
     $c->redirect_to('list_songs');
@@ -106,10 +96,6 @@ sub publish {
 sub unpublish {
     my $c = shift;
 
-    # TODO This repeats in several controllers, can we "DRY" it?
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-
     $c->stash->{song}->hide;
 
     $c->redirect_to('list_songs');
@@ -117,9 +103,6 @@ sub unpublish {
 
 sub edit {
     my $c = shift;
-
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $song = $c->stash->{song};
     my $form = $c->form('Song::Edit', song => $song);
@@ -136,11 +119,6 @@ sub edit {
 
 sub delete {
     my $c = shift;
-
-
-    # TODO This repeats in several controllers, can we "DRY" it?
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $form = $c->form('Song::Delete', song => $c->stash->{song});
     if (my $action = $form->process) {

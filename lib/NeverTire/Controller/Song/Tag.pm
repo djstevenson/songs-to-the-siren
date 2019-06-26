@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->any('/tag')->to(controller => 'Song::Tag');
+    my $u = $song_action->require_admin->any('/tag')->to(controller => 'Song::Tag');
 
     # Actions that do not capture a tag_id
     $u->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
@@ -20,9 +20,6 @@ sub add_routes {
 
 sub edit {
     my $c = shift;
-
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $song = $c->stash->{song};
     my $form = $c->form('Tag::Create', song => $song);
@@ -56,9 +53,6 @@ sub capture {
 
 sub delete {
     my $c = shift;
-
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
 
     my $tag = $c->stash->{tag};
     $c->stash->{song}->delete_tag($tag);

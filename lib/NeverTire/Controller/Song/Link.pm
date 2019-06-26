@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->any('/link')->to(controller => 'Song::Link');
+    my $u = $song_action->require_admin->any('/link')->to(controller => 'Song::Link');
 
     # Admin routes that do not capture a link id
     $u->route('/list')->name('list_song_links')->via('GET')->to(action => 'list');
@@ -20,9 +20,6 @@ sub add_routes {
 sub list {
     my $c = shift;
 
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-
     my $song = $c->stash->{song};
     my $table = $c->table('Song::Link::List', song => $song);
 
@@ -32,9 +29,6 @@ sub list {
 sub create {
     my $c = shift;
 
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-    
     my $song = $c->stash->{song};
     my $form = $c->form('Link::Create', song => $song);
     
@@ -67,9 +61,6 @@ sub capture {
 sub edit {
     my $c = shift;
 
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-    
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Edit', song => $song, link => $link);
@@ -88,9 +79,6 @@ sub edit {
 sub delete {
     my $c = shift;
 
-    return $c->render(status => 403, text => 'Nah')
-        unless exists $c->stash->{admin_user};
-    
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Delete', song => $song, link => $link);
