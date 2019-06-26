@@ -21,7 +21,8 @@ sub add_routes {
 sub edit {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $song = $c->stash->{song};
     my $form = $c->form('Tag::Create', song => $song);
@@ -56,7 +57,8 @@ sub capture {
 sub delete {
     my $c = shift;
 
-    $c->assert_admin;
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{admin_user};
 
     my $tag = $c->stash->{tag};
     $c->stash->{song}->delete_tag($tag);

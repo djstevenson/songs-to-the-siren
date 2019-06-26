@@ -12,7 +12,11 @@ sub add_routes {
 sub create {
     my $c = shift;
 
-    $c->assert_user;
+    # TODO This repeats in several controllers, can we "DRY" it?
+    # TODO e.g. an 'under' stage in the route?
+    # TODO Redirect to a login page
+    return $c->render(status => 403, text => 'Nah')
+        unless exists $c->stash->{auth_user};
 
     my $song = $c->stash->{song};
     my $form = $c->form('Song::Comment::Create', song => $song);
