@@ -47,7 +47,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_edit_song_link',
+        my $url = $table->c->url_for('edit_song_link',
             song_id => $table->song->id,
             link_id => $row->id,
         );
@@ -61,7 +61,7 @@ has_column delete => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_delete_song_link',
+        my $url = $table->c->url_for('delete_song_link',
             song_id => $table->song->id,
             link_id => $row->id,
         );

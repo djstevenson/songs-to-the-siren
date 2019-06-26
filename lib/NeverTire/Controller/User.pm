@@ -2,11 +2,10 @@ package NeverTire::Controller::User;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
-    my ($c, $routes) = @_;
+    my ($c, $r) = @_;
 
-    my $u  = $routes->{all} ->any('/user')->to(controller => 'user');
+    my $u = $r->any('/user')->to(controller => 'user');
 
-    # Don't need to be logged-in for these:
     $u->route('/register')->name('register')->via('GET', 'POST')->to(action => 'register');
     $u->route('/registered')->name('registered')->via('GET')->to(action => 'registered');
     $u->route('/login')->name('login')->via('GET', 'POST')->to(action => 'login');
@@ -21,8 +20,6 @@ sub add_routes {
     $u->route('/forgot_name')->name('forgot_name')->via('GET', 'POST')->to(action => 'forgot_name');
     $u->route('/forgot_name/reminder_sent')->name('name_reminder_sent')->via('GET')->to(action => 'name_reminder_sent');
 
-    # Actions that require a user_id to act on that don't need to be logged-in
-    # e.g. registration confirmation/declination functions
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
     $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')->to(action => 'confirm_registration');
     $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')->to(action => 'decline_registration');

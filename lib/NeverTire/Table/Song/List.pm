@@ -53,7 +53,7 @@ has_column tags => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_edit_song_tags', song_id => $row->id);
+        my $url = $table->c->url_for('edit_song_tags', song_id => $row->id);
         return qq{
             <a href="${url}">Tags</a>
         };
@@ -65,7 +65,7 @@ has_column links => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_list_song_links', song_id => $row->id);
+        my $url = $table->c->url_for('list_song_links', song_id => $row->id);
         return qq{
             <a href="${url}">Links</a>
         };
@@ -77,7 +77,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_edit_song', song_id => $row->id);
+        my $url = $table->c->url_for('edit_song', song_id => $row->id);
         return qq{
             <a href="${url}">Edit</a>
         };
@@ -92,13 +92,13 @@ has_column publish => (
         my $pub = $row->published_at;
         my $now = DateTime->now;
         if ( defined($pub) && DateTime->compare($pub, $now) <= 0 ) {
-            my $url = $table->c->url_for('admin_hide_song', song_id => $row->id);
+            my $url = $table->c->url_for('unpublish_song', song_id => $row->id);
             return qq{
                 <a href="${url}">Hide</a>
             };
         }
         else {
-            my $url = $table->c->url_for('admin_show_song', song_id => $row->id);
+            my $url = $table->c->url_for('publish_song', song_id => $row->id);
             return qq{
                 <a href="${url}">Show</a>
             };
@@ -111,7 +111,7 @@ has_column delete => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_delete_song', song_id => $row->id);
+        my $url = $table->c->url_for('delete_song', song_id => $row->id);
         return qq{
             <a href="${url}">Delete</a>
         };
