@@ -8,7 +8,6 @@ use NeverTire::Schema;
 use NeverTire::Controller::Home;
 use NeverTire::Controller::User;
 use NeverTire::Controller::Song;
-use NeverTire::Controller::Admin;
 use NeverTire::Controller::Markdown;
 
 # This method will run once at server start
@@ -42,9 +41,6 @@ sub startup {
 
     my $song_controller = NeverTire::Controller::Song->new;
     $song_controller->add_routes($route);
-
-    # my $admin_controller = NeverTire::Controller::Admin->new;
-    # $admin_controller->add_routes($route);
 
     my $markdown_controller = NeverTire::Controller::Markdown->new;
     $markdown_controller->add_routes($route);

@@ -1,8 +1,6 @@
 package NeverTire::Controller::Song;
 use Mojo::Base 'Mojolicious::Controller';
 
-# Controller for NON-ADMIN song things.
-
 use NeverTire::Controller::Song::Comment;
 
 sub add_routes {
@@ -10,12 +8,47 @@ sub add_routes {
 
     my $u = $r->any('/song')->to(controller => 'song');
 
+    # Routes that do not capture a song id
+    $u->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
+    $u->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
+
     # Routes that capture a song id
     my $song_action = $u->under('/:song_id')->to(action => 'capture');
     $song_action->route('/view')->name('view_song')->via('GET')->to(action => 'view');
+    $song_action->route('/publish')->name('publish_song')->via('GET')->to(action => 'publish');
+    $song_action->route('/unpublish')->name('unpublish_song')->via('GET')->to(action => 'unpublish');
+    $song_action->route('/edit')->name('edit_song')->via('GET', 'POST')->to(action => 'edit');
+    # Method=DELETE?
+    $song_action->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
 
     # my $comment_controller = NeverTire::Controller::Song::Comment->new;
     # $comment_controller->add_routes($routes);
+}
+
+sub create {
+    my $c = shift;
+
+    $c->assert_admin;
+
+    my $form = $c->form('Song::Create');
+    if ($form->process) {
+        $c->flash(msg => 'Song created');
+
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+sub list {
+    my $c = shift;
+
+    $c->assert_admin;
+
+    my $table = $c->table('Song::List');
+
+    $c->stash(table => $table);
 }
 
 sub capture {
@@ -52,5 +85,57 @@ sub view {
         forest => $song->get_comment_forest($admin),
     );
 }
+
+sub publish {
+    my $c = shift;
+
+    $c->stash->{song}->show;
+
+    $c->redirect_to('list_songs');
+}
+
+sub unpublish {
+    my $c = shift;
+
+    $c->assert_admin;
+
+    $c->stash->{song}->hide;
+
+    $c->redirect_to('list_songs');
+}
+
+sub edit {
+    my $c = shift;
+
+    $c->assert_admin;
+
+    my $song = $c->stash->{song};
+    my $form = $c->form('Song::Edit', song => $song);
+    
+    if ($form->process) {
+        $c->flash(msg => 'Song updated');
+
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+sub delete {
+    my $c = shift;
+
+    $c->assert_admin;
+
+    my $form = $c->form('Song::Delete', song => $c->stash->{song});
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+        $c->redirect_to('list_songs');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
 
 1;
