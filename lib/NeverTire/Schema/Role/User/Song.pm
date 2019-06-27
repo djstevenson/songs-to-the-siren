@@ -47,16 +47,24 @@ sub admin_edit_song {
     return $song;
 }
 
-# Admin only
 sub approve_comment {
     my ($self, $comment) = @_;
 
     croak $NOT_ADMIN unless $self->admin;
 
-# TODO Add 'approved_by'
+    # TODO Add 'approved_by'
     $comment->update({ approved_at  => DateTime->now });
 
     return $comment;
+}
+
+sub reject_comment {
+    my ($self, $comment) = @_;
+
+    croak $NOT_ADMIN unless $self->admin;
+
+    # TODO Maybe save rejected comments somewhere.
+    $comment->delete;
 }
 
 no Moose::Role;

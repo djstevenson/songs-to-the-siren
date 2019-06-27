@@ -11,8 +11,8 @@ sub add_routes {
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
     $comment_action->route('/reply')->name('new_song_reply')->via('GET', 'POST')->to(action => 'reply');
-
-
+    $comment_action->route('/approve')->name('approve_comment')->via('GET', 'POST')->to(action => 'approve');
+    $comment_action->route('/reject')->name('reject_comment')->via('GET', 'POST')->to(action => 'reject');
 }
 
 sub create {
@@ -71,4 +71,42 @@ sub reply {
         $c->stash(form => $form);
     }
 }
+
+sub approve {
+    my $c = shift;
+
+    my $comment = $c->stash->{comment};
+    my $song    = $comment->song;
+
+    my $form = $c->form( 'Song::Comment::Approve', comment => $comment );
+    
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+
+        $c->redirect_to('view_song', song_id => $song->id);
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+sub reject {
+    my $c = shift;
+
+    my $comment = $c->stash->{comment};
+    my $song    = $comment->song;
+
+    my $form = $c->form( 'Song::Comment::Reject', comment => $comment );
+    
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+
+        $c->redirect_to('view_song', song_id => $song->id);
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+
+
 1;

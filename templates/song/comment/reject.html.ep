@@ -1,0 +1,6 @@
+% layout 'default';
+% title 'Reject comment for ' . $song->title;
+
+<h2>Reject comment for <%= $song->title %></h2>
+
+<%== $form->render %>
