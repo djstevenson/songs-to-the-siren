@@ -15,7 +15,7 @@ sub new_song_comment {
 
     my $parent_id;
     if ($parent) {
-        die unless $parent->approved_at;
+        die 'Cannot reply to unapproved article' unless $parent->approved_at;
         $parent_id = $parent->id;
     }
 
