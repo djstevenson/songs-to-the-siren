@@ -31,6 +31,12 @@ has song => (
     required    => 1,
 );
 
+has parent_comment => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Comment',
+    predicate   => 'has_parent_comment',
+);
+
 override posted => sub {
 	my $self = shift;
 
@@ -38,7 +44,9 @@ override posted => sub {
 
     # Whitelist what we extract from the submitted form
 	my $fields = $self->form_hash(qw/ comment_markdown /);
-	return $user->new_song_comment($self->song, $fields);
+
+    my $parent = $self->has_parent_comment ? $self->parent_comment : undef;
+	return $user->new_song_comment($self->song, $parent, $fields);
 };
 
 __PACKAGE__->meta->make_immutable;
