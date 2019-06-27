@@ -59,9 +59,10 @@ sub _default_renderer {
     $s .= qq{</h4><p class="comment-body">${html}</p>};
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
-            $s .= '<p><a href="">Reply to this comment</a></p>';
+            my $url = $app->url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id);
+            $s .= qq{<p><a href="${url}">Reply to this comment</a></p>};
         } elsif ( $auth_user->admin ) {
-            $s .= '<p><a href="">Approve</a> --- <a href="">Reject</a></p>';
+            $s .= q{<p><a href="">Approve</a> --- <a href="">Reject</a></p>};
         }
     }
 

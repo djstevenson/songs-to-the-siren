@@ -101,15 +101,14 @@ sub run {
 		# 1 (root node 0)
 
 		my $comment4 = $self->_create_comment($user,  $song, $second_root_comment, 'Markdown 4');
-		my $comment5 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 5');
-		my $comment6 = $self->_create_comment($user,  $song, $comment4,            'Markdown 6');
-		my $comment7 = $self->_create_comment($user,  $song, $comment6,            'Markdown 7');
-		my $comment8 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 8');
-
 		$admin->approve_comment($comment4);
+		my $comment5 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 5');
 		$admin->approve_comment($comment5);
+		my $comment6 = $self->_create_comment($user,  $song, $comment4,            'Markdown 6');
 		$admin->approve_comment($comment6);
+		my $comment7 = $self->_create_comment($user,  $song, $comment6,            'Markdown 7');
 		$admin->approve_comment($comment7);
+		my $comment8 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 8');
 		$admin->approve_comment($comment8);
 
 		my $forest = $song->get_comment_forest;
@@ -201,6 +200,15 @@ EXP1
 		is ($t, '<ul><li>1</li></ul>', 'Basic "id" render shows right structure, node 1');
 
 	};
+
+	subtest 'Cannot reply to unapproved comment' => sub {
+		my $comment9 = $user->new_song_comment($song, undef, {comment_markdown => 'Markdown 9'});
+		throws_ok {
+			my $comment10 = $user->new_song_comment($song, $comment9, {comment_markdown => 'Markdown 10'});
+
+		} qr/Cannot reply to unapproved article/, 'Cannot reply to unapproved article';
+	};
+
     done_testing;
 }
 
@@ -211,18 +219,17 @@ sub _create_comment {
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->new_song_reply($parent, {comment_markdown => $markdown});
-		is($comment->parent_id, $parent->id, "Comment has correct parent");	
+		$comment = $user->new_song_comment($song, $parent, {comment_markdown => $markdown});
+		is($comment->parent_id, $parent->id, "Comment has correct parent");
 	}
 	else {
-		$comment = $user->new_song_comment($song, {comment_markdown => $markdown});
+		$comment = $user->new_song_comment($song, undef, {comment_markdown => $markdown});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 
 	# Assumes the simplest of markdown, string with no markdown in it..
 	my $expected_markdown = "<p>$markdown</p>\n";
 	is($comment->comment_html, $expected_markdown, "Comment has html");
-	ok(!$comment->approved_at, "Comment is not approved");
 
 	return $comment;
 }
