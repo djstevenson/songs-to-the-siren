@@ -85,17 +85,20 @@ h4.release {
 }
 
 .comments > ul > li {
-    border-bottom: 2px solid green;
-    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #a3b59f;
 }
 
 .comments ul {
     list-style: none;
+    padding-bottom: 1.5rem;
 }
 
 .comments li {
-    border-left: 1px solid #cccccc;
-    padding-left: 4px;
+    margin-top: 3rem;
+    border-left: 1px solid #a3b59f;
+    border-bottom: 1px solid #a3b59f;
+    padding-left: 0.5rem;
 }
 
 .comment-header {
