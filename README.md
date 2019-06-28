@@ -4,9 +4,9 @@ The code behing the "Songs I'll Never Tire Of" blog
 INIT test DB
 ============
 
-Creates a test database `never_tire_test` - deleting any existing content.
+Creates a dev database `never_tire_dev` - deleting any existing content.
 
-`sh tools/inittestdb`
+`sh tools/initdb.dev.sh`
 
 This drops the DB and re-creates it empty. The schema will be created when the app starts up.
 
@@ -44,7 +44,7 @@ TODO Add details on this
 
 ### Selenium-based functional tests
 
-TODO Add details on this
+TODO Add details on this. When they exist
 
 
 FAQ
