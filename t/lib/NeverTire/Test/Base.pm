@@ -6,12 +6,6 @@ use NeverTire::Test::Database;
 
 use Test::Mojo;
 
-has skip_test_db => (
-    is          => 'ro',
-    isa         => 'Bool',
-    default     => 0,
-);
-
 has test_app => (
     is          => 'ro',
     isa         => 'Test::Mojo',
@@ -20,10 +14,7 @@ has test_app => (
     default     => sub {
         my $self = shift;
 
-        return Test::Mojo->new('NeverTire')
-            if $self->skip_test_db;
-
-        my $opts = {db_name => $self->database->db_name};
+        my $opts = { db_name => $self->database->db_name };
         return Test::Mojo->new(NeverTire => $opts)
     },
 );
