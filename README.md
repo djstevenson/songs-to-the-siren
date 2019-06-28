@@ -25,6 +25,19 @@ Optional overrides via the environment:
  * `TEST_BCRYPT_COST=4` (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
 
 
+Full dev
+========
+
+The full comment for starting up a dev server with a new DB, that has a small amount of test data created already, is:
+
+```
+export MOJO_MODE=development ; \
+sh tools/initdb.$MOJO_MODE.sh ; \
+carton exec -- script/never-tire newadmin --name=? --password=? --email=? ; \
+psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
+carton exec -- morbo script/never-tire
+```
+
 To list routes
 ==============
 
