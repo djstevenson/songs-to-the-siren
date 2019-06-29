@@ -65,14 +65,14 @@ sub update_password {
 sub send_name_reminder {
     my ($self, $args) = @_;
 
-    $self->send_email('name_reminder', {user => $self->id, name => $self->name});
+    $self->send_email(name_reminder => {user => $self->id, name => $self->name});
 }
 
 sub send_password_reset {
     my ($self, $args) = @_;
 
     my $k = $self->generate_new_user_key('password_reset', DateTime::Duration->new(hours => 1));
-    $self->send_email('password_reset', {user => $self->id, key => $k});
+    $self->send_email(password_reset => {user => $self->id, key => $k});
 }
 
 sub generate_new_user_key {
@@ -97,11 +97,11 @@ sub generate_new_user_key {
 sub send_registration_email {
     my $self = shift;
 
-    my $purpose = 'registration';
+    my $purpose = ;
     my $duration = DateTime::Duration->new(hours => 1); # TODO Configurable
-    my $user_key = $self->generate_new_user_key($purpose, $duration);
+    my $user_key = $self->generate_new_user_key('registration', $duration);
 
-    $self->send_email($purpose, {
+    $self->send_email(registration => {
         user => $self->id,
         key  => $user_key,
     });
