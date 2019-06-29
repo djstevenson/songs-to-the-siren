@@ -1,14 +1,17 @@
-package NeverTire::Plugin::Mailgun;
-
+package NeverTire::Task::Mailgun;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use Mojo::Template;
 use Mojo::Home;
-
-use Carp;
+use Mojo::UserAgent;
+use Mojo::URL;
 
 # Includes ideas from Mojolicious::Plugin::Mailgun
 # https://metacpan.org/pod/Mojolicious::Plugin::Mailgun
+# 
+# and from the docs for Minion
+# https://mojolicious.org/perldoc/Minion
+
 
 has base_url => sub { Mojo::URL->new('https://api.mailgun.net/v3/'); };
 has ua       => sub { Mojo::UserAgent->new; };
@@ -18,7 +21,7 @@ has api_key  => undef;
 has from     => undef;
 
 sub register {
-    my ($self, $app, $conf) = @_;
+    my ($self, $app) = @_;
 
     # Set config from $ENV, passed conf, or from app config files
     # in that order.
@@ -28,10 +31,11 @@ sub register {
 
     $self->home->detect;
 
-    $app->helper('mailgun.send' => sub {
-        my ($c, $to, $template, $data) = @_;
+    $app->minion->add_task(mailgun => sub {
+        my ($job, $to, $template, $data) = @_;
 
-        use Data::Dumper;
+        my $app = $job->app;
+
         my $mt = Mojo::Template->new;
         my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
         my $body    = $mt->vars(1)->render_file($self->_file(body    => $template), $data);
@@ -39,13 +43,9 @@ sub register {
 
         print STDERR "SUBJECT=$subject\n";
         print STDERR "BODY=$body\n\n\n";
-        
-        # TODO Actually send it!!
-        die 'not yet able to send mails';
     });
-
-    return;
 }
+
 
 # Doc this. If $key is 'api_key', it looks in these places in order:
 #  * $ENV{NEVER_TIRE_MAILGUN_API_KEY}
