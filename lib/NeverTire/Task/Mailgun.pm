@@ -21,7 +21,7 @@ has api_key  => undef;
 has from     => undef;
 
 sub register {
-    my ($self, $app) = @_;
+    my ($self, $app, $conf) = @_;
 
     # Set config from $ENV, passed conf, or from app config files
     # in that order.
@@ -78,6 +78,7 @@ sub _file {
     );
 
 }
+
 1;
 __END__
 
