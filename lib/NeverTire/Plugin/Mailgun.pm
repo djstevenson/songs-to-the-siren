@@ -31,14 +31,17 @@ sub register {
     $app->helper('mailgun.send' => sub {
         my ($c, $to, $template, $data) = @_;
 
+        use Data::Dumper;
         my $mt = Mojo::Template->new;
-        my $subject = $mt->render_file($self->_file(subject => $template), $data);
-        my $body    = $mt->render_file($self->_file(body    => $template), $data);
+        my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
+        my $body    = $mt->vars(1)->render_file($self->_file(body    => $template), $data);
+        print STDERR "DATA=", Dumper($data);
 
-        print STDERR "SUBJECT=$subject\n\n\n";
+        print STDERR "SUBJECT=$subject\n";
         print STDERR "BODY=$body\n\n\n";
-        die 'on arse';
-        # return $r->under(@args)->to(cb => \&_require_admin);
+        
+        # TODO Actually send it!!
+        die 'not yet able to send mails';
     });
 
     return;

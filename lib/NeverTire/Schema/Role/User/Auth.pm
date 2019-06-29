@@ -110,8 +110,9 @@ sub send_registration_email {
 sub send_email {
     my ($self, $template_name, $data) = @_;
 
+    # Keeping a DB record of emails for test etc.
     my $email_rs = $self->result_source->schema->resultset('Email');
-    $email_rs->create({
+    my $email = $email_rs->create({
         email_from    => 'noreply@ytfc.com', # TODO Make configurable
         email_to      => lc($self->email),
         template_name => $template_name,
