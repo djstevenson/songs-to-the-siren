@@ -43,7 +43,7 @@ Provides a 'form' helper to create a form view
 
 =item form
 
-  $c->form($some_partial_class_name);
+    $c->form($some_partial_class_name);
 
 Creates a form of type NeverTire::Form::$some_partial_class_name
 
