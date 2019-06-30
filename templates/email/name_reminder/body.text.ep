@@ -1,0 +1,12 @@
+Your login name for the "Songs I'll Never Tire of" blog
+is "<%= $name %>".
+
+You may now login at
+http://localhost:3000/user/login
+
+# TODO Put correct domain in there.
+
+If you have also forgotten your password, that page will
+allow you to reset it.
+
+

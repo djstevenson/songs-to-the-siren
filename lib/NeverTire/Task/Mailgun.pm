@@ -62,8 +62,11 @@ sub register {
         } => sub {
             my ($ua, $tx) = @_;
 
-            print STDERR "\n\n---------------------------\nTX=", $tx->result->body, "\n\n";
+            $email->update({sent_at => \'NOW()'});
         });
+
+        # TODO use job daemon rather than this.
+        print "LOOP RUNNING=", (Mojo::IOLoop->is_running ? 'yes' : 'no'), "\n";
         Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
 
         # TODO Handle response
