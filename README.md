@@ -4,9 +4,9 @@ The code behing the "Songs I'll Never Tire Of" blog
 INIT test DB
 ============
 
-Creates a dev database `never_tire_dev` - deleting any existing content.
+Creates a dev database `never_tire_development` - deleting any existing content.
 
-`sh tools/initdb.dev.sh`
+`sh tools/initdb.development.sh`
 
 This drops the DB and re-creates it empty. The schema will be created when the app starts up.
 
