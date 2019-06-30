@@ -31,7 +31,6 @@ CREATE UNIQUE INDEX user_keys_user_id_purpose_unique_idx ON user_keys USING BTRE
 DROP TABLE IF EXISTS emails;
 CREATE TABLE emails (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    email_from TEXT NOT NULL,
     email_to TEXT NOT NULL,
     template_name TEXT NOT NULL,
     "data" JSON NOT NULL,
