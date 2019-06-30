@@ -12,15 +12,20 @@ sub register {
 
         # Keeping a DB record of emails for test etc.
         my $email_rs = $c->schema->resultset('Email');
+        my $to       = lc($data->{to});
+
         my $email = $email_rs->create({
             email_from    => 'mailgun@blog.ytfc.com', # TODO Make configurable
-            email_to      => lc($data->{to}),
+            email_to      => $to,
             template_name => $template_name,
             data          => $data,
             queued_at     => DateTime->now,
         });
 
-        # TODO queue minion job to send
+        $app->minion->enqueue(mailgun => [ $email->id ]);
+
+        # TODO Start a daemon rather than this:
+        $app->minion->perform_jobs;
     });
 
 	$app->helper(send_registration_email => sub {

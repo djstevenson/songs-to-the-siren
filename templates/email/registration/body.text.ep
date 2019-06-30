@@ -3,8 +3,8 @@ Thank you for signing-up for the "Songs I'll Never Tire of" blog.
 We received a sign-up request from this email address, which will
 allow you to post comments. 
 
-Please use this link to confirm your registeration: 
-https://localhost:3000/user/<%= $id %>/confirm/<%= $key %>
+Please use this link to confirm your registration: 
+http://localhost:3000/user/<%= $user %>/confirm/<%= $key %>
 
 # TODO Put correct domain in there.
 
@@ -13,7 +13,7 @@ request (including our record of your email address) will be deleted
 after 24 hours.
 
 Or use this link to delete the record immediately: 
-https://localhost:3000/user/<%= $id %>/decline/<%= $key %>
+http://localhost:3000/user/<%= $user %>/decline/<%= $key %>
 
 # TODO Put correct domain in there.
 

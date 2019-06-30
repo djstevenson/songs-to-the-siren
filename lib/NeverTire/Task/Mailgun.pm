@@ -13,7 +13,7 @@ use Mojo::URL;
 # https://mojolicious.org/perldoc/Minion
 
 
-has base_url => sub { Mojo::URL->new('https://api.mailgun.net/v3/'); };
+has base_url => sub { Mojo::URL->new('https://api.eu.mailgun.net/v3/'); };
 has ua       => sub { Mojo::UserAgent->new; };
 has home     => sub { Mojo::Home->new; };
 has domain   => undef;
@@ -33,17 +33,40 @@ sub register {
 
     # Create a minion task to send an email
     $app->minion->add_task(mailgun => sub {
-        my ($job, $to, $template, $data) = @_;
+        my ($job, $email_id) = @_;
 
         my $app = $job->app;
+        my $schema = $app->schema;
+        my $email_rs = $schema->resultset('Email');
+        my $email = $email_rs->find($email_id);
+
+        return unless $email;
+
+        my $template = $email->template_name;
+        my $data     = $email->data;
 
         my $mt = Mojo::Template->new;
         my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
         my $body    = $mt->vars(1)->render_file($self->_file(body    => $template), $data);
-        print STDERR "DATA=", Dumper($data);
+        
+        my $url = $self->base_url->clone;
+        $url->path->merge($self->domain . '/messages');
+        $url->userinfo('api:' . $self->api_key);
 
-        print STDERR "SUBJECT=$subject\n";
-        print STDERR "BODY=$body\n\n\n";
+        # TODO Probably use 'post_p' (aka promise/future version, i.e. non-blocking).
+        my $tx = $self->ua->post($url, form => {
+            to      => $email->email_to,
+            from    => $email->email_from,
+            subject => $subject,
+            text    => $body,
+        } => sub {
+            my ($ua, $tx) = @_;
+
+            print STDERR "\n\n---------------------------\nTX=", $tx->result->body, "\n\n";
+        });
+        Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
+
+        # TODO Handle response
     });
 }
 
