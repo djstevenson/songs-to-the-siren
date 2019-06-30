@@ -71,7 +71,7 @@ sub DEMOLISH {
 sub meta_db_action {
     my ($self, $sql) = @_;
 
-    my $data_source = 'dbi:Pg:database=never_tire_test';
+    my $data_source = 'dbi:Pg:database=postgres';
     my $dbh = DBI->connect($data_source, undef, undef, {RaiseError => 1});
 
    $dbh->do($sql);

@@ -1,0 +1,19 @@
+Thank you for signing-up for the "Songs I'll Never Tire of" blog.
+
+We received a sign-up request from this email address, which will
+allow you to post comments. 
+
+Please use this link to confirm your registration: 
+http://localhost:3000/user/<%= $user %>/confirm/<%= $key %>
+
+# TODO Put correct domain in there.
+
+If you did not send this request, you can ignore this email and the
+request (including our record of your email address) will be deleted
+after 24 hours.
+
+Or use this link to delete the record immediately: 
+http://localhost:3000/user/<%= $user %>/decline/<%= $key %>
+
+# TODO Put correct domain in there.
+

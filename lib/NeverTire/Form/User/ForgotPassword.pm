@@ -30,9 +30,9 @@ override posted => sub {
 	my $user_rs = $self->c->schema->resultset('User');
 	my $user = $user_rs->find_by_email($email_field->value);
 
-	if ($user) {
-		$user->send_password_reset;
-	}
+	$self->c->send_password_reset($user)
+		if $user;
+
 	return 1;
 };
 

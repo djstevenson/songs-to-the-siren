@@ -32,7 +32,6 @@ sub register {
     my $form = $c->form('User::Register');
     if (my $user = $form->process) {
         $c->flash(msg => 'Registered - watch out for confirmation email');
-        # TODO PM to admin? To deal with reg issues?
         $c->redirect_to('registered');
     }
     else {

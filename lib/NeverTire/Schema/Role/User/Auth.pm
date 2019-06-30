@@ -62,19 +62,6 @@ sub update_password {
     $self->delete_key('password_reset');
 }
 
-sub send_name_reminder {
-    my ($self, $args) = @_;
-
-    $self->send_email('name_reminder', {user => $self->id, name => $self->name});
-}
-
-sub send_password_reset {
-    my ($self, $args) = @_;
-
-    my $k = $self->generate_new_user_key('password_reset', DateTime::Duration->new(hours => 1));
-    $self->send_email('password_reset', {user => $self->id, key => $k});
-}
-
 sub generate_new_user_key {
     my ($self, $purpose, $duration) = @_;
 
@@ -94,32 +81,6 @@ sub generate_new_user_key {
     return $key;
 }
 
-sub send_registration_email {
-    my $self = shift;
-
-    my $purpose = 'registration';
-    my $duration = DateTime::Duration->new(hours => 1); # TODO Configurable
-    my $user_key = $self->generate_new_user_key($purpose, $duration);
-
-    $self->send_email($purpose, {
-        user => $self->id,
-        key  => $user_key,
-    });
-}
-
-sub send_email {
-    my ($self, $template_name, $data) = @_;
-
-    my $email_rs = $self->result_source->schema->resultset('Email');
-    $email_rs->create({
-        email_from    => 'noreply@ytfc.com', # TODO Make configurable
-        email_to      => lc($self->email),
-        template_name => $template_name,
-        data          => $data,
-        queued_at     => DateTime->now,
-    });
-}
-
 sub confirm_registration {
     my ($self, $user_key) = @_;
 
@@ -127,9 +88,7 @@ sub confirm_registration {
 
     # Do nothing if already confirmed
     if (!$self->confirmed_at){
-        $self->update({
-			confirmed_at => DateTime->now,
-		});
+        $self->update({ confirmed_at => DateTime->now });
     }
 
     $self->delete_key('registration');

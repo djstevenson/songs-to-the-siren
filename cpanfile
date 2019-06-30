@@ -8,6 +8,8 @@ requires 'MooseX::NonMoose';
 requires 'MooseX::Traits';
 requires 'Mojolicious';
 requires 'Mojo::Pg';
+requires 'Minion';
+requires 'Minion::Backend::Pg';
 requires 'DBIx::Class';
 requires 'DBD::Pg';
 requires 'DateTime';

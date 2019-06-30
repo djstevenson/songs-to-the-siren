@@ -28,6 +28,9 @@ sub startup {
     $app->plugin('NeverTire::Helper::Render');
     $app->plugin('NeverTire::Helper::Tags');
     $app->plugin('NeverTire::Plugin::Auth');
+    $app->plugin(Minion => {Pg => $app->db_dsn});
+    $app->plugin('NeverTire::Task::Mailgun');
+    $app->plugin('NeverTire::Helper::Email');
 
     $app->_migrate_db;
 

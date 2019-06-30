@@ -36,7 +36,6 @@ sub create_user {
 	# TODO Or, make this an initial password that
 	#      is marked as expired, so they have to 
 	#      change it when they log in.
-	# $user->send_registration_email;
 
 	return $user;
 }
@@ -47,18 +46,15 @@ sub register {
 	my $passwd = new_password_hash($args->{password});
 
 	my $now = DateTime->now;
-	my $user = $self->create({
+	return $self->create({
 		name          => $args->{name},
 		email         => lc($args->{email}),
 		password_hash => $passwd,
 		registered_at => $now,
 		password_at   => $now,
 	});
-
-	$user->send_registration_email;
-
-	return $user;
 }
+
 sub find_by_email{
 	my ($self, $email) = @_;
 

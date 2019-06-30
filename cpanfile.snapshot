@@ -1652,6 +1652,27 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Minion-9.10
+    pathname: S/SR/SRI/Minion-9.10.tar.gz
+    provides:
+      LinkCheck undef
+      LinkCheck::Controller::Links undef
+      LinkCheck::Task::CheckLinks undef
+      Minion 9.10
+      Minion::Backend undef
+      Minion::Backend::Pg undef
+      Minion::Command::minion undef
+      Minion::Command::minion::job undef
+      Minion::Command::minion::worker undef
+      Minion::Job undef
+      Minion::Worker undef
+      Minion::_Guard 9.10
+      Mojolicious::Plugin::Minion undef
+      Mojolicious::Plugin::Minion::Admin undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 8.12
+      perl 5.010001
   Module-Build-0.4229
     pathname: L/LE/LEONT/Module-Build-0.4229.tar.gz
     provides:

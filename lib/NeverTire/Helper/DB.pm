@@ -14,6 +14,12 @@ sub register {
         return $c->config->{db_name};
     });
 
+    $app->helper(db_dsn => sub {
+        my $c = shift;
+
+        return 'postgresql://nevertire@localhost/' . $c->db_name
+    });
+    
     my $conn = NeverTire::Schema->connect('dbi:Pg:dbname=' . $app->db_name, 'nevertire', undef);
     $app->helper(schema => sub {
         # TODO Check connection is still alive, reconnect if not?
