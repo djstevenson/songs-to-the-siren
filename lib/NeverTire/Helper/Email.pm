@@ -15,7 +15,7 @@ sub register {
         my $to       = lc($data->{to});
 
         my $email = $email_rs->create({
-            email_from    => 'mailgun@blog.ytfc.com', # TODO Make configurable
+            email_from    => 'noreply@blog.ytfc.com', # TODO Make configurable
             email_to      => $to,
             template_name => $template_name,
             data          => $data,

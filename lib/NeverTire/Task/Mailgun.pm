@@ -53,21 +53,17 @@ sub register {
         $url->path->merge($self->domain . '/messages');
         $url->userinfo('api:' . $self->api_key);
 
-        # TODO Probably use 'post_p' (aka promise/future version, i.e. non-blocking).
-        my $tx = $self->ua->post($url, form => {
+        $self->ua->post_p($url, form => {
             to      => $email->email_to,
             from    => $email->email_from,
             subject => $subject,
             text    => $body,
-        } => sub {
-            my ($ua, $tx) = @_;
+        })->catch( sub {
+            my $err = shift;
+            warn "Mailgun connection error: $err";
+        })->wait;
 
-            $email->update({sent_at => \'NOW()'});
-        });
-
-        # TODO use job daemon rather than this.
-        print "LOOP RUNNING=", (Mojo::IOLoop->is_running ? 'yes' : 'no'), "\n";
-        Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
+        $email->update({sent_at => \'NOW()'});
 
         # TODO Handle response
     });
