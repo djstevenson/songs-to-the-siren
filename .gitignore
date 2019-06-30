@@ -1,3 +1,11 @@
 /local/
 .DS_Store
 .prove
+
+selenium/target
+selenium/build
+selenium/bin
+selenium/.gradle
+selenium/Reports/Forum*html
+selenium/Screenshots/Forum*png
+selenium/.vscode/
