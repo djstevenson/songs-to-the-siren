@@ -31,6 +31,7 @@ sub register {
 
     $self->home->detect;
 
+    # Create a minion task to send an email
     $app->minion->add_task(mailgun => sub {
         my ($job, $to, $template, $data) = @_;
 

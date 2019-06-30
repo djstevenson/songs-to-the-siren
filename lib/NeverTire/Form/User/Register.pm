@@ -52,7 +52,11 @@ override posted => sub {
 	my $self = shift;
 
 	my $rs = $self->c->schema->resultset('User');
-	return $rs->register($self->form_hash(qw/ name email password /));
+	my $user = $rs->register($self->form_hash(qw/ name email password /));
+
+	$self->c->send_registration_email($user);
+
+	return $user;
 };
 
 # TODO Tests
