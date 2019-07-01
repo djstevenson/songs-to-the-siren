@@ -37,6 +37,13 @@ public class Helper {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
+    public static int createTestUser(WebDriver driver, String name) {
+        get(driver, "test/create_user/" + name);
+
+        var testUserPage = PageFactory.initElements(driver, TestUserPage.class);
+        return Integer.parseInt(testUserPage.getValue("id"));
+    }
+
     public static String getBrowser() {
         return config.getBrowser();
     }

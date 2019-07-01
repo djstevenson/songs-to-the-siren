@@ -22,7 +22,7 @@ public class LoginTest extends TestObject {
         // Create some test users
         new TestUser(driver, "logintest1");       // No spaces
         new TestUser(driver, "logintest%202");    // One space "logintest 2"
-        new TestUser(driver, "logintest%20%203"); // Two spaces, should be collapsed "logintest  3"
+        new TestUser(driver, "logintest%20%203"); // Two spaces, should be collapsed "logintest  3" to "logintest 3"
 
         class LoginTestCase {
             String testName;
