@@ -14,7 +14,6 @@ __PACKAGE__->table('emails');
 
 __PACKAGE__->add_columns(
 	id            => {data_type => 'INTEGER'},
-	email_from    => {data_type => 'TEXT'},
 	email_to      => {data_type => 'TEXT'},
 	template_name => {data_type => 'TEXT'},
 	data          => {data_type => 'TEXT'},
