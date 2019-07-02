@@ -45,7 +45,15 @@ sub login {
     my $form = $c->form('User::Login');
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
-        $c->redirect_to('list_songs');
+        if ($user->admin) {
+            # Admin will want to go to song edit page
+            $c->redirect_to('list_songs');
+        }
+        else {
+            # Non-admin back to home page
+            # TODO Redirect back to where we pressed 'login'
+            $c->redirect_to('home');
+        }
     }
     else {
         $c->stash(form => $form);
