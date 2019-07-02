@@ -1,0 +1,4 @@
+% layout 'test';
+% title 'Test user not found';
+
+<p>User not found</p>

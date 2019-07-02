@@ -77,5 +77,48 @@ sub find_by_name{
 	)->first;
 }
 
+##########################
+## TEST-RELATED METHODS ##
+##########################
+
+
+# TODO Split test methods off into a role?
+sub create_test_user {
+	my ($self, $username, $admin) = @_;
+
+	$self->_assert_test_db;
+
+	my $lc_username = lc $username;
+	$lc_username =~ s/\s/-/g;
+	my $email       = $lc_username . '@example.com';
+	my $password    = 'PW ' . $lc_username;
+
+	my $passwd = new_password_hash($password);
+
+	my $now = DateTime->now;
+	my $user = $self->create({
+		name          => $username,
+		email         => $email,
+		password_hash => $passwd,
+		admin         => $admin ? 1 : 0,
+		registered_at => $now,
+		confirmed_at  => $now,
+		password_at   => $now,
+	});
+
+	return $user;
+}
+
+sub _assert_test_db {
+	my $self = shift;
+
+	die unless $ENV{MOJO_MODE} eq 'test';
+
+	my $dbh = $self->result_source->schema->storage->dbh;
+	my ($k, $name) = split(/=/, $dbh->{Name});
+	die unless $name eq 'never_tire_test';
+}
+
+
 __PACKAGE__->meta->make_immutable;
 1;
