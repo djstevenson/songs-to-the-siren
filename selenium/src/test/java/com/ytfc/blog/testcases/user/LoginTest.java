@@ -2,6 +2,7 @@ package com.ytfc.blog.testcases.user;
 
 import com.ytfc.blog.testcases.TestObject;
 import com.ytfc.blog.testobjects.TestUser;
+import com.ytfc.blog.pages.LoggedInPage;
 
 import org.testng.annotations.Test;
 
@@ -70,7 +71,7 @@ public class LoginTest extends TestObject {
 
         loginPage().login("logintest4", "PW logintest4");
 
-        loggedInPage().assertUser("logintest4", "User logintest4 is logged-in");
+        loggedInPage().assertLoggedInAs("logintest4", "User logintest4 is logged-in");
 
     }
 

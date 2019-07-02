@@ -17,13 +17,6 @@ public class FormObject {
         this.driver = driver;
     }
 
-    public void assertLegend(String expected, String message) {
-        var actual = driver
-            .findElement(By.cssSelector("form > legend"))
-            .getText();
-        Assert.assertEquals(actual, expected, message);
-    }
-
     public FormField getField(String key) {
         return fields.get(key);
     }

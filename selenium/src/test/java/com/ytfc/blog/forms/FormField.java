@@ -19,6 +19,7 @@ public class FormField {
     }
 
     public synchronized WebElement getFieldElement() {
+        System.err.println("ID=" + fieldId);
         return driver.findElement(By.id(fieldId));
     }
 

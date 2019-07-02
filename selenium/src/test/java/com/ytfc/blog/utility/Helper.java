@@ -1,8 +1,6 @@
 package com.ytfc.blog.utility;
 
 import java.util.concurrent.TimeUnit;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import com.ytfc.blog.utility.ConfigDataProvider;
+import com.ytfc.blog.pages.user.*;
+
 
 public class Helper {
     protected static ConfigDataProvider config = new ConfigDataProvider();
@@ -40,6 +40,9 @@ public class Helper {
     public static int createTestUser(WebDriver driver, String name) {
         get(driver, "test/create_user/" + name);
 
+        // TODO Maybe just do Java DB updates to create users?
+        // It'll give me a chance to learn how to do it, and prevents
+        // the "test controller" hack.
         var testUserPage = PageFactory.initElements(driver, TestUserPage.class);
         return Integer.parseInt(testUserPage.getValue("id"));
     }

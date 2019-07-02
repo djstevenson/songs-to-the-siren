@@ -31,15 +31,6 @@ public class TestUser {
         return this; // Chainable
     }
 
-    public TestUser addAdminRights() {
-        Helper.setUserFlag(driver, id, "admin");
-        return this;
-    }
-
-    public void removeAdminRights() {
-        Helper.clearUserFlag(driver, id, "admin");
-    }
-
     public int getId() {
         return id;
     }
@@ -56,10 +47,4 @@ public class TestUser {
         return plainPassword;
     }
 
-    public TestUser assertFlag(boolean expected, TestArticle article, String msg) {
-        PageFactory.initElements(driver, ViewArticlePage.class)
-            .assertFlag(expected, article, this, msg);
-
-        return this;
-    }
 }

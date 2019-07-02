@@ -22,7 +22,6 @@ public class LoginPage extends PageObject {
         Helper.get(driver, "user/login");
 
         assertPageTitle("Login", "Page has correct title");
-        form.assertLegend("Login", "Form has correct legend");
         form.assertFieldTypes("Field has correct type");
 
         return this; // Chainable
