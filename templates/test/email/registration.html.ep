@@ -1,0 +1,36 @@
+<tr>
+    <th>good_confirm</th>
+    <td id="email-urls-good-confirm">
+        <a href="<%= url_for('confirm_registration', user_id => $email->data->{user}, user_key => $email->data->{key}) %>"><%= url_for('confirm_registration', user_id => $email->data->{user}, user_key => $email->data->{key}) %></a>
+    </td>
+</tr>
+<tr>
+    <th>good_decline</th>
+    <td id="email-urls-good-decline">
+        <a href="<%= url_for('decline_registration', user_id => $email->data->{user}, user_key => $email->data->{key}) %>"><%= url_for('decline_registration', user_id => $email->data->{user}, user_key => $email->data->{key}) %></a>
+    </td>
+</tr>
+<tr>
+    <th>bad_confirm_id</th>
+    <td id="email-urls-bad-confirm-id">
+        <a href="<%= url_for('confirm_registration', user_id => $email->data->{user} - 1, user_key => $email->data->{key}) %>"><%= url_for('confirm_registration', user_id => $email->data->{user} - 1, user_key => $email->data->{key}) %></a>
+    </td>
+</tr>
+<tr>
+    <th>bad_decline_id</th>
+    <td id="email-urls-bad-decline-id">
+            <a href="<%= url_for('decline_registration', user_id => $email->data->{user} - 1, user_key => $email->data->{key}) %>"><%= url_for('decline_registration', user_id => $email->data->{user} - 1, user_key => $email->data->{key}) %></a>
+    </td>
+</tr>
+<tr>
+    <th>bad_confirm_key</th>
+    <td id="email-urls-bad-confirm-key">
+        <a href="<%= url_for('confirm_registration', user_id => $email->data->{user}, user_key => $email->data->{key} . 'x') %>"><%= url_for('confirm_registration', user_id => $email->data->{user}, user_key => $email->data->{key} . 'x') %></a>
+    </td>
+</tr>
+<tr>
+    <th>bad_decline_key</th>
+    <td id="email-urls-bad-decline-key">
+        <a href="<%= url_for('decline_registration', user_id => $email->data->{user}, user_key => $email->data->{key} . 'x') %>"><%= url_for('decline_registration', user_id => $email->data->{user}, user_key => $email->data->{key} . 'x') %></a>
+    </td>
+</tr>

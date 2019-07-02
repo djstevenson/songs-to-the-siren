@@ -1,0 +1,14 @@
+% layout 'test';
+% title 'Test user - ' . $user->name;
+
+<table id="user">
+    <tr> <th>id            </th> <td id="user-id">            <%= $user->id %>                           </td></tr>
+    <tr> <th>name          </th> <td id="user-name">          <%= $user->name %>                         </td></tr>
+    <tr> <th>email         </th> <td id="user-email">         <%= $user->email %>                        </td></tr>
+    <tr> <th>password_hash </th> <td id="user-password-hash"> <%= $user->password_hash %>                </td></tr>
+    <tr> <th>password_at   </th> <td id="user-password-at">   <%= $user->password_at %>                  </td></tr>
+    <tr> <th>registered_at </th> <td id="user-registered-at"> <%= $user->registered_at %>                </td></tr>
+    <tr> <th>confirmed     </th> <td id="user-confirmed">     <%= $user->confirmed_at  ? 'yes' : 'no' %> </td></tr>
+    <tr> <th>confirmed_at  </th> <td id="user-confirmed-at">  <%= $user->confirmed_at %>                 </td></tr>
+    <tr> <th>admin         </th> <td id="user-admin">         <%= $user->admin  ? 'yes' : 'no' %>        </td></tr>
+</table>

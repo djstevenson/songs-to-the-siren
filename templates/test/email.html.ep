@@ -1,0 +1,37 @@
+% layout 'test';
+% title 'Test email - ' . $email->email_to;
+
+<table id="email">
+    <tr> <th>id            </th> <td id="email-id">            <%= $email->id %>            </td></tr>
+    <tr> <th>email_from    </th> <td id="email-email-from">    <%= $email->email_from %>    </td></tr>
+    <tr> <th>email_to      </th> <td id="email-email-to">      <%= $email->email_to %>      </td></tr>
+    <tr> <th>template_name </th> <td id="email-template-name"> <%= $email->template_name %> </td></tr>
+    <tr> <th>queued_at     </th> <td id="email-queued-at">     <%= $email->queued_at %>     </td></tr>
+    <tr> <th>sent_at       </th> <td id="email-sent-at">       <%= $email->sent_at %>       </td></tr>
+    <tr> <th>data          </th>
+        <td id="email-data">
+            <table>
+                % foreach my $k (keys %{ $email->data }) {
+                    <tr>
+                        <th><%= $k %></th>
+                        <td id="email-data-<%= $k %>">
+                            <%= $email->data->{$k} %>
+                        </td>
+                    </tr>
+                % }
+            </table>
+        </td>
+    </tr>
+    <tr> <th>urls          </th>
+        <td id="email-urls">
+            <table>
+                % if ($email->template_name eq 'registration') {
+                    %= include 'test/email/registration'
+                % }
+                % elsif ($email->template_name eq 'password_reset') {
+                    %= include 'test/email/password_reset'
+                % }
+            </table>
+        </td>
+    </tr>
+</table>

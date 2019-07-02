@@ -177,12 +177,10 @@ sub render {
 	my $buttons = $self->_fieldset($self->_render_buttons);
 
     return qq{
-        <div class="main-panel">
-    		<form accept-charset="utf-8" method="POST" novalidate>
-				$fields
-				$buttons
-    		</form>
-        </div>
+		<form accept-charset="utf-8" method="POST" novalidate>
+			$fields
+			$buttons
+		</form>
 	};
 }
 
