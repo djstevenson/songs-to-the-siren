@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Name reminder';
-<h2>Name reminder</h2>
+<h2 class="notification-title">Name reminder</h2>
 
 <div class="notification">
 	<p>

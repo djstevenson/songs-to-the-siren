@@ -16,6 +16,10 @@ public class PageObject extends SeleniumBase {
         return driver.getTitle();
     }
 
+    public void assert404(String msg) {
+        Assert.assertEquals(getPageTitle(), "Page not found", msg);
+    }
+
     public void assertPageTitle(String expected, String msg) {
         Assert.assertEquals(getPageTitle(), expected, msg);
     }

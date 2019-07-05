@@ -56,6 +56,7 @@ sub login {
         }
     }
     else {
+        delete $c->session->{user};
         $c->stash(form => $form);
     }
 }

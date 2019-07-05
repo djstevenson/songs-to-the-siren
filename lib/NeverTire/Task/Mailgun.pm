@@ -55,7 +55,7 @@ sub register {
 
         $self->ua->post_p($url, form => {
             to      => $email->email_to,
-            from    => $email->email_from,
+            from    => 'noreply@ytfc.com',
             subject => $subject,
             text    => $body,
         })->catch( sub {

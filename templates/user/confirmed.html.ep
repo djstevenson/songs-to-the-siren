@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Registration confirmed';
-<h2>Registration confirmed</h2>
+<h2 class="notification-title">Registration confirmed</h2>
 
 <div class="notification">
 	<p>

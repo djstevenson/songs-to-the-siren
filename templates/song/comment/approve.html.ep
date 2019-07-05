@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Approve comment for ' . $song->title;
 
-<h2>Approve comment for <%= $song->title %></h2>
+<h2 class="notification-title">Approve comment for <%= $song->title %></h2>
 
 <%== $form->render %>

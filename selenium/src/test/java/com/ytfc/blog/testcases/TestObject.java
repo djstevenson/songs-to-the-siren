@@ -23,9 +23,24 @@ public class TestObject extends SeleniumBase {
         BrowserFactory.stopApplication(driver);
     }
 
+    protected void assertUserLogin(String prefix, String name, String password) {
+        loginPage().login(name, password);
+        loggedInPage().assertLoggedInAs(name, prefix + "Login with new password");
+    }
+    
+    protected void assertUserNoLogin(String prefix, String name, String password) {
+        loginPage().login(name, password);
+        loggedInPage().assertLoggedOut(prefix + "No login with old password");
+    }
+
     // A bunch of methods to create page objects.
     // Provided as a convenience to wrap calls to the
     // PageFactory and make tests more readable.
+    protected TestEmailPage loadEmailPage(String type, String name) {
+        return testEmailPage()
+            .get(type, name);
+    }
+
     protected LoginPage loginPage() {
         return PageFactory.initElements(driver, LoginPage.class);
     }
@@ -34,5 +49,28 @@ public class TestObject extends SeleniumBase {
         return PageFactory.initElements(driver, LoggedInPage.class);
     }
 
+    protected ForgotPasswordPage forgotPasswordPage() {
+        return PageFactory.initElements(driver, ForgotPasswordPage.class);
+    }
+
+    protected ForgotNamePage forgotNamePage() {
+        return PageFactory.initElements(driver, ForgotNamePage.class);
+    }
+
+    protected PasswordResetPage passwordResetPage() {
+        return PageFactory.initElements(driver, PasswordResetPage.class);
+    }
+
+    protected NotificationPage notificationPage() {
+        return PageFactory.initElements(driver, NotificationPage.class);
+    }
+
+    protected TestEmailPage testEmailPage() {
+        return PageFactory.initElements(driver, TestEmailPage.class);
+    }
+
+    protected TestUserPage testUserPage() {
+        return PageFactory.initElements(driver, TestUserPage.class);
+    }
 
 }

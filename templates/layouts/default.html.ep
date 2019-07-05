@@ -5,6 +5,13 @@
 
 <div class="container">
     <header>
+        <!-- TODO DRY this, it appears in admin.html.ep too -->
+        % if (my $msg = flash 'msg') {
+            <div class="alert alert-success row flash-msg" role="alert">
+                <%= $msg %>
+            </div>
+        % }
+
         <div class="row">
             <div class="col-12">
                 <h1>Songs I&#x2019;ll Never Tire of...</h1>

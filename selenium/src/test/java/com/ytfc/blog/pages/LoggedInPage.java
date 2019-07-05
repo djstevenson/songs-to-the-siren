@@ -16,7 +16,7 @@ public class LoggedInPage extends PageObject {
     }
 
     public LoggedInPage assertLoggedOut(String message) {
-        // If logged-out, we'll have a "Logint" link
+        // If logged-out, we'll have a "Login" link
         Assert.assertEquals(loggedInStatus.getText(), "Login", message + " - status");
         return this; // Chainable
     }
