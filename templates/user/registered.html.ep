@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Registered';
-<h2>Registered</h2>
+<h2 class="notification-title">Registered</h2>
 
 <div class="notification">
     <p>

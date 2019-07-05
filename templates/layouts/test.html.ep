@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+    %= include 'layouts/_headers'
+<body>
+    <section class="test">
+        <%= content %>
+    </section>
+</body>
+</html>

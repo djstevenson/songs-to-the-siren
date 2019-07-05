@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'Add comment for ' . $song->title;
 
-<h2>New comment for <%= $song->title %></h2>
+<h2 class="notification-title">New comment for <%= $song->title %></h2>
 
 <!-- TODO Gonna need this a few times, put in a partial -->
 <blockquote class="alert alert-warning">

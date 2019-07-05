@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Registration declined';
-<h2>Registration declined</h2>
+<h2 class="notification-title">Registration declined</h2>
 
 <div class="notification">
 	<p>

@@ -3,7 +3,6 @@
 
 <table id="email">
     <tr> <th>id            </th> <td id="email-id">            <%= $email->id %>            </td></tr>
-    <tr> <th>email_from    </th> <td id="email-email-from">    <%= $email->email_from %>    </td></tr>
     <tr> <th>email_to      </th> <td id="email-email-to">      <%= $email->email_to %>      </td></tr>
     <tr> <th>template_name </th> <td id="email-template-name"> <%= $email->template_name %> </td></tr>
     <tr> <th>queued_at     </th> <td id="email-queued-at">     <%= $email->queued_at %>     </td></tr>

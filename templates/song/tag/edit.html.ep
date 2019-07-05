@@ -1,7 +1,7 @@
 % layout 'admin';
 % title 'Edit tags for ' . $song->title;
 
-<h2>Edit tags for <%= $song->title %></h2>
+<h2 class="notification-title">Edit tags for <%= $song->title %></h2>
 
 <%== $form->render %>
 
