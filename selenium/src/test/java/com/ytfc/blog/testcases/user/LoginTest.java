@@ -2,7 +2,6 @@ package com.ytfc.blog.testcases.user;
 
 import com.ytfc.blog.testcases.TestObject;
 import com.ytfc.blog.testobjects.TestUser;
-import com.ytfc.blog.pages.LoggedInPage;
 
 import org.testng.annotations.Test;
 
