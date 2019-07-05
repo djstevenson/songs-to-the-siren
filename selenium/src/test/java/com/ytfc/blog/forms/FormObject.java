@@ -2,9 +2,7 @@ package com.ytfc.blog.forms;
 
 import java.util.HashMap;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class FormObject {
     protected WebDriver driver;
