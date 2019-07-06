@@ -92,7 +92,7 @@ Provides helper methods for sending emails.  Saves the email in the
 database ('emails' table), then uses L<NeverTire::Task::Mailgun> to
 do the send using the Mailgun API.
 
-=head1 ROUTES
+=head1 HELPERS
 
 =over
 
