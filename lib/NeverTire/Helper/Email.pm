@@ -1,7 +1,7 @@
 package NeverTire::Helper::Email;
 use Mojo::Base 'Mojolicious::Plugin';
 
-# TODO POD docs
+# POD docs at end of file
 
 use DateTime::Duration;
 sub register {
@@ -70,4 +70,62 @@ sub register {
 1;
 __END__
 
-# TODO pod docs
+=pod
+
+=head1 NAME
+
+NeverTire::Helper::Email : Helpers for sending emails from blog app
+
+=head1 SYNOPSIS
+
+    # In app startup()
+    $self->plugin('NeverTire::Helper::Email');
+
+    # In your controller actions:
+    $app->send_registration_email($user);
+    $app->send_name_reminder($user);
+    $app->send_password_reset($user);
+
+=head1 DESCRIPTION
+
+Provides helper methods for sending emails.  Saves the email in the
+database ('emails' table), then uses L<NeverTire::Task::Mailgun> to
+do the send using the Mailgun API.
+
+=head1 ROUTES
+
+=over
+
+=item send_registration_email($user)
+
+Sends the initial mail that a new user gets when registering.
+
+Templates are in templates/email/registration
+
+$user is a L<NeverTire::Schema::Result::User> object.
+
+
+=item send_name_reminder($user)
+
+Sends the mail reminding someone of their login username if
+they forgot. 
+
+Templates are in templates/email/name_reminder
+
+$user is a L<NeverTire::Schema::Result::User> object.
+
+
+=item send_password_reset($user)
+
+Sends a mail allowing a user to reset their password, e.g.
+if they forgot it.
+
+Templates are in templates/email/password_reset
+
+$user is a L<NeverTire::Schema::Result::User> object.
+
+=back
+
+=head1 AUTHOR
+
+David Stevenson david@ytfc.com
