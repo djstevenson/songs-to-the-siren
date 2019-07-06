@@ -61,7 +61,16 @@ use Mojo::Pg;
 use Mojo::Pg::Migrations;
 use Mojo::Home;
 
-# TODO docs
+# Private method:
+# Constructs a common base for all routes. The only
+# action taken here is to detect if we have an
+# authenticated user, and update stash accordingly:
+#
+# auth_user  : Set to the user object if logged-in
+# admin_user : Set to the user object if logged-in and is admin
+#
+# 'user object' is an instance of L<NeverTire::Schema::Result::User>
+
 sub _base_route {
     my $app = shift;
 
@@ -90,6 +99,7 @@ sub _base_route {
     });
 }
 
+# Private method to apply migrations from tools/migrations.sql
 sub _migrate_db {
     my $app = shift;
 

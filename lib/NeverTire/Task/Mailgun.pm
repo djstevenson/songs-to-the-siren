@@ -1,6 +1,8 @@
 package NeverTire::Task::Mailgun;
 use Mojo::Base 'Mojolicious::Plugin';
 
+# POD docs at end of file
+
 use Mojo::Template;
 use Mojo::Home;
 use Mojo::UserAgent;
@@ -105,4 +107,80 @@ sub _file {
 1;
 __END__
 
-# TODO pod docs
+=pod
+
+=head1 NAME
+
+NeverTire::Task::Mailgun : Plugin to create routes that check auth
+
+=head1 SYNOPSIS
+
+    # In app startup()
+    $self->plugin('NeverTire::Task::Mailgun');
+
+    # When you want to send an email:
+    $app->minion->enqueue(mailgun => [ $email_id ]);
+
+=head1 DESCRIPTION
+
+Provides a Minion task for sending emails through Mailgun.
+
+=head1 TEST MODE
+
+If $app->mode is 'test', then sending is skipped.
+
+=head1 CONFIGURATION
+
+You will need to configure a from address, a domain and api key. I recommend
+doing this via the environment so that keys etc aren't checked into your app
+repo.
+
+=over
+
+=item from address
+
+Set via the environment, e.g.
+    export NEVER_TIRE_MAILGUN_FROM=noreply@example.com
+
+Or set via the app config file, e.g.
+
+    mailgun => {
+        from => 'noreply@example.com',
+        ...
+    }
+
+
+=item domain
+
+This is the domain that is registered with Mailgun.
+
+Set via the environment, e.g.
+    export NEVER_TIRE_MAILGUN_DOMAIN=example.com
+
+Or set via the app config file, e.g.
+
+    mailgun => {
+        domain => 'example.com',
+        ...
+    }
+
+=item API key
+
+This is the key given to you by Mailgun for authenticating
+API calls using the specified domain:
+
+Set via the environment, e.g.
+    export NEVER_TIRE_MAILGUN_API_KEY=123ABCdef987
+
+Or set via the app config file, e.g.
+
+    mailgun => {
+        api_key => '123ABCdef987',
+        ...
+    }
+
+=back
+
+=head1 AUTHOR
+
+David Stevenson david@ytfc.com
