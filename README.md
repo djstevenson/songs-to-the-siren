@@ -33,6 +33,7 @@ The full comment for starting up a dev server with a new DB, that has a small am
 ```
 export MOJO_MODE=development ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
+carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
 carton exec -- morbo script/never-tire
 ```
