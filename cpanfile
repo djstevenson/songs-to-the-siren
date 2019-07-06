@@ -19,3 +19,4 @@ requires 'Digest::SHA3';
 requires 'HTML::Entities';
 requires 'App::ForkProve';
 requires 'Text::Markdown';
+requires 'IO::Socket::SSL';

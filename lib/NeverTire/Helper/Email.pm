@@ -21,10 +21,12 @@ sub register {
             queued_at     => DateTime->now,
         });
 
-        $app->minion->enqueue(mailgun => [ $email->id ]);
+        if ($app->mode ne 'test') {
+            $app->minion->enqueue(mailgun => [ $email->id ]);
 
-        # TODO Start a daemon rather than this:
-        $app->minion->perform_jobs;
+            # TODO Start a daemon rather than this:
+            $app->minion->perform_jobs;
+        }
     });
 
 	$app->helper(send_registration_email => sub {
