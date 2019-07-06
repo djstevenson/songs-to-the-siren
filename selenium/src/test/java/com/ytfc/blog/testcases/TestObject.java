@@ -65,6 +65,10 @@ public class TestObject extends SeleniumBase {
         return PageFactory.initElements(driver, NotificationPage.class);
     }
 
+    protected RegisterPage registerPage() {
+        return PageFactory.initElements(driver, RegisterPage.class);
+    }
+
     protected TestEmailPage testEmailPage() {
         return PageFactory.initElements(driver, TestEmailPage.class);
     }
