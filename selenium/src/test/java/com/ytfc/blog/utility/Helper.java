@@ -56,7 +56,7 @@ public class Helper {
     //         .assertException("message");
     // }
 
-    // Asserts link present, or not.
+    // Asserts link present, or not. Does not click it.
     public static void assertLink(WebDriver driver, String linkText, boolean expected, String message) {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         boolean actual = driver.findElements(By.linkText(linkText)).size() > 0;
