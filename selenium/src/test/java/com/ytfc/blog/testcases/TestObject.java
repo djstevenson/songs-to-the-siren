@@ -41,6 +41,10 @@ public class TestObject extends SeleniumBase {
             .get(type, name);
     }
 
+    protected HomePage homePage() {
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
     protected LoginPage loginPage() {
         return PageFactory.initElements(driver, LoginPage.class);
     }
