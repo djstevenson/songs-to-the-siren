@@ -5,6 +5,8 @@
    "devDependencies": {
       "chromedriver": "^75.0.1",
       "cucumber": "^5.1.0",
+      "cucumber-html-reporter": "^5.0.0",
+      "cucumber-pretty": "^1.5.2",
       "geckodriver": "^1.16.2",
       "nightwatch": "^1.1.13",
       "nightwatch-api": "^2.3.0"
