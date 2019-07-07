@@ -25,7 +25,7 @@ async function run() {
 
 (async function() {
     try {
-        await setup('default');
+        await setup('chromeHeadless');
         await run();
     } catch (err) {
         console.log(err.stack);

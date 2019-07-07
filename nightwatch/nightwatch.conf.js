@@ -38,6 +38,20 @@ module.exports = {
             }
         },
 
+        chromeHeadless: {
+            webdriver: {
+              server_path: chromedriver.path
+            },
+            desiredCapabilities: {
+                browserName: 'chrome',
+                javascriptEnabled: true,
+                acceptSslCerts: true,
+                chromeOptions: {
+                    args: ['headless', 'disable-gpu']
+                }
+            }
+        },
+
         firefox: {
             webdriver: {
               server_path: geckodriver.path
