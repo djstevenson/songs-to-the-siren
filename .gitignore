@@ -1,6 +1,7 @@
 /local/
 .DS_Store
 .prove
+.vscode
 
 selenium/target
 selenium/build
@@ -9,3 +10,11 @@ selenium/.gradle
 selenium/Reports/Forum*html
 selenium/Screenshots/Forum*png
 selenium/.vscode/
+
+nightwatch/node_modules/
+nightwatch/logs/*
+nightwatch/reports/*
+nightwatch/*.log
+nightwatch/.vscode
+nightwatch/tests_output/*
+nightwatch/report/*

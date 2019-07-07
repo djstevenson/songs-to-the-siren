@@ -35,7 +35,7 @@ export MOJO_MODE=development ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-carton exec -- morbo script/never-tire
+TEST_BCRYPT_COST=4 carton exec -- morbo script/never-tire
 ```
 
 Note, for 'test' and 'development' modes, this creates an admin user with the name 'admin' and password 'xyzzy'.
