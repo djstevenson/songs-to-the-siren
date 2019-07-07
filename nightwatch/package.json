@@ -4,6 +4,7 @@
    "private": true,
    "devDependencies": {
       "chromedriver": "^75.0.1",
+      "cucumber": "^5.1.0",
       "geckodriver": "^1.16.2",
       "nightwatch": "^1.1.13",
       "nightwatch-api": "^2.3.0"
