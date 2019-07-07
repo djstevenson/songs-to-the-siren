@@ -1,17 +1,35 @@
-module.exports = {
-    'step one: navigate to google' : function (browser) {
-        browser
-            .url('https://www.google.com')
-            .waitForElementVisible('body', 1000)
-            .setValue('input[type=text]', 'nightwatch')
-            .waitForElementVisible('input[name=btnK]', 1000)
-    },
+const {
+    createSession,
+    closeSession,
+    startWebDriver,
+    stopWebDriver,
+    client
+} = require('nightwatch-api');
 
-    'step two: click input' : function (browser) {
-        browser
-            .click('input[name=btnK]')
-            .pause(1000)
-            .assert.containsText('#main', 'Night Watch')
-            .end();
-        }
-};
+async function setup(env = 'default') {
+    await startWebDriver({ env });
+    await createSession({ env });
+}
+
+async function shutdown() {
+    await closeSession();
+    await stopWebDriver();
+}
+
+async function run() {
+    await client.url('https://duckduckgo.com/');
+    let title;
+    await client.getTitle(t => (title = t));
+    console.log(title);
+}
+
+(async function() {
+    try {
+        await setup('default');
+        await run();
+    } catch (err) {
+        console.log(err.stack);
+    } finally {
+        await shutdown();
+    }
+})();
