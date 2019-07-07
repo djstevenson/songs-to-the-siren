@@ -16,3 +16,4 @@ nightwatch/logs/*
 nightwatch/reports/*
 nightwatch/*.log
 nightwatch/.vscode
+nightwatch/tests_output/*
