@@ -1,14 +1,18 @@
 {
-   "name": "test-for-never-tire-blog",
-   "version": "1.0.0",
-   "private": true,
-   "devDependencies": {
-      "chromedriver": "^75.0.1",
-      "cucumber": "^5.1.0",
-      "cucumber-html-reporter": "^5.0.0",
-      "cucumber-pretty": "^1.5.2",
-      "geckodriver": "^1.16.2",
-      "nightwatch": "^1.1.13",
-      "nightwatch-api": "^2.3.0"
-   }
+    "name": "test-for-never-tire-blog",
+    "version": "1.0.0",
+    "private": true,
+    "devDependencies": {
+        "chromedriver": "^75.0.1",
+        "cucumber": "^5.1.0",
+        "cucumber-html-reporter": "^5.0.0",
+        "cucumber-pretty": "^1.5.2",
+        "geckodriver": "^1.16.2",
+        "mkdirp": "^0.5.1",
+        "nightwatch": "^1.1.13",
+        "nightwatch-api": "^2.3.0"
+    },
+    "scripts": {
+        "e2e-test": "mkdirp report && cucumber-js --require cucumber.conf.js --require step-definitions --format node_modules/cucumber-pretty --format json:report/cucumber_report.json"
+    }
 }
