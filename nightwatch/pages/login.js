@@ -9,8 +9,7 @@ const loginCommands = {
 
 module.exports = {
 	url: function() {
-		// return `${this.api.launchUrl}/user/login`;
-		return 'http://localhost:3000/user/login';
+		return `${this.api.launchUrl}/user/login`;
 	},
 	sections: {
 		loginForm: {
