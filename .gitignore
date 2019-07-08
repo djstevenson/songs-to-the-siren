@@ -18,3 +18,4 @@ nightwatch/*.log
 nightwatch/.vscode
 nightwatch/tests_output/*
 nightwatch/report/*
+nightwatch/screenshots/*
