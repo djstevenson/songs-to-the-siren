@@ -15,7 +15,7 @@ module.exports = {
                 javascriptEnabled: true,
                 acceptSslCerts: true,
                 chromeOptions: {
-                    args: ['headless', 'disable-gpu']
+                    args: ['disable-gpu']
                 }
             },
             screenshots: {
@@ -24,42 +24,13 @@ module.exports = {
             }
         },
 
-        chrome: {
-            webdriver: {
-              server_path: chromedriver.path
-            },
+        headless: {
             desiredCapabilities: {
                 browserName: 'chrome',
-                javascriptEnabled: true,
-                acceptSslCerts: true,
-                chromeOptions: {
-                    args: ['disable-gpu']
-                }
-            }
-        },
-
-        chromeHeadless: {
-            webdriver: {
-              server_path: chromedriver.path
-            },
-            desiredCapabilities: {
-                browserName: 'chrome',
-                javascriptEnabled: true,
-                acceptSslCerts: true,
                 chromeOptions: {
                     args: ['headless', 'disable-gpu']
                 }
             }
         },
-
-        firefox: {
-            webdriver: {
-              server_path: geckodriver.path
-            },
-            desiredCapabilities: {
-                browserName: 'firefox',
-                marionette: true
-            }
-        }
     }
 };

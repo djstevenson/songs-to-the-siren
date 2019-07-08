@@ -12,7 +12,7 @@ const reporter = require('cucumber-html-reporter');
 setDefaultTimeout(60000);
 
 BeforeAll(async () => {
-    await startWebDriver({ env: process.env.NIGHTWATCH_ENV || 'chrome' });
+    await startWebDriver({ env: process.env.NIGHTWATCH_ENV || 'default' });
     await createSession();
 });
 
