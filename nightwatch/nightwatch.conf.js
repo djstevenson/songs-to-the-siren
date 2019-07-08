@@ -1,9 +1,11 @@
 const chromedriver = require('chromedriver');
-const geckodriver = require('geckodriver');
 
 module.exports = {
+    page_objects_path: "./pages",
+
     test_settings: {
         default: {
+            launch_url: "http://localhost:3000",
             webdriver: {
                 start_process: true,
                 server_path: chromedriver.path,
@@ -31,6 +33,6 @@ module.exports = {
                     args: ['headless', 'disable-gpu']
                 }
             }
-        },
+        }
     }
 };
