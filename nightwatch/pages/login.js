@@ -13,7 +13,7 @@ module.exports = {
 	},
 	sections: {
 		loginForm: {
-			selector: '#login-form',
+			selector: '#user-login-form',
 			elements: {
 				usernameField: '#user-login-name',
 				passwordField: '#user-login-password',

@@ -15,10 +15,11 @@ Then(/^The title is "(.*?)"$/, text => {
     return client.assert.title(text);
 });
 
-// When(/^I click on the login button$/, async () => {
-//     await login.section.loginForm.click('@submit');
-// });
+When(/^I click on the login button$/, () => {
+    return login.section.loginForm.click('@submit').pause(1000);
+});
 
-// Then(/^The name field has error: "(.*?)"$/, async error => {
-//     await client.assert.value('@usernameError', error);
-// });
+Then(/^The "(.*?)" field has error: "(.*?)"$/, (field, error) => {
+    const label = '@' + field + 'Error';
+    return login.section.loginForm.assert.containsText(label, error);
+});
