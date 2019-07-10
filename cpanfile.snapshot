@@ -1668,13 +1668,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-9.10
-    pathname: S/SR/SRI/Minion-9.10.tar.gz
+  Minion-9.11
+    pathname: S/SR/SRI/Minion-9.11.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 9.10
+      Minion 9.11
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1682,7 +1682,7 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 9.10
+      Minion::_Guard 9.11
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
@@ -1837,8 +1837,8 @@ DISTRIBUTIONS
       Mojolicious 8.03
       SQL::Abstract 1.86
       perl 5.010001
-  Mojolicious-8.18
-    pathname: S/SR/SRI/Mojolicious-8.18.tar.gz
+  Mojolicious-8.20
+    pathname: S/SR/SRI/Mojolicious-8.20.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1893,7 +1893,6 @@ DISTRIBUTIONS
       Mojo::Server::Morbo::Backend undef
       Mojo::Server::Morbo::Backend::Poll undef
       Mojo::Server::PSGI undef
-      Mojo::Server::PSGI::_IO undef
       Mojo::Server::Prefork undef
       Mojo::Template undef
       Mojo::Transaction undef
@@ -1908,7 +1907,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.18
+      Mojolicious 8.20
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
