@@ -175,9 +175,9 @@ sub render {
 	#       we need to maintain/test regardless of front-end gubbins.
 	my $fields  = $self->_fieldset($self->_render_fields);
 	my $buttons = $self->_fieldset($self->_render_buttons);
-
+	my $id      = $self->id . '-form';
     return qq{
-		<form accept-charset="utf-8" method="POST" novalidate>
+		<form accept-charset="utf-8" method="POST" novalidate id="${id}">
 			$fields
 			$buttons
 		</form>
