@@ -4,9 +4,9 @@
     % if ($auth_user->admin) {
         (ADMIN)
     % }
-    <a href="<%= url_for('logout') %>">Logout</a>
+    <a class="logout-link" href="<%= url_for('logout') %>">Logout</a>
 % }
 % else {
-    <a href="<%= url_for('login') %>">Login</a> to add comments
+    <a class="login-link" href="<%= url_for('login') %>">Login</a> to add comments
 % }
 </p>
