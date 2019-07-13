@@ -17,4 +17,7 @@ Then(/^The user is logged out$/, () => {
     return common.assertLoggedOut();
 });
 
+Then(/^The title is "(.*?)"$/, text => {
+    return client.assert.title(text);
+});
 

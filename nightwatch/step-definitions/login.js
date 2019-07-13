@@ -16,10 +16,6 @@ Given(/^I open the login page$/,  () => {
         .waitForElementVisible('body', 1000);
 });
 
-Then(/^The title is "(.*?)"$/, text => {
-    return client.assert.title(text);
-});
-
 When(/^I click on the login button$/, () => {
     return login.section.loginForm.click('@submit');
 });
