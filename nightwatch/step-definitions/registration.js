@@ -25,7 +25,7 @@ Then(/^The "(.*?)" registration field has error: "(.*?)"$/, (field, error) => {
     return registration.section.form.assert.containsText(label, error);
 });
 
-When(/^I enter "(.*?)" as "(.*?)" registration field$/, (value, field) => {
+When(/^I enter "(.*?)" into the "(.*?)" registration field$/, (value, field) => {
     const label = '@' + field + 'Field';
     return registration.section.form.setValue(label, value);
 });

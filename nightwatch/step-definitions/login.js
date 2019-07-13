@@ -27,7 +27,7 @@ Then(/^The "(.*?)" login field has error: "(.*?)"$/, (field, error) => {
     return login.section.form.assert.containsText(label, error);
 });
 
-When(/^I enter "(.*?)" as "(.*?)" login field$/, (value, field) => {
+When(/^I enter "(.*?)" into the "(.*?)" login field$/, (value, field) => {
     const label = '@' + field + 'Field';
     return login.section.form.setValue(label, value);
 });
