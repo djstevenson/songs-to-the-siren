@@ -1,26 +1,57 @@
 
 const loginStatusCommands = {
 	assertLoggedOut() {
+		const css = 'a.login-link';
 		return this.api
-			.waitForElementPresent('a.login-link')
+			.waitForElementPresent(css)
 			.assert
-			.elementPresent('a.login-link');
+			.elementPresent(css);
 	},
 
 	assertLoggedIn() {
+		const css = 'a.logout-link';
 		return this.api
-			.waitForElementPresent('a.logout-link')
+			.waitForElementPresent(css)
 			.assert
-			.elementPresent('a.logout-link');
+			.elementPresent(css);
 	},
 
 	assertLoggedInAs(name) {
+		const elementCss = 'span.user-name';
+		const valueXpath = "//span[@class='user-name' and contains(text(), '" + name + "')]";
 		return this.api
-			.waitForElementPresent('span.user-name')
-			.assert
+			.waitForElementPresent(elementCss)
 			.useXpath()
-			.elementPresent("//span[@class='user-name' and contains(text(), '" + name + "')]");
+			.assert
+			.elementPresent(valueXpath)
+			.useCss();
 	},
+};
+
+const flashCommands = {
+	assertFlash(message) {
+		const elementCss = 'div#flash-msg';
+		const valueXpath = "//*[@id='flash-msg' and contains(text(), '" + message + "')]";
+		return this.api
+			.waitForElementPresent(elementCss)
+			.useXpath()
+			.assert
+			.elementPresent(valueXpath)
+			.useCss();
+	}
+};
+
+const notificationCommands = {
+	assertNotification(message) {
+		const elementCss = 'div.notification > p:first-child';
+		const valueXpath = "//div[@class='notification']/p[contains(text(), '" + message + "')]";
+		return this.api
+			.waitForElementPresent(elementCss)
+			.useXpath()
+			.assert
+			.elementPresent(valueXpath)
+			.useCss();
+	}
 };
 
 module.exports = {
@@ -30,5 +61,7 @@ module.exports = {
 
 	commands: [
 		loginStatusCommands,
+		flashCommands,
+		notificationCommands
 	],
 };

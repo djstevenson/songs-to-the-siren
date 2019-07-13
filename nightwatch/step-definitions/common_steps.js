@@ -21,3 +21,10 @@ Then(/^The title is "(.*?)"$/, text => {
     return client.assert.title(text);
 });
 
+Then(/^A flash message says "(.*?)"$/, message => {
+    return common.assertFlash(message);
+});
+
+Then(/^The registration-accepted page is showing$/, () => {
+    return common.assertNotification("Thank you for your registration request");
+});
