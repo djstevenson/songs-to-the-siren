@@ -86,8 +86,7 @@ public class ConfirmRegistrationTest extends TestObject {
         // Test the user was deleted
         testUserPage()
             .get(username)
-            .assertNotFound("Reg declined - user is deleted")
-            .assertPageTitle("Test user not found", "User not found page title");
+            .assert404("Test user not found");
     }
     
     @Test

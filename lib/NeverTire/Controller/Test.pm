@@ -70,10 +70,10 @@ sub view_user {
             user     => $user,
             template => 'test/user',
         );
+        return 1;
     }
-    else {
-        $c->stash(template => 'test/user_not_found')
-    }
+
+    $c->reply->not_found;
 }
 
 # Permissions and prefs
