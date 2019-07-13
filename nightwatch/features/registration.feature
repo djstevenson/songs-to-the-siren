@@ -57,38 +57,11 @@ Scenario: Existing emails rejected
 Scenario: Good new user registers ok and gets confirmation email
 
     When I open the registration page
-    And I enter "regtest3new" into the "username" registration field
+    And I enter "regtest3" into the "username" registration field
     And I enter "regtest3@example.com" into the "email" registration field
-    And I enter "PW regtest3" into the "password" registration field
+    And I enter "PW for reg test 3" into the "password" registration field
     And I click on the register button
     Then The registration-accepted page is showing
     And A flash message says "Registered - watch out for confirmation email"
     And The user is logged out
-
-# Scenario: Bad username fails login
-
-#     Given There is a user named "logintest2"
-#     And I open the login page
-#     When I enter "logintest2x" into the "username" registration field
-#     And I enter "PW logintest2" into the "password" registration field
-#     And I click on the login button
-#     Then The "username" registration field has error: "Name and/or password incorrect"
-
-
-# Scenario: Good username with bad password fails login, in same way as bad username
-
-#     Given There is a user named "logintest3"
-#     And I open the login page
-#     When I enter "logintest3" into the "username" registration field
-#     And I enter "PW logintest2" into the "password" registration field
-#     And I click on the login button
-#     Then The "username" registration field has error: "Name and/or password incorrect"
-
-# Scenario: Bad username AND password shows same error as bad username
-
-#     Given I open the login page
-#     When I enter "abc" into the "username" registration field
-#     And I enter "abcde" into the "password" registration field
-#     And I click on the login button
-#     Then The "username" registration field has error: "Name and/or password incorrect"
-
+    And The user "regtest3x" has a registration email
