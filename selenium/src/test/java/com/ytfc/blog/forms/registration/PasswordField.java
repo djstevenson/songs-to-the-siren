@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class PasswordField extends FormField {
 
     public PasswordField(WebDriver driver) {
-        super(driver, "password", "register-user-password");
+        super(driver, "password", "user-register-password");
 
     }
 
