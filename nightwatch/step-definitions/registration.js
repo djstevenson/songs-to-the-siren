@@ -29,5 +29,3 @@ When(/^I enter "(.*?)" as "(.*?)" registration field$/, (value, field) => {
     const label = '@' + field + 'Field';
     return registration.section.form.setValue(label, value);
 });
-
-

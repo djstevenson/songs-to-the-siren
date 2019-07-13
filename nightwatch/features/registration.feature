@@ -9,33 +9,37 @@ Scenario: Empty registration shows the right errors
 
     Given I open the registration page
     When I click on the register button
-    Then The "username" field has error: "Required"
-    And The "email" field has error: "Required"
-    And  The "password" field has error: "Required"
+    Then The "username" registration field has error: "Required"
+    And The "email" registration field has error: "Required"
+    And  The "password" registration field has error: "Required"
 
-# Scenario: Login with short name shows right error
+Scenario: Registration with short name shows right error
 
-#     Given I open the login page
-#     When I enter "x" as "username" field
-#     And I click on the login button
-#     Then The "username" field has error: "Minimum length 3"
-#     And  The "password" field has error: "Required"
+    Given I open the registration page
+    When I enter "x" as "username" registration field
+    And I click on the register button
+    Then The "username" registration field has error: "Minimum length 3"
 
-# Scenario: Login with short name and password shows right errors
+Scenario: Registration with invalid email shows right error
 
-#     Given I open the login page
-#     When I enter "x" as "username" field
-#     And I enter "x" as "password" field
-#     And I click on the login button
-#     Then The "username" field has error: "Minimum length 3"
-#     And  The "password" field has error: "Minimum length 5"
+    Given I open the registration page
+    When I enter "x@x" as "email" registration field
+    And I click on the register button
+    Then The "email" registration field has error: "Invalid email address"
+
+Scenario: Registration with short password shows right error
+
+    Given I open the registration page
+    When I enter "x" as "password" registration field
+    And I click on the register button
+    Then The "password" registration field has error: "Minimum length 5"
 
 # Scenario: Good login works ok
 
 #     Given I create a user named "logintest1"
 #     And I open the login page
-#     When I enter "logintest1" as "username" field
-#     And I enter "PW logintest1" as "password" field
+#     When I enter "logintest1" as "username" registration field
+#     And I enter "PW logintest1" as "password" registration field
 #     And I click on the login button
 #     Then The user is logged in
 
@@ -43,26 +47,26 @@ Scenario: Empty registration shows the right errors
 
 #     Given I create a user named "logintest2"
 #     And I open the login page
-#     When I enter "logintest2x" as "username" field
-#     And I enter "PW logintest2" as "password" field
+#     When I enter "logintest2x" as "username" registration field
+#     And I enter "PW logintest2" as "password" registration field
 #     And I click on the login button
-#     Then The "username" field has error: "Name and/or password incorrect"
+#     Then The "username" registration field has error: "Name and/or password incorrect"
 
 
 # Scenario: Good username with bad password fails login, in same way as bad username
 
 #     Given I create a user named "logintest3"
 #     And I open the login page
-#     When I enter "logintest3" as "username" field
-#     And I enter "PW logintest2" as "password" field
+#     When I enter "logintest3" as "username" registration field
+#     And I enter "PW logintest2" as "password" registration field
 #     And I click on the login button
-#     Then The "username" field has error: "Name and/or password incorrect"
+#     Then The "username" registration field has error: "Name and/or password incorrect"
 
 # Scenario: Bad username AND password shows same error as bad username
 
 #     Given I open the login page
-#     When I enter "abc" as "username" field
-#     And I enter "abcde" as "password" field
+#     When I enter "abc" as "username" registration field
+#     And I enter "abcde" as "password" registration field
 #     And I click on the login button
-#     Then The "username" field has error: "Name and/or password incorrect"
+#     Then The "username" registration field has error: "Name and/or password incorrect"
 
