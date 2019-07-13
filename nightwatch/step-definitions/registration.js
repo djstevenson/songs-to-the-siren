@@ -16,5 +16,18 @@ Given(/^I open the registration page$/,  () => {
         .waitForElementVisible('body', 1000);
 });
 
+When(/^I click on the register button$/, () => {
+    return registration.section.form.click('@submit');
+});
+
+Then(/^The "(.*?)" registration field has error: "(.*?)"$/, (field, error) => {
+    const label = '@' + field + 'Error';
+    return registration.section.form.assert.containsText(label, error);
+});
+
+When(/^I enter "(.*?)" as "(.*?)" registration field$/, (value, field) => {
+    const label = '@' + field + 'Field';
+    return registration.section.form.setValue(label, value);
+});
 
 

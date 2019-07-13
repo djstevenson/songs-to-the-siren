@@ -5,12 +5,13 @@ Scenario: Registration page looks right
     Given I open the registration page
     Then The title is "Register"
 
-# Scenario: Empty registration shows the right errors
+Scenario: Empty registration shows the right errors
 
-#     Given I open the registration page
-#     When I click on the login button
-#     Then The "username" field has error: "Required"
-#     And  The "password" field has error: "Required"
+    Given I open the registration page
+    When I click on the register button
+    Then The "username" field has error: "Required"
+    And The "email" field has error: "Required"
+    And  The "password" field has error: "Required"
 
 # Scenario: Login with short name shows right error
 

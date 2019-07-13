@@ -17,17 +17,19 @@ Given(/^I open the login page$/,  () => {
 });
 
 When(/^I click on the login button$/, () => {
-    return login.section.loginForm.click('@submit');
+    return login.section.form.click('@submit');
 });
 
-Then(/^The "(.*?)" field has error: "(.*?)"$/, (field, error) => {
+// TODO Kinda repeated for all forms - can we factor it out?
+//      Need to find how to pass form into step though.
+Then(/^The "(.*?)" login field has error: "(.*?)"$/, (field, error) => {
     const label = '@' + field + 'Error';
-    return login.section.loginForm.assert.containsText(label, error);
+    return login.section.form.assert.containsText(label, error);
 });
 
-When(/^I enter "(.*?)" as "(.*?)" field$/, (value, field) => {
+When(/^I enter "(.*?)" as "(.*?)" login field$/, (value, field) => {
     const label = '@' + field + 'Field';
-    return login.section.loginForm.setValue(label, value);
+    return login.section.form.setValue(label, value);
 });
 
 // Factor out this create-test-user cos we're gonna need it everywhere
