@@ -17,11 +17,11 @@ Then(/^The user is logged out$/, () => {
     return common.assertLoggedOut();
 });
 
-Then(/^The title is "(.*?)"$/, text => {
+Then(/^The title is: (.*?)$/, text => {
     return client.assert.title(text);
 });
 
-Then(/^A flash message says "(.*?)"$/, message => {
+Then(/^A flash message says: (.*?)$/, message => {
     return common.assertFlash(message);
 });
 
