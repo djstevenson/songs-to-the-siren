@@ -11,7 +11,8 @@
         "geckodriver": "^1.16.2",
         "mkdirp": "^0.5.1",
         "nightwatch": "^1.1.13",
-        "nightwatch-api": "^2.3.0"
+        "nightwatch-api": "^2.3.0",
+        "reverse-string": "0.0.6"
     },
     "scripts": {
         "e2e-test": "mkdirp report && cucumber-js --require cucumber.conf.js --require step-definitions --format node_modules/cucumber-pretty --format json:report/cucumber_report.json"
