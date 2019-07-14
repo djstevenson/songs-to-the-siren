@@ -22,12 +22,12 @@ When(/^I click on the login button$/, () => {
 
 // TODO Kinda repeated for all forms - can we factor it out?
 //      Need to find how to pass form into step though.
-Then(/^The "(.*?)" login field has error: "(.*?)"$/, (field, error) => {
+Then(/^The (.*?) login field has error: (.*?)$/, (field, error) => {
     const label = '@' + field + 'Error';
     return login.section.form.assert.containsText(label, error);
 });
 
-When(/^I enter "(.*?)" into the "(.*?)" login field$/, (value, field) => {
+When(/^I enter "(.*?)" into the (.*?) login field$/, (value, field) => {
     const label = '@' + field + 'Field';
     return login.section.form.setValue(label, value);
 });
