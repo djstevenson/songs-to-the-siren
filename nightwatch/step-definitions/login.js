@@ -16,26 +16,24 @@ Given(/^I open the login page$/,  () => {
         .waitForElementVisible('body', 1000);
 });
 
-Then(/^The title is "(.*?)"$/, text => {
-    return client.assert.title(text);
-});
-
 When(/^I click on the login button$/, () => {
-    return login.section.loginForm.click('@submit');
+    return login.section.form.click('@submit');
 });
 
-Then(/^The "(.*?)" field has error: "(.*?)"$/, (field, error) => {
+// TODO Kinda repeated for all forms - can we factor it out?
+//      Need to find how to pass form into step though.
+Then(/^The "(.*?)" login field has error: "(.*?)"$/, (field, error) => {
     const label = '@' + field + 'Error';
-    return login.section.loginForm.assert.containsText(label, error);
+    return login.section.form.assert.containsText(label, error);
 });
 
-When(/^I enter "(.*?)" as "(.*?)" field$/, (value, field) => {
+When(/^I enter "(.*?)" into the "(.*?)" login field$/, (value, field) => {
     const label = '@' + field + 'Field';
-    return login.section.loginForm.setValue(label, value);
+    return login.section.form.setValue(label, value);
 });
 
 // Factor out this create-test-user cos we're gonna need it everywhere
-Given(/^I create a user named "(.*?)"$/, (name) => {
+Given(/^There is a user named "(.*?)"$/, (name) => {
     const lcUsername = name.toLowerCase();
     return client
         .url(testUser.url(lcUsername))

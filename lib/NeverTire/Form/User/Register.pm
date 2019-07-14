@@ -6,7 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id'     => (default => 'register-user');
+has '+id'     => (default => 'user-register');
 
 has_field name => (
     type        => 'Input::Text',
@@ -46,7 +46,7 @@ has_field password => (
 	],
 );
 
-has_button register_user => ();
+has_button register => (id => 'user-register-button');
 
 override posted => sub {
 	my $self = shift;

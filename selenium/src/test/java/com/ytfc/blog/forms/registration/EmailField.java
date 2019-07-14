@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class EmailField extends FormField {
 
     public EmailField(WebDriver driver) {
-        super(driver, "email", "register-user-email");
+        super(driver, "email", "user-register-email");
     }
 
     

@@ -20,7 +20,7 @@ public class RegisterPage extends PageObject {
         this.form   = new RegisterForm(driver);
     }
 
-    @FindBy(id="register-user-button") WebElement registerButton;
+    @FindBy(id="user-register-button") WebElement registerButton;
 
     public RegisterPage get() {
         Helper.get(driver, "user/register");

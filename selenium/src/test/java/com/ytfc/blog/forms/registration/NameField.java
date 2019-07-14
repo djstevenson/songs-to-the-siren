@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class NameField extends FormField {
 
     public NameField(WebDriver driver) {
-        super(driver, "text", "register-user-name");
+        super(driver, "text", "user-register-name");
     }
 
     

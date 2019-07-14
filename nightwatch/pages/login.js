@@ -12,7 +12,7 @@ module.exports = {
 		return `${this.api.launchUrl}/user/login`;
 	},
 	sections: {
-		loginForm: {
+		form: {
 			selector: '#user-login-form',
 			elements: {
 				usernameField: '#user-login-name',
