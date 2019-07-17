@@ -3,8 +3,9 @@ Feature: Confirm/Decline Registration
 
 Scenario: A new user confirms their registration
 
-    Given There is a new registered user named: confreg1
-    When I click on the confirm link in the registration email for confreg1
+    Given I open the registration page
+    When I register a user named: confreg1
+    And I click on the confirm link in the registration email for confreg1
     Then The user is logged out
     And I see the login page
     And The user confreg1 is confirmed

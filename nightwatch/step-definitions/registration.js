@@ -27,7 +27,7 @@ When(/^I enter "(.*?)" into the (.*?) registration field$/, (value, field) => {
 });
 
 
-Given(/^There is a new registered user named: (.*?)$/,  (username) => {
+Given(/^I register a user named: (.*?)$/,  (username) => {
     const lcName = username.toLowerCase();
     const email = lcName + '@example.com';
     const passwd = reverse-String(lcName);
