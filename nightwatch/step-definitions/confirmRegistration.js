@@ -1,10 +1,10 @@
-import { client } from 'nightwatch-api';
-import { Given, Then, When } from 'cucumber';
+const { client } = require('nightwatch-api');
+const { Given, Then, When } = require('cucumber');
 
 const viewTestEmail = client.page.viewTestEmail();
 
 When(/^I click on the confirm link in the registration email for (.*)$/, (username) => {
     return client
-        .url(testEmail.url('registration', username))
+        .url(viewTestEmail.url('registration', username))
 });
 

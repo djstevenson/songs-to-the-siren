@@ -1,3 +1,5 @@
-export function url(name) {
-	return `${this.api.launchUrl}/test/create_user/${name}`;
-}
+module.exports = {
+	url: function(type, name) {
+		return `${this.api.launchUrl}/test/view_email/${type}/${name}`;
+	}
+};

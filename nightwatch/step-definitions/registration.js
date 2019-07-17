@@ -1,7 +1,7 @@
-import { client } from 'nightwatch-api';
-import { Given, Then, When } from 'cucumber';
+const { client } = require('nightwatch-api');
+const { Given, Then, When } = require('cucumber');
 
-import { reverse } from 'reverse-string';
+const { reverse } = require('reverse-string');
 
 // Get the registration page
 const registration = client.page.registration();
