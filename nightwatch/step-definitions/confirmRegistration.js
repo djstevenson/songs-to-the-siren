@@ -1,5 +1,5 @@
-const { client } = require('nightwatch-api');
-const { Given, Then, When } = require('cucumber');
+import { client } from 'nightwatch-api';
+import { Given, Then, When } from 'cucumber';
 
 const viewTestEmail = client.page.viewTestEmail();
 

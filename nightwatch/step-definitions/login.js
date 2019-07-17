@@ -1,7 +1,7 @@
-const { client } = require('nightwatch-api');
-const { Given, Then, When } = require('cucumber');
+import { client } from 'nightwatch-api';
+import { Given, Then, When } from 'cucumber';
 
-const { Url } = require('url');
+import { Url } from 'url';
 
 // Get the login page
 const login = client.page.login();
