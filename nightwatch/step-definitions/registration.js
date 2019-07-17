@@ -1,7 +1,7 @@
 const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
-const { Url } = require('url');
+const { reverse } = require('reverse-string');
 
 // Get the registration page
 const registration = client.page.registration();
@@ -29,3 +29,12 @@ When(/^I enter "(.*?)" into the (.*?) registration field$/, (value, field) => {
     const label = '@' + field + 'Field';
     return registration.section.form.setValue(label, value);
 });
+
+
+Given(/^There is a new registered user named: (.*?)$/,  (username) => {
+    const lcName = username.toLowerCase();
+    const email = lcName + '@example.com';
+    const passwd = reverse-String(lcName);
+    return registration.register(lcName, email, passwd);
+});
+
