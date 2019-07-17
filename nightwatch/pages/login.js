@@ -7,21 +7,19 @@ const loginCommands = {
 	},
 };
 
-module.exports = {
-	url: function() {
-		return `${this.api.launchUrl}/user/login`;
-	},
-	sections: {
-		form: {
-			selector: '#user-login-form',
-			elements: {
-				usernameField: '#user-login-name',
-				passwordField: '#user-login-password',
-				usernameError: '#error-user-login-name',
-				passwordError: '#error-user-login-password',
-				submit: '#login-button',
-			},
-			commands: [loginCommands],
+export function url() {
+	return `${this.api.launchUrl}/user/login`;
+}
+export const sections = {
+	form: {
+		selector: '#user-login-form',
+		elements: {
+			usernameField: '#user-login-name',
+			passwordField: '#user-login-password',
+			usernameError: '#error-user-login-name',
+			passwordError: '#error-user-login-password',
+			submit: '#login-button',
 		},
+		commands: [loginCommands],
 	},
 };
