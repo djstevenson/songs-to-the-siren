@@ -1,6 +1,6 @@
+@Focus
 Feature: Confirm/Decline Registration
 
-@Focus
 Scenario: A new user confirms their registration
 
     Given There is a new registered user named: confreg1
