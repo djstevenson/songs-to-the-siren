@@ -1,10 +1,11 @@
 const registrationCommands = {
-	register(username, email, password) {
+	registerUser(username, email, password) {
 		this
 			.setValue('@usernameField', username)
 			.setValue('@emailField',    email)
 			.setValue('@passwordField', password)
-			.click('@submit');
+			.click('@submit')
+			.waitForElementVisible('body', 1000);
 	},
 };
 

@@ -33,7 +33,7 @@ When(/^I enter "(.*?)" into the (.*?) login field$/, (value, field) => {
 });
 
 // Factor out this create-test-user cos we're gonna need it everywhere
-Given(/^There is a user named: (.*?)$/, (name) => {
+Given(/^There is a user named (.*?)$/, (name) => {
     const lcUsername = name.toLowerCase();
     return client
         .url(createTestUser.url(lcUsername))
