@@ -3,22 +3,6 @@
 .prove
 .vscode
 
-selenium/target
-selenium/build
-selenium/bin
-selenium/.gradle
-selenium/Reports/Forum*html
-selenium/Screenshots/Forum*png
-selenium/.vscode/
-
 cypress/node_modules/
 cypress/.vscode
-
-nightwatch/node_modules/
-nightwatch/logs/*
-nightwatch/reports/*
-nightwatch/*.log
-nightwatch/.vscode
-nightwatch/tests_output/*
-nightwatch/report/*
-nightwatch/screenshots/*
+cypress/videos
