@@ -1,14 +1,14 @@
 import { Common } from '../pages/common'
 
-export class LoginPage extends Common {
+export class RegisterPage extends Common {
     visit() {
         // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/login')
+        cy.visit('http://localhost:3000/user/register')
         return this;
     }
 
     getNameField() {
-        return cy.get('#user-login-name')
+        return cy.get('#user-register-name')
     }
 
     setNameField(name) {
@@ -22,11 +22,29 @@ export class LoginPage extends Common {
     }
     
     getNameError() {
-        return cy.get('#error-user-login-name')
+        return cy.get('#error-user-register-name')
+    }
+
+    getEmailField() {
+        return cy.get('#user-register-email')
+    }
+
+    setEmailField(email) {
+        const field = this.getEmailField()
+        field.clear()
+        if (email) {
+            field.type(email)
+        }
+
+        return this
+    }
+    
+    getEmailError() {
+        return cy.get('#error-user-register-email')
     }
 
     getPasswordField() {
-        return cy.get('#user-login-password')
+        return cy.get('#user-register-password')
     }
 
     setPasswordField(password) {
@@ -40,21 +58,21 @@ export class LoginPage extends Common {
     }
     
     getPasswordError() {
-        return cy.get('#error-user-login-password')
+        return cy.get('#error-user-register-password')
     }
 
     getSubmitButton() {
-        return cy.get('#login-button')
+        return cy.get('#user-register-button')
     }
 
     submit() {
         this.getSubmitButton().click()
-        return this
     }
 
-    login(name, password) {
+    register(name, email, password) {
         this
             .setNameField(name)
+            .setEmailField(email)
             .setPasswordField(password)
             .submit()
 
@@ -68,6 +86,16 @@ export class LoginPage extends Common {
 
     assertNameError(expected) {
         this.getNameError().contains(expected)
+        return this
+    }
+
+    assertNoEmailthisError() {
+        this.getEmailthisError().should('be.empty')
+        return this
+    }
+
+    assertEmailthisError(expected) {
+        this.getEmailthisError().contains(expected)
         return this
     }
 
