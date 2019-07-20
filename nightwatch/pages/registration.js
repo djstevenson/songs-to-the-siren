@@ -1,10 +1,11 @@
 const registrationCommands = {
-	register(username, email, password) {
+	registerUser(username, email, password) {
 		this
 			.setValue('@usernameField', username)
 			.setValue('@emailField',    email)
 			.setValue('@passwordField', password)
-			.click('@submit');
+			.click('@submit')
+			.waitForElementVisible('body', 1000);
 	},
 };
 
@@ -18,11 +19,11 @@ module.exports = {
 			elements: {
 				usernameField: '#user-register-name',
 				passwordField: '#user-register-password',
-				emailField:    '#user-register-email',
+				emailField: '#user-register-email',
 				usernameError: '#error-user-register-name',
 				passwordError: '#error-user-register-password',
-				emailError:    '#error-user-register-email',
-				submit:        '#user-register-button',
+				emailError: '#error-user-register-email',
+				submit: '#user-register-button',
 			},
 			commands: [registrationCommands],
 		},

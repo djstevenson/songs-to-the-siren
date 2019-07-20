@@ -31,7 +31,7 @@ Scenario: Login with short name and password shows right errors
 
 Scenario: Good login works ok
 
-    Given There is a user named "logintest1"
+    Given There is a user named logintest1
     And I open the login page
     When I enter "logintest1" into the username login field
     And I enter "PW logintest1" into the password login field
@@ -40,7 +40,7 @@ Scenario: Good login works ok
 
 Scenario: Bad username fails login
 
-    Given There is a user named "logintest2"
+    Given There is a user named logintest2
     And I open the login page
     When I enter "logintest2x" into the username login field
     And I enter "PW logintest2" into the password login field
@@ -50,7 +50,7 @@ Scenario: Bad username fails login
 
 Scenario: Good username with bad password fails login, in same way as bad username
 
-    Given There is a user named "logintest3"
+    Given There is a user named logintest3
     And I open the login page
     When I enter "logintest3" into the username login field
     And I enter "PW logintest2" into the password login field

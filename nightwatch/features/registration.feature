@@ -36,7 +36,7 @@ Scenario: Registration with short password shows right error
 
 Scenario: Existing usernames rejected
 
-    Given There is a user named "regtest1"
+    Given There is a user named regtest1
     And I open the registration page
     When I enter "regtest1" into the username registration field
     And I enter "regtest1@new.example.com" into the email registration field
@@ -46,7 +46,7 @@ Scenario: Existing usernames rejected
 
 Scenario: Existing emails rejected
 
-    Given There is a user named "regtest2"
+    Given There is a user named regtest2
     And I open the registration page
     When I enter "regtest2new" into the username registration field
     And I enter "regtest2@example.com" into the email registration field

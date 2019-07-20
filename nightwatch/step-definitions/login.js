@@ -7,7 +7,7 @@ const { Url } = require('url');
 const login = client.page.login();
 
 // "Create test user" page
-const testUser = client.page.testUser();
+const createTestUser = client.page.createTestUser();
 
 
 Given(/^I open the login page$/,  () => {
@@ -33,10 +33,10 @@ When(/^I enter "(.*?)" into the (.*?) login field$/, (value, field) => {
 });
 
 // Factor out this create-test-user cos we're gonna need it everywhere
-Given(/^There is a user named "(.*?)"$/, (name) => {
+Given(/^There is a user named (.*?)$/, (name) => {
     const lcUsername = name.toLowerCase();
     return client
-        .url(testUser.url(lcUsername))
+        .url(createTestUser.url(lcUsername))
         .waitForElementVisible('body', 1000);
 });
 
