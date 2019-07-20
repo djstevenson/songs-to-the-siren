@@ -29,7 +29,7 @@ describe('Login tests', function() {
             // TODO Put this URL in a global config somewhere
             cy.visit('http://localhost:3000/user/login')
 
-            cy.get('input#user-login-name').type('a');
+            cy.get('input#user-login-name').clear().type('a');
             cy.get('button#login-button').click();
 
             cy.get('#error-user-login-name')
@@ -44,8 +44,8 @@ describe('Login tests', function() {
             // TODO Put this URL in a global config somewhere
             cy.visit('http://localhost:3000/user/login')
 
-            cy.get('input#user-login-name').type('a');
-            cy.get('input#user-login-password').type('b');
+            cy.get('input#user-login-name').clear().type('a');
+            cy.get('input#user-login-password').clear().type('b');
             cy.get('button#login-button').click();
 
             cy.get('#error-user-login-name')
