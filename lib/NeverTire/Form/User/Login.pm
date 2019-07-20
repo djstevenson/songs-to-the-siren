@@ -58,14 +58,18 @@ after extra_validation => sub {
 
 	$self->_clear_save_user;
 
-	my $fail;
+	# Do nothing if we've already shown any errors
+	my $name_field = $self->find_field('name');
+	my $password_field = $self->find_field('password');
+	return if $name_field->has_error || $password_field->has_error;
+
+	my $fail; # Will be set to $login_fail if needed
 
 	my $login_fail = 'Name and/or password incorrect';
 
     # TODO This needs a restructure. Method(s) in User
     #      resultset/result, for example
 	my $user_rs = $self->c->schema->resultset('User');
-	my $name_field = $self->find_field('name');
 	my $user = $user_rs->find_by_name($name_field->value);
 	if ( $user ) {
 		my $password_field = $self->find_field('password');
@@ -87,9 +91,9 @@ after extra_validation => sub {
 		$fail = $login_fail;
 	}
 
-	# Set the error on 'name' if we don't already have one
+	# Set the error on 'name'
 	$name_field->error($fail)
-		if $fail && !$name_field->has_error;
+		if $fail;
 };
 
 __PACKAGE__->meta->make_immutable;
