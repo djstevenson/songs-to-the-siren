@@ -1,6 +1,6 @@
 const loginCommands = {
 	login(username, password) {
-		this
+		this.api
 			.setValue('@usernameField', username)
 			.setValue('@passwordField', password)
 			.click('@submit');

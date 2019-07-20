@@ -3,7 +3,7 @@ const { Given, Then, When } = require('cucumber');
 
 var reverse = require('reverse-string');
 
-// Page objects
+// Page
 const registration = client.page.registration();
 
 Given(/^I open the registration page$/,  () => {
@@ -33,5 +33,4 @@ Given(/^I register a user named (.*?)$/,  (username) => {
     const passwd = reverse(lcName);
     return registration.section.form.registerUser(lcName, email, passwd);
 });
-
 

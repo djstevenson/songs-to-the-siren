@@ -2,6 +2,7 @@ const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
 const viewTestEmail = client.page.viewTestEmail();
+const viewTestUser = client.page.viewTestUser();
 
 When(/^I click on the confirm link in the registration email for (.*)$/, (username) => {
     return client
@@ -11,3 +12,8 @@ When(/^I click on the confirm link in the registration email for (.*)$/, (userna
         .waitForElementVisible('body', 1000);
 });
 
+Then(/^The user (.*?) is not confirmed$/, (username) => {
+    return viewTestUser
+        .navigate(username)
+        .isConfirmed();
+});
