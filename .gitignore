@@ -5,4 +5,4 @@
 
 cypress/node_modules/
 cypress/.vscode
-cypress/videos
+cypress/cypress/videos
