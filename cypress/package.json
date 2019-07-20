@@ -4,7 +4,8 @@
   "description": "Cypress tests for the NeverTire blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "author": "David Stevenson <david@ytfc.com>",
   "license": "ISC",
