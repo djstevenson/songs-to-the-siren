@@ -6,8 +6,8 @@ import { RegisterPage } from '../pages/register-page'
 describe('Login tests', function() {
     describe('Login page looks right', function() {
         it('has the right title', function() {
-            const page = new LoginPage()
-            page.visit()
+            new LoginPage()
+                .visit()
                 .assertTitle('Login')
         })
     })
@@ -15,8 +15,8 @@ describe('Login tests', function() {
     // Tests incomplete...
     describe('Login form has field validation', function() {
         it('empty form shows "required" errors', function() {
-            const page = new LoginPage()
-            page.visit()
+            new LoginPage()
+                .visit()
                 .login('', '')
                 .assertNameError('Required')
                 .assertPasswordError('Required')
