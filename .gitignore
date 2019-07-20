@@ -11,6 +11,9 @@ selenium/Reports/Forum*html
 selenium/Screenshots/Forum*png
 selenium/.vscode/
 
+cypress/node_modules/
+cypress/.vscode
+
 nightwatch/node_modules/
 nightwatch/logs/*
 nightwatch/reports/*
