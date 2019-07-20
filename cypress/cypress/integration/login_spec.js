@@ -35,21 +35,22 @@ describe('Login tests', function() {
                 .assertNameError('Minimum length 3')
                 .assertPasswordError('Minimum length 5')
         })
-        // TODO do these commented-out tests make sense, cos it's not how the screen currently works
-        // it('ok username, short password, only shows error for password', function() {
-        //     new LoginPage()
-        //         .visit()
-        //         .login('abcdef', 'x')
-        //         .assertNoNameError()
-        //         .assertPasswordError('Required')
-        // })
-        // it('short username, ok password, only shows error for username', function() {
-        //     new LoginPage()
-        //         .visit()
-        //         .login('ab', 'xyzzy')
-        //         .assertNoNameError('Minimum length 3')
-        //         .assertNoPasswordError()
-        // })
+        // TODO Do these commented-out tests make sense, cos it's not how the screen currently works
+        // TODO The issue is that we try a login even when the fields have failed validation. Fix this.
+        it('ok username, short password, only shows error for password', function() {
+            new LoginPage()
+                .visit()
+                .login('abcdef', 'x')
+                .assertNoNameError()
+                .assertPasswordError('Minimum length 5')
+        })
+        it('short username, ok password, only shows error for username', function() {
+            new LoginPage()
+                .visit()
+                .login('ab', 'xyzzy')
+                .assertNameError('Minimum length 3')
+                .assertNoPasswordError()
+        })
     })
 
     describe('Login with good username/password succeeds', function() {
