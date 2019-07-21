@@ -50,7 +50,7 @@ describe('Registration tests', function() {
         })
         it('Name aleady-in-use is rejected', function() {
             // Do a good reg
-            let { user, page } = userFactory.getNextRegistered()
+            const { user, page } = userFactory.getNextRegistered()
 
             // And try to re-use the name
             page
@@ -62,7 +62,7 @@ describe('Registration tests', function() {
         })
         it('Password aleady-in-use is rejected', function() {
             // Do a good reg
-            let { user, page } = userFactory.getNextRegistered()
+            const { user, page } = userFactory.getNextRegistered()
 
             // And try to re-use the email
             page
@@ -85,7 +85,7 @@ describe('Registration tests', function() {
                 .assertNotification('Thank you for your registration request.')
         })
         it('registered user can login ok', function() {
-            let user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegistered()['user']
 
             new LoginPage()
                 .visit()
