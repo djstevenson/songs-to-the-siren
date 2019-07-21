@@ -54,7 +54,7 @@ describe('Login tests', function() {
     })
 
     describe('Login with good username/password succeeds', function() {
-        it('shows right error on login attempt', function() {
+        it('logs in and shows right login status', function() {
             new RegisterPage()
                 .visit()
                 .register('logintest1', 'logintest1@example.com', 'xyzzy')
