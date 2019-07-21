@@ -12,7 +12,6 @@ describe('Login tests', function() {
         })
     })
 
-    // Tests incomplete...
     describe('Login form has field validation', function() {
         it('empty form shows "required" errors', function() {
             new LoginPage()
@@ -35,8 +34,6 @@ describe('Login tests', function() {
                 .assertNameError('Minimum length 3')
                 .assertPasswordError('Minimum length 5')
         })
-        // TODO Do these commented-out tests make sense, cos it's not how the screen currently works
-        // TODO The issue is that we try a login even when the fields have failed validation. Fix this.
         it('ok username, short password, only shows error for password', function() {
             new LoginPage()
                 .visit()

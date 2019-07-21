@@ -89,13 +89,13 @@ export class RegisterPage extends Common {
         return this
     }
 
-    assertNoEmailthisError() {
-        this.getEmailthisError().should('be.empty')
+    assertNoEmailError() {
+        this.getEmailError().should('be.empty')
         return this
     }
 
-    assertEmailthisError(expected) {
-        this.getEmailthisError().contains(expected)
+    assertEmailError(expected) {
+        this.getEmailError().contains(expected)
         return this
     }
 
