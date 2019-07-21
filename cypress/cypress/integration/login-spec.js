@@ -1,7 +1,9 @@
 /// <reference types="Cypress" />
 
 import { LoginPage    } from '../pages/login-page'
-import { RegisterPage } from '../pages/register-page'
+import { UserFactory  } from '../support/user-factory'
+
+var userFactory = new UserFactory('logintest')
 
 describe('Login tests', function() {
     describe('Login page looks right', function() {
@@ -52,39 +54,43 @@ describe('Login tests', function() {
 
     describe('Login with good username/password succeeds', function() {
         it('logs in and shows right login status', function() {
-            new RegisterPage()
-                .visit()
-                .register('logintest1', 'logintest1@example.com', 'xyzzy')
+            let user = userFactory.getNextRegistered()['user']
             
             new LoginPage()
                 .visit()
-                .login('logintest1', 'xyzzy')
-                .assertLoggedInAs('logintest1')
+                .login(user.getName(), user.getPassword())
+                .assertLoggedInAs(user.getName())
 
         })
     })
 
     describe('Logins with bad credentials fail', function() {
         it('shows right error on login attempt with wrong username', function() {
+            let user = userFactory.getNextRegistered()['user']
+
             new LoginPage()
                 .visit()
-                .login('logintest2', 'xyzzy')
+                .login(user.getBadName(), user.getPassword())
                 .assertNameError('Name and/or password incorrect')
                 .assertLoggedOut()
 
         })
         it('shows right error on login attempt with wrong password', function() {
+            let user = userFactory.getNextRegistered()['user']
+
             new LoginPage()
                 .visit()
-                .login('logintest1', 'xyzzy2')
+                .login(user.getName(), user.getBadPassword())
                 .assertNameError('Name and/or password incorrect')
                 .assertLoggedOut()
 
         })
         it('shows right error on login attempt with wrong username AND password', function() {
+            let user = userFactory.getNextRegistered()['user']
+
             new LoginPage()
                 .visit()
-                .login('logintest2', 'xyzzy2')
+                .login(user.getBadName(), user.getBadPassword())
                 .assertNameError('Name and/or password incorrect')
                 .assertLoggedOut()
 
