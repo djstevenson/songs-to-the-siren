@@ -13,4 +13,18 @@ export class Common {
         cy.get('span.user-name').contains(username)
         return this
     }
+
+    assertNotification(expected) {
+        cy
+            .get('div.notification > p:first-child')
+            .contains(expected);
+        return this
+    }
+
+    assertFlash(expected) {
+        cy
+            .get('div#flash-msg')
+            .contains(expected);
+        return this
+    }
 }
