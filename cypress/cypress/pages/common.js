@@ -1,4 +1,8 @@
 export class Common {
+    getForm() {
+        return this._form
+    }
+
     assertTitle(expected) {
         cy.title().should('eq', expected)
         return this
@@ -27,4 +31,16 @@ export class Common {
             .contains(expected);
         return this
     }
+
+    assertNoFormError(key) {
+        this.getForm().getError(key).should('be.empty')
+        return this
+    }
+
+    assertFormError(key, expected) {
+        this.getForm().getError(key).contains(expected)
+        return this
+    }
+
+
 }
