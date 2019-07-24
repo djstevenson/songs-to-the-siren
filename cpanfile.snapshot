@@ -1822,10 +1822,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.14
-    pathname: S/SR/SRI/Mojo-Pg-4.14.tar.gz
+  Mojo-Pg-4.15
+    pathname: S/SR/SRI/Mojo-Pg-4.15.tar.gz
     provides:
-      Mojo::Pg 4.14
+      Mojo::Pg 4.15
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
