@@ -1,14 +1,17 @@
 import { User } from '../support/user'
 import { RegisterPage } from '../pages/register-page'
 
+var randomize = require('randomatic');
+
 export class UserFactory {
     constructor(baseName) {
-        this._name = baseName
+        this._name = baseName + '_' + randomize('a0', 5) + '_'
         this._index = 1
     }
 
     getNext() {
-        return new User(this._name, this._index++)
+        const i = this._index++
+        return new User(this._name + i.toString())
     }
 
     getNextRegistered() {
