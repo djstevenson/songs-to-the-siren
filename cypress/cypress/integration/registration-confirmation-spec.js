@@ -10,14 +10,8 @@ describe('Registration confirm/decline tests', function() {
     describe('New user confirms registration', function() {
         it('sees the right notification', function() {
 
-            // TODO Replace this with a Cypress custom "command"
-            //      see https://til.hashrocket.com/posts/92ienlwv9z-custom-cypress-commands
-            const { user, page } = userFactory.getNextRegistered()
+            const user = userFactory.getNextRegistered()['user']
 
-            page
-                .visit()
-                .register(user.getName(), user.getBadEmail(), user.getPassword())
-            
             new TestEmailPage()
                 .visit('registration', user.getName())
                 .confirmRegistration()
@@ -25,12 +19,9 @@ describe('Registration confirm/decline tests', function() {
                 .assertNotification('You have confirmed registration of this account.')
         })
         it('is confirmed', function() {
-            const { user, page } = userFactory.getNextRegistered()
 
-            page
-                .visit()
-                .register(user.getName(), user.getBadEmail(), user.getPassword())
-            
+            const user = userFactory.getNextRegistered()['user']
+
             new TestEmailPage()
                 .visit('registration', user.getName())
                 .confirmRegistration()
@@ -46,11 +37,7 @@ describe('Registration confirm/decline tests', function() {
     describe('New user declines registration', function() {
         it('sees the right notification', function() {
 
-            const { user, page } = userFactory.getNextRegistered()
-
-            page
-                .visit()
-                .register(user.getName(), user.getBadEmail(), user.getPassword())
+            const user = userFactory.getNextRegistered()['user']
             
             new TestEmailPage()
                 .visit('registration', user.getName())
@@ -59,12 +46,9 @@ describe('Registration confirm/decline tests', function() {
                 .assertNotification('You have declined registration of this account.')
         })
         it('is deleted', function() {
-            const { user, page } = userFactory.getNextRegistered()
 
-            page
-                .visit()
-                .register(user.getName(), user.getBadEmail(), user.getPassword())
-            
+            const user = userFactory.getNextRegistered()['user']
+
             new TestEmailPage()
                 .visit('registration', user.getName())
                 .declineRegistration()
