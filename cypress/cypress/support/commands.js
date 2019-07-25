@@ -1,27 +1,66 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import { TestEmailPage } from '../pages/test-email-page'
+import { TestUserPage  } from '../pages/test-user-page'
 
-// Cypress.Commands.add("createTestUser")
+Cypress.Commands.add('confirmUserRegistration', {
+  prevSubject: 'optional'
+}, (subject, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .confirmRegistration()
+        .assertFlash('Registration confirmed')
+        .assertNotification('You have confirmed registration of this account.')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+Cypress.Commands.add('declineUserRegistration', {
+  prevSubject: 'optional'
+}, (subject, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .declineRegistration()
+        .assertFlash('Registration declined')
+        .assertNotification('You have declined registration of this account.')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+Cypress.Commands.add('assertUserIsConfirmed', {
+  prevSubject: 'optional'
+}, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsConfirmed()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+Cypress.Commands.add('assertUserIsNotAdmin', {
+  prevSubject: 'optional'
+}, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsNotAdmin()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+Cypress.Commands.add('assertUserDoesNotExist', {
+    prevSubject: 'optional'
+  }, (subject, user) => {
+      new TestUserPage()
+        .assertNoUser(user.getName())
+  
+      if (subject) {
+          cy.wrap(subject)
+      }
+  })
+  

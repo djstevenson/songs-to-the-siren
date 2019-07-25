@@ -54,7 +54,7 @@ describe('Login tests', function() {
 
     describe('Login with good username/password succeeds', function() {
         it('logs in and shows right login status', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
             
             new LoginPage()
                 .visit()
@@ -66,7 +66,7 @@ describe('Login tests', function() {
 
     describe('Logins with bad credentials fail', function() {
         it('shows right error on login attempt with wrong username', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
 
             new LoginPage()
                 .visit()
@@ -76,7 +76,7 @@ describe('Login tests', function() {
 
         })
         it('shows right error on login attempt with wrong password', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
 
             new LoginPage()
                 .visit()
@@ -86,7 +86,7 @@ describe('Login tests', function() {
 
         })
         it('shows right error on login attempt with wrong username AND password', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
 
             new LoginPage()
                 .visit()
