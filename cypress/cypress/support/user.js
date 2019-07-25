@@ -1,8 +1,8 @@
 var reverse = require('reverse-string')
 
 export class User {
-    constructor(baseName, index) {
-        this._name = baseName + index.toString()
+    constructor(baseName) {
+        this._name = baseName
         this._email = this._name + "@example.com"
         this._password = "PW " + reverse(this._name)
     }

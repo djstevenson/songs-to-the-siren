@@ -3,6 +3,7 @@
 import { LoginPage    } from '../pages/login-page'
 import { RegisterPage } from '../pages/register-page'
 import { UserFactory  } from '../support/user-factory'
+import { TestUserPage } from '../pages/test-user-page'
 
 var userFactory = new UserFactory('regtest')
 
@@ -91,6 +92,14 @@ describe('Registration tests', function() {
                 .visit()
                 .login(user.getName(), user.getPassword())
                 .assertLoggedInAs(user.getName())
+        })
+        it('registered user is not confirmed', function() {
+            const user = userFactory.getNextRegistered()['user']
+
+            new TestUserPage()
+                .visit(user.getName())
+                .assertIsNotConfirmed()
+                .assertIsNotAdmin()
         })
 
         // Testing for what I user can do before/after they confirm
