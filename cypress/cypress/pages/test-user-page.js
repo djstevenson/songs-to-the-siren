@@ -27,4 +27,13 @@ export class TestUserPage extends Common {
         return this
     }
 
+    assertNoUser(username) {
+        const resp = cy.request({
+            url: `http://localhost:3000/test/view_user/${username}`,
+            failOnStatusCode: false
+        })
+        .its('status')
+        .should('eq', 404)
+    }
+
 }
