@@ -1,9 +1,7 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
 
-Cypress.Commands.add('confirmUserRegistration', {
-  prevSubject: 'optional'
-}, (subject, user) => {
+Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
         .confirmRegistration()
@@ -15,9 +13,7 @@ Cypress.Commands.add('confirmUserRegistration', {
     }
 })
 
-Cypress.Commands.add('declineUserRegistration', {
-  prevSubject: 'optional'
-}, (subject, user) => {
+Cypress.Commands.add('declineUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
         .declineRegistration()
@@ -29,9 +25,8 @@ Cypress.Commands.add('declineUserRegistration', {
     }
 })
 
-Cypress.Commands.add('assertUserIsConfirmed', {
-  prevSubject: 'optional'
-}, (subject, user) => {
+// Call via user->assertIsConfirmed()
+Cypress.Commands.add('assertUserIsConfirmed', { prevSubject: 'optional' }, (subject, user) => {
     new TestUserPage()
         .visit(user.getName())
         .assertIsConfirmed()
@@ -41,9 +36,30 @@ Cypress.Commands.add('assertUserIsConfirmed', {
     }
 })
 
-Cypress.Commands.add('assertUserIsNotAdmin', {
-  prevSubject: 'optional'
-}, (subject, user) => {
+// Call via user->assertIsNotConfirmed()
+Cypress.Commands.add('assertUserIsNotConfirmed', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsNotConfirmed()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsAdmin()
+Cypress.Commands.add('assertUserIsAdmin', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsAdmin()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsNotAdmin()
+Cypress.Commands.add('assertUserIsNotAdmin', { prevSubject: 'optional' }, (subject, user) => {
     new TestUserPage()
         .visit(user.getName())
         .assertIsNotAdmin()
@@ -53,14 +69,13 @@ Cypress.Commands.add('assertUserIsNotAdmin', {
     }
 })
 
-Cypress.Commands.add('assertUserDoesNotExist', {
-    prevSubject: 'optional'
-  }, (subject, user) => {
-      new TestUserPage()
-        .assertNoUser(user.getName())
-  
-      if (subject) {
-          cy.wrap(subject)
-      }
-  })
+// Call via user->assertDeleted()
+Cypress.Commands.add('assertUserDoesNotExist', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+    .assertNoUser(user.getName())
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
   

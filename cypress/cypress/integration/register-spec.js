@@ -77,16 +77,10 @@ describe('Registration tests', function() {
 
     describe('Register with good details succeeds', function() {
         it('registering does not login user', function() {
-            //TODO Change userFactory to return a user only
-            //TODO Visit the home page to check the status
-            //TODO Flash can be checked in getNextRegistered()
             userFactory.getNextRegistered()['page']
                 .assertLoggedOut();
         })
         it('registering shows a "success" response', function() {
-            //TODO Change userFactory to return a user only
-            //TODO Visit the home page to check the status
-            //TODO Flash can be checked in getNextRegistered()
             userFactory.getNextRegistered()['page']
                 .assertFlash('Registered - watch out for confirmation email')
                 .assertNotification('Thank you for your registration request.')
@@ -102,8 +96,7 @@ describe('Registration tests', function() {
         it('registered user is not confirmed', function() {
             const user = userFactory.getNextRegisteredUser()
 
-            new TestUserPage()
-                .visit(user.getName())
+            user
                 .assertIsNotConfirmed()
                 .assertIsNotAdmin()
         })

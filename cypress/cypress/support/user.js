@@ -46,6 +46,11 @@ export class User {
         return this
     }
 
+    assertIsNotConfirmed() {
+        cy.assertUserIsNotConfirmed(this)
+        return this
+    }
+
     assertIsAdmin() {
         cy.assertUserIsAdmin(this)
         return this
