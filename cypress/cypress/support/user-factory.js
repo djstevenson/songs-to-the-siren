@@ -22,5 +22,9 @@ export class UserFactory {
         return {user, page}
     }
 
+    getNextRegisteredUser() {
+        return this.getNextRegistered()['user']
+    }
+
 }
 

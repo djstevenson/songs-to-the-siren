@@ -86,7 +86,7 @@ describe('Registration tests', function() {
                 .assertNotification('Thank you for your registration request.')
         })
         it('registered user can login ok', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
 
             new LoginPage()
                 .visit()
@@ -94,10 +94,9 @@ describe('Registration tests', function() {
                 .assertLoggedInAs(user.getName())
         })
         it('registered user is not confirmed', function() {
-            const user = userFactory.getNextRegistered()['user']
+            const user = userFactory.getNextRegisteredUser()
 
-            new TestUserPage()
-                .visit(user.getName())
+            user
                 .assertIsNotConfirmed()
                 .assertIsNotAdmin()
         })

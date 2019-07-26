@@ -1,25 +1,81 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import { TestEmailPage } from '../pages/test-email-page'
+import { TestUserPage  } from '../pages/test-user-page'
+
+Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .confirmRegistration()
+        .assertFlash('Registration confirmed')
+        .assertNotification('You have confirmed registration of this account.')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+Cypress.Commands.add('declineUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .declineRegistration()
+        .assertFlash('Registration declined')
+        .assertNotification('You have declined registration of this account.')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsConfirmed()
+Cypress.Commands.add('assertUserIsConfirmed', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsConfirmed()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsNotConfirmed()
+Cypress.Commands.add('assertUserIsNotConfirmed', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsNotConfirmed()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsAdmin()
+Cypress.Commands.add('assertUserIsAdmin', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsAdmin()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertIsNotAdmin()
+Cypress.Commands.add('assertUserIsNotAdmin', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+        .visit(user.getName())
+        .assertIsNotAdmin()
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->assertDeleted()
+Cypress.Commands.add('assertUserDoesNotExist', { prevSubject: 'optional' }, (subject, user) => {
+    new TestUserPage()
+    .assertNoUser(user.getName())
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+  

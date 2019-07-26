@@ -31,5 +31,40 @@ export class User {
         return this._password + 'x'
     }
 
+    confirmRegistration() {
+        cy.confirmUserRegistration(this)
+        return this
+    }
+
+    declineRegistration() {
+        cy.declineUserRegistration(this)
+        return this
+    }
+
+    assertIsConfirmed() {
+        cy.assertUserIsConfirmed(this)
+        return this
+    }
+
+    assertIsNotConfirmed() {
+        cy.assertUserIsNotConfirmed(this)
+        return this
+    }
+
+    assertIsAdmin() {
+        cy.assertUserIsAdmin(this)
+        return this
+    }
+
+    assertIsNotAdmin() {
+        cy.assertUserIsNotAdmin(this)
+        return this
+    }
+
+    assertDeleted() {
+        cy.assertUserDoesNotExist(this)
+        return this
+    }
+
 }
 
