@@ -1,5 +1,6 @@
-import { Common } from '../pages/common'
+import { Common         } from '../pages/common'
 import { ForgotNameForm } from '../forms/forgot-name-form'
+import { LoginPage      } from '../pages/login-page'
 
 export class ForgotNamePage extends Common {
     constructor() {
@@ -8,8 +9,7 @@ export class ForgotNamePage extends Common {
     }
 
     visit() {
-        // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/forgot_name')
+        new LoginPage().clickForgotNameLink()
         return this;
     }
 

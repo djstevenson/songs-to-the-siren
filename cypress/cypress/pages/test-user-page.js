@@ -3,7 +3,7 @@ import { Common } from '../pages/common'
 export class TestUserPage extends Common {
     visit(username) {
         // TODO global config for base test URL
-        cy.visit(`http://localhost:3000/test/view_user/${username}`)
+        cy.visit(`/test/view_user/${username}`)
         return this;
     }
 
@@ -29,7 +29,7 @@ export class TestUserPage extends Common {
 
     assertNoUser(username) {
         const resp = cy.request({
-            url: `http://localhost:3000/test/view_user/${username}`,
+            url: `/test/view_user/${username}`,
             failOnStatusCode: false
         })
         .its('status')

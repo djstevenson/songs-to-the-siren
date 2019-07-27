@@ -1,5 +1,6 @@
-import { Common } from '../pages/common'
+import { Common             } from '../pages/common'
 import { ForgotPasswordForm } from '../forms/forgot-password-form'
+import { LoginPage          } from '../pages/login-page'
 
 export class ForgotPasswordPage extends Common {
     constructor() {
@@ -8,10 +9,10 @@ export class ForgotPasswordPage extends Common {
     }
 
     visit() {
-        // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/forgot_password')
+        new LoginPage().clickForgotPasswordLink()
         return this;
     }
+
 
     forgotPassword(email) {
         this.getForm().enter(new Map([['email', email]]))
