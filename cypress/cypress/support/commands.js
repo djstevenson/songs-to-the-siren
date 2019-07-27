@@ -88,3 +88,11 @@ Cypress.Commands.add('assertUserHasNoEmail', (user, type) => {
         .visit(type, user.getName())
     cy.get('div#email-not-found')
 })
+
+// TODO Will need to trigger events if any code relies on them
+//      Source: https://github.com/cypress-io/cypress/issues/566
+Cypress.Commands.add('fill', {
+    prevSubject: 'element'
+}, (subject, value) => {
+    cy.wrap(subject).invoke('val', value)
+});
