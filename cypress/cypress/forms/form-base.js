@@ -20,7 +20,9 @@ export class FormBase {
         const field = this.getField(name)
         field.clear();
         if (value) {
-            // field.type(value, {delay: 0})
+            // This version is slower but will be better if
+            // you want to trigger JS events etc.
+            // field.type(value, {delay: 0}) 
             field.fill(value)
         }
         return this
