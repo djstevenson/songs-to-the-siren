@@ -46,6 +46,11 @@ export class User {
         return this
     }
 
+    badDeclineRegistration(type) {
+        cy.badDeclineUserRegistration(type, this)
+        return this
+    }
+
     assertIsConfirmed() {
         cy.assertUserIsConfirmed(this)
         return this

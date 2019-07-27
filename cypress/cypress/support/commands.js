@@ -38,6 +38,17 @@ Cypress.Commands.add('declineUserRegistration', { prevSubject: 'optional' }, (su
     }
 })
 
+// Call via user->badDeclineRegistration()
+Cypress.Commands.add('badDeclineUserRegistration', { prevSubject: 'optional' }, (subject, type, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .badDeclineRegistration(type)
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
 // Call via user->assertIsConfirmed()
 Cypress.Commands.add('assertUserIsConfirmed', { prevSubject: 'optional' }, (subject, user) => {
     new TestUserPage()
