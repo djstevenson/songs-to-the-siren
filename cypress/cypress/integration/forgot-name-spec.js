@@ -3,7 +3,7 @@
 import { ForgotNamePage } from '../pages/forgot-name-page'
 import { UserFactory  } from '../support/user-factory'
 
-var newUser = new UserFactory('regconf')
+var newUser = new UserFactory('forgotname')
 
 describe('Forgot-name form tests', function() {
     describe('Forgot-name form validation', function() {
@@ -41,9 +41,9 @@ describe('Forgot-name form tests', function() {
                 .visit()
                 .forgotName(user.getEmail())
                 .assertFlash('Name reminder')
-                .assertNotification('If there is a user with that email address, a login name reminder has been sent by email.')
+                .assertNotification('Name reminder', 'If there is a user with that email address, a login name reminder has been sent by email.')
 
-            user.assertHasNameReminderEmail()
+            user.assertHasEmail('name_reminder')
         })
 
         it('enters incorrect address, gets good response page, but no email', function() {
@@ -54,9 +54,9 @@ describe('Forgot-name form tests', function() {
                 .visit()
                 .forgotName(user.getBadEmail())
                 .assertFlash('Name reminder')
-                .assertNotification('If there is a user with that email address, a login name reminder has been sent by email.')
+                .assertNotification('Name reminder', 'If there is a user with that email address, a login name reminder has been sent by email.')
 
-            user.assertHasNoNameReminderEmail()
+            user.assertHasNoEmail('name_reminder')
         })
     })
 })

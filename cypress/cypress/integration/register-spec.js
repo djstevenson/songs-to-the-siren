@@ -82,7 +82,7 @@ describe('Registration tests', function() {
         it('registering shows a "success" response', function() {
             userFactory.getNextRegistered()['page']
                 .assertFlash('Registered - watch out for confirmation email')
-                .assertNotification('Thank you for your registration request.')
+                .assertNotification('Registered', 'Thank you for your registration request.')
         })
         it('registered user can login ok', function() {
             const user = userFactory.getNextRegisteredUser()

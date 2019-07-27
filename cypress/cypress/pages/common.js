@@ -18,17 +18,19 @@ export class Common {
         return this
     }
 
-    assertNotification(expected) {
+    assertNotification(title, message) {
         cy
+            .get('h2.notification-title')
+            .contains(title)
             .get('div.notification > p:first-child')
-            .contains(expected);
-        return this
+            .contains(message);
+return this
     }
 
     assertFlash(expected) {
         cy
             .get('div#flash-msg')
-            .contains(expected);
+            .contains(expected)
         return this
     }
 

@@ -8,7 +8,7 @@ Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (su
         .visit('registration', user.getName())
         .confirmRegistration()
         .assertFlash('Registration confirmed')
-        .assertNotification('You have confirmed registration of this account.')
+        .assertNotification('Registration confirmed', 'You have confirmed registration of this account.')
 
     if (subject) {
         cy.wrap(subject)
@@ -32,7 +32,7 @@ Cypress.Commands.add('declineUserRegistration', { prevSubject: 'optional' }, (su
         .visit('registration', user.getName())
         .declineRegistration()
         .assertFlash('Registration declined')
-        .assertNotification('You have declined registration of this account.')
+        .assertNotification('Registration declined', 'You have declined registration of this account.')
 
     if (subject) {
         cy.wrap(subject)
@@ -113,18 +113,26 @@ Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject
     }
 })
 
-// Call via user->assertHasNameReminderEmail()
-Cypress.Commands.add('assertUserHasNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
+// Call via user->assertHasEmail('name_reminder')
+Cypress.Commands.add('assertUserHasEmail', { prevSubject: 'optional' }, (subject, user, type) => {
     new TestEmailPage()
-        .visit('name_reminder', user.getName())
+        .visit(type, user.getName())
 
     cy  .get('td#email-email-to').contains(user.getEmail())
-        .get('td#email-template-name').contains('name_reminder')
+        .get('td#email-template-name').contains(type)
+
+    if (subject) {
+        cy.wrap(subject)
+    }
 })
 
 // Call via user->assertHasNoNameReminderEmail()
-Cypress.Commands.add('assertUserHasNoNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
+Cypress.Commands.add('assertUserHasNoEmail', { prevSubject: 'optional' }, (subject, user, type) => {
     new TestEmailPage()
-        .visit('name_reminder', user.getName())
+        .visit(type, user.getName())
     cy.get('div#email-not-found')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
 })
