@@ -117,14 +117,14 @@ Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject
 Cypress.Commands.add('assertUserHasNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('name_reminder', user.getName())
-    cy
-        .get('td#email-email-to').contains(user.getEmail())
+
+    cy  .get('td#email-email-to').contains(user.getEmail())
         .get('td#email-template-name').contains('name_reminder')
 })
 
 // Call via user->assertHasNoNameReminderEmail()
-Cypress.Commands.add('assertUserNoHasNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
+Cypress.Commands.add('assertUserHasNoNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('name_reminder', user.getName())
-    cy.assertPageNotFound()
+    cy.get('div#email-not-found')
 })

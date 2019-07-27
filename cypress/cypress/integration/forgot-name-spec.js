@@ -33,7 +33,7 @@ describe('Forgot-name form tests', function() {
     })
 
     describe('User forgets password', function() {
-        it('enters correct email, and gets good response page', function() {
+        it('enters correct address, gets good response page, and email', function() {
 
             const user = newUser.getNextRegisteredUser()
 
@@ -42,31 +42,21 @@ describe('Forgot-name form tests', function() {
                 .forgotName(user.getEmail())
                 .assertFlash('Name reminder')
                 .assertNotification('If there is a user with that email address, a login name reminder has been sent by email.')
-            
+
             user.assertHasNameReminderEmail()
         })
+
+        it('enters incorrect address, gets good response page, but no email', function() {
+
+            const user = newUser.getNextRegisteredUser()
+
+            new ForgotNamePage()
+                .visit()
+                .forgotName(user.getBadEmail())
+                .assertFlash('Name reminder')
+                .assertNotification('If there is a user with that email address, a login name reminder has been sent by email.')
+
+            user.assertHasNoNameReminderEmail()
+        })
     })
-
-    // describe('New user uses bad confirm request', function() {
-    //     it('gets 404 not found', function() {
-
-    //         newUser
-    //             .getNextRegisteredUser()
-    //             .badConfirmRegistration('key')
-
-    //         cy.assertPageNotFound()
-    //     })
-    // })
-
-    // describe('New user uses bad decline request', function() {
-    //     it('gets 404 not found', function() {
-
-    //         newUser
-    //             .getNextRegisteredUser()
-    //             .badDeclineRegistration('key')
-
-    //         cy.assertPageNotFound()
-    //     })
-    // })
-
 })

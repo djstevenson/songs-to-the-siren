@@ -1,4 +1,8 @@
 % layout 'test';
 % title 'Test email not found';
 
-<p>Email not found</p>
+<div id="email-not-found">
+    <p>
+        Email not found
+    </p>
+</div>
