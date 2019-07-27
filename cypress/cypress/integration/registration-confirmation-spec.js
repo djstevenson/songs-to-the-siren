@@ -25,4 +25,15 @@ describe('Registration confirm/decline tests', function() {
                 .assertDeleted()
         })
     })
+
+    describe('New user uses bad confirmation request', function() {
+        it('sees right notification, and is not confirmed', function() {
+
+            newUser
+                .getNextRegisteredUser()
+                .badConfirmRegistration('key')
+
+            cy.assertPageNotFound()
+        })
+    })
 })

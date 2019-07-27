@@ -1,6 +1,7 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
 
+// Call via user->confirmRegistration()
 Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
@@ -13,6 +14,18 @@ Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (su
     }
 })
 
+// Call via user->badConfirmRegistration()
+Cypress.Commands.add('badConfirmUserRegistration', { prevSubject: 'optional' }, (subject, type, user) => {
+    new TestEmailPage()
+        .visit('registration', user.getName())
+        .badConfirmRegistration(type)
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})
+
+// Call via user->declineRegistration()
 Cypress.Commands.add('declineUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
@@ -72,10 +85,18 @@ Cypress.Commands.add('assertUserIsNotAdmin', { prevSubject: 'optional' }, (subje
 // Call via user->assertDeleted()
 Cypress.Commands.add('assertUserDoesNotExist', { prevSubject: 'optional' }, (subject, user) => {
     new TestUserPage()
-    .assertNoUser(user.getName())
+     .assertNoUser(user.getName())
 
     if (subject) {
         cy.wrap(subject)
     }
 })
-  
+
+// Call after a click() etc to assert that the result is a 404 not found.
+Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject) => {
+    cy.get('div.page-not-found')
+
+    if (subject) {
+        cy.wrap(subject)
+    }
+})

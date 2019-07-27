@@ -36,6 +36,11 @@ export class User {
         return this
     }
 
+    badConfirmRegistration(type) {
+        cy.badConfirmUserRegistration(type, this)
+        return this
+    }
+
     declineRegistration() {
         cy.declineUserRegistration(this)
         return this
