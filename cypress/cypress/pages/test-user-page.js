@@ -2,7 +2,6 @@ import { Common } from '../pages/common'
 
 export class TestUserPage extends Common {
     visit(username) {
-        // TODO global config for base test URL
         cy.visit(`/test/view_user/${username}`)
         return this;
     }

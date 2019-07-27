@@ -8,7 +8,6 @@ export class LoginPage extends Common {
     }
 
     visit() {
-        // TODO global config for base test URL
         cy.visit('/user/login')
         return this
     }
