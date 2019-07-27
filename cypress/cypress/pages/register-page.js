@@ -1,5 +1,6 @@
-import { Common } from '../pages/common'
+import { Common       } from '../pages/common'
 import { RegisterForm } from '../forms/register-form'
+import { LoginPage    } from '../pages/login-page'
 
 export class RegisterPage extends Common {
     constructor() {
@@ -8,8 +9,7 @@ export class RegisterPage extends Common {
     }
 
     visit() {
-        // TODO global config for base test URL
-        cy.visit('/user/register')
+        new LoginPage().clickRegisterLink()
         return this;
     }
 

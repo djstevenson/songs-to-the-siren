@@ -19,4 +19,19 @@ export class LoginPage extends Common {
         return this
     }
 
+
+    clickRegisterLink() {
+        this.visit()
+        cy.contains('Register new account').click()
+    }
+
+    clickForgotNameLink() {
+        this.visit()
+        cy.contains('Forgot user name').click()
+    }
+
+    clickForgotPasswordLink() {
+        this.visit()
+        cy.contains('Forgot password').click()
+    }
 }
