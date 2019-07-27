@@ -25,4 +25,27 @@ describe('Registration confirm/decline tests', function() {
                 .assertDeleted()
         })
     })
+
+    describe('New user uses bad confirm request', function() {
+        it('gets 404 not found', function() {
+
+            newUser
+                .getNextRegisteredUser()
+                .badConfirmRegistration('key')
+
+            cy.assertPageNotFound()
+        })
+    })
+
+    describe('New user uses bad decline request', function() {
+        it('gets 404 not found', function() {
+
+            newUser
+                .getNextRegisteredUser()
+                .badDeclineRegistration('key')
+
+            cy.assertPageNotFound()
+        })
+    })
+
 })
