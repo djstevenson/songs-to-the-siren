@@ -9,7 +9,7 @@ export class LoginPage extends Common {
 
     visit() {
         // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/login')
+        cy.visit('/user/login')
         return this
     }
 

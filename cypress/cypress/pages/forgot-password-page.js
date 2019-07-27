@@ -9,7 +9,7 @@ export class ForgotPasswordPage extends Common {
 
     visit() {
         // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/forgot_password')
+        cy.visit('/user/forgot_password')
         return this;
     }
 

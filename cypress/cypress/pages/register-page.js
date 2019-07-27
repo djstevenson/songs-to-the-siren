@@ -9,7 +9,7 @@ export class RegisterPage extends Common {
 
     visit() {
         // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/register')
+        cy.visit('/user/register')
         return this;
     }
 

@@ -9,7 +9,7 @@ export class ForgotNamePage extends Common {
 
     visit() {
         // TODO global config for base test URL
-        cy.visit('http://localhost:3000/user/forgot_name')
+        cy.visit('/user/forgot_name')
         return this;
     }
 
