@@ -1,5 +1,6 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
+import { callbackify } from 'util';
 
 // Call via user->confirmRegistration()
 Cypress.Commands.add('confirmUserRegistration', { prevSubject: 'optional' }, (subject, user) => {
@@ -110,4 +111,20 @@ Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject
     if (subject) {
         cy.wrap(subject)
     }
+})
+
+// Call via user->assertHasNameReminderEmail()
+Cypress.Commands.add('assertUserHasNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
+    new TestEmailPage()
+        .visit('name_reminder', user.getName())
+    cy
+        .get('td#email-email-to').contains(user.getEmail())
+        .get('td#email-template-name').contains('name_reminder')
+})
+
+// Call via user->assertHasNoNameReminderEmail()
+Cypress.Commands.add('assertUserNoHasNameReminderEmail', { prevSubject: 'optional' }, (subject, user) => {
+    new TestEmailPage()
+        .visit('name_reminder', user.getName())
+    cy.assertPageNotFound()
 })

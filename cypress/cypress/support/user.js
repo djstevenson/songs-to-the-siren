@@ -76,5 +76,14 @@ export class User {
         return this
     }
 
+    assertHasNameReminderEmail() {
+        cy.assertUserHasNameReminderEmail(this)
+        return this
+    }
+
+    assertHasNoNameReminderEmail() {
+        cy.assertUserHasNoNameReminderEmail(this)
+        return this
+    }
 }
 

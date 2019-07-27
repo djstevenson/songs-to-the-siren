@@ -3,7 +3,6 @@
 import { LoginPage    } from '../pages/login-page'
 import { RegisterPage } from '../pages/register-page'
 import { UserFactory  } from '../support/user-factory'
-import { TestUserPage } from '../pages/test-user-page'
 
 var userFactory = new UserFactory('regtest')
 
