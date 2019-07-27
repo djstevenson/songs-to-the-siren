@@ -20,7 +20,7 @@ export class FormBase {
         const field = this.getField(name)
         field.clear();
         if (value) {
-            field.type(value)
+            field.type(value, {delay: 0})
         }
         return this
     }
