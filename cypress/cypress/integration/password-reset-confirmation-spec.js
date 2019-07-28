@@ -10,8 +10,7 @@ describe('Password reset confirmation', function() {
         it('reset-confirm shows right shiz', function() {
 
             const user = newUser
-                .getNextRegisteredUser()
-                .confirmRegistration()
+                .getNextConfirmedUser()
             
             user
                 .requestPasswordReset()
@@ -38,8 +37,7 @@ describe('Password reset confirmation', function() {
         it('invalid reset code gives page-not-found', function() {
 
             newUser
-                .getNextRegisteredUser()
-                .confirmRegistration()
+                .getNextConfirmedUser()
                 .requestPasswordReset()
                 .badConfirmReset()
             
@@ -52,8 +50,7 @@ describe('Password reset confirmation', function() {
         it('bad new passwords give right errors', function() {
 
             const user = newUser
-                .getNextRegisteredUser()
-                .confirmRegistration()
+                .getNextConfirmedUser()
                 .requestPasswordReset()
                 .confirmReset()
             

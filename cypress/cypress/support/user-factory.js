@@ -26,5 +26,11 @@ export class UserFactory {
         return this.getNextRegistered()['user']
     }
 
+    getNextConfirmedUser() {
+        return this
+            .getNextRegisteredUser()
+            .confirmRegistration()
+    }
+
 }
 
