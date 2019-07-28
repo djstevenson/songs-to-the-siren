@@ -1,5 +1,5 @@
-The code behing the "Songs I'll Never Tire Of" blog
----------------------------------------------------
+The code behing the "Songs I Will Never Tire Of" blog
+-----------------------------------------------------
 
 INIT test DB
 ============
@@ -71,7 +71,7 @@ We don't. It's just a demo app so I can show some code if/when looking for a new
 
 ### Isn't the blog title gramatically incorrect?
 
-Arguably yes. But it's not a great name already and changing it to "Songs Of Which I'll Never Tire" doesn't exactly improve it!
+Probably yes. But it's not a great name already and changing it to "Songs Of Which I Will Never Tire" doesn't seem to improve it a lot.
 
 Licence
 =======

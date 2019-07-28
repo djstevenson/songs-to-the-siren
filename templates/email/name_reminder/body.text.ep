@@ -1,4 +1,4 @@
-Your login name for the "Songs I'll Never Tire of" blog
+Your login name for the "Songs I Will Never Tire of" blog
 is "<%= $name %>".
 
 You may now login at

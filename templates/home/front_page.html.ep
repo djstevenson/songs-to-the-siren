@@ -1,5 +1,5 @@
 % layout 'front_page_layout';
-% title "Songs I\x{2019}ll Never Tire of";
+% title "Songs I Will Never Tire of";
 
 % my $tag_count = scalar @$tags;
 % if ( $tag_count ) {

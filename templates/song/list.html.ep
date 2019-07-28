@@ -1,5 +1,5 @@
 % layout 'admin';
-% title "Songs I\x{2019}ll Never Tire of";
+% title "Songs I Will Never Tire of";
 
 <%== $table->render %>
 
