@@ -26,4 +26,9 @@ export class TestEmailPage extends Common {
         return this
     }
 
+    confirmReset() {
+        cy.get('td#email-urls-good-reset > a').click();
+        return this
+    }
+
 }
