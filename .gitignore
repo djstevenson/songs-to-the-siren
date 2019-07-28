@@ -6,3 +6,4 @@
 cypress/node_modules/
 cypress/.vscode
 cypress/cypress/videos
+cypress/cypress/screenshots

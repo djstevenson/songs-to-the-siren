@@ -17,7 +17,7 @@ sub add_routes {
     # Don't need to be logged in for these actions
     my $t = $route->any('/test')->to(controller => 'test');
 
-    $t->route('/create_user/:username')->name('test_create_user')->via('GET')->to(action => 'create_user');
+    $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/confirm_user/:username')->name('test_confirm_user')->via('GET')->to(action => 'confirm_user');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/set_user_flag/:userid/:flagname')->name('test_set_user_flag')->via('GET')->to(action => 'set_user_flag');
@@ -29,8 +29,12 @@ sub add_routes {
 sub create_user {
     my $c = shift;
 
+    my $name     = $c->param('name')     or die;
+    my $email    = $c->param('email')    or die;
+    my $password = $c->param('password') or die;
+
     my $rs = $c->schema->resultset('User');
-    my $user = $rs->create_test_user($c->stash->{username});
+    my $user = $rs->create_test_user($name, $email, $password);
 
     $c->stash(
         user     => $user,

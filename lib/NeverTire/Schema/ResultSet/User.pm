@@ -84,14 +84,9 @@ sub find_by_name{
 
 # TODO Split test methods off into a role?
 sub create_test_user {
-	my ($self, $username, $admin) = @_;
+	my ($self, $username, $email, $password, $admin) = @_;
 
 	$self->_assert_test_db;
-
-	my $lc_username = lc $username;
-	$lc_username =~ s/\s/-/g;
-	my $email       = $lc_username . '@example.com';
-	my $password    = 'PW ' . $lc_username;
 
 	my $passwd = new_password_hash($password);
 

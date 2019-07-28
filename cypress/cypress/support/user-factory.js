@@ -1,5 +1,7 @@
 import { User } from '../support/user'
 import { RegisterPage } from '../pages/register-page'
+import { verify } from 'crypto';
+import { isError } from 'util';
 
 var randomize = require('randomatic');
 
@@ -26,10 +28,25 @@ export class UserFactory {
         return this.getNextRegistered()['user']
     }
 
+    // This is a shortcut method that gets a registered, confirmed,
+    // test user by using the test-mode-only endpoint
     getNextConfirmedUser() {
-        return this
-            .getNextRegisteredUser()
-            .confirmRegistration()
+        const user = this.getNext()
+
+        const url = '/test/create_user'
+        
+        cy.request({
+            url: '/test/create_user',
+            method: 'POST',
+            qs: {
+                name:     user.getName(),
+                email:    user.getEmail(),
+                password: user.getPassword()
+            }
+
+        })
+
+        return user
     }
 
 }
