@@ -75,7 +75,7 @@ Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject
 
 // Call via user->assertHasEmail('name_reminder')
 Cypress.Commands.add('assertUserHasEmail', (user, type) => {
-    new TestEmailPage()
+    const page = new TestEmailPage()
         .visit(type, user.getName())
 
     cy  .get('td#email-email-to').contains(user.getEmail())
