@@ -35,7 +35,7 @@ describe('Forgot-passworrd form tests', function() {
     describe('User forgets password', function() {
         it('enters correct address, gets good response page, and email', function() {
 
-            const user = newUser.getNextRegisteredUser()
+            const user = newUser.getNextConfirmedUser()
 
             new ForgotPasswordPage()
                 .visit()
@@ -48,7 +48,7 @@ describe('Forgot-passworrd form tests', function() {
 
         it('enters incorrect address, gets good response page, but no email', function() {
 
-            const user = newUser.getNextRegisteredUser()
+            const user = newUser.getNextConfirmedUser()
 
             new ForgotPasswordPage()
                 .visit()
