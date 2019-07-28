@@ -1,5 +1,8 @@
 var reverse = require('reverse-string')
 
+import { TestEmailPage      } from '../pages/test-email-page'
+import { ForgotPasswordPage } from '../pages/forgot-password-page'
+
 export class User {
     constructor(baseName) {
         this._name = baseName
@@ -84,6 +87,17 @@ export class User {
     assertHasNoEmail(type) {
         cy.assertUserHasNoEmail(this, type)
         return this
+    }
+
+    // Returns a TestEmailPage from which you can click to confirm reset
+    requestPasswordReset() {
+        new ForgotPasswordPage()
+            .visit()
+            .forgotPassword(this.getEmail())
+
+        return new TestEmailPage()
+            .visit('password_reset', this.getName())
+
     }
 }
 

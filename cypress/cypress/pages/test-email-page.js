@@ -31,4 +31,9 @@ export class TestEmailPage extends Common {
         return this
     }
 
+    badConfirmReset() {
+        cy.get('td#email-urls-bad-reset-key > a').click();
+        return this
+    }
+
 }

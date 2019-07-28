@@ -1,31 +1,24 @@
 /// <reference types="Cypress" />
 
-import { UserFactory        } from '../support/user-factory'
-import { ForgotPasswordPage } from '../pages/forgot-password-page'
-import { ResetPasswordPage  } from '../pages/reset-password-page'
-import { TestEmailPage      } from '../pages/test-email-page'
-import { LoginPage } from '../pages/login-page';
+import { UserFactory       } from '../support/user-factory'
+import { ResetPasswordPage } from '../pages/reset-password-page'
 
 var newUser = new UserFactory('pwresetconf')
 
-describe('Password reset confirmation (and declination)', function() {
+describe('Password reset confirmation', function() {
     describe('User can perform successful reset', function() {
         it('reset-confirm shows right shiz', function() {
 
             const user = newUser
-                .getNextRegisteredUser()
-                .confirmRegistration()
+                .getNextConfirmedUser()
             
-            new ForgotPasswordPage()
-                .visit()
-                .forgotPassword(user.getEmail())
-
-            new TestEmailPage()
-                .visit('password_reset', user.getName())
+            user
+                .requestPasswordReset()
                 .confirmReset()
                 .assertLoggedOut()
             
-            const newPassword = 'x' + user.getPassword();
+            const newPassword = 'x' + user.getPassword()
+
             const resetPage = new ResetPasswordPage()
                 .resetPassword(newPassword)
                 .assertFlash('Your password has been reset')
@@ -37,6 +30,33 @@ describe('Password reset confirmation (and declination)', function() {
                 .login(user.getName(), newPassword)
                 .assertLoggedInAs(user.getName())
 
+        })
+    })
+    
+    describe('Invalid reset requests are rejected', function() {
+        it('invalid reset code gives page-not-found', function() {
+
+            newUser
+                .getNextConfirmedUser()
+                .requestPasswordReset()
+                .badConfirmReset()
+            
+            cy.assertPageNotFound()
+
+        })
+    })
+    
+    describe('Invalid new passwords are rejected', function() {
+        it('bad new passwords give right errors', function() {
+
+            const user = newUser
+                .getNextConfirmedUser()
+                .requestPasswordReset()
+                .confirmReset()
+            
+            new ResetPasswordPage()
+                .resetPassword('').assertFormError('password', 'Required')
+                .resetPassword('abc').assertFormError('password', 'Minimum length 5')
         })
     })
     
