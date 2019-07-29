@@ -9,6 +9,6 @@ export class RegisterForm extends FormBase {
         this._fields.set('email',    new FormField('email',    'user-register-email'))
         this._fields.set('password', new FormField('password', 'user-register-password'))
 
-        this._buttons.set('submit',  new FormButton('user-register-button'))
+        this._buttons.set('submit',  new FormButton('user-sign-up-button'))
     }
 }

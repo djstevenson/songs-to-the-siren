@@ -7,8 +7,8 @@ Cypress.Commands.add('confirmUserRegistration', (user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
         .confirmRegistration()
-        .assertFlash('Registration confirmed')
-        .assertNotification('Registration confirmed', 'You have confirmed registration of this account.')
+        .assertFlash('Signup confirmed')
+        .assertNotification('Signup confirmed', 'You have confirmed your signup.')
 })
 
 // Call via user->badConfirmRegistration()
@@ -23,8 +23,8 @@ Cypress.Commands.add('declineUserRegistration', (user) => {
     new TestEmailPage()
         .visit('registration', user.getName())
         .declineRegistration()
-        .assertFlash('Registration declined')
-        .assertNotification('Registration declined', 'You have declined registration of this account.')
+        .assertFlash('Signup declined')
+        .assertNotification('Signup declined', 'You have declined the signup of this account.')
 })
 
 // Call via user->badDeclineRegistration()

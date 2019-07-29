@@ -46,7 +46,7 @@ has_field password => (
 	],
 );
 
-has_button register => (id => 'user-register-button');
+has_button sign_up => (id => 'user-sign-up-button');
 
 override posted => sub {
 	my $self = shift;

@@ -1,12 +1,12 @@
 % layout 'default';
 % title 'Registered';
-<h2 class="notification-title">Registered</h2>
+<h2 class="notification-title">New user created</h2>
 
 <div class="notification">
     <p>
-        Thank you for your registration request.
+        Thank you for your signup request.
     </p>
     <p>
-        An email has been sent to you, and your registration will be complete as soon as you click the confirmation link in that email.
+        An email has been sent to you, and your signup will be complete as soon as you click the confirmation link in that email.
     </p>
 </div>

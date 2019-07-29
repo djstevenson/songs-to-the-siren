@@ -31,7 +31,7 @@ sub register {
 
     my $form = $c->form('User::Register');
     if (my $user = $form->process) {
-        $c->flash(msg => 'Registered - watch out for confirmation email');
+        $c->flash(msg => 'User created - watch out for confirmation email');
         $c->redirect_to('registered');
     }
     else {
@@ -122,7 +122,7 @@ sub confirm_registration {
     return $c->reply->not_found
         unless $user->confirm_registration($user_key);
 
-    $c->flash(msg => 'Registration confirmed');
+    $c->flash(msg => 'Signup confirmed');
     $c->redirect_to('confirmed');
 }
 
@@ -134,7 +134,7 @@ sub decline_registration {
     return $c->reply->not_found
         unless $user->decline_registration($user_key);
 
-    $c->flash(msg => 'Registration declined - your details are deleted');
+    $c->flash(msg => 'Signup declined - your details are deleted');
     $c->redirect_to('declined');
 }
 

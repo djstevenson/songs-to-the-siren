@@ -1,10 +1,10 @@
 % layout 'default';
-% title 'Registration declined';
-<h2 class="notification-title">Registration declined</h2>
+% title 'Signup declined';
+<h2 class="notification-title">Signup declined</h2>
 
 <div class="notification">
 	<p>
-		You have declined registration of this account.
+		You have declined the signup of this account.
 	</p>
 	<p>
 		All data associated with this email address has been deleted.
