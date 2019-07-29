@@ -3,7 +3,6 @@
 .prove
 .vscode
 
-cypress/node_modules/
-cypress/.vscode
-cypress/cypress/videos
-cypress/cypress/screenshots
+node_modules/
+cypress/videos
+cypress/screenshots
