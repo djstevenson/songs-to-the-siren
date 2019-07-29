@@ -21,7 +21,7 @@ export class LoginPage extends Common {
 
     clickRegisterLink() {
         this.visit()
-        cy.contains('Register new account').click()
+        cy.contains('Sign up to add comments').click()
     }
 
     clickForgotNameLink() {

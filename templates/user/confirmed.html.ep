@@ -1,10 +1,10 @@
 % layout 'default';
-% title 'Registration confirmed';
-<h2 class="notification-title">Registration confirmed</h2>
+% title 'Signup confirmed';
+<h2 class="notification-title">Signup confirmed</h2>
 
 <div class="notification">
 	<p>
-		You have confirmed registration of this account.
+		You have confirmed your signup.
 	</p>
 	<p>
 		You can now <a href="<%= url_for 'login' %>">login</a>.

@@ -11,7 +11,7 @@ describe('Registration tests', function() {
         it('has the right title', function() {
             new RegisterPage()
                 .visit()
-                .assertTitle('Register')
+                .assertTitle('Sign up')
         })
     })
 
@@ -81,8 +81,8 @@ describe('Registration tests', function() {
         })
         it('registering shows a "success" response', function() {
             userFactory.getNextRegistered()['page']
-                .assertFlash('Registered - watch out for confirmation email')
-                .assertNotification('Registered', 'Thank you for your registration request.')
+                .assertFlash('User created - watch out for confirmation email')
+                .assertNotification('New user created', 'Thank you for your signup request.')
         })
         it('registered user can login ok', function() {
             const user = userFactory.getNextRegisteredUser()
