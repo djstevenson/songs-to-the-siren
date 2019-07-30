@@ -1,6 +1,6 @@
-import { Common } from '../pages/common'
+import { Public } from '../pages/public'
 
-export class TestEmailPage extends Common {
+export class TestEmailPage extends Public {
     visit(type, username) {
         cy.visit(`/test/view_email/${type}/${username}`)
         return this;

@@ -1,6 +1,6 @@
-import { Common } from '../pages/common'
+import { Public } from '../pages/public'
 
-export class TestUserPage extends Common {
+export class TestUserPage extends Public {
     visit(username) {
         cy.visit(`/test/view_user/${username}`)
         return this;
@@ -34,5 +34,4 @@ export class TestUserPage extends Common {
         .its('status')
         .should('eq', 404)
     }
-
 }

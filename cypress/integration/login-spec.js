@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { LoginPage    } from '../pages/login-page'
+import { LoginPage    } from '../pages/user/login-page'
 import { UserFactory  } from '../support/user-factory'
 
 var userFactory = new UserFactory('logintest')

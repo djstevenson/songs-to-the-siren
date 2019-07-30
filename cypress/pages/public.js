@@ -1,4 +1,4 @@
-export class Common {
+export class Public {
     getForm() {
         return this._form
     }

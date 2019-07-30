@@ -32,13 +32,30 @@ The full comment for starting up a dev server with a new DB, that has a small am
 
 ```
 export MOJO_MODE=development ; \
+export MOJO_LOG_LEVEL=debug ; \
+export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-TEST_BCRYPT_COST=4 carton exec -- morbo script/never-tire
+ carton exec -- morbo script/never-tire
 ```
 
 Note, for 'test' and 'development' modes, this creates an admin user with the name 'admin' and password 'xyzzy'.
+
+Test Server
+===========
+
+Start up a test server with the same, but changing the mode, ie:
+
+```
+export MOJO_MODE=test ; \
+export MOJO_LOG_LEVEL=debug ; \
+export TEST_BCRYPT_COST=4 ; \
+sh tools/initdb.$MOJO_MODE.sh ; \
+carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
+psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
+ carton exec -- morbo script/never-tire
+```
 
 To list routes
 ==============
