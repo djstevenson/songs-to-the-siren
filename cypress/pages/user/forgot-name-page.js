@@ -1,6 +1,6 @@
-import { Public         } from '../pages/public'
-import { ForgotNameForm } from '../forms/forgot-name-form'
-import { LoginPage      } from '../pages/user/login-page'
+import { Public         } from '../../pages/public'
+import { ForgotNameForm } from '../../forms/forgot-name-form'
+import { LoginPage      } from '../../pages/user/login-page'
 
 export class ForgotNamePage extends Public {
     constructor() {

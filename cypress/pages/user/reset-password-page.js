@@ -1,6 +1,6 @@
-import { Public            } from '../pages/public'
-import { ResetPasswordForm } from '../forms/reset-password-form'
-import { LoginPage } from './login-page';
+import { Public            } from '../../pages/public'
+import { ResetPasswordForm } from '../../forms/reset-password-form'
+import { LoginPage         } from '../../pages/user/login-page';
 
 export class ResetPasswordPage extends Public {
     constructor() {
