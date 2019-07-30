@@ -1,8 +1,8 @@
-import { Common             } from '../pages/common'
+import { Public             } from '../pages/public'
 import { ForgotPasswordForm } from '../forms/forgot-password-form'
 import { LoginPage          } from '../pages/login-page'
 
-export class ForgotPasswordPage extends Common {
+export class ForgotPasswordPage extends Public {
     constructor() {
         super()
         this._form = new ForgotPasswordForm()

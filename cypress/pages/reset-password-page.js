@@ -1,8 +1,8 @@
-import { Common            } from '../pages/common'
+import { Public            } from '../pages/public'
 import { ResetPasswordForm } from '../forms/reset-password-form'
 import { LoginPage } from './login-page';
 
-export class ResetPasswordPage extends Common {
+export class ResetPasswordPage extends Public {
     constructor() {
         super()
         this._form = new ResetPasswordForm()
