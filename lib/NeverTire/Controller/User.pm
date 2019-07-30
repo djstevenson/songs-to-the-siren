@@ -42,6 +42,12 @@ sub register {
 sub login {
     my $c = shift;
 
+    # Logout before presenting the login screen
+    # TODO Need a shortcut for this
+    delete $c->session->{user};
+    delete $c->stash->{auth_user};
+    delete $c->stash->{admin_user};
+
     my $form = $c->form('User::Login');
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
@@ -56,7 +62,6 @@ sub login {
         }
     }
     else {
-        delete $c->session->{user};
         $c->stash(form => $form);
     }
 }

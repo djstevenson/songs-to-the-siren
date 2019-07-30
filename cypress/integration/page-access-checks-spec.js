@@ -11,6 +11,7 @@ describe('Access control depending on user authorisation', function() {
         it('can access login page', function() {
             new LoginPage()
                 .visit()
+                .assertLoggedOut()
                 .assertTitle('Login')
         })
         it('can access home page', function() {
@@ -22,9 +23,11 @@ describe('Access control depending on user authorisation', function() {
 
     describe('Access for logged-in normal user', function() {
         it('can access login page', function() {
+            // NB Visiting the home page logs you out
             newUser.getNextConfirmedUser().login()
             new LoginPage()
                 .visit()
+                .assertLoggedOut()
                 .assertTitle('Login')
 
         })
