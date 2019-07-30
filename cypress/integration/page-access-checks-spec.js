@@ -15,26 +15,28 @@ describe('Access control depending on user authorisation', function() {
                 .assertTitle('Login')
         })
         it('can access home page', function() {
+            const user = newUser.getNextConfirmedUser().login()
             new HomePage()
                 .visit()
+                .assertLoggedInAs(user.getName())
                 .assertTitle('Songs I Will Never Tire of')
         })
     })
 
     describe('Access for logged-in normal user', function() {
         it('can access login page', function() {
-            // NB Visiting the home page logs you out
             newUser.getNextConfirmedUser().login()
             new LoginPage()
                 .visit()
-                .assertLoggedOut()
+                .assertLoggedOut()    // Login page logs you out
                 .assertTitle('Login')
 
         })
         it('can access home page', function() {
-            newUser.getNextConfirmedUser().login()
+            const user = newUser.getNextConfirmedUser().login()
             new HomePage()
                 .visit()
+                .assertLoggedInAs(user.getName())
                 .assertTitle('Songs I Will Never Tire of')
         })
     })
