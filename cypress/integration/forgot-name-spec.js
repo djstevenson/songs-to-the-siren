@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { ForgotNamePage } from '../pages/forgot-name-page'
+import { ForgotNamePage } from '../pages/user/forgot-name-page'
 import { UserFactory  } from '../support/user-factory'
 
 var newUser = new UserFactory('forgotname')

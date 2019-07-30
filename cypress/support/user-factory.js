@@ -1,5 +1,5 @@
 import { User } from '../support/user'
-import { RegisterPage } from '../pages/register-page'
+import { RegisterPage } from '../pages/user/register-page'
 import { verify } from 'crypto';
 import { isError } from 'util';
 

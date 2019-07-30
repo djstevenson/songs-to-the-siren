@@ -1,6 +1,6 @@
 import { Public             } from '../pages/public'
 import { ForgotPasswordForm } from '../forms/forgot-password-form'
-import { LoginPage          } from '../pages/login-page'
+import { LoginPage          } from '../pages/user/login-page'
 
 export class ForgotPasswordPage extends Public {
     constructor() {

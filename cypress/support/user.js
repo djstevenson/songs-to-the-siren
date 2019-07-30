@@ -1,7 +1,7 @@
 var reverse = require('reverse-string')
 
 import { TestEmailPage      } from '../pages/test-email-page'
-import { ForgotPasswordPage } from '../pages/forgot-password-page'
+import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
 
 export class User {
     constructor(baseName) {
