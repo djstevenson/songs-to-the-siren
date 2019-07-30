@@ -34,5 +34,4 @@ export class TestUserPage extends Public {
         .its('status')
         .should('eq', 404)
     }
-
 }

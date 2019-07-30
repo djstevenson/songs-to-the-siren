@@ -105,6 +105,8 @@ export class User {
         new LoginPage()
         .visit()
         .login(this.getName(), this.getPassword())
+
+        return this
     }
 }
 

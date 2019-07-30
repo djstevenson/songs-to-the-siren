@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+import { SongListPage } from '../pages/song/song-list-page'
 import { LoginPage    } from '../pages/user/login-page'
 import { HomePage     } from '../pages/home-page'
 import { UserFactory  } from '../support/user-factory'
@@ -15,11 +16,14 @@ describe('Access control depending on user authorisation', function() {
                 .assertTitle('Login')
         })
         it('can access home page', function() {
-            const user = newUser.getNextConfirmedUser().login()
             new HomePage()
                 .visit()
-                .assertLoggedInAs(user.getName())
+                .assertLoggedOut()
                 .assertTitle('Songs I Will Never Tire of')
+        })
+        it('can not access song-list admin page', function() {
+            new SongListPage()
+                .visitAssertError(403)
         })
     })
 
@@ -38,6 +42,11 @@ describe('Access control depending on user authorisation', function() {
                 .visit()
                 .assertLoggedInAs(user.getName())
                 .assertTitle('Songs I Will Never Tire of')
+        })
+        it('can not access song-list admin page', function() {
+            const user = newUser.getNextConfirmedUser().login()
+            new SongListPage()
+                .visitAssertError(403)
         })
     })
 })
