@@ -1,8 +1,0 @@
-% layout 'test';
-% title 'Test email not found';
-
-<div id="email-not-found">
-    <p>
-        Email not found
-    </p>
-</div>

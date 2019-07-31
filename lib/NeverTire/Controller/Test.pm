@@ -133,7 +133,7 @@ sub view_email {
         }
     }
 
-    $c->stash(template => 'test/email_not_found');
+    $c->reply->not_found;
 }
 
 1;

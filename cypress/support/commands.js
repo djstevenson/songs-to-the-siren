@@ -86,8 +86,7 @@ Cypress.Commands.add('assertUserHasEmail', (user, type) => {
 Cypress.Commands.add('assertUserHasNoEmail', (user, type) => {
     // TODO Handle this via a 404
     new TestEmailPage(type, user.getName())
-        .visit()
-    cy.get('div#email-not-found')
+        .assertVisitError(404)
 })
 
 // TODO Will need to trigger events if any code relies on them
