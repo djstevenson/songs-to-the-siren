@@ -24,7 +24,7 @@ export class Public {
             .contains(title)
             .get('div.notification > p:first-child')
             .contains(message);
-return this
+        return this
     }
 
     assertFlash(expected) {
