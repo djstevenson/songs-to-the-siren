@@ -49,7 +49,7 @@ export class Public {
         return this
     }
 
-    visitAssertError(err) {
+    assertVisitError(err) {
         cy
             .request({
                 url:              this.pageUrl(),

@@ -4,8 +4,8 @@ import { callbackify } from 'util';
 
 // Call via user->confirmRegistration()
 Cypress.Commands.add('confirmUserRegistration', (user) => {
-    new TestEmailPage()
-        .visit('registration', user.getName())
+    new TestEmailPage('registration', user.getName())
+        .visit()
         .confirmRegistration()
         .assertFlash('Signup confirmed')
         .assertNotification('Signup confirmed', 'You have confirmed your signup.')
@@ -13,15 +13,15 @@ Cypress.Commands.add('confirmUserRegistration', (user) => {
 
 // Call via user->badConfirmRegistration()
 Cypress.Commands.add('badConfirmUserRegistration', (type, user) => {
-    new TestEmailPage()
-        .visit('registration', user.getName())
+    new TestEmailPage('registration', user.getName())
+        .visit()
         .badConfirmRegistration(type)
 })
 
 // Call via user->declineRegistration()
 Cypress.Commands.add('declineUserRegistration', (user) => {
-    new TestEmailPage()
-        .visit('registration', user.getName())
+    new TestEmailPage('registration', user.getName())
+        .visit()
         .declineRegistration()
         .assertFlash('Signup declined')
         .assertNotification('Signup declined', 'You have declined the signup of this account.')
@@ -29,43 +29,43 @@ Cypress.Commands.add('declineUserRegistration', (user) => {
 
 // Call via user->badDeclineRegistration()
 Cypress.Commands.add('badDeclineUserRegistration', (type, user) => {
-    new TestEmailPage()
-        .visit('registration', user.getName())
+    new TestEmailPage('registration', user.getName())
+        .visit()
         .badDeclineRegistration(type)
 })
 
 // Call via user->assertIsConfirmed()
 Cypress.Commands.add('assertUserIsConfirmed', (user) => {
-    new TestUserPage()
-        .visit(user.getName())
+    new TestUserPage(user.getName())
+        .visit()
         .assertIsConfirmed()
 })
 
 // Call via user->assertIsNotConfirmed()
 Cypress.Commands.add('assertUserIsNotConfirmed', (user) => {
-    new TestUserPage()
-        .visit(user.getName())
+    new TestUserPage(user.getName())
+        .visit()
         .assertIsNotConfirmed()
 })
 
 // Call via user->assertIsAdmin()
 Cypress.Commands.add('assertUserIsAdmin', (user) => {
-    new TestUserPage()
-        .visit(user.getName())
+    new TestUserPage(user.getName())
+        .visit()
         .assertIsAdmin()
 })
 
 // Call via user->assertIsNotAdmin()
 Cypress.Commands.add('assertUserIsNotAdmin', (user) => {
-    new TestUserPage()
-        .visit(user.getName())
+    new TestUserPage(user.getName())
+        .visit()
         .assertIsNotAdmin()
 })
 
 // Call via user->assertDeleted()
 Cypress.Commands.add('assertUserDoesNotExist', (user) => {
-    new TestUserPage()
-        .assertNoUser(user.getName())
+    new TestUserPage(user.getName())
+        .assertNoUser()
 })
 
 // Call after a click() etc to assert that the result is a 404 not found.
@@ -75,8 +75,8 @@ Cypress.Commands.add('assertPageNotFound', { prevSubject: 'optional' }, (subject
 
 // Call via user->assertHasEmail('name_reminder')
 Cypress.Commands.add('assertUserHasEmail', (user, type) => {
-    const page = new TestEmailPage()
-        .visit(type, user.getName())
+    const page = new TestEmailPage(type, user.getName())
+        .visit()
 
     cy  .get('td#email-email-to').contains(user.getEmail())
         .get('td#email-template-name').contains(type)
@@ -84,8 +84,9 @@ Cypress.Commands.add('assertUserHasEmail', (user, type) => {
 
 // Call via user->assertHasNoNameReminderEmail()
 Cypress.Commands.add('assertUserHasNoEmail', (user, type) => {
-    new TestEmailPage()
-        .visit(type, user.getName())
+    // TODO Handle this via a 404
+    new TestEmailPage(type, user.getName())
+        .visit()
     cy.get('div#email-not-found')
 })
 
