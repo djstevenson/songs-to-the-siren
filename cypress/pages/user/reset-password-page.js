@@ -3,6 +3,10 @@ import { ResetPasswordForm } from '../../forms/reset-password-form'
 import { LoginPage         } from '../../pages/user/login-page';
 
 export class ResetPasswordPage extends Public {
+    pageUrl() {
+        cy.assert
+    }
+
     constructor() {
         super()
         this._form = new ResetPasswordForm()

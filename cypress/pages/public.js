@@ -44,5 +44,19 @@ export class Public {
         return this
     }
 
+    visit() {
+        cy.visit(this.pageUrl())
+        return this
+    }
+
+    visitAssertError(err) {
+        cy
+            .request({
+                url:              this.pageUrl(),
+                failOnStatusCode: false
+            })
+            .its('status')
+            .should('eq', err)
+    }
 
 }
