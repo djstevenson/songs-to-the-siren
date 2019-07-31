@@ -23,7 +23,7 @@ describe('Access control depending on user authorisation', function() {
         })
         it('can not access song-list admin page', function() {
             new SongListPage()
-                .visitAssertError(403)
+                .assertVisitError(403)
         })
     })
 
@@ -46,7 +46,7 @@ describe('Access control depending on user authorisation', function() {
         it('can not access song-list admin page', function() {
             const user = newUser.getNextConfirmedUser().login()
             new SongListPage()
-                .visitAssertError(403)
+                .assertVisitError(403)
         })
     })
 })

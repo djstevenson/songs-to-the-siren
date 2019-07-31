@@ -96,8 +96,8 @@ export class User {
             .visit()
             .forgotPassword(this.getEmail())
 
-        return new TestEmailPage()
-            .visit('password_reset', this.getName())
+        return new TestEmailPage('password_reset', this.getName())
+            .visit()
 
     }
 

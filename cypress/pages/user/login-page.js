@@ -2,14 +2,13 @@ import { Public    } from '../../pages/public'
 import { LoginForm } from '../../forms/login-form'
 
 export class LoginPage extends Public {
+    pageUrl() {
+        return '/user/login'
+    }
+
     constructor() {
         super()
         this._form = new LoginForm()
-    }
-
-    visit() {
-        cy.visit('/user/login')
-        return this
     }
 
     login(name, password) {

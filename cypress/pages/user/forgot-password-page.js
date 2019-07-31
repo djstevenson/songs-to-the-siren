@@ -3,6 +3,10 @@ import { ForgotPasswordForm } from '../../forms/forgot-password-form'
 import { LoginPage          } from '../../pages/user/login-page'
 
 export class ForgotPasswordPage extends Public {
+    pageUrl() {
+        return '/user/forgot_name'
+    }
+
     constructor() {
         super()
         this._form = new ForgotPasswordForm()
