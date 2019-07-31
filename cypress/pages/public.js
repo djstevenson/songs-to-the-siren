@@ -1,4 +1,4 @@
-export class Common {
+export class Public {
     getForm() {
         return this._form
     }
@@ -24,7 +24,7 @@ export class Common {
             .contains(title)
             .get('div.notification > p:first-child')
             .contains(message);
-return this
+        return this
     }
 
     assertFlash(expected) {
@@ -44,5 +44,19 @@ return this
         return this
     }
 
+    visit() {
+        cy.visit(this.pageUrl())
+        return this
+    }
+
+    assertVisitError(err) {
+        cy
+            .request({
+                url:              this.pageUrl(),
+                failOnStatusCode: false
+            })
+            .its('status')
+            .should('eq', err)
+    }
 
 }

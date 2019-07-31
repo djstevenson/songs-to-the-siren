@@ -1,8 +1,12 @@
-import { Common       } from '../pages/common'
-import { RegisterForm } from '../forms/register-form'
-import { LoginPage    } from '../pages/login-page'
+import { Public       } from '../../pages/public'
+import { RegisterForm } from '../../forms/register-form'
+import { LoginPage    } from '../../pages/user/login-page'
 
-export class RegisterPage extends Common {
+export class RegisterPage extends Public {
+    pageUrl() {
+        return '/user/register'
+    }
+
     constructor() {
         super()
         this._form = new RegisterForm()

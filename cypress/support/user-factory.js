@@ -1,7 +1,5 @@
-import { User } from '../support/user'
-import { RegisterPage } from '../pages/register-page'
-import { verify } from 'crypto';
-import { isError } from 'util';
+import { User         } from '../support/user'
+import { RegisterPage } from '../pages/user/register-page'
 
 var randomize = require('randomatic');
 
@@ -29,7 +27,8 @@ export class UserFactory {
     }
 
     // This is a shortcut method that gets a registered, confirmed,
-    // test user by using the test-mode-only endpoint
+    // test user by using the test-mode-only endpoint. It does
+    // not log them in
     getNextConfirmedUser() {
         const user = this.getNext()
 
@@ -48,6 +47,5 @@ export class UserFactory {
 
         return user
     }
-
 }
 

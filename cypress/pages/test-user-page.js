@@ -1,9 +1,17 @@
-import { Common } from '../pages/common'
+import { Public } from '../pages/public'
 
-export class TestUserPage extends Common {
-    visit(username) {
-        cy.visit(`/test/view_user/${username}`)
-        return this;
+export class TestUserPage extends Public {
+    constructor(username) {
+        super();
+        this._name = username
+    }
+
+    getName() {
+        return this._name
+    }
+    
+    pageUrl() {
+        return '/test/view_user/' + this.getName()
     }
 
     assertIsConfirmed() {
@@ -26,13 +34,7 @@ export class TestUserPage extends Common {
         return this
     }
 
-    assertNoUser(username) {
-        const resp = cy.request({
-            url: `/test/view_user/${username}`,
-            failOnStatusCode: false
-        })
-        .its('status')
-        .should('eq', 404)
+    assertNoUser() {
+        this.assertVisitError(404);
     }
-
 }

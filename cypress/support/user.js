@@ -1,7 +1,8 @@
 var reverse = require('reverse-string')
 
 import { TestEmailPage      } from '../pages/test-email-page'
-import { ForgotPasswordPage } from '../pages/forgot-password-page'
+import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
+import { LoginPage          } from '../pages/user/login-page'
 
 export class User {
     constructor(baseName) {
@@ -95,9 +96,17 @@ export class User {
             .visit()
             .forgotPassword(this.getEmail())
 
-        return new TestEmailPage()
-            .visit('password_reset', this.getName())
+        return new TestEmailPage('password_reset', this.getName())
+            .visit()
 
+    }
+
+    login() {
+        new LoginPage()
+        .visit()
+        .login(this.getName(), this.getPassword())
+
+        return this
     }
 }
 

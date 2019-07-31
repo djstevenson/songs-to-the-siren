@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import { UserFactory       } from '../support/user-factory'
-import { ResetPasswordPage } from '../pages/reset-password-page'
+import { ResetPasswordPage } from '../pages/user/reset-password-page'
 
 var newUser = new UserFactory('pwresetconf')
 

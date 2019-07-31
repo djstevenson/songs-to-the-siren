@@ -1,8 +1,12 @@
-import { Common         } from '../pages/common'
-import { ForgotNameForm } from '../forms/forgot-name-form'
-import { LoginPage      } from '../pages/login-page'
+import { Public         } from '../../pages/public'
+import { ForgotNameForm } from '../../forms/forgot-name-form'
+import { LoginPage      } from '../../pages/user/login-page'
 
-export class ForgotNamePage extends Common {
+export class ForgotNamePage extends Public {
+    pageUrl() {
+        return '/user/forgot_name'
+    }
+
     constructor() {
         super()
         this._form = new ForgotNameForm()

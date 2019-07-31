@@ -1,9 +1,22 @@
-import { Common } from '../pages/common'
+import { Public } from '../pages/public'
 
-export class TestEmailPage extends Common {
-    visit(type, username) {
-        cy.visit(`/test/view_email/${type}/${username}`)
-        return this;
+export class TestEmailPage extends Public {
+    constructor(type, username) {
+        super();
+        this._type = type
+        this._name = username
+    }
+
+    getType() {
+        return this._type
+    }
+    
+    getName() {
+        return this._name
+    }
+    
+    pageUrl() {
+        return '/test/view_email/' + this.getType() + '/' + this.getName()
     }
 
     confirmRegistration() {

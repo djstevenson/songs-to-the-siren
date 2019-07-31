@@ -2,7 +2,7 @@
 .DS_Store
 .prove
 .vscode
-
+log/
 node_modules/
 cypress/videos
 cypress/screenshots
