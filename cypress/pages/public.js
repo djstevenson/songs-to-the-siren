@@ -18,19 +18,23 @@ export class Public {
         return this
     }
 
+    assertLoggedInAsAdmin(username) {
+        cy
+            .get('span.user-name').contains(username)
+            .get('p.login-status').contains('ADMIN')
+        return this
+    }
+
     assertNotification(title, message) {
         cy
-            .get('h2.notification-title')
-            .contains(title)
-            .get('div.notification > p:first-child')
-            .contains(message);
+            .get('h2.notification-title').contains(title)
+            .get('div.notification > p:first-child').contains(message);
         return this
     }
 
     assertFlash(expected) {
         cy
-            .get('div#flash-msg')
-            .contains(expected)
+            .get('div#flash-msg').contains(expected)
         return this
     }
 
