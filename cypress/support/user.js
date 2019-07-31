@@ -5,10 +5,11 @@ import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
 import { LoginPage          } from '../pages/user/login-page'
 
 export class User {
-    constructor(baseName) {
+    constructor(baseName, admin = false) {
         this._name = baseName
         this._email = this._name + "@example.com"
         this._password = "PW " + reverse(this._name)
+        this._admin = admin
     }
 
     getName() {

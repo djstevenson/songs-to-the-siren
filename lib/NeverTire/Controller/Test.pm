@@ -18,12 +18,8 @@ sub add_routes {
     my $t = $route->any('/test')->to(controller => 'test');
 
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
-    $t->route('/confirm_user/:username')->name('test_confirm_user')->via('GET')->to(action => 'confirm_user');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
-    $t->route('/set_user_flag/:userid/:flagname')->name('test_set_user_flag')->via('GET')->to(action => 'set_user_flag');
-    $t->route('/clear_user_flag/:userid/:flagname')->name('test_clear_user_flag')->via('GET')->to(action => 'clear_user_flag');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
-
 }
 
 sub create_user {
@@ -32,23 +28,11 @@ sub create_user {
     my $name     = $c->param('name')     or die;
     my $email    = $c->param('email')    or die;
     my $password = $c->param('password') or die;
+    my $admin    = $c->param('admin')    // 0;
 
     my $rs = $c->schema->resultset('User');
-    my $user = $rs->create_test_user($name, $email, $password);
+    my $user = $rs->create_test_user($name, $email, $password, $admin);
 
-    $c->stash(
-        user     => $user,
-        template => 'test/user',
-    );
-}
-
-sub confirm_user {
-    my $c = shift;
-
-    my $user = $c->_find_user_by_name;
-    my $key  = $user->find_key('registration');
-    $user->confirm_registration($key);
-    
     $c->stash(
         user     => $user,
         template => 'test/user',
@@ -78,37 +62,6 @@ sub view_user {
     }
 
     $c->reply->not_found;
-}
-
-# Permissions and prefs
-sub set_user_flag {
-    my $c = shift;
-
-    $c->_user_flag(1);
-}
-
-sub clear_user_flag {
-    my $c = shift;
-
-    $c->_user_flag(0);
-}
-
-my $_valid_flags = { map { ($_ => 1 )} qw/ admin post banned pm topic_view live_preview updates / };
-
-sub _user_flag {
-    my ($c, $value) = @_;
-
-    my $user = $c->schema->resultset('User')->find($c->stash->{userid});
-    my $flag = $c->stash->{flagname};
-    die unless exists $_valid_flags->{$flag};
-    $user->update({
-        $flag => $value
-    });
-
-    $c->stash(
-        user     => $user,
-        template => 'test/user',
-    );
 }
 
 sub view_email {
@@ -174,19 +127,35 @@ i.e. all actions require a logged-in user.
 
 =over
 
-=item /test/create_user/:username
+=item /test/create_user (POST only)
 
-Creates a user with no permissions.
+Creates a 'confirmed' user with the given name, email, password.
 
-:username is the name. From this we will generate
-an email address as lower-cased-username@example.com
-and a password of PW<space>lower-cased-username
+And, optionally, with the admin flag.
 
-=item /test/confirm_user/:username
+POST only.
 
-Marks a user-registration as confirmed. This short-cuts
-any registration-key checks etc, it just updates the user
-record.
+=head2 Params
+
+=over
+
+=item name
+
+User name
+
+=item email
+
+User email
+
+=item password
+
+User password
+
+=item admin
+
+1 if user is to be admin, 0 otherwise
+
+=back
 
 =item /test/view_user/:username
 
