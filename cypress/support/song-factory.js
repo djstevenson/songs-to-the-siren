@@ -40,5 +40,14 @@ export class SongFactory {
 
         return song
     }
+
+    resetDatabase() {
+        const url = '/test/reset'
+
+        cy.request({
+            url: url,
+            method: 'POST',
+        })
+    }
 }
 

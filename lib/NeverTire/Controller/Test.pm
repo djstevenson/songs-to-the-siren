@@ -17,10 +17,19 @@ sub add_routes {
     # Don't need to be logged in for these actions
     my $t = $route->any('/test')->to(controller => 'test');
 
+    $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
+}
+
+sub reset {
+    my $c = shift;
+
+    $c->schema->resultset('Tag')->delete;
+    $c->schema->resultset('Song')->delete;
+    $c->redirect_to('home');
 }
 
 sub create_user {
@@ -162,25 +171,32 @@ POST only.
 
 =head2 Params
 
-=over
+name, email, password
 
-=item name
+Optional: admin, 1 if user is to be admin, 0 otherwise
 
-User name
 
-=item email
+=item /test/create_song (POST only)
 
-User email
+Creates an optionally-published song with the given deets.
 
-=item password
+POST only.
 
-User password
+=head2 Params
 
-=item admin
+title, artist, album, country_id, summary, full, username, released_at
 
-1 if user is to be admin, 0 otherwise
+Optional: published, 1 if song is to be published, 0 otherwise
 
-=back
+=item /test/reset (POST only)
+
+Resets the test song database by deleting all songs, tags, links, comments
+
+=head2 Params
+
+title, artist, album, country_id, summary, full, username, released_at
+
+Optional: published, 1 if song is to be published, 0 otherwise
 
 =item /test/view_user/:username
 
