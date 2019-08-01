@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 # See end of source file for POD docs
 
-
+use DateTime;
 
 #################################################
 ####### ONLY VALID ON never_tire_test DB  #######
@@ -18,6 +18,7 @@ sub add_routes {
     my $t = $route->any('/test')->to(controller => 'test');
 
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
+    $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
 }
@@ -39,19 +40,43 @@ sub create_user {
     );
 }
 
-sub _find_user_by_name {
+sub create_song {
     my $c = shift;
 
+    my $username = $c->param('username') || die;
+    my $user     = $c->_find_user_by_name($username);
+    die unless $user->admin;
+
+    my $published = $c->param('published')
+        ? DateTime->now
+        : undef;
+
+    my $fields = {
+        title            => $c->param('title'),
+        artist           => $c->param('artist'),
+        album            => $c->param('album'),
+        country_id       => $c->param('country_id'),
+        released_at      => $c->param('released_at'),
+        summary_markdown => $c->param('summary'),
+        full_markdown    => $c->param('full'),
+        published_at     => $published,
+    };
+	$user->admin_create_song($fields);
+
+    $c->redirect_to('home');
+}
+
+sub _find_user_by_name {
+    my ($c, $username) = @_;
+
     my $rs = $c->schema->resultset('User');
-    return $rs->search({
-        name => $c->stash->{username}
-    })->single;
+    return $rs->search({ name => $username })->single;
 }
 
 sub view_user {
     my $c = shift;
 
-    my $user = $c->_find_user_by_name;
+    my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
         $c->stash(
@@ -67,7 +92,7 @@ sub view_user {
 sub view_email {
     my $c = shift;
 
-    my $user = $c->_find_user_by_name;
+    my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
         my $email = $c->schema
