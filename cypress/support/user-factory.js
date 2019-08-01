@@ -37,7 +37,7 @@ export class UserFactory {
         const url = '/test/create_user'
         
         cy.request({
-            url: '/test/create_user',
+            url: url,
             method: 'POST',
             qs: {
                 name:     user.getName(),
