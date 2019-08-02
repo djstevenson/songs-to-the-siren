@@ -1,6 +1,5 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
-import { callbackify } from 'util';
 
 // Call via user->confirmRegistration()
 Cypress.Commands.add('confirmUserRegistration', (user) => {
@@ -84,7 +83,6 @@ Cypress.Commands.add('assertUserHasEmail', (user, type) => {
 
 // Call via user->assertHasNoNameReminderEmail()
 Cypress.Commands.add('assertUserHasNoEmail', (user, type) => {
-    // TODO Handle this via a 404
     new TestEmailPage(type, user.getName())
         .assertVisitError(404)
 })
@@ -96,3 +94,17 @@ Cypress.Commands.add('fill', {
 }, (subject, value) => {
     cy.wrap(subject).invoke('val', value)
 });
+
+Cypress.Commands.add('publishSong', (title, flag) => {
+
+    const url = '/test/publish_song'
+        
+    cy.request({
+        url: url,
+        method: 'POST',
+        qs: {
+            title:       title,
+            published:   (flag ? 1 : 0),
+        }
+    })
+})

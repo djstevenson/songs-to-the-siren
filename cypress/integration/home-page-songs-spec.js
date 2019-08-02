@@ -18,7 +18,10 @@ describe('Home page tests - song list', function() {
                 .visit()
                 .assertSongCount(0)
         })
-        it('shows zero songs after one unpublished song is added', function() {
+        it('shows zero songs if only unpublished songs exist', function() {
+
+            songFactory.resetDatabase()
+
             const user = userFactory.getNextConfirmedUser(true)
             const song = songFactory.getNextSong(user)
 
@@ -27,7 +30,10 @@ describe('Home page tests - song list', function() {
                 .assertSongCount(0)
 
         })
-        it('shows n songs after n published songs are added along with one unpublished', function() {
+        it('with mixed published/unpublished songs, only the former are shown', function() {
+
+            songFactory.resetDatabase()
+
             const user = userFactory.getNextConfirmedUser(true)
             const song1 = songFactory.getNextSong(user, true)
             new HomePage()
@@ -43,6 +49,32 @@ describe('Home page tests - song list', function() {
             new HomePage()
                 .visit()
                 .assertSongCount(2)
+        })
+
+        it('shows 0 songs if we publish then unpublish', function() {
+
+            songFactory.resetDatabase()
+
+            const user = userFactory.getNextConfirmedUser(true)
+            const song1 = songFactory.getNextSong(user, true)
+            new HomePage()
+                .visit()
+                .assertSongCount(1)
+
+            const song2 = songFactory.getNextSong(user, true)
+            new HomePage()
+                .visit()
+                .assertSongCount(2)
+    
+            song1.unpublish();
+            new HomePage()
+                .visit()
+                .assertSongCount(1)
+
+            song2.unpublish();
+            new HomePage()
+                .visit()
+                .assertSongCount(0)
         })
     })
 })
