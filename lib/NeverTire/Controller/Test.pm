@@ -20,6 +20,7 @@ sub add_routes {
     $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
+    $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
 }
@@ -75,11 +76,32 @@ sub create_song {
     $c->redirect_to('home');
 }
 
+sub publish_song {
+    my $c = shift;
+
+    my $title = $c->param('title') || die;
+    my $song  = $c->_find_song_by_title($title);
+    my $flag  = $c->param('published');
+
+    $song->update({
+        published_at => $flag ? \'NOW()' : undef
+    });
+
+    $c->redirect_to('home');
+}
+
 sub _find_user_by_name {
     my ($c, $username) = @_;
 
     my $rs = $c->schema->resultset('User');
     return $rs->search({ name => $username })->single;
+}
+
+sub _find_song_by_title {
+    my ($c, $title) = @_;
+
+    my $rs = $c->schema->resultset('Song');
+    return $rs->search({ title => $title })->single;
 }
 
 sub view_user {
@@ -187,6 +209,38 @@ POST only.
 title, artist, album, country_id, summary, full, username, released_at
 
 Optional: published, 1 if song is to be published, 0 otherwise
+
+=item /test/reset (POST only)
+
+Resets the test song database by deleting all songs, tags, links, comments
+
+=head2 Params
+
+title, artist, album, country_id, summary, full, username, released_at
+
+Optional: published, 1 if song is to be published, 0 otherwise
+
+=item /test/publish_song (POST only)
+
+Publishes, or unpublishes, a song. This is not a RESTy way of
+doing it, but it's only for test code.
+
+POST only.
+
+=head2 Params
+
+=over
+
+=item title
+
+Title of song (tests don't deal with Database IDs)
+
+=item published
+
+Flag, some true value means set song to published=NOW(), some
+false value means set song to published=NULL.
+
+=back
 
 =item /test/reset (POST only)
 

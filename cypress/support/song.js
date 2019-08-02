@@ -36,5 +36,13 @@ export class Song {
     getFull() {
         return this._full
     }
+
+    publish() {
+        cy.publishSong(this.getTitle(), 1)
+    }
+
+    unpublish() {
+        cy.publishSong(this.getTitle(), 0)
+    }
 }
 
