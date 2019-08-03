@@ -19,7 +19,7 @@ export class ForgotPasswordPage extends Public {
 
 
     forgotPassword(email) {
-        this.getForm().enter(new Map([['email', email]]))
+        this.getForm().enter({email: email})
 
         return this
     }

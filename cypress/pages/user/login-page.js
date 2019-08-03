@@ -12,7 +12,7 @@ export class LoginPage extends Public {
     }
 
     login(name, password) {
-        this.getForm().enter(new Map([['name', name], ['password', password]]))
+        this.getForm().enter({name: name, password: password})
 
         return this
     }
