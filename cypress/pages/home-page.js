@@ -1,4 +1,5 @@
-import { Public    } from '../pages/public'
+import { Public       } from '../pages/public'
+import { HomePageSong } from '../pages/home-page-song'
 
 export class HomePage extends Public {
     visit() {
@@ -14,5 +15,9 @@ export class HomePage extends Public {
         else {
             f.its('length').should('eq', c)
         }
+    }
+
+    findSong(n) {
+        return new HomePageSong(n)
     }
 }
