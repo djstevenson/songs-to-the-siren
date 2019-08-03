@@ -56,7 +56,9 @@ sub approved_comments {
 }
 
 sub show {
-    shift->update({ published_at => DateTime->now });
+    my $self = shift;
+    $self->update({ published_at => \'NOW()' });
+    $self->discard_changes;
 }
 
 sub hide {

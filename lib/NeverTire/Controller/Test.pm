@@ -83,9 +83,12 @@ sub publish_song {
     my $song  = $c->_find_song_by_title($title);
     my $flag  = $c->param('published');
 
-    $song->update({
-        published_at => $flag ? \'NOW()' : undef
-    });
+    if ($flag) {
+        $song->show;
+    }
+    else {
+        $song->hide;
+    }
 
     $c->redirect_to('home');
 }
