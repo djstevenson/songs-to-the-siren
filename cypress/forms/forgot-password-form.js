@@ -5,8 +5,8 @@ import { FormButton } from '../forms/form-button'
 export class ForgotPasswordForm extends FormBase {
     constructor() {
         super();
-        this._fields.set('email',    new FormField('email', 'user-forgot-password-email'))
+        this._fields.email   = new FormField('email', 'user-forgot-password-email')
 
-        this._buttons.set('submit',  new FormButton('request-password-reset-button'))
+        this._buttons.submit = new FormButton('request-password-reset-button')
     }
 }

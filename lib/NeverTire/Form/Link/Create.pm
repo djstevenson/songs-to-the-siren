@@ -29,18 +29,16 @@ has_field url => (
     },
 );
 
-# TODO Add integer validation
 has_field priority => (
     type        => 'Input::Text',
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    validators  => [qw/ Required  ValidInteger /],
     options     => {
         initial_value => '',
     },
 );
 
-# TODO Add integer validation
 has_field extras => (
     type        => 'Input::Text',
     autofocus   => 1,

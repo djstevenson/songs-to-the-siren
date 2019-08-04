@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-import { SongListPage   } from '../pages/song/song-list-page'
-import { SongCreatePage } from '../pages/song/song-create-page'
+import { ListSongsPage  } from '../pages/song/list-songs-page'
+import { CreateSongPage } from '../pages/song/create-song-page'
 import { LoginPage      } from '../pages/user/login-page'
 import { HomePage       } from '../pages/home-page'
 import { UserFactory    } from '../support/user-factory'
@@ -23,11 +23,11 @@ describe('Access control depending on user authorisation', function() {
                 .assertTitle('Songs I Will Never Tire of')
         })
         it('can not access song-list admin page', function() {
-            new SongListPage()
+            new ListSongsPage()
                 .assertVisitError(403)
         })
         it('can not access song-create admin page', function() {
-            new SongCreatePage()
+            new CreateSongPage()
                 .assertVisitError(403)
         })
     })
@@ -50,12 +50,12 @@ describe('Access control depending on user authorisation', function() {
         })
         it('can not access song-list admin page', function() {
             const user = newUser.getNextConfirmedUser().login()
-            new SongListPage()
+            new ListSongsPage()
                 .assertVisitError(403)
         })
         it('can not access song-create admin page', function() {
             const user = newUser.getNextConfirmedUser().login()
-            new SongCreatePage()
+            new CreateSongPage()
                 .assertVisitError(403)
         })
     })
@@ -78,14 +78,14 @@ describe('Access control depending on user authorisation', function() {
         })
         it('can access song-list admin page', function() {
             const user = newUser.getNextConfirmedUser(true).login()
-            new SongListPage()
+            new ListSongsPage()
                 .visit()
                 .assertLoggedInAsAdmin(user.getName())
                 .assertTitle('Song list')
         })
         it('can not access song-create admin page', function() {
             const user = newUser.getNextConfirmedUser(true).login()
-            new SongCreatePage()
+            new CreateSongPage()
                 .visit()
                 .assertLoggedInAsAdmin(user.getName())
                 .assertTitle('New song')

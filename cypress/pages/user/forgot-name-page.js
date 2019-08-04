@@ -18,7 +18,7 @@ export class ForgotNamePage extends Public {
     }
 
     forgotName(email) {
-        this.getForm().enter(new Map([['email', email]]))
+        this.getForm().enter({email: email})
 
         return this
     }
