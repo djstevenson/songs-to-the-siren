@@ -3,6 +3,10 @@ export class Public {
         return this._form
     }
 
+    getTable() {
+        return this._table
+    }
+
     assertTitle(expected) {
         cy.title().should('eq', expected)
         return this

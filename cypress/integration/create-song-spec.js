@@ -1,11 +1,13 @@
 /// <reference types="Cypress" />
 
-import { HomePage       } from '../pages/home-page'
+import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { UserFactory    } from '../support/user-factory'
+import { SongFactory    } from '../support/song-factory'
 import { CreateSongPage } from '../pages/song/create-song-page'
 
 var label = 'createsong'
 var userFactory = new UserFactory(label)
+var songFactory = new SongFactory(label)
 
 describe('Create Song tests', function() {
     describe('Form validation', function() {
@@ -86,6 +88,41 @@ describe('Create Song tests', function() {
                 .assertNoFormError('releasedAt')
                 .assertNoFormError('summaryMarkdown')
                 .assertNoFormError('fullMarkdown')
+        })
+    })
+
+    describe('Song list', function() {
+        it('Song list starts empty', function() {
+            songFactory.resetDatabase()
+
+            userFactory
+                .getNextConfirmedUser(true)
+                .login()
+
+            new ListSongsPage()
+                .visit()
+                .assertEmpty()
+        })
+
+        it('Creating a song shows it in the list', function() {
+            songFactory.resetDatabase()
+
+            // Create songs via the form rather than
+            // the test-mode shortcut as, really, we're
+            // testing the admin UI here.
+            userFactory
+                .getNextConfirmedUser(true)
+                .login()
+
+            const song1 = songFactory.getNext()
+
+            new CreateSongPage()
+                .visit()
+                .createSong(song1.asArgs())
+
+            new ListSongsPage()
+                .visit()
+                .assertSongCount(1)
         })
     })
 

@@ -17,7 +17,7 @@ export class SongFactory {
     // This is a shortcut method that gets a test song into
     // the database
     getNextSong(author, published = false) {
-        const song = this.getNext(published)
+        const song = this.getNext()
 
         const url = '/test/create_song'
         
