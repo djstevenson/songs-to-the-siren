@@ -112,9 +112,10 @@ sub by_pubdate {
     # where_published() was called. But it's not
     # called when listing songs for admin user, so
     # we want the unpublished ones at the top.
+    # Secondary sort is by id in the same order
     my $sql_order = $order eq '-desc' ? 'DESC' : 'ASC';
     return $self->search(undef, {
-        order_by => \" published_at ${sql_order} NULLS FIRST",
+        order_by => \" published_at ${sql_order} NULLS FIRST, id ${sql_order}",
     });
 }
 
