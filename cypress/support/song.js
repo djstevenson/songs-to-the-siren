@@ -44,5 +44,17 @@ export class Song {
     unpublish() {
         cy.publishSong(this.getTitle(), 0)
     }
+
+    asArgs() {
+        return {
+            title:           this.getTitle(),
+            artist:          this.getArtist(),
+            album:           this.getAlbum(),
+            countryId:       this.getCountryId(),
+            releasedAt:      this.getReleasedAt(),
+            summaryMarkdown: this.getSummary(),
+            fullMarkdown:    this.getFull(),
+        }
+    }
 }
 
