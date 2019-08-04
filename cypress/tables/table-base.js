@@ -33,4 +33,34 @@ export class TableBase {
     getSelector() {
         return this._selector
     }
+
+    // Both row and column indices count from 1
+    findRow(rowIndex) {
+        const sel = this.getSelector()
+            + ' > table > tbody'
+            + ' > tr:nth-child(' + rowIndex + ')'
+        return cy.get(sel)
+    }
+
+    findCell(rowIndex, colIndex) {
+        const sel = 'td:nth-child(' + colIndex + ')'
+        const row = this.findRow(rowIndex)
+        return row.find(sel)
+    }
+
+    assertCell(row, col, text) {
+        this
+            .findCell(row, col)
+            .contains(text)
+        
+        return this // Chainable
+    }
+
+    clickCell(row, col) {
+        this
+            .findCell(row, col)
+            .click()
+        
+        return this // Chainable
+    }
 }

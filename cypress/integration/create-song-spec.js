@@ -120,10 +120,13 @@ describe('Create Song tests', function() {
                 .visit()
                 .createSong(song1.asArgs())
 
-            new ListSongsPage()
+            const page = new ListSongsPage()
                 .visit()
                 .assertSongCount(1)
+
+            page.getTable().assertCell(1, 2, song1.getTitle())
         })
+
     })
 
 })

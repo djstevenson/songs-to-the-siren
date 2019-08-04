@@ -27,12 +27,16 @@ export class ListSongsPage extends Admin {
         return this
     }
 
-
     assertSongCount(c) {
         this
             .getTable()
             .assertRowCount(c)
 
         return this
+    }
+
+    // rowIndex counts from 1
+    findRow(rowIndex) {
+        return this.getTable().findRow(rowIndex)
     }
 }
