@@ -52,6 +52,11 @@ export class Public {
         return this
     }
 
+    // rowIndex counts from 1
+    assertCell(row, colName, text) {
+        return this.getTable().assertCell(row, colName, text)
+    }
+
     visit() {
         cy.visit(this.pageUrl())
         return this

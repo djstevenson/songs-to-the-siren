@@ -10,6 +10,8 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
+    # TODO Bug: Table code is dumb and forces sorting by one
+    #      of the columns, so overrides by_pubdate. Fix this.
     return $self->c->schema
         ->resultset('Song')
         ->select_metadata
@@ -18,13 +20,11 @@ sub _build_resultset {
 }
 
 has_column id => (
-    sortable     => 1,
     is_header    => 1,
     header       => 'ID',
 );
 
 has_column title => (
-    sortable     => 1,
     link         => sub {
         my ($col, $table, $row) = @_;
 
@@ -34,7 +34,6 @@ has_column title => (
 
 has_column comment_count => (
     header       => 'Unapproved',
-    sortable     => 1,
     sort_by      => 'comment_count',
     content => sub {
         my ($col, $table, $row) = @_;
@@ -44,10 +43,7 @@ has_column comment_count => (
 );
 
 # TODO css to highlight whether it's in the future/past?
-has_column published_at => (
-    header       => 'Published',
-    sortable     => 1,
-);
+has_column published_at => ();
 
 has_column tags => (
     content => sub {
@@ -120,8 +116,6 @@ has_column delete => (
 );
 
 has '+empty_text' => (default => 'No songs yet defined');
-
-has '+default_order_by'   => (default => 'published_at');
 
 override class_for_row_data => sub {
     my ($self, $row_data) = @_;

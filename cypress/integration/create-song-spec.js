@@ -9,13 +9,30 @@ var label = 'createsong'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
+function newAdminUser() {
+    return userFactory
+        .getNextConfirmedUser(true)
+        .login()
+}
+
+// Create songs via the form rather than
+// the test-mode shortcut as, really, we're
+// testing the admin UI here.
+function createSong() {
+    const song = songFactory.getNext()
+
+    new CreateSongPage()
+        .visit()
+        .createSong(song.asArgs())
+
+    return song
+}
+
 describe('Create Song tests', function() {
     describe('Form validation', function() {
         it('Create song page has right title', function() {
 
-            userFactory
-                .getNextConfirmedUser(true)
-                .login()
+            newAdminUser();
 
             new CreateSongPage()
                 .visit()
@@ -24,11 +41,7 @@ describe('Create Song tests', function() {
 
         it('Form shows right errors with empty input', function() {
 
-            // Not practical to check every validation option, but
-            // do the basics
-            userFactory
-                .getNextConfirmedUser(true)
-                .login()
+            newAdminUser();
 
             new CreateSongPage()
                 .visit()
@@ -47,9 +60,7 @@ describe('Create Song tests', function() {
             // There's deliberately minimal validation, no reason
             // why I shouldn't be able to enter a single-character
             // title for example.
-            userFactory
-                .getNextConfirmedUser(true)
-                .login()
+            newAdminUser();
 
             new CreateSongPage()
                 .visit()
@@ -81,13 +92,7 @@ describe('Create Song tests', function() {
                     summaryMarkdown: 'a',
                     fullMarkdown:    'a'
                 })
-                .assertNoFormError('title')
-                .assertNoFormError('artist')
-                .assertNoFormError('album')
                 .assertFormError('countryId', 'Country id 0 does not exist')
-                .assertNoFormError('releasedAt')
-                .assertNoFormError('summaryMarkdown')
-                .assertNoFormError('fullMarkdown')
         })
     })
 
@@ -95,36 +100,50 @@ describe('Create Song tests', function() {
         it('Song list starts empty', function() {
             songFactory.resetDatabase()
 
-            userFactory
-                .getNextConfirmedUser(true)
-                .login()
+            newAdminUser();
 
             new ListSongsPage()
                 .visit()
                 .assertEmpty()
         })
 
-        it('Creating a song shows it in the list', function() {
+        it('shows a new song first in the list', function() {
             songFactory.resetDatabase()
 
-            // Create songs via the form rather than
-            // the test-mode shortcut as, really, we're
-            // testing the admin UI here.
-            userFactory
-                .getNextConfirmedUser(true)
-                .login()
+            newAdminUser();
 
-            const song1 = songFactory.getNext()
+            const song1 = createSong()
 
-            new CreateSongPage()
-                .visit()
-                .createSong(song1.asArgs())
-
-            const page = new ListSongsPage()
+            new ListSongsPage()
                 .visit()
                 .assertSongCount(1)
+                .assertCell(1, 'title', song1.getTitle())
+                .assertCell(1, 'unapproved', '0')
+                .assertCellEmpty(1, 'publishedAt')
 
-            page.getTable().assertCell(1, 2, song1.getTitle())
+            // TODO Better API idea
+            // new ListSongsPage()
+            //     .visit()
+            //     .assertSongCount(1)
+            //     .findRow(1)
+            //         .assert('title', song1.getTitle())
+            //         .assert('unapproved', '0')
+            //         .assertEmpty('publishedAt')
+        })
+
+        it('shows multiple songs in newest-first order', function() {
+            songFactory.resetDatabase()
+
+            newAdminUser();
+
+            const song1 = createSong()
+            const song2 = createSong()
+
+            new ListSongsPage()
+                .visit()
+                .assertSongCount(2)
+                .assertCell(1, 'title', song2.getTitle())  // Song 2 first (woo hoo etc)
+                .assertCell(2, 'title', song1.getTitle())  // Song 1 second
         })
 
     })

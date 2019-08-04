@@ -36,7 +36,7 @@ ResultSet methods for Links
 
 =over
 
-=item by_pubdate
+=item by_priority
 
 A simple helper, for readability, to order
 links by priority. Low number = high priority,

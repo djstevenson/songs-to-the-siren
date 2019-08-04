@@ -5,6 +5,10 @@ export class TableBase {
         this._columns  = {}
     }
 
+    getColumnIndex(colName) {
+        return this._columns[colName].getIndex()
+    }
+
     assertEmpty(text) {
         const sel = this.getSelector() + '.is-empty-table > p'
         cy.get(sel).contains(text)
@@ -34,31 +38,35 @@ export class TableBase {
         return this._selector
     }
 
-    // Both row and column indices count from 1
-    findRow(rowIndex) {
+    findCell(rowIndex, colName) {
+        const colIndex = this.getColumnIndex(colName)
+
         const sel = this.getSelector()
             + ' > table > tbody'
             + ' > tr:nth-child(' + rowIndex + ')'
+            + ' > td:nth-child(' + colIndex + ')'
         return cy.get(sel)
     }
 
-    findCell(rowIndex, colIndex) {
-        const sel = 'td:nth-child(' + colIndex + ')'
-        const row = this.findRow(rowIndex)
-        return row.find(sel)
+    assertCell(rowIndex, colName, text) {
+        this
+            .findCell(rowIndex, colName)
+            .contains(text)
+
+        return this // Chainable
     }
 
-    assertCell(row, col, text) {
+    assertCellEmpty(rowIndex, colName) {
         this
-            .findCell(row, col)
-            .contains(text)
+            .findCell(rowIndex, colName)
+            .should('be.empty')
         
         return this // Chainable
     }
 
-    clickCell(row, col) {
+    clickCell(rowIndex, colName) {
         this
-            .findCell(row, col)
+            .findCell(rowIndex, colName)
             .click()
         
         return this // Chainable
