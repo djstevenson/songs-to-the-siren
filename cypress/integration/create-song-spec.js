@@ -117,18 +117,10 @@ describe('Create Song tests', function() {
             new ListSongsPage()
                 .visit()
                 .assertSongCount(1)
-                .assertCell(1, 'title', song1.getTitle())
-                .assertCell(1, 'unapproved', '0')
-                .assertCellEmpty(1, 'publishedAt')
-
-            // TODO Better API idea
-            // new ListSongsPage()
-            //     .visit()
-            //     .assertSongCount(1)
-            //     .findRow(1)
-            //         .assert('title', song1.getTitle())
-            //         .assert('unapproved', '0')
-            //         .assertEmpty('publishedAt')
+                .getRow(1)
+                    .assertText('title', song1.getTitle())
+                    .assertText('unapproved', '0')
+                    .assertNoText('publishedAt')
         })
 
         it('shows multiple songs in newest-first order', function() {
@@ -139,11 +131,12 @@ describe('Create Song tests', function() {
             const song1 = createSong()
             const song2 = createSong()
 
-            new ListSongsPage()
+            const page = new ListSongsPage()
                 .visit()
                 .assertSongCount(2)
-                .assertCell(1, 'title', song2.getTitle())  // Song 2 first (woo hoo etc)
-                .assertCell(2, 'title', song1.getTitle())  // Song 1 second
+            
+            page.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
+            page.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
         })
 
     })

@@ -36,7 +36,7 @@ export class ListSongsPage extends Admin {
     }
 
     // rowIndex counts from 1
-    findRow(rowIndex) {
-        return this.getTable().findRow(rowIndex)
+    getRow(rowIndex) {
+        return this.getTable().getRow(rowIndex)
     }
 }
