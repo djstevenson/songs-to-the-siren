@@ -30,7 +30,7 @@ has_field album => (
 has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    validators  => [qw/ Required  ValidInteger ValidCountryId /],
 );
 
 has_field released_at => (
