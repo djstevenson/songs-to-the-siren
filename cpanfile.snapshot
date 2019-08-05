@@ -1669,13 +1669,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-9.11
-    pathname: S/SR/SRI/Minion-9.11.tar.gz
+  Minion-9.12
+    pathname: S/SR/SRI/Minion-9.12.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 9.11
+      Minion 9.12
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1683,7 +1683,7 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 9.11
+      Minion::_Guard 9.12
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
@@ -2657,11 +2657,11 @@ DISTRIBUTIONS
     requirements:
       Module::Build::Tiny 0.035
       perl 5.005
-  Role-Tiny-2.000007
-    pathname: E/ET/ETHER/Role-Tiny-2.000007.tar.gz
+  Role-Tiny-2.000008
+    pathname: H/HA/HAARG/Role-Tiny-2.000008.tar.gz
     provides:
-      Role::Tiny 2.000007
-      Role::Tiny::With 2.000007
+      Role::Tiny 2.000008
+      Role::Tiny::With 2.000008
     requirements:
       Exporter 5.57
       perl 5.006
