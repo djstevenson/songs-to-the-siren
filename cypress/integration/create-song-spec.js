@@ -9,12 +9,6 @@ var label = 'createsong'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
-function newAdminUser() {
-    return userFactory
-        .getNextConfirmedUser(true)
-        .login()
-}
-
 // Create songs via the form rather than
 // the test-mode shortcut as, really, we're
 // testing the admin UI here.
@@ -32,7 +26,7 @@ describe('Create Song tests', function() {
     describe('Form validation', function() {
         it('Create song page has right title', function() {
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -41,7 +35,7 @@ describe('Create Song tests', function() {
 
         it('Form shows right errors with empty input', function() {
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -60,7 +54,7 @@ describe('Create Song tests', function() {
             // There's deliberately minimal validation, no reason
             // why I shouldn't be able to enter a single-character
             // title for example.
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -100,7 +94,7 @@ describe('Create Song tests', function() {
         it('Song list starts empty', function() {
             songFactory.resetDatabase()
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new ListSongsPage()
                 .visit()
@@ -110,7 +104,7 @@ describe('Create Song tests', function() {
         it('shows a new song first in the list', function() {
             songFactory.resetDatabase()
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             const song1 = createSong()
 
@@ -126,7 +120,7 @@ describe('Create Song tests', function() {
         it('shows multiple songs in newest-first order', function() {
             songFactory.resetDatabase()
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             const song1 = createSong()
             const song2 = createSong()
