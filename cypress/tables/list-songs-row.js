@@ -14,4 +14,16 @@ export class ListSongsRow extends RowBase {
         this._columns.publish     = new TableColumn(8)
         this._columns.delete      = new TableColumn(9)
     }
+
+    assertNotPublished() {
+        this.assertNoText('publishedAt')
+
+        return this // Chainable
+    }
+
+    assertPublished() {
+        this.assertRegex('publishedAt', /\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d/)
+
+        return this // Chainable
+    }
 }

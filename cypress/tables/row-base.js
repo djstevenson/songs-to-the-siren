@@ -27,10 +27,19 @@ export class RowBase {
         return cy.get(sel)
     }
 
+    assertRegex(colName, regex) {
+        this
+            .findCell(colName)
+            .invoke('text')
+            .should('match', regex)
+
+        return this // Chainable
+    }
+
     assertText(colName, text) {
         this
             .findCell(colName)
-            .contains(text)
+            .should('have.text', text)
 
         return this // Chainable
     }

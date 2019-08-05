@@ -91,46 +91,27 @@ describe('Create Song tests', function() {
     })
 
     describe('Song list', function() {
-        it('Song list starts empty', function() {
-            songFactory.resetDatabase()
-
-            userFactory.getNextLoggedInUser(true)
-
-            new ListSongsPage()
-                .visit()
-                .assertEmpty()
-        })
-
-        it('shows a new song first in the list', function() {
-            songFactory.resetDatabase()
-
-            userFactory.getNextLoggedInUser(true)
-
-            const song1 = createSong()
-
-            new ListSongsPage()
-                .visit()
-                .assertSongCount(1)
-                .getRow(1)
-                    .assertText('title', song1.getTitle())
-                    .assertText('unapproved', '0')
-                    .assertNoText('publishedAt')
-        })
-
         it('shows multiple songs in newest-first order', function() {
             songFactory.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
 
             const song1 = createSong()
+            new ListSongsPage()
+                .visit()
+                .assertSongCount(1)
+                .getRow(1)
+                    .assertText('title', song1.getTitle())
+
+            // Now create another song, it should go to the top
             const song2 = createSong()
 
-            const page = new ListSongsPage()
+            const page2 = new ListSongsPage()
                 .visit()
                 .assertSongCount(2)
             
-            page.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
-            page.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
+            page2.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
+            page2.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
         })
 
     })
