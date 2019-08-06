@@ -27,14 +27,16 @@ sub home_page_songs {
 }
 
 sub full_song_data {
-    my ($self, $song_id) = @_;
+    my ($self, $song_id, $is_admin) = @_;
 
     # TODO Prefetch tags?
-    return $self->select_metadata
+    my $rs =  $self->select_metadata
         ->select_text(full => 'html')
-        ->where_published
-        ->select_comment_count('approved')
-        ->find($song_id);
+        ->select_comment_count('approved');
+    
+    $rs = $rs->where_published unless $is_admin;
+
+    return $rs->find($song_id);
 }
 
 sub select_metadata {

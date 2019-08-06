@@ -58,10 +58,13 @@ sub capture {
 
     # Fetch the full song data, returning 404
     # if it doesn't exist.
+    # Check that it's published, unless
+    # we're admin, in which case we don't care
 
     my $song_id = $c->stash->{song_id};
     my $rs = $c->schema->resultset('Song');
-    if (my $song = $rs->full_song_data($song_id)) {
+    my $admin = exists $c->stash->{admin_user};
+    if (my $song = $rs->full_song_data($song_id, $admin)) {
         $c->stash(song => $song);
     }
     else {

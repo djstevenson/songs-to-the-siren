@@ -11,7 +11,7 @@ var songFactory = new SongFactory(label)
 
 describe('List Song tests', function() {
 
-    describe('Song list', function() {
+    describe('Song order etc', function() {
         it('Song list starts empty', function() {
             songFactory.resetDatabase()
 
@@ -49,6 +49,38 @@ describe('List Song tests', function() {
             page.getRow(3).assertText('title', song1.getTitle()).assertPublished()
         })
 
+    })
+
+    describe('Publish/unpublish button', function() {
+        it('Can publish/unpublish songs from the song list', function() {
+            songFactory.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            const song1 = songFactory.getNextSong(user)
+            const song2 = songFactory.getNextSong(user)
+            var page = new ListSongsPage().visit().assertSongCount(2)
+
+            // Both songs should be unpublished, so have 'show' links
+            const row1 = page.getRow(1).assertUnpublished()
+            const row2 = page.getRow(2).assertUnpublished()
+
+            // Publish the 2nd one and re-check
+            row2.click('publish')
+            row1.assertUnpublished()
+            row2.assertPublished()
+
+            // Publish the 1st one and re-check
+            row1.click('publish')
+            row1.assertPublished()
+            row2.assertPublished()
+
+            // Check that we can unpublish too
+            row2.click('publish')
+            row1.assertPublished()
+            row2.assertUnpublished()
+
+        })
     })
 
 })

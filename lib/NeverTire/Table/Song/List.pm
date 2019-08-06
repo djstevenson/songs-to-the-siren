@@ -45,6 +45,22 @@ has_column comment_count => (
 # TODO css to highlight whether it's in the future/past?
 has_column published_at => ();
 
+has_column publish => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        if ( defined $row->published_at ) {
+            my $url = $table->c->url_for('unpublish_song', song_id => $row->id);
+            return qq{<a href="${url}">Hide</a>};
+        }
+        else {
+            my $url = $table->c->url_for('publish_song', song_id => $row->id);
+            return qq{<a href="${url}">Show</a>};
+        }
+    },
+
+);
+
 has_column tags => (
     content => sub {
         my ($col, $table, $row) = @_;
@@ -77,28 +93,6 @@ has_column edit => (
         return qq{
             <a href="${url}">Edit</a>
         };
-    },
-
-);
-
-has_column publish => (
-    content => sub {
-        my ($col, $table, $row) = @_;
-
-        my $pub = $row->published_at;
-        my $now = DateTime->now;
-        if ( defined($pub) && DateTime->compare($pub, $now) <= 0 ) {
-            my $url = $table->c->url_for('unpublish_song', song_id => $row->id);
-            return qq{
-                <a href="${url}">Hide</a>
-            };
-        }
-        else {
-            my $url = $table->c->url_for('publish_song', song_id => $row->id);
-            return qq{
-                <a href="${url}">Show</a>
-            };
-        }
     },
 
 );

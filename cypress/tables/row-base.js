@@ -55,6 +55,7 @@ export class RowBase {
     click(colName) {
         this
             .findCell(colName)
+            .find('a')
             .click()
         
         return this // Chainable
