@@ -93,6 +93,8 @@ describe('Home page tests - song list', function() {
             const user = userFactory.getNextConfirmedUser(true)
 
             // Create two unpublished songs
+            // TODO Neater api might be:
+            //  song1 = auser.createSong(false) etc
             const song1 = songFactory.getNextSong(user, false)
             const song2 = songFactory.getNextSong(user, false)
             homePage

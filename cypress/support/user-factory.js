@@ -29,8 +29,6 @@ export class UserFactory {
     // This is a shortcut method that gets a registered, confirmed,
     // test user by using the test-mode-only endpoint. It does
     // not log them in
-    //
-    // TODO Should be a method on the user object, surely?
     getNextConfirmedUser(admin = false) {
         const user = this.getNext(admin)
 
@@ -48,6 +46,12 @@ export class UserFactory {
 
         })
 
+        return user
+    }
+
+    getNextLoggedInUser(admin = false) {
+        const user = this.getNextConfirmedUser(admin)
+        user.login()
         return user
     }
 }

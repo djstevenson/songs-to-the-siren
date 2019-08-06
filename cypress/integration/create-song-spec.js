@@ -9,12 +9,6 @@ var label = 'createsong'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
-function newAdminUser() {
-    return userFactory
-        .getNextConfirmedUser(true)
-        .login()
-}
-
 // Create songs via the form rather than
 // the test-mode shortcut as, really, we're
 // testing the admin UI here.
@@ -32,7 +26,7 @@ describe('Create Song tests', function() {
     describe('Form validation', function() {
         it('Create song page has right title', function() {
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -41,7 +35,7 @@ describe('Create Song tests', function() {
 
         it('Form shows right errors with empty input', function() {
 
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -60,7 +54,7 @@ describe('Create Song tests', function() {
             // There's deliberately minimal validation, no reason
             // why I shouldn't be able to enter a single-character
             // title for example.
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -97,46 +91,27 @@ describe('Create Song tests', function() {
     })
 
     describe('Song list', function() {
-        it('Song list starts empty', function() {
+        it('shows multiple songs in newest-first order', function() {
             songFactory.resetDatabase()
 
-            newAdminUser();
-
-            new ListSongsPage()
-                .visit()
-                .assertEmpty()
-        })
-
-        it('shows a new song first in the list', function() {
-            songFactory.resetDatabase()
-
-            newAdminUser();
+            userFactory.getNextLoggedInUser(true)
 
             const song1 = createSong()
-
             new ListSongsPage()
                 .visit()
                 .assertSongCount(1)
                 .getRow(1)
                     .assertText('title', song1.getTitle())
-                    .assertText('unapproved', '0')
-                    .assertNoText('publishedAt')
-        })
 
-        it('shows multiple songs in newest-first order', function() {
-            songFactory.resetDatabase()
-
-            newAdminUser();
-
-            const song1 = createSong()
+            // Now create another song, it should go to the top
             const song2 = createSong()
 
-            const page = new ListSongsPage()
+            const page2 = new ListSongsPage()
                 .visit()
                 .assertSongCount(2)
             
-            page.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
-            page.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
+            page2.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
+            page2.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
         })
 
     })
