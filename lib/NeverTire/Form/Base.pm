@@ -78,7 +78,7 @@ sub process {
 	my $selected_button = $params->param('submit-button');
 	foreach my $button (@{$self->form_buttons}) {
 		my $name = $button->name;
-		$button->clicked(1) if $name eq $selected_button;
+		$button->clicked( $name eq $selected_button );
 	}
 
 	# Allow extra validation in a subclass

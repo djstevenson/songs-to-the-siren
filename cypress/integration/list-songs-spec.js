@@ -3,7 +3,6 @@
 import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
-import { DeleteSongPage } from '../pages/song/delete-song-page'
 
 var label = 'listsong'
 var userFactory = new UserFactory(label)
@@ -83,23 +82,6 @@ describe('List Song tests', function() {
         })
     })
 
-    describe('Delete button', function() {
-        it('Can delete songs from the song list', function() {
-            songFactory.resetDatabase()
-
-            const user = userFactory.getNextLoggedInUser(true)
-
-            const song1 = songFactory.getNextSong(user)
-            const song2 = songFactory.getNextSong(user)
-            var page = new ListSongsPage().visit().assertSongCount(2)
-
-            page.getRow(1).click('delete')
-
-            new DeleteSongPage().cancel()
-
-            var page = new ListSongsPage().visit().assertSongCount(2)
-        })
-    })
 
     // TODO Click through to song-view page
     // TODO Click through to song edit
