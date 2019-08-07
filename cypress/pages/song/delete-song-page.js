@@ -2,10 +2,6 @@ import { Admin          } from '../../pages/admin'
 import { DeleteSongForm } from '../../forms/delete-song-form'
 
 export class DeleteSongPage extends Admin {
-    pageUrl() {
-        return '/song/' + this.getSongId().toString() + '/create'
-    }
-
     constructor(songId) {
         super()
         this._form = new DeleteSongForm()
