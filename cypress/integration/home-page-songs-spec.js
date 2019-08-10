@@ -4,9 +4,9 @@ import { HomePage     } from '../pages/home-page'
 import { UserFactory  } from '../support/user-factory'
 import { SongFactory  } from '../support/song-factory'
 
-var label = 'homecounts'
-var userFactory = new UserFactory(label)
-var songFactory = new SongFactory(label)
+const label = 'homecounts';
+const userFactory = new UserFactory(label);
+const songFactory = new SongFactory(label);
 
 describe('Home page tests - song list', () => {
     describe('Song counts', () => {

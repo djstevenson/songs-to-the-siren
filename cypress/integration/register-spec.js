@@ -4,7 +4,7 @@ import { LoginPage    } from '../pages/user/login-page'
 import { RegisterPage } from '../pages/user/register-page'
 import { UserFactory  } from '../support/user-factory'
 
-var userFactory = new UserFactory('regtest')
+const userFactory = new UserFactory('regtest');
 
 describe('Registration tests', () => {
     describe('Register page looks right', () => {

@@ -1,7 +1,7 @@
 import { User         } from '../support/user'
 import { RegisterPage } from '../pages/user/register-page'
 
-var randomize = require('randomatic');
+const randomize = require('randomatic');
 
 export class UserFactory {
     constructor(baseName) {

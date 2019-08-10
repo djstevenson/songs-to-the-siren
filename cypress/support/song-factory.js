@@ -1,6 +1,6 @@
 import { Song } from '../support/song'
 
-var randomize = require('randomatic');
+const randomize = require('randomatic');
 
 export class SongFactory {
     constructor(baseName) {

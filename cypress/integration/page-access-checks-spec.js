@@ -6,7 +6,7 @@ import { LoginPage      } from '../pages/user/login-page'
 import { HomePage       } from '../pages/home-page'
 import { UserFactory    } from '../support/user-factory'
 
-var newUser = new UserFactory('access')
+const newUser = new UserFactory('access');
 
 describe('Access control depending on user authorisation', () => {
     describe('Access while logged out', () => {

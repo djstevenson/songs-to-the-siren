@@ -5,9 +5,9 @@ import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
 import { CreateSongPage } from '../pages/song/create-song-page'
 
-var label = 'createsong'
-var userFactory = new UserFactory(label)
-var songFactory = new SongFactory(label)
+const label = 'createsong';
+const userFactory = new UserFactory(label);
+const songFactory = new SongFactory(label);
 
 // Create songs via the form rather than
 // the test-mode shortcut as, really, we're

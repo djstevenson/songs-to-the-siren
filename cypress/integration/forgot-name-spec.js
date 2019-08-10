@@ -3,7 +3,7 @@
 import { ForgotNamePage } from '../pages/user/forgot-name-page'
 import { UserFactory  } from '../support/user-factory'
 
-var newUser = new UserFactory('forgotname')
+const newUser = new UserFactory('forgotname');
 
 describe('Forgot-name form tests', () => {
     describe('Forgot-name form validation', () => {

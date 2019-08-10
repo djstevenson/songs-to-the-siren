@@ -3,7 +3,7 @@
 import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
 import { UserFactory        } from '../support/user-factory'
 
-var newUser = new UserFactory('forgotpasswd')
+const newUser = new UserFactory('forgotpasswd');
 
 describe('Forgot-passworrd form tests', () => {
     describe('Forgot-password form validation', () => {

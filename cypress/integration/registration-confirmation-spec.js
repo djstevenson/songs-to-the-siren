@@ -2,7 +2,7 @@
 
 import { UserFactory } from '../support/user-factory'
 
-var newUser = new UserFactory('regconf')
+const newUser = new UserFactory('regconf');
 
 describe('Registration confirm/decline tests', () => {
     describe('New user confirms registration', () => {

@@ -3,7 +3,7 @@
 import { LoginPage    } from '../pages/user/login-page'
 import { UserFactory  } from '../support/user-factory'
 
-var userFactory = new UserFactory('logintest')
+const userFactory = new UserFactory('logintest');
 
 describe('Login tests', () => {
     describe('Login page looks right', () => {

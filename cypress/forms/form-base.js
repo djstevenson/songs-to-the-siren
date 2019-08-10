@@ -27,7 +27,7 @@ export class FormBase {
     }
 
     enter(values) {
-        for (var key in values) {
+        for (const key in values) {
             this.setField(key, values[key])
         }
 

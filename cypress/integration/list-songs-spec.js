@@ -4,9 +4,9 @@ import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
 
-var label = 'listsong'
-var userFactory = new UserFactory(label)
-var songFactory = new SongFactory(label)
+const label = 'listsong';
+const userFactory = new UserFactory(label);
+const songFactory = new SongFactory(label);
 
 describe('List Song tests', () => {
 
@@ -30,7 +30,7 @@ describe('List Song tests', () => {
             const song2 = songFactory.getNextSong(user)
             const song3 = songFactory.getNextSong(user)
 
-            var page = new ListSongsPage().visit().assertSongCount(3)
+            let page = new ListSongsPage().visit().assertSongCount(3);
 
             // In order of creation, newest first
             page.getRow(1).assertText('title', song3.getTitle())
@@ -58,7 +58,7 @@ describe('List Song tests', () => {
 
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
-            var page = new ListSongsPage().visit().assertSongCount(2)
+            const page = new ListSongsPage().visit().assertSongCount(2);
 
             // Both songs should be unpublished, so have 'show' links
             const row1 = page.getRow(1).assertUnpublished()

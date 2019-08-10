@@ -5,9 +5,9 @@ import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
 import { DeleteSongPage } from '../pages/song/delete-song-page'
 
-var label = 'deletesong'
-var userFactory = new UserFactory(label)
-var songFactory = new SongFactory(label)
+const label = 'deletesong';
+const userFactory = new UserFactory(label);
+const songFactory = new SongFactory(label);
 
 describe('Delete Song tests', () => {
     describe('Delete songs from song-list page', () => {
@@ -17,7 +17,7 @@ describe('Delete Song tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
-            var page = new ListSongsPage().visit().assertSongCount(1)
+            const page = new ListSongsPage().visit().assertSongCount(1);
 
             page.getRow(1).click('delete')
 
@@ -32,7 +32,7 @@ describe('Delete Song tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
-            var page = new ListSongsPage().visit().assertSongCount(1)
+            const page = new ListSongsPage().visit().assertSongCount(1);
 
             page.getRow(1).click('publish').click('delete')
 
@@ -48,7 +48,7 @@ describe('Delete Song tests', () => {
 
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
-            var page = new ListSongsPage().visit().assertSongCount(2)
+            const page = new ListSongsPage().visit().assertSongCount(2);
 
             // song 2 now in row 1
             page.getRow(1).assertText('title', song2.getTitle())
