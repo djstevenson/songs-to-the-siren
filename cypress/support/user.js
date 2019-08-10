@@ -1,4 +1,4 @@
-const reverse = require('reverse-string');
+import reverse from 'reverse-string';
 
 import { TestEmailPage      } from '../pages/test-email-page'
 import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
