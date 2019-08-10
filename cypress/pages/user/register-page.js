@@ -18,7 +18,7 @@ export class RegisterPage extends Public {
     }
 
     register(name, email, password) {
-        this.getForm().enter({name: name, email: email, password: password})
+        this.getForm().enter({name, email, password})
 
         return this
     }

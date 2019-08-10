@@ -22,7 +22,7 @@ export class SongFactory {
         const url = '/test/create_song'
         
         cy.request({
-            url: url,
+            url,
             method: 'POST',
             qs: {
                 username:    author.getName(),
@@ -47,7 +47,7 @@ export class SongFactory {
         const url = '/test/reset'
 
         cy.request({
-            url: url,
+            url,
             method: 'POST',
         })
     }

@@ -13,7 +13,7 @@ export class ResetPasswordPage extends Public {
     }
 
     resetPassword(password) {
-        this.getForm().enter({password: password})
+        this.getForm().enter({password})
 
         return this
     }

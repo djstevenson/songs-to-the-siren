@@ -100,10 +100,10 @@ Cypress.Commands.add('publishSong', (title, flag) => {
     const url = '/test/publish_song'
         
     cy.request({
-        url: url,
+        url,
         method: 'POST',
         qs: {
-            title:       title,
+            title,
             published:   (flag ? 1 : 0),
         }
     })
