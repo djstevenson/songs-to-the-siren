@@ -215,10 +215,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Class-Method-Modifiers-2.12
-    pathname: E/ET/ETHER/Class-Method-Modifiers-2.12.tar.gz
+  Class-Method-Modifiers-2.13
+    pathname: E/ET/ETHER/Class-Method-Modifiers-2.13.tar.gz
     provides:
-      Class::Method::Modifiers 2.12
+      Class::Method::Modifiers 2.13
     requirements:
       B 0
       Carp 0
