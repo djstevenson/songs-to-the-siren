@@ -16,7 +16,9 @@ export class TestEmailPage extends Public {
     }
     
     pageUrl() {
-        return '/test/view_email/' + this.getType() + '/' + this.getName()
+        const type = this.getType()
+        const name = this.getName()
+        return `/test/view_email/${type}/${name}`;
     }
 
     confirmRegistration() {

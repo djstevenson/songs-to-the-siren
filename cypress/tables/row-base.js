@@ -19,11 +19,10 @@ export class RowBase {
 
     findCell(colName) {
         const colIndex = this.getColumnIndex(colName)
-
-        const sel = `div#${this.getTableId()}`
-            + ' > table > tbody'
-            + ' > tr:nth-child(' + this.getRowIndex() + ')'
-            + ' > td:nth-child(' + colIndex + ')'
+        const rowIndex = this.getRowIndex()
+        const tableId  = this.getTableId()
+        
+        const sel = `${`div#${tableId}`} > table > tbody > tr:nth-child(${rowIndex}) > td:nth-child(${colIndex})`
         return cy.get(sel)
     }
 

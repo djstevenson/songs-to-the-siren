@@ -1,12 +1,12 @@
 export class Song {
     constructor(baseName) {
-        this._title     = 'Title ' + baseName
-        this._artist    = 'Artist ' + baseName
-        this._album     = 'Album ' + baseName
+        this._title     = `Title ${baseName}`
+        this._artist    = `Artist ${baseName}`
+        this._album     = `Album ${baseName}`
         this._countryId = 1
-        this._releasedAt = 'Release ' + baseName
-        this._summary   = 'Summary ' + baseName
-        this._full      = 'Full ' + baseName
+        this._releasedAt = `Release ${baseName}`
+        this._summary   = `Summary ${baseName}`
+        this._full      = `Full ${baseName}`
     }
 
     getTitle() {

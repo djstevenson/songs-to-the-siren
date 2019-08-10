@@ -1,6 +1,7 @@
 export class HomePageSong {
     constructor(n) {
-        this._dom = cy.get('section.song:nth-child(' + n.toString() + ')')
+        const nth = n.toString()
+        this._dom = cy.get(`section.song:nth-child(${nth})`)
     }
 
     assertSongTitle(expected) {

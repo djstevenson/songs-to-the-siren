@@ -7,8 +7,8 @@ import { LoginPage          } from '../pages/user/login-page'
 export class User {
     constructor(baseName, admin = false) {
         this._name = baseName
-        this._email = this._name + "@example.com"
-        this._password = "PW " + reverse(this._name)
+        this._email = `${baseName}@example.com`
+        this._password = `PW ${reverse(baseName)}`
         this._admin = admin
     }
 
@@ -17,7 +17,7 @@ export class User {
     }
 
     getBadName() {
-        return this._name + 'a'
+        return `${this._name}a`;
     }
 
     getEmail() {
@@ -25,7 +25,7 @@ export class User {
     }
 
     getBadEmail() {
-        return 'e' + this._email
+        return `e${this._email}`;
     }
 
     getPassword() {
@@ -33,7 +33,7 @@ export class User {
     }
 
     getBadPassword() {
-        return this._password + 'x'
+        return `${this._password}x`;
     }
 
     confirmRegistration() {

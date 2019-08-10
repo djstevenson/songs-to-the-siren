@@ -5,7 +5,8 @@ import randomize from 'randomatic';
 
 export class UserFactory {
     constructor(baseName) {
-        this._name = baseName + '_' + randomize('a0', 5) + '_'
+        const r = randomize('a0', 5)
+        this._name = `${baseName}_${r}_`
         this._index = 1
     }
 

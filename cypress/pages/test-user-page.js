@@ -11,7 +11,8 @@ export class TestUserPage extends Public {
     }
     
     pageUrl() {
-        return '/test/view_user/' + this.getName()
+        const name = this.getName()
+        return `/test/view_user/${name}`;
     }
 
     assertIsConfirmed() {

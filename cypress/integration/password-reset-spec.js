@@ -17,7 +17,8 @@ describe('Password reset confirmation', () => {
                 .confirmReset()
                 .assertLoggedOut()
             
-            const newPassword = 'x' + user.getPassword()
+            const oldPassword = user.getPassword()
+            const newPassword = `x${oldPassword}`
 
             const resetPage = new ResetPasswordPage()
                 .resetPassword(newPassword)

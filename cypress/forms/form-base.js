@@ -5,15 +5,18 @@ export class FormBase {
     }
 
     getField(name) {
-        return cy.get('#' + this._fields[name].getSelector());
+        const sel = this._fields[name].getSelector()
+        return cy.get(`#${sel}`);
     }
 
     getError(name) {
-        return cy.get('#error-' + this._fields[name].getSelector());
+        const sel = this._fields[name].getSelector()
+        return cy.get(`#error-${sel}`);
     }
 
     getButton(name) {
-        return cy.get('#' + this._buttons[name].getSelector());
+        const sel = this._buttons[name].getSelector()
+        return cy.get(`#${sel}`);
     }
 
     setField(name, value) {
