@@ -5,9 +5,9 @@ import { ResetPasswordPage } from '../pages/user/reset-password-page'
 
 var newUser = new UserFactory('pwresetconf')
 
-describe('Password reset confirmation', function() {
-    describe('User can perform successful reset', function() {
-        it('reset-confirm shows right shiz', function() {
+describe('Password reset confirmation', () => {
+    describe('User can perform successful reset', () => {
+        it('reset-confirm shows right shiz', () => {
 
             const user = newUser
                 .getNextConfirmedUser()
@@ -33,8 +33,8 @@ describe('Password reset confirmation', function() {
         })
     })
     
-    describe('Invalid reset requests are rejected', function() {
-        it('invalid reset code gives page-not-found', function() {
+    describe('Invalid reset requests are rejected', () => {
+        it('invalid reset code gives page-not-found', () => {
 
             newUser
                 .getNextConfirmedUser()
@@ -46,8 +46,8 @@ describe('Password reset confirmation', function() {
         })
     })
     
-    describe('Invalid new passwords are rejected', function() {
-        it('bad new passwords give right errors', function() {
+    describe('Invalid new passwords are rejected', () => {
+        it('bad new passwords give right errors', () => {
 
             const user = newUser
                 .getNextConfirmedUser()

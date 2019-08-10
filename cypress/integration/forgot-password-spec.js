@@ -5,9 +5,9 @@ import { UserFactory        } from '../support/user-factory'
 
 var newUser = new UserFactory('forgotpasswd')
 
-describe('Forgot-passworrd form tests', function() {
-    describe('Forgot-password form validation', function() {
-        it('empty form returns right error', function() {
+describe('Forgot-passworrd form tests', () => {
+    describe('Forgot-password form validation', () => {
+        it('empty form returns right error', () => {
 
             new ForgotPasswordPage()
                 .visit()
@@ -15,7 +15,7 @@ describe('Forgot-passworrd form tests', function() {
                 .assertFormError('email', 'Required')
         })
 
-        it('invalid email returns right error a@a', function() {
+        it('invalid email returns right error a@a', () => {
 
             new ForgotPasswordPage()
                 .visit()
@@ -23,7 +23,7 @@ describe('Forgot-passworrd form tests', function() {
                 .assertFormError('email', 'Invalid email address')
         })
 
-        it('invalid email returns right error xyzzy', function() {
+        it('invalid email returns right error xyzzy', () => {
 
             new ForgotPasswordPage()
                 .visit()
@@ -32,8 +32,8 @@ describe('Forgot-passworrd form tests', function() {
         })
     })
 
-    describe('User forgets password', function() {
-        it('enters correct address, gets good response page, and email', function() {
+    describe('User forgets password', () => {
+        it('enters correct address, gets good response page, and email', () => {
 
             const user = newUser.getNextConfirmedUser()
 
@@ -46,7 +46,7 @@ describe('Forgot-passworrd form tests', function() {
             user.assertHasEmail('password_reset')
         })
 
-        it('enters incorrect address, gets good response page, but no email', function() {
+        it('enters incorrect address, gets good response page, but no email', () => {
 
             const user = newUser.getNextConfirmedUser()
 

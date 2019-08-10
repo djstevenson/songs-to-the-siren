@@ -9,9 +9,9 @@ var label = 'deletesong'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
-describe('Delete Song tests', function() {
-    describe('Delete songs from song-list page', function() {
-        it('Can cancel an attempt to delete a song', function() {
+describe('Delete Song tests', () => {
+    describe('Delete songs from song-list page', () => {
+        it('Can cancel an attempt to delete a song', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
@@ -26,7 +26,7 @@ describe('Delete Song tests', function() {
             page.visit().assertSongCount(1)
         })
 
-        it('Can delete a published song', function() {
+        it('Can delete a published song', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
@@ -41,7 +41,7 @@ describe('Delete Song tests', function() {
             page.assertEmpty()
         })
 
-        it('Can delete an unpublished song', function() {
+        it('Can delete an unpublished song', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)

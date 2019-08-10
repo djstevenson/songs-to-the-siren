@@ -8,10 +8,10 @@ var label = 'listsong'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
-describe('List Song tests', function() {
+describe('List Song tests', () => {
 
-    describe('Song order etc', function() {
-        it('Song list starts empty', function() {
+    describe('Song order etc', () => {
+        it('Song list starts empty', () => {
             songFactory.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
@@ -21,7 +21,7 @@ describe('List Song tests', function() {
                 .assertEmpty()
         })
 
-        it('shows songs in creation order, regardless of publication status', function() {
+        it('shows songs in creation order, regardless of publication status', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
@@ -50,8 +50,8 @@ describe('List Song tests', function() {
 
     })
 
-    describe('Publish/unpublish button', function() {
-        it('Can publish/unpublish songs from the song list', function() {
+    describe('Publish/unpublish button', () => {
+        it('Can publish/unpublish songs from the song list', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)

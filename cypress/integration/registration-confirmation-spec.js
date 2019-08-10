@@ -4,9 +4,9 @@ import { UserFactory } from '../support/user-factory'
 
 var newUser = new UserFactory('regconf')
 
-describe('Registration confirm/decline tests', function() {
-    describe('New user confirms registration', function() {
-        it('sees right notification, and is confirmed', function() {
+describe('Registration confirm/decline tests', () => {
+    describe('New user confirms registration', () => {
+        it('sees right notification, and is confirmed', () => {
 
             newUser
                 .getNextRegisteredUser()
@@ -16,8 +16,8 @@ describe('Registration confirm/decline tests', function() {
         })
     })
 
-    describe('New user declines registration', function() {
-        it('sees the right notification, and is deleted', function() {
+    describe('New user declines registration', () => {
+        it('sees the right notification, and is deleted', () => {
 
             newUser
                 .getNextRegisteredUser()
@@ -26,8 +26,8 @@ describe('Registration confirm/decline tests', function() {
         })
     })
 
-    describe('New user uses bad confirm request', function() {
-        it('gets 404 not found', function() {
+    describe('New user uses bad confirm request', () => {
+        it('gets 404 not found', () => {
 
             newUser
                 .getNextRegisteredUser()
@@ -37,8 +37,8 @@ describe('Registration confirm/decline tests', function() {
         })
     })
 
-    describe('New user uses bad decline request', function() {
-        it('gets 404 not found', function() {
+    describe('New user uses bad decline request', () => {
+        it('gets 404 not found', () => {
 
             newUser
                 .getNextRegisteredUser()

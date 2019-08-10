@@ -8,32 +8,32 @@ import { UserFactory    } from '../support/user-factory'
 
 var newUser = new UserFactory('access')
 
-describe('Access control depending on user authorisation', function() {
-    describe('Access while logged out', function() {
-        it('can access login page', function() {
+describe('Access control depending on user authorisation', () => {
+    describe('Access while logged out', () => {
+        it('can access login page', () => {
             new LoginPage()
                 .visit()
                 .assertLoggedOut()
                 .assertTitle('Login')
         })
-        it('can access home page', function() {
+        it('can access home page', () => {
             new HomePage()
                 .visit()
                 .assertLoggedOut()
                 .assertTitle('Songs I Will Never Tire of')
         })
-        it('can not access song-list admin page', function() {
+        it('can not access song-list admin page', () => {
             new ListSongsPage()
                 .assertVisitError(403)
         })
-        it('can not access song-create admin page', function() {
+        it('can not access song-create admin page', () => {
             new CreateSongPage()
                 .assertVisitError(403)
         })
     })
 
-    describe('Access for logged-in normal user', function() {
-        it('can access login page', function() {
+    describe('Access for logged-in normal user', () => {
+        it('can access login page', () => {
             newUser.getNextLoggedInUser()
             new LoginPage()
                 .visit()
@@ -41,27 +41,27 @@ describe('Access control depending on user authorisation', function() {
                 .assertTitle('Login')
 
         })
-        it('can access home page', function() {
+        it('can access home page', () => {
             const user = newUser.getNextLoggedInUser()
             new HomePage()
                 .visit()
                 .assertLoggedInAs(user.getName())
                 .assertTitle('Songs I Will Never Tire of')
         })
-        it('can not access song-list admin page', function() {
+        it('can not access song-list admin page', () => {
             const user = newUser.getNextLoggedInUser()
             new ListSongsPage()
                 .assertVisitError(403)
         })
-        it('can not access song-create admin page', function() {
+        it('can not access song-create admin page', () => {
             const user = newUser.getNextLoggedInUser()
             new CreateSongPage()
                 .assertVisitError(403)
         })
     })
 
-    describe('Access for logged-in admin user', function() {
-        it('can access login page', function() {
+    describe('Access for logged-in admin user', () => {
+        it('can access login page', () => {
             newUser.getNextLoggedInUser(true)
             new LoginPage()
                 .visit()
@@ -69,21 +69,21 @@ describe('Access control depending on user authorisation', function() {
                 .assertTitle('Login')
 
         })
-        it('can access home page', function() {
+        it('can access home page', () => {
             const user = newUser.getNextLoggedInUser(true)
             new HomePage()
                 .visit()
                 .assertLoggedInAsAdmin(user.getName())
                 .assertTitle('Songs I Will Never Tire of')
         })
-        it('can access song-list admin page', function() {
+        it('can access song-list admin page', () => {
             const user = newUser.getNextLoggedInUser(true)
             new ListSongsPage()
                 .visit()
                 .assertLoggedInAsAdmin(user.getName())
                 .assertTitle('Song list')
         })
-        it('can not access song-create admin page', function() {
+        it('can not access song-create admin page', () => {
             const user = newUser.getNextLoggedInUser(true)
             new CreateSongPage()
                 .visit()

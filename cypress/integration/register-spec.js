@@ -6,17 +6,17 @@ import { UserFactory  } from '../support/user-factory'
 
 var userFactory = new UserFactory('regtest')
 
-describe('Registration tests', function() {
-    describe('Register page looks right', function() {
-        it('has the right title', function() {
+describe('Registration tests', () => {
+    describe('Register page looks right', () => {
+        it('has the right title', () => {
             new RegisterPage()
                 .visit()
                 .assertTitle('Sign up')
         })
     })
 
-    describe('Register form has field validation', function() {
-        it('empty form shows "required" errors', function() {
+    describe('Register form has field validation', () => {
+        it('empty form shows "required" errors', () => {
             new RegisterPage()
                 .visit()
                 .register('', '', '')
@@ -24,7 +24,7 @@ describe('Registration tests', function() {
                 .assertFormError('email', 'Required')
                 .assertFormError('password', 'Required')
         })
-        it('short username shows min-length error', function() {
+        it('short username shows min-length error', () => {
             new RegisterPage()
                 .visit()
                 .register('a', '', '')
@@ -32,7 +32,7 @@ describe('Registration tests', function() {
                 .assertFormError('email', 'Required')
                 .assertFormError('password', 'Required')
         })
-        it('short username/password shows min-length errors', function() {
+        it('short username/password shows min-length errors', () => {
             new RegisterPage()
                 .visit()
                 .register('a', 'b@example.com', 'c')
@@ -40,7 +40,7 @@ describe('Registration tests', function() {
                 .assertNoFormError('email')
                 .assertFormError('password', 'Minimum length 5')
         })
-        it('invalid email shows appropriate error', function() {
+        it('invalid email shows appropriate error', () => {
             new RegisterPage()
                 .visit()
                 .register('aaaaaa', 'me', 'xxxxxx')
@@ -48,7 +48,7 @@ describe('Registration tests', function() {
                 .assertFormError('email', 'Invalid email address')
                 .assertNoFormError('password')
         })
-        it('Name aleady-in-use is rejected', function() {
+        it('Name aleady-in-use is rejected', () => {
             // Do a good reg
             const { user, page } = userFactory.getNextRegistered()
 
@@ -60,7 +60,7 @@ describe('Registration tests', function() {
                 .assertNoFormError('email')
                 .assertNoFormError('password')
         })
-        it('Password aleady-in-use is rejected', function() {
+        it('Password aleady-in-use is rejected', () => {
             // Do a good reg
             const { user, page } = userFactory.getNextRegistered()
 
@@ -74,17 +74,17 @@ describe('Registration tests', function() {
         })
     })
 
-    describe('Register with good details succeeds', function() {
-        it('registering does not login user', function() {
+    describe('Register with good details succeeds', () => {
+        it('registering does not login user', () => {
             userFactory.getNextRegistered()['page']
                 .assertLoggedOut();
         })
-        it('registering shows a "success" response', function() {
+        it('registering shows a "success" response', () => {
             userFactory.getNextRegistered()['page']
                 .assertFlash('User created - watch out for confirmation email')
                 .assertNotification('New user created', 'Thank you for your signup request.')
         })
-        it('registered user can login ok', function() {
+        it('registered user can login ok', () => {
             const user = userFactory.getNextRegisteredUser()
 
             new LoginPage()
@@ -92,7 +92,7 @@ describe('Registration tests', function() {
                 .login(user.getName(), user.getPassword())
                 .assertLoggedInAs(user.getName())
         })
-        it('registered user is not confirmed', function() {
+        it('registered user is not confirmed', () => {
             const user = userFactory.getNextRegisteredUser()
 
             user

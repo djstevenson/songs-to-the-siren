@@ -5,9 +5,9 @@ import { UserFactory  } from '../support/user-factory'
 
 var newUser = new UserFactory('forgotname')
 
-describe('Forgot-name form tests', function() {
-    describe('Forgot-name form validation', function() {
-        it('empty form returns right error', function() {
+describe('Forgot-name form tests', () => {
+    describe('Forgot-name form validation', () => {
+        it('empty form returns right error', () => {
 
             new ForgotNamePage()
                 .visit()
@@ -15,7 +15,7 @@ describe('Forgot-name form tests', function() {
                 .assertFormError('email', 'Required')
         })
 
-        it('invalid email returns right error a@a', function() {
+        it('invalid email returns right error a@a', () => {
 
             new ForgotNamePage()
                 .visit()
@@ -23,7 +23,7 @@ describe('Forgot-name form tests', function() {
                 .assertFormError('email', 'Invalid email address')
         })
 
-        it('invalid email returns right error xyzzy', function() {
+        it('invalid email returns right error xyzzy', () => {
 
             new ForgotNamePage()
                 .visit()
@@ -32,8 +32,8 @@ describe('Forgot-name form tests', function() {
         })
     })
 
-    describe('User forgets password', function() {
-        it('enters correct address, gets good response page, and email', function() {
+    describe('User forgets password', () => {
+        it('enters correct address, gets good response page, and email', () => {
 
             const user = newUser.getNextConfirmedUser()
 
@@ -46,7 +46,7 @@ describe('Forgot-name form tests', function() {
             user.assertHasEmail('name_reminder')
         })
 
-        it('enters incorrect address, gets good response page, but no email', function() {
+        it('enters incorrect address, gets good response page, but no email', () => {
 
             const user = newUser.getNextConfirmedUser()
 

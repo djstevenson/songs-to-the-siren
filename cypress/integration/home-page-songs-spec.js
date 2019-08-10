@@ -8,9 +8,9 @@ var label = 'homecounts'
 var userFactory = new UserFactory(label)
 var songFactory = new SongFactory(label)
 
-describe('Home page tests - song list', function() {
-    describe('Song counts', function() {
-        it('list starts empty', function() {
+describe('Home page tests - song list', () => {
+    describe('Song counts', () => {
+        it('list starts empty', () => {
 
             songFactory.resetDatabase()
 
@@ -18,7 +18,7 @@ describe('Home page tests - song list', function() {
                 .visit()
                 .assertSongCount(0)
         })
-        it('shows zero songs if only unpublished songs exist', function() {
+        it('shows zero songs if only unpublished songs exist', () => {
 
             songFactory.resetDatabase()
 
@@ -30,7 +30,7 @@ describe('Home page tests - song list', function() {
                 .assertSongCount(0)
 
         })
-        it('with mixed published/unpublished songs, only the former are shown', function() {
+        it('with mixed published/unpublished songs, only the former are shown', () => {
 
             const homePage = new HomePage()
 
@@ -53,7 +53,7 @@ describe('Home page tests - song list', function() {
                 .assertSongCount(2)
         })
 
-        it('shows 0 songs if we publish then unpublish', function() {
+        it('shows 0 songs if we publish then unpublish', () => {
 
             const homePage = new HomePage()
 
@@ -83,8 +83,8 @@ describe('Home page tests - song list', function() {
     })
 
     // By publication date, newest first
-    describe('Songs shown in right order', function() {
-        it('newest publication first', function() {
+    describe('Songs shown in right order', () => {
+        it('newest publication first', () => {
 
             const homePage = new HomePage()
 

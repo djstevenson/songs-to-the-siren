@@ -22,9 +22,9 @@ function createSong() {
     return song
 }
 
-describe('Create Song tests', function() {
-    describe('Form validation', function() {
-        it('Create song page has right title', function() {
+describe('Create Song tests', () => {
+    describe('Form validation', () => {
+        it('Create song page has right title', () => {
 
             userFactory.getNextLoggedInUser(true)
 
@@ -33,7 +33,7 @@ describe('Create Song tests', function() {
                 .assertTitle('New song')
         })
 
-        it('Form shows right errors with empty input', function() {
+        it('Form shows right errors with empty input', () => {
 
             userFactory.getNextLoggedInUser(true)
 
@@ -49,7 +49,7 @@ describe('Create Song tests', function() {
                 .assertFormError('fullMarkdown',    'Required')
         })
 
-        it('Form shows right errors with invalid input', function() {
+        it('Form shows right errors with invalid input', () => {
 
             // There's deliberately minimal validation, no reason
             // why I shouldn't be able to enter a single-character
@@ -90,8 +90,8 @@ describe('Create Song tests', function() {
         })
     })
 
-    describe('Song list', function() {
-        it('shows multiple songs in newest-first order', function() {
+    describe('Song list', () => {
+        it('shows multiple songs in newest-first order', () => {
             songFactory.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
