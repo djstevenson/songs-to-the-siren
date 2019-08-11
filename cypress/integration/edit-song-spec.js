@@ -15,8 +15,8 @@ describe('Edit Song tests', () => {
             songFactory.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
-
             const song1 = songFactory.getNextSong(user)
+
             new ListSongsPage()
                 .visit()
                 .getRow(1)
@@ -26,61 +26,76 @@ describe('Edit Song tests', () => {
                 .assertTitle(`Edit song: ${song1.getTitle()}`)
         })
 
-        // it('Form shows right errors with empty input', () => {
+        it('Form shows right errors with empty input', () => {
 
-        //     userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
 
-        //     new CreateSongPage()
-        //         .visit()
-        //         .createSong({})
-        //         .assertFormError('title',           'Required')
-        //         .assertFormError('artist',          'Required')
-        //         .assertFormError('album',           'Required')
-        //         .assertFormError('countryId',       'Required')
-        //         .assertFormError('releasedAt',      'Required')
-        //         .assertFormError('summaryMarkdown', 'Required')
-        //         .assertFormError('fullMarkdown',    'Required')
-        // })
+            new ListSongsPage().edit(1)
 
-        // it('Form shows right errors with invalid input', () => {
+            new EditSongPage()
+            .editSong({
+                title:           '',
+                artist:          '',
+                album:           '',
+                image:           '',
+                countryId:       '',
+                releasedAt:      '',
+                summaryMarkdown: '',
+                fullMarkdown:    ''
+            })
+            .assertFormError('title',           'Required')
+                .assertFormError('artist',          'Required')
+                .assertFormError('album',           'Required')
+                .assertFormError('image',           'Required')
+                .assertFormError('countryId',       'Required')
+                .assertFormError('releasedAt',      'Required')
+                .assertFormError('summaryMarkdown', 'Required')
+                .assertFormError('fullMarkdown',    'Required')
+        })
 
-        //     // There's deliberately minimal validation, no reason
-        //     // why I shouldn't be able to enter a single-character
-        //     // title for example.
-        //     userFactory.getNextLoggedInUser(true)
+        it('Form shows right errors with invalid input', () => {
 
-        //     new CreateSongPage()
-        //         .visit()
-        //         .createSong({
-        //             title:           'a',
-        //             artist:          'a',
-        //             album:           'a',
-        //             countryId:       'a',
-        //             releasedAt:      'a',
-        //             summaryMarkdown: 'a',
-        //             fullMarkdown:    'a'
-        //         })
-        //         .assertNoFormError('title')
-        //         .assertNoFormError('artist')
-        //         .assertNoFormError('album')
-        //         .assertFormError('countryId', 'Invalid number')
-        //         .assertNoFormError('releasedAt')
-        //         .assertNoFormError('summaryMarkdown')
-        //         .assertNoFormError('fullMarkdown')
+            // There's deliberately minimal validation, no reason
+            // why I shouldn't be able to enter a single-character
+            // title for example.
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
 
-        //     new CreateSongPage()
-        //         .visit()
-        //         .createSong({
-        //             title:           'a',
-        //             artist:          'a',
-        //             album:           'a',
-        //             countryId:       '0',
-        //             releasedAt:      'a',
-        //             summaryMarkdown: 'a',
-        //             fullMarkdown:    'a'
-        //         })
-        //         .assertFormError('countryId', 'Country id 0 does not exist')
-        // })
+            new ListSongsPage().edit(1)
+
+            const page = new EditSongPage()
+                .editSong({
+                    title:           'a',
+                    artist:          'a',
+                    album:           'a',
+                    image:           'a',
+                    countryId:       'a',
+                    releasedAt:      'a',
+                    summaryMarkdown: 'a',
+                    fullMarkdown:    'a'
+                })
+                .assertNoFormError('title')
+                .assertNoFormError('artist')
+                .assertNoFormError('album')
+                .assertNoFormError('image')
+                .assertFormError('countryId', 'Invalid number')
+                .assertNoFormError('releasedAt')
+                .assertNoFormError('summaryMarkdown')
+                .assertNoFormError('fullMarkdown')
+
+            page.editSong({
+                    title:           'a',
+                    artist:          'a',
+                    album:           'a',
+                    image:           'a',
+                    countryId:       '0',
+                    releasedAt:      'a',
+                    summaryMarkdown: 'a',
+                    fullMarkdown:    'a'
+                })
+                .assertFormError('countryId', 'Country id 0 does not exist')
+        })
     })
 
     // describe('Song list', () => {
