@@ -116,6 +116,32 @@ describe('Edit Song tests', () => {
             listPage.getRow(1).assertText('title', newTitle)
         })
 
+        it('song edit does not affect position in song list', () => {
+            songFactory.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
+            const song2 = songFactory.getNextSong(user)
+            const song3 = songFactory.getNextSong(user)
+
+            const listPage = new ListSongsPage().visit()
+            // Row 1 = song3, row 2 = song2, row 3 = song1
+            listPage.getRow(1).assertText('title', song3.getTitle())
+            listPage.getRow(2).assertText('title', song2.getTitle())
+            listPage.getRow(3).assertText('title', song1.getTitle())
+
+            listPage.edit(2)
+
+            const newTitle = 'x' + song2.getTitle();
+            new EditSongPage()
+                .editSong({ title: newTitle })
+            
+            // Row 1 = song3, row 2 = song2, row 3 = song1
+            listPage.getRow(1).assertText('title', song3.getTitle())
+            listPage.getRow(2).assertText('title', newTitle)
+            listPage.getRow(3).assertText('title', song1.getTitle())
+        })
+
     })
 
 })
