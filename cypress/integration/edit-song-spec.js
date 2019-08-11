@@ -29,22 +29,22 @@ describe('Edit Song tests', () => {
         it('Form shows right errors with empty input', () => {
 
             const user = userFactory.getNextLoggedInUser(true)
-            const song1 = songFactory.getNextSong(user)
+            songFactory.getNextSong(user)
 
             new ListSongsPage().edit(1)
 
             new EditSongPage()
-            .editSong({
-                title:           '',
-                artist:          '',
-                album:           '',
-                image:           '',
-                countryId:       '',
-                releasedAt:      '',
-                summaryMarkdown: '',
-                fullMarkdown:    ''
-            })
-            .assertFormError('title',           'Required')
+                .editSong({
+                    title:           '',
+                    artist:          '',
+                    album:           '',
+                    image:           '',
+                    countryId:       '',
+                    releasedAt:      '',
+                    summaryMarkdown: '',
+                    fullMarkdown:    ''
+                })
+                .assertFormError('title',           'Required')
                 .assertFormError('artist',          'Required')
                 .assertFormError('album',           'Required')
                 .assertFormError('image',           'Required')
@@ -60,7 +60,7 @@ describe('Edit Song tests', () => {
             // why I shouldn't be able to enter a single-character
             // title for example.
             const user = userFactory.getNextLoggedInUser(true)
-            const song1 = songFactory.getNextSong(user)
+            songFactory.getNextSong(user)
 
             new ListSongsPage().edit(1)
 
@@ -98,30 +98,24 @@ describe('Edit Song tests', () => {
         })
     })
 
-    // describe('Song list', () => {
-    //     it('shows multiple songs in newest-first order', () => {
-    //         songFactory.resetDatabase()
+    describe('Song list', () => {
+        it('new song title shows up in song list', () => {
+            songFactory.resetDatabase()
 
-    //         userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
 
-    //         const song1 = createSong()
-    //         new ListSongsPage()
-    //             .visit()
-    //             .assertSongCount(1)
-    //             .getRow(1)
-    //                 .assertText('title', song1.getTitle())
+            const listPage = new ListSongsPage().visit()
 
-    //         // Now create another song, it should go to the top
-    //         const song2 = createSong()
+            listPage.edit(1)
 
-    //         const page2 = new ListSongsPage()
-    //             .visit()
-    //             .assertSongCount(2)
+            const newTitle = 'x' + song1.getTitle();
+            new EditSongPage()
+                .editSong({ title: newTitle })
             
-    //         page2.getRow(1).assertText('title', song2.getTitle())  // Song 2 first (woo hoo etc)
-    //         page2.getRow(2).assertText('title', song1.getTitle())  // Song 1 second
-    //     })
+            listPage.getRow(1).assertText('title', newTitle)
+        })
 
-    // })
+    })
 
 })
