@@ -6,3 +6,7 @@
 <p>
     <a href="<%= $c->url_for('create_song') %>">New song</a>
 </p>
+
+<p>
+    <a href="<%= $c->url_for('delete_all_songs') %>">Delete ALL songs and related data</a>
+</p>
