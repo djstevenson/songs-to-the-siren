@@ -1,5 +1,8 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
+import { UserFactory   } from '../support/user-factory'
+
+const newUser = new UserFactory('commands');
 
 // Call via user->confirmRegistration()
 Cypress.Commands.add('confirmUserRegistration', (user) => {
@@ -108,3 +111,21 @@ Cypress.Commands.add('publishSong', (title, flag) => {
         }
     })
 })
+
+Cypress.Commands.add('resetDatabase', () => {
+
+    // get ephemeral admin user - the reset will delete it
+    newUser.getNextLoggedInUser(true)
+
+    const url = '/song/delete/all'
+        
+    cy.request({
+        url,
+        method: 'POST',
+        qs: {
+            'submit-button': 'delete_all_songs'
+        }
+    })
+})
+
+

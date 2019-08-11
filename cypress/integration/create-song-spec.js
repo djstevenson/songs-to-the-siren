@@ -96,7 +96,7 @@ describe('Create Song tests', () => {
 
     describe('Song list', () => {
         it('shows multiple songs in newest-first order', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
 

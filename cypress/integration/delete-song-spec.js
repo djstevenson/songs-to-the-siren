@@ -12,7 +12,7 @@ const songFactory = new SongFactory(label);
 describe('Delete Song tests', () => {
     describe('Delete songs from song-list page', () => {
         it('Can cancel an attempt to delete a song', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
 
@@ -27,7 +27,7 @@ describe('Delete Song tests', () => {
         })
 
         it('Can delete a published song', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
 
@@ -42,7 +42,7 @@ describe('Delete Song tests', () => {
         })
 
         it('Can delete an unpublished song', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
 
