@@ -114,6 +114,5 @@ sub _assert_test_db {
 	die unless $name eq 'never_tire_test';
 }
 
-
 __PACKAGE__->meta->make_immutable;
 1;

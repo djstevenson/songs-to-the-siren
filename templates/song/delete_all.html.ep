@@ -1,0 +1,7 @@
+% layout 'admin';
+% title 'Delete ALL songs';
+
+<p>Delete all songs, tags, comments, links, etc, and all users. This will log you out.</p>
+
+<%== $form->render %>
+
