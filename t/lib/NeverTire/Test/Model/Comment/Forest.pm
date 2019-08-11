@@ -29,6 +29,7 @@ sub run {
 		title            => 'The song title',
 		artist           => 'The artist name',
 		album            => 'Greatest hits',
+		image            => 'http://example.com/image.jpg',
 		country          => $self->create_country('CO'),
 		released_at      => 'Last week',
 	};

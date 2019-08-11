@@ -43,6 +43,7 @@ describe('Create Song tests', () => {
                 .assertFormError('title',           'Required')
                 .assertFormError('artist',          'Required')
                 .assertFormError('album',           'Required')
+                .assertFormError('image',           'Required')
                 .assertFormError('countryId',       'Required')
                 .assertFormError('releasedAt',      'Required')
                 .assertFormError('summaryMarkdown', 'Required')
@@ -62,6 +63,7 @@ describe('Create Song tests', () => {
                     title:           'a',
                     artist:          'a',
                     album:           'a',
+                    image:           'a',
                     countryId:       'a',
                     releasedAt:      'a',
                     summaryMarkdown: 'a',
@@ -70,6 +72,7 @@ describe('Create Song tests', () => {
                 .assertNoFormError('title')
                 .assertNoFormError('artist')
                 .assertNoFormError('album')
+                .assertNoFormError('image')
                 .assertFormError('countryId', 'Invalid number')
                 .assertNoFormError('releasedAt')
                 .assertNoFormError('summaryMarkdown')
@@ -81,6 +84,7 @@ describe('Create Song tests', () => {
                     title:           'a',
                     artist:          'a',
                     album:           'a',
+                    image:           'a',
                     countryId:       '0',
                     releasedAt:      'a',
                     summaryMarkdown: 'a',

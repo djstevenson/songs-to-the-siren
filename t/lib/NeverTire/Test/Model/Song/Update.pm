@@ -24,6 +24,7 @@ sub run {
 		title            => 'title',
 		artist           => 'artist',
 		album            => 'album',
+		image            => 'image',
 		country          => $self->create_country('CO'),
 		released_at      => 'release',
 	});
@@ -35,6 +36,7 @@ sub run {
 	my $artist  = 'The artist name';
 	my $country = $self->create_country('XX');
 	my $album   = 'Greatest hits';
+	my $image   = 'New image';
 	my $release = 'Last week';
 	my $edited_song = $user->admin_edit_song($song => {
 		summary_markdown => $summary,
@@ -42,6 +44,7 @@ sub run {
 		title            => $title,
 		artist           => $artist,
 		album            => $album,
+		image            => $image,
 		country_id       => $country->id,
 		released_at      => $release,
 	});
@@ -54,6 +57,7 @@ sub run {
 	is($song->artist,        $artist,               'Artist is correct');
 	is($song->country_id,    $country->id,          'Country is correct');
 	is($song->album,         $album,                'Album is correct');
+	is($song->image,         $image,                'Image is correct');
 	is($song->released_at,   $release,              'Release date is correct');
 
 	is($song->created_at, $dc, 'Editing does not change created_at');

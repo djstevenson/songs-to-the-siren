@@ -8,6 +8,7 @@ export class CreateSongForm extends FormBase {
         this._fields.title           = new FormField('text',     'new-song-title')
         this._fields.artist          = new FormField('text',     'new-song-artist')
         this._fields.album           = new FormField('text',     'new-song-album')
+        this._fields.image           = new FormField('text',     'new-song-image')
         this._fields.countryId       = new FormField('text',     'new-song-country-id')
         this._fields.releasedAt      = new FormField('text',     'new-song-released-at')
         this._fields.summaryMarkdown = new FormField('textarea', 'new-song-summary-markdown')
