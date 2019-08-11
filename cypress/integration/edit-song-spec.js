@@ -142,6 +142,40 @@ describe('Edit Song tests', () => {
             listPage.getRow(3).assertText('title', song1.getTitle())
         })
 
-    })
 
+        it('song edit does affect publication status', () => {
+            songFactory.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
+
+            const listPage = new ListSongsPage()
+
+            const row1 = listPage.visit().getRow(1)
+            row1
+                .assertUnpublished()
+                .click('edit')
+            
+
+            const newTitle = 'x' + song1.getTitle();
+            new EditSongPage()
+                .editSong({ title: newTitle })
+
+            // Check still not published
+            row1.assertUnpublished()
+
+            // Now publish it, edit again, and re-check status
+            row1
+                .click('publish')
+                .assertPublished()
+                .click('edit')
+
+            const newTitle2 = 'xy' + song1.getTitle();
+            new EditSongPage()
+                .editSong({ title: newTitle })
+
+            // Check still not published
+            row1.assertPublished()
+        })
+    })
 })
