@@ -11,26 +11,20 @@ use DateTime;
 ####### DON'T USE THAT DB IN PRODUCTION!! #######
 #################################################
 
+
+# TODO Replace all this with proper admin pages
+
 sub add_routes {
     my ($c, $route) = @_;
 
     # Don't need to be logged in for these actions
     my $t = $route->any('/test')->to(controller => 'test');
 
-    $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
     $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
-}
-
-sub reset {
-    my $c = shift;
-
-    $c->schema->resultset('Tag')->delete;
-    $c->schema->resultset('Song')->delete;
-    $c->redirect_to('home');
 }
 
 sub create_user {
@@ -214,16 +208,6 @@ title, artist, album, country_id, summary, full, username, released_at
 
 Optional: published, 1 if song is to be published, 0 otherwise
 
-=item /test/reset (POST only)
-
-Resets the test song database by deleting all songs, tags, links, comments
-
-=head2 Params
-
-title, artist, album, country_id, summary, full, username, released_at
-
-Optional: published, 1 if song is to be published, 0 otherwise
-
 =item /test/publish_song (POST only)
 
 Publishes, or unpublishes, a song. This is not a RESTy way of
@@ -245,16 +229,6 @@ Flag, some true value means set song to published=NOW(), some
 false value means set song to published=NULL.
 
 =back
-
-=item /test/reset (POST only)
-
-Resets the test song database by deleting all songs, tags, links, comments
-
-=head2 Params
-
-title, artist, album, country_id, summary, full, username, released_at
-
-Optional: published, 1 if song is to be published, 0 otherwise
 
 =item /test/view_user/:username
 
