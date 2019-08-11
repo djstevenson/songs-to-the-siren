@@ -12,7 +12,7 @@ const songFactory = new SongFactory(label);
 describe('Edit Song tests', () => {
     describe('Form validation', () => {
         it('Edit song page has right title', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -100,7 +100,7 @@ describe('Edit Song tests', () => {
 
     describe('Song list', () => {
         it('new song title shows up in song list', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -117,7 +117,7 @@ describe('Edit Song tests', () => {
         })
 
         it('song edit does not affect position in song list', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -144,7 +144,7 @@ describe('Edit Song tests', () => {
 
 
         it('song edit does affect publication status', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)

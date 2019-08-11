@@ -12,7 +12,7 @@ describe('List Song tests', () => {
 
     describe('Song order etc', () => {
         it('Song list starts empty', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
 
@@ -22,7 +22,7 @@ describe('List Song tests', () => {
         })
 
         it('shows songs in creation order, regardless of publication status', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
 
@@ -52,7 +52,7 @@ describe('List Song tests', () => {
 
     describe('Publish/unpublish button', () => {
         it('Can publish/unpublish songs from the song list', () => {
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
 

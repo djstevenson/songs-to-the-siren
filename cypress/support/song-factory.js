@@ -43,15 +43,5 @@ export class SongFactory {
         return song
     }
 
-    // TODO Is this the right class for these?
-    //      These are more like 'song util' methods
-    resetDatabase() {
-        const url = '/test/reset'
-
-        cy.request({
-            url,
-            method: 'POST',
-        })
-    }
 }
 

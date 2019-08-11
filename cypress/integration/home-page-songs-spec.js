@@ -12,7 +12,7 @@ describe('Home page tests - song list', () => {
     describe('Song counts', () => {
         it('list starts empty', () => {
 
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             new HomePage()
                 .visit()
@@ -20,7 +20,7 @@ describe('Home page tests - song list', () => {
         })
         it('shows zero songs if only unpublished songs exist', () => {
 
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             const song = songFactory.getNextSong(user)
@@ -34,7 +34,7 @@ describe('Home page tests - song list', () => {
 
             const homePage = new HomePage()
 
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             const song1 = songFactory.getNextSong(user, true)
@@ -57,7 +57,7 @@ describe('Home page tests - song list', () => {
 
             const homePage = new HomePage()
 
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             const song1 = songFactory.getNextSong(user, true)
@@ -88,7 +88,7 @@ describe('Home page tests - song list', () => {
 
             const homePage = new HomePage()
 
-            songFactory.resetDatabase()
+            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
 
