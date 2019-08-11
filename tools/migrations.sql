@@ -51,8 +51,8 @@ CREATE TABLE songs (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     artist TEXT NOT NULL,
     title TEXT NOT NULL,
-    album TEXT,
-    "image" TEXT,    -- /public/images/160/${image} - size is 160x160
+    album TEXT NOT NULL,
+    "image" TEXT NOT NULL,    -- /public/images/160/${image} - size is 160x160
     country_id BIGINT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
 
     summary_markdown TEXT NOT NULL,

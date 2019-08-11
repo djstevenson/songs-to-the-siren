@@ -1,12 +1,13 @@
 export class Song {
     constructor(baseName) {
-        this._title     = `Title ${baseName}`
-        this._artist    = `Artist ${baseName}`
-        this._album     = `Album ${baseName}`
-        this._countryId = 1
+        this._title      = `Title ${baseName}`
+        this._artist     = `Artist ${baseName}`
+        this._album      = `Album ${baseName}`
+        this._image      = `http://example.com/${baseName}.jpg`
+        this._countryId  = 1
         this._releasedAt = `Release ${baseName}`
-        this._summary   = `Summary ${baseName}`
-        this._full      = `Full ${baseName}`
+        this._summary    = `Summary ${baseName}`
+        this._full       = `Full ${baseName}`
     }
 
     getTitle() {
@@ -19,6 +20,10 @@ export class Song {
 
     getAlbum() {
         return this._album
+    }
+
+    getImage() {
+        return this._image
     }
 
     getCountryId() {
@@ -37,6 +42,9 @@ export class Song {
         return this._full
     }
 
+    // TODO Do away with these 'test page' hacks.
+    //      If we give admin access to emails table,
+    //      we can do all we need from normal interface
     publish() {
         cy.publishSong(this.getTitle(), 1)
     }
@@ -47,13 +55,14 @@ export class Song {
 
     asArgs() {
         return {
-            title:           this.getTitle(),
-            artist:          this.getArtist(),
-            album:           this.getAlbum(),
-            countryId:       this.getCountryId(),
-            releasedAt:      this.getReleasedAt(),
-            summaryMarkdown: this.getSummary(),
-            fullMarkdown:    this.getFull(),
+            title:            this.getTitle(),
+            artist:           this.getArtist(),
+            album:            this.getAlbum(),
+            image:            this.getImage(),
+            countryId:        this.getCountryId(),
+            releasedAt:       this.getReleasedAt(),
+            summaryMarkdown:  this.getSummary(),
+            fullMarkdown:     this.getFull(),
         }
     }
 }

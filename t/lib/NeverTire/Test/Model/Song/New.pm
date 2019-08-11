@@ -26,6 +26,7 @@ sub run {
 	my $artist  = 'The artist name';
 	my $country = $self->create_country('CO');
 	my $album   = 'Greatest hits';
+	my $image   = 'Album artwork';
 	my $release = 'Last week';
 	
 	my $song = $user->admin_create_song({
@@ -35,6 +36,7 @@ sub run {
 		artist           => $artist,
 		country          => $country,
 		album            => $album,
+		image            => $image,
 		released_at      => $release,
 	});
 
@@ -47,6 +49,7 @@ sub run {
 	is($song->artist,        $artist,               'Artist is correct');
 	is($song->country_id,    $country->id,          'Country is correct');
 	is($song->album,         $album,                'Album is correct');
+	is($song->image,         $image,                'Image is correct');
 	is($song->released_at,   $release,              'Release date is correct');
 
 	my $dc  = $song->created_at;  # DateTime object

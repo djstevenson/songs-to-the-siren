@@ -15,12 +15,6 @@ export class ListSongsRow extends RowBase {
         this._columns.delete      = new TableColumn(9)
     }
 
-    assertNotPublished() {
-        this.assertNoText('publishedAt')
-
-        return this // Chainable
-    }
-
     // publishedAt should be a date
     // Publish link should be 'Hide'
     assertPublished() {

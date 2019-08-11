@@ -39,4 +39,10 @@ export class ListSongsPage extends Admin {
     getRow(rowIndex) {
         return this.getTable().getRow(rowIndex)
     }
+
+    // Shortcut to hit the edit link in the 'n'th row
+    // Returns the row object
+    edit(rowIndex) {
+        return this.getRow(rowIndex).click('edit')
+    }
 }

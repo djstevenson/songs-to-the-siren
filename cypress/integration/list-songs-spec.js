@@ -44,7 +44,7 @@ describe('List Song tests', () => {
             page = new ListSongsPage().visit().assertSongCount(3)
 
             page.getRow(1).assertText('title', song3.getTitle()).assertPublished()
-            page.getRow(2).assertText('title', song2.getTitle()).assertNotPublished()
+            page.getRow(2).assertText('title', song2.getTitle()).assertUnpublished()
             page.getRow(3).assertText('title', song1.getTitle()).assertPublished()
         })
 

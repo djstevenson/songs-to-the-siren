@@ -27,6 +27,12 @@ has_field album => (
     validators  => [qw/ Required  /],
 );
 
+has_field image => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
+);
+
 has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -77,7 +83,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title artist album country_id released_at summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title artist album image country_id released_at summary_markdown full_markdown /);
 	return $user->admin_create_song($fields);
 };
 

@@ -26,6 +26,7 @@ sub run {
 		full_markdown    => 'full',
 		title            => 'title',
 		artist           => 'artist',
+		image            => 'image',
 		album            => 'album',
 		country          => $self->create_country('CO'),
 		released_at      => 'release',

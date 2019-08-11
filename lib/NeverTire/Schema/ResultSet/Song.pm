@@ -30,8 +30,10 @@ sub full_song_data {
     my ($self, $song_id, $is_admin) = @_;
 
     # TODO Prefetch tags?
-    my $rs =  $self->select_metadata
-        ->select_text(full => 'html')
+    my $rs =  $self
+        ->select_metadata
+        ->select_text(summary => 'markdown')
+        ->select_text(full    => 'markdown')
         ->select_comment_count('approved');
     
     $rs = $rs->where_published unless $is_admin;
@@ -43,8 +45,8 @@ sub select_metadata {
     my $self = shift;
 
     return $self->search(undef, {
-        select    => [qw/ id title album image country.name country.emoji created_at updated_at published_at released_at author.name artist /],
-        as        => [qw/ id title album image country_name country_emoji created_at updated_at published_at released_at author_name artist /],
+        select    => [qw/ id title album image country_id country.name country.emoji created_at updated_at published_at released_at author.name artist /],
+        as        => [qw/ id title album image country_id country_name country_emoji created_at updated_at published_at released_at author_name artist /],
         join      => [qw/ author country /],
     });
 }
