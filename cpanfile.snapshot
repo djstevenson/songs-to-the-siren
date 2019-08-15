@@ -370,11 +370,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.9.0
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.9.0.tar.gz
+  DBD-Pg-3.9.1
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.9.1.tar.gz
     provides:
-      Bundle::DBD::Pg v3.9.0
-      DBD::Pg v3.9.0
+      Bundle::DBD::Pg v3.9.1
+      DBD::Pg v3.9.1
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
@@ -2705,49 +2705,49 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
-  Specio-0.43
-    pathname: D/DR/DROLSKY/Specio-0.43.tar.gz
+  Specio-0.44
+    pathname: D/DR/DROLSKY/Specio-0.44.tar.gz
     provides:
-      Specio 0.43
-      Specio::Coercion 0.43
-      Specio::Constraint::AnyCan 0.43
-      Specio::Constraint::AnyDoes 0.43
-      Specio::Constraint::AnyIsa 0.43
-      Specio::Constraint::Enum 0.43
-      Specio::Constraint::Intersection 0.43
-      Specio::Constraint::ObjectCan 0.43
-      Specio::Constraint::ObjectDoes 0.43
-      Specio::Constraint::ObjectIsa 0.43
-      Specio::Constraint::Parameterizable 0.43
-      Specio::Constraint::Parameterized 0.43
-      Specio::Constraint::Role::CanType 0.43
-      Specio::Constraint::Role::DoesType 0.43
-      Specio::Constraint::Role::Interface 0.43
-      Specio::Constraint::Role::IsaType 0.43
-      Specio::Constraint::Simple 0.43
-      Specio::Constraint::Structurable 0.43
-      Specio::Constraint::Structured 0.43
-      Specio::Constraint::Union 0.43
-      Specio::Declare 0.43
-      Specio::DeclaredAt 0.43
-      Specio::Exception 0.43
-      Specio::Exporter 0.43
-      Specio::Helpers 0.43
-      Specio::Library::Builtins 0.43
-      Specio::Library::Numeric 0.43
-      Specio::Library::Perl 0.43
-      Specio::Library::String 0.43
-      Specio::Library::Structured 0.43
-      Specio::Library::Structured::Dict 0.43
-      Specio::Library::Structured::Map 0.43
-      Specio::Library::Structured::Tuple 0.43
-      Specio::OO 0.43
-      Specio::PartialDump 0.43
-      Specio::Registry 0.43
-      Specio::Role::Inlinable 0.43
-      Specio::Subs 0.43
-      Specio::TypeChecks 0.43
-      Test::Specio 0.43
+      Specio 0.44
+      Specio::Coercion 0.44
+      Specio::Constraint::AnyCan 0.44
+      Specio::Constraint::AnyDoes 0.44
+      Specio::Constraint::AnyIsa 0.44
+      Specio::Constraint::Enum 0.44
+      Specio::Constraint::Intersection 0.44
+      Specio::Constraint::ObjectCan 0.44
+      Specio::Constraint::ObjectDoes 0.44
+      Specio::Constraint::ObjectIsa 0.44
+      Specio::Constraint::Parameterizable 0.44
+      Specio::Constraint::Parameterized 0.44
+      Specio::Constraint::Role::CanType 0.44
+      Specio::Constraint::Role::DoesType 0.44
+      Specio::Constraint::Role::Interface 0.44
+      Specio::Constraint::Role::IsaType 0.44
+      Specio::Constraint::Simple 0.44
+      Specio::Constraint::Structurable 0.44
+      Specio::Constraint::Structured 0.44
+      Specio::Constraint::Union 0.44
+      Specio::Declare 0.44
+      Specio::DeclaredAt 0.44
+      Specio::Exception 0.44
+      Specio::Exporter 0.44
+      Specio::Helpers 0.44
+      Specio::Library::Builtins 0.44
+      Specio::Library::Numeric 0.44
+      Specio::Library::Perl 0.44
+      Specio::Library::String 0.44
+      Specio::Library::Structured 0.44
+      Specio::Library::Structured::Dict 0.44
+      Specio::Library::Structured::Map 0.44
+      Specio::Library::Structured::Tuple 0.44
+      Specio::OO 0.44
+      Specio::PartialDump 0.44
+      Specio::Registry 0.44
+      Specio::Role::Inlinable 0.44
+      Specio::Subs 0.44
+      Specio::TypeChecks 0.44
+      Test::Specio 0.44
     requirements:
       B 0
       Carp 0
