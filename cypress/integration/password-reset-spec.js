@@ -5,7 +5,7 @@ import { ResetPasswordPage } from '../pages/user/reset-password-page'
 
 const newUser = new UserFactory('pwresetconf');
 
-describe('Password reset confirmation', () => {
+context('Password reset confirmation', () => {
     describe('User can perform successful reset', () => {
         it('reset-confirm shows right shiz', () => {
 

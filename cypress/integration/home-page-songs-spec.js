@@ -8,7 +8,7 @@ const label = 'homecounts';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
-describe('Home page tests - song list', () => {
+context('Home page tests - song list', () => {
     describe('Song counts', () => {
         it('list starts empty', () => {
 

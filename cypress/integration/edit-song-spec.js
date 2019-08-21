@@ -9,7 +9,7 @@ const label = 'editsong';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
-describe('Edit Song tests', () => {
+context('Edit Song tests', () => {
     describe('Form validation', () => {
         it('Edit song page has right title', () => {
             cy.resetDatabase()

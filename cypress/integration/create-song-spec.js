@@ -22,7 +22,7 @@ function createSong() {
     return song
 }
 
-describe('Create Song tests', () => {
+context('Create Song tests', () => {
     describe('Form validation', () => {
         it('Create song page has right title', () => {
 

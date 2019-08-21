@@ -4,7 +4,7 @@ import { UserFactory } from '../support/user-factory'
 
 const newUser = new UserFactory('regconf');
 
-describe('Registration confirm/decline tests', () => {
+context('Registration confirm/decline tests', () => {
     describe('New user confirms registration', () => {
         it('sees right notification, and is confirmed', () => {
 

@@ -8,7 +8,7 @@ const label = 'listsong';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
-describe('List Song tests', () => {
+context('List Song tests', () => {
 
     describe('Song order etc', () => {
         it('Song list starts empty', () => {
