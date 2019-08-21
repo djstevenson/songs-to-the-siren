@@ -8,7 +8,7 @@ import { UserFactory    } from '../support/user-factory'
 
 const newUser = new UserFactory('access');
 
-describe('Access control depending on user authorisation', () => {
+context('Access control depending on user authorisation', () => {
     describe('Access while logged out', () => {
         it('can access login page', () => {
             new LoginPage()

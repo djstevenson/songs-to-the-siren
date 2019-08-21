@@ -9,7 +9,7 @@ const label = 'deletesong';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
-describe('Delete Song tests', () => {
+context('Delete Song tests', () => {
     describe('Delete songs from song-list page', () => {
         it('Can cancel an attempt to delete a song', () => {
             cy.resetDatabase()

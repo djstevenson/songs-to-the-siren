@@ -5,7 +5,7 @@ import { UserFactory        } from '../support/user-factory'
 
 const newUser = new UserFactory('forgotpasswd');
 
-describe('Forgot-passworrd form tests', () => {
+context('Forgot-passworrd form tests', () => {
     describe('Forgot-password form validation', () => {
         it('empty form returns right error', () => {
 

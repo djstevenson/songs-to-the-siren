@@ -6,7 +6,7 @@ import { UserFactory  } from '../support/user-factory'
 
 const userFactory = new UserFactory('regtest');
 
-describe('Registration tests', () => {
+context('Registration tests', () => {
     describe('Register page looks right', () => {
         it('has the right title', () => {
             new RegisterPage()

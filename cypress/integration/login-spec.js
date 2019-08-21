@@ -5,7 +5,7 @@ import { UserFactory  } from '../support/user-factory'
 
 const userFactory = new UserFactory('logintest');
 
-describe('Login tests', () => {
+context('Login tests', () => {
     describe('Login page looks right', () => {
         it('has the right title', () => {
             new LoginPage()
