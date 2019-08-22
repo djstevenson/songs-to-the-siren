@@ -21,8 +21,6 @@ sub run {
         my $schema = $app->schema;
         my $user_rs = $schema->resultset('User');
 
-        die 'Users already exist' if $user_rs->count;
-
         $user_rs->create_user({
             name     => $name,
             email    => $email,
