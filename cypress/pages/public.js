@@ -22,10 +22,16 @@ export class Public {
         return this
     }
 
+    clickSongListLink(username) {
+        cy
+            .get('a.admin-link').click()
+        return this
+    }
+
     assertLoggedInAsAdmin(username) {
         cy
             .get('span.user-name').contains(username)
-            .get('p.login-status').contains('ADMIN')
+            .get('a.admin-link').contains('ADMIN')
         return this
     }
 
