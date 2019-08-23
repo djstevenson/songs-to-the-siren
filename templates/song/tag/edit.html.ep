@@ -12,3 +12,9 @@
         </li>
     % }
 </ul>
+
+<p>
+    <a href="<%= url_for('list_songs') %>">List songs</a>
+    -
+    <a href="<%= $c->url_for('view_song', song_id => $song->id) %>">View song</a>
+</p>
