@@ -114,20 +114,9 @@ Cypress.Commands.add('publishSong', (title, flag) => {
 
 Cypress.Commands.add('resetDatabase', () => {
 
-    // get ephemeral admin user - the reset will delete it
-    // TODO Make this a special 'test' function that only 
-    //      applies to the test DB and we don't have to authenticate
-    //      for it == faster.
-    newUser.getNextLoggedInUser(true)
-
-    const url = '/song/delete/all'
-        
     cy.request({
-        url,
-        method: 'POST',
-        qs: {
-            'submit-button': 'delete_all_songs'
-        }
+        url: '/test/reset',
+        method: 'POST'
     })
 })
 

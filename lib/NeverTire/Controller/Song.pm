@@ -11,10 +11,6 @@ sub add_routes {
     my $u = $r->any('/song')->to(controller => 'song');
     my $a = $u->require_admin;
 
-    # Primary for tests.  TODO Consider using DELETE instead of POST?
-    $a->route('/delete/all')->name('delete_all_songs')->via('GET', 'POST')->to(action => 'delete_all');
-
-
     # Routes that do not capture a song id
     $a->route('/list')->name('list_songs')->via('GET')->to(action => 'list');
     $a->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
@@ -55,19 +51,6 @@ sub list {
     my $table = $c->table('Song::List');
 
     $c->stash(table => $table);
-}
-
-sub delete_all {
-    my $c = shift;
-
-    my $form = $c->form('Song::Delete::All');
-    if (my $action = $form->process) {
-        $c->flash(msg => $action);
-        $c->redirect_to('home');
-    }
-    else {
-        $c->stash(form => $form);
-    }
 }
 
 sub capture {
