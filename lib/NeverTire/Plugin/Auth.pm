@@ -75,7 +75,7 @@ for a controller action:
 
     $route->require_login->any('/comment')->to(controller => ...);
 
-Ends the request and eturns a 403 http status if there is no
+Ends the request and returns a 403 http status if there is no
 authenticated user.
 
 =item require_admin
@@ -83,9 +83,9 @@ authenticated user.
 In your routes, use 'require_admin' when you require an authenticated
 ADMIN user for a controller action:
 
-    $route->require_admin->any('/admin')->to(controller => ...);
+    $route->require_admin->any('/blah')->to(controller => ...);
 
-Ends the request and eturns a 403 http status if there is no
+Ends the request and returns a 403 http status if there is no
 authenticated user, or if there is an authenticated user but they are
 not an admin.
 

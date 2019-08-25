@@ -34,6 +34,7 @@ sub full_song_data {
         ->select_metadata
         ->select_text(summary => 'markdown')
         ->select_text(full    => 'markdown')
+        ->select_text(full    => 'html')
         ->select_comment_count('approved');
     
     $rs = $rs->where_published unless $is_admin;
