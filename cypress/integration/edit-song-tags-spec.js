@@ -5,22 +5,28 @@ import { UserFactory   } from '../support/user-factory'
 import { SongFactory   } from '../support/song-factory'
 import { EditTagsPage  } from '../pages/song/tag/edit-tags-page'
 
-const label = 'editsong';
-const userFactory = new UserFactory(label);
-const songFactory = new SongFactory(label);
+const label = 'editsong'
+const userFactory = new UserFactory(label)
+const songFactory = new SongFactory(label)
+
+function createSongEditTags() {
+    cy.resetDatabase()
+
+    const user = userFactory.getNextLoggedInUser(true)
+    const song1 = songFactory.getNextSong(user)
+
+    new ListSongsPage()
+        .visit()
+        .getRow(1)
+        .click('tags')
+
+        return song1
+}
 
 context('Edit Song Tags test', () => {
     describe('Form validation', () => {
         it('Edit song tags page has right title', () => {
-            cy.resetDatabase()
-
-            const user = userFactory.getNextLoggedInUser(true)
-            const song1 = songFactory.getNextSong(user)
-
-            new ListSongsPage()
-                .visit()
-                .getRow(1)
-                .click('tags')
+            const song1 = createSongEditTags()
             
             new EditTagsPage()
                 .assertTitle(`Edit tags for ${song1.getTitle()}`)
@@ -28,143 +34,104 @@ context('Edit Song Tags test', () => {
         })
 
         it('Form shows right errors with empty input', () => {
-
-            const user = userFactory.getNextLoggedInUser(true)
-            songFactory.getNextSong(user)
-
-            new ListSongsPage()
-                .visit()
-                .getRow(1)
-                .click('tags')
+            createSongEditTags()
             
             new EditTagsPage()
                 .createTag({ name: '' })
                 .assertFormError('name', 'Required')
                 .assertTagCount(0)
+        })
     })
 
-        // it('Form shows right errors with invalid input', () => {
+    describe('Tag editing', () => {
+        it('new song starts with no tags, and can create new tags', () => {
+            createSongEditTags()
 
-        //     // There's deliberately minimal validation, no reason
-        //     // why I shouldn't be able to enter a single-character
-        //     // title for example.
-        //     const user = userFactory.getNextLoggedInUser(true)
-        //     songFactory.getNextSong(user)
+            new EditTagsPage()
+                .createTag({ name: 'abc1' })
+                .assertTagCount(1)
+                .createTag({ name: 'def ghI' }) // Spaces ok
+                .assertTagCount(2)
+                .createTag({ name: 'ελληνικά' }) // Unicode ok
+                .assertTagCount(3)
+                .assertTagName(1, 'abc1')
+                .assertTagName(2, 'def ghI')
+                .assertTagName(3, 'ελληνικά')
+        })
 
-        //     new ListSongsPage().edit(1)
+        it('dupe tags only created once', () => {
+            createSongEditTags()
 
-        //     const page = new EditSongPage()
-        //         .editSong({
-        //             title:           'a',
-        //             artist:          'a',
-        //             album:           'a',
-        //             image:           'a',
-        //             countryId:       'a',
-        //             releasedAt:      'a',
-        //             summaryMarkdown: 'a',
-        //             fullMarkdown:    'a'
-        //         })
-        //         .assertNoFormError('title')
-        //         .assertNoFormError('artist')
-        //         .assertNoFormError('album')
-        //         .assertNoFormError('image')
-        //         .assertFormError('countryId', 'Invalid number')
-        //         .assertNoFormError('releasedAt')
-        //         .assertNoFormError('summaryMarkdown')
-        //         .assertNoFormError('fullMarkdown')
+            new EditTagsPage()
+                .createTag({ name: 'abc1' })
+                .assertTagCount(1)
+                .createTag({ name: 'abc1' })
+                .assertTagCount(1)
+                .assertTagName(1, 'abc1')
+        })
 
-        //     page.editSong({
-        //             title:           'a',
-        //             artist:          'a',
-        //             album:           'a',
-        //             image:           'a',
-        //             countryId:       '0',
-        //             releasedAt:      'a',
-        //             summaryMarkdown: 'a',
-        //             fullMarkdown:    'a'
-        //         })
-        //         .assertFormError('countryId', 'Country id 0 does not exist')
-        // })
+        it('tags can be deleted, and re-added', () => {
+            createSongEditTags()
+
+            // Add a tag, delete it, re-add it.
+            new EditTagsPage()
+                .createTag({ name: 'abc1' })
+                .assertTagCount(1)
+                .assertTagName(1, 'abc1')
+
+                .deleteTag(1)
+                .assertTagCount(0)
+
+                .createTag({ name: 'abc1' })
+                .assertTagCount(1)
+                .assertTagName(1, 'abc1')
+        })
+
+        it('tags can be deleted from the start of the list', () => {
+            createSongEditTags()
+
+            // Add three tags, delete first
+            createThreeTags()
+
+                .deleteTag(1)
+                .assertTagCount(2)
+
+                .assertTagName(1, 'tag2')
+                .assertTagName(2, 'tag3')
+        })
+
+        it('tags can be deleted from the middle of the list', () => {
+            createSongEditTags()
+
+            // Add three tags, delete middle one
+            createThreeTags()
+
+                .deleteTag(2)
+                .assertTagCount(2)
+
+                .assertTagName(1, 'tag1')
+                .assertTagName(2, 'tag3')
+        })
     })
 
-    // describe('Song list', () => {
-    //     it('new song title shows up in song list', () => {
-    //         cy.resetDatabase()
+    it('tags can be deleted from the end of the list', () => {
+        createSongEditTags()
 
-    //         const user = userFactory.getNextLoggedInUser(true)
-    //         const song1 = songFactory.getNextSong(user)
+        // Add three tags, delete last
+        createThreeTags()
 
-    //         const listPage = new ListSongsPage().visit()
+            .deleteTag(3)
+            .assertTagCount(2)
 
-    //         listPage.edit(1)
-
-    //         const newTitle = 'x' + song1.getTitle();
-    //         new EditSongPage()
-    //             .editSong({ title: newTitle })
-            
-    //         listPage.getRow(1).assertText('title', newTitle)
-    //     })
-
-    //     it('song edit does not affect position in song list', () => {
-    //         cy.resetDatabase()
-
-    //         const user = userFactory.getNextLoggedInUser(true)
-    //         const song1 = songFactory.getNextSong(user)
-    //         const song2 = songFactory.getNextSong(user)
-    //         const song3 = songFactory.getNextSong(user)
-
-    //         const listPage = new ListSongsPage().visit()
-    //         // Row 1 = song3, row 2 = song2, row 3 = song1
-    //         listPage.getRow(1).assertText('title', song3.getTitle())
-    //         listPage.getRow(2).assertText('title', song2.getTitle())
-    //         listPage.getRow(3).assertText('title', song1.getTitle())
-
-    //         listPage.edit(2)
-
-    //         const newTitle = 'x' + song2.getTitle();
-    //         new EditSongPage()
-    //             .editSong({ title: newTitle })
-            
-    //         // Row 1 = song3, row 2 = song2, row 3 = song1
-    //         listPage.getRow(1).assertText('title', song3.getTitle())
-    //         listPage.getRow(2).assertText('title', newTitle)
-    //         listPage.getRow(3).assertText('title', song1.getTitle())
-    //     })
-
-
-    //     it('song edit does affect publication status', () => {
-    //         cy.resetDatabase()
-
-    //         const user = userFactory.getNextLoggedInUser(true)
-    //         const song1 = songFactory.getNextSong(user)
-
-    //         const listPage = new ListSongsPage()
-
-    //         const row1 = listPage.visit().getRow(1)
-    //         row1
-    //             .assertUnpublished()
-    //             .click('edit')
-            
-
-    //         const newTitle = 'x' + song1.getTitle();
-    //         new EditSongPage()
-    //             .editSong({ title: newTitle })
-
-    //         // Check still not published
-    //         row1.assertUnpublished()
-
-    //         // Now publish it, edit again, and re-check status
-    //         row1
-    //             .click('publish')
-    //             .assertPublished()
-    //             .click('edit')
-
-    //         const newTitle2 = 'xy' + song1.getTitle();
-    //         new EditSongPage()
-    //             .editSong({ title: newTitle })
-
-    //         // Check still not published
-    //         row1.assertPublished()
-    //     })
-    // })
+            .assertTagName(1, 'tag1')
+            .assertTagName(2, 'tag2')
+    })
 })
+
+function createThreeTags() {
+    return new EditTagsPage()
+        .createTag({ name: 'tag1' })
+        .createTag({ name: 'tag2' })
+        .createTag({ name: 'tag3' })
+        .assertTagCount(3)
+    }

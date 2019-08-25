@@ -8,7 +8,7 @@
 <ul class="tag-list">
     % foreach my $tag ( @$tags ) {
         <li id="song-tag-<%= $song->id %>-<%= $tag->id %>-li">
-            <button id="song-tag-<%= $song->id %>-<%= $tag->id %>" onclick="deleteSongTag(<%= $song->id %>, <%= $tag->id %>)" class="btn btn-danger rounded-pill tag-button">x <%= $tag->name %></button>
+            <button id="song-tag-<%= $song->id %>-<%= $tag->id %>" onclick="deleteSongTag(<%= $song->id %>, <%= $tag->id %>)" class="btn btn-danger rounded-pill tag-button"><span class="delete-signifier">x</span> <span class="tag-name"><%= $tag->name %></span></button>
         </li>
     % }
 </ul>
