@@ -11,9 +11,21 @@ sub by_priority {
     my $self = shift;
 
     return $self->search(undef, {
-        order_by => 'priority'
+        order_by => { -asc => 'priority' },
     });
 }
+
+sub links_by_name {
+    my $self = shift;
+
+    my %links = map {
+        ($_->name => $_)
+    } $self->all;
+
+    return \%links;
+}
+
+
 
 __PACKAGE__->meta->make_immutable;
 1;
@@ -41,6 +53,16 @@ ResultSet methods for Links
 A simple helper, for readability, to order
 links by priority. Low number = high priority,
 so sort is 'ascending'.
+
+=item links_by_name
+
+Returns the links in the current result set as
+a hash, keyed by link name. Values are result
+objects.
+
+So, this will return an ARRAYREF of records,
+not a resultset! Think of it as a kinda
+fetchall_hashref equiv.
 
 =back
 
