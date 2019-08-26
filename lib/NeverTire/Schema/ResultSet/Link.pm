@@ -11,7 +11,7 @@ sub by_priority {
     my $self = shift;
 
     return $self->search(undef, {
-        order_by => 'priority'
+        order_by => { -asc => 'priority' },
     });
 }
 

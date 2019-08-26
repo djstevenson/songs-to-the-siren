@@ -121,6 +121,7 @@ sub add_comment {
 }
 
 # Gets links as a hashref, keyed by link name
+# TODO Should be a method on the links resultset!
 sub get_links {
     my $self = shift;
 
