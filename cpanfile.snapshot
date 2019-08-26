@@ -3131,10 +3131,10 @@ DISTRIBUTIONS
       TAP::Harness 3.25
       parent 0.221
       version 0.77
-  namespace-autoclean-0.28
-    pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
+  namespace-autoclean-0.29
+    pathname: E/ET/ETHER/namespace-autoclean-0.29.tar.gz
     provides:
-      namespace::autoclean 0.28
+      namespace::autoclean 0.29
     requirements:
       B::Hooks::EndOfScope 0.12
       ExtUtils::MakeMaker 0
