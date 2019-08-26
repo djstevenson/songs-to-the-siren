@@ -120,18 +120,6 @@ sub add_comment {
     return $self->create_related(comments => $comment_data);
 }
 
-# Gets links as a hashref, keyed by link name
-# TODO Should be a method on the links resultset!
-sub get_links {
-    my $self = shift;
-
-    my %links = map {
-        ($_->name => $_)
-    } $self->links->all;
-
-    return \%links;
-}
-
 sub add_link {
     my ($self, $values) = @_;
 

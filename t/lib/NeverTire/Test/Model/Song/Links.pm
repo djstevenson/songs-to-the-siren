@@ -102,13 +102,13 @@ sub run {
 
 	# In templates, we may want to get links by name, e.g. to 
 	# link to the youtube video. Test that:
-	my $links_by_name = $song1->get_links;
-	# get_links returned hash, k=name, v=result object
+	my $links_by_name = $song1->links->links_by_name;
+	# links_by_name returned hash, k=name, v=result object
 	is($links_by_name->{$link1->{name}}->url, $link1->{url}, 'get by name: song1 has right link for link1');
 	is($links_by_name->{$link2->{name}}->url, $link2->{url}, 'get by name: song1 has right link for link2');
 
 	# And check extras while we're at it, for song2
-	$links_by_name = $song2->get_links;
+	$links_by_name = $song2->links->links_by_name;
 	is($links_by_name->{$link1->{name}}->url,    $link1->{url}, 'get by name: song2 has right link for link1');
 	is($links_by_name->{$link1->{name}}->extras, undef,         'get by name: song2 has right extras for link1');
 	is($links_by_name->{$link3->{name}}->url,    $link3->{url}, 'get by name: song2 has right link for link3');
