@@ -83,7 +83,7 @@ sub view {
     my $admin = exists $c->stash->{admin_user};
 
     $c->stash(
-        links  => $song->links_by_name,
+        links  => $song->links->links_by_name,
         forest => $song->get_comment_forest($admin),
     );
 }
