@@ -12,10 +12,11 @@
             </div>
         % }
 
+        <!-- TODO This is duped in front_page_layout.html.ep -->
         <div class="row">
             <div class="col-12">
                 <h1>Songs I Will Never Tire of...</h1>
-                <p>About this blog...</p>
+                <p><a href="<%= url_for('view_page', name => 'about') %>">About this blog...</a></p>
                 %= include "user/_loginout"
             </div>
         </div>
