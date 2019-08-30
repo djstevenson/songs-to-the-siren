@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Edit ' . $link->name . ' link for ' . $song->title;
 
 <h2 class="notification-title">Edit <%= $link->name %> link for <%= $song->title %></h2>

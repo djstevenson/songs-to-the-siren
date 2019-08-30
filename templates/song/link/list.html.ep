@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title "Songs I Will Never Tire of";
 
 <%== $table->render %>

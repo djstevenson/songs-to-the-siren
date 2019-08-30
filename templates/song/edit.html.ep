@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Edit song: ' . $song->title;
 
 <%== $form->render %>

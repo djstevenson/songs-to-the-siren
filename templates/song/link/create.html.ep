@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Create link for ' . $song->title;
 
 <h2 class="notification-title">Create link for <%= $song->title %></h2>

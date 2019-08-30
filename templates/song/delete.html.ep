@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Delete song: ' . $song->title;
 
 <%== $form->render %>
