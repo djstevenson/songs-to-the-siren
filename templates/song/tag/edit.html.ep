@@ -1,4 +1,4 @@
-% layout 'admin';
+% layout 'default';
 % title 'Edit tags for ' . $song->title;
 
 <h2 class="notification-title">Edit tags for <%= $song->title %></h2>

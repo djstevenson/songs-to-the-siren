@@ -6,7 +6,6 @@
 <div class="container">
     %= include '_content_header'
 
-    <!-- TODO This is almost the same as front_page_layout and the two can/should become one -->
     <main>
         <div class="row">
             <div class="col-12">
@@ -23,6 +22,14 @@
         </div>
     </footer>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");
+        markdownPreview("#new-song-full-markdown", "#markdown-preview-full");
+    });
+</script>
+
 
 </body>
 </html>
