@@ -22,7 +22,7 @@ sub add_routes {
     $page_action_a->route('/edit')->name('edit_page')->via('GET', 'POST')->to(action => 'edit');
 
     # Method=DELETE?
-    # $song_action_a->route('/delete')->name('delete_song')->via('GET', 'POST')->to(action => 'delete');
+    $page_action_a->route('/delete')->name('delete_page')->via('GET', 'POST')->to(action => 'delete');
 
 }
 
@@ -83,18 +83,18 @@ sub edit {
     }
 }
 
-# sub delete {
-#     my $c = shift;
+sub delete {
+    my $c = shift;
 
-#     my $form = $c->form('Song::Delete', song => $c->stash->{song});
-#     if (my $action = $form->process) {
-#         $c->flash(msg => $action);
-#         $c->redirect_to('list_songs');
-#     }
-#     else {
-#         $c->stash(form => $form);
-#     }
-# }
+    my $form = $c->form('Page::Delete', page => $c->stash->{page});
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+        $c->redirect_to('list_pages');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
 
 
 1;

@@ -50,7 +50,7 @@ has_column delete => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = ''; # $table->c->url_for('delete_song', song_id => $row->id);
+        my $url = $table->c->url_for('delete_page', name => $row->name);
         return qq{
             <a href="${url}">Delete</a>
         };
