@@ -67,21 +67,6 @@ sub reject_comment {
     $comment->delete;
 }
 
-sub admin_create_page {
-    my ($self, $args) = @_;
-
-    croak $NOT_ADMIN unless $self->admin;
-
-    my $full_args = {
-        %$args,
-        html       => markdown($args->{markdown}),
-        updated_at => DateTime->now,
-    };
-
-    return $self->create_related('pages', $full_args);
-}
-
-
 no Moose::Role;
 1;
 

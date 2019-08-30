@@ -28,6 +28,7 @@
         markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");
         markdownPreview("#new-song-full-markdown", "#markdown-preview-full");
         markdownPreview("#new-page-markdown", "#markdown-page-preview");
+        markdownPreview("#edit-page-markdown", "#markdown-page-preview");
     });
 </script>
 

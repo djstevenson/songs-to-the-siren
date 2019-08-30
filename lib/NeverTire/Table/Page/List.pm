@@ -38,7 +38,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = ''; # $table->c->url_for('edit_song', song_id => $row->id);
+        my $url = $table->c->url_for('edit_page', name => $row->name);
         return qq{
             <a href="${url}">Edit</a>
         };
