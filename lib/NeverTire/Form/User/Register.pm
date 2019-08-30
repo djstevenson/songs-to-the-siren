@@ -19,7 +19,7 @@ has_field name => (
 		'Required',
 		[ MinLength => {min => 3} ],
 		[ MaxLength => {max => 30} ],
-		'UniqueName',
+		'UniqueUserName',
 	],
 );
 
@@ -32,7 +32,7 @@ has_field email => (
     	'Required',
     	[ MaxLength => {max => 999} ],
     	'ValidEmail',
-    	'UniqueEmail',
+    	'UniqueUserEmail',
 	],
 );
 

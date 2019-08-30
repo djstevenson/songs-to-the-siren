@@ -6,3 +6,6 @@
 <p>
     <a href="<%= $c->url_for('create_song') %>">New song</a>
 </p>
+<p>
+    <a href="<%= $c->url_for('list_pages') %>">List pages</a>
+</p>

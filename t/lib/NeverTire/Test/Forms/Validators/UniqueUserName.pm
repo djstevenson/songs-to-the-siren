@@ -1,4 +1,4 @@
-package NeverTire::Test::Forms::Validators::UniqueName;
+package NeverTire::Test::Forms::Validators::UniqueUserName;
 use Moose;
 use namespace::autoclean;
 
@@ -12,7 +12,7 @@ with 'NeverTire::Test::Role';
 
 has '+user_base' => (default => 'form_val_5');
 
-use NeverTire::Form::Field::Validator::UniqueName;
+use NeverTire::Form::Field::Validator::UniqueUserName;
 
 sub run {
 	my $self = shift;
@@ -42,15 +42,15 @@ sub run {
 		{ data => 'xyzzy',         expected => undef,                },
 	];
 
-	my $validator = NeverTire::Form::Field::Validator::UniqueName->new(schema => $self->schema);
+	my $validator = NeverTire::Form::Field::Validator::UniqueUserName->new(schema => $self->schema);
 	foreach my $test (@$tests){
 		my $actual = $validator->validate($test->{data});
 		my $expected = $test->{expected};
 		if (defined $expected) {
-			is($actual, $expected, 'UniqueName on "' . ($test->{data} // 'undef') . '" should return "' . $expected . '"');
+			is($actual, $expected, 'UniqueUserName on "' . ($test->{data} // 'undef') . '" should return "' . $expected . '"');
 		}
 		else {
-			ok(!defined($actual), 'UniqueName on "' . ($test->{data} // 'undef') . '" should return undef');
+			ok(!defined($actual), 'UniqueUserName on "' . ($test->{data} // 'undef') . '" should return undef');
 		}
 	}
     

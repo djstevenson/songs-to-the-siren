@@ -1,4 +1,4 @@
-package NeverTire::Test::Forms::Validators::UniqueEmail;
+package NeverTire::Test::Forms::Validators::UniqueUserEmail;
 use Moose;
 use namespace::autoclean;
 
@@ -12,7 +12,7 @@ with 'NeverTire::Test::Role';
 
 has '+user_base' => (default => 'form_val_6');
 
-use NeverTire::Form::Field::Validator::UniqueEmail;
+use NeverTire::Form::Field::Validator::UniqueUserEmail;
 
 sub run {
 	my $self = shift;
@@ -46,15 +46,15 @@ sub run {
 		{ data => 'x' . $email3,    expected => undef,                     },
 	];
 
-	my $validator = NeverTire::Form::Field::Validator::UniqueEmail->new(schema => $self->schema);
+	my $validator = NeverTire::Form::Field::Validator::UniqueUserEmail->new(schema => $self->schema);
 	foreach my $test (@$tests){
 		my $actual = $validator->validate($test->{data});
 		my $expected = $test->{expected};
 		if (defined $expected) {
-			is($actual, $expected, 'UniqueEmail on "' . ($test->{data} // 'undef') . '" should return "' . $expected . '"');
+			is($actual, $expected, 'UniqueUserEmail on "' . ($test->{data} // 'undef') . '" should return "' . $expected . '"');
 		}
 		else {
-			ok(!defined($actual), 'UniqueEmail on "' . ($test->{data} // 'undef') . '" should return undef');
+			ok(!defined($actual), 'UniqueUserEmail on "' . ($test->{data} // 'undef') . '" should return undef');
 		}
 	}
     

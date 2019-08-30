@@ -124,10 +124,14 @@ CREATE TABLE pages (
     title TEXT NOT NULL,
     markdown TEXT NOT NULL,
     html TEXT NOT NULL,
+    author_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX pages_name_idx ON pages USING BTREE("name");
+CREATE UNIQUE INDEX pages_name_idx ON pages USING BTREE("name");
+
+-- Support for cascade on foreign key constraints
+CREATE INDEX pages_author_id_idx ON pages USING BTREE(author_id);
 
 -- 1 down
 DROP TABLE IF EXISTS pages;

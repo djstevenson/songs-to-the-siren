@@ -1,0 +1,8 @@
+% layout 'default';
+% title "Page list";
+
+<%== $table->render %>
+
+<p>
+    <a href="<%= $c->url_for('create_page') %>">New page</a>
+</p>

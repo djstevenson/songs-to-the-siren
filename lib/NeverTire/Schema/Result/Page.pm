@@ -21,6 +21,8 @@ __PACKAGE__->add_columns(
     markdown         => {data_type => 'TEXT'},
     html             => {data_type => 'TEXT'},
 
+    author_id        => {data_type => 'INTEGER'},
+    
     updated_at       => {data_type => 'DATETIME'},
 );
 

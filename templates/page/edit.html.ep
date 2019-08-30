@@ -1,0 +1,4 @@
+% layout 'default';
+% title 'Edit page: ' . $page->name;
+
+<%== $form->render %>
