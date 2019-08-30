@@ -16,4 +16,4 @@ my $test = NeverTire::Test->new;
 
 ##### END BOILERPLATE
 
-$test->run('Forms::Validators::UniqueName');
+$test->run('Forms::Validators::UniqueUserEmail');

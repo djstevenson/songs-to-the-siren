@@ -1,5 +1,4 @@
-package NeverTire::Form::Field::Validator::UniqueEmail;
-use namespace::autoclean;
+package NeverTire::Form::Field::Validator::UniqueUserName;
 use Moose;
 
 extends 'NeverTire::Form::Field::Validator::Base';
@@ -9,9 +8,9 @@ sub validate{
 	my ($self, $value) = @_;
 
 	my $users_rs = $self->schema->resultset('User');
-	my $found = $users_rs->find_by_email($value);
+	my $found = $users_rs->find_by_name($value);
 	
-    return 'Email already registered' if $found;
+    return 'Name already in use' if $found;
 	return undef;
 }
 
