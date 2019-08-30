@@ -15,7 +15,21 @@ sub add_routes {
     # Admin routes, no capture:
     my $a = $u->require_admin;
     $a->route('/list')->name('list_pages')->via('GET')->to(action => 'list');
-    # $a->route('/create')->name('create_song')->via('GET', 'POST')->to(action => 'create');
+    $a->route('/create')->name('create_page')->via('GET', 'POST')->to(action => 'create');
+}
+
+sub create {
+    my $c = shift;
+
+    my $form = $c->form('Page::Create');
+    if ($form->process) {
+        $c->flash(msg => 'Page created');
+
+        $c->redirect_to('list_pages');
+    }
+    else {
+        $c->stash(form => $form);
+    }
 }
 
 sub list {
@@ -31,7 +45,7 @@ sub capture {
 
     my $name = $c->stash->{name};
     my $rs = $c->schema->resultset('Page');
-    if ( my $page = $rs->search({ name => $name} )->single ) {
+    if ( my $page = $rs->find_by_name($name) ) {
         $c->stash( page => $page );
     }
     else {

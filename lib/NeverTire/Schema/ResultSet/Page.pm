@@ -9,6 +9,12 @@ use Carp qw/ croak /;
 
 use DateTime;
 
+sub find_by_name {
+    my ($self, $name) = @_;
+
+    return $self->search({ name => $name} )->single;
+}
+
 sub by_name {
     my ($self, $order) = @_;
 
@@ -41,7 +47,12 @@ ResultSet methods for pages
 
 =over
 
-=item by_name
+=item find_by_name($name)
+
+Returns the unique result object with the specified name,
+or undef if not found.
+
+=item by_name($optional_direction)
 
 Sorts the resultset by name in ascending alpha order. 
 Pass '-desc' as the arg if you want the reverse
