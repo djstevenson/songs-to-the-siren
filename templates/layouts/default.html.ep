@@ -4,23 +4,7 @@
 <body>
 
 <div class="container">
-    <header>
-        <!-- TODO DRY this, it appears in admin.html.ep too -->
-        % if (my $msg = flash 'msg') {
-            <div class="alert alert-success row flash-msg" role="alert" id="flash-msg">
-                <%= $msg %>
-            </div>
-        % }
-
-        <!-- TODO This is duped in front_page_layout.html.ep -->
-        <div class="row">
-            <div class="col-12">
-                <h1>Songs I Will Never Tire of...</h1>
-                <p><a href="<%= url_for('view_page', name => 'about') %>">About this blog...</a></p>
-                %= include "user/_loginout"
-            </div>
-        </div>
-    </header>
+    %= include '_content_header'
 
     <!-- TODO This is almost the same as front_page_layout and the two can/should become one -->
     <main>

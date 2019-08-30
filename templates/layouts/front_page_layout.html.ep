@@ -6,15 +6,7 @@
 <!-- TODO This dupes a log of default.html -->
 
 <div class="container">
-    <header>
-        <div class="row">
-            <div class="col-12">
-                <h1>Songs I Will Never Tire of...</h1>
-                <p><a href="<%= url_for('view_page', name => 'about') %>">About this blog...</a></p>
-                %= include "user/_loginout"
-            </div>
-        </div>
-    </header>
+    %= include '_content_header'
 
     <main>
 <%= content %>

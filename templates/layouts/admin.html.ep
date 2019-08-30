@@ -4,20 +4,7 @@
 <body>
 
 <div class="container">
-    <header>
-        % if (my $msg = flash 'msg') {
-            <div class="alert alert-success row flash-msg" role="alert" id="flash-msg">
-                <%= $msg %>
-            </div>
-        % }
-
-        <div class="row">
-            <div class="col-12">
-                <h1>Songs I Will Never Tire of...</h1>
-                %= include "user/_loginout"
-            </div>
-        </div>
-    </header>
+    %= include '_content_header'
 
     <main>
         <div class="row">
