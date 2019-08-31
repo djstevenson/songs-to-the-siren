@@ -34,6 +34,7 @@ sub reset {
     $c->schema->resultset('Tag')->delete;
     $c->schema->resultset('Song')->delete;
     $c->schema->resultset('Song')->delete;
+    $c->schema->resultset('Page')->delete;
     $c->redirect_to('home');
 }
 
