@@ -14,7 +14,6 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('pages');
 
 __PACKAGE__->add_columns(
-    id               => {data_type => 'INTEGER'},
     name             => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
 
@@ -26,7 +25,7 @@ __PACKAGE__->add_columns(
     updated_at       => {data_type => 'DATETIME'},
 );
 
-__PACKAGE__->set_primary_key('id');
+__PACKAGE__->set_primary_key('name');
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);

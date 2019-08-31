@@ -53,7 +53,7 @@ sub capture {
 
     my $name = $c->stash->{name};
     my $rs = $c->schema->resultset('Page');
-    if ( my $page = $rs->find_by_name($name) ) {
+    if ( my $page = $rs->find($name) ) {
         $c->stash( page => $page );
     }
     else {
