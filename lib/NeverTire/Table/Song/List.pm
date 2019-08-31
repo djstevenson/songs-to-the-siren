@@ -10,13 +10,10 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    # TODO Bug: Table code is dumb and forces sorting by one
-    #      of the columns, so overrides by_pubdate. Fix this.
     return $self->c->schema
         ->resultset('Song')
         ->select_metadata
-        ->select_comment_count('unapproved')
-        ->by_pubdate;
+        ->select_comment_count('unapproved');
 }
 
 has_column id => (

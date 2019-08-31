@@ -13,11 +13,11 @@ sub _build_resultset {
     # TODO Bug: Table code is dumb and forces sorting by one
     #      of the columns, so overrides by_pubdate. Fix this.
     return $self->c->schema
-        ->resultset('Page')
-        ->by_name;
+        ->resultset('Page');
 }
 
 has '+default_order_by' => (default => 'name');
+has '+default_sort_dir' => (default => 'u');
 
 has_column name => (
     is_header    => 1,
