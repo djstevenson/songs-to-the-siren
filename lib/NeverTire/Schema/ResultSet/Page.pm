@@ -9,12 +9,6 @@ use Carp qw/ croak /;
 
 use DateTime;
 
-sub find_by_name {
-    my ($self, $name) = @_;
-
-    return $self->search({ name => $name} )->single;
-}
-
 sub by_name {
     my ($self, $order) = @_;
 
@@ -46,11 +40,6 @@ ResultSet methods for pages
 =head1 METHODS
 
 =over
-
-=item find_by_name($name)
-
-Returns the unique result object with the specified name,
-or undef if not found.
 
 =item by_name($optional_direction)
 

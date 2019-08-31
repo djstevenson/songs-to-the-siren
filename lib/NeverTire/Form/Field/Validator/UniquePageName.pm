@@ -8,7 +8,7 @@ sub validate{
 	my ($self, $value) = @_;
 
 	my $pages_rs = $self->schema->resultset('Page');
-	my $found = $pages_rs->find_by_name($value);
+	my $found = $pages_rs->find($value);
 	
     return 'Name already in use' if $found;
 	return undef;

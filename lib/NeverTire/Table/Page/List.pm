@@ -17,9 +17,7 @@ sub _build_resultset {
         ->by_name;
 }
 
-has_column id => (
-    header       => 'ID',
-);
+has '+default_order_by' => (default => 'name');
 
 has_column name => (
     is_header    => 1,

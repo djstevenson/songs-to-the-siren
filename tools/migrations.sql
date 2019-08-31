@@ -119,16 +119,13 @@ CREATE TABLE links (
 CREATE INDEX links_song_id_name_idx ON links USING BTREE(song_id, "name");
 
 CREATE TABLE pages (
-    id SERIAL NOT NULL PRIMARY KEY,
-    "name" TEXT NOT NULL,
+    "name" TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
     markdown TEXT NOT NULL,
     html TEXT NOT NULL,
     author_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
-
-CREATE UNIQUE INDEX pages_name_idx ON pages USING BTREE("name");
 
 -- Support for cascade on foreign key constraints
 CREATE INDEX pages_author_id_idx ON pages USING BTREE(author_id);
