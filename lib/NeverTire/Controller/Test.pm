@@ -23,6 +23,7 @@ sub add_routes {
     $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
+    $t->route('/create_page')->name('test_create_page')->via('POST')->to(action => 'create_page');
     $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
@@ -78,6 +79,23 @@ sub create_song {
         published_at     => $published,
     };
 	$user->admin_create_song($fields);
+
+    $c->redirect_to('home');
+}
+
+sub create_page {
+    my $c = shift;
+
+    my $username = $c->param('username') || die;
+    my $user     = $c->_find_user_by_name($username);
+    die unless $user->admin;
+
+    my $fields = {
+        name             => $c->param('name'),
+        title            => $c->param('title'),
+        markdown         => $c->param('markdown'),
+    };
+	$user->admin_create_page($fields);
 
     $c->redirect_to('home');
 }
