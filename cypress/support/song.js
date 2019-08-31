@@ -42,9 +42,6 @@ export class Song {
         return this._full
     }
 
-    // TODO Do away with these 'test page' hacks.
-    //      If we give admin access to emails table,
-    //      we can do all we need from normal interface
     publish() {
         cy.publishSong(this.getTitle(), 1)
     }
