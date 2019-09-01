@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import { ListPagesPage  } from '../pages/page/list-pages-page'
-import { UserFactory    } from '../support/user-factory'
-import { PageFactory    } from '../support/page-factory'
-import { EditPagePage   } from '../pages/page/edit-page-page'
+import { ListPagesPage  } from '../../pages/page/list-pages-page'
+import { UserFactory    } from '../../support/user-factory'
+import { PageFactory    } from '../../support/page-factory'
+import { EditPagePage   } from '../../pages/page/edit-page-page'
 
 const label = 'editpage';
 const userFactory = new UserFactory(label);

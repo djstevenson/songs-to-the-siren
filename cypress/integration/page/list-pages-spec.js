@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-import { ListPagesPage  } from '../pages/page/list-pages-page'
-import { UserFactory    } from '../support/user-factory'
-import { PageFactory    } from '../support/page-factory'
+import { ListPagesPage  } from '../../pages/page/list-pages-page'
+import { UserFactory    } from '../../support/user-factory'
+import { PageFactory    } from '../../support/page-factory'
 
 const label = 'listpage';
 const userFactory = new UserFactory(label);

@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import { ListPagesPage  } from '../pages/page/list-pages-page'
-import { UserFactory    } from '../support/user-factory'
-import { PageFactory    } from '../support/page-factory'
-import { DeletePagePage } from '../pages/page/delete-page-page'
+import { ListPagesPage  } from '../../pages/page/list-pages-page'
+import { UserFactory    } from '../../support/user-factory'
+import { PageFactory    } from '../../support/page-factory'
+import { DeletePagePage } from '../../pages/page/delete-page-page'
 
 const label = 'deletepage';
 const userFactory = new UserFactory(label);
