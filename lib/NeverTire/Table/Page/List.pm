@@ -20,7 +20,6 @@ has '+default_order_by' => (default => 'name');
 has '+default_sort_dir' => (default => 'u');
 
 has_column name => (
-    is_header    => 1,
     link         => sub {
         my ($col, $table, $row) = @_;
 

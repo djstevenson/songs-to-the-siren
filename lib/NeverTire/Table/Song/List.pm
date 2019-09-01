@@ -17,7 +17,6 @@ sub _build_resultset {
 }
 
 has_column id => (
-    is_header    => 1,
     header       => 'ID',
 );
 
