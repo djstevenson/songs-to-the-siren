@@ -53,7 +53,7 @@ context('Delete Song tests', () => {
             // song 2 now in row 1
             page.getRow(1).assertText('title', song2.getTitle())
 
-            page.getRow(1).click('delete')
+            page.delete(1)
 
             new DeleteSongPage().deleteSong()
 

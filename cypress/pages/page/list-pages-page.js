@@ -50,7 +50,7 @@ export class ListPagesPage extends Admin {
 
     // Shortcut to hit the delete link in the 'n'th row
     // Returns the row object
-    edit(rowIndex) {
+    delete(rowIndex) {
         return this.getRow(rowIndex).click('delete')
     }
 }

@@ -45,4 +45,10 @@ export class ListSongsPage extends Admin {
     edit(rowIndex) {
         return this.getRow(rowIndex).click('edit')
     }
+
+    // Shortcut to hit the delete link in the 'n'th row
+    // Returns the row object
+    delete(rowIndex) {
+        return this.getRow(rowIndex).click('delete')
+    }
 }
