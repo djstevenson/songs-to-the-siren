@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { UserFactory } from '../support/user-factory'
+import { UserFactory } from '../../support/user-factory'
 
 const newUser = new UserFactory('regconf');
 
