@@ -82,9 +82,4 @@ context('List Song tests', () => {
         })
     })
 
-
-    // TODO Click through to song-view page
-    // TODO Click through to song edit
-    // TODO Click through to tag edit
-    // TODO Click through to link edit
 })
