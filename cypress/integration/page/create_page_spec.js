@@ -1,6 +1,5 @@
 /// <reference types="Cypress" />
 
-import { ListPagesPage  } from '../../pages/page/list-pages-page'
 import { UserFactory    } from '../../support/user-factory'
 import { PageFactory    } from '../../support/page-factory'
 import { CreatePagePage } from '../../pages/page/create-page-page'
