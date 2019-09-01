@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage  } from '../pages/song/list-songs-page'
-import { UserFactory    } from '../support/user-factory'
-import { SongFactory    } from '../support/song-factory'
-import { DeleteSongPage } from '../pages/song/delete-song-page'
+import { ListSongsPage  } from '../../pages/song/list-songs-page'
+import { UserFactory    } from '../../support/user-factory'
+import { SongFactory    } from '../../support/song-factory'
+import { DeleteSongPage } from '../../pages/song/delete-song-page'
 
 const label = 'deletesong';
 const userFactory = new UserFactory(label);
@@ -53,7 +53,7 @@ context('Delete Song tests', () => {
             // song 2 now in row 1
             page.getRow(1).assertText('title', song2.getTitle())
 
-            page.getRow(1).click('delete')
+            page.delete(1)
 
             new DeleteSongPage().deleteSong()
 

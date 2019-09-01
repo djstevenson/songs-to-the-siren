@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
-import { UserFactory        } from '../support/user-factory'
+import { ForgotPasswordPage } from '../../pages/user/forgot-password-page'
+import { UserFactory        } from '../../support/user-factory'
 
 const newUser = new UserFactory('forgotpasswd');
 

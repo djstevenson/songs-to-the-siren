@@ -84,14 +84,6 @@ has link => (
     predicate   => 'has_link',
 );
 
-# If true, cell is rendered as a row header
-# <th scope="row">...</th>
-has is_header => (
-    is          => 'ro',
-    isa         => 'Bool',
-    default     => 0,
-);
-
 # Set this if we are to format the column as a timestamp.
 # The cell value must be a DateTime object
 has timestamp => (
@@ -213,10 +205,6 @@ sub render_body_cell {
         : '';
 
     $s //= '';
-
-    if ($self->is_header) {
-        return qq{<th scope="row" $class>$s</th>};
-    }
 
     return qq{<td $class>$s</td>};
 }

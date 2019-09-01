@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage  } from '../pages/song/list-songs-page'
-import { UserFactory    } from '../support/user-factory'
-import { SongFactory    } from '../support/song-factory'
-import { CreateSongPage } from '../pages/song/create-song-page'
+import { ListSongsPage  } from '../../pages/song/list-songs-page'
+import { UserFactory    } from '../../support/user-factory'
+import { SongFactory    } from '../../support/song-factory'
+import { CreateSongPage } from '../../pages/song/create-song-page'
 
 const label = 'createsong';
 const userFactory = new UserFactory(label);

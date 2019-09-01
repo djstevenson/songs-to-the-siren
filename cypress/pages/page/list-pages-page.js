@@ -1,20 +1,20 @@
 import { Admin          } from '../../pages/admin'
-import { ListSongsTable } from '../../tables/list-songs-table'
+import { ListPagesTable } from '../../tables/list-pages-table'
 
-export class ListSongsPage extends Admin {
+export class ListPagesPage extends Admin {
 
     pageUrl() {
-        return '/song/list'
+        return '/page/list'
     }
 
     constructor() {
         super()
-        this._table = new ListSongsTable()
+        this._table = new ListPagesTable()
     }
 
-    clickNewSongLink() {
+    clickNewPageLink() {
         this.visit()
-        cy.contains('New song').click()
+        cy.contains('New page').click()
 
         return this
     }
@@ -22,12 +22,12 @@ export class ListSongsPage extends Admin {
     assertEmpty() {
         this
             .getTable()
-            .assertEmpty('No songs yet defined')
+            .assertEmpty('No pages yet defined')
 
         return this
     }
 
-    assertSongCount(c) {
+    assertPageCount(c) {
         this
             .getTable()
             .assertRowCount(c)
@@ -36,6 +36,8 @@ export class ListSongsPage extends Admin {
     }
 
     // rowIndex counts from 1
+    // TODO This can be in a base class? e.g. a separate
+    //      base class for pages that have tables?
     getRow(rowIndex) {
         return this.getTable().getRow(rowIndex)
     }
