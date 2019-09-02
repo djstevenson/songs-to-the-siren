@@ -118,7 +118,7 @@ CREATE TABLE links (
 
 CREATE INDEX links_song_id_name_idx ON links USING BTREE(song_id, "name");
 
-CREATE TABLE pages (
+CREATE TABLE content (
     "name" TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
     markdown TEXT NOT NULL,
@@ -128,10 +128,10 @@ CREATE TABLE pages (
 );
 
 -- Support for cascade on foreign key constraints
-CREATE INDEX pages_author_id_idx ON pages USING BTREE(author_id);
+CREATE INDEX content_author_id_idx ON content USING BTREE(author_id);
 
 -- 1 down
-DROP TABLE IF EXISTS pages;
+DROP TABLE IF EXISTS content;
 DROP TABLE IF EXISTS links;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS song_tags;

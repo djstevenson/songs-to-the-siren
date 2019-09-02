@@ -10,7 +10,7 @@ extends 'NeverTire::Schema::Base::Result';
 # file sizes more managable, and to group related methods
 with 'NeverTire::Schema::Role::User::Auth';
 with 'NeverTire::Schema::Role::User::Song';
-with 'NeverTire::Schema::Role::User::Page';
+with 'NeverTire::Schema::Role::User::Content';
 with 'NeverTire::Schema::Role::User::Comment';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
@@ -30,7 +30,7 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->has_many(pages    => 'NeverTire::Schema::Result::Page',    { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(content  => 'NeverTire::Schema::Result::Content', { 'foreign.author_id' => 'self.id' });
 __PACKAGE__->has_many(songs    => 'NeverTire::Schema::Result::Song',    { 'foreign.author_id' => 'self.id' });
 __PACKAGE__->has_many(comments => 'NeverTire::Schema::Result::Comment', { 'foreign.author_id' => 'self.id' });
 
