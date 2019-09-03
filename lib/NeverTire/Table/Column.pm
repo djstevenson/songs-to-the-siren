@@ -43,23 +43,6 @@ has hidden => (
     default     => 0,
 );
 
-has sortable => (
-    is          => 'ro',
-    isa         => 'Bool',
-    default     => 0,
-);
-
-# For overriding the sort_by column. Meaningless
-# unless sortable is set
-has sort_by => (
-    is          => 'ro',
-    isa         => 'Str',
-    lazy        => 1,
-    default     => sub {
-        return shift->name;
-    },
-);
-
 # Optional CSS for cells in this column
 has cell_class => (
     is          => 'ro',
@@ -122,57 +105,10 @@ sub render_header_cell {
 
     return '' if $self->hidden;
 
-    my $paginator = $table->paginator;
     my $s = encode_entities($self->header);
-    if ($self->sortable) {
-		$s .= ' ' . $self->_link_down($paginator, '▼', '▽');
-		$s .= ' ' . $self->_link_up($paginator, '▲', '△');
-    }
-
     return qq{<th scope="col">$s</th>};
 }
 
-sub _link_up_down {
-	my ($self, $paginator, $dir, $label_on, $label_off) = @_;
-
-	my $args = {
-		sort_dir => $dir,
-		order_by => $self->name,
-	};
-	return $self->_make_link($paginator, $dir, $label_on, $label_off, $args);
-}
-
-sub _link_down {
-	my ($self, $paginator, $label_on, $label_off) = @_;
-
-	return $self->_link_up_down($paginator, 'd', $self->_active_arrow_down, $self->_inactive_arrow_down);
-}
-
-sub _link_up {
-	my ($self, $paginator, $label_on, $label_off) = @_;
-
-	return $self->_link_up_down($paginator, 'u', $self->_active_arrow_up, $self->_inactive_arrow_up);
-}
-
-sub _make_link {
-	my ($self, $paginator, $dir, $label_on, $label_off, $args) = @_;
-
-	if ($paginator->order_col->name eq $self->name && $paginator->sort_dir eq $dir) {
-		return $label_on;
-	}
-	else {
-		my @kvs;
-		foreach my $k (qw/ page page_size order_by sort_dir /) {
-			my $v = exists $args->{$k} ? $args->{$k} : $paginator->$k;
-			push @kvs, $k . '=' . uri_escape($v);
-		}
-
-		my $url = '?' . join('&', @kvs);
-		return qq{<a href="$url">$label_off</a>};
-	}
-}
-
-# TODO Tests
 sub render_body_cell {
     my ($self, $table, $row) = @_;
 

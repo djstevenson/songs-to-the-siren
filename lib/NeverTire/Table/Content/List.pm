@@ -10,14 +10,10 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    # TODO Bug: Table code is dumb and forces sorting by one
-    #      of the columns, so overrides by_pubdate. Fix this.
     return $self->c->schema
-        ->resultset('Content');
+        ->resultset('Content')
+        ->search(undef, { order_by => 'name'}); # Resultset helper
 }
-
-has '+default_order_by' => (default => 'name');
-has '+default_sort_dir' => (default => 'u');
 
 has_column name => (
     link         => sub {

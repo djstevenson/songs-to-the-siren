@@ -13,7 +13,8 @@ sub _build_resultset {
     return $self->c->schema
         ->resultset('Song')
         ->select_metadata
-        ->select_comment_count('unapproved');
+        ->select_comment_count('unapproved')
+        ->by_id;
 }
 
 has_column id => (
@@ -30,7 +31,6 @@ has_column title => (
 
 has_column comment_count => (
     header       => 'Unapproved',
-    sort_by      => 'comment_count',
     content => sub {
         my ($col, $table, $row) = @_;
 

@@ -23,7 +23,7 @@ context('Home page tests - song list', () => {
             cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
-            const song = songFactory.getNextSong(user)
+            songFactory.getNextSong(user)
 
             new HomePage()
                 .visit()
@@ -37,17 +37,17 @@ context('Home page tests - song list', () => {
             cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
-            const song1 = songFactory.getNextSong(user, true)
+            songFactory.getNextSong(user, true)
             homePage
                 .visit()
                 .assertSongCount(1)
 
-            const song2 = songFactory.getNextSong(user, false)
+            songFactory.getNextSong(user, false)
             homePage
                 .visit()
                 .assertSongCount(1)
 
-            const song3 = songFactory.getNextSong(user, true)
+            songFactory.getNextSong(user, true)
             homePage
                 .visit()
                 .assertSongCount(2)
