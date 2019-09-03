@@ -1,0 +1,10 @@
+% layout 'default';
+% title $content->title;
+
+
+<section class="row">
+    <div class="content col-12">
+        <h2><%= $content->title %></h2>
+        <%== $content->html %>
+    </div>
+</section>
