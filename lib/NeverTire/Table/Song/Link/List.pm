@@ -20,25 +20,16 @@ sub _build_resultset {
 }
 
 has_column id => (
-    sortable     => 1,
     header       => 'ID',
 );
 
-has_column priority => (
-    sortable     => 1,
-);
+has_column priority => ();
 
-has_column name => (
-    sortable     => 1,
-);
+has_column name => ();
 
-has_column url => (
-    sortable     => 1,
-);
+has_column url => ();
 
-has_column extras => (
-    sortable     => 1,
-);
+has_column extras => ();
 
 has_column edit => (
     content => sub {
@@ -68,9 +59,6 @@ has_column delete => (
     },
 );
 has '+empty_text' => (default => 'No links for this song');
-
-has '+default_order_by' => (default => 'priority');
-has '+default_sort_dir' => (default => 'u');
 
 __PACKAGE__->meta->make_immutable;
 1;

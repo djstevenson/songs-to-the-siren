@@ -2,8 +2,6 @@ package NeverTire::Table::Base;
 use Moose;
 use namespace::autoclean;
 
-use NeverTire::Table::Paginator;
-
 use Scalar::Util qw/ blessed /;
 
 has c => (
@@ -53,45 +51,6 @@ has page_size => (
     default     => sub { return shift->c->req->param('page_size') || 12; },
 );
 
-# Value is a COLUMN NAME, not a database field
-has order_by => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    lazy        => 1,
-    init_arg    => undef,
-    default     => sub {
-        my $self = shift;
-        return $self->c->req->param('order_by') || $self->default_order_by;
-    },
-);
-
-has default_order_by => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    lazy        => 1,
-    init_arg    => undef,
-    default     => 'id',
-);
-
-has sort_dir => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    lazy        => 1,
-    init_arg    => undef,
-    default     => sub {
-        my $self = shift;
-        return $self->c->req->param('sort_dir') || $self->default_sort_dir;
-    },
-);
-
-has default_sort_dir => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    lazy        => 1,
-    init_arg    => undef,
-    default     => 'd',
-);
-
 # Override default
 has empty_text => (
     is			=> 'ro',
@@ -105,14 +64,6 @@ has row_count => (
     lazy        => 1,
     init_arg    => undef,
     builder     => '_build_row_count',
-);
-
-has paginator => (
-    is          => 'ro',
-    isa         => 'NeverTire::Table::Paginator',
-    lazy        => 1,
-    init_arg    => undef,
-    builder     => '_build_paginator',
 );
 
 has id => (
@@ -143,27 +94,6 @@ sub _build_row_count {
     return $self->resultset->count;
 }
 
-sub _build_paginator {
-    my $self = shift;
-
-    return NeverTire::Table::Paginator->new(
-        page      => $self->page,
-        page_size => $self->page_size,
-        order_col => $self->_order_column,
-        sort_dir  => $self->sort_dir,
-        row_count => $self->row_count,
-    );
-}
-
-sub _order_column {
-    my $self = shift;
-
-    foreach my $col (@{ $self->table_columns }) {
-        return $col if $col->name eq $self->order_by;
-    }
-    return undef;
-}
-
 sub render {
     my $self = shift;
 
@@ -189,7 +119,6 @@ sub _data_render {
             . $header
             . $self->_render_body
         . '</table>'
-        . $self->paginator->render;
 }
 
 sub _render_header {
@@ -208,7 +137,7 @@ sub _render_body {
 
     my $s;
 
-    my $rs = $self->paginator->paginate_rs($self->resultset);
+    my $rs = $self->resultset;
     while (my $row = $rs->next) {
         my $row_class = '';
         if (my $class = $self->class_for_row_data($row)) {
@@ -223,14 +152,6 @@ sub _render_body {
 
     return '<tbody>' . $s . '</tbody>';
 }
-
-sub BUILD {
-	my $self = shift;
-
-    my $sort_dir = $self->sort_dir;
-    die 'Invalid sort options' unless $sort_dir eq 'u' || $sort_dir eq 'd';
-}
-
 
 # Override this if you want to return a different TR class
 # depending on row data.

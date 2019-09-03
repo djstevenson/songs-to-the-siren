@@ -15,7 +15,7 @@ sub home_page_songs {
     my $rs = $self->select_metadata
         ->select_text(summary => 'html')
         ->where_published
-        ->by_pubdate;
+        ->by_publication_date;
 
     if ($tags) {
         foreach my $tag (@$tags) {
@@ -107,10 +107,20 @@ sub where_has_tag {
     });
 }
 
-sub by_pubdate {
+sub by_id {
     my ($self, $order) = @_;
 
     $order //= '-desc';
+
+    return $self->search(undef, {
+        order_by => { $order => 'id' }
+    });
+}
+
+sub by_publication_date {
+     my ($self, $order) = @_;
+
+     $order //= '-desc';
 
     # Make some plain SQL so we can do NULLS FIRST
     # We won't see the NULL (unpublished) cases if
@@ -218,13 +228,23 @@ Adds a WHERE clause to select only published songs.
   
     $song_rs->where_published;
 
-=item by_pubdate
+=item by_id
 
-Sorts the resultset by publication date, newest first. 
+Sorts the resultset by id, descending (newest first).
+
 Pass '-asc' as the arg if you want oldest first.
 
-    $song_rs->by_pubdate;          # Sort desc
-    $song_rs->by_pubdate('-asc');  # Sort asc
+    $song_rs->by_id;          # Sort desc
+    $song_rs->by_id('-asc');  # Sort asc
+
+=item by_publication_date
+
+Sorts the resultset by publication date, newest first
+
+Pass '-asc' as the arg if you want oldest first.
+
+    $song_rs->by_publication_date;          # Sort desc
+    $song_rs->by_publication_date('-asc');  # Sort asc
 
 =back
 
