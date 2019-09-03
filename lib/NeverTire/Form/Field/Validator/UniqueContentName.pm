@@ -7,7 +7,7 @@ with 'NeverTire::Form::Field::Validator::Role';
 sub validate{
 	my ($self, $value) = @_;
 
-	my $pages_rs = $self->schema->resultset('Page');
+	my $pages_rs = $self->schema->resultset('Content');
 	my $found = $pages_rs->find($value);
 	
     return 'Name already in use' if $found;

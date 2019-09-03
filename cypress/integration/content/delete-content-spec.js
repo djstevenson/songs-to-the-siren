@@ -16,30 +16,30 @@ context('Delete Content tests', () => {
 
             const user = userFactory.getNextLoggedInUser(true)
 
-            contentFactory.getNextContent(user)
+            contentFactory.getNextContent(user, 'a')
             const content = new ListContentPage().visit().assertContentCount(1);
 
-            content.getRow(1).click('delete')
+            content.delete(1)
 
             new DeleteContentPage().cancel()
 
             content.visit().assertContentCount(1)
         })
 
-        // it('Can delete a song', () => {
-        //     cy.resetDatabase()
+        it('Can delete content', () => {
+            cy.resetDatabase()
 
-        //     const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextLoggedInUser(true)
 
-        //     const song1 = songFactory.getNextSong(user)
-        //     const page = new ListSongsPage().visit().assertSongCount(1);
+            contentFactory.getNextContent(user, 'a')
+            const content = new ListContentPage().visit().assertContentCount(1);
 
-        //     page.getRow(1).click('publish').click('delete')
+            content.delete(1)
 
-        //     new DeleteSongPage().deleteSong()
+            new DeleteContentPage().deleteContent()
 
-        //     page.assertEmpty()
-        // })
+            content.assertEmpty()
+        })
 
 
     })
