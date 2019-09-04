@@ -1821,10 +1821,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.15
-    pathname: S/SR/SRI/Mojo-Pg-4.15.tar.gz
+  Mojo-Pg-4.16
+    pathname: S/SR/SRI/Mojo-Pg-4.16.tar.gz
     provides:
-      Mojo::Pg 4.15
+      Mojo::Pg 4.16
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -1832,7 +1832,7 @@ DISTRIBUTIONS
       Mojo::Pg::Transaction undef
       SQL::Abstract::Pg undef
     requirements:
-      DBD::Pg 3.005001
+      DBD::Pg 3.007004
       ExtUtils::MakeMaker 0
       Mojolicious 8.03
       SQL::Abstract 1.86
