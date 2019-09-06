@@ -1,5 +1,7 @@
 % layout 'default';
-% title "Songs I Will Never Tire of";
+% title 'Links for ' . $song->title;
+
+<h2 class="notification-title">Links for <%= $song->title %></h2>
 
 <%== $table->render %>
 
