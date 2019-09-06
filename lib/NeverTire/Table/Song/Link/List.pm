@@ -16,7 +16,9 @@ has song => (
 sub _build_resultset {
     my $self = shift;
 
-    return $self->song->links;
+    return $self->song
+        ->links
+        ->by_priority;
 }
 
 has_column id => (
