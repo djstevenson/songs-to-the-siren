@@ -1,5 +1,6 @@
 import { Admin              } from '../../admin'
 import { ListSongLinksTable } from '../../../tables/list-song-links-table'
+import { CreateSongLinkPage } from '../../../pages/song/link/create-song-link-page'
 
 export class ListSongLinksPage extends Admin {
     pageUrl() {
@@ -28,4 +29,8 @@ export class ListSongLinksPage extends Admin {
         return this
     }
 
+    clickNew() {
+        cy.contains('New link').click()
+        return new CreateSongLinkPage()
+    }
 }
