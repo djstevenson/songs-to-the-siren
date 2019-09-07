@@ -3,7 +3,6 @@
 import { ListContentPage } from '../../pages/content/list-content-page'
 import { UserFactory     } from '../../support/user-factory'
 import { ContentFactory  } from '../../support/content-factory'
-import { EditContentPage } from '../../pages/content/edit-content-page'
 
 const label = 'editcontent';
 const userFactory    = new UserFactory(label);
@@ -17,9 +16,9 @@ context('Edit Content tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const content1 = contentFactory.getNextContent(user, 'a')
 
-            new ListContentPage().visit().edit(1)
-            
-            new EditContentPage()
+            new ListContentPage()
+                .visit()
+                .edit(1)
                 .assertTitle(`Edit content: ${content1.getName()}`)
         })
 
@@ -28,9 +27,9 @@ context('Edit Content tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             contentFactory.getNextContent(user, 'a')
 
-            new ListContentPage().visit().edit(1)
-
-            new EditContentPage()
+            new ListContentPage()
+                .visit()
+                .edit(1)
                 .editContent({
                     name:     '',
                     title:    '',
@@ -52,11 +51,8 @@ context('Edit Content tests', () => {
 
             const listPage = new ListContentPage().visit()
             
-            listPage.edit(1)
-
             const newTitle = 'x' + content1.getTitle();
-            new EditContentPage()
-                .editContent({ title: newTitle })
+            listPage.edit(1).editContent({ title: newTitle })
             
             listPage.getRow(1).assertText('title', newTitle)
         })
@@ -75,11 +71,9 @@ context('Edit Content tests', () => {
             listPage.getRow(2).assertText('name', content1.getName())
             listPage.getRow(3).assertText('name', content2.getName())
 
-            listPage.edit(1)
-
+            
             const newName = 'x' + content3.getName(); // Move to last
-            new EditContentPage()
-                .editContent({ name: newName })
+            listPage.edit(1).editContent({ name: newName })
             
             // Row 1 = content1, row 2 = content2, row 3 = content3
             listPage.getRow(1).assertText('name', content1.getName())

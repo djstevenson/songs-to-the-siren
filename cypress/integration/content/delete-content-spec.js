@@ -3,7 +3,6 @@
 import { ListContentPage   } from '../../pages/content/list-content-page'
 import { UserFactory       } from '../../support/user-factory'
 import { ContentFactory    } from '../../support/content-factory'
-import { DeleteContentPage } from '../../pages/content/delete-content-page'
 
 const label = 'deletecontent';
 const userFactory    = new UserFactory(label);
@@ -17,13 +16,15 @@ context('Delete Content tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
-            const content = new ListContentPage().visit().assertContentCount(1);
+            const content = new ListContentPage()
 
-            content.delete(1)
+            content
+                .visit()
+                .assertContentCount(1)
+                .delete(1)
+                .cancel()
 
-            new DeleteContentPage().cancel()
-
-            content.visit().assertContentCount(1)
+            content.assertContentCount(1)
         })
 
         it('Can delete content', () => {
@@ -32,11 +33,13 @@ context('Delete Content tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
-            const content = new ListContentPage().visit().assertContentCount(1);
+            const content = new ListContentPage()
 
-            content.delete(1)
-
-            new DeleteContentPage().deleteContent()
+            content
+                .visit()
+                .assertContentCount(1)
+                .delete(1)
+                .deleteContent()
 
             content.assertEmpty()
         })
