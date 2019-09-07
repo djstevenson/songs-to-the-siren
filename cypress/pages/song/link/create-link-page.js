@@ -1,5 +1,5 @@
 import { Admin              } from '../../admin'
-import { CreateSongLinkForm } from '../../../forms/song/create-song-link-form'
+import { CreateSongLinkForm } from '../../../forms/create-link-form'
 
 export class CreateSongLinkPage extends Admin {
     pageUrl() {

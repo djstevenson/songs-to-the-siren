@@ -1,14 +1,14 @@
 import { TableBase        } from '../tables/table-base'
-import { ListSongLinksRow } from '../tables/list-song-links-row'
+import { ListLinksRow } from '../tables/list-links-row'
 
-export class ListSongLinksTable extends TableBase {
+export class ListLinksTable extends TableBase {
     constructor() {
         super('table-song-link-list')
     }
 
     // rowIndex starts at 1
     getRow(rowIndex) {
-        return new ListSongLinksRow(this.getId(), rowIndex)
+        return new ListLinksRow(this.getId(), rowIndex)
     }
     
 }

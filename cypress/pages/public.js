@@ -78,4 +78,11 @@ export class Public {
             .should('eq', err)
     }
 
+    // Gets table row, if there is a table, 
+    // rowIndex counts from 1
+    getRow(rowIndex) {
+        return this.getTable().getRow(rowIndex)
+    }
+
+    
 }

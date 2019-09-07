@@ -1,5 +1,5 @@
 import { Admin        } from '../../../pages/admin'
-import { EditTagsForm } from '../../../forms/song/edit-tags-form'
+import { EditTagsForm } from '../../../forms/edit-tags-form'
 
 export class EditTagsPage extends Admin {
     pageUrl() {

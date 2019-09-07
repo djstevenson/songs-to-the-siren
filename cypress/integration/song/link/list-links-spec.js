@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import { ListSongsPage     } from '../../../pages/song/list-songs-page'
-import { ListSongLinksPage } from '../../../pages/song/link/list-song-links-page'
+import { ListSongLinksPage } from '../../../pages/song/link/list-links-page'
 import { UserFactory       } from '../../../support/user-factory'
 import { SongFactory       } from '../../../support/song-factory'
 
