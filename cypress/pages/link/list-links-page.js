@@ -2,6 +2,7 @@ import { Admin          } from '../admin'
 import { ListLinksTable } from '../../tables/list-links-table'
 import { CreateLinkPage } from './create-link-page'
 import { DeleteLinkPage } from './delete-link-page'
+import { EditLinkPage   } from './edit-link-page'
 
 export class ListLinksPage extends Admin {
     pageUrl() {
@@ -44,14 +45,16 @@ export class ListLinksPage extends Admin {
     }
 
     // Shortcut to hit the edit link in the 'n'th row
-    // Returns the row object
-    // TODO Should return the edit/delete page objects?
+    // Returns the edit form for the object
+    // in the selected row
     edit(rowIndex) {
-        return this.getRow(rowIndex).click('edit')
+        this.getRow(rowIndex).click('edit')
+        return new EditLinkPage()
     }
 
     // Shortcut to hit the delete link in the 'n'th row
-    // Returns the row object
+    // Returns the delete confirmation form for the object
+    // in the selected row
     delete(rowIndex) {
         this.getRow(rowIndex).click('delete')
         return new DeleteLinkPage()
