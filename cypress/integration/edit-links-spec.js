@@ -56,7 +56,6 @@ context('Song links CRUD tests', () => {
 
     })
 
-    // TODO Ditto for edit form
     describe('Create form validation', () => {
         it('Form rejects empty fields', () => {
             const song1 = createSongListLinks()
@@ -117,8 +116,11 @@ context('Song links CRUD tests', () => {
             .assertName('link 20')
 
         })
+    })
 
-        it('Can delete links', () => {
+    describe('Delete song links', () => {
+
+        it('Can cancel deletes', () => {
             const song1 = createSongListLinks()
             
             const listPage = new ListLinksPage()
@@ -132,6 +134,26 @@ context('Song links CRUD tests', () => {
 
             listPage.assertLinkCount(2)
 
+        })
+
+        it('Can delete links', () => {
+            const song1 = createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+                .createLink(makeLinkData(10))
+                .createLink(makeLinkData(20))
+
+            listPage
+                .delete(2)
+                .deleteLink()
+
+            listPage.assertLinkCount(1)
+
+            listPage
+                .delete(1)
+                .deleteLink()
+
+            listPage.assertEmpty()
         })
 
     })

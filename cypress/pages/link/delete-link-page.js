@@ -7,7 +7,7 @@ export class DeleteLinkPage extends Admin {
         this._form = new DeleteLinkForm()
     }
 
-    deleteContent() {
+    deleteLink() {
         this.getForm().enter({})
     
         return this
