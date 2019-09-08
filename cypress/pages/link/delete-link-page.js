@@ -1,4 +1,4 @@
-import { Admin          } from '../../pages/admin'
+import { Admin          } from '../admin'
 import { DeleteLinkForm } from '../../forms/delete-link-form'
 
 export class DeleteLinkPage extends Admin {

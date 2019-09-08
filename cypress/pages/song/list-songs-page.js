@@ -1,4 +1,4 @@
-import { Admin          } from '../../pages/admin'
+import { Admin          } from '../admin'
 import { ListSongsTable } from '../../tables/list-songs-table'
 
 export class ListSongsPage extends Admin {

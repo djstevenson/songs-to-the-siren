@@ -1,7 +1,7 @@
-import { Admin             } from '../../pages/admin'
+import { Admin             } from '../admin'
 import { ListContentTable  } from '../../tables/list-content-table'
-import { DeleteContentPage } from '../../pages/content/delete-content-page'
-import { EditContentPage   } from '../../pages/content/edit-content-page'
+import { DeleteContentPage } from './delete-content-page'
+import { EditContentPage   } from './edit-content-page'
 
 export class ListContentPage extends Admin {
 

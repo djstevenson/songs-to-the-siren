@@ -1,6 +1,6 @@
-import { Public       } from '../../pages/public'
+import { Public       } from '../public'
 import { RegisterForm } from '../../forms/register-form'
-import { LoginPage    } from '../../pages/user/login-page'
+import { LoginPage    } from './login-page'
 
 export class RegisterPage extends Public {
     pageUrl() {

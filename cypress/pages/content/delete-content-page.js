@@ -1,4 +1,4 @@
-import { Admin             } from '../../pages/admin'
+import { Admin             } from '../admin'
 import { DeleteContentForm } from '../../forms/delete-content-form'
 
 export class DeleteContentPage extends Admin {
