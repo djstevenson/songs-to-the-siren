@@ -1,6 +1,6 @@
-import { FormBase   } from '../forms/form-base'
-import { FormField  } from '../forms/form-field'
-import { FormButton } from '../forms/form-button'
+import { FormBase   } from './form-base'
+import { FormField  } from './form-field'
+import { FormButton } from './form-button'
 
 export class CreateSongForm extends FormBase {
     constructor() {

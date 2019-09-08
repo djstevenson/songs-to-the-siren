@@ -1,5 +1,7 @@
-import { Admin            } from '../../pages/admin'
-import { ListContentTable } from '../../tables/list-content-table'
+import { Admin             } from '../admin'
+import { ListContentTable  } from '../../tables/list-content-table'
+import { DeleteContentPage } from './delete-content-page'
+import { EditContentPage   } from './edit-content-page'
 
 export class ListContentPage extends Admin {
 
@@ -35,22 +37,18 @@ export class ListContentPage extends Admin {
         return this
     }
 
-    // rowIndex counts from 1
-    // TODO This can be in a base class? e.g. a separate
-    //      base class for pages that have tables?
-    getRow(rowIndex) {
-        return this.getTable().getRow(rowIndex)
-    }
-
     // Shortcut to hit the edit link in the 'n'th row
     // Returns the row object
     edit(rowIndex) {
-        return this.getRow(rowIndex).click('edit')
+        this.getRow(rowIndex).click('edit')
+        return new EditContentPage()
     }
 
     // Shortcut to hit the delete link in the 'n'th row
     // Returns the row object
     delete(rowIndex) {
-        return this.getRow(rowIndex).click('delete')
+        this.getRow(rowIndex).click('delete')
+        return new DeleteContentPage()
     }
+
 }

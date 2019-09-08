@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-import { LoginPage    } from '../../pages/user/login-page'
-import { UserFactory  } from '../../support/user-factory'
+import { LoginPage    } from '../pages/user/login-page'
+import { UserFactory  } from '../support/user-factory'
 
 const userFactory = new UserFactory('logintest');
 

@@ -1,4 +1,4 @@
-import { Page } from '../support/page'
+import { Page } from './page'
 
 import randomize from 'randomatic';
 

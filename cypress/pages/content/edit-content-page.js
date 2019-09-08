@@ -1,4 +1,4 @@
-import { Admin           } from '../../pages/admin'
+import { Admin           } from '../admin'
 import { EditContentForm } from '../../forms/edit-content-form'
 
 export class EditContentPage extends Admin {

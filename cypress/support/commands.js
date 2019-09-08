@@ -1,6 +1,6 @@
 import { TestEmailPage } from '../pages/test-email-page'
 import { TestUserPage  } from '../pages/test-user-page'
-import { UserFactory   } from '../support/user-factory'
+import { UserFactory   } from './user-factory'
 
 const newUser = new UserFactory('commands');
 

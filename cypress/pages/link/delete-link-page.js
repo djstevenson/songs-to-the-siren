@@ -1,10 +1,10 @@
-import { Admin             } from '../admin'
-import { DeleteContentForm } from '../../forms/delete-content-form'
+import { Admin          } from '../admin'
+import { DeleteLinkForm } from '../../forms/delete-link-form'
 
-export class DeleteContentPage extends Admin {
+export class DeleteLinkPage extends Admin {
     constructor() {
         super()
-        this._form = new DeleteContentForm()
+        this._form = new DeleteLinkForm()
     }
 
     deleteContent() {

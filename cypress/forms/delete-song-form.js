@@ -1,5 +1,5 @@
-import { FormBase   } from '../forms/form-base'
-import { FormButton } from '../forms/form-button'
+import { FormBase   } from './form-base'
+import { FormButton } from './form-button'
 
 export class DeleteSongForm extends FormBase {
     constructor() {

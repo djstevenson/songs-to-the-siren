@@ -1,4 +1,4 @@
-import { User         } from '../support/user'
+import { User         } from './user'
 import { RegisterPage } from '../pages/user/register-page'
 
 import randomize from 'randomatic';

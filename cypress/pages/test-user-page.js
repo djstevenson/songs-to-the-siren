@@ -1,4 +1,4 @@
-import { Public } from '../pages/public'
+import { Public } from './public'
 
 export class TestUserPage extends Public {
     constructor(username) {

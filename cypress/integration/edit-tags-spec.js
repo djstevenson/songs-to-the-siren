@@ -1,11 +1,11 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage } from '../../pages/song/list-songs-page'
-import { UserFactory   } from '../../support/user-factory'
-import { SongFactory   } from '../../support/song-factory'
-import { EditTagsPage  } from '../../pages/song/tag/edit-tags-page'
+import { ListSongsPage } from '../pages/song/list-songs-page'
+import { UserFactory   } from '../support/user-factory'
+import { SongFactory   } from '../support/song-factory'
+import { EditTagsPage  } from '../pages/tag/edit-tags-page'
 
-const label = 'editsong'
+const label = 'edittags'
 const userFactory = new UserFactory(label)
 const songFactory = new SongFactory(label)
 
@@ -134,4 +134,4 @@ function createThreeTags() {
         .createTag({ name: 'tag2' })
         .createTag({ name: 'tag3' })
         .assertTagCount(3)
-    }
+}

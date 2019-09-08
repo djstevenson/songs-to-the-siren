@@ -1,4 +1,4 @@
-import { Public    } from '../../pages/public'
+import { Public    } from '../public'
 import { LoginForm } from '../../forms/login-form'
 
 export class LoginPage extends Public {

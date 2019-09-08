@@ -1,4 +1,4 @@
-import { Admin          } from '../../pages/admin'
+import { Admin          } from '../admin'
 import { ListSongsTable } from '../../tables/list-songs-table'
 
 export class ListSongsPage extends Admin {
@@ -33,11 +33,6 @@ export class ListSongsPage extends Admin {
             .assertRowCount(c)
 
         return this
-    }
-
-    // rowIndex counts from 1
-    getRow(rowIndex) {
-        return this.getTable().getRow(rowIndex)
     }
 
     // Shortcut to hit the edit link in the 'n'th row

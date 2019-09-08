@@ -20,21 +20,18 @@ has_field name => (
 # TODO Add URL validation
 has_field url => (
     type        => 'Input::Text',
-    autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
 );
 
 has_field priority => (
     type        => 'Input::Text',
-    autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  ValidInteger /],
 );
 
 has_field extras => (
     type        => 'Input::Text',
-    autofocus   => 1,
     filters     => [qw/ TrimEdges /],
 );
 

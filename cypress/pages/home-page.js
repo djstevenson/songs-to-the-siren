@@ -1,5 +1,5 @@
-import { Public       } from '../pages/public'
-import { HomePageSong } from '../pages/home-page-song'
+import { Public       } from './public'
+import { HomePageSong } from './home-page-song'
 
 export class HomePage extends Public {
     visit() {
