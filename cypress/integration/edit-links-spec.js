@@ -3,8 +3,8 @@
 import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
-import { ListLinksPage  } from '../pages/song/link/list-links-page'
-import { CreateLinkPage } from '../pages/song/link/create-link-page'
+import { ListLinksPage  } from '../pages/link/list-links-page'
+import { CreateLinkPage } from '../pages/link/create-link-page'
 
 const label = 'editlinks'
 const userFactory = new UserFactory(label)
@@ -56,10 +56,9 @@ context('Song links CRUD tests', () => {
 
     })
 
-    // TODO Ditto for edit form
     describe('Create form validation', () => {
-        it('Form rejects empty fields', () => {
-            const song1 = createSongListLinks()
+        it('Create form rejects empty fields', () => {
+            createSongListLinks()
             
             new ListLinksPage().clickNew()
 
@@ -71,16 +70,16 @@ context('Song links CRUD tests', () => {
                 .assertNoFormError('extras')
         })
 
-        it('Form non-integer priority', () => {
-            const song1 = createSongListLinks()
+        it('Create form non-integer priority', () => {
+            createSongListLinks()
             
             new ListLinksPage().clickNew()
 
             new CreateLinkPage()
                 .createLink({
-                    name: "name1",
-                    url:  "http://example.com/",
-                    priority: "arse"
+                    name: 'name1',
+                    url:  'http://example.com/',
+                    priority: 'arse'
                 })
                 .assertNoFormError('name')
                 .assertNoFormError('url')
@@ -91,7 +90,7 @@ context('Song links CRUD tests', () => {
 
     describe('Create song links', () => {
         it('Create links, listed in priority order', () => {
-            const song1 = createSongListLinks()
+            createSongListLinks()
             
             const listPage = new ListLinksPage()
                 .createLink(makeLinkData(10))
@@ -117,9 +116,77 @@ context('Song links CRUD tests', () => {
             .assertName('link 20')
 
         })
+    })
 
-        it('Can delete links', () => {
-            const song1 = createSongListLinks()
+    describe('Edit form validation', () => {
+
+        it('Edit form rejects empty fields', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            listPage.createLink(makeLinkData(10))
+            listPage
+                .edit(1)
+                .editLink({
+                    name: '',
+                    url: '',
+                    priority: ''
+                })
+                .assertFormError('name',     'Required')
+                .assertFormError('url',      'Required')
+                .assertFormError('priority', 'Required')
+                .assertNoFormError('extras')
+        })
+
+        it('Edit form non-integer priority', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            listPage.createLink(makeLinkData(10))
+            listPage
+                .edit(1)
+                .editLink({
+                    name: 'name1',
+                    url:  'http://example.com/',
+                    priority: 'arse'
+                })
+                .assertNoFormError('name')
+                .assertNoFormError('url')
+                .assertFormError  ('priority', 'Invalid number')
+                .assertNoFormError('extras')
+        })
+
+    })
+    
+    describe('Edit song links', () => {
+        it('Can edit links', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+    
+            const data20 = makeLinkData(20)
+            listPage.createLink(makeLinkData(10))
+            listPage.createLink(data20)
+            listPage
+                .edit(1)
+                .editLink({
+                    name: 'new name 30',
+                    priority: 30
+                })
+    
+            // Link '20' should now be first, and the edited
+            // link '30' second
+            listPage.getRow(1).assertText('name', data20.name)
+            listPage.getRow(2).assertText('name', 'new name 30')
+        })
+    })
+
+    describe('Delete song links', () => {
+
+        it('Can cancel deletes', () => {
+            createSongListLinks()
             
             const listPage = new ListLinksPage()
                 .createLink(makeLinkData(10))
@@ -132,6 +199,26 @@ context('Song links CRUD tests', () => {
 
             listPage.assertLinkCount(2)
 
+        })
+
+        it('Can delete links', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+                .createLink(makeLinkData(10))
+                .createLink(makeLinkData(20))
+
+            listPage
+                .delete(2)
+                .deleteLink()
+
+            listPage.assertLinkCount(1)
+
+            listPage
+                .delete(1)
+                .deleteLink()
+
+            listPage.assertEmpty()
         })
 
     })
