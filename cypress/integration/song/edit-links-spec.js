@@ -6,11 +6,10 @@ import { SongFactory    } from '../../support/song-factory'
 import { ListLinksPage  } from '../../pages/song/link/list-links-page'
 import { CreateLinkPage } from '../../pages/song/link/create-link-page'
 
-const label = 'createlinks'
+const label = 'editlinks'
 const userFactory = new UserFactory(label)
 const songFactory = new SongFactory(label)
 
-// TODO this code used in a few places, DRY it
 function createSongListLinks() {
     cy.resetDatabase()
 
@@ -36,8 +35,29 @@ function makeLinkData(n) {
     }
 }
 
-context('Create song links test', () => {
-    describe('Form validation', () => {
+context('Song links CRUD tests', () => {
+    describe('New song has empty list of links', () => {
+        it('List song links page has right title, and list is empty', () => {
+
+            const user = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
+        
+            // Go to the list-links page
+            new ListSongsPage()
+                .visit()
+                .getRow(1)
+                .click('links')
+                   
+            // Assert list is empty
+            new ListLinksPage()
+                .assertTitle(`Links for ${song1.getTitle()}`)
+                .assertEmpty()
+        })
+
+    })
+
+    // TODO Ditto for edit form
+    describe('Create form validation', () => {
         it('Form rejects empty fields', () => {
             const song1 = createSongListLinks()
             
@@ -115,6 +135,6 @@ context('Create song links test', () => {
         })
 
     })
-
+    
 })
 
