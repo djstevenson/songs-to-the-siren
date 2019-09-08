@@ -1,7 +1,7 @@
-import { Admin          } from '../../admin'
-import { ListLinksTable } from '../../../tables/list-links-table'
-import { CreateLinkPage } from '../../song/link/create-link-page'
-import { DeleteLinkPage } from '../../link/delete-link-page'
+import { Admin          } from '../admin'
+import { ListLinksTable } from '../../tables/list-links-table'
+import { CreateLinkPage } from './create-link-page'
+import { DeleteLinkPage } from './delete-link-page'
 
 export class ListLinksPage extends Admin {
     pageUrl() {

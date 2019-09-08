@@ -1,5 +1,5 @@
-import { Admin          } from '../../admin'
-import { CreateLinkForm } from '../../../forms/create-link-form'
+import { Admin          } from '../admin'
+import { CreateLinkForm } from '../../forms/create-link-form'
 
 export class CreateLinkPage extends Admin {
     pageUrl() {
