@@ -1,10 +1,10 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage  } from '../../../pages/song/list-songs-page'
-import { UserFactory    } from '../../../support/user-factory'
-import { SongFactory    } from '../../../support/song-factory'
-import { ListLinksPage  } from '../../../pages/song/link/list-links-page'
-import { CreateLinkPage } from '../../../pages/song/link/create-link-page'
+import { ListSongsPage  } from '../../pages/song/list-songs-page'
+import { UserFactory    } from '../../support/user-factory'
+import { SongFactory    } from '../../support/song-factory'
+import { ListLinksPage  } from '../../pages/song/link/list-links-page'
+import { CreateLinkPage } from '../../pages/song/link/create-link-page'
 
 const label = 'createlinks'
 const userFactory = new UserFactory(label)

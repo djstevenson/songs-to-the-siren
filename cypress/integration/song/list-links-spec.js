@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage     } from '../../../pages/song/list-songs-page'
-import { ListLinksPage } from '../../../pages/song/link/list-links-page'
-import { UserFactory       } from '../../../support/user-factory'
-import { SongFactory       } from '../../../support/song-factory'
+import { ListSongsPage } from '../../pages/song/list-songs-page'
+import { ListLinksPage } from '../../pages/song/link/list-links-page'
+import { UserFactory   } from '../../support/user-factory'
+import { SongFactory   } from '../../support/song-factory'
 
 const label = 'listlinks'
 const userFactory = new UserFactory(label)
