@@ -1,5 +1,5 @@
-import { TableBase    } from '../tables/table-base'
-import { ListSongsRow } from '../tables/list-songs-row'
+import { TableBase    } from './table-base'
+import { ListSongsRow } from './list-songs-row'
 
 export class ListSongsTable extends TableBase {
     constructor() {

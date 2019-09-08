@@ -1,5 +1,5 @@
-import { RowBase     } from '../tables/row-base'
-import { TableColumn } from '../tables/table-column'
+import { RowBase     } from './row-base'
+import { TableColumn } from './table-column'
 
 export class ListLinksRow extends RowBase {
     constructor(tableId, rowIndex) {

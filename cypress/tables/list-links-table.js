@@ -1,5 +1,5 @@
-import { TableBase        } from '../tables/table-base'
-import { ListLinksRow } from '../tables/list-links-row'
+import { TableBase    } from './table-base'
+import { ListLinksRow } from './list-links-row'
 
 export class ListLinksTable extends TableBase {
     constructor() {

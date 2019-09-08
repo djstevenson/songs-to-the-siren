@@ -1,5 +1,5 @@
-import { TableBase      } from '../tables/table-base'
-import { ListContentRow } from '../tables/list-content-row'
+import { TableBase      } from './table-base'
+import { ListContentRow } from './list-content-row'
 
 export class ListContentTable extends TableBase {
     constructor() {

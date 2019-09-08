@@ -1,4 +1,4 @@
-import { Song } from '../support/song'
+import { Song } from './song'
 
 import randomize from 'randomatic';
 
