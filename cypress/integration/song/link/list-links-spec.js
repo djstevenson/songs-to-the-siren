@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import { ListSongsPage     } from '../../../pages/song/list-songs-page'
-import { ListSongLinksPage } from '../../../pages/song/link/list-links-page'
+import { ListLinksPage } from '../../../pages/song/link/list-links-page'
 import { UserFactory       } from '../../../support/user-factory'
 import { SongFactory       } from '../../../support/song-factory'
 
@@ -24,7 +24,7 @@ context('List Song Links test', () => {
                 .click('links')
                    
             // Assert list is empty
-            new ListSongLinksPage()
+            new ListLinksPage()
                 .assertTitle(`Links for ${song1.getTitle()}`)
                 .assertEmpty()
         })

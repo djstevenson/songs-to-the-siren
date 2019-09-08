@@ -1,9 +1,9 @@
-import { Admin               } from '../../admin'
-import { ListLinksTable  } from '../../../tables/list-links-table'
-import { CreateSongLinkPage  } from '../../../pages/song/link/create-link-page'
-import { DeleteLinkPage      } from '../../pages/link/delete-link-page'
+import { Admin          } from '../../admin'
+import { ListLinksTable } from '../../../tables/list-links-table'
+import { CreateLinkPage } from '../../song/link/create-link-page'
+import { DeleteLinkPage } from '../../link/delete-link-page'
 
-export class ListSongLinksPage extends Admin {
+export class ListLinksPage extends Admin {
     pageUrl() {
         // TODO Needs song id
         return '/song/n/link/list'
@@ -32,7 +32,7 @@ export class ListSongLinksPage extends Admin {
 
     clickNew() {
         cy.contains('New link').click()
-        return new CreateSongLinkPage()
+        return new CreateLinkPage()
     }
 
     createLink(args) {

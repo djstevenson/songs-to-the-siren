@@ -1,10 +1,10 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage      } from '../../../pages/song/list-songs-page'
-import { UserFactory        } from '../../../support/user-factory'
-import { SongFactory        } from '../../../support/song-factory'
-import { ListSongLinksPage  } from '../../../pages/song/link/list-links-page'
-import { CreateSongLinkPage } from '../../../pages/song/link/create-link-page'
+import { ListSongsPage  } from '../../../pages/song/list-songs-page'
+import { UserFactory    } from '../../../support/user-factory'
+import { SongFactory    } from '../../../support/song-factory'
+import { ListLinksPage  } from '../../../pages/song/link/list-links-page'
+import { CreateLinkPage } from '../../../pages/song/link/create-link-page'
 
 const label = 'createlinks'
 const userFactory = new UserFactory(label)
@@ -41,9 +41,9 @@ context('Create song links test', () => {
         it('Form rejects empty fields', () => {
             const song1 = createSongListLinks()
             
-            new ListSongLinksPage().clickNew()
+            new ListLinksPage().clickNew()
 
-            new CreateSongLinkPage()
+            new CreateLinkPage()
                 .createLink({})
                 .assertFormError('name',     'Required')
                 .assertFormError('url',      'Required')
@@ -54,9 +54,9 @@ context('Create song links test', () => {
         it('Form non-integer priority', () => {
             const song1 = createSongListLinks()
             
-            new ListSongLinksPage().clickNew()
+            new ListLinksPage().clickNew()
 
-            new CreateSongLinkPage()
+            new CreateLinkPage()
                 .createLink({
                     name: "name1",
                     url:  "http://example.com/",
@@ -73,7 +73,7 @@ context('Create song links test', () => {
         it('Create links, listed in priority order', () => {
             const song1 = createSongListLinks()
             
-            const listPage = new ListSongLinksPage()
+            const listPage = new ListLinksPage()
                 .createLink(makeLinkData(10))
                 .assertLinkCount(1)
 
@@ -101,27 +101,16 @@ context('Create song links test', () => {
         it('Can delete links', () => {
             const song1 = createSongListLinks()
             
-            const listPage = new ListSongLinksPage()
+            const listPage = new ListLinksPage()
                 .createLink(makeLinkData(10))
                 .createLink(makeLinkData(20))
 
             // Can cancel delete
-            listPage.delete(1).
             listPage
                 .delete(1)
-                .assert
-            // Check ordering
-            listPage.getRow(1)
-                .assertPriority(5)
-                .assertName('link 5')
+                .cancel()
 
-            listPage.getRow(2)
-            .assertPriority(10)
-            .assertName('link 10')
-
-            listPage.getRow(3)
-            .assertPriority(20)
-            .assertName('link 20')
+            listPage.assertLinkCount(2)
 
         })
 

@@ -1,7 +1,7 @@
-import { Admin              } from '../../admin'
-import { CreateSongLinkForm } from '../../../forms/create-link-form'
+import { Admin          } from '../../admin'
+import { CreateLinkForm } from '../../../forms/create-link-form'
 
-export class CreateSongLinkPage extends Admin {
+export class CreateLinkPage extends Admin {
     pageUrl() {
         // TODO Needs song id
         return '/song/n/link/create'
@@ -9,7 +9,7 @@ export class CreateSongLinkPage extends Admin {
 
     constructor() {
         super()
-        this._form = new CreateSongLinkForm()
+        this._form = new CreateLinkForm()
     }
 
     createLink(args) {

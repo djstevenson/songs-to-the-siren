@@ -1,8 +1,8 @@
-import { FormBase   } from '../form-base'
-import { FormField  } from '../form-field'
-import { FormButton } from '../form-button'
+import { FormBase   } from './form-base'
+import { FormField  } from './form-field'
+import { FormButton } from './form-button'
 
-export class CreateSongLinkForm extends FormBase {
+export class CreateLinkForm extends FormBase {
     constructor() {
         super();
         this._fields.name     = new FormField('text', 'add-link-name')
