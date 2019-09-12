@@ -3,7 +3,7 @@
         <h4>Links</h4>
         <p>
             <ul>
-                % foreach my $k (keys %$links) {
+                % foreach my $k (sort { $links->{$a}->priority <=> $links->{$b}->priority } keys %$links) {
                     <li>
                         <a href="<%= $links->{$k}->url %>"><%= $k %></a>
                     </li>
