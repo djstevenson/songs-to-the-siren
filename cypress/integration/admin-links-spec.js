@@ -18,7 +18,7 @@ context('Admin user links to song-list', () => {
             new HomePage()
                 .visit()
                 .assertLoggedInAsAdmin('admin')
-                .clickSongListLink()
+                .clickAdminHomeLink()
                 .assertLoggedInAsAdmin('admin')
         })
     })

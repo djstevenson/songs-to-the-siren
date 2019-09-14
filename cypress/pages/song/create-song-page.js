@@ -3,7 +3,7 @@ import { CreateSongForm } from '../../forms/create-song-form'
 
 export class CreateSongPage extends Admin {
     pageUrl() {
-        return '/song/create'
+        return '/admin/song/create'
     }
 
     constructor() {
