@@ -4,7 +4,7 @@ import { ListSongsTable } from '../../tables/list-songs-table'
 export class ListSongsPage extends Admin {
 
     pageUrl() {
-        return '/song/list'
+        return '/admin/song/list'
     }
 
     constructor() {

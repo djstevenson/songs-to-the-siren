@@ -10,6 +10,7 @@ use NeverTire::Controller::User;
 use NeverTire::Controller::Song;
 use NeverTire::Controller::Markdown;
 use NeverTire::Controller::Content;
+use NeverTire::Controller::Admin;
 use NeverTire::Controller::Test;
 
 # This method will run once at server start
@@ -52,6 +53,9 @@ sub startup {
 
     my $markdown_controller = NeverTire::Controller::Markdown->new;
     $markdown_controller->add_routes($route);
+
+    my $admin_controller = NeverTire::Controller::Admin->new;
+    $admin_controller->add_routes($route);
 
     # Two conditions required for enabling test endpoints
     # MOJO_MODE=TEST and the db name must be never_tire_test

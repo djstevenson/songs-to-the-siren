@@ -22,16 +22,16 @@ export class Public {
         return this
     }
 
-    clickSongListLink(username) {
+    clickAdminHomeLink(username) {
         cy
-            .get('a.admin-link').click()
+            .get('a.admin-home-link').click()
         return this
     }
 
     assertLoggedInAsAdmin(username) {
         cy
             .get('span.user-name').contains(username)
-            .get('a.admin-link').contains('ADMIN')
+            .get('a.admin-home-link').contains('ADMIN')
         return this
     }
 

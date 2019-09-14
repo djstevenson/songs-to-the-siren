@@ -1,19 +1,19 @@
-package NeverTire::Controller::Song::Link;
+package NeverTire::Controller::Admin::Song::Link;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->require_admin->any('/link')->to(controller => 'Song::Link');
+    my $u = $song_action->require_admin->any('/link')->to(controller => 'admin-song-link');
 
     # Admin routes that do not capture a link id
-    $u->route('/list')->name('list_song_links')->via('GET')->to(action => 'list');
-    $u->route('/create')->name('create_song_link')->via('GET', 'POST')->to(action => 'create');
+    $u->route('/list')->name('admin_list_song_links')->via('GET')->to(action => 'list');
+    $u->route('/create')->name('admin_create_song_link')->via('GET', 'POST')->to(action => 'create');
 
     # Admin routes that capture a link id
     my $link_action = $u->under('/:link_id')->to(action => 'capture');
-    $link_action->route('/edit')->name('edit_song_link')->via('GET', 'POST')->to(action => 'edit');
-    $link_action->route('/delete')->name('delete_song_link')->via('GET', 'POST')->to(action => 'delete'); # DELETE method?
+    $link_action->route('/edit')->name('admin_edit_list_song_link')->via('GET', 'POST')->to(action => 'edit');
+    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete'); # DELETE method?
 }
 
 
@@ -36,7 +36,7 @@ sub create {
         $c->flash(msg => 'Link added');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('list_song_links', song_id => $song->id);
+        $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
         $c->stash(form => $form);
@@ -69,7 +69,7 @@ sub edit {
         $c->flash(msg => 'Link edited');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('list_song_links', song_id => $song->id);
+        $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
             $c->stash(form => $form);
@@ -85,7 +85,7 @@ sub delete {
 
     if (my $action = $form->process) {
         $c->flash(msg => $action);
-        $c->redirect_to('list_song_links', song_id => $song->id);
+        $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
         $c->stash(form => $form);
