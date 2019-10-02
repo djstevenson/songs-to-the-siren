@@ -1837,8 +1837,8 @@ DISTRIBUTIONS
       Mojolicious 8.03
       SQL::Abstract 1.86
       perl 5.010001
-  Mojolicious-8.24
-    pathname: S/SR/SRI/Mojolicious-8.24.tar.gz
+  Mojolicious-8.25
+    pathname: S/SR/SRI/Mojolicious-8.25.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1907,7 +1907,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.24
+      Mojolicious 8.25
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -2656,11 +2656,11 @@ DISTRIBUTIONS
     requirements:
       Module::Build::Tiny 0.035
       perl 5.005
-  Role-Tiny-2.000008
-    pathname: H/HA/HAARG/Role-Tiny-2.000008.tar.gz
+  Role-Tiny-2.001001
+    pathname: H/HA/HAARG/Role-Tiny-2.001001.tar.gz
     provides:
-      Role::Tiny 2.000008
-      Role::Tiny::With 2.000008
+      Role::Tiny 2.001001
+      Role::Tiny::With 2.001001
     requirements:
       Exporter 5.57
       perl 5.006
@@ -2832,11 +2832,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Sub-Quote-2.006003
-    pathname: H/HA/HAARG/Sub-Quote-2.006003.tar.gz
+  Sub-Quote-2.006006
+    pathname: H/HA/HAARG/Sub-Quote-2.006006.tar.gz
     provides:
-      Sub::Defer 2.006003
-      Sub::Quote 2.006003
+      Sub::Defer 2.006006
+      Sub::Quote 2.006006
     requirements:
       ExtUtils::MakeMaker 0
       Scalar::Util 0
