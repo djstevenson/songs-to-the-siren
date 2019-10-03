@@ -1,19 +1,19 @@
-package NeverTire::Controller::Song::Tag;
+package NeverTire::Controller::Admin::Song::Tag;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->require_admin->any('/tag')->to(controller => 'song-tag');
+    my $u = $song_action->require_admin->any('/tag')->to(controller => 'admin-song-tag');
 
     # Actions that do not capture a tag_id
-    $u->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
+    $u->route('/edit')->name('admin_edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
 
     # Actions that DO capture a tag_id
     my $tag_action = $u->under('/:tag_id')->to(action => 'capture');
 
     # Remove a tag from a song
-    $tag_action->route->name('delete_song_tag')->via('DELETE')->to(action => 'delete');
+    $tag_action->route->name('admin_delete_song_tag')->via('DELETE')->to(action => 'delete');
 
 }
 
@@ -32,7 +32,7 @@ sub edit {
         $c->flash(msg => 'Tag added');
         
         # Redirect so that form is reinitialised
-        $c->redirect_to('edit_song_tags', song_id => $song->id);
+        $c->redirect_to('admin_edit_song_tags', song_id => $song->id);
     }
 
 }
