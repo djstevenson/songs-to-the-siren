@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->require_admin->any('/tag')->to(controller => 'Song::Tag');
+    my $u = $song_action->require_admin->any('/tag')->to(controller => 'song-tag');
 
     # Actions that do not capture a tag_id
     $u->route('/edit')->name('edit_song_tags')->via('GET', 'POST')->to(action => 'edit');

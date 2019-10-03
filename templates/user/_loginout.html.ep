@@ -2,7 +2,7 @@
 % if (my $auth_user = stash 'auth_user') {
     Logged-in as <span class="user-name"><%= $auth_user->name %></span>
     % if ($auth_user->admin) {
-        (<a class="admin-link" href="<%= url_for('list_songs') %>">ADMIN</a>)
+        (<a class="admin-home-link" href="<%= url_for('admin_home') %>">ADMIN</a>)
     % }
     <a class="logout-link" href="<%= url_for('logout') %>">Logout</a>
 % }
