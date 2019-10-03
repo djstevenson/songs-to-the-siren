@@ -6,7 +6,7 @@ import { EditContentPage   } from './edit-content-page'
 export class ListContentPage extends Admin {
 
     pageUrl() {
-        return '/content/list'
+        return '/admin/content/list'
     }
 
     constructor() {

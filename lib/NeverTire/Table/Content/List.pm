@@ -31,7 +31,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('edit_content', name => $row->name);
+        my $url = $table->c->url_for('admin_edit_content', name => $row->name);
         return qq{
             <a href="${url}">Edit</a>
         };
@@ -43,7 +43,7 @@ has_column delete => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('delete_content', name => $row->name);
+        my $url = $table->c->url_for('admin_delete_content', name => $row->name);
         return qq{
             <a href="${url}">Delete</a>
         };

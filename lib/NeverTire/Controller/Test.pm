@@ -21,7 +21,7 @@ sub add_routes {
     $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
-    $t->route('/create_content')->name('test_create_content')->via('POST')->to(action => 'create_content');
+    $t->route('/admin_create_content')->name('test_admin_create_content')->via('POST')->to(action => 'create_content');
     $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
