@@ -2963,11 +2963,11 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-TCP-2.20
-    pathname: M/MI/MIYAGAWA/Test-TCP-2.20.tar.gz
+  Test-TCP-2.21
+    pathname: K/KA/KAZUHO/Test-TCP-2.21.tar.gz
     provides:
       Net::EmptyPort undef
-      Test::TCP 2.20
+      Test::TCP 2.21
       Test::TCP::CheckPort undef
     requirements:
       ExtUtils::MakeMaker 6.64
