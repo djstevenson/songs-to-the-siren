@@ -2,7 +2,6 @@ package NeverTire::Controller::Song;
 use Mojo::Base 'Mojolicious::Controller';
 
 use NeverTire::Controller::Song::Comment;
-use NeverTire::Controller::Song::Tag;
 
 sub add_routes {
     my ($c, $r) = @_;
@@ -16,7 +15,6 @@ sub add_routes {
     $song_action_u->route('/view')->name('view_song')->via('GET')->to(action => 'view');
 
     NeverTire::Controller::Song::Comment ->new ->add_routes($song_action_u);
-    NeverTire::Controller::Song::Tag     ->new ->add_routes($song_action_u);
 }
 
 sub capture {
