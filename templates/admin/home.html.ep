@@ -2,4 +2,4 @@
 % title "ADMIN";
 
 <p><a href="<%= $c->url_for('admin_list_songs') %>">List songs</a></p>
-<p><a href="<%= $c->url_for('list_content') %>">List content</a></p>
+<p><a href="<%= $c->url_for('admin_list_content') %>">List content</a></p>

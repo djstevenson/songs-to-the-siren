@@ -20,7 +20,7 @@ export class ContentFactory {
         const content = this.getNext()
         content.prefixName(name)
 
-        const url = '/test/create_content'
+        const url = '/test/admin_create_content'
         
         cy.request({
             url,

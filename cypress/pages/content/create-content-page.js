@@ -3,7 +3,7 @@ import { CreateContentForm } from '../../forms/create-content-form'
 
 export class CreateContentPage extends Admin {
     pageUrl() {
-        return '/content/create'
+        return '/admin/content/create'
     }
 
     constructor() {

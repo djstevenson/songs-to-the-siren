@@ -4,7 +4,7 @@ import { EditContentForm } from '../../forms/edit-content-form'
 export class EditContentPage extends Admin {
     pageUrl() {
         // TODO Needs song name
-        return '/content/name/edit'
+        return '/admin/content/name/edit'
     }
 
     constructor() {
