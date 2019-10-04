@@ -4,5 +4,5 @@
 <%== $table->render %>
 
 <p>
-    <a href="<%= $c->url_for('create_page') %>">New page</a>
+    <a href="<%= $c->url_for('admin_create_content') %>">New content</a>
 </p>
