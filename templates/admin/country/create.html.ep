@@ -1,0 +1,4 @@
+% layout 'default';
+% title 'New country';
+
+<%== $form->render %>

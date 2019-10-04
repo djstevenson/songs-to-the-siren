@@ -11,6 +11,7 @@ extends 'NeverTire::Schema::Base::Result';
 with 'NeverTire::Schema::Role::User::Auth';
 with 'NeverTire::Schema::Role::User::Song';
 with 'NeverTire::Schema::Role::User::Content';
+with 'NeverTire::Schema::Role::User::Country';
 with 'NeverTire::Schema::Role::User::Comment';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
