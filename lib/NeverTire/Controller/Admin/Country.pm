@@ -18,7 +18,7 @@ sub add_routes {
     $country_action_a->route('/edit')->name('admin_edit_country')->via('GET', 'POST')->to(action => 'edit');
 
     # # Method=DELETE?
-    # $country_action_a->route('/delete')->name('admin_delete_country')->via('GET', 'POST')->to(action => 'delete');
+    $country_action_a->route('/delete')->name('admin_delete_country')->via('GET', 'POST')->to(action => 'delete');
 
 }
 
@@ -77,18 +77,18 @@ sub edit {
     }
 }
 
-# sub delete {
-#     my $c = shift;
+sub delete {
+    my $c = shift;
 
-#     my $form = $c->form('Country::Delete', country => $c->stash->{country});
-#     if (my $action = $form->process) {
-#         $c->flash(msg => $action);
-#         $c->redirect_to('admin_list_countries');
-#     }
-#     else {
-#         $c->stash(form => $form);
-#     }
-# }
+    my $form = $c->form('Country::Delete', country => $c->stash->{country});
+    if (my $action = $form->process) {
+        $c->flash(msg => $action);
+        $c->redirect_to('admin_list_countries');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
 
 
 1;

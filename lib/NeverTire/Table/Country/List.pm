@@ -32,17 +32,17 @@ has_column edit => (
 
 );
 
-# has_column delete => (
-#     content => sub {
-#         my ($col, $table, $row) = @_;
+has_column delete => (
+    content => sub {
+        my ($col, $table, $row) = @_;
 
-#         my $url = $table->c->url_for('admin_delete_content', name => $row->name);
-#         return qq{
-#             <a href="${url}">Delete</a>
-#         };
-#     },
+        my $url = $table->c->url_for('admin_delete_country', country_id => $row->id);
+        return qq{
+            <a href="${url}">Delete</a>
+        };
+    },
 
-# );
+);
 
 has '+empty_text' => (default => 'No country codes yet defined');
 
