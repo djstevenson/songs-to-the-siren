@@ -16,6 +16,13 @@ has country => (
     required    => 1,
 );
 
+has_field name => (
+    type        => 'Input::Text',
+    autofocus   => 1,
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required /],
+);
+
 has_field emoji => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -33,6 +40,13 @@ override posted => sub {
 	my $fields = $self->form_hash(qw/ name emoji /);
 	return $user->admin_edit_country($self->country, $fields);
 };
+
+# Prepopulate GET form from the content object
+sub BUILD {
+    my $self = shift;
+
+    $self->data_object($self->country);
+}
 
 __PACKAGE__->meta->make_immutable;
 1;

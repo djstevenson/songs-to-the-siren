@@ -12,7 +12,7 @@ has_field name => (
     type        => 'Input::Text',
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required UniqueCountryName /],
+    validators  => [qw/ Required /],
 );
 
 has_field emoji => (

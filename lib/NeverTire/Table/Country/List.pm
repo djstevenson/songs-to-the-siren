@@ -24,7 +24,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_edit_country', name => $row->name);
+        my $url = $table->c->url_for('admin_edit_country', country_id => $row->id);
         return qq{
             <a href="${url}">Edit</a>
         };

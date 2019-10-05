@@ -8,17 +8,17 @@ sub add_routes {
     my $a = $r->any('/country')->to(controller => 'admin-country');
 
     # Capturing a country id
-    my $country_action_a = $a->under('/:country')->to(action => 'capture');
+    my $country_action_a = $a->under('/:country_id')->to(action => 'capture');
 
     # Admin routes, no capture:
     $a->route('/list')->name('admin_list_countries')->via('GET')->to(action => 'list');
     $a->route('/create')->name('admin_create_country')->via('GET', 'POST')->to(action => 'create');
 
-    # # Admin content, with a capture
+    # Admin actions, with a capture
     $country_action_a->route('/edit')->name('admin_edit_country')->via('GET', 'POST')->to(action => 'edit');
 
     # # Method=DELETE?
-    # $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'delete');
+    # $country_action_a->route('/delete')->name('admin_delete_country')->via('GET', 'POST')->to(action => 'delete');
 
 }
 
@@ -47,7 +47,7 @@ sub list {
 sub capture {
     my $c = shift;
 
-    my $name = $c->stash->{country};
+    my $name = $c->stash->{country_id};
     my $rs = $c->schema->resultset('Country');
     if ( my $country = $rs->find($name) ) {
         $c->stash( country => $country );
@@ -64,8 +64,8 @@ sub capture {
 sub edit {
     my $c = shift;
 
-    my $content = $c->stash->{country};
-    my $form = $c->form('Country::Edit', content => $content);
+    my $country = $c->stash->{country};
+    my $form = $c->form('Country::Edit', country => $country);
     
     if ($form->process) {
         $c->flash(msg => 'Country updated');
@@ -80,10 +80,10 @@ sub edit {
 # sub delete {
 #     my $c = shift;
 
-#     my $form = $c->form('Content::Delete', content => $c->stash->{content});
+#     my $form = $c->form('Country::Delete', country => $c->stash->{country});
 #     if (my $action = $form->process) {
 #         $c->flash(msg => $action);
-#         $c->redirect_to('admin_list_content');
+#         $c->redirect_to('admin_list_countries');
 #     }
 #     else {
 #         $c->stash(form => $form);
