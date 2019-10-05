@@ -26,6 +26,16 @@ sub admin_create_country {
     });
 }
 
+sub admin_edit_country {
+    my ($self, $country, $args) = @_;
+
+    croak $NOT_ADMIN unless $self->admin;
+
+    $country->update({emoji => $args->{emoji}});
+    
+    return $country;
+}
+
 
 no Moose::Role;
 1;

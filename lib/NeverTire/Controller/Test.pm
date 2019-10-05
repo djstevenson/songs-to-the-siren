@@ -70,7 +70,7 @@ sub create_song {
         artist           => $c->param('artist'),
         album            => $c->param('album'),
         image            => $c->param('image'),
-        country_id       => $c->param('country_id'),
+        country          => $c->param('country'),
         released_at      => $c->param('released_at'),
         summary_markdown => $c->param('summary'),
         full_markdown    => $c->param('full'),
@@ -231,7 +231,7 @@ POST only.
 
 =head2 Params
 
-title, artist, album, country_id, summary, full, username, released_at
+title, artist, album, country, summary, full, username, released_at
 
 Optional: published, 1 if song is to be published, 0 otherwise
 

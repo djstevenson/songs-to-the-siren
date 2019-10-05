@@ -1,4 +1,4 @@
-package NeverTire::Form::Field::Validator::ValidCountryId;
+package NeverTire::Form::Field::Validator::ValidCountryName;
 use namespace::autoclean;
 use Moose;
 
@@ -12,7 +12,7 @@ sub validate{
 	my $found = $countries_rs->find($value);
 	
     return undef if $found;
-	return qq{Country id ${value} does not exist};
+	return qq{Country name ${value} does not exist};
 }
 
 

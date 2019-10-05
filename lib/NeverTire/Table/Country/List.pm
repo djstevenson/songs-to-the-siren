@@ -20,17 +20,17 @@ has_column name => ();
 # TODO Need an option not to encode HTML entities so we can display the actual flags
 has_column emoji => ();
 
-# has_column edit => (
-#     content => sub {
-#         my ($col, $table, $row) = @_;
+has_column edit => (
+    content => sub {
+        my ($col, $table, $row) = @_;
 
-#         my $url = $table->c->url_for('admin_edit_content', name => $row->name);
-#         return qq{
-#             <a href="${url}">Edit</a>
-#         };
-#     },
+        my $url = $table->c->url_for('admin_edit_country', name => $row->name);
+        return qq{
+            <a href="${url}">Edit</a>
+        };
+    },
 
-# );
+);
 
 # has_column delete => (
 #     content => sub {

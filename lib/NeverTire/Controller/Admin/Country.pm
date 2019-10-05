@@ -8,14 +8,14 @@ sub add_routes {
     my $a = $r->any('/country')->to(controller => 'admin-country');
 
     # Capturing a country id
-    # my $content_action_a = $a->under('/:country_id')->to(action => 'capture');
+    my $country_action_a = $a->under('/:country')->to(action => 'capture');
 
     # Admin routes, no capture:
     $a->route('/list')->name('admin_list_countries')->via('GET')->to(action => 'list');
     $a->route('/create')->name('admin_create_country')->via('GET', 'POST')->to(action => 'create');
 
     # # Admin content, with a capture
-    # $content_action_a->route('/edit')->name('admin_edit_content')->via('GET', 'POST')->to(action => 'edit');
+    $country_action_a->route('/edit')->name('admin_edit_country')->via('GET', 'POST')->to(action => 'edit');
 
     # # Method=DELETE?
     # $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'delete');
@@ -44,38 +44,38 @@ sub list {
     $c->stash(table => $table);
 }
 
-# sub capture {
-#     my $c = shift;
+sub capture {
+    my $c = shift;
 
-#     my $name = $c->stash->{name};
-#     my $rs = $c->schema->resultset('Content');
-#     if ( my $content = $rs->find($name) ) {
-#         $c->stash( content => $content );
-#     }
-#     else {
-#         $c->reply->not_found;
-#         return undef;
-#     }
+    my $name = $c->stash->{country};
+    my $rs = $c->schema->resultset('Country');
+    if ( my $country = $rs->find($name) ) {
+        $c->stash( country => $country );
+    }
+    else {
+        $c->reply->not_found;
+        return undef;
+    }
 
-#     return 1;
-# }
+    return 1;
+}
 
 
-# sub edit {
-#     my $c = shift;
+sub edit {
+    my $c = shift;
 
-#     my $content = $c->stash->{content};
-#     my $form = $c->form('Content::Edit', content => $content);
+    my $content = $c->stash->{country};
+    my $form = $c->form('Country::Edit', content => $content);
     
-#     if ($form->process) {
-#         $c->flash(msg => 'Page updated');
+    if ($form->process) {
+        $c->flash(msg => 'Country updated');
 
-#         $c->redirect_to('admin_list_content');
-#     }
-#     else {
-#         $c->stash(form => $form);
-#     }
-# }
+        $c->redirect_to('admin_list_countries');
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
 
 # sub delete {
 #     my $c = shift;
