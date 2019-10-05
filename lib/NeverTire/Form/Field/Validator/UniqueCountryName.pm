@@ -8,7 +8,7 @@ sub validate{
 	my ($self, $value) = @_;
 
 	my $country_rs = $self->schema->resultset('Country');
-	my $found = $country_rs->find($value);
+	my $found = $country_rs->search({name => $value})->single;
 	
     return 'Country name already in use' if $found;
 	return undef;
