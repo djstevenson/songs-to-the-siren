@@ -40,9 +40,11 @@ CREATE TABLE emails (
 
 DROP TABLE IF EXISTS countries;
 CREATE TABLE countries (
-    "name" TEXT NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
     emoji TEXT NOT NULL
 );
+CREATE UNIQUE INDEX countries_name_unique_idx ON countries USING BTREE("name");
 
 DROP TABLE IF EXISTS songs;
 CREATE TABLE songs (
@@ -51,7 +53,7 @@ CREATE TABLE songs (
     title TEXT NOT NULL,
     album TEXT NOT NULL,
     "image" TEXT NOT NULL,    -- /public/images/160/${image} - size is 160x160
-    country TEXT NOT NULL REFERENCES countries(name) ON DELETE RESTRICT,
+    country_id INTEGER NOT NULL REFERENCES countries(id) ON DELETE RESTRICT,
 
     summary_markdown TEXT NOT NULL,
     summary_html TEXT NOT NULL,

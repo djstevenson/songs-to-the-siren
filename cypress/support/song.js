@@ -4,7 +4,7 @@ export class Song {
         this._artist     = `Artist ${baseName}`
         this._album      = `Album ${baseName}`
         this._image      = `http://example.com/${baseName}.jpg`
-        this._country    = 'US',
+        this._countryId  = 1,
         this._releasedAt = `Release ${baseName}`
         this._summary    = `Summary ${baseName}`
         this._full       = `Full ${baseName}`
@@ -26,8 +26,8 @@ export class Song {
         return this._image
     }
 
-    getCountry() {
-        return this._country
+    getCountryId() {
+        return this._countryId
     }
 
     getReleasedAt() {
@@ -56,7 +56,7 @@ export class Song {
             artist:           this.getArtist(),
             album:            this.getAlbum(),
             image:            this.getImage(),
-            country:          this.getCountry(),
+            countryId:        this.getCountryId(),
             releasedAt:       this.getReleasedAt(),
             summaryMarkdown:  this.getSummary(),
             fullMarkdown:     this.getFull(),

@@ -43,10 +43,10 @@ has_field image => (
 );
 
 # TODO Proper select menu for countries
-has_field country => (
+has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required ValidCountryName /],
+    validators  => [qw/ Required ValidInteger /],
 );
 
 has_field released_at => (
@@ -93,7 +93,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title album artist image country released_at summary_markdown full_markdown /);
+	my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown /);
 	return $user->admin_edit_song($self->song, $fields);
 };
 
