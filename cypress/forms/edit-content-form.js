@@ -5,7 +5,6 @@ import { FormButton } from './form-button'
 export class EditContentForm extends FormBase {
     constructor() {
         super();
-        this._fields.name     = new FormField('text',     'edit-content-name')
         this._fields.title    = new FormField('text',     'edit-content-title')
         this._fields.markdown = new FormField('textarea', 'edit-content-markdown')
 

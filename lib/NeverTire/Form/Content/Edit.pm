@@ -44,7 +44,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name title markdown /);
+	my $fields = $self->form_hash(qw/ title markdown /);
 	return $user->admin_edit_content($self->content, $fields);
 };
 
