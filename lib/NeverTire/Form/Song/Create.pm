@@ -40,14 +40,9 @@ has_field country_id => (
     selections  => sub {
         my ($field, $form) = @_;
 
-        my $rs = $form->c->schema
+        return $form->c->schema
             ->resultset('Country')
-            ->name_order;
-
-        return [
-            map { { value => $_->id, text => $_->name } } $rs->all
-        ];
-
+            ->as_select_options;
     },
 );
 

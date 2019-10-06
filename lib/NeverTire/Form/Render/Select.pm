@@ -17,13 +17,15 @@ sub render {
 
     my $s;
 
+    my $selected = $self->has_value ? $self->value : $buttons->[0]->id;
+
     $s = qq{<div class="form-group"><label for="${id}">$label</label><select class="form-control" name="${name}" id="${id}">};
     foreach my $button (@$buttons) {
         my $value    = $button->{value};
-        # my $checked  = $button->{checked} ? 'checked="checked"' : '';
+        my $selected = $selected == $value ? 'selected="selected"' : '';
         my $label    = $button->{text} // $value;
 
-        $s .= qq{ <option value="${value}">${label}</option> };
+        $s .= qq{ <option value="${value}" ${selected}>${label}</option> };
     }
 
     my $error_id    = 'error-' . $id;

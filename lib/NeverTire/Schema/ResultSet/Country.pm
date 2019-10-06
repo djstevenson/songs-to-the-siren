@@ -17,6 +17,16 @@ sub name_order {
     });
 }
 
+sub as_select_options {
+    my $self = shift;
+
+    my $rs = $self->name_order;
+
+    return [
+        map { { value => $_->id, text => $_->name } } $rs->all
+    ];
+}
+
 __PACKAGE__->meta->make_immutable;
 1;
 
