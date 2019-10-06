@@ -2,6 +2,8 @@ package NeverTire::Form::Render::RadioButtonGroup;
 use Moose::Role;
 use namespace::autoclean;
 
+# TODO POD
+# TODO Unit tests
 sub render {
     my ($self, $form) = @_;
 

@@ -34,9 +34,13 @@ has_field image => (
 );
 
 has_field country_id => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required ValidInteger /],
+    type        => 'Select',
+    label       => 'Country',
+    selections  => [
+        { value => 1, text => 'UK', checked => 1 },
+        { value => 2, text => 'US'               },
+        { value => 3, text => 'CA'               },
+    ],
 );
 
 has_field released_at => (
