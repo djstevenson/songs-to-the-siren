@@ -20,10 +20,7 @@ sub admin_create_country {
     croak $NOT_ADMIN unless $self->admin;
 
     my $rs = $self->result_source->schema->resultset('Country');
-    $rs->create({
-        name  => $args->{name},
-        emoji => $args->{emoji},
-    });
+    $rs->create($args);
 }
 
 sub admin_edit_country {
@@ -31,7 +28,7 @@ sub admin_edit_country {
 
     croak $NOT_ADMIN unless $self->admin;
 
-    $country->update({emoji => $args->{emoji}});
+    $country->update($args);
     
     return $country;
 }
