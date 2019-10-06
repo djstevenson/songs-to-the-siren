@@ -3,6 +3,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 use NeverTire::Controller::Admin::Song;
 use NeverTire::Controller::Admin::Content;
+use NeverTire::Controller::Admin::Country;
 
 sub add_routes {
     my ($c, $r) = @_;
@@ -13,6 +14,7 @@ sub add_routes {
 
     NeverTire::Controller::Admin::Song    ->new ->add_routes($a);
     NeverTire::Controller::Admin::Content ->new ->add_routes($a);
+    NeverTire::Controller::Admin::Country ->new ->add_routes($a);
 }
 
 1;

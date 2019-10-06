@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Delete page: ' . $content->name;
+% title 'Delete content: ' . $content->name;
 
 <%== $form->render %>
 

@@ -68,7 +68,7 @@ sub edit {
     my $form = $c->form('Content::Edit', content => $content);
     
     if ($form->process) {
-        $c->flash(msg => 'Page updated');
+        $c->flash(msg => 'Content updated');
 
         $c->redirect_to('admin_list_content');
     }

@@ -31,7 +31,7 @@ export class SongFactory {
                 artist:      song.getArtist(),
                 album:       song.getAlbum(),
                 image:       song.getImage(),
-                country_id:  song.getCountryId(),
+                country_id:  1,
                 released_at: song.getReleasedAt(),
                 summary:     song.getSummary(),
                 full:        song.getFull(),

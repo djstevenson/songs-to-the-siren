@@ -46,7 +46,7 @@ has_field image => (
 has_field country_id => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  ValidInteger ValidCountryId /],
+    validators  => [qw/ Required ValidInteger /],
 );
 
 has_field released_at => (

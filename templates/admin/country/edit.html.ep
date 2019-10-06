@@ -1,4 +1,4 @@
 % layout 'default';
-% title 'New content';
+% title 'Edit country: ' . $country->name;
 
 <%== $form->render %>

@@ -53,7 +53,7 @@ CREATE TABLE songs (
     title TEXT NOT NULL,
     album TEXT NOT NULL,
     "image" TEXT NOT NULL,    -- /public/images/160/${image} - size is 160x160
-    country_id INT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
+    country_id INTEGER NOT NULL REFERENCES countries(id) ON DELETE RESTRICT,
 
     summary_markdown TEXT NOT NULL,
     summary_html TEXT NOT NULL,

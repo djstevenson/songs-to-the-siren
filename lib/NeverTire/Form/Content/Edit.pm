@@ -16,15 +16,6 @@ has content => (
     required    => 1,
 );
 
-has_field name => (
-    type        => 'Input::Text',
-    autofocus   => 1,
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required /],
-    # TODO Kinda want a "unique name other than this page itself validation".
-    # TODO Or don't let them edit the name. Use it as a primary key?
-);
-
 has_field title => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -53,7 +44,7 @@ override posted => sub {
 	my $user = $self->c->stash->{auth_user};
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name title markdown /);
+	my $fields = $self->form_hash(qw/ title markdown /);
 	return $user->admin_edit_content($self->content, $fields);
 };
 
