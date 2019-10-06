@@ -24,7 +24,7 @@ sub run {
 	$user_obj1->admin_create_content({name => 'xyzzy', title => 'The title', markdown => 'The markdown'});
 
 	my $tests = [
-		{ data => 'xyzzy', expected => 'Name already in use' },
+		{ data => 'xyzzy', expected => 'Content name already in use' },
 		{ data => 'xyz2y', expected => undef                 },
 	];
 

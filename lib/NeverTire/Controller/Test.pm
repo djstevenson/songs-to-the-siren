@@ -22,6 +22,7 @@ sub add_routes {
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
     $t->route('/admin_create_content')->name('test_admin_create_content')->via('POST')->to(action => 'create_content');
+    $t->route('/admin_create_country')->name('test_admin_create_country')->via('POST')->to(action => 'create_country');
     $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
@@ -34,6 +35,8 @@ sub reset {
     $c->schema->resultset('Song')->delete;
     $c->schema->resultset('Song')->delete;
     $c->schema->resultset('Content')->delete;
+    $c->schema->resultset('Country')->delete;
+    $c->schema->resultset('Country')->create({ id => 1, name => 'zz', emoji => 'zz'});
     $c->redirect_to('home');
 }
 
@@ -94,6 +97,22 @@ sub create_content {
         markdown         => $c->param('markdown'),
     };
 	$user->admin_create_content($fields);
+
+    $c->redirect_to('home');
+}
+
+sub create_country {
+    my $c = shift;
+
+    my $username = $c->param('username') || die;
+    my $user     = $c->_find_user_by_name($username);
+    die unless $user->admin;
+
+    my $fields = {
+        name  => $c->param('name'),
+        emoji => $c->param('emoji'),
+    };
+	$user->admin_create_country($fields);
 
     $c->redirect_to('home');
 }
@@ -231,7 +250,7 @@ POST only.
 
 =head2 Params
 
-title, artist, album, country_id, summary, full, username, released_at
+title, artist, album, country, summary, full, username, released_at
 
 Optional: published, 1 if song is to be published, 0 otherwise
 

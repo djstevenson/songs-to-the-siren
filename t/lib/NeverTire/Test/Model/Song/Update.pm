@@ -25,7 +25,7 @@ sub run {
 		artist           => 'artist',
 		album            => 'album',
 		image            => 'image',
-		country          => $self->create_country('CO'),
+		country_id       => $self->create_country('CO')->id,
 		released_at      => 'release',
 	});
 	my $dc = $song->created_at;
@@ -55,7 +55,8 @@ sub run {
 	is($song->full_html,     "<p>${full}</p>\n",    'Full html is correct');
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
-	is($song->country_id,    $country->id,          'Country is correct');
+	is($song->country_id,    $country->id,          'Country id is correct');
+	is($song->country->name, $country->name,        'Country name is correct');
 	is($song->album,         $album,                'Album is correct');
 	is($song->image,         $image,                'Image is correct');
 	is($song->released_at,   $release,              'Release date is correct');

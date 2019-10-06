@@ -4,7 +4,7 @@ export class Song {
         this._artist     = `Artist ${baseName}`
         this._album      = `Album ${baseName}`
         this._image      = `http://example.com/${baseName}.jpg`
-        this._countryId  = 1
+        this._countryId  = 1,
         this._releasedAt = `Release ${baseName}`
         this._summary    = `Summary ${baseName}`
         this._full       = `Full ${baseName}`

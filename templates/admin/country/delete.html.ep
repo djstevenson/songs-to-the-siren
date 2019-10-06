@@ -1,0 +1,5 @@
+% layout 'default';
+% title 'Delete country: ' . $country->name;
+
+<%== $form->render %>
+

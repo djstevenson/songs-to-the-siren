@@ -153,20 +153,6 @@ context('Song CRUD tests', () => {
                 .assertNoFormError('releasedAt')
                 .assertNoFormError('summaryMarkdown')
                 .assertNoFormError('fullMarkdown')
-
-            new CreateSongPage()
-                .visit()
-                .createSong({
-                    title:           'a',
-                    artist:          'a',
-                    album:           'a',
-                    image:           'a',
-                    countryId:       '0',
-                    releasedAt:      'a',
-                    summaryMarkdown: 'a',
-                    fullMarkdown:    'a'
-                })
-                .assertFormError('countryId', 'Country id 0 does not exist')
         })
     })
 
@@ -244,17 +230,6 @@ context('Song CRUD tests', () => {
                 .assertNoFormError('summaryMarkdown')
                 .assertNoFormError('fullMarkdown')
 
-            page.editSong({
-                    title:           'a',
-                    artist:          'a',
-                    album:           'a',
-                    image:           'a',
-                    countryId:       '0',
-                    releasedAt:      'a',
-                    summaryMarkdown: 'a',
-                    fullMarkdown:    'a'
-                })
-                .assertFormError('countryId', 'Country id 0 does not exist')
         })
     })
 

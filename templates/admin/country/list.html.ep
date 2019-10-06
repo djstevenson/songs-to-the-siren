@@ -1,0 +1,8 @@
+% layout 'default';
+% title "Country list";
+
+<%== $table->render %>
+
+<p>
+    <a href="<%= $c->url_for('admin_create_country') %>">New country</a>
+</p>
