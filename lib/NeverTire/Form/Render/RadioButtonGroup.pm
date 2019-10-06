@@ -8,7 +8,7 @@ sub render {
     my ($self, $form) = @_;
 
     my $name    = $self->name;
-    my $buttons = $self->selections or die 'What no buttons?';
+    my $buttons = $self->_get_selections($form) or die 'What no buttons?';
 
     my $s;
 

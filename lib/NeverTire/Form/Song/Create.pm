@@ -33,14 +33,22 @@ has_field image => (
     validators  => [qw/ Required  /],
 );
 
+# TODO Dupe code with edit function. Sort this out.
 has_field country_id => (
     type        => 'Select',
     label       => 'Country',
-    selections  => [
-        { value => 1, text => 'UK', checked => 1 },
-        { value => 2, text => 'US'               },
-        { value => 3, text => 'CA'               },
-    ],
+    selections  => sub {
+        my ($field, $form) = @_;
+
+        my $rs = $form->c->schema
+            ->resultset('Country')
+            ->name_order;
+
+        return [
+            map { { value => $_->id, text => $_->name } } $rs->all
+        ];
+
+    },
 );
 
 has_field released_at => (

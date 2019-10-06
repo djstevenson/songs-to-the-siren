@@ -9,7 +9,7 @@ with 'NeverTire::Form::Render::Input::Generic';
 sub render {
     my ($self, $form) = @_;
 
-    my $buttons = $self->selections or die 'What no buttons?';
+    my $buttons = $self->_get_selections($form) or die 'What no buttons?';
 
     my $name  = $self->name;
     my $id    = $self->_name_to_id($form, $name);
@@ -20,7 +20,7 @@ sub render {
     $s = qq{<div class="form-group"><label for="${id}">$label</label><select class="form-control" name="${name}" id="${id}">};
     foreach my $button (@$buttons) {
         my $value    = $button->{value};
-        my $checked  = $button->{checked} ? 'checked="checked"' : '';
+        # my $checked  = $button->{checked} ? 'checked="checked"' : '';
         my $label    = $button->{text} // $value;
 
         $s .= qq{ <option value="${value}">${label}</option> };

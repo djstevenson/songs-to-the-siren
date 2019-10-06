@@ -64,11 +64,11 @@ has options => (
     default     => sub { return {}; },
 );
 
-# For radio buttons (and probs can re-use for select menus)
+# For radio buttons and select menus
 has selections => (
     is          => 'ro',
-    isa         => 'ArrayRef',  # TODO also accept coderef
-    default     => sub { return []; },
+    isa         => 'CodeRef',
+    predicate   => 'has_selections',
 );
 
 has value => (
@@ -159,6 +159,21 @@ sub _get_options {
     die 'Invalid options' unless ref($options) eq 'HASH';
     return $options;
 }
+
+sub _get_selections {
+    my ($self, $form) = @_;
+
+    die unless $self->has_selections;
+
+    my $selections = $self->selections;
+    if (ref($selections) eq 'CODE') {
+        $selections = $selections->($self, $form);
+    }
+
+    die 'Invalid selections' unless ref($selections) eq 'ARRAY';
+    return $selections;
+}
+
 
 __PACKAGE__->meta->make_immutable;
 1;
