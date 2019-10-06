@@ -33,10 +33,17 @@ has_field image => (
     validators  => [qw/ Required  /],
 );
 
+# TODO Dupe code with edit function. Sort this out.
 has_field country_id => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required ValidInteger /],
+    type        => 'Select',
+    label       => 'Country',
+    selections  => sub {
+        my ($field, $form) = @_;
+
+        return $form->c->schema
+            ->resultset('Country')
+            ->as_select_options;
+    },
 );
 
 has_field released_at => (

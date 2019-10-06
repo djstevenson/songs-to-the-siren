@@ -12,7 +12,7 @@ sub _build_resultset {
 
     return $self->c->schema
         ->resultset('Country')
-        ->search(undef, { order_by => 'name'});
+        ->name_order;
 }
 
 has_column name => ();
