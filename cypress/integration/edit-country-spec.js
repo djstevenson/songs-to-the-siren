@@ -55,13 +55,15 @@ context('Country CRUD tests', () => {
             countryFactory.getNextCountry(user, 'a')
             const country = new ListCountryPage()
 
+            // Create one country, but count is two as the reset
+            // code always creates one with id=1
             country
                 .visit()
-                .assertCountryCount(1)
+                .assertCountryCount(2)
                 .delete(1)
                 .cancel()
 
-            country.assertCountryCount(1)
+            country.assertCountryCount(2)
         })
 
         it('Can delete country', () => {
@@ -74,6 +76,14 @@ context('Country CRUD tests', () => {
 
             country
                 .visit()
+                .assertCountryCount(2)
+                .delete(1)
+                .deleteCountry()
+            
+            country.assertCountryCount(1)
+
+            country
+                .visit()
                 .assertCountryCount(1)
                 .delete(1)
                 .deleteCountry()
@@ -83,14 +93,14 @@ context('Country CRUD tests', () => {
     })
 
     describe('Country list page, ordering', () => {
-        it('Country list starts empty', () => {
+        it('Country list starts empty apart from test data', () => {
             cy.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
 
             new ListCountryPage()
                 .visit()
-                .assertEmpty()
+                .assertCountryCount(1)
         })
 
         it('shows country in name order', () => {
@@ -102,7 +112,7 @@ context('Country CRUD tests', () => {
             const country2 = countryFactory.getNextCountry(user, 'a')
             const country3 = countryFactory.getNextCountry(user, 'b')
 
-            let country = new ListCountryPage().visit().assertCountryCount(3);
+            let country = new ListCountryPage().visit().assertCountryCount(4);
 
             // In order of creation, newest first
             country.getRow(1).assertText('name', country2.getName())

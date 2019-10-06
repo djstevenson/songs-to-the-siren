@@ -36,6 +36,7 @@ sub reset {
     $c->schema->resultset('Song')->delete;
     $c->schema->resultset('Content')->delete;
     $c->schema->resultset('Country')->delete;
+    $c->schema->resultset('Country')->create({ id => 1, name => 'zz', emoji => 'zz'});
     $c->redirect_to('home');
 }
 
