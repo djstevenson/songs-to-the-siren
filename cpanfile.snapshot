@@ -1821,10 +1821,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.16
-    pathname: S/SR/SRI/Mojo-Pg-4.16.tar.gz
+  Mojo-Pg-4.17
+    pathname: S/SR/SRI/Mojo-Pg-4.17.tar.gz
     provides:
-      Mojo::Pg 4.16
+      Mojo::Pg 4.17
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -2656,11 +2656,11 @@ DISTRIBUTIONS
     requirements:
       Module::Build::Tiny 0.035
       perl 5.005
-  Role-Tiny-2.001001
-    pathname: H/HA/HAARG/Role-Tiny-2.001001.tar.gz
+  Role-Tiny-2.001003
+    pathname: H/HA/HAARG/Role-Tiny-2.001003.tar.gz
     provides:
-      Role::Tiny 2.001001
-      Role::Tiny::With 2.001001
+      Role::Tiny 2.001003
+      Role::Tiny::With 2.001003
     requirements:
       Exporter 5.57
       perl 5.006
@@ -2963,11 +2963,11 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-TCP-2.21
-    pathname: K/KA/KAZUHO/Test-TCP-2.21.tar.gz
+  Test-TCP-2.22
+    pathname: M/MI/MIYAGAWA/Test-TCP-2.22.tar.gz
     provides:
       Net::EmptyPort undef
-      Test::TCP 2.21
+      Test::TCP 2.22
       Test::TCP::CheckPort undef
     requirements:
       ExtUtils::MakeMaker 6.64
