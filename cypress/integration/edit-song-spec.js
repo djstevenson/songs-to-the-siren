@@ -109,7 +109,8 @@ context('Song CRUD tests', () => {
                 .assertTitle('New song')
         })
 
-        it('Form shows right errors with empty input', () => {
+        it('Create song form shows right errors with empty input', () => {
+            cy.resetDatabase()
 
             userFactory.getNextLoggedInUser(true)
 
@@ -120,40 +121,11 @@ context('Song CRUD tests', () => {
                 .assertFormError('artist',          'Required')
                 .assertFormError('album',           'Required')
                 .assertFormError('image',           'Required')
-                .assertFormError('countryId',       'Required')
                 .assertFormError('releasedAt',      'Required')
                 .assertFormError('summaryMarkdown', 'Required')
                 .assertFormError('fullMarkdown',    'Required')
         })
 
-        it('Form shows right errors with invalid input', () => {
-
-            // There's deliberately minimal validation, no reason
-            // why I shouldn't be able to enter a single-character
-            // title for example.
-            userFactory.getNextLoggedInUser(true)
-
-            new CreateSongPage()
-                .visit()
-                .createSong({
-                    title:           'a',
-                    artist:          'a',
-                    album:           'a',
-                    image:           'a',
-                    countryId:       'a',
-                    releasedAt:      'a',
-                    summaryMarkdown: 'a',
-                    fullMarkdown:    'a'
-                })
-                .assertNoFormError('title')
-                .assertNoFormError('artist')
-                .assertNoFormError('album')
-                .assertNoFormError('image')
-                .assertFormError('countryId', 'Invalid number')
-                .assertNoFormError('releasedAt')
-                .assertNoFormError('summaryMarkdown')
-                .assertNoFormError('fullMarkdown')
-        })
     })
 
     describe('Edit form validation', () => {
@@ -163,21 +135,19 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
-            new ListSongsPage()
-                .visit()
-                .getRow(1)
-                .click('edit')
+            new ListSongsPage().visit().edit(1)
             
             new EditSongPage()
                 .assertTitle(`Edit song: ${song1.getTitle()}`)
         })
 
-        it('Form shows right errors with empty input', () => {
+        it('Edit song form shows right errors with empty input', () => {
+            cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
             songFactory.getNextSong(user)
 
-            new ListSongsPage().edit(1)
+            new ListSongsPage().visit().edit(1)
 
             new EditSongPage()
                 .editSong({
@@ -185,7 +155,7 @@ context('Song CRUD tests', () => {
                     artist:          '',
                     album:           '',
                     image:           '',
-                    countryId:       '',
+                    countryId:       'zz',
                     releasedAt:      '',
                     summaryMarkdown: '',
                     fullMarkdown:    ''
@@ -194,42 +164,9 @@ context('Song CRUD tests', () => {
                 .assertFormError('artist',          'Required')
                 .assertFormError('album',           'Required')
                 .assertFormError('image',           'Required')
-                .assertFormError('countryId',       'Required')
                 .assertFormError('releasedAt',      'Required')
                 .assertFormError('summaryMarkdown', 'Required')
                 .assertFormError('fullMarkdown',    'Required')
-        })
-
-        it('Form shows right errors with invalid input', () => {
-
-            // There's deliberately minimal validation, no reason
-            // why I shouldn't be able to enter a single-character
-            // title for example.
-            const user = userFactory.getNextLoggedInUser(true)
-            songFactory.getNextSong(user)
-
-            new ListSongsPage().edit(1)
-
-            const page = new EditSongPage()
-                .editSong({
-                    title:           'a',
-                    artist:          'a',
-                    album:           'a',
-                    image:           'a',
-                    countryId:       'a',
-                    releasedAt:      'a',
-                    summaryMarkdown: 'a',
-                    fullMarkdown:    'a'
-                })
-                .assertNoFormError('title')
-                .assertNoFormError('artist')
-                .assertNoFormError('album')
-                .assertNoFormError('image')
-                .assertFormError('countryId', 'Invalid number')
-                .assertNoFormError('releasedAt')
-                .assertNoFormError('summaryMarkdown')
-                .assertNoFormError('fullMarkdown')
-
         })
     })
 

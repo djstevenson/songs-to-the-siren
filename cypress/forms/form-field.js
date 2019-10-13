@@ -11,4 +11,9 @@ export class FormField {
     getSelector() {
         return this._selector
     }
+
+    get() {
+        const sel = this.getSelector()
+        return cy.get(`#${sel}`);
+    }
 }
