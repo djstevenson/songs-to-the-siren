@@ -18,14 +18,15 @@ sub render {
     my $s;
 
     my $selected = $self->has_value ? $self->value : $buttons->[0]->id;
+    $selected ||= 0;
 
     $s = qq{<div class="form-group"><label for="${id}">$label</label><select class="form-control" name="${name}" id="${id}">};
     foreach my $button (@$buttons) {
         my $value    = $button->{value};
-        my $selected = $selected == $value ? 'selected="selected"' : '';
+        my $sel_attr = defined($value) && $selected == $value ? 'selected="selected"' : 0;
         my $label    = $button->{text} // $value;
 
-        $s .= qq{ <option value="${value}" ${selected}>${label}</option> };
+        $s .= qq{ <option value="${value}" ${sel_attr}>${label}</option> };
     }
 
     my $error_id    = 'error-' . $id;
