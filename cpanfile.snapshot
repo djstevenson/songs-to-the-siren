@@ -303,14 +303,22 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.12
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.12.tar.gz
+  Cpanel-JSON-XS-4.14
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.14.tar.gz
     provides:
-      Cpanel::JSON::XS 4.12
+      Cpanel::JSON::XS 4.14
       Cpanel::JSON::XS::Type undef
     requirements:
+      Carp 0
+      Config 0
+      Encode 1.9801
+      Exporter 0
       ExtUtils::MakeMaker 0
       Pod::Text 2.08
+      XSLoader 0
+      overload 0
+      strict 0
+      warnings 0
   Crypt-DES-2.07
     pathname: D/DP/DPARIS/Crypt-DES-2.07.tar.gz
     provides:
