@@ -5,8 +5,7 @@ export class FormBase {
     }
 
     getField(name) {
-        const sel = this._fields[name].getSelector()
-        return cy.get(`#${sel}`);
+        return this._fields[name]
     }
 
     getError(name) {
@@ -21,10 +20,18 @@ export class FormBase {
 
     setField(name, value) {
         const field = this.getField(name)
-        field.clear();
-        if (value) {
-            //  field.type(value, {delay: 0})
-            field.fill(value)
+        const type = field.getType()
+        if (type == 'select') {
+            if (value) {
+                field.get().select(value)
+            }
+        }
+        else {
+            const sel = field.get()
+            sel.clear();
+            if (value) {
+                sel.fill(value)
+            }
         }
         return this
     }
