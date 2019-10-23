@@ -47,8 +47,9 @@ sub view {
     my $admin = exists $c->stash->{admin_user};
 
     $c->stash(
-        links  => $song->links->links_by_name,
-        forest => $song->get_comment_forest($admin),
+        links      => $song->links->links_by_name,
+        forest     => $song->get_comment_forest($admin),
+        navigation => $song->get_navigation,
     );
 }
 

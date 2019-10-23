@@ -131,6 +131,47 @@ sub add_link {
     });
 }
 
+# returns {
+#    next => $next_newer_song,
+#    prev => $next_older_song,
+# }
+# Either link can be missing (no prev/next song).
+
+sub get_navigation {
+    my $self = shift;
+
+    my $result = {};
+
+    my $next_song = $self->newer;
+    my $prev_song = $self->older;
+
+    $result->{next} = $next_song if $next_song;
+    $result->{prev} = $prev_song if $prev_song;
+
+    return $result;
+}
+
+sub newer {
+    my $self = shift;
+
+    return $self
+        ->result_source
+        ->resultset
+        ->newer($self)
+        ->where_published
+        ->single;
+}
+
+sub older {
+    my $self = shift;
+
+    return $self
+        ->result_source
+        ->resultset
+        ->older($self)
+        ->where_published
+        ->single;
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
