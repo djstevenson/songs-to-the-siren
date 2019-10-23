@@ -142,11 +142,11 @@ sub get_navigation {
 
     my $result = {};
 
-    my $next_song = $self->newer;
-    my $prev_song = $self->older;
+    my $newer_song = $self->newer;
+    my $older_song = $self->older;
 
-    $result->{next} = $next_song if $next_song;
-    $result->{prev} = $prev_song if $prev_song;
+    $result->{newer} = $newer_song if $newer_song;
+    $result->{older} = $older_song if $older_song;
 
     return $result;
 }
