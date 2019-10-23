@@ -132,10 +132,10 @@ sub add_link {
 }
 
 # returns {
-#    next => $next_newer_song,
-#    prev => $next_older_song,
+#    newer => $next_newer_song,
+#    older => $next_older_song,
 # }
-# Either link can be missing (no prev/next song).
+# Either link can be missing (no older/newer song).
 
 sub get_navigation {
     my $self = shift;
