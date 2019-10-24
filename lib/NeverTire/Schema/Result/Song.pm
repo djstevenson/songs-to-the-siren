@@ -135,20 +135,15 @@ sub add_link {
 #    newer => $next_newer_song,
 #    older => $next_older_song,
 # }
-# Either link can be missing (no older/newer song).
+# Either song can be undef (no older/newer song).
 
 sub get_navigation {
     my $self = shift;
 
-    my $result = {};
-
-    my $newer_song = $self->newer;
-    my $older_song = $self->older;
-
-    $result->{newer} = $newer_song if $newer_song;
-    $result->{older} = $older_song if $older_song;
-
-    return $result;
+    return {
+        newer => $self->newer,
+        older => $self->older,
+    };
 }
 
 sub newer {
