@@ -1,0 +1,8 @@
+<p class="navigation">
+    % if ($navigation->{newer}) {
+        <p>Newer</p>
+    % }
+    % if ($navigation->{older}) {
+        <p>Older</p>
+    % }
+</p>
