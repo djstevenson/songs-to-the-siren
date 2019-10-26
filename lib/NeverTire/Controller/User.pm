@@ -52,8 +52,8 @@ sub login {
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
         if ($user->admin) {
-            # Admin will want to go to song edit page
-            $c->redirect_to('admin_list_songs');
+            # Admin user wants to go do admin index
+            $c->redirect_to('admin_home');
         }
         else {
             # Non-admin back to home page
