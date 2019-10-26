@@ -7,7 +7,6 @@
     <div class="description col-12">
         %= include 'song/_youtube'
         <%== $song->full_html %>
-        %= include 'song/_navigation'
     </div>
     %= include 'song/_comments'
     %= include 'song/_links'
