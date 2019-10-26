@@ -134,6 +134,28 @@ sub by_publication_date {
     });
 }
 
+sub newer {
+    my ($self, $song) = @_;
+
+    return $self->search({
+        id => { '>' => $song->id }
+    }, {
+        order_by => { -asc => 'id' },
+        rows     => 1,
+    });
+}
+
+sub older {
+    my ($self, $song) = @_;
+
+    return $self->search({
+        id => { '<' => $song->id }
+    }, {
+        order_by => { -desc => 'id' },
+        rows     => 1,
+    });
+}
+
 __PACKAGE__->meta->make_immutable;
 1;
 
@@ -245,6 +267,32 @@ Pass '-asc' as the arg if you want oldest first.
 
     $song_rs->by_publication_date;          # Sort desc
     $song_rs->by_publication_date('-asc');  # Sort asc
+
+=item newer
+
+Finds the songs newer than the specified song.
+
+Normally, you'll call this like:
+
+   $rs->newer($song)->where_published->single
+
+There is a short-cut via the song result object which
+does the exact above sequence, call this as:
+
+  $song->newer;
+
+=item older
+
+Finds the songs older than the specified song.
+
+Normally, you'll call this like:
+
+   $rs->older($song)->where_published->single
+
+There is a short-cut via the song result object which
+does the exact above sequence, call this as:
+
+  $song->older;
 
 =back
 

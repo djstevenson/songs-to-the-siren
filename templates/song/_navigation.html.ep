@@ -1,0 +1,8 @@
+<p class="navigation">
+    % if (my $song = $navigation->{newer}) {
+        <p>Next: <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %> by <%= $song->artist %></a></p>
+    % }
+    % if (my $song = $navigation->{older}) {
+        <p>Previous: <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %> by <%= $song->artist %></a></p>
+    % }
+</p>
