@@ -14,13 +14,6 @@
         </div>
     </main>
 
-    <footer>
-        <div class="row">
-            <div class="col-12">
-                Page footer here.
-            </div>
-        </div>
-    </footer>
 </div>
 
 <script type="text/javascript">
