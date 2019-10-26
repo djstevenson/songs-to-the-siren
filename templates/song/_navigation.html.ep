@@ -1,8 +1,8 @@
-<p class="navigation">
+<nav class="col-12">
     % if (my $song = $navigation->{newer}) {
-        <p class="next">&raquo; <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %></a></p>
+        <p class="next float-md-left float-sm-none">&laquo; <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %></a> &laquo;</p>
     % }
     % if (my $song = $navigation->{older}) {
-        <p class="prev">&laquo; <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %></a></p>
+        <p class="prev float-md-right float-sm-none">&raquo; <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %></a> &raquo;</p>
     % }
-</p>
+</nav>

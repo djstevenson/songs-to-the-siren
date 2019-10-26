@@ -11,4 +11,5 @@
     %= include 'song/_comments'
     %= include 'song/_links'
     %= include 'song/_footer'
+    %= include 'song/_navigation'
 </section>

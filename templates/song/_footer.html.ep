@@ -19,5 +19,4 @@
             Last updated at <%= datetime($updated) %>
         </p>
     % }
-    %= include 'song/_navigation'
 </footer>
