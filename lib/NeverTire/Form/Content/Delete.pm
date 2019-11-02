@@ -15,7 +15,7 @@ has content => (
 );
 
 has_button delete_content => ();
-has_button cancel => (style => 'light');
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
