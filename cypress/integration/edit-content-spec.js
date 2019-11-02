@@ -34,6 +34,20 @@ context('Content CRUD tests', () => {
                 .assertTitle('New content')
         })
 
+        it('Can cancel an attempt to create content', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            contentFactory.getNextContent(user, 'a')
+
+            new CreateContentPage()
+                .visit()
+                .cancel()
+
+            new ListContentPage().assertContentCount(1)
+        })
+
         it('Form shows right errors with empty input', () => {
 
             userFactory.getNextLoggedInUser(true)
@@ -123,6 +137,23 @@ context('Content CRUD tests', () => {
                 .visit()
                 .edit(1)
                 .assertTitle(`Edit content: ${content1.getName()}`)
+        })
+
+        it('Can cancel an attempt to edit content', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            contentFactory.getNextContent(user, 'a')
+            const content = new ListContentPage()
+
+            content
+                .visit()
+                .assertContentCount(1)
+                .edit(1)
+                .cancel()
+
+            content.assertContentCount(1)
         })
 
         it('Form shows right errors with empty input', () => {
