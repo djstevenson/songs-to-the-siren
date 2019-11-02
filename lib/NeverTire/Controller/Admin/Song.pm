@@ -35,7 +35,7 @@ sub create {
 
     my $form = $c->form('Song::Create');
     if ($form->process) {
-        $c->flash(msg => 'Song created');
+        $c->flash(msg => 'Song created') if $form->action eq 'created';
 
         $c->redirect_to('admin_list_songs');
     }
@@ -97,7 +97,7 @@ sub edit {
     my $form = $c->form('Song::Edit', song => $song);
     
     if ($form->process) {
-        $c->flash(msg => 'Song updated');
+        $c->flash(msg => 'Song updated') if $form->action eq 'updated';
 
         $c->redirect_to('admin_list_songs');
     }
@@ -110,8 +110,8 @@ sub delete {
     my $c = shift;
 
     my $form = $c->form('Song::Delete', song => $c->stash->{song});
-    if (my $action = $form->process) {
-        $c->flash(msg => $action);
+    if ($form->process) {
+        $c->flash(msg => 'Song deleted') if $form->action eq 'deleted';
         $c->redirect_to('admin_list_songs');
     }
     else {

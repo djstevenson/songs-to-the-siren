@@ -37,15 +37,23 @@ has_field preview => (
 );
 
 has_button update_content => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-	my $user = $self->c->stash->{auth_user};
+    my $update_button = $self->find_button('update_content');
+    if ( $update_button->clicked ) {
+        my $user = $self->c->stash->{auth_user};
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title markdown /);
-	return $user->admin_edit_content($self->content, $fields);
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ title markdown /);
+        $user->admin_edit_content($self->content, $fields);
+        $self->action('updated');
+    }
+
+    return 1;
+
 };
 
 # Prepopulate GET form from the content object

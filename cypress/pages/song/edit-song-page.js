@@ -1,7 +1,7 @@
-import { Admin        } from '../admin'
-import { EditSongForm } from '../../forms/edit-song-form'
+import { EditSongForm  } from '../../forms/edit-song-form'
+import { BaseSong      } from './base-song'
 
-export class EditSongPage extends Admin {
+export class EditSongPage extends BaseSong {
     pageUrl() {
         // TODO Needs song id
         return '/song/n/edit'

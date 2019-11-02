@@ -27,7 +27,7 @@ sub create {
 
     my $form = $c->form('Country::Create');
     if ($form->process) {
-        $c->flash(msg => 'Country created');
+        $c->flash(msg => 'Country created') if $form->action eq 'created';
 
         $c->redirect_to('admin_list_countries');
     }
@@ -68,7 +68,7 @@ sub edit {
     my $form = $c->form('Country::Edit', country => $country);
     
     if ($form->process) {
-        $c->flash(msg => 'Country updated');
+        $c->flash(msg => 'Country updated') if $form->action eq 'updated';
 
         $c->redirect_to('admin_list_countries');
     }
@@ -82,7 +82,7 @@ sub delete {
 
     my $form = $c->form('Country::Delete', country => $c->stash->{country});
     if (my $action = $form->process) {
-        $c->flash(msg => $action);
+        $c->flash(msg => 'Country deleted') if $form->action eq 'deleted';
         $c->redirect_to('admin_list_countries');
     }
     else {

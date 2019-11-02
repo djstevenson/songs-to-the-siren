@@ -2,8 +2,8 @@
 
 import { UserFactory       } from '../support/user-factory'
 import { ContentFactory    } from '../support/content-factory'
-import { CreateContentPage } from '../pages/content/create-content-page'
 import { ListContentPage   } from '../pages/content/list-content-page'
+import { CreateContentPage } from '../pages/content/create-content-page'
 
 const label = 'createcontent';
 const userFactory = new UserFactory(label);
@@ -34,6 +34,19 @@ context('Content CRUD tests', () => {
                 .assertTitle('New content')
         })
 
+        it('Can cancel an attempt to create content', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            contentFactory.getNextContent(user, 'a')
+
+            new CreateContentPage()
+                .visit()
+                .cancel()
+                .assertContentCount(1)
+        })
+
         it('Form shows right errors with empty input', () => {
 
             userFactory.getNextLoggedInUser(true)
@@ -60,8 +73,7 @@ context('Content CRUD tests', () => {
                 .assertContentCount(1)
                 .delete(1)
                 .cancel()
-
-            content.assertContentCount(1)
+                .assertContentCount(1)
         })
 
         it('Can delete content', () => {
@@ -123,6 +135,22 @@ context('Content CRUD tests', () => {
                 .visit()
                 .edit(1)
                 .assertTitle(`Edit content: ${content1.getName()}`)
+        })
+
+        it('Can cancel an attempt to edit content', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            contentFactory.getNextContent(user, 'a')
+            const content = new ListContentPage()
+
+            content
+                .visit()
+                .assertContentCount(1)
+                .edit(1)
+                .cancel()
+                .assertContentCount(1)
         })
 
         it('Form shows right errors with empty input', () => {

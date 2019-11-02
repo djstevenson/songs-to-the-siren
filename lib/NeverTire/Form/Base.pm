@@ -66,19 +66,30 @@ sub process {
 		return;
 	}
 
-	# Get the list of params and filter and validate each one
+	# No validation if the submmit button turns it off
 	my $params = $self->c->req->params;
+	my $selected_button_name = $params->param('submit-button');
+	my $selected_button;
+	foreach my $button (@{$self->form_buttons}) {
+		my $name = $button->name;
+		if ($name eq $selected_button_name) {
+			$button->clicked(1);
+			$selected_button = $button;
+			last;
+		}
+		else {
+			$button->clicked(0);
+		}
+	}
+	die unless $selected_button;
+	return $self->posted if $selected_button->skip_validation;
+
+	# Get the list of params and filter and validate each one
     my $schema = $self->c->schema;
 	foreach my $field (@{$self->form_fields}) {
 		my $name = $field->name;
 		my $value = $params->param($name);
 		$field->process($schema, $value);
-	}
-
-	my $selected_button = $params->param('submit-button');
-	foreach my $button (@{$self->form_buttons}) {
-		my $name = $button->name;
-		$button->clicked( $name eq $selected_button );
 	}
 
 	# Allow extra validation in a subclass
@@ -91,6 +102,12 @@ sub process {
 
 	return $result;
 }
+
+has action => (
+	is          => 'rw',
+	isa         => 'Str',
+	default     => 'cancel',
+);
 
 # Does a linear search of fields. The list is short, so this is good enough.
 sub find_field {
@@ -154,7 +171,7 @@ sub extra_validation{
 
 # Override this.  Be careful with the return value.
 # TODO Document it
-sub posted{
+sub posted {
 	return 1;
 }
 

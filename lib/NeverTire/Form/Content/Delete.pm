@@ -15,7 +15,7 @@ has content => (
 );
 
 has_button delete_content => ();
-has_button cancel => (style => 'light');
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
@@ -23,10 +23,10 @@ override posted => sub {
     my $delete_button = $self->find_button('delete_content');
     if ( $delete_button->clicked ) {
         $self->content->delete;
-        return 'Content deleted';
+        $self->action('deleted');
     }
 
-    return 'No action taken';
+    return 1;
 };
 
 __PACKAGE__->meta->make_immutable;

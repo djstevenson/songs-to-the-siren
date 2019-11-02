@@ -2,8 +2,8 @@
 
 import { UserFactory       } from '../support/user-factory'
 import { CountryFactory    } from '../support/country-factory'
+import { ListCountriesPage   } from '../pages/country/list-countries-page'
 import { CreateCountryPage } from '../pages/country/create-country-page'
-import { ListCountryPage   } from '../pages/country/list-country-page'
 
 const label = 'createcountry';
 const userFactory = new UserFactory(label);
@@ -34,6 +34,17 @@ context('Country CRUD tests', () => {
                 .assertTitle('New country')
         })
 
+        it('Can cancel an attempt to create country', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            new CreateCountryPage()
+                .visit()
+                .cancel()
+                .assertCountryCount(1)
+        })
+
         it('Form shows right errors with empty input', () => {
 
             userFactory.getNextLoggedInUser(true)
@@ -53,7 +64,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
-            const country = new ListCountryPage()
+            const country = new ListCountriesPage()
 
             // Create one country, but count is two as the reset
             // code always creates one with id=1
@@ -62,8 +73,7 @@ context('Country CRUD tests', () => {
                 .assertCountryCount(2)
                 .delete(1)
                 .cancel()
-
-            country.assertCountryCount(2)
+                .assertCountryCount(2)
         })
 
         it('Can delete country', () => {
@@ -72,7 +82,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
-            const country = new ListCountryPage()
+            const country = new ListCountriesPage()
 
             country
                 .visit()
@@ -98,7 +108,7 @@ context('Country CRUD tests', () => {
 
             userFactory.getNextLoggedInUser(true)
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .assertCountryCount(1)
         })
@@ -112,7 +122,7 @@ context('Country CRUD tests', () => {
             const country2 = countryFactory.getNextCountry(user, 'a')
             const country3 = countryFactory.getNextCountry(user, 'b')
 
-            let country = new ListCountryPage().visit().assertCountryCount(4);
+            let country = new ListCountriesPage().visit().assertCountryCount(4);
 
             // In order of creation, newest first
             country.getRow(1).assertText('name', country2.getName())
@@ -129,10 +139,25 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .edit(1)
                 .assertTitle(`Edit country: ${country1.getName()}`)
+        })
+
+        it('Can cancel an attempt to edit country', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            // We should land on the list-countries page
+            const countries = new ListCountriesPage()
+
+            countries
+                .visit()
+                .edit(1)
+                .cancel()
+                .assertCountryCount(1)
         })
 
         it('Form shows right errors with empty input', () => {
@@ -140,7 +165,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             countryFactory.getNextCountry(user, 'a')
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .edit(1)
                 .editCountry({
@@ -160,7 +185,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
-            const listPage = new ListCountryPage().visit()
+            const listPage = new ListCountriesPage().visit()
             
             const newName = 'x' + country1.getName();
             listPage.edit(1).editCountry({ name: newName })

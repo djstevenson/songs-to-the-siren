@@ -1,7 +1,7 @@
-import { Admin           } from '../admin'
 import { EditCountryForm } from '../../forms/edit-country-form'
+import { BaseCountry       } from './base-country'
 
-export class EditCountryPage extends Admin {
+export class EditCountryPage extends BaseCountry {
     pageUrl() {
         // TODO Needs song name
         return '/admin/country/name/edit'

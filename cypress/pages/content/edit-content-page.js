@@ -1,7 +1,7 @@
-import { Admin           } from '../admin'
 import { EditContentForm } from '../../forms/edit-content-form'
+import { BaseContent       } from './base-content'
 
-export class EditContentPage extends Admin {
+export class EditContentPage extends BaseContent {
     pageUrl() {
         // TODO Needs song name
         return '/admin/content/name/edit'

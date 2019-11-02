@@ -1,7 +1,7 @@
-import { Admin             } from '../admin'
 import { CreateContentForm } from '../../forms/create-content-form'
+import { BaseContent       } from './base-content'
 
-export class CreateContentPage extends Admin {
+export class CreateContentPage extends BaseContent {
     pageUrl() {
         return '/admin/content/create'
     }

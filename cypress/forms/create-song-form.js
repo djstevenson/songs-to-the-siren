@@ -15,5 +15,6 @@ export class CreateSongForm extends FormBase {
         this._fields.fullMarkdown    = new FormField('textarea', 'new-song-full-markdown')
 
         this._buttons.submit         = new FormButton('create-song-button')
+        this._buttons.cancel         = new FormButton('cancel-button')
     }
 }

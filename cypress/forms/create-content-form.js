@@ -10,5 +10,6 @@ export class CreateContentForm extends FormBase {
         this._fields.markdown = new FormField('textarea', 'new-content-markdown')
 
         this._buttons.submit  = new FormButton('create-content-button')
+        this._buttons.cancel  = new FormButton('cancel-button')
     }
 }

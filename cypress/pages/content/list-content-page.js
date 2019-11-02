@@ -38,14 +38,14 @@ export class ListContentPage extends Admin {
     }
 
     // Shortcut to hit the edit link in the 'n'th row
-    // Returns the row object
+    // Returns the delete page object
     edit(rowIndex) {
         this.getRow(rowIndex).click('edit')
         return new EditContentPage()
     }
 
     // Shortcut to hit the delete link in the 'n'th row
-    // Returns the row object
+    // Returns the delete page object
     delete(rowIndex) {
         this.getRow(rowIndex).click('delete')
         return new DeleteContentPage()

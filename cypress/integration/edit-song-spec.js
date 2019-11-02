@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
+import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { CreateSongPage } from '../pages/song/create-song-page'
 import { DeleteSongPage } from '../pages/song/delete-song-page'
 import { EditSongPage   } from '../pages/song/edit-song-page'
@@ -109,6 +109,18 @@ context('Song CRUD tests', () => {
                 .assertTitle('New song')
         })
 
+        it('Create song form can be cancelled', () => {
+            cy.resetDatabase()
+
+            const user  = userFactory.getNextLoggedInUser(true)
+            songFactory.getNextSong(user)
+
+            new CreateSongPage()
+                .visit()
+                .cancel()
+                .assertSongCount(1)
+        })
+
         it('Create song form shows right errors with empty input', () => {
             cy.resetDatabase()
 
@@ -135,10 +147,23 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
-            new ListSongsPage().visit().edit(1)
-            
-            new EditSongPage()
+            new ListSongsPage()
+                .visit()
+                .edit(1)
                 .assertTitle(`Edit song: ${song1.getTitle()}`)
+        })
+
+        it('Edit song form can be cancelled', () => {
+            cy.resetDatabase()
+
+            const user  = userFactory.getNextLoggedInUser(true)
+            songFactory.getNextSong(user)
+
+            new ListSongsPage()
+                .visit()
+                .edit(1)
+                .cancel()
+                .assertSongCount(1)
         })
 
         it('Edit song form shows right errors with empty input', () => {
@@ -147,9 +172,9 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             songFactory.getNextSong(user)
 
-            new ListSongsPage().visit().edit(1)
-
-            new EditSongPage()
+            new ListSongsPage()
+                .visit()
+                .edit(1)
                 .editSong({
                     title:           '',
                     artist:          '',
@@ -177,12 +202,10 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
-            const listPage = new ListSongsPage().visit()
-
-            listPage.edit(1)
-
             const newTitle = 'x' + song1.getTitle();
-            new EditSongPage()
+            const listPage = new ListSongsPage().visit()
+            listPage
+                .edit(1)
                 .editSong({ title: newTitle })
             
             listPage.getRow(1).assertText('title', newTitle)
@@ -196,16 +219,15 @@ context('Song CRUD tests', () => {
             const song2 = songFactory.getNextSong(user)
             const song3 = songFactory.getNextSong(user)
 
+            const newTitle = 'x' + song2.getTitle();
             const listPage = new ListSongsPage().visit()
             // Row 1 = song3, row 2 = song2, row 3 = song1
             listPage.getRow(1).assertText('title', song3.getTitle())
             listPage.getRow(2).assertText('title', song2.getTitle())
             listPage.getRow(3).assertText('title', song1.getTitle())
 
-            listPage.edit(2)
-
-            const newTitle = 'x' + song2.getTitle();
-            new EditSongPage()
+            listPage
+                .edit(2)
                 .editSong({ title: newTitle })
             
             // Row 1 = song3, row 2 = song2, row 3 = song1
@@ -214,8 +236,8 @@ context('Song CRUD tests', () => {
             listPage.getRow(3).assertText('title', song1.getTitle())
         })
 
-
-        it('song edit does affect publication status', () => {
+        // TODO Refactor to make this readable! This is a mess
+        it('song edit does affect not publication status', () => {
             cy.resetDatabase()
 
             const user = userFactory.getNextLoggedInUser(true)
@@ -226,8 +248,7 @@ context('Song CRUD tests', () => {
             const row1 = listPage.visit().getRow(1)
             row1
                 .assertUnpublished()
-                .click('edit')
-            
+                .click('edit')            
 
             const newTitle = 'x' + song1.getTitle();
             new EditSongPage()
@@ -236,18 +257,18 @@ context('Song CRUD tests', () => {
             // Check still not published
             row1.assertUnpublished()
 
-            // Now publish it, edit again, and re-check status
-            row1
-                .click('publish')
-                .assertPublished()
-                .click('edit')
+            // // Now publish it, edit again, and re-check status
+            // row1
+            //     .click('publish')
+            //     .assertPublished()
+            //     .click('edit')
 
-            const newTitle2 = 'xy' + song1.getTitle();
-            new EditSongPage()
-                .editSong({ title: newTitle })
+            // const newTitle2 = 'xy' + song1.getTitle();
+            // new EditSongPage()
+            //     .editSong({ title: newTitle })
 
-            // Check still not published
-            row1.assertPublished()
+            // // Check still published
+            // row1.assertPublished()
         })
     })
 
@@ -258,13 +279,12 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
-            const page = new ListSongsPage().visit().assertSongCount(1);
-
-            page.getRow(1).click('delete')
-
-            new DeleteSongPage().cancel()
-
-            page.visit().assertSongCount(1)
+            new ListSongsPage()
+                .visit()
+                .assertSongCount(1)
+                .delete(1)
+                .cancel()
+                .assertSongCount(1)
         })
 
         it('Can delete a published song', () => {

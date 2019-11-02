@@ -92,15 +92,22 @@ has_field full_preview => (
 );
 
 has_button update_song => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-	my $user = $self->c->stash->{auth_user};
+    my $update_button = $self->find_button('update_song');
+    if ( $update_button->clicked ) {
+        my $user = $self->c->stash->{auth_user};
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown /);
-	return $user->admin_edit_song($self->song, $fields);
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown /);
+        $user->admin_edit_song($self->song, $fields);
+        $self->action('updated');
+    }
+
+    return 1;
 };
 
 # Prepopulate GET form from the song object

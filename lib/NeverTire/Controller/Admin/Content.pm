@@ -27,8 +27,7 @@ sub create {
 
     my $form = $c->form('Content::Create');
     if ($form->process) {
-        $c->flash(msg => 'Content created');
-
+        $c->flash(msg => 'New country created') if $form->action eq 'created';
         $c->redirect_to('admin_list_content');
     }
     else {
@@ -68,8 +67,7 @@ sub edit {
     my $form = $c->form('Content::Edit', content => $content);
     
     if ($form->process) {
-        $c->flash(msg => 'Content updated');
-
+        $c->flash(msg => 'Content updated') if $form->action eq 'updated';
         $c->redirect_to('admin_list_content');
     }
     else {
@@ -82,7 +80,7 @@ sub delete {
 
     my $form = $c->form('Content::Delete', content => $c->stash->{content});
     if (my $action = $form->process) {
-        $c->flash(msg => $action);
+        $c->flash(msg => 'Content deleted') if $form->action eq 'deleted';
         $c->redirect_to('admin_list_content');
     }
     else {

@@ -22,15 +22,23 @@ has_field emoji => (
 );
 
 has_button create_country => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-	my $user = $self->c->stash->{auth_user};
+    my $create_button = $self->find_button('create_country');
+    if ( $create_button->clicked ) {
+        my $user = $self->c->stash->{auth_user};
 
+        # Whitelist what we extract from the submitted form
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name emoji /);
-	return $user->admin_create_country($fields);
+        my $fields = $self->form_hash(qw/ name emoji /);
+        $user->admin_create_country($fields);
+        $self->action('created');
+    }
+
+    return 1;
 };
 
 __PACKAGE__->meta->make_immutable;

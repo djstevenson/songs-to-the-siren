@@ -31,7 +31,7 @@ export class Public {
     assertLoggedInAsAdmin(username) {
         cy
             .get('span.user-name').contains(username)
-            .get('a.admin-home-link').contains('ADMIN')
+            .get('a.admin-home-link').contains('Admin home')
         return this
     }
 

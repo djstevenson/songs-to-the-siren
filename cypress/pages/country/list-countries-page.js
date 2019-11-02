@@ -3,7 +3,7 @@ import { ListCountryTable  } from '../../tables/list-country-table'
 import { DeleteCountryPage } from './delete-country-page'
 import { EditCountryPage   } from './edit-country-page'
 
-export class ListCountryPage extends Admin {
+export class ListCountriesPage extends Admin {
 
     pageUrl() {
         return '/admin/country/list'
@@ -38,14 +38,14 @@ export class ListCountryPage extends Admin {
     }
 
     // Shortcut to hit the edit link in the 'n'th row
-    // Returns the row object
+    // Returns the edit page object
     edit(rowIndex) {
         this.getRow(rowIndex).click('edit')
         return new EditCountryPage()
     }
 
     // Shortcut to hit the delete link in the 'n'th row
-    // Returns the row object
+    // Returns the delete page object
     delete(rowIndex) {
         this.getRow(rowIndex).click('delete')
         return new DeleteCountryPage()
