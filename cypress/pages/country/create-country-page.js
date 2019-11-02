@@ -1,5 +1,6 @@
 import { Admin             } from '../admin'
 import { CreateCountryForm } from '../../forms/create-country-form'
+import { ListCountryPage   } from './list-country-page'
 
 export class CreateCountryPage extends Admin {
     pageUrl() {
@@ -15,5 +16,11 @@ export class CreateCountryPage extends Admin {
         this.getForm().enter(args)
     
         return this
+    }
+
+    cancel() {
+        this.getForm().getButton('cancel').click()
+    
+        return new ListCountryPage()
     }
 }

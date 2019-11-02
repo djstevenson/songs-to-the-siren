@@ -42,9 +42,7 @@ context('Country CRUD tests', () => {
             new CreateCountryPage()
                 .visit()
                 .cancel()
-
-            // We should land on the list-countries page
-            new ListCountryPage().assertCountryCount(1)
+                .assertCountryCount(1)
         })
 
         it('Form shows right errors with empty input', () => {
@@ -75,8 +73,7 @@ context('Country CRUD tests', () => {
                 .assertCountryCount(2)
                 .delete(1)
                 .cancel()
-
-            country.assertCountryCount(2)
+                .assertCountryCount(2)
         })
 
         it('Can delete country', () => {
@@ -160,8 +157,7 @@ context('Country CRUD tests', () => {
                 .visit()
                 .edit(1)
                 .cancel()
-            
-            countries.assertCountryCount(1)
+                .assertCountryCount(1)
         })
 
         it('Form shows right errors with empty input', () => {
