@@ -1,8 +1,7 @@
-import { Admin           } from '../admin'
 import { EditContentForm } from '../../forms/edit-content-form'
-import { ListContentPage   } from './list-content-page'
+import { BaseContent       } from './base-content'
 
-export class EditContentPage extends Admin {
+export class EditContentPage extends BaseContent {
     pageUrl() {
         // TODO Needs song name
         return '/admin/content/name/edit'
@@ -17,11 +16,5 @@ export class EditContentPage extends Admin {
         this.getForm().enter(args)
     
         return this
-    }
-
-    cancel() {
-        this.getForm().getButton('cancel').click()
-    
-        return new ListContentPage()
     }
 }

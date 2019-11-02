@@ -2,8 +2,8 @@
 
 import { UserFactory       } from '../support/user-factory'
 import { ContentFactory    } from '../support/content-factory'
-import { CreateContentPage } from '../pages/content/create-content-page'
 import { ListContentPage   } from '../pages/content/list-content-page'
+import { CreateContentPage } from '../pages/content/create-content-page'
 
 const label = 'createcontent';
 const userFactory = new UserFactory(label);
