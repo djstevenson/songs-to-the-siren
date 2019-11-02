@@ -1,8 +1,7 @@
-import { Admin           } from '../admin'
 import { EditCountryForm } from '../../forms/edit-country-form'
-import { ListCountriesPage   } from './list-countries-page'
+import { BaseCountry       } from './base-country'
 
-export class EditCountryPage extends Admin {
+export class EditCountryPage extends BaseCountry {
     pageUrl() {
         // TODO Needs song name
         return '/admin/country/name/edit'
@@ -17,11 +16,5 @@ export class EditCountryPage extends Admin {
         this.getForm().enter(args)
     
         return this
-    }
-
-    cancel() {
-        this.getForm().getButton('cancel').click()
-    
-        return new ListCountriesPage()
     }
 }

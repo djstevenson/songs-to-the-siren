@@ -2,8 +2,8 @@
 
 import { UserFactory       } from '../support/user-factory'
 import { CountryFactory    } from '../support/country-factory'
-import { CreateCountryPage } from '../pages/country/create-country-page'
 import { ListCountriesPage   } from '../pages/country/list-countries-page'
+import { CreateCountryPage } from '../pages/country/create-country-page'
 
 const label = 'createcountry';
 const userFactory = new UserFactory(label);
