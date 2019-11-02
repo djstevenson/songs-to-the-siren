@@ -1,8 +1,7 @@
-import { Admin          } from '../admin'
 import { CreateSongForm } from '../../forms/create-song-form'
-import { ListSongsPage  } from './list-songs-page'
+import { BaseSong       } from './base-song'
 
-export class CreateSongPage extends Admin {
+export class CreateSongPage extends BaseSong {
     pageUrl() {
         return '/admin/song/create'
     }
@@ -16,11 +15,5 @@ export class CreateSongPage extends Admin {
         this.getForm().enter(args)
     
         return this
-    }
-
-    cancel() {
-        this.getForm().getButton('cancel').click()
-    
-        return new ListSongsPage()
     }
 }
