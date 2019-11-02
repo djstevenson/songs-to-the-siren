@@ -113,7 +113,7 @@ context('Song CRUD tests', () => {
             cy.resetDatabase()
 
             const user  = userFactory.getNextLoggedInUser(true)
-            const song1 = songFactory.getNextSong(user)
+            songFactory.getNextSong(user)
 
             new CreateSongPage()
                 .visit()
@@ -154,6 +154,20 @@ context('Song CRUD tests', () => {
             
             new EditSongPage()
                 .assertTitle(`Edit song: ${song1.getTitle()}`)
+        })
+
+        it('Edit song form can be cancelled', () => {
+            cy.resetDatabase()
+
+            const user  = userFactory.getNextLoggedInUser(true)
+            songFactory.getNextSong(user)
+
+            new ListSongsPage().visit().edit(1)
+            new EditSongPage().cancel()
+
+            // Should land on lists-songs page
+            // Check cancel didn't create/delete anything
+            new ListSongsPage().assertSongCount(1)
         })
 
         it('Edit song form shows right errors with empty input', () => {
