@@ -148,6 +148,22 @@ context('Country CRUD tests', () => {
                 .assertTitle(`Edit country: ${country1.getName()}`)
         })
 
+        it('Can cancel an attempt to edit country', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            // We should land on the list-countries page
+            const countries = new ListCountryPage()
+
+            countries
+                .visit()
+                .edit(1)
+                .cancel()
+            
+            countries.assertCountryCount(1)
+        })
+
         it('Form shows right errors with empty input', () => {
 
             const user = userFactory.getNextLoggedInUser(true)
