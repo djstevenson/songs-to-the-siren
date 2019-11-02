@@ -109,6 +109,21 @@ context('Song CRUD tests', () => {
                 .assertTitle('New song')
         })
 
+        it('Create song form can be cancelled', () => {
+            cy.resetDatabase()
+
+            const user  = userFactory.getNextLoggedInUser(true)
+            const song1 = songFactory.getNextSong(user)
+
+            new CreateSongPage()
+                .visit()
+                .cancel()
+            
+            // Should land on lists-songs page
+            // Check cancel didn't create/delete anything
+            new ListSongsPage().assertSongCount(1)
+        })
+
         it('Create song form shows right errors with empty input', () => {
             cy.resetDatabase()
 

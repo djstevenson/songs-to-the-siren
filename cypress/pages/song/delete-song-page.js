@@ -17,10 +17,4 @@ export class DeleteSongPage extends Admin {
     
         return this
     }
-
-    cancel() {
-        this.getForm().getButton('cancel').click()
-    
-        return this
-    }
 }
