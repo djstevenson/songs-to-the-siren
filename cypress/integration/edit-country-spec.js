@@ -34,6 +34,19 @@ context('Country CRUD tests', () => {
                 .assertTitle('New country')
         })
 
+        it('Can cancel an attempt to create country', () => {
+            cy.resetDatabase()
+
+            const user = userFactory.getNextLoggedInUser(true)
+
+            new CreateCountryPage()
+                .visit()
+                .cancel()
+
+            // We should land on the list-countries page
+            new ListCountryPage().assertCountryCount(1)
+        })
+
         it('Form shows right errors with empty input', () => {
 
             userFactory.getNextLoggedInUser(true)
