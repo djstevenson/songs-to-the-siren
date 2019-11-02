@@ -83,6 +83,7 @@ has_field full_preview => (
 );
 
 has_button create_song => ();
+has_button cancel => (style => 'light');
 
 override posted => sub {
 	my $self = shift;

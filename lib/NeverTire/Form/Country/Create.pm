@@ -22,6 +22,7 @@ has_field emoji => (
 );
 
 has_button create_country => ();
+has_button cancel => (style => 'light');
 
 override posted => sub {
 	my $self = shift;

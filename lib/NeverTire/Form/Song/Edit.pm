@@ -92,6 +92,7 @@ has_field full_preview => (
 );
 
 has_button update_song => ();
+has_button cancel => (style => 'light');
 
 override posted => sub {
 	my $self = shift;

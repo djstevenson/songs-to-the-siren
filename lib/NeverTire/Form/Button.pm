@@ -59,5 +59,11 @@ has clicked => (
     default     => 0,
 );
 
+has skip_validation => (
+    is          => 'rw',
+    isa         => 'Bool',
+    default     => 0,
+);
+
 __PACKAGE__->meta->make_immutable;
 1;
