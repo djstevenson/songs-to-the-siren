@@ -83,16 +83,22 @@ has_field full_preview => (
 );
 
 has_button create_song => ();
-has_button cancel => (style => 'light');
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-	my $user = $self->c->stash->{auth_user};
+    my $create_button = $self->find_button('create_song');
+    if ( $create_button->clicked ) {
+        my $user = $self->c->stash->{auth_user};
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ title artist album image country_id released_at summary_markdown full_markdown /);
-	return $user->admin_create_song($fields);
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ title artist album image country_id released_at summary_markdown full_markdown /);
+        $user->admin_create_song($fields);
+        $self->action('created');
+    }
+
+    return 1;
 };
 
 __PACKAGE__->meta->make_immutable;
