@@ -3,7 +3,7 @@
 import { UserFactory       } from '../support/user-factory'
 import { CountryFactory    } from '../support/country-factory'
 import { CreateCountryPage } from '../pages/country/create-country-page'
-import { ListCountryPage   } from '../pages/country/list-country-page'
+import { ListCountriesPage   } from '../pages/country/list-countries-page'
 
 const label = 'createcountry';
 const userFactory = new UserFactory(label);
@@ -64,7 +64,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
-            const country = new ListCountryPage()
+            const country = new ListCountriesPage()
 
             // Create one country, but count is two as the reset
             // code always creates one with id=1
@@ -82,7 +82,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
-            const country = new ListCountryPage()
+            const country = new ListCountriesPage()
 
             country
                 .visit()
@@ -108,7 +108,7 @@ context('Country CRUD tests', () => {
 
             userFactory.getNextLoggedInUser(true)
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .assertCountryCount(1)
         })
@@ -122,7 +122,7 @@ context('Country CRUD tests', () => {
             const country2 = countryFactory.getNextCountry(user, 'a')
             const country3 = countryFactory.getNextCountry(user, 'b')
 
-            let country = new ListCountryPage().visit().assertCountryCount(4);
+            let country = new ListCountriesPage().visit().assertCountryCount(4);
 
             // In order of creation, newest first
             country.getRow(1).assertText('name', country2.getName())
@@ -139,7 +139,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .edit(1)
                 .assertTitle(`Edit country: ${country1.getName()}`)
@@ -151,7 +151,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             // We should land on the list-countries page
-            const countries = new ListCountryPage()
+            const countries = new ListCountriesPage()
 
             countries
                 .visit()
@@ -165,7 +165,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             countryFactory.getNextCountry(user, 'a')
 
-            new ListCountryPage()
+            new ListCountriesPage()
                 .visit()
                 .edit(1)
                 .editCountry({
@@ -185,7 +185,7 @@ context('Country CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
-            const listPage = new ListCountryPage().visit()
+            const listPage = new ListCountriesPage().visit()
             
             const newName = 'x' + country1.getName();
             listPage.edit(1).editCountry({ name: newName })

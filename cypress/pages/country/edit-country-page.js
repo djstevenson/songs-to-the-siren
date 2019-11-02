@@ -1,6 +1,6 @@
 import { Admin           } from '../admin'
 import { EditCountryForm } from '../../forms/edit-country-form'
-import { ListCountryPage   } from './list-country-page'
+import { ListCountriesPage   } from './list-countries-page'
 
 export class EditCountryPage extends Admin {
     pageUrl() {
@@ -22,6 +22,6 @@ export class EditCountryPage extends Admin {
     cancel() {
         this.getForm().getButton('cancel').click()
     
-        return new ListCountryPage()
+        return new ListCountriesPage()
     }
 }

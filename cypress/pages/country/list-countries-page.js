@@ -3,7 +3,7 @@ import { ListCountryTable  } from '../../tables/list-country-table'
 import { DeleteCountryPage } from './delete-country-page'
 import { EditCountryPage   } from './edit-country-page'
 
-export class ListCountryPage extends Admin {
+export class ListCountriesPage extends Admin {
 
     pageUrl() {
         return '/admin/country/list'
