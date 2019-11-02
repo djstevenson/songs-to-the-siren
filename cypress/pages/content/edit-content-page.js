@@ -1,5 +1,6 @@
 import { Admin           } from '../admin'
 import { EditContentForm } from '../../forms/edit-content-form'
+import { ListContentPage   } from './list-content-page'
 
 export class EditContentPage extends Admin {
     pageUrl() {
@@ -16,5 +17,11 @@ export class EditContentPage extends Admin {
         this.getForm().enter(args)
     
         return this
+    }
+
+    cancel() {
+        this.getForm().getButton('cancel').click()
+    
+        return new ListContentPage()
     }
 }

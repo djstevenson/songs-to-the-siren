@@ -44,8 +44,7 @@ context('Content CRUD tests', () => {
             new CreateContentPage()
                 .visit()
                 .cancel()
-
-            new ListContentPage().assertContentCount(1)
+                .assertContentCount(1)
         })
 
         it('Form shows right errors with empty input', () => {
@@ -74,8 +73,7 @@ context('Content CRUD tests', () => {
                 .assertContentCount(1)
                 .delete(1)
                 .cancel()
-
-            content.assertContentCount(1)
+                .assertContentCount(1)
         })
 
         it('Can delete content', () => {
@@ -152,8 +150,7 @@ context('Content CRUD tests', () => {
                 .assertContentCount(1)
                 .edit(1)
                 .cancel()
-
-            content.assertContentCount(1)
+                .assertContentCount(1)
         })
 
         it('Form shows right errors with empty input', () => {

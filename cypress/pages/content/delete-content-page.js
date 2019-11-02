@@ -1,5 +1,6 @@
-import { Admin             } from '../admin'
 import { DeleteContentForm } from '../../forms/delete-content-form'
+import { Admin             } from '../admin'
+import { ListContentPage   } from './list-content-page'
 
 export class DeleteContentPage extends Admin {
     constructor() {
@@ -16,6 +17,12 @@ export class DeleteContentPage extends Admin {
     cancel() {
         this.getForm().getButton('cancel').click()
     
-        return this
+        return new ListContentPage()
+    }
+
+    cancel() {
+        this.getForm().getButton('cancel').click()
+    
+        return new ListContentPage()
     }
 }
