@@ -1,5 +1,6 @@
 import { Admin          } from '../admin'
 import { DeleteSongForm } from '../../forms/delete-song-form'
+import { ListSongsPage  } from './list-songs-page'
 
 export class DeleteSongPage extends Admin {
     constructor(songId) {
@@ -16,5 +17,11 @@ export class DeleteSongPage extends Admin {
         this.getForm().enter({})
     
         return this
+    }
+
+    cancel() {
+        this.getForm().getButton('cancel').click()
+    
+        return new ListSongsPage()
     }
 }

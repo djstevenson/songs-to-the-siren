@@ -1,5 +1,6 @@
 import { Admin          } from '../admin'
 import { CreateSongForm } from '../../forms/create-song-form'
+import { ListSongsPage  } from './list-songs-page'
 
 export class CreateSongPage extends Admin {
     pageUrl() {
@@ -15,5 +16,11 @@ export class CreateSongPage extends Admin {
         this.getForm().enter(args)
     
         return this
+    }
+
+    cancel() {
+        this.getForm().getButton('cancel').click()
+    
+        return new ListSongsPage()
     }
 }

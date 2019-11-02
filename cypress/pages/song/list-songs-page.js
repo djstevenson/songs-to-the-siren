@@ -1,5 +1,7 @@
 import { Admin          } from '../admin'
 import { ListSongsTable } from '../../tables/list-songs-table'
+import { DeleteSongPage } from './delete-song-page'
+import { EditSongPage   } from './edit-song-page'
 
 export class ListSongsPage extends Admin {
 
@@ -36,14 +38,16 @@ export class ListSongsPage extends Admin {
     }
 
     // Shortcut to hit the edit link in the 'n'th row
-    // Returns the row object
+    // Returns the edit page object
     edit(rowIndex) {
-        return this.getRow(rowIndex).click('edit')
+        this.getRow(rowIndex).click('edit')
+        return new EditSongPage()
     }
 
     // Shortcut to hit the delete link in the 'n'th row
-    // Returns the row object
+    // Returns the delete page object
     delete(rowIndex) {
-        return this.getRow(rowIndex).click('delete')
+        this.getRow(rowIndex).click('delete')
+        return new DeleteSongPage()
     }
 }
