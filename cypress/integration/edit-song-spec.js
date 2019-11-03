@@ -46,22 +46,24 @@ context('Song CRUD tests', () => {
             const song2 = songFactory.getNextSong(user)
             const song3 = songFactory.getNextSong(user)
 
-            let page = new ListSongsPage().visit().assertSongCount(3);
-
             // In order of creation, newest first
-            page.getRow(1).assertText('title', song3.getTitle())
-            page.getRow(2).assertText('title', song2.getTitle())
-            page.getRow(3).assertText('title', song1.getTitle())
+            let page = new ListSongsPage()
+                .visit()
+                .assertSongCount(3)
+                .assertSongTitle(1, song3.getTitle())
+                .assertSongTitle(2, song2.getTitle())
+                .assertSongTitle(3, song1.getTitle())
 
             // Publish two songs and check order remains the same
             song1.publish();
             song3.publish();
 
-            page = new ListSongsPage().visit().assertSongCount(3)
-
-            page.getRow(1).assertText('title', song3.getTitle()).assertPublished()
-            page.getRow(2).assertText('title', song2.getTitle()).assertUnpublished()
-            page.getRow(3).assertText('title', song1.getTitle()).assertPublished()
+            page
+                .visit()
+                .assertSongCount(3)
+                .assertSongTitle(1, song3.getTitle())
+                .assertSongTitle(2, song2.getTitle())
+                .assertSongTitle(3, song1.getTitle())
         })
 
 
@@ -73,28 +75,30 @@ context('Song CRUD tests', () => {
 
             const user = userFactory.getNextLoggedInUser(true)
 
-            const song1 = songFactory.getNextSong(user)
-            const song2 = songFactory.getNextSong(user)
-            const page = new ListSongsPage().visit().assertSongCount(2);
+            songFactory.getNextSong(user)
+            songFactory.getNextSong(user)
 
-            // Both songs should be unpublished, so have 'show' links
-            const row1 = page.getRow(1).assertUnpublished()
-            const row2 = page.getRow(2).assertUnpublished()
+            // Both songs should be unpublished
+            new ListSongsPage()
+                .visit()
+                .assertSongCount(2)
+                .assertSongUnpublished(1)
+                .assertSongUnpublished(2)
 
             // Publish the 2nd one and re-check
-            row2.click('publish')
-            row1.assertUnpublished()
-            row2.assertPublished()
+                .publishSong(2)
+                .assertSongUnpublished(1)
+                .assertSongPublished(2)
 
             // Publish the 1st one and re-check
-            row1.click('publish')
-            row1.assertPublished()
-            row2.assertPublished()
+                .publishSong(1)
+                .assertSongPublished(1)
+                .assertSongPublished(2)
 
             // Check that we can unpublish too
-            row2.click('publish')
-            row1.assertPublished()
-            row2.assertUnpublished()
+                .unpublishSong(2)
+                .assertSongPublished(1)
+                .assertSongUnpublished(2)
 
         })
     })

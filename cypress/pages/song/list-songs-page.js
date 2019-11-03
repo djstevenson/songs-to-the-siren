@@ -14,13 +14,6 @@ export class ListSongsPage extends Admin {
         this._table = new ListSongsTable()
     }
 
-    clickNewSongLink() {
-        this.visit()
-        cy.contains('New song').click()
-
-        return this
-    }
-
     assertEmpty() {
         this
             .getTable()
@@ -49,5 +42,42 @@ export class ListSongsPage extends Admin {
     delete(rowIndex) {
         this.getRow(rowIndex).click('delete')
         return new DeleteSongPage()
+    }
+
+    // Shortcut to assert the title of the song in the 'n'th row
+    // Returns this page object, for chaining tests
+    assertSongTitle(rowIndex, expectedTitle) {
+        this.getRow(rowIndex).assertText('title', expectedTitle)
+        return this
+    }
+
+    // Shortcut to assert the song in the 'n'th row is unpublished
+    // Returns this page object, for chaining tests
+    assertSongUnpublished(rowIndex) {
+        this.getRow(rowIndex).assertUnpublished()
+        return this
+    }
+
+    // Shortcut to assert the song in the 'n'th row is published
+    // Returns this page object, for chaining tests
+    assertSongPublished(rowIndex) {
+        this.getRow(rowIndex).assertPublished()
+        return this
+    }
+
+    // Shortcut to publish the song in the 'n'th row
+    // Returns this page object, for chaining
+    publishSong(rowIndex) {
+        this.assertSongUnpublished(rowIndex)
+        this.getRow(rowIndex).click('publish')
+        return this
+    }
+
+    // Shortcut to unpublish the song in the 'n'th row
+    // Returns this page object, for chaining
+    unpublishSong(rowIndex) {
+        this.assertSongPublished(rowIndex)
+        this.getRow(rowIndex).click('publish')
+        return this
     }
 }
