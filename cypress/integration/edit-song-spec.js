@@ -11,19 +11,6 @@ const label = 'listsong';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
-// Create songs via the form rather than
-// the test-mode shortcut as, really, we're
-// testing the admin UI here.
-function createSong() {
-    const song = songFactory.getNext()
-
-    new CreateSongPage()
-        .visit()
-        .createSong(song.asArgs())
-
-    return song
-}
-
 context('Song CRUD tests', () => {
 
     describe('List-songs ordering etc', () => {
@@ -85,17 +72,17 @@ context('Song CRUD tests', () => {
                 .assertSongUnpublished(1)
                 .assertSongUnpublished(2)
 
-            // Publish the 2nd one and re-check
+                // Publish the 2nd one and re-check
                 .publishSong(2)
                 .assertSongUnpublished(1)
                 .assertSongPublished(2)
 
-            // Publish the 1st one and re-check
+                // Publish the 1st one and re-check
                 .publishSong(1)
                 .assertSongPublished(1)
                 .assertSongPublished(2)
 
-            // Check that we can unpublish too
+                // Check that we can unpublish too
                 .unpublishSong(2)
                 .assertSongPublished(1)
                 .assertSongUnpublished(2)
