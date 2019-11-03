@@ -242,30 +242,23 @@ context('Song CRUD tests', () => {
 
             const listPage = new ListSongsPage()
 
-            const row1 = listPage.visit().getRow(1)
-            row1
-                .assertUnpublished()
-                .click('edit')            
+            listPage
+                .visit()
+                .assertSongUnpublished(1)
+                .edit(1)
 
             const newTitle = 'x' + song1.getTitle();
-            new EditSongPage()
-                .editSong({ title: newTitle })
+            new EditSongPage().editSong({ title: newTitle })
 
-            // Check still not published
-            row1.assertUnpublished()
+            // Now publish it, edit again, and re-check status
+            const newTitle2 = 'xx' + song1.getTitle();
+            listPage
+                .publishSong(1)
+                .assertSongPublished(1)
+                .edit(1)
+                .editSong({ title: newTitle2 })
 
-            // // Now publish it, edit again, and re-check status
-            // row1
-            //     .click('publish')
-            //     .assertPublished()
-            //     .click('edit')
-
-            // const newTitle2 = 'xy' + song1.getTitle();
-            // new EditSongPage()
-            //     .editSong({ title: newTitle })
-
-            // // Check still published
-            // row1.assertPublished()
+            listPage.assertSongPublished(1)
         })
     })
 
@@ -290,11 +283,13 @@ context('Song CRUD tests', () => {
             const user = userFactory.getNextLoggedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
-            const page = new ListSongsPage().visit().assertSongCount(1);
+            const page = new ListSongsPage()
+                .visit()
+                .assertSongCount(1)
 
-            page.getRow(1).click('publish').click('delete')
-
-            new DeleteSongPage().deleteSong()
+            page
+                .delete(1)    // Requests delete form
+                .deleteSong() // Hits confirm
 
             page.assertEmpty()
         })
@@ -306,19 +301,18 @@ context('Song CRUD tests', () => {
 
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
-            const page = new ListSongsPage().visit().assertSongCount(2);
+            const page = new ListSongsPage()
+                .visit()
+                .assertSongCount(2)
+                .assertSongTitle(1, song2.getTitle()) // song 2 now in row 1
 
-            // song 2 now in row 1
-            page.getRow(1).assertText('title', song2.getTitle())
+            page
+                .delete(1)
+                .deleteSong()
 
-            page.delete(1)
-
-            new DeleteSongPage().deleteSong()
-
-            page.assertSongCount(1)
-
-            // song 1 now in row 1
-            page.getRow(1).assertText('title', song1.getTitle())
+            page
+                .assertSongCount(1)
+                .assertSongTitle(1, song1.getTitle()) // song 1 now in row 1
         })
 
     })
