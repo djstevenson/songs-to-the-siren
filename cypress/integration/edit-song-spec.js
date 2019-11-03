@@ -198,8 +198,9 @@ context('Song CRUD tests', () => {
             listPage
                 .edit(1)
                 .editSong({ title: newTitle })
-            
-            listPage.getRow(1).assertText('title', newTitle)
+
+            listPage
+                .assertSongTitle(1, newTitle)
         })
 
         it('song edit does not affect position in song list', () => {
@@ -211,20 +212,25 @@ context('Song CRUD tests', () => {
             const song3 = songFactory.getNextSong(user)
 
             const newTitle = 'x' + song2.getTitle();
-            const listPage = new ListSongsPage().visit()
-            // Row 1 = song3, row 2 = song2, row 3 = song1
-            listPage.getRow(1).assertText('title', song3.getTitle())
-            listPage.getRow(2).assertText('title', song2.getTitle())
-            listPage.getRow(3).assertText('title', song1.getTitle())
+            const listPage = new ListSongsPage()
+                .visit()
+                .assertSongCount(3)
+                .assertSongTitle(1, song3.getTitle())
+                .assertSongTitle(2, song2.getTitle())
+                .assertSongTitle(3, song1.getTitle())
 
+            // Edit the title of song 2
             listPage
                 .edit(2)
-                .editSong({ title: newTitle })
-            
+                .editSong({ title: newTitle });
+
             // Row 1 = song3, row 2 = song2, row 3 = song1
-            listPage.getRow(1).assertText('title', song3.getTitle())
-            listPage.getRow(2).assertText('title', newTitle)
-            listPage.getRow(3).assertText('title', song1.getTitle())
+            listPage
+                .visit()
+                .assertSongCount(3)
+                .assertSongTitle(1, song3.getTitle())
+                .assertSongTitle(2, newTitle)
+                .assertSongTitle(3, song1.getTitle())
         })
 
         // TODO Refactor to make this readable! This is a mess
