@@ -3,6 +3,7 @@
 
 
 <section class="song row">
+    %= include 'song/_navigation'
     %= include 'song/_header'
     <div class="description col-12">
         %= include 'song/_youtube'
