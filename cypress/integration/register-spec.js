@@ -77,7 +77,7 @@ context('Registration tests', () => {
     describe('Register with good details succeeds', () => {
         it('registering does not sign in user', () => {
             userFactory.getNextRegistered()['page']
-                .assertLoggedOut();
+                .assertSignedOut();
         })
         it('registering shows a "success" response', () => {
             userFactory.getNextRegistered()['page']

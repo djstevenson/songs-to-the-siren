@@ -12,7 +12,7 @@ export class Public {
         return this
     }
 
-    assertLoggedOut() {
+    assertSignedOut() {
         cy.get('a.sign-in-link').contains('Sign in')
         return this
     }

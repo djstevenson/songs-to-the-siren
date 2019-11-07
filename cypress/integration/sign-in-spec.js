@@ -72,7 +72,7 @@ context('Sign in tests', () => {
                 .visit()
                 .signIn(user.getBadName(), user.getPassword())
                 .assertFormError('name', 'Name and/or password incorrect')
-                .assertLoggedOut()
+                .assertSignedOut()
 
         })
         it('shows right error on Sign in attempt with wrong password', () => {
@@ -82,7 +82,7 @@ context('Sign in tests', () => {
                 .visit()
                 .signIn(user.getName(), user.getBadPassword())
                 .assertFormError('name', 'Name and/or password incorrect')
-                .assertLoggedOut()
+                .assertSignedOut()
 
         })
         it('shows right error on Sign in attempt with wrong username AND password', () => {
@@ -92,7 +92,7 @@ context('Sign in tests', () => {
                 .visit()
                 .signIn(user.getBadName(), user.getBadPassword())
                 .assertFormError('name', 'Name and/or password incorrect')
-                .assertLoggedOut()
+                .assertSignedOut()
 
         })
     })

@@ -11,7 +11,7 @@ context('Admin user links to song-list', () => {
         it('link exists', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             // Should go to home page which has admin link
             // Click on it to go to song list which also has same link

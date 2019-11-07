@@ -15,7 +15,7 @@ context('Password reset confirmation', () => {
             user
                 .requestPasswordReset()
                 .confirmReset()
-                .assertLoggedOut()
+                .assertSignedOut()
             
             const oldPassword = user.getPassword()
             const newPassword = `x${oldPassword}`

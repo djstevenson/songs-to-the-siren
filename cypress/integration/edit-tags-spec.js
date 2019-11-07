@@ -12,7 +12,7 @@ const songFactory = new SongFactory(label)
 function createSongEditTags() {
     cy.resetDatabase()
 
-    const user = userFactory.getNextLoggedInUser(true)
+    const user = userFactory.getNextSignedInUser(true)
     const song1 = songFactory.getNextSong(user)
 
     new ListSongsPage()

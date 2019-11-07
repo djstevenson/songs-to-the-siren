@@ -27,7 +27,7 @@ context('Country CRUD tests', () => {
         it('Create country page has right title', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateCountryPage()
                 .visit()
@@ -37,7 +37,7 @@ context('Country CRUD tests', () => {
         it('Can cancel an attempt to create country', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             new CreateCountryPage()
                 .visit()
@@ -47,7 +47,7 @@ context('Country CRUD tests', () => {
 
         it('Form shows right errors with empty input', () => {
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateCountryPage()
                 .visit()
@@ -61,7 +61,7 @@ context('Country CRUD tests', () => {
         it('Can cancel an attempt to delete country', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
             const country = new ListCountriesPage()
@@ -79,7 +79,7 @@ context('Country CRUD tests', () => {
         it('Can delete country', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
             const country = new ListCountriesPage()
@@ -106,7 +106,7 @@ context('Country CRUD tests', () => {
         it('Country list starts empty apart from test data', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new ListCountriesPage()
                 .visit()
@@ -116,7 +116,7 @@ context('Country CRUD tests', () => {
         it('shows country in name order', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const country1 = countryFactory.getNextCountry(user, 'c')
             const country2 = countryFactory.getNextCountry(user, 'a')
@@ -136,7 +136,7 @@ context('Country CRUD tests', () => {
         it('Edit country page has right title', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
             new ListCountriesPage()
@@ -148,7 +148,7 @@ context('Country CRUD tests', () => {
         it('Can cancel an attempt to edit country', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             // We should land on the list-countries page
             const countries = new ListCountriesPage()
@@ -162,7 +162,7 @@ context('Country CRUD tests', () => {
 
         it('Form shows right errors with empty input', () => {
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             countryFactory.getNextCountry(user, 'a')
 
             new ListCountriesPage()
@@ -182,7 +182,7 @@ context('Country CRUD tests', () => {
         it('new country shows up in country list', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
             const listPage = new ListCountriesPage().visit()

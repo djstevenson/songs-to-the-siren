@@ -17,7 +17,7 @@ context('Song CRUD tests', () => {
         it('Song list starts empty', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new ListSongsPage()
                 .visit()
@@ -27,7 +27,7 @@ context('Song CRUD tests', () => {
         it('shows songs in creation order, regardless of publication status', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
@@ -60,7 +60,7 @@ context('Song CRUD tests', () => {
         it('Can publish/unpublish songs from the song list', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             songFactory.getNextSong(user)
             songFactory.getNextSong(user)
@@ -93,7 +93,7 @@ context('Song CRUD tests', () => {
     describe('Create form validation', () => {
         it('Create song page has right title', () => {
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -103,7 +103,7 @@ context('Song CRUD tests', () => {
         it('Create song form can be cancelled', () => {
             cy.resetDatabase()
 
-            const user  = userFactory.getNextLoggedInUser(true)
+            const user  = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
 
             new CreateSongPage()
@@ -115,7 +115,7 @@ context('Song CRUD tests', () => {
         it('Create song form shows right errors with empty input', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateSongPage()
                 .visit()
@@ -135,7 +135,7 @@ context('Song CRUD tests', () => {
         it('Edit song page has right title', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
             new ListSongsPage()
@@ -147,7 +147,7 @@ context('Song CRUD tests', () => {
         it('Edit song form can be cancelled', () => {
             cy.resetDatabase()
 
-            const user  = userFactory.getNextLoggedInUser(true)
+            const user  = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
 
             new ListSongsPage()
@@ -160,7 +160,7 @@ context('Song CRUD tests', () => {
         it('Edit song form shows right errors with empty input', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
 
             new ListSongsPage()
@@ -190,7 +190,7 @@ context('Song CRUD tests', () => {
         it('new song title shows up in song list', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
             const newTitle = 'x' + song1.getTitle();
@@ -206,7 +206,7 @@ context('Song CRUD tests', () => {
         it('song edit does not affect position in song list', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
             const song3 = songFactory.getNextSong(user)
@@ -237,7 +237,7 @@ context('Song CRUD tests', () => {
         it('song edit does affect not publication status', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
 
             const listPage = new ListSongsPage()
@@ -266,7 +266,7 @@ context('Song CRUD tests', () => {
         it('Can cancel an attempt to delete a song', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
             new ListSongsPage()
@@ -280,7 +280,7 @@ context('Song CRUD tests', () => {
         it('Can delete a published song', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
             const page = new ListSongsPage()
@@ -297,7 +297,7 @@ context('Song CRUD tests', () => {
         it('Can delete an unpublished song', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const song1 = songFactory.getNextSong(user)
             const song2 = songFactory.getNextSong(user)
