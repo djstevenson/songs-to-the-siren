@@ -3,7 +3,7 @@
 import { SignInPage   } from '../pages/user/sign-in-page'
 import { UserFactory  } from '../support/user-factory'
 
-const userFactory = new UserFactory('logintest');
+const userFactory = new UserFactory('signintest');
 
 context('Sign in tests', () => {
     describe('Sign in page looks right', () => {
@@ -59,12 +59,12 @@ context('Sign in tests', () => {
             new SignInPage()
                 .visit()
                 .signIn(user.getName(), user.getPassword())
-                .assertLoggedInAs(user.getName())
+                .assertSignedInAs(user.getName())
 
         })
     })
 
-    describe('Logins with bad credentials fail', () => {
+    describe('Signs in with bad credentials fail', () => {
         it('shows right error on Sign in attempt with wrong username', () => {
             const user = userFactory.getNextRegisteredUser()
 

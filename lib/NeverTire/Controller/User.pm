@@ -9,7 +9,7 @@ sub add_routes {
     $u->route('/register')->name('register')->via('GET', 'POST')->to(action => 'register');
     $u->route('/registered')->name('registered')->via('GET')->to(action => 'registered');
     $u->route('/sign_in')->name('sign_in')->via('GET', 'POST')->to(action => 'sign_in');
-    $u->route('/logout')->name('logout')->via('GET')->to(action => 'logout');
+    $u->route('/sign_out')->name('sign_out')->via('GET')->to(action => 'sign_out');
     $u->route('/confirmed')->name('confirmed')->via('GET')->to(action => 'confirmed');
     $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
 
@@ -66,7 +66,7 @@ sub sign_in {
     }
 }
 
-sub logout {
+sub sign_out {
     my $c = shift;
 
     delete $c->session->{user};

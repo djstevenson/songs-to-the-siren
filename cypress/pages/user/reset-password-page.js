@@ -18,8 +18,8 @@ export class ResetPasswordPage extends Public {
         return this
     }
 
-    clickLogin() {
-        cy.contains("Login").click()
+    clickSignIn() {
+        cy.contains("Sign in").click()
         return new SignInPage();
     }
 }

@@ -41,7 +41,7 @@ context('Forgot-name form tests', () => {
                 .visit()
                 .forgotName(user.getEmail())
                 .assertFlash('Name reminder')
-                .assertNotification('Name reminder', 'If there is a user with that email address, a login name reminder has been sent by email.')
+                .assertNotification('Name reminder', 'If there is a user with that email address, a user name reminder has been sent by email.')
 
             user.assertHasEmail('name_reminder')
         })
@@ -54,7 +54,7 @@ context('Forgot-name form tests', () => {
                 .visit()
                 .forgotName(user.getBadEmail())
                 .assertFlash('Name reminder')
-                .assertNotification('Name reminder', 'If there is a user with that email address, a login name reminder has been sent by email.')
+                .assertNotification('Name reminder', 'If there is a user with that email address, a user name reminder has been sent by email.')
 
             user.assertHasNoEmail('name_reminder')
         })
