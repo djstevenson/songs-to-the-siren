@@ -12,12 +12,12 @@ export class Public {
         return this
     }
 
-    assertLoggedOut() {
-        cy.get('a.login-link').contains('Login')
+    assertSignedOut() {
+        cy.get('a.sign-in-link').contains('Sign in')
         return this
     }
 
-    assertLoggedInAs(username) {
+    assertSignedInAs(username) {
         cy.get('span.user-name').contains(username)
         return this
     }
@@ -28,7 +28,7 @@ export class Public {
         return this
     }
 
-    assertLoggedInAsAdmin(username) {
+    assertSignedInAsAdmin(username) {
         cy
             .get('span.user-name').contains(username)
             .get('a.admin-home-link').contains('Admin home')

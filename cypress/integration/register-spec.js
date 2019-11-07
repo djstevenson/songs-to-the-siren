@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { LoginPage    } from '../pages/user/login-page'
+import { SignInPage   } from '../pages/user/sign-in-page'
 import { RegisterPage } from '../pages/user/register-page'
 import { UserFactory  } from '../support/user-factory'
 
@@ -75,22 +75,22 @@ context('Registration tests', () => {
     })
 
     describe('Register with good details succeeds', () => {
-        it('registering does not login user', () => {
+        it('registering does not sign in user', () => {
             userFactory.getNextRegistered()['page']
-                .assertLoggedOut();
+                .assertSignedOut();
         })
         it('registering shows a "success" response', () => {
             userFactory.getNextRegistered()['page']
                 .assertFlash('User created - watch out for confirmation email')
                 .assertNotification('New user created', 'Thank you for your signup request.')
         })
-        it('registered user can login ok', () => {
+        it('registered user can sign in ok', () => {
             const user = userFactory.getNextRegisteredUser()
 
-            new LoginPage()
+            new SignInPage()
                 .visit()
-                .login(user.getName(), user.getPassword())
-                .assertLoggedInAs(user.getName())
+                .signIn(user.getName(), user.getPassword())
+                .assertSignedInAs(user.getName())
         })
         it('registered user is not confirmed', () => {
             const user = userFactory.getNextRegisteredUser()

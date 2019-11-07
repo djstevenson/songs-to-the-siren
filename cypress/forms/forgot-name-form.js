@@ -7,6 +7,6 @@ export class ForgotNameForm extends FormBase {
         super();
         this._fields.email   = new FormField('email',    'user-forgot-name-email')
 
-        this._buttons.submit = new FormButton('send-me-my-login-name-button')
+        this._buttons.submit = new FormButton('send-me-my-user-name-button')
     }
 }

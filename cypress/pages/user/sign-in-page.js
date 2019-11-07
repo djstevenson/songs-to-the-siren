@@ -1,17 +1,17 @@
-import { Public    } from '../public'
-import { LoginForm } from '../../forms/login-form'
+import { Public     } from '../public'
+import { SignInForm } from '../../forms/sign-in-form'
 
-export class LoginPage extends Public {
+export class SignInPage extends Public {
     pageUrl() {
-        return '/user/login'
+        return '/user/sign_in'
     }
 
     constructor() {
         super()
-        this._form = new LoginForm()
+        this._form = new SignInForm()
     }
 
-    login(name, password) {
+    signIn(name, password) {
         this.getForm().enter({name, password})
 
         return this

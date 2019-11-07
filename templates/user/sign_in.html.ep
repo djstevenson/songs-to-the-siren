@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Login';
+% title 'Sign in';
 
 <%== $form->render %>
 

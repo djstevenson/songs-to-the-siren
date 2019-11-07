@@ -13,7 +13,7 @@ const songFactory = new SongFactory(label)
 function createSongListLinks() {
     cy.resetDatabase()
 
-    const user = userFactory.getNextLoggedInUser(true)
+    const user = userFactory.getNextSignedInUser(true)
     const song1 = songFactory.getNextSong(user)
 
     new ListSongsPage()
@@ -39,7 +39,7 @@ context('Song links CRUD tests', () => {
     describe('New song has empty list of links', () => {
         it('List song links page has right title, and list is empty', () => {
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
         
             // Go to the list-links page

@@ -50,9 +50,9 @@ export class UserFactory {
         return user
     }
 
-    getNextLoggedInUser(admin = false) {
+    getNextSignedInUser(admin = false) {
         const user = this.getNextConfirmedUser(admin)
-        user.login()
+        user.signIn()
         return user
     }
 }

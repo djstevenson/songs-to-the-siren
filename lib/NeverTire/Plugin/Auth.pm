@@ -10,9 +10,9 @@ sub register {
 
     my $root = $app->routes;
 
-    $root->add_shortcut(require_login => sub {
+    $root->add_shortcut(require_sign_in => sub {
         my ($r, @args) = @_;
-        return $r->under(@args)->to(cb => \&_require_login);
+        return $r->under(@args)->to(cb => \&_require_sign_in);
     });
 
     $root->add_shortcut(require_admin => sub {
@@ -23,7 +23,7 @@ sub register {
     return;
 }
 
-sub _require_login {
+sub _require_sign_in {
     my $c = shift;
 
     return 1 if exists $c->stash->{auth_user};
@@ -56,7 +56,7 @@ NeverTire::Plugin::Auth : Plugin to create routes that check auth
     $self->plugin('NeverTire::Plugin::Auth');
 
     # In your routes setup:
-    $route->require_login->...;
+    $route->require_sign_in->...;
 
     $route->require_admin->...;
 
@@ -68,12 +68,12 @@ Provides route methods that check for auth users.
 
 =over
 
-=item require_login
+=item require_sign_in
 
-In your routes, use 'require_login' when you require an authenticated user
+In your routes, use 'require_sign_in' when you require an authenticated user
 for a controller action:
 
-    $route->require_login->any('/comment')->to(controller => ...);
+    $route->require_sign_in->any('/comment')->to(controller => ...);
 
 Ends the request and returns a 403 http status if there is no
 authenticated user.

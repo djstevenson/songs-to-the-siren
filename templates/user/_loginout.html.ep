@@ -1,13 +1,13 @@
-<p class="login-status">
+<p class="sign-in-status">
 % if (my $auth_user = stash 'auth_user') {
-    Logged-in as <span class="user-name"><%= $auth_user->name %></span>
-    <a class="logout-link" href="<%= url_for('logout') %>">Logout</a>
+    Signed-in as <span class="user-name"><%= $auth_user->name %></span>
+    <a class="sign-out-link" href="<%= url_for('sign_out') %>">Sign out</a>
 
     % if ($auth_user->admin) {
         - <a class="admin-home-link" href="<%= url_for('admin_home') %>">Admin home</a>
     % }
 % }
 % else {
-    <a class="login-link" href="<%= url_for('login') %>">Login</a> to add comments
+    <a class="sign-in-link" href="<%= url_for('sign_in') %>">Sign in</a> to add comments
 % }
 </p>

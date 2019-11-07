@@ -1,6 +1,6 @@
 import { Public         } from '../public'
 import { ForgotNameForm } from '../../forms/forgot-name-form'
-import { LoginPage      } from './login-page'
+import { SignInPage     } from './sign-in-page'
 
 export class ForgotNamePage extends Public {
     pageUrl() {
@@ -13,7 +13,7 @@ export class ForgotNamePage extends Public {
     }
 
     visit() {
-        new LoginPage().clickForgotNameLink()
+        new SignInPage().clickForgotNameLink()
         return this;
     }
 

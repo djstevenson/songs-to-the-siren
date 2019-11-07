@@ -15,7 +15,7 @@ context('Password reset confirmation', () => {
             user
                 .requestPasswordReset()
                 .confirmReset()
-                .assertLoggedOut()
+                .assertSignedOut()
             
             const oldPassword = user.getPassword()
             const newPassword = `x${oldPassword}`
@@ -25,11 +25,11 @@ context('Password reset confirmation', () => {
                 .assertFlash('Your password has been reset')
                 .assertNotification('Password reset', 'Your password has been reset.')
             
-            // Finally, login with the new password
-            resetPage.clickLogin()
+            // Finally, sign in with the new password
+            resetPage.clickSignIn()
                 .visit()
-                .login(user.getName(), newPassword)
-                .assertLoggedInAs(user.getName())
+                .signIn(user.getName(), newPassword)
+                .assertSignedInAs(user.getName())
 
         })
     })

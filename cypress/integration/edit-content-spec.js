@@ -27,7 +27,7 @@ context('Content CRUD tests', () => {
         it('Create content page has right title', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateContentPage()
                 .visit()
@@ -37,7 +37,7 @@ context('Content CRUD tests', () => {
         it('Can cancel an attempt to create content', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
 
@@ -49,7 +49,7 @@ context('Content CRUD tests', () => {
 
         it('Form shows right errors with empty input', () => {
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new CreateContentPage()
                 .visit()
@@ -63,7 +63,7 @@ context('Content CRUD tests', () => {
         it('Can cancel an attempt to delete content', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
             const content = new ListContentPage()
@@ -79,7 +79,7 @@ context('Content CRUD tests', () => {
         it('Can delete content', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
             const content = new ListContentPage()
@@ -98,7 +98,7 @@ context('Content CRUD tests', () => {
         it('Content list starts empty', () => {
             cy.resetDatabase()
 
-            userFactory.getNextLoggedInUser(true)
+            userFactory.getNextSignedInUser(true)
 
             new ListContentPage()
                 .visit()
@@ -108,7 +108,7 @@ context('Content CRUD tests', () => {
         it('shows content in name order', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             const content1 = contentFactory.getNextContent(user, 'c')
             const content2 = contentFactory.getNextContent(user, 'a')
@@ -128,7 +128,7 @@ context('Content CRUD tests', () => {
         it('Edit content page has right title', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const content1 = contentFactory.getNextContent(user, 'a')
 
             new ListContentPage()
@@ -140,7 +140,7 @@ context('Content CRUD tests', () => {
         it('Can cancel an attempt to edit content', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
             const content = new ListContentPage()
@@ -155,7 +155,7 @@ context('Content CRUD tests', () => {
 
         it('Form shows right errors with empty input', () => {
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             contentFactory.getNextContent(user, 'a')
 
             new ListContentPage()
@@ -175,7 +175,7 @@ context('Content CRUD tests', () => {
         it('new page shows up in page list', () => {
             cy.resetDatabase()
 
-            const user = userFactory.getNextLoggedInUser(true)
+            const user = userFactory.getNextSignedInUser(true)
             const content1 = contentFactory.getNextContent(user, 'a')
 
             const listPage = new ListContentPage().visit()
