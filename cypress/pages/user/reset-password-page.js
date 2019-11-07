@@ -1,6 +1,6 @@
 import { Public            } from '../public'
 import { ResetPasswordForm } from '../../forms/reset-password-form'
-import { LoginPage         } from './login-page';
+import { SignInPage        } from './sign-in-page';
 
 export class ResetPasswordPage extends Public {
     pageUrl() {
@@ -20,6 +20,6 @@ export class ResetPasswordPage extends Public {
 
     clickLogin() {
         cy.contains("Login").click()
-        return new LoginPage();
+        return new SignInPage();
     }
 }

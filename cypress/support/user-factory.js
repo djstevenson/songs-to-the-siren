@@ -52,7 +52,7 @@ export class UserFactory {
 
     getNextLoggedInUser(admin = false) {
         const user = this.getNextConfirmedUser(admin)
-        user.login()
+        user.signIn()
         return user
     }
 }

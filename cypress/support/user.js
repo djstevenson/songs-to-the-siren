@@ -2,7 +2,7 @@ import reverse from 'reverse-string';
 
 import { TestEmailPage      } from '../pages/test-email-page'
 import { ForgotPasswordPage } from '../pages/user/forgot-password-page'
-import { LoginPage          } from '../pages/user/login-page'
+import { SignInPage         } from '../pages/user/sign-in-page'
 
 export class User {
     constructor(baseName, admin = false) {
@@ -102,10 +102,10 @@ export class User {
 
     }
 
-    login() {
-        new LoginPage()
+    signIn() {
+        new SignInPage()
         .visit()
-        .login(this.getName(), this.getPassword())
+        .signIn(this.getName(), this.getPassword())
 
         return this
     }

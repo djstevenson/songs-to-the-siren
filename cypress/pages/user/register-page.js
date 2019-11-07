@@ -1,6 +1,6 @@
 import { Public       } from '../public'
 import { RegisterForm } from '../../forms/register-form'
-import { LoginPage    } from './login-page'
+import { SignInPage   } from './sign-in-page'
 
 export class RegisterPage extends Public {
     pageUrl() {
@@ -13,7 +13,7 @@ export class RegisterPage extends Public {
     }
 
     visit() {
-        new LoginPage().clickRegisterLink()
+        new SignInPage().clickRegisterLink()
         return this;
     }
 

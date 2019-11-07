@@ -8,7 +8,7 @@ sub add_routes {
 
     $u->route('/register')->name('register')->via('GET', 'POST')->to(action => 'register');
     $u->route('/registered')->name('registered')->via('GET')->to(action => 'registered');
-    $u->route('/login')->name('login')->via('GET', 'POST')->to(action => 'login');
+    $u->route('/sign_in')->name('sign_in')->via('GET', 'POST')->to(action => 'sign_in');
     $u->route('/logout')->name('logout')->via('GET')->to(action => 'logout');
     $u->route('/confirmed')->name('confirmed')->via('GET')->to(action => 'confirmed');
     $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
@@ -39,16 +39,16 @@ sub register {
     }
 }
 
-sub login {
+sub sign_in {
     my $c = shift;
 
-    # Logout before presenting the login screen
+    # Logout before presenting the sign-in screen
     # TODO Need a shortcut for this
     delete $c->session->{user};
     delete $c->stash->{auth_user};
     delete $c->stash->{admin_user};
 
-    my $form = $c->form('User::Login');
+    my $form = $c->form('User::SignIn');
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
         if ($user->admin) {
@@ -57,7 +57,7 @@ sub login {
         }
         else {
             # Non-admin back to home page
-            # TODO Redirect back to where we pressed 'login'
+            # TODO Redirect back to where we pressed 'sign-in'
             $c->redirect_to('home');
         }
     }

@@ -2,7 +2,7 @@
 
 import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { CreateSongPage } from '../pages/song/create-song-page'
-import { LoginPage      } from '../pages/user/login-page'
+import { SignInPage     } from '../pages/user/sign-in-page'
 import { HomePage       } from '../pages/home-page'
 import { UserFactory    } from '../support/user-factory'
 
@@ -11,7 +11,7 @@ const newUser = new UserFactory('access');
 context('Access control depending on user authorisation', () => {
     describe('Access while logged out', () => {
         it('can access login page', () => {
-            new LoginPage()
+            new SignInPage()
                 .visit()
                 .assertLoggedOut()
                 .assertTitle('Login')
@@ -35,7 +35,7 @@ context('Access control depending on user authorisation', () => {
     describe('Access for logged-in normal user', () => {
         it('can access login page', () => {
             newUser.getNextLoggedInUser()
-            new LoginPage()
+            new SignInPage()
                 .visit()
                 .assertLoggedOut()    // Login page logs you out
                 .assertTitle('Login')
@@ -63,7 +63,7 @@ context('Access control depending on user authorisation', () => {
     describe('Access for logged-in admin user', () => {
         it('can access login page', () => {
             newUser.getNextLoggedInUser(true)
-            new LoginPage()
+            new SignInPage()
                 .visit()
                 .assertLoggedOut()    // Login page logs you out
                 .assertTitle('Login')

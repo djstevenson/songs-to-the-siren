@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { LoginPage    } from '../pages/user/login-page'
+import { SignInPage   } from '../pages/user/sign-in-page'
 import { RegisterPage } from '../pages/user/register-page'
 import { UserFactory  } from '../support/user-factory'
 
@@ -87,7 +87,7 @@ context('Registration tests', () => {
         it('registered user can login ok', () => {
             const user = userFactory.getNextRegisteredUser()
 
-            new LoginPage()
+            new SignInPage()
                 .visit()
                 .login(user.getName(), user.getPassword())
                 .assertLoggedInAs(user.getName())

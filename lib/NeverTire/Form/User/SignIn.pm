@@ -1,4 +1,4 @@
-package NeverTire::Form::User::Login;
+package NeverTire::Form::User::SignIn;
 use Moose;
 use namespace::autoclean;
 
@@ -8,7 +8,7 @@ with 'NeverTire::Form::Role';
 
 use NeverTire::Util::Password qw/ check_password_hash new_password_hash /;
 
-has '+id'     => (default => 'user-login');
+has '+id'     => (default => 'user-sign-in');
 
 has_field name => (
     type        => 'Input::Text',
@@ -34,7 +34,7 @@ has_field password => (
 	],
 );
 
-has_button login => ();
+has_button sign_in => ();
 
 has _save_user => (
     is          => 'rw',
@@ -63,9 +63,9 @@ after extra_validation => sub {
 	my $password_field = $self->find_field('password');
 	return if $name_field->has_error || $password_field->has_error;
 
-	my $fail; # Will be set to $login_fail if needed
+	my $fail; # Will be set to $sign_in_fail if needed
 
-	my $login_fail = 'Name and/or password incorrect';
+	my $sign_in_fail = 'Name and/or password incorrect';
 
     # TODO This needs a restructure. Method(s) in User
     #      resultset/result, for example
@@ -80,7 +80,7 @@ after extra_validation => sub {
 			$self->_save_user($user);
 		}
 		else {
-			$fail = $login_fail;
+			$fail = $sign_in_fail;
 		}
 	}
 	else {
@@ -88,7 +88,7 @@ after extra_validation => sub {
 		# to thwart those who use timing to differentiate between
 		# bad name and bad password.
 		new_password_hash('dummy value');
-		$fail = $login_fail;
+		$fail = $sign_in_fail;
 	}
 
 	# Set the error on 'name'

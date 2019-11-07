@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
-    my $u = $song_action->require_login->any('/comment')->to(controller => 'song-comment');
+    my $u = $song_action->require_sign_in->any('/comment')->to(controller => 'song-comment');
     
     $u->route('/create')->name('new_song_comment')->via('GET', 'POST')->to(action => 'create');
 
