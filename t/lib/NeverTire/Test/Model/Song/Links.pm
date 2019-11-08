@@ -20,12 +20,14 @@ sub _random_link {
 	my $s1 = random_user_key;
 	my $s2 = random_user_key;
 	my $s3 = random_user_key;
+	my $s4 = random_user_key;
 
 	return {
-		name     => $s3,
-		url      => "https://${s1}.example.com/${s2}.html",
-		priority => $priority,
-		extras   => $extras,
+		name        => $s3,
+		url         => "https://${s1}.example.com/${s2}.html",
+		description => $s4,
+		priority    => $priority,
+		extras      => $extras,
 	};
 }
 

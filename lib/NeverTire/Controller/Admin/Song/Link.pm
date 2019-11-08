@@ -33,9 +33,7 @@ sub create {
     my $form = $c->form('Link::Create', song => $song);
     
     if ($form->process) {
-        $c->flash(msg => 'Link added');
-        
-        # Redirect so that form is reinitialised
+        $c->flash(msg => 'Link added') if $form->action eq 'created';
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
@@ -66,9 +64,7 @@ sub edit {
     my $form = $c->form('Link::Edit', song => $song, link => $link);
     
     if ($form->process) {
-        $c->flash(msg => 'Link edited');
-        
-        # Redirect so that form is reinitialised
+        $c->flash(msg => 'Link updated') if $form->action eq 'updated';
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
@@ -84,7 +80,7 @@ sub delete {
     my $form = $c->form('Link::Delete', song => $song, link => $link);
 
     if (my $action = $form->process) {
-        $c->flash(msg => $action);
+        $c->flash(msg => $action) if $form->action eq 'deleted';
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {

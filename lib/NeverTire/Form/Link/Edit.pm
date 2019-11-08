@@ -30,6 +30,12 @@ has_field priority => (
     validators  => [qw/ Required  ValidInteger /],
 );
 
+has_field description => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
+);
+
 has_field extras => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -48,12 +54,13 @@ has link => (
 );
 
 has_button update_link => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name url priority extras /);
+	my $fields = $self->form_hash(qw/ name url description priority extras /);
 	return $self->link->update($fields);
 };
 
