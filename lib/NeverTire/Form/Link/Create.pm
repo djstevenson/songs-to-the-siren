@@ -13,9 +13,6 @@ has_field name => (
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 # TODO Add URL validation
@@ -23,26 +20,23 @@ has_field url => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 has_field priority => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  ValidInteger /],
-    options     => {
-        initial_value => '',
-    },
+);
+
+has_field description => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
 );
 
 has_field extras => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
-    options     => {
-        initial_value => '',
-    },
 );
 
 has song => (
@@ -52,12 +46,13 @@ has song => (
 );
 
 has_button create_link => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
     # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name url priority extras /);
+	my $fields = $self->form_hash(qw/ name url description priority extras /);
 	return $self->song->add_link($fields);
 };
 

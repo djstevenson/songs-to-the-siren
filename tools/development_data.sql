@@ -137,6 +137,6 @@ VALUES
 (2, 1, NULL, '3rd thread c6', '<p>3rd thread c6</p>', NOW(), NOW()),
 (2, 2,    5, 'reply to c5 = c7', '<p>reply to c5 = c7</p>', NOW(), NOW());
 
-INSERT INTO links (song_id, "name", "url", extras, priority)
+INSERT INTO links (song_id, "name", "url", description, extras, priority)
 VALUES
-(6, 'YouTube', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', '16by9', 10);
+(6, 'YouTube', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '16by9', 10);

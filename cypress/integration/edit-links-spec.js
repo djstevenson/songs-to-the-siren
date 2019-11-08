@@ -31,6 +31,7 @@ function makeLinkData(n) {
         priority: n,
         name: 'link ' + ns,
         url: 'http://example.com/link' + ns + '.html',
+        description: 'desc ' + ns,
         extras: ns + 'x' + ns
     }
 }
@@ -64,9 +65,10 @@ context('Song links CRUD tests', () => {
 
             new CreateLinkPage()
                 .createLink({})
-                .assertFormError('name',     'Required')
-                .assertFormError('url',      'Required')
-                .assertFormError('priority', 'Required')
+                .assertFormError('name',        'Required')
+                .assertFormError('url',         'Required')
+                .assertFormError('description', 'Required')
+                .assertFormError('priority',    'Required')
                 .assertNoFormError('extras')
         })
 
@@ -79,10 +81,12 @@ context('Song links CRUD tests', () => {
                 .createLink({
                     name: 'name1',
                     url:  'http://example.com/',
-                    priority: 'arse'
+                    priority: 'arse',
+                    description: 'also arse'
                 })
                 .assertNoFormError('name')
                 .assertNoFormError('url')
+                .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
                 .assertNoFormError('extras')
         })
@@ -131,11 +135,13 @@ context('Song links CRUD tests', () => {
                 .editLink({
                     name: '',
                     url: '',
-                    priority: ''
+                    priority: '',
+                    description: ''
                 })
-                .assertFormError('name',     'Required')
-                .assertFormError('url',      'Required')
-                .assertFormError('priority', 'Required')
+                .assertFormError('name',        'Required')
+                .assertFormError('url',         'Required')
+                .assertFormError('priority',    'Required')
+                .assertFormError('description', 'Required')
                 .assertNoFormError('extras')
         })
 
@@ -150,10 +156,12 @@ context('Song links CRUD tests', () => {
                 .editLink({
                     name: 'name1',
                     url:  'http://example.com/',
-                    priority: 'arse'
+                    priority: 'arse',
+                    description: 'also arse'
                 })
                 .assertNoFormError('name')
                 .assertNoFormError('url')
+                .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
                 .assertNoFormError('extras')
         })

@@ -16,6 +16,7 @@ __PACKAGE__->add_columns(
     id               => {data_type => 'INTEGER'},
     song_id          => {data_type => 'INTEGER'},
     name             => {data_type => 'TEXT'},
+    description      => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
     priority         => {data_type => 'INTEGER'},
 
