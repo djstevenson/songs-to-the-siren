@@ -11,11 +11,14 @@ const label = 'listsong';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
+beforeEach( () => {
+    cy.resetDatabase()
+})
+
 context('Song CRUD tests', () => {
 
     describe('List-songs ordering etc', () => {
         it('Song list starts empty', () => {
-            cy.resetDatabase()
 
             userFactory.getNextSignedInUser(true)
 
@@ -25,7 +28,6 @@ context('Song CRUD tests', () => {
         })
 
         it('shows songs in creation order, regardless of publication status', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
 
@@ -58,7 +60,6 @@ context('Song CRUD tests', () => {
 
     describe('Publish/unpublish button', () => {
         it('Can publish/unpublish songs from the song list', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
 
@@ -101,7 +102,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Create song form can be cancelled', () => {
-            cy.resetDatabase()
 
             const user  = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
@@ -113,7 +113,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Create song form shows right errors with empty input', () => {
-            cy.resetDatabase()
 
             userFactory.getNextSignedInUser(true)
 
@@ -133,7 +132,6 @@ context('Song CRUD tests', () => {
 
     describe('Edit form validation', () => {
         it('Edit song page has right title', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -145,7 +143,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Edit song form can be cancelled', () => {
-            cy.resetDatabase()
 
             const user  = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
@@ -158,7 +155,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Edit song form shows right errors with empty input', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
             songFactory.getNextSong(user)
@@ -188,7 +184,6 @@ context('Song CRUD tests', () => {
 
     describe('Song list - new song goes into right place in list', () => {
         it('new song title shows up in song list', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -204,7 +199,6 @@ context('Song CRUD tests', () => {
         })
 
         it('song edit does not affect position in song list', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -235,7 +229,6 @@ context('Song CRUD tests', () => {
 
         // TODO Refactor to make this readable! This is a mess
         it('song edit does affect not publication status', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
             const song1 = songFactory.getNextSong(user)
@@ -264,7 +257,6 @@ context('Song CRUD tests', () => {
 
     describe('Delete songs from song-list page', () => {
         it('Can cancel an attempt to delete a song', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
 
@@ -278,7 +270,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Can delete a published song', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
 
@@ -295,7 +286,6 @@ context('Song CRUD tests', () => {
         })
 
         it('Can delete an unpublished song', () => {
-            cy.resetDatabase()
 
             const user = userFactory.getNextSignedInUser(true)
 

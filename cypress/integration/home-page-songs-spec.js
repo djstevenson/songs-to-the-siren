@@ -8,19 +8,19 @@ const label = 'homecounts';
 const userFactory = new UserFactory(label);
 const songFactory = new SongFactory(label);
 
+beforeEach( () => {
+    cy.resetDatabase()
+})
+
 context('Home page tests - song list', () => {
     describe('Song counts', () => {
         it('list starts empty', () => {
-
-            cy.resetDatabase()
 
             new HomePage()
                 .visit()
                 .assertSongCount(0)
         })
         it('shows zero songs if only unpublished songs exist', () => {
-
-            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             songFactory.getNextSong(user)
@@ -33,8 +33,6 @@ context('Home page tests - song list', () => {
         it('with mixed published/unpublished songs, only the former are shown', () => {
 
             const homePage = new HomePage()
-
-            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             songFactory.getNextSong(user, true)
@@ -56,8 +54,6 @@ context('Home page tests - song list', () => {
         it('shows 0 songs if we publish then unpublish', () => {
 
             const homePage = new HomePage()
-
-            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
             const song1 = songFactory.getNextSong(user, true)
@@ -87,8 +83,6 @@ context('Home page tests - song list', () => {
         it('newest publication first', () => {
 
             const homePage = new HomePage()
-
-            cy.resetDatabase()
 
             const user = userFactory.getNextConfirmedUser(true)
 

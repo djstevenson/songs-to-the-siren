@@ -9,6 +9,10 @@ const label = 'createcountry';
 const userFactory = new UserFactory(label);
 const countryFactory = new CountryFactory(label);
 
+beforeEach( () => {
+    cy.resetDatabase()
+})
+
 // Create pages via the form rather than
 // the test-mode shortcut as we're
 // testing the admin UI here.
@@ -25,8 +29,6 @@ function createCountry() {
 context('Country CRUD tests', () => {
     describe('Create form validation', () => {
         it('Create country page has right title', () => {
-            cy.resetDatabase()
-
             userFactory.getNextSignedInUser(true)
 
             new CreateCountryPage()
@@ -35,8 +37,6 @@ context('Country CRUD tests', () => {
         })
 
         it('Can cancel an attempt to create country', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             new CreateCountryPage()
@@ -59,8 +59,6 @@ context('Country CRUD tests', () => {
 
     describe('Delete country from country-list page', () => {
         it('Can cancel an attempt to delete country', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
@@ -77,8 +75,6 @@ context('Country CRUD tests', () => {
         })
 
         it('Can delete country', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             countryFactory.getNextCountry(user, 'a')
@@ -104,8 +100,6 @@ context('Country CRUD tests', () => {
 
     describe('Country list page, ordering', () => {
         it('Country list starts empty apart from test data', () => {
-            cy.resetDatabase()
-
             userFactory.getNextSignedInUser(true)
 
             new ListCountriesPage()
@@ -114,8 +108,6 @@ context('Country CRUD tests', () => {
         })
 
         it('shows country in name order', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             const country1 = countryFactory.getNextCountry(user, 'c')
@@ -134,8 +126,6 @@ context('Country CRUD tests', () => {
 
     describe('Edit form validation', () => {
         it('Edit country page has right title', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
@@ -146,8 +136,6 @@ context('Country CRUD tests', () => {
         })
 
         it('Can cancel an attempt to edit country', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             // We should land on the list-countries page
@@ -180,8 +168,6 @@ context('Country CRUD tests', () => {
 
     describe('Country list updates after edits', () => {
         it('new country shows up in country list', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
             const country1 = countryFactory.getNextCountry(user, 'a')
 
