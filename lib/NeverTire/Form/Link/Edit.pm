@@ -59,9 +59,15 @@ has_button cancel => (style => 'light', skip_validation => 1);
 override posted => sub {
 	my $self = shift;
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name url description priority extras /);
-	return $self->link->update($fields);
+    my $update_button = $self->find_button('update_link');
+    if ( $update_button->clicked ) {
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ name url description priority extras /);
+        $self->link->update($fields);
+        $self->action('updated');
+    }
+
+    return 1;
 };
 
 # Prepopulate GET form from the song object

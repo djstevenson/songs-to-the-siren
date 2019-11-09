@@ -3,7 +3,7 @@ export class Song {
         this._title      = `Title ${baseName}`
         this._artist     = `Artist ${baseName}`
         this._album      = `Album ${baseName}`
-        this._image      = `http://example.com/${baseName}.jpg`
+        this._image      = `image_${baseName}`
         this._countryId  = 1,
         this._releasedAt = `Release ${baseName}`
         this._summary    = `Summary ${baseName}`

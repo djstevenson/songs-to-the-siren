@@ -1,7 +1,7 @@
-import { Admin          } from '../admin'
 import { DeleteLinkForm } from '../../forms/delete-link-form'
+import { BaseLink       } from './base-link'
 
-export class DeleteLinkPage extends Admin {
+export class DeleteLinkPage extends BaseLink {
     constructor() {
         super()
         this._form = new DeleteLinkForm()
@@ -9,12 +9,6 @@ export class DeleteLinkPage extends Admin {
 
     deleteLink() {
         this.getForm().enter({})
-    
-        return this
-    }
-
-    cancel() {
-        this.getForm().getButton('cancel').click()
     
         return this
     }

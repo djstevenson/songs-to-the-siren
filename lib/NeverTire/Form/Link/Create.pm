@@ -51,9 +51,16 @@ has_button cancel => (style => 'light', skip_validation => 1);
 override posted => sub {
 	my $self = shift;
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ name url description priority extras /);
-	return $self->song->add_link($fields);
+    my $create_button = $self->find_button('create_link');
+    if ( $create_button->clicked ) {
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ name url description priority extras /);
+        $self->song->add_link($fields);
+
+        $self->action('created');
+    }
+
+    return 1;
 };
 
 __PACKAGE__->meta->make_immutable;
