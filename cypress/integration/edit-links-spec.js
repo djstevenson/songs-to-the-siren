@@ -61,7 +61,8 @@ context('Song links CRUD tests', () => {
         it('Create form rejects empty fields', () => {
             createSongListLinks()
             
-            new ListLinksPage().clickNew()
+            new ListLinksPage()
+                .clickNew()
 
             new CreateLinkPage()
                 .createLink({})
@@ -75,7 +76,8 @@ context('Song links CRUD tests', () => {
         it('Create form non-integer priority', () => {
             createSongListLinks()
             
-            new ListLinksPage().clickNew()
+            new ListLinksPage()
+                .clickNew()
 
             new CreateLinkPage()
                 .createLink({
@@ -93,6 +95,15 @@ context('Song links CRUD tests', () => {
     })
 
     describe('Create song links', () => {
+        it('Can cancel an attempt to create a link', () => {
+            createSongListLinks()
+
+            new ListLinksPage()
+                .clickNew()
+                .cancel()
+                .assertEmpty()
+        })
+
         it('Create links, listed in priority order', () => {
             createSongListLinks()
             
@@ -169,6 +180,20 @@ context('Song links CRUD tests', () => {
     })
     
     describe('Edit song links', () => {
+        it('Can cancel an attempt to edit a link', () => {
+            createSongListLinks()
+
+            const listPage = new ListLinksPage()
+
+            listPage
+                .createLink(makeLinkData(10))
+
+            listPage
+                .edit(1)
+                .cancel()
+                .assertLinkCount(1)
+        })
+
         it('Can edit links', () => {
             createSongListLinks()
             

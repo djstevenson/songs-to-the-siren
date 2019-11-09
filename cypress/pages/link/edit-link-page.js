@@ -1,7 +1,7 @@
-import { Admin        } from '../admin'
 import { EditLinkForm } from '../../forms/edit-link-form'
+import { BaseLink     } from './base-link'
 
-export class EditLinkPage extends Admin {
+export class EditLinkPage extends BaseLink {
     pageUrl() {
         // TODO Needs song id, link id
         return '/song/n/link/m/edit'

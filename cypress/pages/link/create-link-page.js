@@ -1,7 +1,8 @@
-import { Admin          } from '../admin'
 import { CreateLinkForm } from '../../forms/create-link-form'
+import { BaseLink       } from './base-link'
 
-export class CreateLinkPage extends Admin {
+
+export class CreateLinkPage extends BaseLink {
     pageUrl() {
         // TODO Needs song id
         return '/song/n/link/create'
