@@ -22,11 +22,13 @@ function createContent() {
     return content
 }
 
+beforeEach( () => {
+    cy.resetDatabase()
+})
+
 context('Content CRUD tests', () => {
     describe('Create form validation', () => {
         it('Create content page has right title', () => {
-            cy.resetDatabase()
-
             userFactory.getNextSignedInUser(true)
 
             new CreateContentPage()
@@ -35,8 +37,6 @@ context('Content CRUD tests', () => {
         })
 
         it('Can cancel an attempt to create content', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
@@ -61,8 +61,6 @@ context('Content CRUD tests', () => {
 
     describe('Delete content from content-list page', () => {
         it('Can cancel an attempt to delete content', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
@@ -77,8 +75,6 @@ context('Content CRUD tests', () => {
         })
 
         it('Can delete content', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
@@ -96,8 +92,6 @@ context('Content CRUD tests', () => {
 
     describe('Content list page, ordering', () => {
         it('Content list starts empty', () => {
-            cy.resetDatabase()
-
             userFactory.getNextSignedInUser(true)
 
             new ListContentPage()
@@ -106,8 +100,6 @@ context('Content CRUD tests', () => {
         })
 
         it('shows content in name order', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             const content1 = contentFactory.getNextContent(user, 'c')
@@ -126,8 +118,6 @@ context('Content CRUD tests', () => {
 
     describe('Edit form validation', () => {
         it('Edit content page has right title', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
             const content1 = contentFactory.getNextContent(user, 'a')
 
@@ -138,8 +128,6 @@ context('Content CRUD tests', () => {
         })
 
         it('Can cancel an attempt to edit content', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
 
             contentFactory.getNextContent(user, 'a')
@@ -173,8 +161,6 @@ context('Content CRUD tests', () => {
 
     describe('Page list updates after edits', () => {
         it('new page shows up in page list', () => {
-            cy.resetDatabase()
-
             const user = userFactory.getNextSignedInUser(true)
             const content1 = contentFactory.getNextContent(user, 'a')
 
