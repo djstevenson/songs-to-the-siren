@@ -110,14 +110,15 @@ CREATE INDEX comments_parent_id_idx ON comments USING BTREE(parent_id);
 CREATE TABLE links (
     id SERIAL NOT NULL PRIMARY KEY,
     song_id INT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
-    "name" TEXT NOT NULL,
+    identifier TEXT NOT NULL,
+    "class" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     description TEXT NOT NULL,
     priority INTEGER NOT NULL DEFAULT 0,
     extras TEXT
 );
 
-CREATE INDEX links_song_id_idx ON links USING BTREE(song_id);
+CREATE UNIQUE INDEX links_song_id_identifier_idx ON links USING BTREE(song_id, identifier);
 
 CREATE TABLE content (
     "name" TEXT NOT NULL PRIMARY KEY,

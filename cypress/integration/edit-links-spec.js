@@ -10,9 +10,13 @@ const label = 'editlinks'
 const userFactory = new UserFactory(label)
 const songFactory = new SongFactory(label)
 
-function createSongListLinks() {
+beforeEach( () => {
     cy.resetDatabase()
+})
 
+// Creates a user and song, and loads the list-links
+// page for the song. Does not create any links
+function createSongListLinks() {
     const user = userFactory.getNextSignedInUser(true)
     const song1 = songFactory.getNextSong(user)
 
@@ -21,7 +25,7 @@ function createSongListLinks() {
         .getRow(1)
         .click('links')
 
-        return song1
+    return song1
 }
 
 function makeLinkData(n) {
@@ -29,7 +33,8 @@ function makeLinkData(n) {
 
     return {
         priority: n,
-        name: 'link ' + ns,
+        class: 'class ' + ns,
+        identifier: 'identifier ' + ns,
         url: 'http://example.com/link' + ns + '.html',
         description: 'desc ' + ns,
         extras: ns + 'x' + ns
@@ -40,8 +45,7 @@ context('Song links CRUD tests', () => {
     describe('New song has empty list of links', () => {
         it('List song links page has right title, and list is empty', () => {
 
-            const user = userFactory.getNextSignedInUser(true)
-            const song1 = songFactory.getNextSong(user)
+            const song1 = createSongListLinks()
         
             // Go to the list-links page
             new ListSongsPage()
@@ -63,14 +67,25 @@ context('Song links CRUD tests', () => {
             
             new ListLinksPage()
                 .clickNew()
-
-            new CreateLinkPage()
                 .createLink({})
-                .assertFormError('name',        'Required')
+                .assertFormError('identifier',  'Required')
+                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
                 .assertNoFormError('extras')
+        })
+
+        it('Create form rejects existing identifiers', () => {
+            createSongListLinks()
+            
+            const linkData = makeLinkData(10)
+
+            new ListLinksPage()
+                .createLink(linkData)
+                .clickNew()
+                .createLink(linkData)
+                .assertFormError('identifier', 'Identifier already used for this song');
         })
 
         it('Create form non-integer priority', () => {
@@ -81,12 +96,14 @@ context('Song links CRUD tests', () => {
 
             new CreateLinkPage()
                 .createLink({
-                    name: 'name1',
+                    identifier: 'id1',
+                    class: 'class1',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
-                .assertNoFormError('name')
+                .assertNoFormError('identifier')
+                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
@@ -120,15 +137,15 @@ context('Song links CRUD tests', () => {
             // Check ordering
             listPage.getRow(1)
                 .assertPriority(5)
-                .assertName('link 5')
+                .assertIdentifier('identifier 5')
 
             listPage.getRow(2)
-            .assertPriority(10)
-            .assertName('link 10')
+                .assertPriority(10)
+                .assertIdentifier('identifier 10')
 
             listPage.getRow(3)
-            .assertPriority(20)
-            .assertName('link 20')
+                .assertPriority(20)
+                .assertIdentifier('identifier 20')
 
         })
     })
@@ -144,16 +161,54 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: '',
+                    class: '',
+                    identifier: '',
                     url: '',
                     priority: '',
                     description: ''
                 })
-                .assertFormError('name',        'Required')
+                .assertFormError('identifier',  'Required')
+                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('priority',    'Required')
                 .assertFormError('description', 'Required')
                 .assertNoFormError('extras')
+        })
+
+        it('Edit form does not reject existing identifier from the link we are editing', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            const linkData = makeLinkData(10)
+
+            // Test form is not rejected due to existing identifier
+            // when the existing identifier is our own! i.e., edit
+            // a link without changing the identifier
+            listPage
+                .createLink(makeLinkData(10))
+                .edit(1)
+                .editLink({class: ''})
+                .assertFormError('class', 'Required')
+                .assertNoFormError('identifier')
+        })
+
+        it('Edit form rejects existing identifier from other links', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            const linkData10 = makeLinkData(10)
+            const linkData20 = makeLinkData(20)
+
+            // Create two links
+            listPage.createLink(linkData10)
+            listPage.createLink(linkData20)
+
+            // Edit the second and attempt to set its identifier to the first
+            listPage.edit(2)
+                .editLink({identifier: linkData10.identifier})
+                .assertFormError('identifier', 'Identifier already used for this song')
         })
 
         it('Edit form non-integer priority', () => {
@@ -165,12 +220,14 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: 'name1',
+                    class: 'class1',
+                    identifier: 'identifier1',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
-                .assertNoFormError('name')
+                .assertNoFormError('identifier')
+                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
@@ -205,14 +262,14 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: 'new name 30',
+                    identifier: 'new identifier 30',
                     priority: 30
                 })
     
             // Link '20' should now be first, and the edited
             // link '30' second
-            listPage.getRow(1).assertText('name', data20.name)
-            listPage.getRow(2).assertText('name', 'new name 30')
+            listPage.getRow(1).assertText('identifier', data20.identifier)
+            listPage.getRow(2).assertText('identifier', 'new identifier 30')
         })
     })
 
