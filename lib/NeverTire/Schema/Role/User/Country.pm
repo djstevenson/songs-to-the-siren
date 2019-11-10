@@ -3,8 +3,6 @@ use Moose::Role;
 
 # TODO Add pod
 
-use DateTime;
-use Text::Markdown qw/ markdown /;
 use Carp qw/ croak /;
 
 use Readonly;
