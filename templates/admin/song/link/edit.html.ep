@@ -1,6 +1,6 @@
 % layout 'default';
-% title 'Edit ' . $link->name . ' link for ' . $song->title;
+% title 'Edit ' . $link->identifier . ' link for ' . $song->title;
 
-<h2 class="notification-title">Edit <%= $link->name %> link for <%= $song->title %></h2>
+<h2 class="notification-title">Edit <%= $link->identifier %> link for <%= $song->title %></h2>
 
 <%== $form->render %>

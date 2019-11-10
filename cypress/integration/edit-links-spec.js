@@ -29,7 +29,8 @@ function makeLinkData(n) {
 
     return {
         priority: n,
-        name: 'link ' + ns,
+        class: 'class ' + ns,
+        identifier: 'identifier ' + ns,
         url: 'http://example.com/link' + ns + '.html',
         description: 'desc ' + ns,
         extras: ns + 'x' + ns
@@ -66,7 +67,8 @@ context('Song links CRUD tests', () => {
 
             new CreateLinkPage()
                 .createLink({})
-                .assertFormError('name',        'Required')
+                .assertFormError('identifier',  'Required')
+                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
@@ -81,12 +83,14 @@ context('Song links CRUD tests', () => {
 
             new CreateLinkPage()
                 .createLink({
-                    name: 'name1',
+                    identifier: 'id1',
+                    class: 'class1',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
-                .assertNoFormError('name')
+                .assertNoFormError('identifier')
+                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
@@ -120,15 +124,15 @@ context('Song links CRUD tests', () => {
             // Check ordering
             listPage.getRow(1)
                 .assertPriority(5)
-                .assertName('link 5')
+                .assertIdentifier('identifier 5')
 
             listPage.getRow(2)
-            .assertPriority(10)
-            .assertName('link 10')
+                .assertPriority(10)
+                .assertIdentifier('identifier 10')
 
             listPage.getRow(3)
-            .assertPriority(20)
-            .assertName('link 20')
+                .assertPriority(20)
+                .assertIdentifier('identifier 20')
 
         })
     })
@@ -144,12 +148,14 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: '',
+                    class: '',
+                    identifier: '',
                     url: '',
                     priority: '',
                     description: ''
                 })
-                .assertFormError('name',        'Required')
+                .assertFormError('identifier',  'Required')
+                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('priority',    'Required')
                 .assertFormError('description', 'Required')
@@ -165,12 +171,14 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: 'name1',
+                    class: 'class1',
+                    identifier: 'identifier1',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
-                .assertNoFormError('name')
+                .assertNoFormError('identifier')
+                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
@@ -205,14 +213,14 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    name: 'new name 30',
+                    identifier: 'new identifier 30',
                     priority: 30
                 })
     
             // Link '20' should now be first, and the edited
             // link '30' second
-            listPage.getRow(1).assertText('name', data20.name)
-            listPage.getRow(2).assertText('name', 'new name 30')
+            listPage.getRow(1).assertText('identifier', data20.identifier)
+            listPage.getRow(2).assertText('identifier', 'new identifier 30')
         })
     })
 

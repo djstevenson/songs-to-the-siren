@@ -27,7 +27,9 @@ has_column id => (
 
 has_column priority => ();
 
-has_column name => ();
+has_column identifier => ();
+
+has_column class => ();
 
 has_column url => ();
 

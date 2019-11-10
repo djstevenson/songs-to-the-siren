@@ -124,7 +124,8 @@ sub add_link {
     my ($self, $values) = @_;
 
     return $self->links->create({
-        name        => $values->{name},
+        identifier  => $values->{identifier},
+        class       => $values->{class},
         url         => $values->{url},
         description => $values->{description},
         priority    => $values->{priority},

@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Delete ' . $link->name . ' link  for ' . $song->title;
+% title 'Delete ' . $link->identifier . ' link  for ' . $song->title;
 
 <%== $form->render %>
 

@@ -15,12 +15,13 @@ __PACKAGE__->table('links');
 __PACKAGE__->add_columns(
     id               => {data_type => 'INTEGER'},
     song_id          => {data_type => 'INTEGER'},
-    name             => {data_type => 'TEXT'},
+    identifier       => {data_type => 'TEXT'},
+    class            => {data_type => 'TEXT'},
     description      => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
     priority         => {data_type => 'INTEGER'},
 
-    # e.g. ratio ("16x9" etc) for the youtubes.
+    # JSON e.g. {"ratio": "16x9", "start": "01:10"} for the youtubes.
     extras           => {data_type => 'TEXT'},
 );
 

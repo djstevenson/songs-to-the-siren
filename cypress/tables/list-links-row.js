@@ -6,11 +6,12 @@ export class ListLinksRow extends RowBase {
         super(tableId, rowIndex);
         this._columns.id          = new TableColumn(1)
         this._columns.priority    = new TableColumn(2)
-        this._columns.name        = new TableColumn(3)
-        this._columns.url         = new TableColumn(4)
-        this._columns.extras      = new TableColumn(5)
-        this._columns.edit        = new TableColumn(6)
-        this._columns.delete      = new TableColumn(7)
+        this._columns.identifier  = new TableColumn(3)
+        this._columns.class       = new TableColumn(4)
+        this._columns.url         = new TableColumn(5)
+        this._columns.extras      = new TableColumn(6)
+        this._columns.edit        = new TableColumn(7)
+        this._columns.delete      = new TableColumn(8)
     }
 
 
@@ -20,8 +21,8 @@ export class ListLinksRow extends RowBase {
         return this // Chainable
     }
 
-    assertName(name) {
-        this.assertText('name', name)
+    assertIdentifier(identifier) {
+        this.assertText('identifier', identifier)
 
         return this // Chainable
     }
