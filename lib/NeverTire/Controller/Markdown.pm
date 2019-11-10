@@ -1,8 +1,7 @@
 package NeverTire::Controller::Markdown;
 use Mojo::Base 'Mojolicious::Controller';
 
-# TODO DROP LIVE PREVIEWS (git issue #195))
-use Text::Markdown qw/ markdown /;
+use NeverTire::Markdown;
 
 sub add_routes {
     my ($c, $r) = @_;
@@ -19,8 +18,9 @@ sub render_markdown {
     return $c->render(status => 403, text => 'Nah')
         unless exists $c->stash->{auth_user};
 
+    my $processor = NeverTire::Markdown->new;
     my $markdown = $c->param('markdown');
-    my $html = markdown($markdown);
+    my $html = $processor->markdown($markdown);
     $c->render(text => $html);
 }
 
