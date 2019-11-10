@@ -7,7 +7,7 @@ extends 'NeverTire::Schema::Base::Result';
 # TODO POD
 
 # Bring in methods that we split out. We did that to keep
-# file sizes more managable, and to group related methods
+# file sizes more manageable, and to group related methods
 with 'NeverTire::Schema::Role::User::Auth';
 with 'NeverTire::Schema::Role::User::Song';
 with 'NeverTire::Schema::Role::User::Content';

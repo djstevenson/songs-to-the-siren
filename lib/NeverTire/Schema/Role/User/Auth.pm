@@ -10,7 +10,7 @@ use NeverTire::Util::Password
     'check_password_hash' => { -as => 'util_check_password_hash' },
     'random_user_key';
 
-# This exists just to keep Result::User down to a more managable size.
+# This exists just to keep Result::User down to a more manageable size.
 # It extracts the methods relating to authentication, key management, etc
 
 # Returns boolean, meaning 'key is valid for this user/purpose'
