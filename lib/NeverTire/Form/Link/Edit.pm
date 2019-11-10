@@ -19,7 +19,6 @@ has_field identifier => (
 
 has_field class => (
     type        => 'Input::Text',
-    autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required /],
 );
@@ -94,6 +93,7 @@ override posted => sub {
         # Whitelist what we extract from the submitted form
         my $fields = $self->form_hash(qw/ identifier class url description priority extras /);
         $self->link->update($fields);
+        $self->song->render_markdown;
         $self->action('updated');
     }
 

@@ -4,11 +4,13 @@ use Moose::Role;
 # TODO Add pod
 
 use DateTime;
-use Text::Markdown qw/ markdown /;
-use Carp qw/ croak /;
 
-# This exists just to keep Result::User down to a more managable size.
-# It extracts the methods relating to songs etc
+# Use standard markdown rather than our extensions, as 
+# this is used by non-admins.
+use Text::Markdown qw/ markdown /;
+
+# This exists just to keep Result::User down to a more manageable size.
+# It extracts the methods relating to comments etc
 
 sub new_song_comment {
     my ($self, $song, $parent, $data) = @_;

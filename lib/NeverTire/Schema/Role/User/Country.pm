@@ -3,15 +3,13 @@ use Moose::Role;
 
 # TODO Add pod
 
-use DateTime;
-use Text::Markdown qw/ markdown /;
 use Carp qw/ croak /;
 
 use Readonly;
 
 Readonly my $NOT_ADMIN => 'Not admin - permission denied';
 
-# This exists just to keep Result::User down to a more managable size.
+# This exists just to keep Result::User down to a more manageable size.
 # It extracts the methods relating to country codes etc
 
 sub admin_create_country {
