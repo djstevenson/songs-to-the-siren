@@ -21,9 +21,11 @@ sub _random_link {
 	my $s2 = random_user_key;
 	my $s3 = random_user_key;
 	my $s4 = random_user_key;
+	my $s5 = random_user_key;
 
 	return {
-		name        => $s3,
+		identifier  => $s3,
+		class       => $s5,
 		url         => "https://${s1}.example.com/${s2}.html",
 		description => $s4,
 		priority    => $priority,
@@ -88,17 +90,17 @@ sub run {
 
 	# get by priority order
 	my @links = $song1->links->by_priority->all;
-	is($links[0]->name, $link1->{name}, 'Song1 link1 has right name');
+	is($links[0]->identifier, $link1->{identifier}, 'Song1 link1 has right identifier');
 	is($links[0]->url,  $link1->{url},  'Song1 link1 has right url');
-	is($links[1]->name, $link2->{name}, 'Song1 link2 has right name');
+	is($links[1]->identifier, $link2->{identifier}, 'Song1 link2 has right identifier');
 	is($links[1]->url,  $link2->{url},  'Song1 link2 has right url');
 
 	@links = $song2->links->by_priority->all;
-	is($links[0]->name, $link4->{name}, 'Song2 link1 has right name');
+	is($links[0]->identifier, $link4->{identifier}, 'Song2 link1 has right identifier');
 	is($links[0]->url,  $link4->{url},  'Song2 link1 has right url');
-	is($links[1]->name, $link1->{name}, 'Song2 link2 has right name');
+	is($links[1]->identifier, $link1->{identifier}, 'Song2 link2 has right identifier');
 	is($links[1]->url,  $link1->{url},  'Song2 link2 has right url');
-	is($links[2]->name, $link3->{name}, 'Song2 link3 has right name');
+	is($links[2]->identifier, $link3->{identifier}, 'Song2 link3 has right identifier');
 	is($links[2]->url,  $link3->{url},  'Song2 link3 has right url');
 
 
@@ -106,17 +108,17 @@ sub run {
 	# link to the youtube video. Test that:
 	my $links_by_name = $song1->links->links_by_name;
 	# links_by_name returned hash, k=name, v=result object
-	is($links_by_name->{$link1->{name}}->url, $link1->{url}, 'get by name: song1 has right link for link1');
-	is($links_by_name->{$link2->{name}}->url, $link2->{url}, 'get by name: song1 has right link for link2');
+	is($links_by_name->{$link1->{identifier}}->url, $link1->{url}, 'get by name: song1 has right link for link1');
+	is($links_by_name->{$link2->{identifier}}->url, $link2->{url}, 'get by name: song1 has right link for link2');
 
 	# And check extras while we're at it, for song2
 	$links_by_name = $song2->links->links_by_name;
-	is($links_by_name->{$link1->{name}}->url,    $link1->{url}, 'get by name: song2 has right link for link1');
-	is($links_by_name->{$link1->{name}}->extras, undef,         'get by name: song2 has right extras for link1');
-	is($links_by_name->{$link3->{name}}->url,    $link3->{url}, 'get by name: song2 has right link for link3');
-	is($links_by_name->{$link3->{name}}->extras, undef,         'get by name: song2 has right extras for link3');
-	is($links_by_name->{$link4->{name}}->url,    $link4->{url}, 'get by name: song2 has right link for link4');
-	is($links_by_name->{$link4->{name}}->extras, '16x9',        'get by name: song2 has right extras for link4');
+	is($links_by_name->{$link1->{identifier}}->url,    $link1->{url}, 'get by name: song2 has right link for link1');
+	is($links_by_name->{$link1->{identifier}}->extras, undef,         'get by name: song2 has right extras for link1');
+	is($links_by_name->{$link3->{identifier}}->url,    $link3->{url}, 'get by name: song2 has right link for link3');
+	is($links_by_name->{$link3->{identifier}}->extras, undef,         'get by name: song2 has right extras for link3');
+	is($links_by_name->{$link4->{identifier}}->url,    $link4->{url}, 'get by name: song2 has right link for link4');
+	is($links_by_name->{$link4->{identifier}}->extras, '16x9',        'get by name: song2 has right extras for link4');
 
     done_testing;
 }

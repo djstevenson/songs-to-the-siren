@@ -61,10 +61,7 @@ after extra_validation => sub {
 
     my $fail;
 
-    my $identifiers = $self->c
-        ->schema->resultset('Link')
-        ->for_song($self->song)
-        ->links_by_identifier;
+    my $identifiers = $self->song->links->links_by_identifier;
     
     my $identifier_field = $self->find_field('identifier');
     my $identifier_value = lc $identifier_field->value;
