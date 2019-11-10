@@ -73,7 +73,7 @@ after extra_validation => sub {
     $fail = 'Password must not contain user name'
         if index($password_value, $name_value) != -1;
 
-    # Set the error on 'name' if we don't already have one
+    # Set the error on 'password' if we don't already have one
     $password_field->error($fail)
         if $fail && !$password_field->has_error;
 };
