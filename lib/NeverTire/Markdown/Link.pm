@@ -11,7 +11,11 @@ has _links => (
     isa         => 'HashRef[NeverTire::Schema::Result::Link]',
     lazy        => 1,
     default     => sub {
-        return shift->song->links->links_by_identifier;
+        my $self = shift;
+
+        return {} unless $self->has_song;
+
+        return $self->song->links->links_by_identifier;
     }
 );
 

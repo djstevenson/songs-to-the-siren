@@ -10,7 +10,7 @@ use NeverTire::Markdown::Link;
 has song => (
     is          => 'ro',
     isa         => 'NeverTire::Schema::Result::Song',
-    required    => 1,
+    predicate   => 'has_song',
 );
 
 has _preprocessors => (
@@ -20,13 +20,13 @@ has _preprocessors => (
     default     => sub {
         my $self = shift;
 
-        my $song = $self->song;
+        my $args = $self->has_song ? {song => $self->song} : {};
 
         my @classes = (
             'NeverTire::Markdown::Link',
         );
         return [
-            map { $_->new( song => $song ) } @classes
+            map { $_->new( $args ) } @classes
         ];
     }
 );
@@ -70,11 +70,14 @@ method of Text::Markdown
 
 =over
 
-=item song (required)
+=item song (preferred)
 
 A DBIx::Class result object for the song being rendered. 
 
-We'll need this to look up links etc.
+We'll need this to look up links etc. 
+
+If you don't have a song object yet, leave this out, but all
+link lookups will fail and return placeholder text.
 
 =back
 

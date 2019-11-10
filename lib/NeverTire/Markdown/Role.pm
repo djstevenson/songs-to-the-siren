@@ -6,7 +6,7 @@ use Moose::Role;
 has song => (
     is          => 'ro',
     isa         => 'NeverTire::Schema::Result::Song',
-    required    => 1,
+    predicate   => 'has_song',
 );
 
 requires 'process';

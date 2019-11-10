@@ -125,12 +125,16 @@ sub run {
 		},
 	];
 
+	my $p = NeverTire::Markdown->new( song => $song1 );
 	foreach my $test (@$tests) {
-		my $p = NeverTire::Markdown->new( song => $song1 );
 		my $actual = $p->markdown($test->{input});
 		is($actual, $test->{expected}, $test->{test_name});
 	}
 	
+	# Test with no song object, all lookups will fail:
+	$p = NeverTire::Markdown->new;
+	is($p->markdown('abc ^^identifier1^^ def'), qq{<p>abc <strong>LINK IDENTIFIER NOT FOUND: identifier1</strong> def</p>\n}, 'All links fail lookup without a song');
+
     done_testing;
 }
 
