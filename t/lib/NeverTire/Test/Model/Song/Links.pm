@@ -106,19 +106,19 @@ sub run {
 
 	# In templates, we may want to get links by name, e.g. to 
 	# link to the youtube video. Test that:
-	my $links_by_name = $song1->links->links_by_name;
-	# links_by_name returned hash, k=name, v=result object
-	is($links_by_name->{$link1->{identifier}}->url, $link1->{url}, 'get by name: song1 has right link for link1');
-	is($links_by_name->{$link2->{identifier}}->url, $link2->{url}, 'get by name: song1 has right link for link2');
+	my $links_by_identifier = $song1->links->links_by_identifier;
+	# links_by_identifier returned hash, k=name, v=result object
+	is($links_by_identifier->{$link1->{identifier}}->url, $link1->{url}, 'get by identifier: song1 has right link for link1');
+	is($links_by_identifier->{$link2->{identifier}}->url, $link2->{url}, 'get by identifier: song1 has right link for link2');
 
 	# And check extras while we're at it, for song2
-	$links_by_name = $song2->links->links_by_name;
-	is($links_by_name->{$link1->{identifier}}->url,    $link1->{url}, 'get by name: song2 has right link for link1');
-	is($links_by_name->{$link1->{identifier}}->extras, undef,         'get by name: song2 has right extras for link1');
-	is($links_by_name->{$link3->{identifier}}->url,    $link3->{url}, 'get by name: song2 has right link for link3');
-	is($links_by_name->{$link3->{identifier}}->extras, undef,         'get by name: song2 has right extras for link3');
-	is($links_by_name->{$link4->{identifier}}->url,    $link4->{url}, 'get by name: song2 has right link for link4');
-	is($links_by_name->{$link4->{identifier}}->extras, '16x9',        'get by name: song2 has right extras for link4');
+	$links_by_identifier = $song2->links->links_by_identifier;
+	is($links_by_identifier->{$link1->{identifier}}->url,    $link1->{url}, 'get by identifier: song2 has right link for link1');
+	is($links_by_identifier->{$link1->{identifier}}->extras, undef,         'get by identifier: song2 has right extras for link1');
+	is($links_by_identifier->{$link3->{identifier}}->url,    $link3->{url}, 'get by identifier: song2 has right link for link3');
+	is($links_by_identifier->{$link3->{identifier}}->extras, undef,         'get by identifier: song2 has right extras for link3');
+	is($links_by_identifier->{$link4->{identifier}}->url,    $link4->{url}, 'get by identifier: song2 has right link for link4');
+	is($links_by_identifier->{$link4->{identifier}}->extras, '16x9',        'get by identifier: song2 has right extras for link4');
 
     done_testing;
 }
