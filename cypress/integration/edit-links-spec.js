@@ -175,6 +175,42 @@ context('Song links CRUD tests', () => {
                 .assertNoFormError('extras')
         })
 
+        it('Edit form does not reject existing identifier from the link we are editing', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            const linkData = makeLinkData(10)
+
+            // Test form is not rejected due to existing identifier
+            // when the existing identifier is our own! i.e., edit
+            // a link without changing the identifier
+            listPage
+                .createLink(makeLinkData(10))
+                .edit(1)
+                .editLink({class: ''})
+                .assertFormError('class', 'Required')
+                .assertNoFormError('identifier')
+        })
+
+        it('Edit form rejects existing identifier from other links', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            const linkData10 = makeLinkData(10)
+            const linkData20 = makeLinkData(20)
+
+            // Create two links
+            listPage.createLink(linkData10)
+            listPage.createLink(linkData20)
+
+            // Edit the second and attempt to set its identifier to the first
+            listPage.edit(2)
+                .editLink({identifier: linkData10.identifier})
+                .assertFormError('identifier', 'Identifier already used for this song')
+        })
+
         it('Edit form non-integer priority', () => {
             createSongListLinks()
             
