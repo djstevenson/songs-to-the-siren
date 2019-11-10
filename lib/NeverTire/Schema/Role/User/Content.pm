@@ -4,7 +4,7 @@ use Moose::Role;
 # TODO Add pod
 
 use DateTime;
-use Text::Markdown qw/ markdown /;
+use NeverTire::Markdown;
 use Carp qw/ croak /;
 
 use Readonly;
@@ -19,9 +19,10 @@ sub admin_create_content {
 
     croak $NOT_ADMIN unless $self->admin;
 
+    my $processor = NeverTire::Markdown->new;
     my $full_args = {
         %$args,
-        html       => markdown($args->{markdown}),
+        html       => $processor->markdown($args->{markdown}),
         updated_at => DateTime->now,
     };
 
@@ -33,9 +34,10 @@ sub admin_edit_content {
 
     croak $NOT_ADMIN unless $self->admin;
 
+    my $processor = NeverTire::Markdown->new;
     my $full_args = {
         %$args,
-        html       => markdown($args->{markdown}),
+        html       => $processor->markdown($args->{markdown}),
         updated_at => DateTime->now,
     };
 

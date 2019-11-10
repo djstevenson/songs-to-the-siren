@@ -4,7 +4,6 @@ use Moose::Role;
 # TODO Add pod
 
 use DateTime;
-use Text::Markdown qw/ markdown /;
 use Carp qw/ croak /;
 
 use Readonly;
@@ -21,12 +20,15 @@ sub admin_create_song {
 
     my $full_args = {
         %$args,
-        full_html    => markdown($args->{full_markdown}),
-        summary_html => markdown($args->{summary_markdown}),
+        full_html    => '',
+        summary_html => '',
         created_at   => DateTime->now,
     };
 
-    return $self->create_related('songs', $full_args);
+    my $song = $self->create_related('songs', $full_args);
+    $song->render_markdown;
+
+    return $song;
 }
 
 sub admin_edit_song {
@@ -36,14 +38,13 @@ sub admin_edit_song {
 
     my $full_args = {
         %$args,
-        full_html    => markdown($args->{full_markdown}),
-        summary_html => markdown($args->{summary_markdown}),
         updated_at   => DateTime->now,
     };
 
     # TODO Record who did the update
     $song->update($full_args);
-    
+    $song->render_markdown;
+
     return $song;
 }
 
