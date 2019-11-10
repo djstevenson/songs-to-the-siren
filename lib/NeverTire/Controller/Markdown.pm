@@ -1,6 +1,7 @@
 package NeverTire::Controller::Markdown;
 use Mojo::Base 'Mojolicious::Controller';
 
+# TODO DROP LIVE PREVIEWS (git issue #195))
 use Text::Markdown qw/ markdown /;
 
 sub add_routes {
