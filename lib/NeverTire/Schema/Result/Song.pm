@@ -133,6 +133,16 @@ sub add_link {
     });
 }
 
+sub render_markdown {
+    my $self = shift;
+
+    my $processor = NeverTire::Markdown->new( song => $self );
+    $self->update({
+        full_html    => $processor->markdown($self->full_markdown),
+        summary_html => $processor->markdown($self->summary_markdown),
+    });
+}
+
 # returns {
 #    newer => $next_newer_song,
 #    older => $next_older_song,
