@@ -10,9 +10,13 @@ const label = 'editlinks'
 const userFactory = new UserFactory(label)
 const songFactory = new SongFactory(label)
 
-function createSongListLinks() {
+beforeEach( () => {
     cy.resetDatabase()
+})
 
+// Creates a user and song, and loads the list-links
+// page for the song. Does not create any links
+function createSongListLinks() {
     const user = userFactory.getNextSignedInUser(true)
     const song1 = songFactory.getNextSong(user)
 
@@ -21,7 +25,7 @@ function createSongListLinks() {
         .getRow(1)
         .click('links')
 
-        return song1
+    return song1
 }
 
 function makeLinkData(n) {
@@ -41,8 +45,7 @@ context('Song links CRUD tests', () => {
     describe('New song has empty list of links', () => {
         it('List song links page has right title, and list is empty', () => {
 
-            const user = userFactory.getNextSignedInUser(true)
-            const song1 = songFactory.getNextSong(user)
+            const song1 = createSongListLinks()
         
             // Go to the list-links page
             new ListSongsPage()
@@ -64,8 +67,6 @@ context('Song links CRUD tests', () => {
             
             new ListLinksPage()
                 .clickNew()
-
-            new CreateLinkPage()
                 .createLink({})
                 .assertFormError('identifier',  'Required')
                 .assertFormError('class',       'Required')
@@ -73,6 +74,18 @@ context('Song links CRUD tests', () => {
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
                 .assertNoFormError('extras')
+        })
+
+        it('Create form rejects existing identifiers', () => {
+            createSongListLinks()
+            
+            const linkData = makeLinkData(10)
+
+            new ListLinksPage()
+                .createLink(linkData)
+                .clickNew()
+                .createLink(linkData)
+                .assertFormError('identifier', 'Identifier already used for this song');
         })
 
         it('Create form non-integer priority', () => {
