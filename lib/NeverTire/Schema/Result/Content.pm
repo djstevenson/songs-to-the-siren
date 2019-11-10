@@ -7,7 +7,6 @@ extends 'NeverTire::Schema::Base::Result';
 # TODO POD
 
 use DateTime;
-use Text::Markdown qw/ markdown /;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 

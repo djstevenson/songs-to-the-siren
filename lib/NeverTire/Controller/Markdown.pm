@@ -14,6 +14,7 @@ sub render_markdown {
 
     # TODO This repeats in several controllers, can we "DRY" it?
     # TODO e.g. an 'under' stage in the route?
+    # TODO Check - I think this is already done!!
     return $c->render(status => 403, text => 'Nah')
         unless exists $c->stash->{auth_user};
 
