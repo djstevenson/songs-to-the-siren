@@ -72,11 +72,19 @@ TESTS
 
 ### Unit tests for Perl code
 
-TODO Add details on this
+To run the Perl unit test suite:
 
-### Selenium-based functional tests
+`carton exec -- forkprove -MMoose -MDBIx::Class -I. -j8 -lr t`
 
-TODO Add details on this. When they exist
+(-j8 is the level of parallelism, you can change this depending on core count of your CPU)
+
+### Cypress.io functional tests
+
+`npm i` to install
+
+`npx cypress open` to open the test UI, ready for testing in Electron or Chrome
+
+`npx cypress run` to run headless.
 
 
 FAQ
