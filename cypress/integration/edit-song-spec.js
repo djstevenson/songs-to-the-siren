@@ -307,4 +307,48 @@ context('Song CRUD tests', () => {
 
     })
 
+    describe('Editing links re-renders song', () => {
+        it('Reference a link that does not exist, then create it', () => {
+            const user = userFactory.getNextSignedInUser(true)
+
+            const song1 = songFactory.getNextSong(user)
+            
+            // Edit song to reference a link we have not created yet
+            const newMarkdown = "abc ^^link1^^ def"
+            const listPage = new ListSongsPage()
+            listPage
+                .visit()
+                .edit(1)
+                .editSong({ fullMarkdown: newMarkdown });
+            
+            // View it and check rendered html shows placeholder
+            listPage
+                .visit()
+                .view(1)
+                .assertSongTitle(song1.getTitle())
+                .assertDescriptionContains("LINK IDENTIFIER NOT FOUND: link1")
+            
+            // Edit the link
+            const url1 = "https://ytfc.com/link1"
+            const desc1 = "link1 desc"
+            listPage
+                .visit()
+                .links(1)
+                .clickNew()
+                .createLink({
+                    identifier: "link1",
+                    url: url1,
+                    description: desc1,
+                    class: "test",
+                    priority: 10
+                })
+            
+            // Revisit song page and check link
+            listPage
+                .visit()
+                .view(1)
+                .assertDescriptionLink(1, url1, desc1)
+        })
+   });
+
 })

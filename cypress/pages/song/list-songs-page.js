@@ -2,6 +2,8 @@ import { Admin          } from '../admin'
 import { ListSongsTable } from '../../tables/list-songs-table'
 import { DeleteSongPage } from './delete-song-page'
 import { EditSongPage   } from './edit-song-page'
+import { ViewSongPage   } from './view-song-page'
+import { ListLinksPage  } from '../link/list-links-page'
 
 export class ListSongsPage extends Admin {
 
@@ -28,6 +30,18 @@ export class ListSongsPage extends Admin {
             .assertRowCount(c)
 
         return this
+    }
+
+    // Shortcut to hit the the view page by clicking on the title
+    view(rowIndex) {
+        this.getRow(rowIndex).click('title')
+        return new ViewSongPage()
+    }
+
+    // Shortcut to hit the the links edit page for the given song
+    links(rowIndex) {
+        this.getRow(rowIndex).click('links')
+        return new ListLinksPage()
     }
 
     // Shortcut to hit the edit link in the 'n'th row
