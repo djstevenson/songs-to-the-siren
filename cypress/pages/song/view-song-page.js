@@ -12,4 +12,13 @@ export class ViewSongPage extends Public {
         cy.get('.description').contains(expected)
         return this
     }
+
+    assertDescriptionLink(nth, url, desc) {
+        const sel = ".description > p"
+        const link = cy.get(sel).find(`a:nth-child(${nth})`)
+        link.contains(desc)
+        link.should('have.attr', 'href').and('include', url)
+
+        return this
+    }
 }
