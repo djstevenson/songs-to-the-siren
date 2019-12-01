@@ -16,15 +16,5 @@
 
 </div>
 
-<script type="text/javascript">
-    $(function() {
-        app.markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");
-        app.markdownPreview("#new-song-full-markdown", "#markdown-preview-full");
-        app.markdownPreview("#new-page-markdown", "#markdown-page-preview");
-        app.markdownPreview("#edit-page-markdown", "#markdown-page-preview");
-    });
-</script>
-
-
 </body>
 </html>

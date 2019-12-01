@@ -1,21 +1,3 @@
-module.exports = {
-    markdownPreview:markdownPreview,
-    deleteSongTag:deleteSongTag
-};
-
-function markdownPreview(textAreaID, previewAreaID) {
-    $(textAreaID).on('change keyup paste focus', $.throttle( 500, function() {
-        $.ajax({
-            type: "POST",
-            url: "/markdown",
-            data: { markdown: $(this).val() },
-            success: function(data) {
-                $(previewAreaID).html(data).show();
-            },
-        });
-    }));
-}
-
 function deleteSongTag(songID, tagID) {
     var url = "/admin/song/" + songID + "/tag/" + tagID;
     $.ajax({
@@ -34,10 +16,23 @@ function deleteSongTag(songID, tagID) {
 
 $(function() {
     $('.song-tag').hover(
-        function(){ $(this).toggleClass('btn-primary');  $(this).toggleClass('btn-outline-dark') }
+        function() { $(this).toggleClass('btn-primary');  $(this).toggleClass('btn-outline-dark') }
     );
     $('.song-tag-remove').hover(
-        function(){ $(this).toggleClass('btn-danger');  $(this).toggleClass('btn-outline-dark') }
+        function() { $(this).toggleClass('btn-danger');  $(this).toggleClass('btn-outline-dark') }
     );
+
+    $('[data-markdown-preview]').on('change keyup paste focus', $.throttle( 500, function() {
+        const data = $(this).data()
+        const previewAreaId = '#' + data['markdownPreview']
+        $.ajax({
+            type: "POST",
+            url: "/markdown",
+            data: { markdown: $(this).val() },
+            success: function(data) {
+                $(previewAreaId).html(data).show();
+            },
+        });
+    }));
 });
 
