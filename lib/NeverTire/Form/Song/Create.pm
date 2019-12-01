@@ -59,12 +59,15 @@ has_field summary_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-summary',
+    },
 );
 
 has_field summary_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div id="markdown-preview-summary" class="markdown summary markdown-preview">Summary preview here</div>},
+        html => q{<div id="markdown-preview-summary" class="markdown summary markdown-preview"></div>},
     },
 );
 
@@ -73,12 +76,15 @@ has_field full_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-full',
+    },
 );
 
 has_field full_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div id="markdown-preview-full" class="markdown full markdown-preview">Full preview here</div>},
+        html => q{<div id="markdown-preview-full" class="markdown full markdown-preview"></div>},
     },
 );
 
