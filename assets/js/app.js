@@ -1,3 +1,8 @@
+module.exports = {
+    markdownPreview:markdownPreview,
+    deleteSongTag:deleteSongTag
+};
+
 function markdownPreview(textAreaID, previewAreaID) {
     $(textAreaID).on('change keyup paste focus', $.throttle( 500, function() {
         $.ajax({
