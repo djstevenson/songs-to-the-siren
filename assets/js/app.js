@@ -24,14 +24,11 @@ $(function() {
 
     $('[data-delete-song-tag]').on('click', function() {
         const data = $(this).data()
-        const buttonID = $(this).attr('id')
         const tagId = data['tagId']
         const songId = data['songId']
         var url = "/admin/song/" + songId + "/tag/" + tagId
         const button = $(this)
-        const listItemID = '#' + buttonID + "-li"
-        console.log("list item "+ listItemID)
-        const listItem = $(listItemID)
+        const listItem = button.parent()
         $.ajax({
             type: "DELETE",
             url: url,
