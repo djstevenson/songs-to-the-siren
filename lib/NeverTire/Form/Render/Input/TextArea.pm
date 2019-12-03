@@ -29,10 +29,12 @@ sub render {
     my $options = $self->_get_options;
 	my $rows = exists $options->{rows} ? $options->{rows} : 6;
 
+    my $data = $self->render_data;
+
     return qq{
 		<div class="form-group">
 			<label for="${id}">${label}</label>
-			<textarea id="${id}" name="${name}" $autofocus class="${input_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
+			<textarea id="${id}" name="${name}" ${data} $autofocus class="${input_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
 			${error}
 		</div>
 	};

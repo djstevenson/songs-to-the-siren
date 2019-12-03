@@ -26,12 +26,15 @@ has_field markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-content',
+    },
 );
 
 has_field preview => (
     type        => 'Html',
     options     => {
-        html => q{<div id="markdown-content-preview" class="markdown markdown-preview">Preview here</div>},
+        html => q{<div id="markdown-preview-content" class="markdown markdown-preview">Preview here</div>},
     },
 );
 

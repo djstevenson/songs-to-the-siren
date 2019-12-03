@@ -35,12 +35,14 @@ sub _input_render {
         $value = $self->value;
     }
 
+    my $data = $self->render_data;
+
     # TODO If the form has errors, consider patching autofocus to go to the first error field?
     my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';
     return qq{
         <div class="form-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" name="${name}" $autofocus class="${input_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" ${data} name="${name}" $autofocus class="${input_class}" placeholder="${placeholder}" value="${value}"/>
             ${error}
         </div>
     };

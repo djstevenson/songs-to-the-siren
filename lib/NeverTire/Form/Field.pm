@@ -85,6 +85,21 @@ has error => (
     predicate   => 'has_error',
 );
 
+# Document this. If present, then
+# { abc => 1, def => 'blah', ghi => undef }
+# would render attributes like:
+# <tag data-abc="1" data-def="blah" data-ghi>
+#
+# Defined values are stringified, so it doesn't
+# mean anything to have a hash as a value.
+# In future, maybe change this to render a hash
+# as JSON if we have a use-case.
+has data => (
+    is          => 'ro',
+    isa         => 'HashRef[Maybe[Int|Str]]',
+    predicate   => 'has_data',
+);
+
 sub process {
     my ($self, $schema, $value) = @_;
 
@@ -174,6 +189,28 @@ sub _get_selections {
     return $selections;
 }
 
+
+sub render_data {
+    my $self = shift;
+
+    return '' unless $self->has_data;
+
+    my @attrs;
+    
+    my %data = %{ $self->data };
+    for my $k ( keys %data ) {
+        my $v = $data{$k};
+
+        if ( defined($v) ) {
+            push @attrs, qq{data-${k}="$v"};
+        }
+        else {
+            push @attrs, qq{data-${k}}; # Undef value, just return attr name
+        }
+    }
+    
+    return join(' ', @attrs);
+}
 
 __PACKAGE__->meta->make_immutable;
 1;
