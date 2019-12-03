@@ -2724,49 +2724,49 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
-  Specio-0.44
-    pathname: D/DR/DROLSKY/Specio-0.44.tar.gz
+  Specio-0.45
+    pathname: D/DR/DROLSKY/Specio-0.45.tar.gz
     provides:
-      Specio 0.44
-      Specio::Coercion 0.44
-      Specio::Constraint::AnyCan 0.44
-      Specio::Constraint::AnyDoes 0.44
-      Specio::Constraint::AnyIsa 0.44
-      Specio::Constraint::Enum 0.44
-      Specio::Constraint::Intersection 0.44
-      Specio::Constraint::ObjectCan 0.44
-      Specio::Constraint::ObjectDoes 0.44
-      Specio::Constraint::ObjectIsa 0.44
-      Specio::Constraint::Parameterizable 0.44
-      Specio::Constraint::Parameterized 0.44
-      Specio::Constraint::Role::CanType 0.44
-      Specio::Constraint::Role::DoesType 0.44
-      Specio::Constraint::Role::Interface 0.44
-      Specio::Constraint::Role::IsaType 0.44
-      Specio::Constraint::Simple 0.44
-      Specio::Constraint::Structurable 0.44
-      Specio::Constraint::Structured 0.44
-      Specio::Constraint::Union 0.44
-      Specio::Declare 0.44
-      Specio::DeclaredAt 0.44
-      Specio::Exception 0.44
-      Specio::Exporter 0.44
-      Specio::Helpers 0.44
-      Specio::Library::Builtins 0.44
-      Specio::Library::Numeric 0.44
-      Specio::Library::Perl 0.44
-      Specio::Library::String 0.44
-      Specio::Library::Structured 0.44
-      Specio::Library::Structured::Dict 0.44
-      Specio::Library::Structured::Map 0.44
-      Specio::Library::Structured::Tuple 0.44
-      Specio::OO 0.44
-      Specio::PartialDump 0.44
-      Specio::Registry 0.44
-      Specio::Role::Inlinable 0.44
-      Specio::Subs 0.44
-      Specio::TypeChecks 0.44
-      Test::Specio 0.44
+      Specio 0.45
+      Specio::Coercion 0.45
+      Specio::Constraint::AnyCan 0.45
+      Specio::Constraint::AnyDoes 0.45
+      Specio::Constraint::AnyIsa 0.45
+      Specio::Constraint::Enum 0.45
+      Specio::Constraint::Intersection 0.45
+      Specio::Constraint::ObjectCan 0.45
+      Specio::Constraint::ObjectDoes 0.45
+      Specio::Constraint::ObjectIsa 0.45
+      Specio::Constraint::Parameterizable 0.45
+      Specio::Constraint::Parameterized 0.45
+      Specio::Constraint::Role::CanType 0.45
+      Specio::Constraint::Role::DoesType 0.45
+      Specio::Constraint::Role::Interface 0.45
+      Specio::Constraint::Role::IsaType 0.45
+      Specio::Constraint::Simple 0.45
+      Specio::Constraint::Structurable 0.45
+      Specio::Constraint::Structured 0.45
+      Specio::Constraint::Union 0.45
+      Specio::Declare 0.45
+      Specio::DeclaredAt 0.45
+      Specio::Exception 0.45
+      Specio::Exporter 0.45
+      Specio::Helpers 0.45
+      Specio::Library::Builtins 0.45
+      Specio::Library::Numeric 0.45
+      Specio::Library::Perl 0.45
+      Specio::Library::String 0.45
+      Specio::Library::Structured 0.45
+      Specio::Library::Structured::Dict 0.45
+      Specio::Library::Structured::Map 0.45
+      Specio::Library::Structured::Tuple 0.45
+      Specio::OO 0.45
+      Specio::PartialDump 0.45
+      Specio::Registry 0.45
+      Specio::Role::Inlinable 0.45
+      Specio::Subs 0.45
+      Specio::TypeChecks 0.45
+      Test::Specio 0.45
     requirements:
       B 0
       Carp 0
@@ -2786,6 +2786,7 @@ DISTRIBUTIONS
       Test::Fatal 0
       Test::More 0.96
       Try::Tiny 0
+      XString 0
       overload 0
       parent 0
       perl 5.008
@@ -3180,6 +3181,13 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
+  XString-0.002
+    pathname: A/AT/ATOOMIC/XString-0.002.tar.gz
+    provides:
+      XString 0.002
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.010
   forkprove-v0.4.10
     pathname: M/MI/MIYAGAWA/forkprove-v0.4.10.tar.gz
     provides:
