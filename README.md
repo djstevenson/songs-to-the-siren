@@ -30,7 +30,7 @@ SCSS
 CSS stylesheets are written in SCSS. To covert to CSS, install the scss ruby gem and run (from the project's root dir):
 
 ```
-scss --watch assets/sass/never-tire.scss:public/never-tire.css
+scss --watch assets/never-tire.scss:public/never-tire.css
 ```
 
 Full dev
