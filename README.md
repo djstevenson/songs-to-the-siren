@@ -24,6 +24,19 @@ Optional overrides via the environment:
 
  * `TEST_BCRYPT_COST=4` (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
 
+Webpack
+=======
+
+Currently, JS assets are managed by webpack, but that's overkill for the amount of JS here, so that will change.
+
+SCSS
+====
+
+CSS stylesheets are written in SCSS. To covert to CSS, install the scss ruby gem and run (from the project's root dir):
+
+```
+scss --watch assets/sass/never-tire.scss:public/never-tire.css
+```
 
 Full dev
 ========
