@@ -1,4 +1,4 @@
-% layout 'front_page_layout';
+% layout 'default';
 % title "Songs I Will Never Tire of";
 
 % my $tag_count = scalar @$tags;

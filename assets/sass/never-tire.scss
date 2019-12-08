@@ -1,7 +1,8 @@
-/* TODO: Use SCSS? */
+$themeColour-Light: #f3e2c7;
+$themeColour-Dark: #b68d4c;
 
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: $themeColor-Light;
     color: rgb(17, 17, 17);
     margin: 1rem;
 }
