@@ -8,6 +8,7 @@ $themeColour-HeaderSeparator: #222005;
 $themeColour-Link: #6ecfcf;
 $themeColour-VisitedLink: #6eafaf;
 $themeColour-HoverLink: #cf6e6e;
+$themeColour-InputBackground: #cccccc;
 
 a:link {
     color: $themeColour-Link;
@@ -19,6 +20,10 @@ a:visited {
 
 a:hover {
     color: $themeColour-HoverLink;
+}
+
+.form-validation-error {
+    font-weight: bold;
 }
 
 body {
