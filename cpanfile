@@ -8,7 +8,6 @@ requires 'MooseX::NonMoose';
 requires 'MooseX::Traits';
 requires 'Mojolicious';
 requires 'Mojo::Pg';
-requires 'Mojolicious::Plugin::Webpack';
 requires 'Minion';
 requires 'Minion::Backend::Pg';
 requires 'DBIx::Class';

@@ -24,6 +24,14 @@ Optional overrides via the environment:
 
  * `TEST_BCRYPT_COST=4` (say): Cheaper Bcrypts for faster tests. Don't set it this low in production. Default is 13.
 
+SCSS
+====
+
+CSS stylesheets are written in SCSS. To covert to CSS, install the scss ruby gem and run (from the project's root dir):
+
+```
+scss --watch assets/never-tire.scss:public/never-tire.css
+```
 
 Full dev
 ========
@@ -37,7 +45,7 @@ export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-DBIC_TRACE=0 MOJO_WEBPACK_BUILD=1 carton exec -- morbo script/never-tire
+DBIC_TRACE=0 carton exec -- morbo script/never-tire
 ```
 
 Note, for 'test' and 'development' modes, this creates an admin user with the name 'admin' and password 'xyzzy'.
@@ -54,7 +62,7 @@ export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-DBIC_TRACE=0 MOJO_WEBPACK_BUILD=1 carton exec -- morbo script/never-tire
+DBIC_TRACE=0 carton exec -- morbo script/never-tire
 ```
 
 To list routes

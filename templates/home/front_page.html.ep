@@ -1,4 +1,4 @@
-% layout 'front_page_layout';
+% layout 'default';
 % title "Songs I Will Never Tire of";
 
 % my $tag_count = scalar @$tags;
@@ -14,6 +14,8 @@
     </p>
 % }
 
+% my $c = 1;
 % while (my $song = $songs->next ) {
-    %= include 'home/_song', song => $song
+    %= include 'home/_song', song => $song, class => (($c & 1) ? 'odd-song' : 'even-song')
+    % $c++;
 % }

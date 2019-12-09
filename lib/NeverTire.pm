@@ -34,7 +34,6 @@ sub startup {
     $app->plugin(Minion => {Pg => $app->db_dsn});
     $app->plugin('NeverTire::Task::Mailgun');
     $app->plugin('NeverTire::Helper::Email');
-    $app->plugin(Webpack => {process => [qw(js css)]});
 
     $app->_migrate_db;
 
