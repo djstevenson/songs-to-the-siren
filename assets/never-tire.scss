@@ -1,20 +1,24 @@
-$themeColour-Light: #f3e2c7;
-$themeColour-Dark: #b68d4c;
+$themeColour-Background: #383508;
+$themeColour-BackgroundOdd: #222005;
+$themeColour-BackgroundEven: #2a2806;
+$themeColour-Title: #a79e19;
+$themeColour-Text: #d0d0d0;
+$themeColour-HeaderSeparator: #222005;
 
 body {
-    background-color: $themeColour-Light;
-    color: rgb(17, 17, 17);
+    background-color: $themeColour-Background;
     margin: 1rem;
+    color: $themeColour-Text;
 }
 
 img { border: none; }
 
 section.song {
-    border-bottom: 3px solid #aaaaaa;
+    padding-top: 1rem;
     margin-bottom: 3rem;
 
     header {
-        border-bottom: 1px solid #cccccc;
+        border-bottom: 1px solid $themeColour-HeaderSeparator;
         margin-bottom: 1rem;
     }
 
@@ -31,6 +35,13 @@ section.song {
     }
 }
 
+.odd-song {
+    background-color: $themeColour-BackgroundOdd;
+}
+
+.even-song {
+    background-color: $themeColour-BackgroundEven;
+}
 
 .song-tag, .song-tag-remove {
     margin-left: 0.2rem;
@@ -61,6 +72,7 @@ h2.title {
     font-weight: 800;
     font-size: 2rem;
     display: inline-block;
+    color: $themeColour-Title;
 }
 
 h3.artist {
