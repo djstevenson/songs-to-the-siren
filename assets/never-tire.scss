@@ -2,8 +2,24 @@ $themeColour-Background: #383508;
 $themeColour-BackgroundOdd: #222005;
 $themeColour-BackgroundEven: #2a2806;
 $themeColour-Title: #a79e19;
+$themeColour-TitleBackground: #0d0c02;
 $themeColour-Text: #d0d0d0;
 $themeColour-HeaderSeparator: #222005;
+$themeColour-Link: #6ecfcf;
+$themeColour-VisitedLink: #6eafaf;
+$themeColour-HoverLink: #cf6e6e;
+
+a:link {
+    color: $themeColour-Link;
+}
+
+a:visited {
+    color: $themeColour-VisitedLink;
+}
+
+a:hover {
+    color: $themeColour-HoverLink;
+}
 
 body {
     background-color: $themeColour-Background;
@@ -14,7 +30,6 @@ body {
 img { border: none; }
 
 section.song {
-    padding-top: 1rem;
     margin-bottom: 3rem;
 
     header {
@@ -71,8 +86,11 @@ section.song {
 h2.title {
     font-weight: 800;
     font-size: 2rem;
-    display: inline-block;
+    display:  block;
     color: $themeColour-Title;
+    background-color: $themeColour-TitleBackground;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 h3.artist {

@@ -1,6 +1,8 @@
-<header class="col-12">
-    <a href="<%= url_for('view_song', song_id => $song->id) %>"><img class="rounded float-left mr-3 mb-1" src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" /></a>
-    <h2 class="title">
+<header class="col-12 p-0">
+    <a href="<%= url_for('view_song', song_id => $song->id) %>">
+        <img class="rounded float-left mr-3 mb-1" src="/images/160/<%= $song->image %>.jpg" alt="record sleeve image" height="160" width="160" />
+    </a>
+    <h2 class="title rounded-top">
         <%= $song->title %>
     </h2>
     <h3 class="artist">
