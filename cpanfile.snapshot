@@ -1967,15 +1967,6 @@ DISTRIBUTIONS
       List::Util 1.41
       Time::Local 1.2
       perl 5.010001
-  Mojolicious-Plugin-Webpack-0.12
-    pathname: J/JH/JHTHORSEN/Mojolicious-Plugin-Webpack-0.12.tar.gz
-    provides:
-      Mojolicious::Command::Author::webpack undef
-      Mojolicious::Plugin::Webpack 0.12
-      Mojolicious::Plugin::Webpack::Builder undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      Mojolicious 8.00
   Moo-2.003006
     pathname: H/HA/HAARG/Moo-2.003006.tar.gz
     provides:
