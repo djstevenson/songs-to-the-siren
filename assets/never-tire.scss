@@ -11,6 +11,7 @@ $themeColour-HoverLink: #cf6e6e;
 $themeColour-Input: #f1eb9c;
 $themeColour-InputFocus: #ffffff;
 $themeColour-InputBorder: #003300;
+$themeColour-InputBorderFocus: #99ccff;
 
 body {
     background-color: $themeColour-Background;
@@ -38,10 +39,11 @@ a:hover {
 
 textarea, input[type="text"], input[type="password"], input[type="email"] {
     border-color: $themeColour-InputBorder !important;
-    border-width: 1px !important;
+    border-width: 3px !important;
     background-color: $themeColour-Input !important;
     &:focus {
         background-color: $themeColour-InputFocus !important;
+        border-color: $themeColour-InputBorderFocus !important;
     }
 }
 
