@@ -27,7 +27,7 @@ sub _input_render {
     if ($self->has_error) {
         $text = $self->error;
         $input_class .= ' is-invalid';
-        $error_class = 'text-danger';
+        $error_class = 'text-danger form-validation-error';
     }
     my $error = qq{<span id="${error_id}" class="${error_class}">${text}</span>};
 
