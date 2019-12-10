@@ -8,7 +8,18 @@ $themeColour-HeaderSeparator: #222005;
 $themeColour-Link: #6ecfcf;
 $themeColour-VisitedLink: #6eafaf;
 $themeColour-HoverLink: #cf6e6e;
-$themeColour-InputBackground: #cccccc;
+$themeColour-Input: #d4c81f;
+$themeColour-InputFocus: #f1eb9c;
+$themeColour-InputPlaceholder: #000000;
+$themeColour-InputBorder: #666666;
+
+body {
+    background-color: $themeColour-Background;
+    margin: 1rem;
+    color: $themeColour-Text;
+}
+
+img { border: none; }
 
 a:link {
     color: $themeColour-Link;
@@ -26,13 +37,17 @@ a:hover {
     font-weight: bold;
 }
 
-body {
-    background-color: $themeColour-Background;
-    margin: 1rem;
-    color: $themeColour-Text;
-}
+textarea, input[type="text"], input[type="password"], input[type="email"] {
+    border-color: $themeColour-InputBorder !important;
+    background-color: $themeColour-Input !important;
+    &:focus {
+        background-color: $themeColour-InputFocus !important;
+    }
 
-img { border: none; }
+    &::placeholder {
+        color: $themeColour-InputPlaceholder !important;
+    }
+}
 
 section.song {
     margin-bottom: 3rem;
