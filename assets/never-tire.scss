@@ -8,10 +8,9 @@ $themeColour-HeaderSeparator: #222005;
 $themeColour-Link: #6ecfcf;
 $themeColour-VisitedLink: #6eafaf;
 $themeColour-HoverLink: #cf6e6e;
-$themeColour-Input: #d4c81f;
-$themeColour-InputFocus: #f1eb9c;
-$themeColour-InputPlaceholder: #000000;
-$themeColour-InputBorder: #666666;
+$themeColour-Input: #edda5e; /*#d4c81f;*/
+$themeColour-InputFocus: #ffffff;
+$themeColour-InputBorder: #003300;
 
 body {
     background-color: $themeColour-Background;
@@ -39,13 +38,10 @@ a:hover {
 
 textarea, input[type="text"], input[type="password"], input[type="email"] {
     border-color: $themeColour-InputBorder !important;
+    border-width: 1px !important;
     background-color: $themeColour-Input !important;
     &:focus {
         background-color: $themeColour-InputFocus !important;
-    }
-
-    &::placeholder {
-        color: $themeColour-InputPlaceholder !important;
     }
 }
 
