@@ -12,6 +12,7 @@ $themeColour-Input: #f1eb9c;
 $themeColour-InputFocus: #ffffff;
 $themeColour-InputBorder: #003300;
 $themeColour-InputBorderFocus: #99ccff;
+$themeColour-Unpublished: #cd5c5c;
 
 body {
     background-color: $themeColour-Background;
@@ -171,4 +172,8 @@ h4.release {
 
 div.youtube {
     margin-bottom: 1em;
+}
+
+tr.song-is-not-published {
+    background-color: $themeColour-Unpublished !important;
 }
