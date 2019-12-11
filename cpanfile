@@ -8,6 +8,7 @@ requires 'MooseX::NonMoose';
 requires 'MooseX::Traits';
 requires 'Mojolicious';
 requires 'Mojo::Pg';
+requires 'Mozilla::CA';
 requires 'Minion';
 requires 'Minion::Backend::Pg';
 requires 'DBIx::Class';
