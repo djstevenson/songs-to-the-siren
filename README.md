@@ -44,7 +44,7 @@ export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
-psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
+psql -Unevertire never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
 DBIC_TRACE=0 carton exec -- morbo script/never-tire
 ```
 
@@ -61,7 +61,7 @@ export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
-psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
+psql -Unevertire never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
 DBIC_TRACE=0 carton exec -- morbo script/never-tire
 ```
 
