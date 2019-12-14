@@ -17,6 +17,7 @@ $col-MarkdownPreviewBorder: black;
 $col-CommentUnmoderated: goldenrod;
 $col-CommentAt: #a79e19;
 $col-CommentHeaderBottom: #555555;
+$col-CommentBackground: #2a2806;
 
 body {
     background-color: $col-Background;
@@ -137,22 +138,25 @@ h4.release {
 
 /* COMMENTS */
 .comments {
-    // background-color: red;
-    // border-left-color: black;
-    // border-left-width: 10px;
 
     .unmoderated {
         background-color: $col-CommentUnmoderated;
     }
 
     ul {
+        padding-top: 1rem;
+        // background-color: $col-BackgroundEven;
         list-style: none;
-        padding-bottom: 1.5rem;
+        // padding-bottom: 1.5rem;
+        margin-right: 1rem;
+
+        &.comment-root {
+            padding-bottom: 1rem;
+        }
     }
 
     li {
-        margin-top: 3rem;
-        padding-left: 0.5rem;
+        margin-top: 1rem;
     }
 
     span.comment-at {
@@ -167,7 +171,8 @@ h4.release {
     font-weight: normal;
     font-size: 1rem;
     border-bottom: 1px solid $col-CommentHeaderBottom;
-    margin-bottom: 2px;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
 
     .author strong {
         color: $col-CommentAt;

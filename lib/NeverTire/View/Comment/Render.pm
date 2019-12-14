@@ -13,7 +13,7 @@ sub render_comments {
 
     $draw_node //= \&_default_renderer;
 
-    return '<ul>' . _render_node($app, $root_node, $draw_node, 0) . '</ul>';
+    return '<ul class="comment-root">' . _render_node($app, $root_node, $draw_node, 0) . '</ul>';
 }
 
 sub _render_node {
