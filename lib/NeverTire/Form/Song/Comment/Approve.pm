@@ -20,7 +20,7 @@ has_button cancel => (style => 'light');
 override posted => sub {
 	my $self = shift;
 	
-    my $approve_button = $self->find_button('admin_approve_comment');
+    my $approve_button = $self->find_button('approve_comment');
     if ( $approve_button->clicked ) {
         my $user = $self->c->stash->{auth_user};
         $user->approve_comment($self->comment);
