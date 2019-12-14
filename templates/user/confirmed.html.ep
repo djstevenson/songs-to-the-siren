@@ -7,6 +7,6 @@
 		You have confirmed your signup.
 	</p>
 	<p>
-		You can now <a href="<%= url_for 'login' %>">login</a>.
+		You can now <a href="<%= url_for 'sign_in' %>">login</a>.
 	</p>
 </div>

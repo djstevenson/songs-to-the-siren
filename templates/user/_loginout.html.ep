@@ -5,6 +5,7 @@
 
     % if ($auth_user->admin) {
         - <a class="admin-home-link" href="<%= url_for('admin_home') %>">Admin home</a>
+        - <a class="home-link" href="<%= url_for('home') %>">Public home</a>
     % }
 % }
 % else {

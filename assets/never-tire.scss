@@ -1,37 +1,43 @@
-$themeColour-Background: #383508;
-$themeColour-BackgroundOdd: #222005;
-$themeColour-BackgroundEven: #2a2806;
-$themeColour-Title: #a79e19;
-$themeColour-TitleBackground: #0d0c02;
-$themeColour-Text: #d0d0d0;
-$themeColour-HeaderSeparator: #222005;
-$themeColour-Link: #6ecfcf;
-$themeColour-VisitedLink: #6eafaf;
-$themeColour-HoverLink: #cf6e6e;
-$themeColour-Input: #f1eb9c;
-$themeColour-InputFocus: #ffffff;
-$themeColour-InputBorder: #003300;
-$themeColour-InputBorderFocus: #99ccff;
-$themeColour-Unpublished: #cd5c5c;
+$col-Background: #383508;
+$col-BackgroundOdd: #222005;
+$col-BackgroundEven: #2a2806;
+$col-Title: #a79e19;
+$col-TitleBackground: #0d0c02;
+$col-Text: #d0d0d0;
+$col-HeaderSeparator: #222005;
+$col-Link: #6ecfcf;
+$col-VisitedLink: #6eafaf;
+$col-HoverLink: #cf6e6e;
+$col-Input: #f1eb9c;
+$col-InputFocus: #ffffff;
+$col-InputBorder: #003300;
+$col-InputBorderFocus: #99ccff;
+$col-Unpublished: #cd5c5c;
+$col-MarkdownPreviewBorder: black;
+$col-CommentUnmoderatedBackground: #003366;
+$col-CommentUnmoderatedBorder: #ff9933;
+$col-CommentAt: #a79e19;
+$col-CommentHeaderBottom: #555555;
+$col-CommentBackground: #2a2806;
 
 body {
-    background-color: $themeColour-Background;
+    background-color: $col-Background;
     margin: 1rem;
-    color: $themeColour-Text;
+    color: $col-Text;
 }
 
 img { border: none; }
 
 a:link {
-    color: $themeColour-Link;
+    color: $col-Link;
 }
 
 a:visited {
-    color: $themeColour-VisitedLink;
+    color: $col-VisitedLink;
 }
 
 a:hover {
-    color: $themeColour-HoverLink;
+    color: $col-HoverLink;
 }
 
 .form-validation-error {
@@ -39,12 +45,12 @@ a:hover {
 }
 
 textarea, input[type="text"], input[type="password"], input[type="email"] {
-    border-color: $themeColour-InputBorder !important;
+    border-color: $col-InputBorder !important;
     border-width: 3px !important;
-    background-color: $themeColour-Input !important;
+    background-color: $col-Input !important;
     &:focus {
-        background-color: $themeColour-InputFocus !important;
-        border-color: $themeColour-InputBorderFocus !important;
+        background-color: $col-InputFocus !important;
+        border-color: $col-InputBorderFocus !important;
     }
 }
 
@@ -60,7 +66,7 @@ section.song {
     margin-bottom: 3rem;
 
     header {
-        border-bottom: 1px solid $themeColour-HeaderSeparator;
+        border-bottom: 1px solid $col-HeaderSeparator;
         margin-bottom: 1rem;
     }
 
@@ -78,11 +84,11 @@ section.song {
 }
 
 .odd-song {
-    background-color: $themeColour-BackgroundOdd;
+    background-color: $col-BackgroundOdd;
 }
 
 .even-song {
-    background-color: $themeColour-BackgroundEven;
+    background-color: $col-BackgroundEven;
 }
 
 .song-tag, .song-tag-remove {
@@ -91,7 +97,7 @@ section.song {
 }
 
 .markdown-preview {
-    border: 1px solid black;
+    border: 1px solid $col-MarkdownPreviewBorder;
     margin-bottom: 2rem;
     display: none;
 }
@@ -114,8 +120,8 @@ h2.title {
     font-weight: 800;
     font-size: 2rem;
     display:  block;
-    color: $themeColour-Title;
-    background-color: $themeColour-TitleBackground;
+    color: $col-Title;
+    background-color: $col-TitleBackground;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
@@ -133,36 +139,51 @@ h4.release {
 
 /* COMMENTS */
 .comments {
+
     .unmoderated {
-        background-color: goldenrod;
+        border: 5px solid $col-CommentUnmoderatedBorder;
+        background: $col-CommentUnmoderatedBackground;
+        padding: 1rem;
+
+        .comment-body:before {
+            content: "COMMENT AWAITING APPROVAL:";
+        }
     }
 
     ul {
+        padding-top: 1rem;
+        background-color: $col-BackgroundEven;
         list-style: none;
-        padding-bottom: 1.5rem;
+        margin-right: 1rem;
+
+        &.comment-root {
+            padding-bottom: 1rem;
+        }
     }
 
     li {
-        margin-top: 3rem;
-        border-left: 1px solid #a3b59f;
-        border-bottom: 1px solid #a3b59f;
-        padding-left: 0.5rem;
+        margin-top: 1rem;
     }
 
-    & > ul > li {
-        padding-bottom: 1rem;
-        border-bottom: 3px solid #a3b59f;
+    span.comment-at {
+        color: $col-CommentAt;
+        float: left;
+        margin-right: 0.5rem;
+        font-weight: bold;
     }
 }
 
 .comment-header {
     font-weight: normal;
     font-size: 1rem;
-    border-bottom: 1px solid #999999;
-    margin-bottom: 2px;
+    border-bottom: 1px solid $col-CommentHeaderBottom;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
 
-    .author {
-        margin-right: 1.5rem;
+    .author strong {
+        color: $col-CommentAt;
+        margin-left: 0.35rem;
+        margin-right: 0.5rem;
     }
 
     .date {
@@ -175,5 +196,5 @@ div.youtube {
 }
 
 tr.song-is-not-published {
-    background-color: $themeColour-Unpublished !important;
+    background-color: $col-Unpublished !important;
 }
