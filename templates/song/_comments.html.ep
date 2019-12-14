@@ -10,6 +10,8 @@
         <p><a href="<%= url_for 'new_song_comment', song_id => $song->id %>">New comment</a></p>
     % }
     % else {
-        <p><a href="<%= url_for 'login' %>">Log in</a> to add a comment</p>
+        <p>
+            <a class="sign-in-link" href="<%= url_for('sign_in') %>">Sign in</a> to add comments
+        </p>
     % }
 </section>
