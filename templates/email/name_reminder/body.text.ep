@@ -2,7 +2,7 @@ Your login name for the "Songs I Will Never Tire of" blog
 is "<%= $name %>".
 
 You may now login at
-http://localhost:3000/user/login
+http://localhost:3000/user/sign_in
 
 # TODO Put correct domain in there.
 
