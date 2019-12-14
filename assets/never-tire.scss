@@ -14,7 +14,8 @@ $col-InputBorder: #003300;
 $col-InputBorderFocus: #99ccff;
 $col-Unpublished: #cd5c5c;
 $col-MarkdownPreviewBorder: black;
-$col-CommentUnmoderated: goldenrod;
+$col-CommentUnmoderatedBackground: #003366;
+$col-CommentUnmoderatedBorder: #ff9933;
 $col-CommentAt: #a79e19;
 $col-CommentHeaderBottom: #555555;
 $col-CommentBackground: #2a2806;
@@ -140,14 +141,19 @@ h4.release {
 .comments {
 
     .unmoderated {
-        background-color: $col-CommentUnmoderated;
+        border: 5px solid $col-CommentUnmoderatedBorder;
+        background: $col-CommentUnmoderatedBackground;
+        padding: 1rem;
+
+        .comment-body:before {
+            content: "COMMENT AWAITING APPROVAL:";
+        }
     }
 
     ul {
         padding-top: 1rem;
-        // background-color: $col-BackgroundEven;
+        background-color: $col-BackgroundEven;
         list-style: none;
-        // padding-bottom: 1.5rem;
         margin-right: 1rem;
 
         &.comment-root {

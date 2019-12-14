@@ -37,9 +37,6 @@ sub _render_node {
 	return $s;
 }
 
-# TODO This'd be better in a template, given that
-#      it's basically HTML with minor logic and
-#      the comment count will be low.
 sub _default_renderer {
     my ($app, $node, $level) = @_;
 
@@ -61,7 +58,8 @@ sub _default_renderer {
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
     my $id = $comment->id;
     my $s = sprintf('<a name="comment-%d"></a>', $id);
-    $s .= qq{<h4 class="comment-header ${mod_status}">};
+    $s .= qq{<div class="${mod_status}"};
+    $s .= qq{<h4 class="comment-header">};
     $s .= qq{<span class="author">${noun} #${id} by <strong>${author}</strong> </span>};
     $s .= qq{<span class="date">${timestamp}</span>};
     if ( $parent ) {
@@ -81,6 +79,7 @@ sub _default_renderer {
             $s .= qq{<p><a href="${approve_url}">Approve</a> --- <a href="${reject_url}">Reject</a></p>};
         }
     }
+    $s .= q{</div>};  # Closes the div modstatus
 
     return $s;
 }
