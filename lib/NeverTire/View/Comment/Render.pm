@@ -45,18 +45,32 @@ sub _default_renderer {
 
     my $comment = $node->comment;
 
-    my $noun = $level == 0 ? 'Comment' : 'Reply';
+    my ($noun, $parent) = $level == 0
+        ? ('Comment', undef)
+        : ('Reply', $comment->parent);
 
-    my $author    = $comment->get_column('author_name');
-    my $timestamp = $app->datetime($comment->created_at);
-    my $html      = $comment->comment_html;
+    my $author     = $comment->get_column('author_name');
+    my $timestamp  = $app->datetime($comment->created_at);
+    my $html       = $comment->comment_html;
+    my $at         = '';
 
+    # TODO structure this better, this method is too long.
+    # e.g. add private methods to build format headers, body, etc separately
+    # then bring them together here.
     my $approved   = $comment->approved_at;
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
-    my $s .= qq{<h4 class="comment-header ${mod_status}">};
-    $s .= qq{<span class="author">${noun} by <strong>${author}</strong></span>};
-    $s .= qq{<span class="date">at ${timestamp}</span>};
-    $s .= qq{</h4><p class="comment-body">${html}</p>};
+    my $id = $comment->id;
+    my $s = sprintf('<a name="comment-%d"></a>', $id);
+    $s .= qq{<h4 class="comment-header ${mod_status}">};
+    $s .= qq{<span class="author">${noun} #${id} by <strong>${author}</strong> </span>};
+    $s .= qq{<span class="date">${timestamp}</span>};
+    if ( $parent ) {
+        my $parent_id   = $parent->id;
+        my $parent_name = $parent->author->name;
+        $s .= sprintf(' (reply to <a href="#comment-%d">#%d</a>)', $parent_id, $parent_id );
+        $at = qq{<span class="comment-at">\@${parent_name}</span> };
+    }
+    $s .= qq{</h4><div class="comment-body">${at}${html}</div>};
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
             my $url = $app->url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id);
