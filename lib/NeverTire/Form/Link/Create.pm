@@ -15,7 +15,7 @@ has_field identifier => (
     validators  => [qw/ Required /],
 );
 
-// TODO Sort out duped code with the Edit form
+# TODO Sort out duped code with the Edit form
 has_field class => (
     type        => 'Select',
     selections  => sub {

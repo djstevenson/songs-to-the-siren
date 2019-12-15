@@ -17,6 +17,7 @@ has_field identifier => (
     validators  => [qw/ Required /],
 );
 
+# TODO Sort out duped code with the Create form
 has_field class => (
     type        => 'Select',
     selections  => sub {
