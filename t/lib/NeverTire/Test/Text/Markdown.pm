@@ -38,7 +38,7 @@ sub run {
 
 	$song1->create_related('links', {
 		identifier  => 'identifier1',
-		class       => 'youtube',
+		class       => 'Default',
 		url         => "https://id1.example.com/test.html",
 		description => 'description 1',
 		priority    => 0,
@@ -47,7 +47,7 @@ sub run {
 
 	$song1->create_related('links', {
 		identifier  => 'identifier2',
-		class       => 'vimeo',
+		class       => 'Default',
 		url         => "https://id2.example.com/test.html",
 		description => 'description *2* embeds markdown',
 		priority    => 0,
@@ -56,12 +56,22 @@ sub run {
 
 	$song2->create_related('links', {
 		identifier  => 'identifier3',
-		class       => 'itunes',
+		class       => 'Default',
 		url         => "https://id3.example.com/test.html",
 		description => 'identifier3 only exists for a different song',
 		priority    => 0,
 		extras      => undef,
 	});
+
+	$song1->create_related('links', {
+		identifier  => 'identifier4',
+		class       => 'YouTubeEmbedded',
+		url         => "https://id4.example.com/test.html",
+		description => 'description 4',
+		priority    => 0,
+		extras      => undef,
+	});
+
 
 	my $tests = [
 		{
@@ -122,6 +132,12 @@ sub run {
 			test_name => 'Two identifiers, both found',
 			input     => 'abc ^^identifier1^^ ^^identifier2^^ def',
 			expected  => qq{<p>abc <a href="https://id1.example.com/test.html">description 1</a> <a href="https://id2.example.com/test.html">description <em>2</em> embeds markdown</a> def</p>\n},
+		},
+
+		{
+			test_name => 'One link, non-default format: YouTubeEmbedded',
+			input     => 'abc ^^identifier4^^ def',
+			expected  => qq{<p>abc <a href="https://id4.example.com/test.html" class="youtube-embedded">description 4</a> def</p>\n},
 		},
 	];
 
