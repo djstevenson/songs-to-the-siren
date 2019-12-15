@@ -15,10 +15,18 @@ has_field identifier => (
     validators  => [qw/ Required /],
 );
 
+// TODO Sort out duped code with the Edit form
 has_field class => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    type        => 'Select',
+    selections  => sub {
+        my ($field, $form) = @_;
+
+        my $roles = $form->c->app->config->{link_roles};
+
+        return [
+            map { { value => $_, text => $_ } } @$roles
+        ];
+    },
 );
 
 # TODO Add URL validation
