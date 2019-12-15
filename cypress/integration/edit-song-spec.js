@@ -339,7 +339,7 @@ context('Song CRUD tests', () => {
                     identifier: "link1",
                     url: url1,
                     description: desc1,
-                    class: "test",
+                    class: "Default",
                     priority: 10
                 })
             

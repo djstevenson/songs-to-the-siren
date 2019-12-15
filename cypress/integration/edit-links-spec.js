@@ -33,7 +33,7 @@ function makeLinkData(n) {
 
     return {
         priority: n,
-        class: 'class ' + ns,
+        class: 'Default',
         identifier: 'identifier ' + ns,
         url: 'http://example.com/link' + ns + '.html',
         description: 'desc ' + ns,
@@ -69,7 +69,6 @@ context('Song links CRUD tests', () => {
                 .clickNew()
                 .createLink({})
                 .assertFormError('identifier',  'Required')
-                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
@@ -97,13 +96,12 @@ context('Song links CRUD tests', () => {
             new CreateLinkPage()
                 .createLink({
                     identifier: 'id1',
-                    class: 'class1',
+                    class: 'YouTubeEmbedded',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
                 .assertNoFormError('identifier')
-                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
@@ -161,14 +159,13 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    class: '',
+                    class: 'YouTubeEmbedded',
                     identifier: '',
                     url: '',
                     priority: '',
                     description: ''
                 })
                 .assertFormError('identifier',  'Required')
-                .assertFormError('class',       'Required')
                 .assertFormError('url',         'Required')
                 .assertFormError('priority',    'Required')
                 .assertFormError('description', 'Required')
@@ -188,8 +185,7 @@ context('Song links CRUD tests', () => {
             listPage
                 .createLink(makeLinkData(10))
                 .edit(1)
-                .editLink({class: ''})
-                .assertFormError('class', 'Required')
+                .editLink({description: ''})
                 .assertNoFormError('identifier')
         })
 
@@ -220,14 +216,13 @@ context('Song links CRUD tests', () => {
             listPage
                 .edit(1)
                 .editLink({
-                    class: 'class1',
+                    class: 'Default',
                     identifier: 'identifier1',
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse'
                 })
                 .assertNoFormError('identifier')
-                .assertNoFormError('class')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
