@@ -4,6 +4,8 @@ use namespace::autoclean;
 
 with 'NeverTire::Markdown::Role';
 
+use NeverTire::View::Link::Render;
+
 # An extension to Text::Markdown - POD docs at end of file
 
 has _links => (
@@ -38,8 +40,10 @@ sub _replacement_link {
     return "**LINK IDENTIFIER NOT FOUND: $identifier**"
         unless exists $self->_links->{$identifier};
     
-    my $l = $self->_links->{$identifier};
-    return sprintf('<a href="%s">%s</a>', $l->url, $l->description);
+    my $args = { link => $self->_links->{$identifier} };
+    $args->{song} = $self->song if $self->has_song;
+    my $renderer = NeverTire::View::Link::Render->new($args);
+    return $renderer->as_html;
 }
 
 __PACKAGE__->meta->make_immutable;

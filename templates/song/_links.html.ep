@@ -5,7 +5,7 @@
             <ul>
                 % foreach my $k (sort { $links->{$a}->priority <=> $links->{$b}->priority } keys %$links) {
                     <li>
-                        <a href="<%= $links->{$k}->url %>"><%= $k %></a>
+                        <a href="<%= $links->{$k}->url %>"><%= $links->{$k}->description %></a>
                     </li>
                 % }
             </ul>
