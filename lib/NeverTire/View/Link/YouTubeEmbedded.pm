@@ -15,9 +15,8 @@ sub render {
     my $link = $self->link;
 
     return sprintf(
-        '<a href="%s" class="youtube-embedded">%s</a>',
-        $link->url,
-        $link->description,
+        '<iframe style="float:right" width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+        $link->url
     );
 }
 

@@ -137,7 +137,7 @@ sub run {
 		{
 			test_name => 'One link, non-default format: YouTubeEmbedded',
 			input     => 'abc ^^identifier4^^ def',
-			expected  => qq{<p>abc <a href="https://id4.example.com/test.html" class="youtube-embedded">description 4</a> def</p>\n},
+			expected  => qq{<p>abc <iframe style="float:right" width="560" height="315" src="https://id4.example.com/test.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> def</p>\n},
 		},
 	];
 
