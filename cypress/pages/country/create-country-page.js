@@ -1,5 +1,5 @@
-import { CreateCountryForm } from '../../forms/create-country-form'
-import { BaseCountry       } from './base-country'
+import { EditCountryForm } from '../../forms/edit-country-form'
+import { BaseCountry     } from './base-country'
 
 export class CreateCountryPage extends BaseCountry {
     pageUrl() {
@@ -8,7 +8,7 @@ export class CreateCountryPage extends BaseCountry {
 
     constructor() {
         super()
-        this._form = new CreateCountryForm()
+        this._form = new EditCountryForm()
     }
 
     createCountry(args) {

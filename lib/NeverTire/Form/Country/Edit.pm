@@ -2,8 +2,6 @@ package NeverTire::Form::Country::Edit;
 use Moose;
 use namespace::autoclean;
 
-# TODO Loadsa dupe code with Country::Create form, can we put most of this in a base class or something?
-
 use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
@@ -13,7 +11,7 @@ has '+id' => (default => 'edit-country');
 has country => (
     is          => 'ro',
     isa         => 'NeverTire::Schema::Result::Country',
-    required    => 1,
+    predicate   => 'is_update',
 );
 
 has_field name => (
@@ -29,19 +27,31 @@ has_field emoji => (
     validators  => [qw/ Required  /],
 );
 
-has_button update_country => ();
+has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-    my $update_button = $self->find_button('update_country');
+    my $update_button = $self->find_button('submit');
     if ( $update_button->clicked ) {
+
         my $user = $self->c->stash->{auth_user};
 
+        # Whitelist what we extract from the submitted form
     	my $fields = $self->form_hash(qw/ name emoji /);
-	    $user->admin_edit_country($self->country, $fields);
-        $self->action('updated');
+    
+        # Create or update?
+        if ( $self->is_update ) {
+            # Update
+	        $user->admin_edit_country($self->country, $fields);
+            $self->action('updated');
+        }
+        else {
+            # Create
+            $user->admin_create_country($fields);
+            $self->action('created');
+        }
     }
 
     return 1;
@@ -51,7 +61,9 @@ override posted => sub {
 sub BUILD {
     my $self = shift;
 
-    $self->data_object($self->country);
+    if ( $self->is_update ) {
+        $self->data_object($self->country);
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

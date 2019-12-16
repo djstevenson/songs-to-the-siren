@@ -25,7 +25,7 @@ sub add_routes {
 sub create {
     my $c = shift;
 
-    my $form = $c->form('Country::Create');
+    my $form = $c->form('Country::Edit');
     if ($form->process) {
         $c->flash(msg => 'Country created') if $form->action eq 'created';
 
