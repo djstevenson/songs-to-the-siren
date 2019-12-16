@@ -2,13 +2,24 @@ package NeverTire::Form::Link::Edit;
 use Moose;
 use namespace::autoclean;
 
-# TODO Loadsa dupe code with Link::Create form, can we put most of this in a base class or something?
-
 use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
 has '+id' => (default => 'edit-link');
+
+has song => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Song',
+    required    => 1,
+);
+
+has link => (
+    is          => 'ro',
+    isa         => 'NeverTire::Schema::Result::Link',
+    predicate   => 'is_update',
+);
+
 
 has_field identifier => (
     type        => 'Input::Text',
@@ -17,7 +28,6 @@ has_field identifier => (
     validators  => [qw/ Required /],
 );
 
-# TODO Sort out duped code with the Create form
 has_field class => (
     type        => 'Select',
     selections  => sub {
@@ -55,25 +65,14 @@ has_field extras => (
     filters     => [qw/ TrimEdges /],
 );
 
-has song => (
-    is          => 'ro',
-    isa         => 'NeverTire::Schema::Result::Song',
-    required    => 1,
-);
-
-has link => (
-    is          => 'ro',
-    isa         => 'NeverTire::Schema::Result::Link',
-    required    => 1,
-);
-
-has_button update_link => ();
+has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
 # Identifier must not already exist for this song. However,
 # if we're not changing it in this edit, then it'll already exist
 # in this link. So the check is "does it exist in this song for
-# any other link"
+# any other link". Obvs skip this for create, where we always need
+# dupe detection
 after extra_validation => sub {
     my $self = shift;
 
@@ -86,7 +85,7 @@ after extra_validation => sub {
 
     $fail = 'Identifier already used for this song'
         if exists $identifiers->{$identifier_value}
-            && $identifiers->{$identifier_value}->id != $self->link->id;
+            && (! $self->is_update || $identifiers->{$identifier_value}->id != $self->link->id);
 
     # Set the error on 'identifier' if we don't already have one
     $identifier_field->error($fail)
@@ -96,13 +95,26 @@ after extra_validation => sub {
 override posted => sub {
 	my $self = shift;
 
-    my $update_button = $self->find_button('update_link');
+    my $update_button = $self->find_button('submit');
     if ( $update_button->clicked ) {
+
+        my $user = $self->c->stash->{auth_user};
+
         # Whitelist what we extract from the submitted form
-        my $fields = $self->form_hash(qw/ identifier class url description priority extras /);
-        $self->link->update($fields);
-        $self->song->render_markdown;
-        $self->action('updated');
+    	my $fields = $self->form_hash(qw/ identifier class url description priority extras /);
+    
+        # Create or update?
+        if ( $self->is_update ) {
+            # Update
+            $self->link->update($fields);
+            $self->song->render_markdown;
+            $self->action('updated');
+        }
+        else {
+            # Create
+            $self->song->add_link($fields);
+            $self->song->render_markdown;
+        }
     }
 
     return 1;
@@ -112,7 +124,9 @@ override posted => sub {
 sub BUILD {
     my $self = shift;
 
- 	$self->data_object($self->link);
+    if ( $self->is_update ) {
+     	$self->data_object($self->link);
+    }
 }
 
 __PACKAGE__->meta->make_immutable;
