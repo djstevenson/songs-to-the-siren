@@ -1,5 +1,5 @@
-import { CreateContentForm } from '../../forms/create-content-form'
-import { BaseContent       } from './base-content'
+import { EditContentForm } from '../../forms/edit-content-form'
+import { BaseContent     } from './base-content'
 
 export class CreateContentPage extends BaseContent {
     pageUrl() {
@@ -8,7 +8,7 @@ export class CreateContentPage extends BaseContent {
 
     constructor() {
         super()
-        this._form = new CreateContentForm()
+        this._form = new EditContentForm()
     }
 
     createContent(args) {
