@@ -33,7 +33,7 @@ sub add_routes {
 sub create {
     my $c = shift;
 
-    my $form = $c->form('Song::Create');
+    my $form = $c->form('Song::Edit');
     if ($form->process) {
         $c->flash(msg => 'Song created') if $form->action eq 'created';
 

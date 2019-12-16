@@ -4,7 +4,6 @@ import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
 import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { CreateSongPage } from '../pages/song/create-song-page'
-import { DeleteSongPage } from '../pages/song/delete-song-page'
 import { EditSongPage   } from '../pages/song/edit-song-page'
 
 const label = 'listsong';
