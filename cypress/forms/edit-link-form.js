@@ -12,7 +12,7 @@ export class EditLinkForm extends FormBase {
         this._fields.description = new FormField('text',   'edit-link-description')
         this._fields.extras      = new FormField('text',   'edit-link-extras')
 
-        this._buttons.submit     = new FormButton('update-link-button')
+        this._buttons.submit     = new FormButton('submit-button')
         this._buttons.cancel     = new FormButton('cancel-button')
     }
 }

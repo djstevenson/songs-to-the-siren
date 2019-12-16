@@ -1,5 +1,5 @@
-import { CreateLinkForm } from '../../forms/create-link-form'
-import { BaseLink       } from './base-link'
+import { EditLinkForm } from '../../forms/edit-link-form'
+import { BaseLink     } from './base-link'
 
 
 export class CreateLinkPage extends BaseLink {
@@ -10,7 +10,7 @@ export class CreateLinkPage extends BaseLink {
 
     constructor() {
         super()
-        this._form = new CreateLinkForm()
+        this._form = new EditLinkForm()
     }
 
     createLink(args) {

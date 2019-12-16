@@ -25,7 +25,7 @@ sub add_routes {
 sub create {
     my $c = shift;
 
-    my $form = $c->form('Content::Create');
+    my $form = $c->form('Content::Edit');
     if ($form->process) {
         $c->flash(msg => 'New country created') if $form->action eq 'created';
         $c->redirect_to('admin_list_content');

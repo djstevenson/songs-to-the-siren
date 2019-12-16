@@ -1,5 +1,5 @@
-import { CreateSongForm } from '../../forms/create-song-form'
-import { BaseSong       } from './base-song'
+import { EditSongForm } from '../../forms/edit-song-form'
+import { BaseSong     } from './base-song'
 
 export class CreateSongPage extends BaseSong {
     pageUrl() {
@@ -8,7 +8,7 @@ export class CreateSongPage extends BaseSong {
 
     constructor() {
         super()
-        this._form = new CreateSongForm()
+        this._form = new EditSongForm()
     }
 
     createSong(args) {

@@ -8,7 +8,7 @@ export class EditContentForm extends FormBase {
         this._fields.title    = new FormField('text',     'edit-content-title')
         this._fields.markdown = new FormField('textarea', 'edit-content-markdown')
 
-        this._buttons.submit  = new FormButton('update-content-button')
+        this._buttons.submit  = new FormButton('submit-button')
         this._buttons.cancel  = new FormButton('cancel-button')
     }
 }
