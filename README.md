@@ -37,7 +37,7 @@ export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
 carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql never_tire_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
- carton exec -- morbo script/never-tire
+carton exec -- morbo script/never-tire
 ```
 
 Note, for 'test' and 'development' modes, this creates an admin user with the name 'admin' and password 'xyzzy'.
@@ -62,29 +62,36 @@ To list routes
 
 `carton exec -- script/never-tire routes`
 
-Rebuild deps
-============
+Rebuild CPAN (Perl) deps
+========================
 
 `rm -rf local vendor cpanfile.snapshot ; carton install ; carton bundle`
 
-TESTS
-=====
+Rebuild Node deps for functional tests
+======================================
 
-### Unit tests for Perl code
+`nvm use; rm -rf node_modules; npm install`
+
+Run functional tests
+====================
+
+#### Run with Electron-based UI
+
+`npx cypress open`
+
+#### Run headless
+
+`npx cypress run`
+
+
+Perl unit tests
+===============
 
 To run the Perl unit test suite:
 
 `carton exec -- forkprove -MMoose -MDBIx::Class -I. -j8 -lr t`
 
 (-j8 is the level of parallelism, you can change this depending on core count of your CPU)
-
-### Cypress.io functional tests
-
-`npm i` to install
-
-`npx cypress open` to open the test UI, ready for testing in Electron or Chrome
-
-`npx cypress run` to run headless.
 
 
 FAQ
@@ -98,10 +105,10 @@ We don't. It's just a demo app so I can show some code if/when looking for a new
 
 Probably yes. But it's not a great name already and changing it to "Songs Of Which I Will Never Tire" doesn't seem to improve it a lot.
 
-Licence
+License
 =======
 
-Coming soon, likely to be something fairly permissive.
+MIT License.  See the file "LICENSE" in the root directory.
 
 Author
 ======
