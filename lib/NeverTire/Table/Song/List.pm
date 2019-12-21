@@ -110,8 +110,10 @@ has '+empty_text' => (default => 'No songs yet defined');
 override class_for_row_data => sub {
     my ($self, $row_data) = @_;
 
-    return 'table-warning' 
+    return 'song-is-not-published' 
         unless $row_data->published_at;
+    
+    return undef;
 };
 
 __PACKAGE__->meta->make_immutable;

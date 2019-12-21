@@ -17,8 +17,15 @@ sub _build_resultset {
 
 has_column name => ();
 
-# TODO Need an option not to encode HTML entities so we can display the actual flags
 has_column emoji => ();
+
+has_column display => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        return $row->emoji;
+    }
+);
 
 has_column edit => (
     content => sub {
@@ -28,8 +35,7 @@ has_column edit => (
         return qq{
             <a href="${url}">Edit</a>
         };
-    },
-
+    }
 );
 
 has_column delete => (

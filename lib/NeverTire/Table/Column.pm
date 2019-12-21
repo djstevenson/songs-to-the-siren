@@ -33,7 +33,9 @@ has header => (
     isa         => 'Str',
     lazy        => 1,
     default     => sub {
-        return ucfirst(shift->name);
+        my $s = shift->name;
+        $s =~ s/_/ /g;
+        return ucfirst $s;
     },
 );
 

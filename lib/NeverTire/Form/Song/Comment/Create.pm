@@ -14,6 +14,9 @@ has_field comment_markdown => (
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-comment',
+    },
 );
 
 has_field comment_preview => (

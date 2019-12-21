@@ -3,8 +3,6 @@ use Moose;
 use namespace::autoclean;
 
 
-# TODO Loadsa dupe code with Song::Create form, can we put most of this in a base class or something?
-
 use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
@@ -14,7 +12,7 @@ has '+id' => (default => 'edit-song');
 has song => (
     is          => 'ro',
     isa         => 'NeverTire::Schema::Result::Song',
-    required    => 1,
+    predicate   => 'is_update',
 );
 
 has_field title => (
@@ -42,7 +40,6 @@ has_field image => (
     validators  => [qw/ Required  /],
 );
 
-# TODO Dupe code with create function. Sort this out.
 has_field country_id => (
     type        => 'Select',
     label       => 'Country',
@@ -68,12 +65,15 @@ has_field summary_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-summary',
+    },
 );
 
 has_field summary_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div id="markdown-preview-summary" class="markdown summary markdown-preview">Summary preview here</div>},
+        html => q{<div id="markdown-preview-summary" class="markdown summary markdown-preview"></div>},
     },
 );
 
@@ -82,39 +82,55 @@ has_field full_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
+    data        => {
+        'markdown-preview' => 'markdown-preview-full',
+    },
 );
 
 has_field full_preview => (
     type        => 'Html',
     options     => {
-        html => q{<div id="markdown-preview-full" class="markdown full markdown-preview">Full preview here</div>},
+        html => q{<div id="markdown-preview-full" class="markdown full markdown-preview"></div>},
     },
 );
 
-has_button update_song => ();
+has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
 	my $self = shift;
 
-    my $update_button = $self->find_button('update_song');
+    my $update_button = $self->find_button('submit');
     if ( $update_button->clicked ) {
+
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
         my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown /);
-        $user->admin_edit_song($self->song, $fields);
-        $self->action('updated');
+    
+        # Create or update?
+        if ( $self->is_update ) {
+            # Update
+            $user->admin_edit_song($self->song, $fields);
+            $self->action('updated');
+        }
+        else {
+            # Create
+            $user->admin_create_song($fields);
+            $self->action('created');
+        }
     }
 
     return 1;
 };
 
-# Prepopulate GET form from the song object
+# Prepopulate GET form from the song object if it's an update
 sub BUILD {
     my $self = shift;
 
- 	$self->data_object($self->song);
+    if ( $self->is_update ) {
+     	$self->data_object($self->song);
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

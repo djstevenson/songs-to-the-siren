@@ -8,6 +8,9 @@
     <div class="description col-12">
         %= include 'song/_youtube'
         <%== $song->full_html %>
+        % if ( stash 'admin_user' ) {
+            <p><a href="<%= url_for('admin_edit_song', song_id => $song->id) %>">Edit song</a></p>
+        % }
     </div>
     %= include 'song/_comments'
     %= include 'song/_links'

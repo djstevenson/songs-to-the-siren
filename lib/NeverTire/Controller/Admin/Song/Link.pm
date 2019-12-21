@@ -30,7 +30,7 @@ sub create {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    my $form = $c->form('Link::Create', song => $song);
+    my $form = $c->form('Link::Edit', song => $song);
     
     if ($form->process) {
         $c->flash(msg => 'Link added') if $form->action eq 'created';

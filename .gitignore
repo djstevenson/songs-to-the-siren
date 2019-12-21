@@ -6,5 +6,7 @@ log/
 node_modules/
 cypress/videos
 cypress/screenshots
-.sass-cache/
+public/asset
+public/never-tire.css
 public/never-tire.css.map
+.sass-cache

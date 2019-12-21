@@ -3,28 +3,23 @@
     %= include 'layouts/_headers'
 <body>
 
+<!-- TODO This dupes a log of default.html -->
+
 <div class="container">
     %= include '_content_header'
 
     <main>
-        <div class="row">
-            <div class="col-12">
-                <%= content %>
-            </div>
-        </div>
+<%= content %>
     </main>
 
+    <footer>
+        <div class="row">
+            <div class="col-12">
+                <p>Copyright (c) 2019 D J Stevenson</p>
+            </div>
+        </div>
+    </footer>
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        markdownPreview("#new-song-summary-markdown", "#markdown-preview-summary");
-        markdownPreview("#new-song-full-markdown", "#markdown-preview-full");
-        markdownPreview("#new-page-markdown", "#markdown-page-preview");
-        markdownPreview("#edit-page-markdown", "#markdown-page-preview");
-    });
-</script>
-
 
 </body>
 </html>

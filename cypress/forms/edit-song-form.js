@@ -14,7 +14,7 @@ export class EditSongForm extends FormBase {
         this._fields.summaryMarkdown = new FormField('textarea', 'edit-song-summary-markdown')
         this._fields.fullMarkdown    = new FormField('textarea', 'edit-song-full-markdown')
 
-        this._buttons.submit         = new FormButton('update-song-button')
+        this._buttons.submit         = new FormButton('submit-button')
         this._buttons.cancel         = new FormButton('cancel-button')
     }
 }

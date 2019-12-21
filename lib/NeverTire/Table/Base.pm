@@ -115,7 +115,7 @@ sub _data_render {
     my $header = $self->show_header ? $self->_render_header : '';
 
     return
-        '<table class="table table-hover table-sm">'
+        '<table class="table table-striped table-dark table-borderless">'
             . $header
             . $self->_render_body
         . '</table>'
@@ -129,7 +129,7 @@ sub _render_header {
         $s .= $col->render_header_cell($self);
     }
 
-    return '<thead class="thead-light"><tr>' . $s . '</tr></thead>';
+    return '<thead class="thead-dark"><tr>' . $s . '</tr></thead>';
 }
 
 sub _render_body {
@@ -143,7 +143,7 @@ sub _render_body {
         if (my $class = $self->class_for_row_data($row)) {
             $row_class = qq{class="$class"};
         }
-        $s .= qq{<tr ${row_class}">};
+        $s .= qq{<tr ${row_class}>};
         foreach my $col (@{ $self->table_columns }) {
             $s .= $col->render_body_cell($self, $row);
         }

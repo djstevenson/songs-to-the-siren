@@ -1,5 +1,5 @@
 
-<section class="song row">
+<section class="song row rounded <%= $class %>">
     %= include 'song/_header'
     <div class="description col-12">
         <%== $song->summary_html %>
