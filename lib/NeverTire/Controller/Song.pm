@@ -44,11 +44,11 @@ sub view {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    my $admin = exists $c->stash->{admin_user};
+    my $user = $c->stash->{user};
 
     $c->stash(
         links      => $song->links->links_by_identifier,
-        forest     => $song->get_comment_forest($admin),
+        forest     => $song->get_comment_forest($user),
         navigation => $song->get_navigation,
     );
 }
