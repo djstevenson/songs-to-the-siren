@@ -52,14 +52,16 @@ sub _default_renderer {
     my $at         = '';
 
     # TODO structure this better, this method is too long.
+    # TODO This is way too hard to read.
     # e.g. add private methods to build format headers, body, etc separately
     # then bring them together here.
+    #      Or do it in templates rather than Perl.
     my $approved   = $comment->approved_at;
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
     my $id = $comment->id;
     my $s = sprintf('<a name="comment-%d"></a>', $id);
     $s .= qq{<div class="${mod_status}"};
-    $s .= qq{<h4 class="comment-header">};
+    $s .=  q{<h4 class="comment-header">};
     $s .= qq{<span class="author">${noun} #${id} by <strong>${author}</strong> </span>};
     $s .= qq{<span class="date">${timestamp}</span>};
     if ( $parent ) {
