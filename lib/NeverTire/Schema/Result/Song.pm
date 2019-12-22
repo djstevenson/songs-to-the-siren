@@ -98,7 +98,6 @@ sub delete_tag {
 sub get_comment_forest {
     my ($self, $user) = @_;
 
-    print STDERR "******* user=", $user->id, "\n";
     return make_forest($self, $user);
 }
 
