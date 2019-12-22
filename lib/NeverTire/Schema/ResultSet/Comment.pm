@@ -23,12 +23,34 @@ sub for_display {
     });
 }
 
-sub where_approved {
-    my $self = shift;
+sub for_user {
+    my ($self, $user) = @_;
 
-    return $self->search({
-        approved_at => { '!=' => undef }
-    });
+    my $rs;
+    if ($user) {
+        if ($user->admin) {
+            # Admin user sees everything
+            $rs = $self;
+        }
+        else {
+            # Non-admin user sees modded comments
+            # and OWN non-modded ones.
+            $rs = $self->search({
+                -or => [
+                    { approved_at => { '!=' => undef } },
+                    { author_id   => $user->id         },
+                ]
+            });
+        }
+    }
+    else {
+        # Not logged-in, sees modded comments only
+        $rs = $self->search({
+            approved_at => { '!=' => undef }
+        });
+    }
+
+    return $rs;
 }
 
 sub id_order {

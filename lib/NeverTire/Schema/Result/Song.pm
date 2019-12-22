@@ -96,9 +96,9 @@ sub delete_tag {
 # Unmoderated comments are included IFF $admin is
 # true.
 sub get_comment_forest {
-    my ($self, $admin) = @_;
+    my ($self, $user) = @_;
 
-    return make_forest($self, $admin);
+    return make_forest($self, $user);
 }
 
 sub add_comment {

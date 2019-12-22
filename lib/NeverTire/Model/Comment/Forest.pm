@@ -13,10 +13,13 @@ use Sub::Exporter -setup => {
 # Called as a class method
 # $song is a NeverTire::Schema::ResultSet::Comment
 #
-# Unmoderated comments are included IFF $admin is
-# true.
+# Unmoderated comments excluded except:
+#   * Admin user sees all comments, modded or not
+#   * Non-admin user sees all moderated comments and
+#     their OWN unmodded comments. 
+
 sub make_forest {
-    my ($song, $admin) = @_;
+    my ($song, $user) = @_;
 
     # Get them in ascending order so we process the
     # oldest first. But we add nodes to the root list,
@@ -26,10 +29,8 @@ sub make_forest {
     my $comment_rs = $song
         ->comments
         ->for_display
+        ->for_user($user)
         ->id_order;
-
-    $comment_rs = $comment_rs->where_approved
-        unless $admin;
 
     my $root_nodes = [];
     my $all_nodes  = {};
