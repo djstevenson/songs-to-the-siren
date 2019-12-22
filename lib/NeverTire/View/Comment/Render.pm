@@ -68,7 +68,8 @@ sub _default_renderer {
         $s .= sprintf(' (reply to <a href="#comment-%d">#%d</a>)', $parent_id, $parent_id );
         $at = qq{<span class="comment-at">\@${parent_name}</span> };
     }
-    $s .= qq{</h4><div class="comment-body">${at}${html}</div>};
+    my $mod = $approved ? '' : '<span class="mod-warning">COMMENT AWAITING APPROVAL: </span>';
+    $s .= qq{</h4><div class="comment-body">${mod}${at}${html}</div>};
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
             my $url = $app->url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id);

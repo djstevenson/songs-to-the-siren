@@ -44,7 +44,7 @@ sub view {
     my $c = shift;
 
     my $song = $c->stash->{song};
-    my $user = $c->stash->{user};
+    my $user = $c->stash->{auth_user};
 
     $c->stash(
         links      => $song->links->links_by_identifier,
