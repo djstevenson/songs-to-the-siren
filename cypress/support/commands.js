@@ -120,4 +120,13 @@ Cypress.Commands.add('resetDatabase', () => {
     })
 })
 
+Cypress.Commands.add('signOut', () => {
+
+    cy.request({
+        url: '/user/sign_out',
+        method: 'GET'
+    })
+})
+
+
 
