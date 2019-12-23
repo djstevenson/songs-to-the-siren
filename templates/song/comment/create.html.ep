@@ -23,11 +23,3 @@
 <!-- TODO Surely BBCode is better for end-users? -->
 
 <%== $form->render %>
-
-<!-- TODO Find a better way of annotating markdown/preview fields so that we automatically pick them up -->
-<!-- TODO Probably consider rendering client-side too, though that requires emulating the foibles of some CPAN nonsense in JS -->
-<script type="text/javascript">
-    $(function() {
-        app.markdownPreview("#new-song-comment-comment-markdown", "#markdown-preview-comment");
-    });
-</script>
