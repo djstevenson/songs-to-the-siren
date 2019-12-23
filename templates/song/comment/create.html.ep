@@ -6,8 +6,8 @@
 <!-- TODO Gonna need this a few times, put in a partial -->
 <blockquote class="alert alert-warning">
     <p>
-        <strong>Note: </strong>All comments are moderated, so will only be visible to you on
-        the song page until Admin marks it as 'public'.
+        <strong>Note: </strong>All comments are moderated, so not be visible to other
+        site users until Admin marks it as 'public'.
     </p>
     <p>
         Nothing spammy, abusive, profane, offensive, etc will be accepted, obviously.
