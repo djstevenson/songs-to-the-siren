@@ -42,8 +42,10 @@ context('Comments are shown (or hidden) correctly', () => {
 
             cy.signOut()
 
+            const user = userFactory.getNextSignedInUser(false)
+
             visitSong()
-                .assertSongTitle(song.getTitle())
+                .createRootComment('test markdown 1')
 
         })
 

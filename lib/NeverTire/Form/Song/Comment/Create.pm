@@ -6,7 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id' => (default => 'new-song-comment');
+has '+id' => (default => 'new-comment');
 
 has_field comment_markdown => (
     type        => 'Input::TextArea',

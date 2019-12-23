@@ -1,4 +1,5 @@
-import { Public } from '../public'
+import { Public            } from '../public'
+import { CreateCommentPage } from '../comment/create-comment-page'
 
 export class ViewSongPage extends Public {
 
@@ -20,5 +21,13 @@ export class ViewSongPage extends Public {
         link.should('have.attr', 'href').and('include', url)
 
         return this
+    }
+
+    createRootComment(txt) {
+        cy.get('#new-comment-thread').click()
+        
+        return new CreateCommentPage()
+            .createComment(txt)
+
     }
 }
