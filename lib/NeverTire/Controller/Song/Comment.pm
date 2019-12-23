@@ -61,7 +61,7 @@ sub reply {
     );
     
     if ($form->process) {
-        $c->flash(msg => 'Commented added - subject to moderation');
+        $c->flash(msg => 'Reply added - subject to moderation');
 
         $c->redirect_to('view_song', song_id => $song->id);
     }
