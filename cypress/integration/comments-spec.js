@@ -13,12 +13,16 @@ beforeEach( () => {
     cy.resetDatabase()
 })
 
-// Creates a song, does not go to the view as we'll
-// generally want to change user first.
+// Creates a song as a new admin user
+// Logs out
+// Returns the song
 function createSong() {
 
     const user = userFactory.getNextSignedInUser(true)
-    return songFactory.getNextSong(user, true)
+    const song = songFactory.getNextSong(user, true)
+    cy.signOut()
+
+    return song    
 }
 
 // Visits first song on home page, ie the most-recently 
@@ -35,20 +39,61 @@ function visitSong() {
 
 context('Comments are shown (or hidden) correctly', () => {
 
+    // TODO Extend tests to include replies to other comments, too.
+    
     describe('New root comment', () => {
-        it('New comment invisible if not logged-in', () => {
+        it('New comment visible (but marked) to the author', () => {
 
-            const song = createSong()
+            createSong()
 
-            cy.signOut()
+            userFactory.getNextSignedInUser(false)
 
-            const user = userFactory.getNextSignedInUser(false)
+            const viewSongPage = visitSong()
 
-            visitSong()
+            const commentDom = viewSongPage
                 .createRootComment('test markdown 1')
+                .assertCountRootComments(1)
+                .findRootComment(1)
+            
+            viewSongPage
+                .assertCommentUnmoderated(commentDom)
 
         })
 
+        it('New comment visible (but marked) to an admin', () => {
+
+            createSong()
+
+            userFactory.getNextSignedInUser(true)
+
+            const viewSongPage = visitSong()
+
+            const commentDom = viewSongPage
+                .createRootComment('test markdown 2')
+                .assertCountRootComments(1)
+                .findRootComment(1)
+            
+            viewSongPage
+                .assertCommentUnmoderated(commentDom)
+
+        })
+
+        it('New comment invisible if not logged-in', () => {
+
+            createSong()
+
+            userFactory.getNextSignedInUser(false)
+
+            visitSong()
+                .createRootComment('test markdown 3')
+            
+            // Logout and revisit song, check that I can't see
+            // unmodded comment as I am not logged in
+            cy.signOut()
+
+            visitSong()
+            .assertCountRootComments(0)
+        })
 
     })
 

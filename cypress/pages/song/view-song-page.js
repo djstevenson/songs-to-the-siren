@@ -26,8 +26,37 @@ export class ViewSongPage extends Public {
     createRootComment(txt) {
         cy.get('#new-comment-thread').click()
         
-        return new CreateCommentPage()
+        new CreateCommentPage()
             .createComment(txt)
 
+        return this
     }
+
+    assertCountRootComments(c) {
+        const dom = cy.get('section.comments > div.forest')
+
+        if ( c == 0 ) {
+            dom.should('not.exist')
+        }
+        else {
+            dom
+                .find('ul.comment-root')
+                .its('length').should('eq', c)
+        }
+        return this
+    }
+
+    // Find the 'nth' root comment
+    // TODO Return some object here, and implement assertUnmoderated on that object
+    findRootComment(nth) {
+        return cy.get(`section.comments > div.forest > ul.comment-root:nth-child(${nth})`)
+    }
+
+    
+    assertCommentUnmoderated(commentDom) {
+        const comment = commentDom.find('li > div.unmoderated')
+        comment.contains('COMMENT AWAITING APPROVAL')
+        return this
+    }
+
 }

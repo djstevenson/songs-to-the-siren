@@ -10,9 +10,11 @@
     % }
 
     % if ( scalar @$forest ) {
+        <div class="forest">
         % foreach my $tree ( @$forest ) {
             %== render_comment_tree($tree);
         % }
+        </div>
     % }
 
 </section>
