@@ -1771,13 +1771,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Module-Find-0.13
-    pathname: C/CR/CRENZ/Module-Find-0.13.tar.gz
+  Module-Find-0.15
+    pathname: C/CR/CRENZ/Module-Find-0.15.tar.gz
     provides:
-      Module::Find 0.13
-      ModuleFindTest undef
-      ModuleFindTest::SubMod undef
-      ModuleFindTest::SubMod::SubSubMod undef
+      Module::Find 0.15
     requirements:
       ExtUtils::MakeMaker 0
       File::Find 0
@@ -1848,8 +1845,8 @@ DISTRIBUTIONS
       Mojolicious 8.03
       SQL::Abstract 1.86
       perl 5.010001
-  Mojolicious-8.27
-    pathname: S/SR/SRI/Mojolicious-8.27.tar.gz
+  Mojolicious-8.28
+    pathname: S/SR/SRI/Mojolicious-8.28.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1918,7 +1915,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.27
+      Mojolicious 8.28
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
