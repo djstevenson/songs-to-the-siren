@@ -40,97 +40,79 @@ function visitSong() {
 
 context('Comments are shown (or hidden) correctly', () => {
 
-    describe('New unmoderated comment', () => {
-        it('New unmoderated comment visible (but marked) to the author', () => {
+    it('New unmoderated comment visible (but marked) to the author', () => {
 
-            createSong()
+        createSong()
 
-            userFactory.getNextSignedInUser(false)
+        const nonAuthor = userFactory.getNextSignedInUser(false)
+        const admin     = userFactory.getNextSignedInUser(true)
+        const author    = userFactory.getNextSignedInUser(false)
 
-            visitSong()
-                .createRootComment('test markdown 1')
-                .assertCountRootComments(1)
-                // Author sees comment which is flagged as needing moderation
-                .assertCommentUnmoderated(1)
+        visitSong()
+            .createRootComment('test markdown 1')
+            .assertCountRootComments(1)
+            // Author sees comment which is flagged as needing moderation
+            .assertCommentUnmoderated(1)
 
-        })
-
-        it('New unmoderated comment visible (but marked) to an admin', () => {
-
-            createSong()
-
-            userFactory.getNextSignedInUser(true)
-
-            visitSong()
-                .createRootComment('test markdown 2')
-                .assertCountRootComments(1)
-                // Admin sees comment which is flagged as needing moderation
-                .assertCommentUnmoderated(1)
-                // Admin also sees 'approve' and 'delete' links.
-                .assertCommentModLinksPresent(1)
-
-        })
-
-        it('New unmoderated comment invisible if not logged-in', () => {
-
-            createSong()
-
-            userFactory.getNextSignedInUser(false)
-
-            visitSong()
-                .createRootComment('test markdown 3')
-            
-            // Logout and revisit song, check that I can't see
-            // unmodded comment as I am not logged in
-            cy.signOut()
-
-            visitSong()
-                .assertCountRootComments(0)
-        })
+        // Admin sees comment flagged for moderation
+        // and also sees the approve/reject links
+        admin.signIn()
+        visitSong()
+            .assertCountRootComments(1)
+            .assertCommentUnmoderated(1)
+            .assertCommentText(1, 'markdown 1')
+    
+        // Other logged-in, non-admin, user does not see the comment at all
+        nonAuthor.signIn()
+        visitSong()
+            .assertCountRootComments(0)
+    
+        // Logged-out user does not see the comment at all
+        cy.signOut()
+        visitSong()
+            .assertCountRootComments(0)
 
     })
 
-    describe('Approved comment visible to all', () => {
-        it('New reply visible (but marked) to the author', () => {
+    it('Approved comment visibility', () => {
 
-            createSong()
+        createSong()
 
-            const nonAuthor = userFactory.getNextSignedInUser(false)
-            const admin     = userFactory.getNextSignedInUser(true)
-            const author    = userFactory.getNextSignedInUser(false)
+        const nonAuthor = userFactory.getNextSignedInUser(false)
+        const admin     = userFactory.getNextSignedInUser(true)
+        const author    = userFactory.getNextSignedInUser(false)
 
-            visitSong()
-                .createRootComment('test markdown 4')
-                .assertCountRootComments(1)
-            
-            // Admin approves comment.
-            admin.signIn()
-            visitSong()
-                .approveRootComment(1)
+        visitSong()
+            .createRootComment('test markdown 4')
+            .assertCountRootComments(1)
+        
+        // Admin approves comment.
+        admin.signIn()
+        visitSong()
+            .approveRootComment(1)
 
-            // Admin sees comment not flagged for moderation
-                .assertCommentModerated(1)
-                .assertCommentText(1, 'markdown 4')
-            
-            // Author ditto
-            author.signIn()
-            visitSong()
-                .assertCommentModerated(1)
-                .assertCommentText(1, 'markdown 4')
+        // Admin sees comment not flagged for moderation
+            .assertCommentModerated(1)
+            .assertCommentText(1, 'markdown 4')
+        
+        // Author ditto
+        author.signIn()
+        visitSong()
+            .assertCommentModerated(1)
+            .assertCommentText(1, 'markdown 4')
 
-            // Other user ditto
-            nonAuthor.signIn()
-            visitSong()
-                .assertCommentModerated(1)
-                .assertCommentText(1, 'markdown 4')
+        // Other user ditto
+        nonAuthor.signIn()
+        visitSong()
+            .assertCommentModerated(1)
+            .assertCommentText(1, 'markdown 4')
 
-            // Also visible when logged out
-            cy.signOut()
-            visitSong()
-                .assertCommentModerated(1)
-                .assertCommentText(1, 'markdown 4')
-
-        })
+        // Also visible when logged out
+        cy.signOut()
+        visitSong()
+            .assertCommentModerated(1)
+            .assertCommentText(1, 'markdown 4')
 
     })
+
 })

@@ -78,13 +78,8 @@ export class ViewSongPage extends Public {
     assertCommentText(n, txt) {
         this
             .findRootComment(n)
-            .find('li > div.unmoderated')
-            .should('not.exist')
-
-        this
-            .findRootComment(n)
             .contains(txt)
-            
+
         return this
     }
 
