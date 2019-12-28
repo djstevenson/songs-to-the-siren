@@ -53,9 +53,26 @@ export class ViewSongPage extends Public {
     }
 
     
-    assertCommentUnmoderated(commentDom) {
-        const comment = commentDom.find('li > div.unmoderated')
-        comment.contains('COMMENT AWAITING APPROVAL')
+    assertCommentUnmoderated(n) {
+        this
+            .findRootComment(n)
+            .find('li > div.unmoderated')
+            .contains('COMMENT AWAITING APPROVAL')
+
+        return this
+    }
+
+    // The 'approve'/'reject' links that an admin will see
+    // for an unmoderated commentt.
+    assertCommentModLinksPresent(n) {
+        this
+            .findRootComment(n)
+            .find("li > div.unmoderated a:contains('Approve')")
+
+        this
+            .findRootComment(n)
+            .find("li > div.unmoderated a:contains('Reject')")
+
         return this
     }
 

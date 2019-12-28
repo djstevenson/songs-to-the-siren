@@ -48,15 +48,11 @@ context('Comments are shown (or hidden) correctly', () => {
 
             userFactory.getNextSignedInUser(false)
 
-            const viewSongPage = visitSong()
-
-            const commentDom = viewSongPage
+            visitSong()
                 .createRootComment('test markdown 1')
                 .assertCountRootComments(1)
-                .findRootComment(1)
-            
-            viewSongPage
-                .assertCommentUnmoderated(commentDom)
+                // Author sees comment which is flagged as needing moderation
+                .assertCommentUnmoderated(1)
 
         })
 
@@ -66,15 +62,13 @@ context('Comments are shown (or hidden) correctly', () => {
 
             userFactory.getNextSignedInUser(true)
 
-            const viewSongPage = visitSong()
-
-            const commentDom = viewSongPage
+            visitSong()
                 .createRootComment('test markdown 2')
                 .assertCountRootComments(1)
-                .findRootComment(1)
-            
-            viewSongPage
-                .assertCommentUnmoderated(commentDom)
+                // Admin sees comment which is flagged as needing moderation
+                .assertCommentUnmoderated(1)
+                // Admin also sees 'approve' and 'delete' links.
+                .assertCommentModLinksPresent(1)
 
         })
 
@@ -92,7 +86,7 @@ context('Comments are shown (or hidden) correctly', () => {
             cy.signOut()
 
             visitSong()
-            .assertCountRootComments(0)
+                .assertCountRootComments(0)
         })
 
     })
