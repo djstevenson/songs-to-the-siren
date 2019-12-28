@@ -56,7 +56,7 @@ context('Comments are shown (or hidden) correctly', () => {
 
         })
 
-        it('New comment visible (but marked) to an admin', () => {
+        it('New root comment visible (but marked) to an admin', () => {
 
             createSong()
 
@@ -72,7 +72,7 @@ context('Comments are shown (or hidden) correctly', () => {
 
         })
 
-        it('New comment invisible if not logged-in', () => {
+        it('New root comment invisible if not logged-in', () => {
 
             createSong()
 
