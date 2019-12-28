@@ -98,7 +98,7 @@ has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
 override posted => sub {
-	my $self = shift;
+    my $self = shift;
 
     my $update_button = $self->find_button('submit');
     if ( $update_button->clicked ) {

@@ -6,7 +6,7 @@ use NeverTire::Form::Moose;
 extends 'NeverTire::Form::Base';
 with 'NeverTire::Form::Role';
 
-has '+id' => (default => 'new-song-comment');
+has '+id' => (default => 'new-comment');
 
 has_field comment_markdown => (
     type        => 'Input::TextArea',
@@ -26,7 +26,8 @@ has_field comment_preview => (
     },
 );
 
-has_button add_comment => ();
+has_button submit => ();
+has_button cancel => (style => 'light', skip_validation => 1);
 
 has song => (
     is          => 'ro',
@@ -43,13 +44,19 @@ has parent_comment => (
 override posted => sub {
 	my $self = shift;
 
-    my $user = $self->c->stash->{auth_user};
+    my $submit_button = $self->find_button('submit');
+    if ( $submit_button->clicked ) {
+        
+        my $user = $self->c->stash->{auth_user};
 
-    # Whitelist what we extract from the submitted form
-	my $fields = $self->form_hash(qw/ comment_markdown /);
+        # Whitelist what we extract from the submitted form
+        my $fields = $self->form_hash(qw/ comment_markdown /);
 
-    my $parent = $self->has_parent_comment ? $self->parent_comment : undef;
-	return $user->new_song_comment($self->song, $parent, $fields);
+        my $parent = $self->has_parent_comment ? $self->parent_comment : undef;
+        $user->new_song_comment($self->song, $parent, $fields);
+    }
+
+    return 1;
 };
 
 __PACKAGE__->meta->make_immutable;

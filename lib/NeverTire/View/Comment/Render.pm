@@ -60,7 +60,7 @@ sub _default_renderer {
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
     my $id = $comment->id;
     my $s = sprintf('<a name="comment-%d"></a>', $id);
-    $s .= qq{<div class="${mod_status}"};
+    $s .= qq{<div class="${mod_status}">};
     $s .=  q{<h4 class="comment-header">};
     $s .= qq{<span class="author">${noun} #${id} by <strong>${author}</strong> </span>};
     $s .= qq{<span class="date">${timestamp}</span>};
