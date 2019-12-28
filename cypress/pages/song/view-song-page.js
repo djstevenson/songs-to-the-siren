@@ -66,6 +66,18 @@ export class ViewSongPage extends Public {
         return this
     }
 
+    rejectRootComment(n) {
+        this
+            .findRootComment(n)
+            .find("li > div.unmoderated a:contains('Reject')")
+            .click()
+        
+        new RejectCommentPage()
+            .rejectComment()
+
+        return this
+    }
+
     assertCommentModerated(n) {
         this
             .findRootComment(n)

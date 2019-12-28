@@ -83,7 +83,7 @@ context('Comments are shown (or hidden) correctly', () => {
         const author    = userFactory.getNextSignedInUser(false)
 
         visitSong()
-            .createRootComment('test markdown 4')
+            .createRootComment('test markdown 2')
             .assertCountRootComments(1)
         
         // Admin approves comment.
@@ -92,26 +92,72 @@ context('Comments are shown (or hidden) correctly', () => {
             .approveRootComment(1)
 
         // Admin sees comment not flagged for moderation
+            .assertCountRootComments(1)
             .assertCommentModerated(1)
-            .assertCommentText(1, 'markdown 4')
+            .assertCommentText(1, 'markdown 2')
         
         // Author ditto
         author.signIn()
         visitSong()
+            .assertCountRootComments(1)
             .assertCommentModerated(1)
-            .assertCommentText(1, 'markdown 4')
+            .assertCommentText(1, 'markdown 2')
 
         // Other user ditto
         nonAuthor.signIn()
         visitSong()
+            .assertCountRootComments(1)
             .assertCommentModerated(1)
-            .assertCommentText(1, 'markdown 4')
+            .assertCommentText(1, 'markdown 2')
 
         // Also visible when logged out
         cy.signOut()
         visitSong()
+            .assertCountRootComments(1)
             .assertCommentModerated(1)
-            .assertCommentText(1, 'markdown 4')
+            .assertCommentText(1, 'markdown 2')
+
+    })
+
+    it('Rejected comment visibility', () => {
+
+        // No-one should be able to see a rejected comment.
+        // TODO Consider changing this so that the author
+        // still sees it, with a flag to see it's rejected ,
+        // and possibly even a moderator comment to say why
+
+        createSong()
+
+        const nonAuthor = userFactory.getNextSignedInUser(false)
+        const admin     = userFactory.getNextSignedInUser(true)
+        const author    = userFactory.getNextSignedInUser(false)
+
+        visitSong()
+            .createRootComment('test markdown 3')
+            .assertCountRootComments(1)
+        
+        // Admin rejects comment.
+        admin.signIn()
+        visitSong()
+            .rejectRootComment(1)
+
+        // Admin does not see comment
+          .assertCountRootComments(0)
+    
+        // Author ditto
+        author.signIn()
+        visitSong()
+            .assertCountRootComments(0)
+
+        // Other user ditto
+        nonAuthor.signIn()
+        visitSong()
+            .assertCountRootComments(0)
+
+        // Also visible when logged out
+        cy.signOut()
+        visitSong()
+            .assertCountRootComments(0)
 
     })
 
