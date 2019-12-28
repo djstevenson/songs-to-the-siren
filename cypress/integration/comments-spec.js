@@ -20,6 +20,7 @@ function createSong() {
 
     const user = userFactory.getNextSignedInUser(true)
     const song = songFactory.getNextSong(user, true)
+
     cy.signOut()
 
     return song    
@@ -39,10 +40,8 @@ function visitSong() {
 
 context('Comments are shown (or hidden) correctly', () => {
 
-    // TODO Extend tests to include replies to other comments, too.
-    
-    describe('New root comment', () => {
-        it('New comment visible (but marked) to the author', () => {
+    describe('New unmoderated comment', () => {
+        it('New unmoderated comment visible (but marked) to the author', () => {
 
             createSong()
 
@@ -56,7 +55,7 @@ context('Comments are shown (or hidden) correctly', () => {
 
         })
 
-        it('New root comment visible (but marked) to an admin', () => {
+        it('New unmoderated comment visible (but marked) to an admin', () => {
 
             createSong()
 
@@ -72,7 +71,7 @@ context('Comments are shown (or hidden) correctly', () => {
 
         })
 
-        it('New root comment invisible if not logged-in', () => {
+        it('New unmoderated comment invisible if not logged-in', () => {
 
             createSong()
 
@@ -91,4 +90,47 @@ context('Comments are shown (or hidden) correctly', () => {
 
     })
 
+    describe('Approved comment visible to all', () => {
+        it('New reply visible (but marked) to the author', () => {
+
+            createSong()
+
+            const nonAuthor = userFactory.getNextSignedInUser(false)
+            const admin     = userFactory.getNextSignedInUser(true)
+            const author    = userFactory.getNextSignedInUser(false)
+
+            visitSong()
+                .createRootComment('test markdown 4')
+                .assertCountRootComments(1)
+            
+            // Admin approves comment.
+            admin.signIn()
+            visitSong()
+                .approveRootComment(1)
+
+            // Admin sees comment not flagged for moderation
+                .assertCommentModerated(1)
+                .assertCommentText(1, 'markdown 4')
+            
+            // Author ditto
+            author.signIn()
+            visitSong()
+                .assertCommentModerated(1)
+                .assertCommentText(1, 'markdown 4')
+
+            // Other user ditto
+            nonAuthor.signIn()
+            visitSong()
+                .assertCommentModerated(1)
+                .assertCommentText(1, 'markdown 4')
+
+            // Also visible when logged out
+            cy.signOut()
+            visitSong()
+                .assertCommentModerated(1)
+                .assertCommentText(1, 'markdown 4')
+
+        })
+
+    })
 })

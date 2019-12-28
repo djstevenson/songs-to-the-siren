@@ -1,5 +1,7 @@
-import { Public            } from '../public'
-import { CreateCommentPage } from '../comment/create-comment-page'
+import { Public             } from '../public'
+import { CreateCommentPage  } from '../comment/create-comment-page'
+import { ApproveCommentPage } from '../comment/approve-comment-page'
+import { RejectCommentPage  } from '../comment/reject-comment-page'
 
 export class ViewSongPage extends Public {
 
@@ -48,11 +50,44 @@ export class ViewSongPage extends Public {
 
     // Find the 'nth' root comment
     // TODO Return some object here, and implement assertUnmoderated on that object
-    findRootComment(nth) {
-        return cy.get(`section.comments > div.forest > ul.comment-root:nth-child(${nth})`)
+    findRootComment(n) {
+        return cy.get(`section.comments > div.forest > ul.comment-root:nth-child(${n})`)
     }
 
-    
+    approveRootComment(n) {
+        this
+            .findRootComment(n)
+            .find("li > div.unmoderated a:contains('Approve')")
+            .click()
+        
+        new ApproveCommentPage()
+            .approveComment()
+
+        return this
+    }
+
+    assertCommentModerated(n) {
+        this
+            .findRootComment(n)
+            .find('li > div.unmoderated')
+            .should('not.exist')
+
+        return this
+    }
+
+    assertCommentText(n, txt) {
+        this
+            .findRootComment(n)
+            .find('li > div.unmoderated')
+            .should('not.exist')
+
+        this
+            .findRootComment(n)
+            .contains(txt)
+            
+        return this
+    }
+
     assertCommentUnmoderated(n) {
         this
             .findRootComment(n)
