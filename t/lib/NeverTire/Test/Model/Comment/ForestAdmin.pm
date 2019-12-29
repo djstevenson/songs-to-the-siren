@@ -15,8 +15,6 @@ use Test::Deep qw/ cmp_deeply /;
 
 use DateTime;
 
-use NeverTire::View::Comment::Render qw/ render_comments /;
-
 extends 'NeverTire::Test::Base';
 with 'NeverTire::Test::Role';
 
