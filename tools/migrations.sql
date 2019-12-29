@@ -129,8 +129,20 @@ CREATE TABLE content (
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
--- Support for cascade on foreign key constraints
 CREATE INDEX content_author_id_idx ON content USING BTREE(author_id);
+
+-- 2 up
+CREATE TABLE comment_edits (
+    id SERIAL NOT NULL PRIMARY KEY,
+    comment_id INT NOT NULL REFERENCES comments(id) ON DELETE CASCADE,
+    reason TEXT NOT NULL,
+    editor_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    edited_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+CREATE INDEX comment_edits_comment_id_idx ON comment_edits USING BTREE(comment_id);
+
+-- 2 down
+DROP TABLE IF EXISTS comment_edits;
 
 -- 1 down
 DROP TABLE IF EXISTS content;

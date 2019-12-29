@@ -34,6 +34,16 @@ has_field comment_preview => (
     },
 );
 
+has_field reason => (
+    type        => 'Input::Text',
+    label       => 'Reason for edit',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
+    options     => {
+        initial_value => '',
+    }
+);
+
 has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
@@ -46,7 +56,7 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-        my $fields = $self->form_hash(qw/ comment_markdown /);
+        my $fields = $self->form_hash(qw/ comment_markdown reason /);
 
         $user->edit_song_comment($self->comment, $fields);
     }

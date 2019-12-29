@@ -35,17 +35,17 @@ sub new_song_comment {
 sub edit_song_comment {
     my ($self, $comment, $data) = @_;
 
-    # The text here is surely part of the view?
-    # TODO Record the date/reason for the edit in the
-    # DB and render that properly in the view.
-    my $markdown = $data->{comment_markdown}
-     . qq{\n\nEdited by admin};
+    my $reason = delete $data->{reason};
 
     my $full_args = {
         %$data,
-        comment_html => markdown($markdown),
+        comment_html => markdown($data->{comment_markdown}),
     };
 
+    $comment->create_related(edits => {
+        editor_id => $self->id,
+        reason    => $reason,
+    });
     return $comment->update($full_args);
 }
 
