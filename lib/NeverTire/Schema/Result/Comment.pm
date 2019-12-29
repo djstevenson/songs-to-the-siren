@@ -37,6 +37,13 @@ __PACKAGE__->belongs_to(song   => 'NeverTire::Schema::Result::Song',        { 'f
 
 __PACKAGE__->has_many(edits    => 'NeverTire::Schema::Result::CommentEdit', { 'foreign.comment_id' => 'self.id' });
 
+# Newest first
+sub edits_by_date {
+    return shift->edits->search(undef, {
+        order_by => {-desc => 'id'}
+    });
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

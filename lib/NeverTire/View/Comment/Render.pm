@@ -101,14 +101,12 @@ sub _render_edits {
 
     my $s = '';
 
-    my @edits = $comment->edits->search(undef, {
-        order_by => {-asc => 'edited_at'}
-    })->all;
+    my @edits = $comment->edits_by_date->all;
 
     if ( scalar @edits ) {
         $s .= q{<div class="comment-edits"><h4>Edits</h4><ul>};
         foreach my $edit ( @edits ) {
-            $s .= sprintf(q{<li>Edited by <span class="editor">%s</span> <span class="date">%s</span> - "%s"</li>},
+            $s .= sprintf(q{<li>Edited by <span class="editor">%s</span> <span class="date">%s</span> - "<span class="reason">%s</span>"</li>},
                 xml_escape($edit->editor->name),
                 xml_escape($app->datetime($edit->edited_at)),
                 xml_escape($edit->reason),
