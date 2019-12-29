@@ -108,7 +108,7 @@ sub _render_edits {
     if ( scalar @edits ) {
         $s .= q{<div class="comment-edits"><h4>Edits</h4><ul>};
         foreach my $edit ( @edits ) {
-            $s .= sprintf(q{<li>Edited by %s %s - %s</li>},
+            $s .= sprintf(q{<li>Edited by <span class="editor">%s</span> <span class="date">%s</span> - "%s"</li>},
                 xml_escape($edit->editor->name),
                 xml_escape($app->datetime($edit->edited_at)),
                 xml_escape($edit->reason),
