@@ -31,9 +31,10 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->has_many(content  => 'NeverTire::Schema::Result::Content', { 'foreign.author_id' => 'self.id' });
-__PACKAGE__->has_many(songs    => 'NeverTire::Schema::Result::Song',    { 'foreign.author_id' => 'self.id' });
-__PACKAGE__->has_many(comments => 'NeverTire::Schema::Result::Comment', { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(content       => 'NeverTire::Schema::Result::Content',     { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(songs         => 'NeverTire::Schema::Result::Song',        { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(comments      => 'NeverTire::Schema::Result::Comment',     { 'foreign.author_id' => 'self.id' });
+__PACKAGE__->has_many(comment_edits => 'NeverTire::Schema::Result::CommentEdit', { 'foreign.editor_id' => 'self.id' });
 
 
 no Moose;

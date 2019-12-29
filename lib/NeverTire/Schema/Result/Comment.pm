@@ -28,12 +28,21 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',    { 'foreign.id' => 'self.author_id' });
+__PACKAGE__->belongs_to(author => 'NeverTire::Schema::Result::User',        { 'foreign.id' => 'self.author_id'  });
 
-__PACKAGE__->belongs_to(parent => 'NeverTire::Schema::Result::Comment', { 'foreign.id' => 'self.parent_id' });
-__PACKAGE__->has_many(replies  => 'NeverTire::Schema::Result::Comment', { 'foreign.parent_id' => 'self.id' });
+__PACKAGE__->belongs_to(parent => 'NeverTire::Schema::Result::Comment',     { 'foreign.id' => 'self.parent_id'  });
+__PACKAGE__->has_many(replies  => 'NeverTire::Schema::Result::Comment',     { 'foreign.parent_id' => 'self.id'  });
 
-__PACKAGE__->belongs_to(song   => 'NeverTire::Schema::Result::Song',    { 'foreign.id' => 'self.song_id' });
+__PACKAGE__->belongs_to(song   => 'NeverTire::Schema::Result::Song',        { 'foreign.id' => 'self.song_id'    });
+
+__PACKAGE__->has_many(edits    => 'NeverTire::Schema::Result::CommentEdit', { 'foreign.comment_id' => 'self.id' });
+
+# Newest first
+sub edits_by_date {
+    return shift->edits->search(undef, {
+        order_by => {-desc => 'id'}
+    });
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);

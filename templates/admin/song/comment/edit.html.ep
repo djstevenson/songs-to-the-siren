@@ -1,0 +1,6 @@
+% layout 'default';
+% title 'Edit comment for ' . $song->title;
+
+<h2 class="notification-title">Edit comment for <%= $song->title %></h2>
+
+<%== $form->render %>

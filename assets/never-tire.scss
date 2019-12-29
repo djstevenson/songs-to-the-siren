@@ -202,3 +202,35 @@ div.youtube {
 tr.song-is-not-published {
     background-color: $col-Unpublished !important;
 }
+
+.comment-edits {
+    h4 {
+        display: none;
+    }
+
+    .editor {
+        color: $col-CommentAt;
+        margin-left: 0.35rem;
+        margin-right: 0.5rem;
+    }
+
+    .date {
+        font-size: 0.87rem;
+    }
+
+    ul {
+        li {
+            margin: 0;
+            padding: 0.1rem;
+        }
+    }
+
+}
+
+.links h4 {
+    display: none;
+}
+
+#new-comment-thread {
+    margin-right: 1.25rem;
+}

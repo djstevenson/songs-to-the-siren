@@ -32,6 +32,23 @@ sub new_song_comment {
     return $self->create_related('comments', $full_args);
 }
 
+sub edit_song_comment {
+    my ($self, $comment, $data) = @_;
+
+    my $reason = delete $data->{reason};
+
+    my $full_args = {
+        %$data,
+        comment_html => markdown($data->{comment_markdown}),
+    };
+
+    $comment->create_related(edits => {
+        editor_id => $self->id,
+        reason    => $reason,
+    });
+    return $comment->update($full_args);
+}
+
 no Moose::Role;
 1;
 

@@ -2,6 +2,8 @@ package NeverTire::View::Comment::Render;
 use strict;
 use warnings;
 
+use Mojo::Util qw/ xml_escape /;
+
 use Sub::Exporter -setup => {
     exports => [qw/ render_comments /]
 };
@@ -56,6 +58,9 @@ sub _default_renderer {
     # e.g. add private methods to build format headers, body, etc separately
     # then bring them together here.
     #      Or do it in templates rather than Perl.
+
+    # TODO Are we even HTML entity-encoding everything we need to?
+
     my $approved   = $comment->approved_at;
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
     my $id = $comment->id;
@@ -71,7 +76,9 @@ sub _default_renderer {
         $at = qq{<span class="comment-at">\@${parent_name}</span> };
     }
     my $mod = $approved ? '' : '<span class="mod-warning">COMMENT AWAITING APPROVAL: </span>';
-    $s .= qq{</h4><div class="comment-body">${mod}${at}${html}</div>};
+    my $edits = _render_edits($app, $comment);
+    $s .= qq{</h4><div class="comment-body">${mod}${at}${html}${edits}</div>};
+
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
             my $url = $app->url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id);
@@ -79,10 +86,34 @@ sub _default_renderer {
         } elsif ( $auth_user->admin ) {
             my $approve_url = $app->url_for('admin_approve_comment', song_id => $comment->song->id, comment_id => $comment->id);
             my $reject_url  = $app->url_for('admin_reject_comment',  song_id => $comment->song->id, comment_id => $comment->id);
-            $s .= qq{<p><a href="${approve_url}">Approve</a> --- <a href="${reject_url}">Reject</a></p>};
+            my $edit_url    = $app->url_for('admin_edit_comment',    song_id => $comment->song->id, comment_id => $comment->id);
+            $s .= qq{<p><a href="${approve_url}">Approve</a> --- <a href="${reject_url}">Reject</a> --- <a href="${edit_url}">Edit</a></p>};
         }
     }
+
     $s .= q{</div>};  # Closes the div modstatus
+
+    return $s;
+}
+
+sub _render_edits {
+    my ($app, $comment) = @_;
+
+    my $s = '';
+
+    my @edits = $comment->edits_by_date->all;
+
+    if ( scalar @edits ) {
+        $s .= q{<div class="comment-edits"><h4>Edits</h4><ul>};
+        foreach my $edit ( @edits ) {
+            $s .= sprintf(q{<li>Edited by <span class="editor">%s</span> <span class="date">%s</span> - "<span class="reason">%s</span>"</li>},
+                xml_escape($edit->editor->name),
+                xml_escape($app->datetime($edit->edited_at)),
+                xml_escape($edit->reason),
+            );
+        }
+        $s .= q{</ul></div>};
+    }
 
     return $s;
 }

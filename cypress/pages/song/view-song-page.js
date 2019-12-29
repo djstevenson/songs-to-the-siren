@@ -2,6 +2,7 @@ import { Public             } from '../public'
 import { CreateCommentPage  } from '../comment/create-comment-page'
 import { ApproveCommentPage } from '../comment/approve-comment-page'
 import { RejectCommentPage  } from '../comment/reject-comment-page'
+import { EditCommentPage    } from '../comment/edit-comment-page'
 
 export class ViewSongPage extends Public {
 
@@ -78,6 +79,18 @@ export class ViewSongPage extends Public {
         return this
     }
 
+    editRootComment(n, args) {
+        this
+            .findRootComment(n)
+            .find("li > div.unmoderated a:contains('Edit')")
+            .click()
+        
+        new EditCommentPage()
+            .editComment(args)
+
+        return this
+    }
+
     assertCommentModerated(n) {
         this
             .findRootComment(n)
@@ -104,16 +117,82 @@ export class ViewSongPage extends Public {
         return this
     }
 
-    // The 'approve'/'reject' links that an admin will see
-    // for an unmoderated commentt.
-    assertCommentModLinksPresent(n) {
+    assertEditLinkNotPresent(n) {
         this
             .findRootComment(n)
-            .find("li > div.unmoderated a:contains('Approve')")
+            .find('a:contains(Edit)')
+            .should('not.exist')
+
+        return this
+    }
+
+    assertEditLinkPresent(n) {
+        this
+            .findRootComment(n)
+            .find('a:contains(Edit)')
+
+        return this
+    }
+
+    assertEditCount(n, c) {
+        const dom = this.findRootComment(n)
+
+        if ( c == 0 ) {
+            dom
+                .find('div.comment-edits')
+                .should('not.exist')
+
+        }
+        else {
+            dom
+                .find('div.comment-edits > ul > li')
+                .its('length').should('eq', c)
+        }
+        return this
+    }
+
+    // n: selects which comment (1=first)
+    // e: selects which edit (1=first)
+    // args: should have 'editor' and 'reason' keys
+    assertEditContent(n, e, args) {
+        const dom = this.findRootComment(n)
+
+        const sel1 = `div.comment-edits > ul > li:nth-child(${e}) > span.editor`
 
         this
             .findRootComment(n)
-            .find("li > div.unmoderated a:contains('Reject')")
+            .find(sel1)
+            .contains(args.editor)
+
+        const sel2 = `div.comment-edits > ul > li:nth-child(${e}) > span.reason`
+
+        this
+            .findRootComment(n)
+            .find(sel2)
+            .contains(args.reason)
+        
+        return this
+    }
+
+    // n: selects which comment (1=first)
+    assertCommentContains(n, txt) {
+        this
+            .findRootComment(n)
+            .contains(txt)
+        
+        return this
+    }
+
+    // The 'approve'/'reject' links that an admin will see
+    // for an unmoderated comment.
+    assertCommentModLinksPresent(n) {
+        this
+            .findRootComment(n)
+            .find('li > div.unmoderated a:contains(Approve)')
+
+        this
+            .findRootComment(n)
+            .find('li > div.unmoderated a:contains(Reject)')
 
         return this
     }

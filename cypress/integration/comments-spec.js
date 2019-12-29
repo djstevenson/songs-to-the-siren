@@ -161,4 +161,75 @@ context('Comments are shown (or hidden) correctly', () => {
 
     })
 
+    it('Admin edits a comment', () => {
+
+        // Currently, can only edit before approval.
+        // TODO Change this to allow editing at any time.
+        // TODO Add deletion too.
+
+        createSong()
+
+        const admin     = userFactory.getNextSignedInUser(true)
+        const author    = userFactory.getNextSignedInUser(false)
+
+        const md1 = 'test abc markdown 4'
+        const md2 = 'test def markdown 4 edited'
+        const md3 = 'test xyz markdown 4 re-edited'
+
+        const reason1 = 'Cypress 1 test'
+        const reason2 = 'Cypress 2 test'
+
+        // "author" creates comment. Does not get edit link
+        visitSong()
+            .createRootComment(md1)
+            .assertCountRootComments(1)
+            .assertEditLinkNotPresent(1)
+            .assertCommentContains(1, md1)
+        
+        // Admin does get edit link. Check that there
+        // are no edits initially, then make an edit,
+        // and check that there is now one, then check
+        // its contents.
+        // And then does another edit...
+        admin.signIn()
+        visitSong()
+            .assertCountRootComments(1)
+            .assertEditLinkPresent(1)
+            .assertEditCount(1, 0)  // First comment, zero edits
+            .editRootComment(1, {
+                markdown: md2,
+                reason: reason1
+            })
+            .assertCommentContains(1, md2)
+            .assertEditCount(1, 1)  // First comment, one edit
+            .assertEditContent(1, 1, { // First comment, first edit
+                editor: admin.getName(),
+                reason: reason1
+            })
+
+            .editRootComment(1, {
+                markdown: md3,
+                reason: reason2
+            })
+            .assertCommentContains(1, md3)
+            .assertEditCount(1, 2)  // First comment, two edits
+            .assertEditContent(1, 1, { // First comment, first edit (newest)
+                editor: admin.getName(),
+                reason: reason2
+            })
+
+            // Admin approves, and edits still show when logged out
+            .approveRootComment(1)
+        
+        cy.signOut()
+        visitSong()
+            .assertCommentContains(1, md3)
+            .assertEditCount(1, 2)  // First comment, two edits
+            .assertEditContent(1, 1, { // First comment, first edit (newest)
+                editor: admin.getName(),
+                reason: reason2
+            })
+
+    })
+
 })
