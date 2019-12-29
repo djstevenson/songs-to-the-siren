@@ -2,6 +2,8 @@ package NeverTire::View::Comment::Render;
 use strict;
 use warnings;
 
+use Mojo::Util qw/ xml_escape /;
+
 use Sub::Exporter -setup => {
     exports => [qw/ render_comments /]
 };
@@ -56,6 +58,9 @@ sub _default_renderer {
     # e.g. add private methods to build format headers, body, etc separately
     # then bring them together here.
     #      Or do it in templates rather than Perl.
+
+    # TODO Are we even HTML entity-encoding everything we need to?
+
     my $approved   = $comment->approved_at;
     my $mod_status = $approved ? 'moderated' : 'unmoderated';
     my $id = $comment->id;
@@ -71,7 +76,8 @@ sub _default_renderer {
         $at = qq{<span class="comment-at">\@${parent_name}</span> };
     }
     my $mod = $approved ? '' : '<span class="mod-warning">COMMENT AWAITING APPROVAL: </span>';
-    $s .= qq{</h4><div class="comment-body">${mod}${at}${html}</div>};
+    my $edits = _render_edits($app, $comment);
+    $s .= qq{</h4><div class="comment-body">${mod}${at}${html}${edits}</div>};
 
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
@@ -86,6 +92,30 @@ sub _default_renderer {
     }
 
     $s .= q{</div>};  # Closes the div modstatus
+
+    return $s;
+}
+
+sub _render_edits {
+    my ($app, $comment) = @_;
+
+    my $s = '';
+
+    my @edits = $comment->edits->search(undef, {
+        order_by => {-asc => 'edited_at'}
+    })->all;
+
+    if ( scalar @edits ) {
+        $s .= q{<div class="comment-edits"><h4>Edits</h4><ul>};
+        foreach my $edit ( @edits ) {
+            $s .= sprintf(q{<li>Edited by %s %s - %s</li>},
+                xml_escape($edit->editor->name),
+                xml_escape($app->datetime($edit->edited_at)),
+                xml_escape($edit->reason),
+            );
+        }
+        $s .= q{</ul></div>};
+    }
 
     return $s;
 }
