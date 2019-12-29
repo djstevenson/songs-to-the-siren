@@ -72,6 +72,7 @@ sub _default_renderer {
     }
     my $mod = $approved ? '' : '<span class="mod-warning">COMMENT AWAITING APPROVAL: </span>';
     $s .= qq{</h4><div class="comment-body">${mod}${at}${html}</div>};
+
     if ( my $auth_user = $app->stash->{auth_user} ) {
         if ( $approved ) {
             my $url = $app->url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id);
@@ -79,9 +80,11 @@ sub _default_renderer {
         } elsif ( $auth_user->admin ) {
             my $approve_url = $app->url_for('admin_approve_comment', song_id => $comment->song->id, comment_id => $comment->id);
             my $reject_url  = $app->url_for('admin_reject_comment',  song_id => $comment->song->id, comment_id => $comment->id);
-            $s .= qq{<p><a href="${approve_url}">Approve</a> --- <a href="${reject_url}">Reject</a></p>};
+            my $edit_url    = $app->url_for('admin_edit_comment',    song_id => $comment->song->id, comment_id => $comment->id);
+            $s .= qq{<p><a href="${approve_url}">Approve</a> --- <a href="${reject_url}">Reject</a> --- <a href="${edit_url}">Edit</a></p>};
         }
     }
+
     $s .= q{</div>};  # Closes the div modstatus
 
     return $s;

@@ -11,7 +11,8 @@ sub add_routes {
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
     $comment_action->route('/approve')->name('admin_approve_comment')->via('GET', 'POST')->to(action => 'approve');
-    $comment_action->route('/reject')->name('admin_reject_comment')->via('GET', 'POST')->to(action => 'reject');
+    $comment_action->route('/reject') ->name('admin_reject_comment') ->via('GET', 'POST')->to(action => 'reject');
+    $comment_action->route('/edit')   ->name('admin_edit_comment')   ->via('GET', 'POST')->to(action => 'edit');
 }
 
 sub capture {
@@ -38,8 +39,8 @@ sub approve {
 
     my $form = $c->form( 'Song::Comment::Approve', comment => $comment );
     
-    if (my $action = $form->process) {
-        $c->flash(msg => $action);
+    if ($form->process) {
+        $c->flash(msg => 'Comment approved');
 
         $c->redirect_to('view_song', song_id => $song->id);
     }
@@ -56,8 +57,25 @@ sub reject {
 
     my $form = $c->form( 'Song::Comment::Reject', comment => $comment );
     
-    if (my $action = $form->process) {
-        $c->flash(msg => $action);
+    if ($form->process) {
+        $c->flash(msg => 'Comment rejected');
+
+        $c->redirect_to('view_song', song_id => $song->id);
+    }
+    else {
+        $c->stash(form => $form);
+    }
+}
+sub edit {
+    my $c = shift;
+
+    my $comment = $c->stash->{comment};
+    my $song    = $comment->song;
+
+    my $form = $c->form( 'Song::Comment::Edit', comment => $comment );
+    
+    if ($form->process) {
+        $c->flash(msg => 'Comment edited');
 
         $c->redirect_to('view_song', song_id => $song->id);
     }
