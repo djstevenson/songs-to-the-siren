@@ -12,7 +12,9 @@
     % if ( scalar @$forest ) {
         <div class="forest">
         % foreach my $tree ( @$forest ) {
-            %== render_comment_tree($tree);
+            <ul class="comment-root">
+                %= include 'song/comment/_tree_node', node => $tree, level => 0
+            </ul>
         % }
         </div>
     % }

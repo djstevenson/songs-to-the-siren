@@ -1,9 +1,9 @@
 package NeverTire::Helper::Render;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use NeverTire::Util::Date            qw/ format_date     /;
+use NeverTire::Util::Date qw/ format_date     /;
 
-use HTML::Entities                   qw/ encode_entities /;
+use HTML::Entities        qw/ encode_entities /;
 
 # TODO POD
 
@@ -71,8 +71,9 @@ sub register {
             return $false // 'No';
         }
     });
+}
 
-    # TODO Tests for helpers
+# TODO Tests for helpers
 
 sub _label_to_id {
     my ($self, $label) = @_;

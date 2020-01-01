@@ -1,0 +1,22 @@
+%# args:
+%#    comment: a comment DBIx::Class result object
+
+% if ( my $auth_user = stash 'auth_user' ) {
+
+    % if ( $comment->approved_at ) {
+        %# Logged-in user can reply if this comment is approved
+        <p>
+            <a href="<%= url_for('new_song_reply', song_id => $comment->song->id, comment_id => $comment->id) %>">Reply to this comment</a>
+        </p>
+    % }
+    % elsif ( $auth_user->admin ) {
+        %# Logged-in user is admin, so should see the approve/reject/edit links
+        <p>
+            <a href="<%= url_for('admin_approve_comment', song_id => $comment->song->id, comment_id => $comment->id) %>">Approve</a>
+            ---
+            <a href="<%= url_for('admin_reject_comment',  song_id => $comment->song->id, comment_id => $comment->id) %>">Reject</a>
+            ---
+            <a href="<%= url_for('admin_edit_comment',    song_id => $comment->song->id, comment_id => $comment->id) %>">Edit</a>
+        </p>
+    % }
+% }

@@ -1,0 +1,11 @@
+%# args:
+%#    comment: a comment DBIx::Class result object
+%#    level:   Tree depth, zero at root, goes up at each level of reply
+
+<a name="comment-<%= $comment->id %>"></a>
+<div class="<%= $comment->approved_at ? 'moderated' : 'unmoderated' %>">
+    %= include 'song/comment/_header', comment => $comment, level => $level
+
+    %= include 'song/comment/_body', comment => $comment
+    %= include 'song/comment/_links', comment => $comment
+</div>
