@@ -79,11 +79,11 @@ sub _create_comment {
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->new_song_comment($song, $parent, {comment_markdown => $markdown});
+		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $markdown});
 		is($comment->parent_id, $parent->id, "Comment has correct parent");
 	}
 	else {
-		$comment = $user->new_song_comment($song, undef, {comment_markdown => $markdown});
+		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $markdown});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 

@@ -19,7 +19,7 @@ __PACKAGE__->add_columns(
     
     parent_id        => {data_type => 'INTEGER'},
 
-    comment_markdown => {data_type => 'TEXT'},
+    comment_bbcode   => {data_type => 'TEXT'},
     comment_html     => {data_type => 'TEXT'},
 
     created_at       => {data_type => 'DATETIME'},

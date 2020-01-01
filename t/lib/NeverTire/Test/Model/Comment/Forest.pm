@@ -163,9 +163,9 @@ sub run {
 	};
 
 	subtest 'Cannot reply to unapproved comment' => sub {
-		my $comment9 = $user->new_song_comment($song, undef, {comment_markdown => 'Markdown 9'});
+		my $comment9 = $user->new_song_comment($song, undef, {comment_bbcode => 'Markdown 9'});
 		throws_ok {
-			my $comment10 = $user->new_song_comment($song, $comment9, {comment_markdown => 'Markdown 10'});
+			my $comment10 = $user->new_song_comment($song, $comment9, {comment_bbcode => 'Markdown 10'});
 
 		} qr/Cannot reply to unapproved article/, 'Cannot reply to unapproved article';
 	};
@@ -180,11 +180,11 @@ sub _create_comment {
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->new_song_comment($song, $parent, {comment_markdown => $markdown});
+		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $markdown});
 		is($comment->parent_id, $parent->id, "Comment has correct parent");
 	}
 	else {
-		$comment = $user->new_song_comment($song, undef, {comment_markdown => $markdown});
+		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $markdown});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 

@@ -3,11 +3,10 @@ use Moose::Role;
 
 # TODO Add pod
 
-use DateTime;
+use NeverTire::BBCode;
 
-# Use standard markdown rather than our extensions, as 
-# this is used by non-admins.
-use Text::Markdown qw/ markdown /;
+use DateTime;
+use Parse::BBCode;
 
 # This exists just to keep Result::User down to a more manageable size.
 # It extracts the methods relating to comments etc
@@ -21,11 +20,14 @@ sub new_song_comment {
         $parent_id = $parent->id;
     }
 
+    my $renderer = NeverTire::BBCode->new;
+    my $rendered_html = $renderer->render($data->{comment_bbcode});
+
     my $full_args = {
         %$data,
         parent_id    => $parent_id,
         song_id      => $song->id,
-        comment_html => markdown($data->{comment_markdown}),
+        comment_html => $rendered_html,
         created_at   => DateTime->now,
     };
 
@@ -39,7 +41,7 @@ sub edit_song_comment {
 
     my $full_args = {
         %$data,
-        comment_html => markdown($data->{comment_markdown}),
+        comment_html => bbcode($data->{comment_bbcode}),
     };
 
     $comment->create_related(edits => {

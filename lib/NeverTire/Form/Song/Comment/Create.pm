@@ -8,22 +8,12 @@ with 'NeverTire::Form::Role';
 
 has '+id' => (default => 'new-comment');
 
-has_field comment_markdown => (
+has_field comment_bbcode => (
     type        => 'Input::TextArea',
-    label       => 'Comment (plain text or Markdown format)',
+    label       => 'Comment (plain text or BBCode format)',
     autofocus   => 1,
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    data        => {
-        'markdown-preview' => 'markdown-preview-comment',
-    },
-);
-
-has_field comment_preview => (
-    type        => 'Html',
-    options     => {
-        html => q{<div id="markdown-preview-comment" class="markdown comment markdown-preview">Comment preview here</div>},
-    },
 );
 
 has_button submit => ();
@@ -50,7 +40,7 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-        my $fields = $self->form_hash(qw/ comment_markdown /);
+        my $fields = $self->form_hash(qw/ comment_bbcode /);
 
         my $parent = $self->has_parent_comment ? $self->parent_comment : undef;
         $user->new_song_comment($self->song, $parent, $fields);

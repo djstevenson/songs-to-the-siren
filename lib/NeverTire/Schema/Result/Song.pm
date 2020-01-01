@@ -101,25 +101,6 @@ sub get_comment_forest {
     return make_forest($self, $user);
 }
 
-sub add_comment {
-    my ($self, $user, $reply_to, $markdown) = @_;
-
-    # Whitelist fields from $data, and add
-    # in default values where needed.
-    my $parent_id = $reply_to ? $reply_to->id : undef;
-
-    my $comment_data = {
-        song_id          => $self->id,
-        author_id        => $user->id,
-        parent_id        => $parent_id,
-        comment_markdown => $markdown,
-        comment_html     => markdown($markdown),
-        created_at       => DateTime->now
-    };
-
-    return $self->create_related(comments => $comment_data);
-}
-
 sub add_link {
     my ($self, $values) = @_;
 
