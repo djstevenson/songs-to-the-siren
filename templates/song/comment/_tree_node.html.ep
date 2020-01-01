@@ -1,0 +1,15 @@
+%# args:
+%#    node = tree node from which to render
+%#    level = render depth (0 for root node)
+
+<li>
+    %= include 'song/comment/_comment', comment => $node->comment, level => $level
+    % if ( scalar @{ $node->children } ) {
+        <ul>
+        % foreach my $child_node ( @{ $node->children } ) {
+            %# Recursion...
+            %= include 'song/comment/_tree_node', node => $child_node, level => $level + 1
+        % }
+        </ul>
+    % }
+</li>

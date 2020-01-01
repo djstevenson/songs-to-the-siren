@@ -1,0 +1,15 @@
+%# args:
+%#    comment: a comment DBIx::Class result object
+
+
+<div class="comment-body">
+    % if ( ! $comment->approved_at ) {
+        <span class="mod-warning">COMMENT AWAITING APPROVAL: </span>
+    % }
+
+    % if ( $comment->parent ) {
+        <span class="comment-at">@<%= $comment->parent->author->name %></span>
+    % }
+    <%== $comment->comment_html %>
+    %= include 'song/comment/_edits', comment => $comment
+</div>

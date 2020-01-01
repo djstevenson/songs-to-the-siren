@@ -13,8 +13,6 @@ use Test::Deep qw/ cmp_deeply /;
 
 use DateTime;
 
-use NeverTire::View::Comment::Render qw/ render_comments /;
-
 extends 'NeverTire::Test::Base';
 with 'NeverTire::Test::Role';
 
@@ -161,48 +159,6 @@ sub run {
 			[],
 			'Comment7 has no children',
 		);
-
-		# Test the Node renderer too
-		my $nr = sub {
-			my $node = shift;
-
-			return $node->comment->id;
-		};
-
-		my $app = $self->app;
-		my $s = render_comments($app, $forest->[0], sub { shift; return shift->comment->id});
-		my $exp1 = <<'EXP1';
-		<ul_class="comment-root">
-			<li>
-				3
-				<ul>
-					<li>
-						8
-					</li>
-					<li>
-						5
-					</li>
-					<li>
-						4
-						<ul>
-							<li>6
-								<ul>
-									<li>
-										7
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
-EXP1
-		$exp1 =~ s/\s//g; # Whitespace isn't rendered
-		$exp1 =~ s/_/ /g; # Except the ones marked with underscores above
-		is ($s, $exp1,                 'Basic "id" render shows right structure, node 0');
-		my $t = render_comments($app, $forest->[1], sub { shift; return shift->comment->id});
-		is ($t, '<ul class="comment-root"><li>1</li></ul>', 'Basic "id" render shows right structure, node 1');
 
 	};
 

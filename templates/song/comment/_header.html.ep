@@ -1,0 +1,19 @@
+%# args:
+%#    comment: a comment DBIx::Class result object
+%#    level:   Tree depth, zero at root, goes up at each level of reply
+
+<h4 class="comment-header">
+    <span class="author">
+        <%= $level == 0 ? 'Comment' : 'Reply' %>
+        #<%= $comment->id %> by 
+        <strong><%= $comment->get_column('author_name') %></strong>
+    </span>
+    <span class="date">
+        <%= datetime($comment->created_at) %>
+    </span>
+
+    % if ( $comment->parent ) {
+        % my $parent_id   = $comment->parent->id;
+        (reply to <a href="#comment-<%= $parent_id %>">#<%= $parent_id %></a>)', $parent_id, $parent_id );
+    % }
+</h4>

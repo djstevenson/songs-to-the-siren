@@ -1,0 +1,21 @@
+%# args:
+%#    comment: a comment DBIx::Class result object
+
+
+% my @edits = $comment->edits_by_date->all;
+% if ( scalar @edits ) {
+    <div class="comment-edits">
+        <h4>Edits</h4>
+        <ul>
+            % for my $edit ( @edits ) {
+                <li>
+                    Edited by
+                    <span class="editor"><%= $edit->editor->name %></span>
+                    <span class="date"><%= datetime($edit->edited_at) %></span>
+                    -
+                    <span class="reason"><%= $edit->reason %></span>
+                </li>
+            % }
+        </ul>
+    </div>
+% }

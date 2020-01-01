@@ -1,10 +1,9 @@
 package NeverTire::Helper::Render;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use NeverTire::Util::Date            qw/ format_date     /;
-use NeverTire::View::Comment::Render qw/ render_comments /;
+use NeverTire::Util::Date qw/ format_date     /;
 
-use HTML::Entities                   qw/ encode_entities /;
+use HTML::Entities        qw/ encode_entities /;
 
 # TODO POD
 
@@ -15,6 +14,7 @@ sub register {
     # TODO Fix this
     # TODO Tests
     # TODO POD
+    # TODO Surely there's a CPAN module that already does this?!
     $app->helper(pluralise => sub {
         my ($c, $value, $label) = @_;
 
@@ -71,19 +71,9 @@ sub register {
             return $false // 'No';
         }
     });
-
-    # TODO Tests for helpers
-
-    # TODO This'd be better in a template, given that
-    #      it's basically HTML with minor logic and
-    #      the comment count will be low.
-
-    $app->helper(render_comment_tree => sub {
-        my ($c, $tree) = @_;
-
-        return render_comments($c, $tree);
-    });
 }
+
+# TODO Tests for helpers
 
 sub _label_to_id {
     my ($self, $label) = @_;
