@@ -18,7 +18,7 @@ use DateTime;
 extends 'NeverTire::Test::Base';
 with 'NeverTire::Test::Role';
 
-has '+user_base' => (default => 'model_c1');
+has '+user_base' => (default => 'model_c2');
 
 sub run {
 	my $self = shift;
@@ -48,7 +48,7 @@ sub run {
 	};
 
 	subtest 'I add one comment, admin does not mod it, admin should still see it' => sub {
-		$first_root_comment = $self->_create_comment($user, $song, undef, 'Markdown 1');
+		$first_root_comment = $self->_create_comment($user, $song, undef, 'BBCode1');
 
 		my $forest = $song->get_comment_forest($admin);
 		is(scalar @$forest, 1, 'Admin sees unmodded comments');
@@ -69,22 +69,22 @@ sub run {
 
 # Too many args, but then it's a private method so &shrug; 
 sub _create_comment {
-	my ($self, $user, $song, $parent, $markdown) = @_;
+	my ($self, $user, $song, $parent, $bbcode) = @_;
 
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $markdown});
+		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $bbcode});
 		is($comment->parent_id, $parent->id, "Comment has correct parent");
 	}
 	else {
-		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $markdown});
+		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $bbcode});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 
-	# Assumes the simplest of markdown, string with no markdown in it..
-	my $expected_markdown = "<p>$markdown</p>\n";
-	is($comment->comment_html, $expected_markdown, "Comment has html");
+	# Assumes the simplest of bbcode, string with no bbcode in it..
+	my $expected_bbcode = "<p>$bbcode</p>";
+	is($comment->comment_html, $expected_bbcode, "Comment has html");
 
 	return $comment;
 }

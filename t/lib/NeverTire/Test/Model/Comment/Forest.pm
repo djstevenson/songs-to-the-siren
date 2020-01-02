@@ -45,7 +45,7 @@ sub run {
 	};
 
 	subtest 'Add one "root" comment as admin, don\'t approve it' => sub {
-		$first_root_comment = $self->_create_comment($admin, $song, undef, 'Markdown 1');
+		$first_root_comment = $self->_create_comment($admin, $song, undef, 'BBCode1');
 
 		my $forest = $song->get_comment_forest(undef);
 		is(scalar @$forest, 0, 'Only unapproved comments -> empty forest');
@@ -62,7 +62,7 @@ sub run {
 
 	subtest 'Add approved comment to other song' => sub {
 		my $song2 = $admin->admin_create_song($song_data);
-		my $other_song_comment = $self->_create_comment($admin, $song2, undef, 'Markdown 2');
+		my $other_song_comment = $self->_create_comment($admin, $song2, undef, 'BBCode2');
 		$admin->approve_comment($other_song_comment);
 
 		my $forest = $song->get_comment_forest(undef);
@@ -71,7 +71,7 @@ sub run {
 	};
 
 	subtest 'Add second approved root comment to first song' => sub {
-		$second_root_comment = $self->_create_comment($admin, $song, undef, 'Markdown 3');
+		$second_root_comment = $self->_create_comment($admin, $song, undef, 'BBCode3');
 		$admin->approve_comment($second_root_comment);
 
 		my $forest = $song->get_comment_forest(undef);
@@ -102,15 +102,15 @@ sub run {
 		#
 		# 1 (root node 0)
 
-		my $comment4 = $self->_create_comment($user,  $song, $second_root_comment, 'Markdown 4');
+		my $comment4 = $self->_create_comment($user,  $song, $second_root_comment, 'BBCode4');
 		$admin->approve_comment($comment4);
-		my $comment5 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 5');
+		my $comment5 = $self->_create_comment($admin, $song, $second_root_comment, 'BBCode5');
 		$admin->approve_comment($comment5);
-		my $comment6 = $self->_create_comment($user,  $song, $comment4,            'Markdown 6');
+		my $comment6 = $self->_create_comment($user,  $song, $comment4,            'BBCode6');
 		$admin->approve_comment($comment6);
-		my $comment7 = $self->_create_comment($user,  $song, $comment6,            'Markdown 7');
+		my $comment7 = $self->_create_comment($user,  $song, $comment6,            'BBCode7');
 		$admin->approve_comment($comment7);
-		my $comment8 = $self->_create_comment($admin, $song, $second_root_comment, 'Markdown 8');
+		my $comment8 = $self->_create_comment($admin, $song, $second_root_comment, 'BBCode8');
 		$admin->approve_comment($comment8);
 
 		my $forest = $song->get_comment_forest(undef);
@@ -163,9 +163,9 @@ sub run {
 	};
 
 	subtest 'Cannot reply to unapproved comment' => sub {
-		my $comment9 = $user->new_song_comment($song, undef, {comment_bbcode => 'Markdown 9'});
+		my $comment9 = $user->new_song_comment($song, undef, {comment_bbcode => 'BBCode9'});
 		throws_ok {
-			my $comment10 = $user->new_song_comment($song, $comment9, {comment_bbcode => 'Markdown 10'});
+			my $comment10 = $user->new_song_comment($song, $comment9, {comment_bbcode => 'BBCode10'});
 
 		} qr/Cannot reply to unapproved article/, 'Cannot reply to unapproved article';
 	};
@@ -175,22 +175,22 @@ sub run {
 
 # Too many args, but then it's a private method so &shrug; 
 sub _create_comment {
-	my ($self, $user, $song, $parent, $markdown) = @_;
+	my ($self, $user, $song, $parent, $bbcode) = @_;
 
 	my $comment;
 
 	if ( defined $parent ) {
-		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $markdown});
+		$comment = $user->new_song_comment($song, $parent, {comment_bbcode => $bbcode});
 		is($comment->parent_id, $parent->id, "Comment has correct parent");
 	}
 	else {
-		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $markdown});
+		$comment = $user->new_song_comment($song, undef, {comment_bbcode => $bbcode});
 		ok(!$comment->parent_id, "Comment has no parent");
 	}
 
-	# Assumes the simplest of markdown, string with no markdown in it..
-	my $expected_markdown = "<p>$markdown</p>\n";
-	is($comment->comment_html, $expected_markdown, "Comment has html");
+	# Assumes the simplest of BBcode, string with no BBcode in it..
+	my $expected_bbcode = "<p>$bbcode</p>";
+	is($comment->comment_html, $expected_bbcode, "Comment has html");
 
 	return $comment;
 }
