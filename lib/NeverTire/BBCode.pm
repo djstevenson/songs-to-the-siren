@@ -35,8 +35,9 @@ sub _build_renderer {
     my %defaults = Parse::BBCode::HTML->defaults;
     delete $defaults{size};
     delete $defaults{color};
-    delete $defaults{code};
     delete $defaults{html};
+    delete $defaults{noparse};
+    delete $defaults{table};
 
     return Parse::BBCode->new({
         close_open_tags => 1,
@@ -50,10 +51,10 @@ sub _build_renderer {
                 $e
             },
             's' => q(<s>%s</s>),
-            'article' => q(<a href="/articles/show/%s">article: %s</a>),
             'sub' => q(<sub>%s</sub>),
             'sup' => q(<sup>%s</sup>),
             'code' => q(<pre>%s</pre>),
+            'quote' => q(<blockquote>%s</blockquote>),
         }
     });
 }
