@@ -39,9 +39,12 @@ sub edit_song_comment {
 
     my $reason = delete $data->{reason};
 
+    my $renderer = NeverTire::BBCode->new;
+    my $rendered_html = $renderer->render($data->{comment_bbcode});
+
     my $full_args = {
         %$data,
-        comment_html => bbcode($data->{comment_bbcode}),
+        comment_html => $rendered_html,
     };
 
     $comment->create_related(edits => {

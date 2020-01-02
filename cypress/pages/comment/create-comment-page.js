@@ -14,7 +14,7 @@ export class CreateCommentPage extends Public {
 
     createComment(txt) {
         this.getForm().enter({
-            "markdown" : txt
+            bbcode : txt
         })
     
         // You probably want to load a view-song-page next
