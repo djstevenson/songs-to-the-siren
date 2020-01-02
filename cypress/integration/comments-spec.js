@@ -172,19 +172,19 @@ context('Comments are shown (or hidden) correctly', () => {
         const admin     = userFactory.getNextSignedInUser(true)
         const author    = userFactory.getNextSignedInUser(false)
 
-        const md1 = 'test abc markdown 4'
-        const md2 = 'test def markdown 4 edited'
-        const md3 = 'test xyz markdown 4 re-edited'
+        const bb1 = 'test abc bbcode 4'
+        const bb2 = 'test def bbcode 4 edited'
+        const bb3 = 'test xyz bbcode 4 re-edited'
 
         const reason1 = 'Cypress 1 test'
         const reason2 = 'Cypress 2 test'
 
         // "author" creates comment. Does not get edit link
         visitSong()
-            .createRootComment(md1)
+            .createRootComment(bb1)
             .assertCountRootComments(1)
             .assertEditLinkNotPresent(1)
-            .assertCommentContains(1, md1)
+            .assertCommentContains(1, bb1)
         
         // Admin does get edit link. Check that there
         // are no edits initially, then make an edit,
@@ -197,10 +197,10 @@ context('Comments are shown (or hidden) correctly', () => {
             .assertEditLinkPresent(1)
             .assertEditCount(1, 0)  // First comment, zero edits
             .editRootComment(1, {
-                markdown: md2,
+                bbcode: bb2,
                 reason: reason1
             })
-            .assertCommentContains(1, md2)
+            .assertCommentContains(1, bb2)
             .assertEditCount(1, 1)  // First comment, one edit
             .assertEditContent(1, 1, { // First comment, first edit
                 editor: admin.getName(),
@@ -208,10 +208,10 @@ context('Comments are shown (or hidden) correctly', () => {
             })
 
             .editRootComment(1, {
-                markdown: md3,
+                bbcode: bb3,
                 reason: reason2
             })
-            .assertCommentContains(1, md3)
+            .assertCommentContains(1, bb3)
             .assertEditCount(1, 2)  // First comment, two edits
             .assertEditContent(1, 1, { // First comment, first edit (newest)
                 editor: admin.getName(),
@@ -223,7 +223,7 @@ context('Comments are shown (or hidden) correctly', () => {
         
         cy.signOut()
         visitSong()
-            .assertCommentContains(1, md3)
+            .assertCommentContains(1, bb3)
             .assertEditCount(1, 2)  // First comment, two edits
             .assertEditContent(1, 1, { // First comment, first edit (newest)
                 editor: admin.getName(),

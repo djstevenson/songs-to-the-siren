@@ -21,3 +21,4 @@ requires 'HTML::Entities';
 requires 'App::ForkProve';
 requires 'Text::Markdown';
 requires 'IO::Socket::SSL';
+requires 'Parse::BBCode';

@@ -2537,6 +2537,24 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Parse-BBCode-0.15
+    pathname: T/TI/TINITA/Parse-BBCode-0.15.tar.gz
+    provides:
+      Parse::BBCode 0.15
+      Parse::BBCode::HTML 0.15
+      Parse::BBCode::Markdown 0.15
+      Parse::BBCode::Tag 0.15
+      Parse::BBCode::Text 0.15
+      Parse::BBCode::XHTML 0.15
+    requirements:
+      Carp 0
+      Class::Accessor::Fast 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      URI::Escape 0
+      base 0
+      strict 0
+      warnings 0
   Path-Class-0.37
     pathname: K/KW/KWILLIAMS/Path-Class-0.37.tar.gz
     provides:

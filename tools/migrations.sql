@@ -98,7 +98,7 @@ CREATE TABLE comments (
     song_id INT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
     author_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     parent_id INT REFERENCES comments(id) ON DELETE CASCADE,
-    comment_markdown TEXT NOT NULL,
+    comment_bbcode TEXT NOT NULL,
     comment_html TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     approved_at TIMESTAMP WITH TIME ZONE DEFAULT NULL
@@ -131,7 +131,6 @@ CREATE TABLE content (
 
 CREATE INDEX content_author_id_idx ON content USING BTREE(author_id);
 
--- 2 up
 CREATE TABLE comment_edits (
     id SERIAL NOT NULL PRIMARY KEY,
     comment_id INT NOT NULL REFERENCES comments(id) ON DELETE CASCADE,
@@ -141,10 +140,9 @@ CREATE TABLE comment_edits (
 );
 CREATE INDEX comment_edits_comment_id_idx ON comment_edits USING BTREE(comment_id);
 
--- 2 down
-DROP TABLE IF EXISTS comment_edits;
 
 -- 1 down
+DROP TABLE IF EXISTS comment_edits;
 DROP TABLE IF EXISTS content;
 DROP TABLE IF EXISTS links;
 DROP TABLE IF EXISTS comments;
