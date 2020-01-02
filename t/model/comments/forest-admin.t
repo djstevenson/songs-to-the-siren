@@ -16,4 +16,4 @@ my $test = NeverTire::Test->new;
 
 ##### END BOILERPLATE
 
-$test->run('Model::Comment::ForestNonAdmin');
+$test->run('Model::Comment::ForestAdmin');
