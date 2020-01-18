@@ -378,11 +378,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.10.1
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.1.tar.gz
+  DBD-Pg-3.10.2
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.2.tar.gz
     provides:
-      Bundle::DBD::Pg v3.10.1
-      DBD::Pg v3.10.1
+      Bundle::DBD::Pg v3.10.2
+      DBD::Pg v3.10.2
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
@@ -3048,8 +3048,8 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0.42
       Text::Balanced 0
-  TimeDate-2.30
-    pathname: G/GB/GBARR/TimeDate-2.30.tar.gz
+  TimeDate-2.31
+    pathname: A/AT/ATOOMIC/TimeDate-2.31.tar.gz
     provides:
       Date::Format 2.24
       Date::Format::Generic 2.24
@@ -3074,6 +3074,7 @@ DISTRIBUTIONS
       Date::Language::Icelandic 1.01
       Date::Language::Italian 1.01
       Date::Language::Norwegian 1.01
+      Date::Language::Occitan 1.04
       Date::Language::Oromo 0.99
       Date::Language::Romanian 1.01
       Date::Language::Russian 1.01
@@ -3087,8 +3088,9 @@ DISTRIBUTIONS
       Date::Language::TigrinyaEritrean 1.00
       Date::Language::TigrinyaEthiopian 1.00
       Date::Language::Turkish 1.0
-      Date::Parse 2.30
+      Date::Parse 2.31
       Time::Zone 2.24
+      TimeDate 1.21
     requirements:
       ExtUtils::MakeMaker 0
   Try-Tiny-0.30
