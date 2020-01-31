@@ -378,11 +378,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.10.2
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.2.tar.gz
+  DBD-Pg-3.10.3
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.3.tar.gz
     provides:
-      Bundle::DBD::Pg v3.10.2
-      DBD::Pg v3.10.2
+      Bundle::DBD::Pg v3.10.3
+      DBD::Pg v3.10.3
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
@@ -408,8 +408,8 @@ DISTRIBUTIONS
       Test::More 0.88
       Tie::Hash 0
       perl 5.006
-  DBI-1.642
-    pathname: T/TI/TIMB/DBI-1.642.tar.gz
+  DBI-1.643
+    pathname: T/TI/TIMB/DBI-1.643.tar.gz
     provides:
       Bundle::DBI 12.008696
       DBD::DBM 0.08
@@ -465,7 +465,7 @@ DISTRIBUTIONS
       DBD::Sponge::dr 12.010003
       DBD::Sponge::st 12.010003
       DBDI 12.015129
-      DBI 1.642
+      DBI 1.643
       DBI::Const::GetInfo::ANSI 2.008697
       DBI::Const::GetInfo::ODBC 2.011374
       DBI::Const::GetInfoReturn 2.008697
@@ -505,11 +505,11 @@ DISTRIBUTIONS
       DBI::SQL::Nano::Table_ 1.015544
       DBI::Util::CacheMemory 0.010315
       DBI::Util::_accessor 0.009479
-      DBI::common 1.642
+      DBI::common 1.643
     requirements:
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
-      perl 5.008
+      perl 5.008001
   DBIx-Class-0.082841
     pathname: R/RI/RIBASUSHI/DBIx-Class-0.082841.tar.gz
     provides:
@@ -1679,49 +1679,49 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.02
-    pathname: S/SR/SRI/Minion-10.02.tar.gz
+  Minion-10.04
+    pathname: S/SR/SRI/Minion-10.04.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.02
+      Minion 10.04
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
       Minion::Command::minion::job undef
       Minion::Command::minion::worker undef
+      Minion::Iterator undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 10.02
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
       ExtUtils::MakeMaker 0
-      Mojolicious 8.12
+      Mojolicious 8.27
       perl 5.010001
-  Module-Build-0.4229
-    pathname: L/LE/LEONT/Module-Build-0.4229.tar.gz
+  Module-Build-0.4231
+    pathname: L/LE/LEONT/Module-Build-0.4231.tar.gz
     provides:
-      Module::Build 0.4229
-      Module::Build::Base 0.4229
-      Module::Build::Compat 0.4229
-      Module::Build::Config 0.4229
-      Module::Build::Cookbook 0.4229
-      Module::Build::Dumper 0.4229
-      Module::Build::Notes 0.4229
-      Module::Build::PPMMaker 0.4229
-      Module::Build::Platform::Default 0.4229
-      Module::Build::Platform::MacOS 0.4229
-      Module::Build::Platform::Unix 0.4229
-      Module::Build::Platform::VMS 0.4229
-      Module::Build::Platform::VOS 0.4229
-      Module::Build::Platform::Windows 0.4229
-      Module::Build::Platform::aix 0.4229
-      Module::Build::Platform::cygwin 0.4229
-      Module::Build::Platform::darwin 0.4229
-      Module::Build::Platform::os2 0.4229
-      Module::Build::PodParser 0.4229
+      Module::Build 0.4231
+      Module::Build::Base 0.4231
+      Module::Build::Compat 0.4231
+      Module::Build::Config 0.4231
+      Module::Build::Cookbook 0.4231
+      Module::Build::Dumper 0.4231
+      Module::Build::Notes 0.4231
+      Module::Build::PPMMaker 0.4231
+      Module::Build::Platform::Default 0.4231
+      Module::Build::Platform::MacOS 0.4231
+      Module::Build::Platform::Unix 0.4231
+      Module::Build::Platform::VMS 0.4231
+      Module::Build::Platform::VOS 0.4231
+      Module::Build::Platform::Windows 0.4231
+      Module::Build::Platform::aix 0.4231
+      Module::Build::Platform::cygwin 0.4231
+      Module::Build::Platform::darwin 0.4231
+      Module::Build::Platform::os2 0.4231
+      Module::Build::PodParser 0.4231
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
@@ -1829,10 +1829,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.17
-    pathname: S/SR/SRI/Mojo-Pg-4.17.tar.gz
+  Mojo-Pg-4.18
+    pathname: S/SR/SRI/Mojo-Pg-4.18.tar.gz
     provides:
-      Mojo::Pg 4.17
+      Mojo::Pg 4.18
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -1845,8 +1845,8 @@ DISTRIBUTIONS
       Mojolicious 8.03
       SQL::Abstract 1.86
       perl 5.010001
-  Mojolicious-8.31
-    pathname: S/SR/SRI/Mojolicious-8.31.tar.gz
+  Mojolicious-8.32
+    pathname: S/SR/SRI/Mojolicious-8.32.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1915,7 +1915,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.31
+      Mojolicious 8.32
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
