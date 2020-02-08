@@ -20,7 +20,7 @@ context('Access control depending on user authorisation', () => {
             new HomePage()
                 .visit()
                 .assertSignedOut()
-                .assertTitle('Songs I Will Never Tire of')
+                .assertTitle('Songs to the Siren')
         })
         it('can not access song-list admin page', () => {
             new ListSongsPage()
@@ -46,7 +46,7 @@ context('Access control depending on user authorisation', () => {
             new HomePage()
                 .visit()
                 .assertSignedInAs(user.getName())
-                .assertTitle('Songs I Will Never Tire of')
+                .assertTitle('Songs to the Siren')
         })
         it('can not access song-list admin page', () => {
             const user = newUser.getNextSignedInUser()
@@ -74,7 +74,7 @@ context('Access control depending on user authorisation', () => {
             new HomePage()
                 .visit()
                 .assertSignedInAsAdmin(user.getName())
-                .assertTitle('Songs I Will Never Tire of')
+                .assertTitle('Songs to the Siren')
         })
         it('can access song-list admin page', () => {
             const user = newUser.getNextSignedInUser(true)

@@ -1,5 +1,5 @@
 % layout 'default';
-% title "Songs I Will Never Tire of";
+% title "Songs to the Siren";
 
 % my $tag_count = scalar @$tags;
 % if ( $tag_count ) {

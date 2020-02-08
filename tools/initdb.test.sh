@@ -2,7 +2,7 @@
 
 cd tools
 echo 'Drop :test database'
-psql -U nevertire postgres -c 'DROP DATABASE IF EXISTS never_tire_test'
+psql -U songstothesiren postgres -c 'DROP DATABASE IF EXISTS songstothesiren_test'
 
 echo 'Create :test database'
-createdb -U postgres -O nevertire never_tire_test
+createdb -U postgres -O songstothesiren songstothesiren_test
