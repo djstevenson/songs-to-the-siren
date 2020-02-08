@@ -303,10 +303,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.18
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.18.tar.gz
+  Cpanel-JSON-XS-4.19
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.19.tar.gz
     provides:
-      Cpanel::JSON::XS 4.18
+      Cpanel::JSON::XS 4.19
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -378,11 +378,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.10.3
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.3.tar.gz
+  DBD-Pg-3.10.4
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.10.4.tar.gz
     provides:
-      Bundle::DBD::Pg v3.10.3
-      DBD::Pg v3.10.3
+      Bundle::DBD::Pg v3.10.4
+      DBD::Pg v3.10.4
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
