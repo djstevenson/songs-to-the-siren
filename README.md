@@ -4,7 +4,7 @@ The code behing the "Songs To The Siren" blog
 INIT test DB
 ============
 
-Creates a dev database `songstothesiren_development` - deleting any existing content.
+Create a dev database `songstothesiren_development` - deleting any existing content.
 
 `sh tools/initdb.development.sh`
 
@@ -43,9 +43,9 @@ export MOJO_MODE=development ; \
 export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
-carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
+carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql -Usongstothesiren songstothesiren_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-DBIC_TRACE=0 carton exec -- morbo script/never-tire
+DBIC_TRACE=0 carton exec -- morbo script/songs-to-the-siren
 ```
 
 Note, for 'test' and 'development' modes, this creates an admin user with the name 'admin' and password 'xyzzy'.
@@ -60,15 +60,15 @@ export MOJO_MODE=test ; \
 export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
-carton exec -- script/never-tire newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
+carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
 psql -Usongstothesiren songstothesiren_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
-DBIC_TRACE=0 carton exec -- morbo script/never-tire
+DBIC_TRACE=0 carton exec -- morbo script/songs-to-the-siren
 ```
 
 To list routes
 ==============
 
-`carton exec -- script/never-tire routes`
+`carton exec -- script/songs-to-the-siren routes`
 
 Rebuild deps
 ============
@@ -102,14 +102,10 @@ FAQ
 
 We don't. It's just a demo app so I can show some code if/when looking for a new job. Which I'm not, at the moment. But you never know what's ahead.
 
-### Isn't the blog title gramatically incorrect?
-
-Probably yes. But it's not a great name already and changing it to "Songs Of Which I Will Never Tire" doesn't seem to improve it a lot.
-
-License
+Licence
 =======
 
-MIT License, see the LICENSE file.
+MIT License (sic), see the LICENSE file.
 
 Author
 ======

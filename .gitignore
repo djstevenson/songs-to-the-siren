@@ -7,6 +7,6 @@ node_modules/
 cypress/videos
 cypress/screenshots
 public/asset
-public/never-tire.css
-public/never-tire.css.map
+public/songs-to-the-siren.css
+public/songs-to-the-siren.css.map
 .sass-cache

@@ -73,14 +73,14 @@ sub register {
 
 
 # Doc this. If $key is 'api_key', it looks in these places in order:
-#  * $ENV{songstothesiren_MAILGUN_API_KEY}
+#  * $ENV{SONGSTOTHESIREN_MAILGUN_API_KEY}
 #  * $conf->{api_key}
 #  * $app->conf->{mailgun}->{api_key}
 
 sub _conf {
     my ($self, $key, $app, $conf) = @_;
 
-    my $env_name = 'songstothesiren_MAILGUN_' . uc($key);
+    my $env_name = 'SONGSTOTHESIREN_MAILGUN_' . uc($key);
     return $ENV{$env_name} if exists $ENV{$env_name};
 
     return $conf->{$key} if exists $conf->{$key};
