@@ -1,6 +1,8 @@
 The code behing the "Songs To The Siren" blog
 ---------------------------------------------
 
+songstothesiren.com is intended to go live by 1st March 2020.
+
 INIT test DB
 ============
 
