@@ -35,20 +35,14 @@ sub startup {
     $app->plugin('SongsToTheSiren::Task::Mailgun');
     $app->plugin('SongsToTheSiren::Helper::Email');
 
-    # Secure access to the server status ui with Basic authentication
-    my $under = $app->routes->under('/status' => sub {
-        my $c = shift;
-        # PUT CREDENTIALS OUTSIDE OF APP
-        return 1 if $c->req->url->to_abs->userinfo eq 'app:status';
-        $c->res->headers->www_authenticate('Basic');
-        $c->render(text => 'Authentication required!', status => 401);
-        return undef;
-    });
-    $app->plugin('Status' => {route => $under});
-
     $app->_migrate_db;
 
     my $route = $app->_base_route;
+
+    # Status page, if admin
+    my $a = $route->any('/')->require_admin;
+    my $status_route = $a->name('status_home')->any('/status');
+    $app->plugin('Status' => {route => $status_route});
 
     my $user_controller = SongsToTheSiren::Controller::User->new;
 	$user_controller->add_routes($route);
