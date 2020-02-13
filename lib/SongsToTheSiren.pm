@@ -39,6 +39,11 @@ sub startup {
 
     my $route = $app->_base_route;
 
+    # Status page, if admin
+    my $a = $route->any('/')->require_admin;
+    my $status_route = $a->name('status_home')->any('/status');
+    $app->plugin('Status' => {route => $status_route});
+
     my $user_controller = SongsToTheSiren::Controller::User->new;
 	$user_controller->add_routes($route);
 

@@ -7,6 +7,7 @@ requires 'Moose';
 requires 'MooseX::NonMoose';
 requires 'MooseX::Traits';
 requires 'Mojolicious';
+requires 'Mojolicious::Plugin::Status';
 requires 'Mojo::Pg';
 requires 'Mozilla::CA';
 requires 'Minion';
