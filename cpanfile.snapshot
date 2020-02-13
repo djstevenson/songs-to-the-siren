@@ -105,6 +105,12 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
+  BSD-Resource-1.2911
+    pathname: J/JH/JHI/BSD-Resource-1.2911.tar.gz
+    provides:
+      BSD::Resource 1.2911
+    requirements:
+      ExtUtils::MakeMaker 0
   Capture-Tiny-0.48
     pathname: D/DA/DAGOLDEN/Capture-Tiny-0.48.tar.gz
     provides:
@@ -1416,6 +1422,21 @@ DISTRIBUTIONS
       File::Path 0
       File::Spec 0
       perl 5.008000
+  File-Map-0.66
+    pathname: L/LE/LEONT/File-Map-0.66.tar.gz
+    provides:
+      File::Map 0.66
+    requirements:
+      Carp 0
+      ExtUtils::CBuilder 0
+      Module::Build 0.28
+      PerlIO::Layers 0
+      Sub::Exporter::Progressive 0.001005
+      XSLoader 0
+      perl 5.008001
+      strict 0
+      subs 0
+      warnings 0
   File-ShareDir-1.116
     pathname: R/RE/REHSACK/File-ShareDir-1.116.tar.gz
     provides:
@@ -1963,6 +1984,19 @@ DISTRIBUTIONS
       JSON::PP 2.27103
       List::Util 1.41
       Time::Local 1.2
+      perl 5.010001
+  Mojolicious-Plugin-Status-1.06
+    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.06.tar.gz
+    provides:
+      Mojo::MemoryMap undef
+      Mojo::MemoryMap::Writer undef
+      Mojolicious::Plugin::Status 1.06
+    requirements:
+      BSD::Resource 0
+      ExtUtils::MakeMaker 0
+      File::Map 0
+      Mojolicious 8.33
+      Sereal 0
       perl 5.010001
   Moo-2.003006
     pathname: H/HA/HAARG/Moo-2.003006.tar.gz
@@ -2580,6 +2614,21 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
+  PerlIO-Layers-0.011
+    pathname: L/LE/LEONT/PerlIO-Layers-0.011.tar.gz
+    provides:
+      PerlIO::Layers 0.011
+    requirements:
+      Carp 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      List::Util 0
+      Module::Build 0.3601
+      PerlIO 0
+      XSLoader 0
+      perl 5.008_001
+      strict 0
+      warnings 0
   Plack-1.0047
     pathname: M/MI/MIYAGAWA/Plack-1.0047.tar.gz
     provides:
@@ -2738,6 +2787,40 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
+  Sereal-4.011
+    pathname: Y/YV/YVES/Sereal-4.011.tar.gz
+    provides:
+      Sereal 4.011
+    requirements:
+      ExtUtils::MakeMaker 0
+      Sereal::Decoder 4.011
+      Sereal::Encoder 4.011
+      perl 5.008
+  Sereal-Decoder-4.011
+    pathname: Y/YV/YVES/Sereal-Decoder-4.011.tar.gz
+    provides:
+      Sereal::Decoder 4.011
+      Sereal::Decoder::Constants 4.011
+      Sereal::Performance undef
+    requirements:
+      ExtUtils::MakeMaker 7.0
+      ExtUtils::ParseXS 2.21
+      File::Find 0
+      File::Path 0
+      XSLoader 0
+      perl 5.008
+  Sereal-Encoder-4.011
+    pathname: Y/YV/YVES/Sereal-Encoder-4.011.tar.gz
+    provides:
+      Sereal::Encoder 4.011
+      Sereal::Encoder::Constants 4.011
+    requirements:
+      ExtUtils::MakeMaker 7.0
+      ExtUtils::ParseXS 2.21
+      File::Find 0
+      File::Path 0
+      XSLoader 0
+      perl 5.008
   Specio-0.45
     pathname: D/DR/DROLSKY/Specio-0.45.tar.gz
     provides:
