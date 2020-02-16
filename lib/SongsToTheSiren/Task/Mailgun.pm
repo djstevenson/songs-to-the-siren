@@ -1,4 +1,11 @@
 package SongsToTheSiren::Task::Mailgun;
+
+
+# DO NOT USE
+#
+# This was left out of testing after Mailgun
+# stopped their free tier
+
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD docs at end of file
