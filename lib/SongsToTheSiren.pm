@@ -32,7 +32,6 @@ sub startup {
     $app->plugin('SongsToTheSiren::Helper::Tags');
     $app->plugin('SongsToTheSiren::Plugin::Auth');
     $app->plugin(Minion => {Pg => $app->db_dsn});
-    $app->plugin('SongsToTheSiren::Task::Mailgun');
     $app->plugin('SongsToTheSiren::Helper::Email');
 
     $app->_migrate_db;

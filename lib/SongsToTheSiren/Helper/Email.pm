@@ -22,7 +22,7 @@ sub register {
         });
 
         if ($app->mode ne 'test') {
-            $app->minion->enqueue(mailgun => [ $email->id ]);
+            $app->minion->enqueue(smtp => [ $email->id ]);
 
             # TODO Start a daemon rather than this:
             $app->minion->perform_jobs;
@@ -89,8 +89,8 @@ SongsToTheSiren::Helper::Email : Helpers for sending emails from blog app
 =head1 DESCRIPTION
 
 Provides helper methods for sending emails.  Saves the email in the
-database ('emails' table), then uses L<SongsToTheSiren::Task::Mailgun> to
-do the send using the Mailgun API.
+database ('emails' table), then builds the mail from a template
+and uses Net::SMTP::TLS to send it
 
 =head1 HELPERS
 
