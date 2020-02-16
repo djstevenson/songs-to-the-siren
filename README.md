@@ -1,7 +1,7 @@
 The code behing the "Songs To The Siren" blog
 ---------------------------------------------
 
-songstothesiren.com is intended to go live by 1st March 2020. The main TODO before then is to replace Mailgun for sending emails with something else, probably just using the local sendmail initially.
+songstothesiren.com is intended to go live early March 2020. 
 
 INIT test DB
 ============
