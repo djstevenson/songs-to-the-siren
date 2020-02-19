@@ -33,6 +33,7 @@ sub startup {
     $app->plugin('SongsToTheSiren::Plugin::Auth');
     $app->plugin(Minion => {Pg => $app->db_dsn});
     $app->plugin('SongsToTheSiren::Helper::Email');
+    $app->plugin('SongsToTheSiren::Task::SendMail');
 
     $app->_migrate_db;
 
