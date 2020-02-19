@@ -2638,16 +2638,16 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  PerlIO-Layers-0.011
-    pathname: L/LE/LEONT/PerlIO-Layers-0.011.tar.gz
+  PerlIO-Layers-0.012
+    pathname: L/LE/LEONT/PerlIO-Layers-0.012.tar.gz
     provides:
-      PerlIO::Layers 0.011
+      PerlIO::Layers 0.012
     requirements:
       Carp 0
       Exporter 5.57
       ExtUtils::CBuilder 0
       List::Util 0
-      Module::Build 0.3601
+      Module::Build 0.28
       PerlIO 0
       XSLoader 0
       perl 5.008_001
