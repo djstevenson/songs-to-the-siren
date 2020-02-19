@@ -81,13 +81,10 @@ sub _conf {
     my ($self, $key, $app, $conf) = @_;
 
     my $env_name = 'SONGSTOTHESIREN_SMTP_' . uc($key);
-    print "   Try env $env_name\n";
     return $ENV{$env_name} if exists $ENV{$env_name};
 
-    print "   Try conf->$key\n";
     return $conf->{$key} if exists $conf->{$key};
 
-    print "   Try app->config->{smtp}->{$key}\n";
     return $app->config->{smtp}->{$key} if exists $app->config->{smtp}->{$key};
 
     die "Not found smtp config for '$key'";
