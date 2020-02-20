@@ -10,22 +10,24 @@ use Mojo::URL;
 
 use Net::SMTP::TLS;
 
-has home     => sub { Mojo::Home->new; };
+has home        => sub { Mojo::Home->new; };
 
-has host     => undef;
-has user     => undef;
-has password => undef;
-has from     => undef;
+has host        => undef;
+has user        => undef;
+has password    => undef;
+has from        => undef;
+has site_domain => undef;
 
 sub register {
     my ($self, $app, $conf) = @_;
 
     # Set config from $ENV, passed conf, or from app config files
     # in that order.
-    $self->host    ( $self->_conf('host',     $app, $conf) );
-    $self->user    ( $self->_conf('user',     $app, $conf) );
-    $self->password( $self->_conf('password', $app, $conf) );
-    $self->from    ( $self->_conf('from',     $app, $conf) );
+    $self->host       ( $self->_conf('host',     $app, $conf) );
+    $self->user       ( $self->_conf('user',     $app, $conf) );
+    $self->password   ( $self->_conf('password', $app, $conf) );
+    $self->from       ( $self->_conf('from',     $app, $conf) );
+    $self->site_domain( $self->_conf('domain',   $app, $conf) );
 
     $self->home->detect;
 
@@ -43,6 +45,8 @@ sub register {
         my $template = $email->template_name;
         my $data     = $email->data;
 
+        $data->{domain} = $self->site_domain;
+
         my $mt = Mojo::Template->new;
         my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
         my $body    = $mt->vars(1)->render_file($self->_file(body    => $template), $data);
@@ -50,7 +54,7 @@ sub register {
         my $from = $self->from;
         my $to   = $email->email_to;
 
-        my ($localpart, $domain) = split(/\@/, $from);
+        my ($localpart, $from_domain) = split(/\@/, $from);
 
         # TODO Default TLS config doesn't work with my 
         #      ESP. Work out what does, and make it 
@@ -58,7 +62,7 @@ sub register {
         my $smtp = Net::SMTP::TLS->new(
             $self->host,
             NoTLS    => 1,
-            Hello    => $domain,
+            Hello    => $from_domain,
             Timeout  => 60,
             User     => $self->user,
             Password => $self->password,
