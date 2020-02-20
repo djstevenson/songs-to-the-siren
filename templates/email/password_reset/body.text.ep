@@ -3,7 +3,5 @@ You requested a password reset for the
 
 To reset your password, please use this link:
 
-http://localhost:3000/user/<%= $user %>/reset/<%= $key %>
-
-# TODO Put correct domain in there.
+<%= $domain %>/user/<%= $user %>/reset/<%= $key %>
 
