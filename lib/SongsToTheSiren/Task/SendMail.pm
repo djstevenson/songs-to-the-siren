@@ -7,6 +7,7 @@ use Mojo::Template;
 use Mojo::Home;
 use Mojo::UserAgent;
 use Mojo::URL;
+use Mojo::JSON qw/ decode_json /;
 
 use Net::SMTP::TLS;
 
@@ -17,17 +18,24 @@ has user        => undef;
 has password    => undef;
 has from        => undef;
 has site_domain => undef;
+has json_conf   => undef;
 
 sub register {
-    my ($self, $app, $conf) = @_;
+    my ($self, $app) = @_;
 
-    # Set config from $ENV, passed conf, or from app config files
-    # in that order.
-    $self->host       ( $self->_conf('host',     $app, $conf) );
-    $self->user       ( $self->_conf('user',     $app, $conf) );
-    $self->password   ( $self->_conf('password', $app, $conf) );
-    $self->from       ( $self->_conf('from',     $app, $conf) );
-    $self->site_domain( $self->_conf('domain',   $app, $conf) );
+    # Load conf from ENV, if exists
+    my $mode = uc $app->mode;
+
+    my $env_name = "SONGSTOTHESIREN_${mode}_CONFIG";
+    $self->json_conf( decode_json($ENV{$env_name}) )
+        if exists $ENV{$env_name};
+
+    $self->host       ( $self->_conf('host',     $app) );
+    $self->user       ( $self->_conf('user',     $app) );
+    $self->password   ( $self->_conf('password', $app) );
+    $self->from       ( $self->_conf('from',     $app) );
+    $self->site_domain( $self->_conf('domain',   $app) );
+
 
     $self->home->detect;
 
@@ -82,14 +90,13 @@ sub register {
 
 # See POD for details on how we pick up config
 sub _conf {
-    my ($self, $key, $app, $conf) = @_;
+    my ($self, $key, $app) = @_;
 
-    my $env_name = 'SONGSTOTHESIREN_SMTP_' . uc($key);
-    return $ENV{$env_name} if exists $ENV{$env_name};
+    return $self->json_conf->{$key}
+        if exists $self->json_conf->{$key};
 
-    return $conf->{$key} if exists $conf->{$key};
-
-    return $app->config->{smtp}->{$key} if exists $app->config->{smtp}->{$key};
+    return $app->config->{smtp}->{$key}
+        if exists $app->config->{smtp}->{$key};
 
     die "Not found smtp config for '$key'";
 }
@@ -142,12 +149,19 @@ aren't checked into your app's repo.
 
 =over
 
-=item from address
+=item from
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_FROM=noreply@example.com
+Set via JSON in the environment. The env name is
+mode-dependent, so will be one of:
 
-Or set via the app config file, e.g.
+  SONGSTOTHESIREN_DEVELOPMENT_CONFIG=...
+  SONGSTOTHESIREN_TEST_CONFIG=...
+  SONGSTOTHESIREN_PRODUCTION_CONFIG=...
+
+Within the JSON defined there, the value corresponding to the
+'from' key will be selected.
+
+If not present, we'll look in the app config file, e.g.
 
     smtp => {
         from => 'noreply@example.com',
@@ -159,13 +173,11 @@ Or set via the app config file, e.g.
 
 The SMTP host that sends your mails.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=smtp.example.com
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'host', or
+set via the app config file, e.g.
 
     smtp => {
-        domain => 'smtp.example.com',
+        host => 'smtp.example.com',
         ...
     }
 
@@ -173,10 +185,8 @@ Or set via the app config file, e.g.
 
 The user name for authenticating to your SMTP server.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=mymailuser
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'user', or
+set via the app config file, e.g.
 
     smtp => {
         user => 'mymailuser',
@@ -187,19 +197,30 @@ Or set via the app config file, e.g.
 
 The password for authenticating to your SMTP server.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=mymailpassword
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'password', or
+set via the app config file, e.g.
 
     smtp => {
         password => 'mymailpassword',
         ...
     }
 
-=item ...
+=item domain
 
-TODO: Allow more config options
+The domain for emailed links, including the protocol
+(and port, if required)
+
+Set via the env JSON, keyname is 'domain', or
+set via the app config file, e.g.
+
+    smtp => {
+        domain => 'https://songstothesiren.com',
+        ...
+    }
+
+(TODO: We might need this for reasons other than
+SMTP, so should this be defined elsewhere in the 
+config?)
 
 =back
 
