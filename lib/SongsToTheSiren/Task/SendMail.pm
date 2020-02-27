@@ -149,12 +149,19 @@ aren't checked into your app's repo.
 
 =over
 
-=item from address
+=item from
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_FROM=noreply@example.com
+Set via JSON in the environment. The env name is
+mode-dependent, so will be one of:
 
-Or set via the app config file, e.g.
+  SONGSTOTHESIREN_DEVELOPMENT_CONFIG=...
+  SONGSTOTHESIREN_TEST_CONFIG=...
+  SONGSTOTHESIREN_PRODUCTION_CONFIG=...
+
+Within the JSON defined there, the value corresponding to the
+'from' key will be selected.
+
+If not present, we'll look in the app config file, e.g.
 
     smtp => {
         from => 'noreply@example.com',
@@ -166,13 +173,11 @@ Or set via the app config file, e.g.
 
 The SMTP host that sends your mails.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=smtp.example.com
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'host', or
+set via the app config file, e.g.
 
     smtp => {
-        domain => 'smtp.example.com',
+        host => 'smtp.example.com',
         ...
     }
 
@@ -180,10 +185,8 @@ Or set via the app config file, e.g.
 
 The user name for authenticating to your SMTP server.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=mymailuser
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'user', or
+set via the app config file, e.g.
 
     smtp => {
         user => 'mymailuser',
@@ -194,19 +197,30 @@ Or set via the app config file, e.g.
 
 The password for authenticating to your SMTP server.
 
-Set via the environment, e.g.
-    export SONGSTOTHESIREN_SMTP_USER=mymailpassword
-
-Or set via the app config file, e.g.
+Set via the env JSON, keyname is 'password', or
+set via the app config file, e.g.
 
     smtp => {
         password => 'mymailpassword',
         ...
     }
 
-=item ...
+=item domain
 
-TODO: Allow more config options
+The domain for emailed links, including the protocol
+(and port, if required)
+
+Set via the env JSON, keyname is 'domain', or
+set via the app config file, e.g.
+
+    smtp => {
+        domain => 'https://songstothesiren.com',
+        ...
+    }
+
+(TODO: We might need this for reasons other than
+SMTP, so should this be defined elsewhere in the 
+config?)
 
 =back
 
