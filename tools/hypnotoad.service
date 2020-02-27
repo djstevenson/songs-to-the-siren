@@ -1,0 +1,14 @@
+[Unit]
+Description=Songs To The Siren Mojolicious application
+After=network.target
+
+[Service]
+WorkingDirectory=/home/ytfc/html_songs/songs-to-the-siren
+Type=forking
+PIDFile=/home/ytfc/html_songs/songs-to-the-siren/script/hypnotoad.pid
+ExecStart=/home/ytfc/.plenv/shims/carton exec /home/ytfc/html_songs/songs-to-the-siren/local/bin/hypnotoad  /home/ytfc/html_songs/songs-to-the-siren/script/songs-to-the-siren
+ExecReload=/home/ytfc/.plenv/shims/carton exec /home/ytfc/html_songs/songs-to-the-siren/local/bin/hypnotoad  /home/ytfc/html_songs/songs-to-the-siren/script/songs-to-the-siren
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
