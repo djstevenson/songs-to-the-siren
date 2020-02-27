@@ -20,7 +20,7 @@ export class SignInPage extends Public {
 
     clickRegisterLink() {
         this.visit()
-        cy.contains('Sign up to add comments').click()
+        cy.contains('Sign up new account').click()
     }
 
     clickForgotNameLink() {
