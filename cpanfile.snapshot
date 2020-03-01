@@ -728,19 +728,19 @@ DISTRIBUTIONS
       integer 0
       perl 5.006
       strict 0
-  DateTime-1.51
-    pathname: D/DR/DROLSKY/DateTime-1.51.tar.gz
+  DateTime-1.52
+    pathname: D/DR/DROLSKY/DateTime-1.52.tar.gz
     provides:
-      DateTime 1.51
-      DateTime::Duration 1.51
-      DateTime::Helpers 1.51
-      DateTime::Infinite 1.51
-      DateTime::Infinite::Future 1.51
-      DateTime::Infinite::Past 1.51
-      DateTime::LeapSecond 1.51
-      DateTime::PP 1.51
-      DateTime::PPExtra 1.51
-      DateTime::Types 1.51
+      DateTime 1.52
+      DateTime::Duration 1.52
+      DateTime::Helpers 1.52
+      DateTime::Infinite 1.52
+      DateTime::Infinite::Future 1.52
+      DateTime::Infinite::Past 1.52
+      DateTime::LeapSecond 1.52
+      DateTime::PP 1.52
+      DateTime::PPExtra 1.52
+      DateTime::Types 1.52
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -799,11 +799,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.36
       Module::Build::Tiny 0.035
       Test::More 0
-  DateTime-Format-Strptime-1.76
-    pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.76.tar.gz
+  DateTime-Format-Strptime-1.77
+    pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.77.tar.gz
     provides:
-      DateTime::Format::Strptime 1.76
-      DateTime::Format::Strptime::Types 1.76
+      DateTime::Format::Strptime 1.77
+      DateTime::Format::Strptime::Types 1.77
     requirements:
       Carp 0
       DateTime 1.00
