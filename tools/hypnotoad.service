@@ -1,0 +1,19 @@
+[Unit]
+Description=Songs To The Siren Mojolicious application
+After=network.target
+
+[Service]
+User=exampleuser
+Group=examplegroup
+WorkingDirectory=/home/blah/html_songs/songs-to-the-siren
+Environment='MOJO_MODE=production'
+Environment='SONGSTOTHESIREN_PRODUCTION_CONFIG={"domain":"https://songstothesiren.com", "host":"mail.example.com", "from":"noreply@songstothesiren.com","user":"user@example.com","password":"example"}'
+Type=forking
+PIDFile=/home/blah/html_songs/songs-to-the-siren/script/hypnotoad.pid
+ExecStart=/home/blah/.plenv/shims/carton exec /home/blah/html_songs/songs-to-the-siren/local/bin/hypnotoad  /home/blah/html_songs/songs-to-the-siren/script/songs-to-the-siren
+ExecReload=/home/blah/.plenv/shims/carton exec /home/blah/html_songs/songs-to-the-siren/local/bin/hypnotoad  /home/blah/html_songs/songs-to-the-siren/script/songs-to-the-siren
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+
