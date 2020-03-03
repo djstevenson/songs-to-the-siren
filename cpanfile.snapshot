@@ -2993,10 +2993,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Test-Deep-1.128
-    pathname: R/RJ/RJBS/Test-Deep-1.128.tar.gz
+  Test-Deep-1.130
+    pathname: R/RJ/RJBS/Test-Deep-1.130.tar.gz
     provides:
-      Test::Deep 1.128
+      Test::Deep 1.130
       Test::Deep::All undef
       Test::Deep::Any undef
       Test::Deep::Array undef
