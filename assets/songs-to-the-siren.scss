@@ -20,8 +20,9 @@ $col-CommentUnmoderatedWarning: #ff9933;
 $col-CommentAt: #a79e19;
 $col-CommentHeaderBottom: #555555;
 $col-CommentBackground: #2a2806;
-$col-ContentHeader: #d4af37;
-$col-ContentUnderline: rgba(141, 114, 30, 0.4);
+$col-ContentHeader: #a79e19;
+$col-ContentHeaderLighter: #c8be1e;
+$col-ContentUnderline: rgba(167, 121, 25, 0.4);
 
 body {
     background-color: $col-Background;
@@ -255,5 +256,16 @@ tr.song-is-not-published {
         // border-bottom: 2px solid $col-ContentUnderline;
         // padding-bottom: 0.5rem;
         // margin-bottom: 1.5rem;
+    }
+}
+
+.page-header h1 a {
+    color: $col-ContentHeader;
+    font-style: oblique;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: none;
+        color: $col-ContentHeaderLighter;
     }
 }

@@ -5,9 +5,9 @@
         </div>
     % }
 
-    <div class="row">
+    <div class="row page-header">
         <div class="col-12">
-            <h1>Songs to the Siren</h1>
+            <h1><a href="/">Songs to the Siren</a></h1>
             <p><a href="<%= url_for('view_content', name => 'about') %>">About this blog...</a></p>
             %= include "user/_loginout"
         </div>
