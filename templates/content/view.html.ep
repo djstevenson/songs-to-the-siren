@@ -3,7 +3,7 @@
 
 
 <section class="row">
-    <div class="content col-12">
+    <div class="col-12 content content-<%= $name %>">
         <h2><%= $content->title %></h2>
         <%== $content->html %>
     </div>

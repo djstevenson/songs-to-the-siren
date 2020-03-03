@@ -20,6 +20,8 @@ $col-CommentUnmoderatedWarning: #ff9933;
 $col-CommentAt: #a79e19;
 $col-CommentHeaderBottom: #555555;
 $col-CommentBackground: #2a2806;
+$col-ContentHeader: #d4af37;
+$col-ContentUnderline: rgba(141, 114, 30, 0.4);
 
 body {
     background-color: $col-Background;
@@ -233,4 +235,25 @@ tr.song-is-not-published {
 
 #new-comment-thread {
     margin-right: 1.25rem;
+}
+
+.content {
+    h2 {
+        margin-top: 1rem;
+        color: $col-ContentHeader;
+        font-weight: bold;
+        border-bottom: 2px solid $col-ContentUnderline;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        margin-top: 1rem;
+        color: $col-ContentHeader;
+        margin-bottom: 1rem;
+        // font-weight: bold;
+        // border-bottom: 2px solid $col-ContentUnderline;
+        // padding-bottom: 0.5rem;
+        // margin-bottom: 1.5rem;
+    }
 }

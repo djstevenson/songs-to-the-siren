@@ -3,8 +3,6 @@
     %= include 'layouts/_headers'
 <body>
 
-<!-- TODO This dupes a log of default.html -->
-
 <div class="container">
     %= include '_content_header'
 
