@@ -37,7 +37,9 @@ function makeLinkData(n) {
         identifier: 'identifier ' + ns,
         url: 'http://example.com/link' + ns + '.html',
         description: 'desc ' + ns,
-        extras: ns + 'x' + ns
+        extras: ns + 'x' + ns,
+        title: 'title' + ns,
+        linkText: 'link text ' + ns
     }
 }
 
@@ -72,6 +74,8 @@ context('Song links CRUD tests', () => {
                 .assertFormError('url',         'Required')
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
+                .assertFormError('linkText',    'Required')
+                .assertNoFormError('title')
                 .assertNoFormError('extras')
         })
 
@@ -99,13 +103,15 @@ context('Song links CRUD tests', () => {
                     class: 'YouTubeEmbedded',
                     url:  'http://example.com/',
                     priority: 'arse',
-                    description: 'also arse'
+                    description: 'also arse',
+                    linkText: 'linky'
                 })
                 .assertNoFormError('identifier')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
                 .assertNoFormError('extras')
+                .assertNoFormError('linkText')
         })
     })
 
