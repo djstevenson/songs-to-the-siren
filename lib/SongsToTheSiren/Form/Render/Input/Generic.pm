@@ -16,7 +16,6 @@ sub _input_render {
     my $name        = $self->name;
     my $id          = $self->_name_to_id($form, $name);
     my $label       = $self->label;
-    my $placeholder = $self->placeholder;
 
     my $value       = '';
     my $input_class = 'form-control';
@@ -42,7 +41,7 @@ sub _input_render {
     return qq{
         <div class="form-group">
             <label for="${id}">${label}</label>
-            <input type="${type}" id="${id}" ${data} name="${name}" $autofocus class="${input_class}" placeholder="${placeholder}" value="${value}"/>
+            <input type="${type}" id="${id}" ${data} name="${name}" $autofocus class="${input_class}" value="${value}"/>
             ${error}
         </div>
     };

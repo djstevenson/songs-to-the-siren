@@ -11,7 +11,6 @@ has '+id'     => (default => 'user-new-password');
 has_field password => (
     type        => 'Input::Password',
     label       => 'New password',
-    placeholder => 'New password',
     autofocus   => 1,
     filters     => [],
     validators  => [

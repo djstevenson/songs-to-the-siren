@@ -22,7 +22,6 @@ sub run {
             type => 'password',
             name => 'password',
             class => 'form-control',
-            placeholder => 'Password',
             value => '',
 			id => 'test-form-password',
         },

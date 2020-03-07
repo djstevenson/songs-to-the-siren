@@ -16,14 +16,14 @@ use SongsToTheSiren::Test::Forms::MockForm;
 # Example simple render (reformatted):
 #  <div class="form-group">
 #     <label for="new-song-artist">Artist</label>
-#     <input type="text" id="new-song-artist" name="artist"  class="form-control " placeholder="Artist" value=""/>
+#     <input type="text" id="new-song-artist" name="artist"  class="form-control " value=""/>
 #     <span id="error-new-song-artist" class=""></span>
 #  </div>
 #
 # If the field has an error, this becomes:
 #  <div class="form-group">
 #     <label for="new-song-artist">Artist</label>
-#     <input type="text" id="new-song-artist" name="artist"  class="form-control is-invalid" placeholder="Artist" value=""/>
+#     <input type="text" id="new-song-artist" name="artist"  class="form-control is-invalid" value=""/>
 #     <span id="error-new-song-artist" class="text-danger"></span>
 #  </div>
 #

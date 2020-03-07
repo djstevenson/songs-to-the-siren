@@ -31,9 +31,9 @@ has_column identifier => ();
 
 has_column class => ();
 
-has_column url => ();
+has_column title => ();
 
-has_column extras => ();
+has_column link_text => ();
 
 has_column edit => (
     content => sub {

@@ -48,13 +48,6 @@ has autofocus => (
     default     => 0,
 );
 
-has placeholder => (
-    is          => 'ro',
-    isa         => 'Str',
-    lazy        => 1,
-    default     => sub { return shift->label; },
-);
-
 # Hashref, or coderef that returns hashref.
 # Coderef is called with ($self, $form)
 # $self being the field object

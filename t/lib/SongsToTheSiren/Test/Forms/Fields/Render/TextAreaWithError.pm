@@ -20,7 +20,6 @@ sub run {
         exp_input_attrs => {
             name => 'your-name',
             class => 'form-control is-invalid',
-            placeholder => 'Your name',
 			id => 'test-form-your-name',
             rows => 6,
         },
