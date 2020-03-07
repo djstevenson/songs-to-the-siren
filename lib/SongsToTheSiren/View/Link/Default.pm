@@ -6,7 +6,7 @@ with 'SongsToTheSiren::View::Link::Role';
 # TODO POD docs
 
 # Provides a basic renderer for links that generates:
-# <a href="${url}">${description}</a>
+# <a href="${url}" target="blank">${description}</a>
 # where ${xxx} is the value of a field in the link record.
 
 sub render {
