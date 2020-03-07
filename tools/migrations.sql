@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS users;
 
 
 -- 2 up Add title/text fields to links
-ALTER TABLE links ADD COLUMN title TEXT DEFAULT NULL;
+ALTER TABLE links ADD COLUMN title TEXT NOT NULL DEFAULT '';
 ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
 
 --2 down 
