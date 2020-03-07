@@ -19,7 +19,6 @@ sub run {
     });
 
     is($field->label, 'Your name', 'Default label generated from name');
-    is($field->placeholder, 'Your name', 'Default placeholder generated from label');
     ok(!$field->has_value, 'Has no value if we have not set one');
     ok(!$field->has_error, 'Has no error if we have not set one');
 

@@ -339,7 +339,10 @@ context('Song CRUD tests', () => {
                     url: url1,
                     description: desc1,
                     class: "Default",
-                    priority: 10
+                    priority: 10,
+                    linkText: "link text",
+                    extras: "",
+                    title:"title"
                 })
             
             // Revisit song page and check link

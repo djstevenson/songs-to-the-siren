@@ -54,6 +54,17 @@ has_field priority => (
     validators  => [qw/ Required  ValidInteger /],
 );
 
+has_field link_text => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
+);
+
+has_field title => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+);
+
 has_field description => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -101,7 +112,7 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-    	my $fields = $self->form_hash(qw/ identifier class url description priority extras /);
+    	my $fields = $self->form_hash(qw/ identifier class url description priority extras link_text title /);
     
         # Create or update?
         if ( $self->is_update ) {

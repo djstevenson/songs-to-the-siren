@@ -20,6 +20,8 @@ __PACKAGE__->add_columns(
     description      => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
     priority         => {data_type => 'INTEGER'},
+    link_text        => {data_type => 'TEXT'},
+    title            => {data_type => 'TEXT'},
 
     # JSON e.g. {"ratio": "16x9", "start": "01:10"} for the youtubes.
     extras           => {data_type => 'TEXT'},

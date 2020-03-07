@@ -16,4 +16,4 @@ my $test = SongsToTheSiren::Test->new;
 
 ##### END BOILERPLATE
 
-$test->run('Forms::Fields::Render::ExplicitLabelAndPlaceholder');
+$test->run('Forms::Fields::Render::ExplicitLabel');

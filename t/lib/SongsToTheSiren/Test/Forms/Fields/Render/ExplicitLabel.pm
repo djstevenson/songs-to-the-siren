@@ -1,4 +1,4 @@
-package SongsToTheSiren::Test::Forms::Fields::Render::ExplicitLabelAndPlaceholder;
+package SongsToTheSiren::Test::Forms::Fields::Render::ExplicitLabel;
 use Moose;
 use namespace::autoclean;
 
@@ -14,7 +14,7 @@ sub run {
     my $self = shift;
 
     $self->_run_test('Input::Text', {
-        field_args      => {name => 'your-name', label => 'abc', placeholder => 'PPP'},
+        field_args      => {name => 'your-name', label => 'abc'},
         field_type      => 'input',
         exp_label_attrs => {for => 'test-form-your-name'},
         exp_label       => 'abc',
@@ -22,7 +22,6 @@ sub run {
             type => 'text',
             name => 'your-name',
             class => 'form-control',
-            placeholder => 'PPP',
             value => '',
 			id => 'test-form-your-name',
         },

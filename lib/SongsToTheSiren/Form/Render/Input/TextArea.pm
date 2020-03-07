@@ -10,7 +10,6 @@ sub render {
     my $name        = $self->name;
     my $id          = $self->_name_to_id($form, $name);
     my $label       = $self->label;
-    my $placeholder = $self->placeholder;
 
 	my $value       = $self->has_value ? $self->value : '';
     my $input_class = 'form-control';
@@ -34,7 +33,7 @@ sub render {
     return qq{
 		<div class="form-group">
 			<label for="${id}">${label}</label>
-			<textarea id="${id}" name="${name}" ${data} $autofocus class="${input_class}" rows="${rows}" placeholder="${placeholder}">${value}</textarea>
+			<textarea id="${id}" name="${name}" ${data} $autofocus class="${input_class}" rows="${rows}" >${value}</textarea>
 			${error}
 		</div>
 	};

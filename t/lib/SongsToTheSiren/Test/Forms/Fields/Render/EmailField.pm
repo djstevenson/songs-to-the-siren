@@ -22,7 +22,6 @@ sub run {
             type => 'email',
             name => 'email',
             class => 'form-control',
-            placeholder => 'Email',
             value => 'xyzzy@example.com',
 			id => 'test-form-email',
         },

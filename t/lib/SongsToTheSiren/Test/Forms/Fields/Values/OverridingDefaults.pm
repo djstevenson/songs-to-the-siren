@@ -17,11 +17,9 @@ sub run {
        name => 'your-name',
        type => 'Input::Text',
        label => 'My label',
-       placeholder => 'The placeholder',
     });
 
     is($field->label, 'My label', 'Overrides label ok');
-    is($field->placeholder, 'The placeholder', 'Overrides placeholder ok');
 
     done_testing;
 }

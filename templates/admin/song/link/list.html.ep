@@ -8,3 +8,9 @@
 <p>
     <a href="<%= url_for('admin_create_song_link', song_id => $song->id) %>">New link</a>
 </p>
+<p>
+    <a href="<%= url_for('admin_edit_song', song_id => $song->id) %>">Edit <%= $song->title %></a>
+</p>
+<p>
+    <a href="<%= url_for('admin_list_songs') %>">Admin list songs</a>
+</p>

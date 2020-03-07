@@ -153,3 +153,12 @@ DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS emails;
 DROP TABLE IF EXISTS user_keys;
 DROP TABLE IF EXISTS users;
+
+
+-- 2 up Add title/text fields to links
+ALTER TABLE links ADD COLUMN title TEXT NOT NULL DEFAULT '';
+ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
+
+--2 down 
+ALTER TABLE links DROP COLUMN title;
+ALTER TABLE links DROP COLUMN link_text;

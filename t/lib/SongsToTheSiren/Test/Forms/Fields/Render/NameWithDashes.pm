@@ -22,7 +22,6 @@ sub run {
             type => 'text',
             name => 'your-name',
             class => 'form-control',
-            placeholder => 'Your name',
             value => '',
 			id => 'test-form-your-name',
         },
