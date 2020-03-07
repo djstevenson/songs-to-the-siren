@@ -139,4 +139,4 @@ VALUES
 
 INSERT INTO links (song_id, identifier, "class", "url", description, title, link_text, extras, priority)
 VALUES
-(6, 'official_youtube', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', NULL, '', '16by9', 10);
+(6, 'official_youtube', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '', '', '16by9', 10);
