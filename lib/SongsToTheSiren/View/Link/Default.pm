@@ -15,8 +15,9 @@ sub render {
     my $link = $self->link;
 
     return sprintf(
-        '<a href="%s">%s</a>',
+        '<a href="%s" target="_blank"%s>%s</a>',
         $link->url,
+        ($link->title ? q{ title="} . $link->title . q{"} : ''),
         $link->description,
     );
 }

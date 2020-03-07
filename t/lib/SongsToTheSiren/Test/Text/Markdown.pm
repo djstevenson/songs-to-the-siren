@@ -101,25 +101,25 @@ sub run {
 		{
 			test_name => 'Identifier found',
 			input     => 'abc ^^identifier1^^ def',
-			expected  => qq{<p>abc <a href="https://id1.example.com/test.html">description 1</a> def</p>\n},
+			expected  => qq{<p>abc <a href="https://id1.example.com/test.html" target="_blank">description 1</a> def</p>\n},
 		},
 
 		{
 			test_name => 'Identifier found, description embeds markdown',
 			input     => 'abc ^^identifier2^^ def',
-			expected  => qq{<p>abc <a href="https://id2.example.com/test.html">description <em>2</em> embeds markdown</a> def</p>\n},
+			expected  => qq{<p>abc <a href="https://id2.example.com/test.html" target="_blank">description <em>2</em> embeds markdown</a> def</p>\n},
 		},
 
 		{
 			test_name => 'Two identifiers, only 1st found',
 			input     => 'abc ^^identifier1^^ ^^identifier3^^ def',
-			expected  => qq{<p>abc <a href="https://id1.example.com/test.html">description 1</a> <strong>LINK IDENTIFIER NOT FOUND: identifier3</strong> def</p>\n},
+			expected  => qq{<p>abc <a href="https://id1.example.com/test.html" target="_blank">description 1</a> <strong>LINK IDENTIFIER NOT FOUND: identifier3</strong> def</p>\n},
 		},
 
 		{
 			test_name => 'Two identifiers, only 2nd found',
 			input     => 'abc ^^identifierx^^ ^^identifier1^^ def',
-			expected  => qq{<p>abc <strong>LINK IDENTIFIER NOT FOUND: identifierx</strong> <a href="https://id1.example.com/test.html">description 1</a> def</p>\n},
+			expected  => qq{<p>abc <strong>LINK IDENTIFIER NOT FOUND: identifierx</strong> <a href="https://id1.example.com/test.html" target="_blank">description 1</a> def</p>\n},
 		},
 
 		{
@@ -131,7 +131,7 @@ sub run {
 		{
 			test_name => 'Two identifiers, both found',
 			input     => 'abc ^^identifier1^^ ^^identifier2^^ def',
-			expected  => qq{<p>abc <a href="https://id1.example.com/test.html">description 1</a> <a href="https://id2.example.com/test.html">description <em>2</em> embeds markdown</a> def</p>\n},
+			expected  => qq{<p>abc <a href="https://id1.example.com/test.html" target="_blank">description 1</a> <a href="https://id2.example.com/test.html" target="_blank">description <em>2</em> embeds markdown</a> def</p>\n},
 		},
 
 		{
