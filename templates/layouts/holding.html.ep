@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    %= include 'layouts/_headers'
+<body>
+
+<div class="container">
+    <main>
+<%= content %>
+    </main>
+</div>
+
+</body>
+</html>
