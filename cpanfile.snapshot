@@ -2845,49 +2845,49 @@ DISTRIBUTIONS
       File::Path 0
       XSLoader 0
       perl 5.008
-  Specio-0.45
-    pathname: D/DR/DROLSKY/Specio-0.45.tar.gz
+  Specio-0.46
+    pathname: D/DR/DROLSKY/Specio-0.46.tar.gz
     provides:
-      Specio 0.45
-      Specio::Coercion 0.45
-      Specio::Constraint::AnyCan 0.45
-      Specio::Constraint::AnyDoes 0.45
-      Specio::Constraint::AnyIsa 0.45
-      Specio::Constraint::Enum 0.45
-      Specio::Constraint::Intersection 0.45
-      Specio::Constraint::ObjectCan 0.45
-      Specio::Constraint::ObjectDoes 0.45
-      Specio::Constraint::ObjectIsa 0.45
-      Specio::Constraint::Parameterizable 0.45
-      Specio::Constraint::Parameterized 0.45
-      Specio::Constraint::Role::CanType 0.45
-      Specio::Constraint::Role::DoesType 0.45
-      Specio::Constraint::Role::Interface 0.45
-      Specio::Constraint::Role::IsaType 0.45
-      Specio::Constraint::Simple 0.45
-      Specio::Constraint::Structurable 0.45
-      Specio::Constraint::Structured 0.45
-      Specio::Constraint::Union 0.45
-      Specio::Declare 0.45
-      Specio::DeclaredAt 0.45
-      Specio::Exception 0.45
-      Specio::Exporter 0.45
-      Specio::Helpers 0.45
-      Specio::Library::Builtins 0.45
-      Specio::Library::Numeric 0.45
-      Specio::Library::Perl 0.45
-      Specio::Library::String 0.45
-      Specio::Library::Structured 0.45
-      Specio::Library::Structured::Dict 0.45
-      Specio::Library::Structured::Map 0.45
-      Specio::Library::Structured::Tuple 0.45
-      Specio::OO 0.45
-      Specio::PartialDump 0.45
-      Specio::Registry 0.45
-      Specio::Role::Inlinable 0.45
-      Specio::Subs 0.45
-      Specio::TypeChecks 0.45
-      Test::Specio 0.45
+      Specio 0.46
+      Specio::Coercion 0.46
+      Specio::Constraint::AnyCan 0.46
+      Specio::Constraint::AnyDoes 0.46
+      Specio::Constraint::AnyIsa 0.46
+      Specio::Constraint::Enum 0.46
+      Specio::Constraint::Intersection 0.46
+      Specio::Constraint::ObjectCan 0.46
+      Specio::Constraint::ObjectDoes 0.46
+      Specio::Constraint::ObjectIsa 0.46
+      Specio::Constraint::Parameterizable 0.46
+      Specio::Constraint::Parameterized 0.46
+      Specio::Constraint::Role::CanType 0.46
+      Specio::Constraint::Role::DoesType 0.46
+      Specio::Constraint::Role::Interface 0.46
+      Specio::Constraint::Role::IsaType 0.46
+      Specio::Constraint::Simple 0.46
+      Specio::Constraint::Structurable 0.46
+      Specio::Constraint::Structured 0.46
+      Specio::Constraint::Union 0.46
+      Specio::Declare 0.46
+      Specio::DeclaredAt 0.46
+      Specio::Exception 0.46
+      Specio::Exporter 0.46
+      Specio::Helpers 0.46
+      Specio::Library::Builtins 0.46
+      Specio::Library::Numeric 0.46
+      Specio::Library::Perl 0.46
+      Specio::Library::String 0.46
+      Specio::Library::Structured 0.46
+      Specio::Library::Structured::Dict 0.46
+      Specio::Library::Structured::Map 0.46
+      Specio::Library::Structured::Tuple 0.46
+      Specio::OO 0.46
+      Specio::PartialDump 0.46
+      Specio::Registry 0.46
+      Specio::Role::Inlinable 0.46
+      Specio::Subs 0.46
+      Specio::TypeChecks 0.46
+      Test::Specio 0.46
     requirements:
       B 0
       Carp 0
