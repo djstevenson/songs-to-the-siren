@@ -3,9 +3,9 @@
         <h4>Links</h4>
         <p>
             <ul>
-                % foreach my $k (sort { $links->{$a}->priority <=> $links->{$b}->priority } keys %$links) {
+                % while ( my $link = $list_links->next ) {
                     <li>
-                        <a href="<%= $links->{$k}->url %>"><%= $links->{$k}->description %></a>
+                        <a class="<%= $link->class %>" href="<%= $link->url %>"><%= $link->description %></a>
                     </li>
                 % }
             </ul>

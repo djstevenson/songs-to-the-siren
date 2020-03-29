@@ -69,7 +69,7 @@ sub run {
 	
 	$song1->add_link($link1);
 	is($song1->links->count, 1, 'After link1, song has one link');
-	$song1->add_link($link2);
+	my $link2_obj = $song1->add_link($link2);
 	is($song1->links->count, 2, 'After link2, song has two links');
 	is($song2->links->count, 0, 'Song2 still has no links');
 
@@ -103,9 +103,17 @@ sub run {
 	is($links[2]->identifier, $link3->{identifier}, 'Song2 link3 has right identifier');
 	is($links[2]->url,  $link3->{url},  'Song2 link3 has right url');
 
+	# List of links that appear at the end of a song article.
+	# Uses $rs->in_list->by_priority, so excludes anything with priority zero
+	# Change link2 to be priority zero, and check it is skipped
+	$link2_obj->update({priority => 0});
+	@links = $song1->links->links_list->all;
+	is(scalar(@links), 1, 'link2 priority 0: link2 is ignored');
+	is($links[0]->identifier, $link1->{identifier}, 'link2 priority 0: link1 still returned');
 
+	
 	# In templates, we may want to get links by name, e.g. to 
-	# link to the youtube video. Test that:
+	# link to the youtube video. Priority is ignored. 
 	my $links_by_identifier = $song1->links->links_by_identifier;
 	# links_by_identifier returned hash, k=name, v=result object
 	is($links_by_identifier->{$link1->{identifier}}->url, $link1->{url}, 'get by identifier: song1 has right link for link1');

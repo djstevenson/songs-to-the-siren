@@ -107,6 +107,10 @@ CREATE INDEX comments_song_id_idx ON comments USING BTREE(song_id);
 CREATE INDEX comments_author_id_idx ON comments USING BTREE(author_id);
 CREATE INDEX comments_parent_id_idx ON comments USING BTREE(parent_id);
 
+
+-- Priority determines the order the links appear in the list
+-- at the end of a song article.  In ascending priority.
+-- 0 = don't put link in the list.
 CREATE TABLE links (
     id SERIAL NOT NULL PRIMARY KEY,
     song_id INT NOT NULL REFERENCES songs(id) ON DELETE CASCADE,

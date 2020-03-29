@@ -19,7 +19,12 @@ __PACKAGE__->add_columns(
     class            => {data_type => 'TEXT'},
     description      => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
+
+    # Priority determines the order the links appear in the list
+    # at the end of a song article.  In ascending priority.
+    # 0 = don't put link in the list.
     priority         => {data_type => 'INTEGER'},
+
     link_text        => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
 
