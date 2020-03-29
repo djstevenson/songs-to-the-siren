@@ -269,3 +269,20 @@ tr.song-is-not-published {
         color: $col-ContentHeaderLighter;
     }
 }
+
+ul.link-list {
+    list-style: none;
+    
+    li {
+        height: 32px;
+        margin-bottom: 12px;
+        padding-left: 48px;
+        &.Spotify {
+            background: transparent url('/images/logos/spotify/spotify32.png') no-repeat center left;
+        }
+        &.YouTubeEmbedded {
+            background: transparent url('/images/logos/youtube/youtube32.png') no-repeat center left;
+        }
+    }
+    
+}

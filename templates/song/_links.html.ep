@@ -2,10 +2,10 @@
     <div class="links">
         <h4>Links</h4>
         <p>
-            <ul>
+            <ul class="link-list">
                 % while ( my $link = $list_links->next ) {
-                    <li>
-                        <a class="<%= $link->class %>" href="<%= $link->url %>"><%= $link->description %></a>
+                    <li class="<%= $link->class %>">
+                        <a href="<%= $link->url %>"><%= $link->description %></a>
                     </li>
                 % }
             </ul>
