@@ -137,7 +137,10 @@ VALUES
 (2, 1, NULL, '3rd thread c6', '<p>3rd thread c6</p>', NOW(), NOW()),
 (2, 2,    5, 'reply to c5 = c7', '<p>reply to c5 = c7</p>', NOW(), NOW());
 
-INSERT INTO links (song_id, identifier, "class", "url", description, title, link_text, extras, priority, css)
+INSERT INTO links (song_id, identifier, "class", "url", description, title, extras, priority, css)
 VALUES
-(6, 'official_youtube', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '', '', '16by9', 10, 'youtube'),
-(6, 'spotify', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Spotify', '', '', '', 20, 'spotify');
+(6, 'official_youtube', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '', '16by9', 10, 'youtube'),
+(6, 'spotify', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Spotify', '', '', 20, 'spotify'),
+(6, 'itunes_store', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'iTunes Store', '', '', 30, 'itunes-store'),
+(6, 'apple_music', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Apple Music', '', '', 40, 'apple-music'),
+(6, 'vimeo', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Vimeo', '', '', 50, 'vimeo');

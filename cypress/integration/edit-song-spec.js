@@ -340,7 +340,7 @@ context('Song CRUD tests', () => {
                     description: desc1,
                     class: "Default",
                     priority: 10,
-                    linkText: "link text",
+                    css: "default",
                     extras: "",
                     title:"title"
                 })

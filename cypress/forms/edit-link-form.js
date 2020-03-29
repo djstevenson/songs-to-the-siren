@@ -11,8 +11,8 @@ export class EditLinkForm extends FormBase {
         this._fields.priority    = new FormField('text',   'edit-link-priority')
         this._fields.description = new FormField('text',   'edit-link-description')
         this._fields.title       = new FormField('text',   'edit-link-title')
-        this._fields.linkText    = new FormField('text',   'edit-link-link-text')
         this._fields.extras      = new FormField('text',   'edit-link-extras')
+        this._fields.css         = new FormField('select', 'edit-link-css')
 
         this._buttons.submit     = new FormButton('submit-button')
         this._buttons.cancel     = new FormButton('cancel-button')

@@ -54,12 +54,6 @@ has_field priority => (
     validators  => [qw/ Required  ValidInteger /],
 );
 
-has_field link_text => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
-);
-
 has_field title => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
@@ -74,6 +68,19 @@ has_field description => (
 has_field extras => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
+);
+
+has_field css => (
+    type        => 'Select',
+    selections  => sub {
+        my ($field, $form) = @_;
+
+        my $css = $form->c->app->config->{link_css};
+
+        return [
+            map { { value => $_, text => $_ } } @$css
+        ];
+    },
 );
 
 has_button submit => ();
@@ -112,8 +119,8 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-    	my $fields = $self->form_hash(qw/ identifier class url description priority extras link_text title /);
-    
+    	my $fields = $self->form_hash(qw/ identifier class url description priority extras title css /);
+
         # Create or update?
         if ( $self->is_update ) {
             # Update

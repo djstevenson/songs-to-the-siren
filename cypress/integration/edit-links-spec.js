@@ -39,7 +39,7 @@ function makeLinkData(n) {
         description: 'desc ' + ns,
         extras: ns + 'x' + ns,
         title: 'title' + ns,
-        linkText: 'link text ' + ns
+        css: 'default',
     }
 }
 
@@ -74,7 +74,6 @@ context('Song links CRUD tests', () => {
                 .assertFormError('url',         'Required')
                 .assertFormError('description', 'Required')
                 .assertFormError('priority',    'Required')
-                .assertFormError('linkText',    'Required')
                 .assertNoFormError('title')
                 .assertNoFormError('extras')
         })
@@ -104,14 +103,13 @@ context('Song links CRUD tests', () => {
                     url:  'http://example.com/',
                     priority: 'arse',
                     description: 'also arse',
-                    linkText: 'linky'
+                    css: 'youtube'
                 })
                 .assertNoFormError('identifier')
                 .assertNoFormError('url')
                 .assertNoFormError('description')
                 .assertFormError  ('priority', 'Invalid number')
                 .assertNoFormError('extras')
-                .assertNoFormError('linkText')
         })
     })
 
