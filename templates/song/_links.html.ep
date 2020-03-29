@@ -4,7 +4,7 @@
         <p>
             <ul class="link-list">
                 % while ( my $link = $list_links->next ) {
-                    <li class="<%= $link->class %>">
+                    <li class="<%= $link->css %>">
                         <a href="<%= $link->url %>"><%= $link->description %></a>
                     </li>
                 % }

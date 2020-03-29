@@ -166,3 +166,9 @@ ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
 --2 down 
 ALTER TABLE links DROP COLUMN title;
 ALTER TABLE links DROP COLUMN link_text;
+
+--3 up Add css class name to links
+ALTER TABLE links ADD COLUMN css TEXT DEFAULT NULL;
+
+--3 down 
+ALTER TABLE links DROP COLUMN css;

@@ -16,7 +16,7 @@ __PACKAGE__->add_columns(
     id               => {data_type => 'INTEGER'},
     song_id          => {data_type => 'INTEGER'},
     identifier       => {data_type => 'TEXT'},
-    class            => {data_type => 'TEXT'},
+    class            => {data_type => 'TEXT'},   # Perl class of renderer
     description      => {data_type => 'TEXT'},
     url              => {data_type => 'TEXT'},
 
@@ -30,6 +30,9 @@ __PACKAGE__->add_columns(
 
     # JSON e.g. {"ratio": "16x9", "start": "01:10"} for the youtubes.
     extras           => {data_type => 'TEXT'},
+
+    # CSS class for the <a> link in the list. NULL = none
+    css              => {data_type => 'TEXT'},
 );
 
 __PACKAGE__->set_primary_key('id');
