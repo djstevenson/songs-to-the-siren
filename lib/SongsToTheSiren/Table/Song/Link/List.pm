@@ -29,11 +29,7 @@ has_column priority => ();
 
 has_column identifier => ();
 
-has_column class => ();
-
-has_column title => ();
-
-has_column link_text => ();
+has_column description => ();
 
 has_column edit => (
     content => sub {
