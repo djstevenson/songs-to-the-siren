@@ -111,6 +111,7 @@ sub add_link {
         description => $values->{description},
         priority    => $values->{priority},
         extras      => $values->{extras},
+        css         => $values->{css},
     });
 }
 
