@@ -1,12 +1,12 @@
-$col-Background: #383508;
-$col-BackgroundOdd: #222005;
-$col-BackgroundEven: #2a2806;
-$col-Title: #a79e19;
+$col-Background: #1d1f21;
+$col-BackgroundOdd: #252526;
+$col-BackgroundEven: #29292a;
+$col-Title: #d2b40a;
 $col-TitleBackground: #0d0c02;
 $col-Text: #d0d0d0;
 $col-HeaderSeparator: #222005;
-$col-Link: #6ecfcf;
-$col-VisitedLink: #6ecfcf;
+$col-Link: #72bcbc;
+$col-VisitedLink: #72bcbc;
 $col-HoverLink: #cf6e6e;
 $col-Input: #f1eb9c;
 $col-InputFocus: #ffffff;
@@ -20,9 +20,9 @@ $col-CommentUnmoderatedWarning: #ff9933;
 $col-CommentAt: #a79e19;
 $col-CommentHeaderBottom: #555555;
 $col-CommentBackground: #2a2806;
-$col-ContentHeader: #a79e19;
+$col-ContentHeader: #d2b40a;
 $col-ContentHeaderLighter: #c8be1e;
-$col-ContentUnderline: rgba(167, 121, 25, 0.4);
+$col-ContentUnderline: #005000;
 
 body {
     background-color: $col-Background;
@@ -128,17 +128,18 @@ h2.title {
     background-color: $col-TitleBackground;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    border-bottom: 3px solid $col-ContentUnderline;
 }
 
 h3.artist {
-    font-weight: 300;
     font-size: 1.5rem;
     font-style: oblique;
 }
 
 h4.release {
-    font-weight: 200;
+    font-weight: 300;
     font-size: 1rem;
+    font-style: oblique;
 }
 
 /* COMMENTS */
@@ -252,10 +253,7 @@ tr.song-is-not-published {
         margin-top: 1rem;
         color: $col-ContentHeader;
         margin-bottom: 1rem;
-        // font-weight: bold;
-        // border-bottom: 2px solid $col-ContentUnderline;
-        // padding-bottom: 0.5rem;
-        // margin-bottom: 1.5rem;
+        border-bottom: 2px solid $col-ContentUnderline;
     }
 }
 
