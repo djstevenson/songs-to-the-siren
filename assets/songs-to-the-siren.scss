@@ -255,6 +255,12 @@ tr.song-is-not-published {
         margin-bottom: 1rem;
         border-bottom: 2px solid $col-ContentUnderline;
     }
+
+    blockquote {
+        margin-left: 1rem;
+        padding-left: 1rem;
+        border-left: 2px solid $col-ContentUnderline;
+    }
 }
 
 .page-header h1 a {
