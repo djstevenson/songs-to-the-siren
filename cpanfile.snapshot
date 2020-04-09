@@ -1656,6 +1656,7 @@ DISTRIBUTIONS
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
+      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   JSON-MaybeXS-1.004000
@@ -2010,20 +2011,20 @@ DISTRIBUTIONS
       Mojolicious 8.33
       Sereal 0
       perl 5.010001
-  Moo-2.003006
-    pathname: H/HA/HAARG/Moo-2.003006.tar.gz
+  Moo-2.004000
+    pathname: H/HA/HAARG/Moo-2.004000.tar.gz
     provides:
       Method::Generate::Accessor undef
       Method::Generate::BuildAll undef
       Method::Generate::Constructor undef
       Method::Generate::DemolishAll undef
-      Moo 2.003006
+      Moo 2.004000
       Moo::HandleMoose undef
       Moo::HandleMoose::FakeConstructor undef
       Moo::HandleMoose::FakeMetaClass undef
       Moo::HandleMoose::_TypeMap undef
       Moo::Object undef
-      Moo::Role 2.003006
+      Moo::Role 2.004000
       Moo::_Utils undef
       Moo::_mro undef
       Moo::_strictures undef
@@ -2035,7 +2036,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Module::Runtime 0.014
       Role::Tiny 2.001004
-      Scalar::Util 1.09
+      Scalar::Util 1.00
       Sub::Defer 2.006006
       Sub::Quote 2.006006
       perl 5.006
