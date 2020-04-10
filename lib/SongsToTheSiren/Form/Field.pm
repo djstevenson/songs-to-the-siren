@@ -48,6 +48,30 @@ has autofocus => (
     default     => 0,
 );
 
+has autocomplete => (
+    is			=> 'ro',
+    isa			=> 'Str',
+    predicate   => 'has_autocomplete',
+);
+
+has autocorrect => (
+    is			=> 'ro',
+    isa			=> 'Str',
+    predicate   => 'has_autocorrect',
+);
+
+has autocapitalize => (
+    is			=> 'ro',
+    isa			=> 'Str',
+    predicate   => 'has_autocapitalize',
+);
+
+has spellcheck => (
+    is			=> 'ro',
+    isa			=> 'Str',
+    predicate   => 'has_spellcheck',
+);
+
 # Hashref, or coderef that returns hashref.
 # Coderef is called with ($self, $form)
 # $self being the field object

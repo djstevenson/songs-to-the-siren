@@ -23,7 +23,7 @@ sub render {
     }
     my $error = qq{<span id="${error_id}" class="${error_class}">${text}</span>};
 
-    my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';
+    my $autofocus_etc = $self->_get_auto_attributes;
 
     my $options = $self->_get_options;
 	my $rows = exists $options->{rows} ? $options->{rows} : 6;
@@ -33,10 +33,34 @@ sub render {
     return qq{
 		<div class="form-group">
 			<label for="${id}">${label}</label>
-			<textarea id="${id}" name="${name}" ${data} $autofocus class="${input_class}" rows="${rows}" >${value}</textarea>
+			<textarea id="${id}" name="${name}" ${data} ${autofocus_etc} class="${input_class}" rows="${rows}" >${value}</textarea>
 			${error}
 		</div>
 	};
 }
 
+# TODO This is also in the generic input renderer.
+#      Do something about this duped code.
+
+sub _get_auto_attributes {
+    my ($self) = @_;
+
+    my %attrs;
+
+    # autofocus HTML5 is a boolean (present or not). 
+    # The others here take a value.
+    $attrs{autofocus}      = undef                 if $self->autofocus;
+    $attrs{autocomplete}   = $self->autocomplete   if $self->has_autocomplete;
+    $attrs{autocorrect}    = $self->autocorrect    if $self->has_autocorrect;
+    $attrs{autocapitalize} = $self->autocapitalize if $self->has_autocapitalize;
+    $attrs{spellcheck}     = $self->spellcheck     if $self->has_spellcheck;
+    
+    return join(' ', map {
+        defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_
+    } keys %attrs);
+}
+
+no Moose::Role;
 1;
+
+

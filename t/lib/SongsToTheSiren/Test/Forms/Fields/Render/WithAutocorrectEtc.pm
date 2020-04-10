@@ -1,4 +1,4 @@
-package SongsToTheSiren::Test::Forms::Fields::Render::WithAutofocus;
+package SongsToTheSiren::Test::Forms::Fields::Render::WithAutocorrectEtc;
 use Moose;
 use namespace::autoclean;
 
@@ -13,9 +13,16 @@ has '+user_base' => (default => 'form_field_render3');
 sub run {
     my $self = shift;
 
+    
     subtest 'Input::Text' => sub {
         $self->_run_test('Input::Text', {
-            field_args      => {name => 'your-name', autofocus => 1},
+            field_args      => {
+                name           => 'your-name',
+                autocomplete   => 'off',
+                autocorrect    => 'off',
+                autocapitalize => 'none',
+                spellcheck     => 'false',
+            },
             field_type      => 'input',
             exp_label_attrs => {for => 'test-form-your-name'},
             exp_label       => 'Your name',
@@ -24,7 +31,10 @@ sub run {
                 name => 'your-name',
                 class => 'form-control',
                 value => '',
-                autofocus => undef,
+                autocomplete => 'off',
+                autocorrect => 'off',
+                autocapitalize => 'none',
+                spellcheck => 'false',
                 id => 'test-form-your-name',
             },
         });
@@ -32,14 +42,21 @@ sub run {
 
     subtest 'Input::TextArea' => sub {
         $self->_run_test('Input::TextArea', {
-            field_args      => {name => 'your-name', autofocus => 1},
+            field_args      => {
+                name           => 'your-name',
+                autocorrect    => 'off',
+                autocapitalize => 'on',
+                spellcheck     => 'true',
+            },
             field_type      => 'textarea',
             exp_label_attrs => {for => 'test-form-your-name'},
             exp_label       => 'Your name',
             exp_input_attrs => {
                 name => 'your-name',
                 class => 'form-control',
-                autofocus => undef,
+                autocorrect => 'off',
+                autocapitalize => 'on',
+                spellcheck => 'true',
                 id => 'test-form-your-name',
                 rows => 6,
             },
