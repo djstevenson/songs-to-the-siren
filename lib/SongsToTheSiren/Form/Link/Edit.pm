@@ -22,10 +22,13 @@ has link => (
 
 
 has_field identifier => (
-    type        => 'Input::Text',
-    autofocus   => 1,
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required /],
+    type           => 'Input::Text',
+    autofocus      => 1,
+    filters        => [qw/ TrimEdges /],
+    validators     => [qw/ Required /],
+    autocomplete   => 'off',
+    spellcheck     => 'false',
+    autocapitalize => 'off',
 );
 
 has_field class => (

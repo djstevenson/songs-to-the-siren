@@ -35,9 +35,12 @@ has_field album => (
 );
 
 has_field image => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    type           => 'Input::Text',
+    filters        => [qw/ TrimEdges /],
+    validators     => [qw/ Required  /],
+    autocomplete   => 'off',
+    spellcheck     => 'false',
+    autocapitalize => 'off',
 );
 
 has_field country_id => (
