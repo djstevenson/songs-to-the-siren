@@ -28,7 +28,7 @@ sub render {
     my $options = $self->_get_options;
 	my $rows = exists $options->{rows} ? $options->{rows} : 6;
 
-    my $data = $self->render_data;
+    my $data = $self->render_data($form);
 
     return qq{
 		<div class="form-group">

@@ -65,8 +65,10 @@ has_field summary_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    data        => {
-        'markdown-preview' => 'markdown-preview-summary',
+    data        => sub {
+        my ($field, $form) = @_;
+
+        return $form->_markdown_field_data('summary');
     },
 );
 
@@ -82,8 +84,10 @@ has_field full_markdown => (
     type        => 'Input::TextArea',
     filters     => [qw/ TrimEdges /],
     validators  => [qw/ Required  /],
-    data        => {
-        'markdown-preview' => 'markdown-preview-full',
+    data        => sub {
+        my ($field, $form) = @_;
+
+        return $form->_markdown_field_data('full');
     },
 );
 
@@ -96,6 +100,18 @@ has_field full_preview => (
 
 has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
+
+sub _markdown_field_data {
+    my ($self, $name) = @_;
+
+    my %data = ('markdown-preview' => 'markdown-preview-' . $name);
+
+    if ( $self->is_update ) {
+        $data{'song-id'} = $self->song->id;
+    }
+
+    return \%data;
+}
 
 override posted => sub {
     my $self = shift;
