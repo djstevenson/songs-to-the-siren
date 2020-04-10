@@ -34,7 +34,7 @@ sub _input_render {
         $value = $self->value;
     }
 
-    my $data = $self->render_data;
+    my $data = $self->render_data($form);
 
     # TODO If the form has errors, consider patching autofocus to go to the first error field?
     my $autofocus = $self->autofocus ? 'autofocus="autofocus"' : '';

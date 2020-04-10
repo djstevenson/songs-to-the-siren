@@ -83,13 +83,10 @@ has error => (
 # would render attributes like:
 # <tag data-abc="1" data-def="blah" data-ghi>
 #
-# Defined values are stringified, so it doesn't
-# mean anything to have a hash as a value.
-# In future, maybe change this to render a hash
-# as JSON if we have a use-case.
+# Defined values are stringified.
 has data => (
     is          => 'ro',
-    isa         => 'HashRef[Maybe[Int|Str]]',
+    isa         => 'HashRef|CodeRef',
     predicate   => 'has_data',
 );
 
@@ -184,13 +181,18 @@ sub _get_selections {
 
 
 sub render_data {
-    my $self = shift;
+    my ($self, $form) = @_;
 
     return '' unless $self->has_data;
 
+    my $data = $self->data;
+    if ( ref($data) eq 'CODE' ) {
+        $data = $data->($self, $form);
+    }
+
     my @attrs;
     
-    my %data = %{ $self->data };
+    my %data = %{ $data };
     for my $k ( keys %data ) {
         my $v = $data{$k};
 

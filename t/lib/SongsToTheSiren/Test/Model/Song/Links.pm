@@ -30,6 +30,7 @@ sub _random_link {
 		description => $s4,
 		priority    => $priority,
 		extras      => $extras,
+		css         => 'default',
 	};
 }
 

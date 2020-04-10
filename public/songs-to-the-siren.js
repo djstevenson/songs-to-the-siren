@@ -12,10 +12,11 @@ $(function() {
     $('[data-markdown-preview]').on('change keyup paste focus', $.throttle( 500, function() {
         const data = $(this).data()
         const previewAreaId = '#' + data['markdownPreview']
+        const songId = data['songId']
         $.ajax({
             type: "POST",
             url: "/markdown",
-            data: { markdown: $(this).val() },
+            data: { markdown: $(this).val(), song: songId },
             success: function(data) {
                 $(previewAreaId).html(data).show()
             },

@@ -2,3 +2,7 @@
 % title 'Edit song: ' . $song->title;
 
 <%== $form->render %>
+
+<p>
+    <a target="_blank" href="<%= url_for('admin_list_song_links', song_id => $song->id) %>">Links for <%= $song->title %></a> (new tab).
+</p>

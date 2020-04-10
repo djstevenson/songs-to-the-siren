@@ -239,7 +239,7 @@ tr.song-is-not-published {
     margin-right: 1.25rem;
 }
 
-.content, .description {
+.content, .description, .markdown-preview {
     h2 {
         margin-top: 1rem;
         color: $col-ContentHeader;
@@ -259,7 +259,8 @@ tr.song-is-not-published {
     blockquote {
         margin-left: 1rem;
         padding-left: 1rem;
-        border-left: 2px solid $col-ContentUnderline;
+        border-left: 1px solid $col-ContentUnderline;
+        font-style: oblique;
     }
 }
 
