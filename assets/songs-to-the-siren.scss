@@ -87,14 +87,6 @@ section.song {
     }
 }
 
-.odd-song {
-    background-color: $col-BackgroundOdd;
-}
-
-.even-song {
-    background-color: $col-BackgroundEven;
-}
-
 .song-tag, .song-tag-remove {
     margin-left: 0.2rem;
     margin-bottom: 0.5rem;
@@ -239,7 +231,7 @@ tr.song-is-not-published {
     margin-right: 1.25rem;
 }
 
-.content, .description, .markdown-preview {
+.content, .description, .markdown-preview, .front-page-song-list {
     h2 {
         margin-top: 1rem;
         color: $col-ContentHeader;
@@ -261,6 +253,18 @@ tr.song-is-not-published {
         padding-left: 1rem;
         border-left: 1px solid $col-ContentUnderline;
         font-style: oblique;
+    }
+}
+
+.front-page-song-list {
+    a {
+        font-weight: bold; 
+    }
+    li {
+        padding-bottom: 0.5rem;
+    }
+    .date {
+        color: #a0a0a0;
     }
 }
 
