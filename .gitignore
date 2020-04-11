@@ -12,5 +12,4 @@ public/songs-to-the-siren.css.map
 .sass-cache
 script/hypnotoad.pid
 songs_to_the_siren.production.conf
-public/images/artwork/160/*.jpg
-public/images/artwork/320/*.jpg
+public/images/artwork/*.jpg
