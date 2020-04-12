@@ -10,14 +10,6 @@ sub add_routes {
 sub front_page {
     my $c = shift;
 
-    # If not logged-in, and not in test mode,
-    # go to temporary holding front page. 
-    # TODO Remove this when we go live.
-    if ( $c->app->mode ne 'test' && !exists $c->stash->{auth_user} ) {
-        $c->render(template => 'home/holding_front_page');
-        return;
-    }
-
     # TODO Add pagination
     my $tags  = $c->schema->resultset('Tag')
         ->search_by_ids($c->param('tags'));
