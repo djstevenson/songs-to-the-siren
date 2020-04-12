@@ -36,7 +36,7 @@ function makeLinkData(n) {
         class: 'Default',
         identifier: 'identifier ' + ns,
         url: 'http://example.com/link' + ns + '.html',
-        description: 'desc ' + ns,
+        description: 'desc of 12" version' + ns,
         extras: ns + 'x' + ns,
         title: 'title' + ns,
         css: 'default',
