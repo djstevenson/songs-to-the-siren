@@ -4,7 +4,7 @@
 <h2 class="notification-title">Add reply for <%= $song->title %></h2>
 
 <!-- TODO Gonna need this a few times, put in a partial -->
-<blockquote class="alert alert-warning">
+<blockquote class="alert alert-secondary">
     <p>
         <strong>Note: </strong>All comments are moderated, so not be visible to other
         site users until Admin marks it as 'public'.
