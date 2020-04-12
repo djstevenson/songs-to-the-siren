@@ -2,6 +2,8 @@ package SongsToTheSiren::Form::Field;
 use Moose;
 use namespace::autoclean;
 
+use HTML::Entities qw/ encode_entities /;
+
 has name => (
     is			=> 'ro',
     isa			=> 'Str',
@@ -159,6 +161,14 @@ sub set_initial_value {
 }
 
 sub _get_initial_value {
+	my ($self, $form) = @_;
+
+    my $s = $self->_get_initial_value_unencoded($form);
+
+    return encode_entities($s);
+}
+
+sub _get_initial_value_unencoded {
 	my ($self, $form) = @_;
 
     return '' if $self->type eq 'Html';
