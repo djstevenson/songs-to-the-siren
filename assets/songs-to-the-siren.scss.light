@@ -1,28 +1,25 @@
-$col-Background: #1d1f21;
-$col-BorderSong: black;
-$col-BackgroundSong: #242425;
-$col-BackgroundComments:#29292a;
-$col-Title: #d2b40a;
-$col-TitleBackground: #0d0c02;
-$col-Text: #d0d0d0;
-$col-HeaderSeparator: #222005;
-$col-Link: #72bcbc;
-$col-VisitedLink: #72bcbc;
+$col-Background: #e8e8e8;
+$col-Title: #014954;
+$col-TitleBackground: #ccd4cc;
+$col-Text: #202020;
+$col-HeaderSeparator: #037b71;
+$col-Link: #1f5a9a;
+$col-VisitedLink: #1f5a9a;
 $col-HoverLink: #cf6e6e;
-$col-Input: #f1eb9c;
-$col-InputFocus: #ffffff;
-$col-InputBorder: #003300;
-$col-InputBorderFocus: #99ccff;
+$col-Input: #d0d0d0;
+$col-InputFocus: #f0f0f0;
+$col-InputBorder: #003366;
+$col-InputBorderFocus: #cccccc;
 $col-Unpublished: #cd5c5c;
 $col-MarkdownPreviewBorder: black;
-$col-CommentUnmoderatedBackground: #2a2806;
+$col-CommentUnmoderatedBackground: #bab106;
 $col-CommentUnmoderatedBorder: 1px solid #ff9933;
-$col-CommentUnmoderatedWarning: #ff9933;
-$col-CommentAt: #a79e19;
+$col-CommentUnmoderatedWarning: #5b2d00;
+$col-CommentAt: #8e8514;
 $col-CommentHeaderBottom: #555555;
-$col-CommentBackground: #2a2806;
-$col-ContentHeader: #d2b40a;
-$col-ContentHeaderLighter: #c8be1e;
+$col-BackgroundComments:#d8d8d8;
+$col-ContentHeader: #036a61;
+$col-ContentHeaderLighter: #24837b;
 $col-ContentUnderline: #005000;
 
 body {
@@ -68,7 +65,7 @@ form {
 }
 
 section.song {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     margin-left: 0;
 
     header {
@@ -77,6 +74,7 @@ section.song {
     }
 
     footer {
+        border-bottom: 1px solid $col-HeaderSeparator;
         .song-tags {
             font-size: 87%;
         }
@@ -271,6 +269,7 @@ tr.song-is-not-published {
 }
 
 .page-header h1 a {
+    border-bottom: 1px solid $col-HeaderSeparator;
     color: $col-ContentHeader;
     font-style: oblique;
     font-weight: bold;
