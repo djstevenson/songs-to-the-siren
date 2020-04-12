@@ -1,6 +1,7 @@
 $col-Background: #1d1f21;
-$col-BackgroundOdd: #252526;
-$col-BackgroundEven: #29292a;
+$col-BorderSong: black;
+$col-BackgroundSong: #242425;
+$col-BackgroundComments:#29292a;
 $col-Title: #d2b40a;
 $col-TitleBackground: #0d0c02;
 $col-Text: #d0d0d0;
@@ -68,6 +69,7 @@ form {
 
 section.song {
     margin-bottom: 3rem;
+    margin-left: 0;
 
     header {
         border-bottom: 1px solid $col-HeaderSeparator;
@@ -152,7 +154,7 @@ h4.release {
 
     ul {
         padding-top: 1rem;
-        background-color: $col-BackgroundEven;
+        background-color: $col-BackgroundComments;
         list-style: none;
         margin-right: 1rem;
 
