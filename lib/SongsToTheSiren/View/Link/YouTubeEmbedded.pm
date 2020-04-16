@@ -14,7 +14,7 @@ sub render {
     my $link = $self->link;
 
     return sprintf(
-        '<iframe style="float:right" width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+        '<iframe class="yt-embedded" style="float:right" width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
         $link->url
     );
 }
