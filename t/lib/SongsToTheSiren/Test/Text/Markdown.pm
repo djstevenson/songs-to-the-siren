@@ -137,7 +137,7 @@ sub run {
 		{
 			test_name => q{One link, non-default format: YouTubeEmbedded},
 			input     => q{abc ^^identifier4^^ def},
-			expected  => q{<p>abc <iframe style="float:right" width="560" height="315" src="https://id4.example.com/test.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> def</p>},
+			expected  => q{<p>abc <iframe class="yt-embedded" style="float:right" width="560" height="315" src="https://id4.example.com/test.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> def</p>},
 		},
 	];
 
