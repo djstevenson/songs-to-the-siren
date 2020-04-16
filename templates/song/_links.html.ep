@@ -5,15 +5,17 @@
             <ul class="link-list">
                 % while ( my $link = $list_links->next ) {
                     <li class="<%= $link->css %>">
-                        % my $logo_root = '/images/logos/' . $link->css;
-                        <img src="<%= $logo_root %>-1x.png" height="32" width="32"
-                             srcset="
-                                <%= $logo_root %>-4x.png 4x,
-                                <%= $logo_root %>-3x.png 3x,
-                                <%= $logo_root %>-2x.png 2x,
-                                <%= $logo_root %>-1x.png 1x
-                             "/>
-                        <a href="<%= $link->url %>"><%= $link->description %></a>
+                        <a href="<%= $link->url %>">
+                            % my $logo_root = '/images/logos/' . $link->css;
+                            <img src="<%= $logo_root %>-1x.png" height="32" width="32"
+                                srcset="
+                                    <%= $logo_root %>-4x.png 4x,
+                                    <%= $logo_root %>-3x.png 3x,
+                                    <%= $logo_root %>-2x.png 2x,
+                                    <%= $logo_root %>-1x.png 1x
+                                "/>
+                            <%= $link->description %>
+                        </a>
                     </li>
                 % }
             </ul>
