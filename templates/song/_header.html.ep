@@ -1,5 +1,7 @@
 <header class="col-12 p-0">
-    <a href="<%= url_for('view_song', song_id => $song->id) %>">
+    % if ( $clickable_titles ) {
+        <a href="<%= url_for('view_song', song_id => $song->id) %>">
+    % }
         % my $image_root = '/images/artwork/' . $song->image;
         <img class="rounded float-left mr-3 mb-1"
             alt="record sleeve image" height="160" width="160"
@@ -11,11 +13,17 @@
                 <%= $image_root %>-1x.jpg 1x
             "
         />
-    </a>
-    <h2 class="title rounded-top">
-        <a href="<%= url_for('view_song', song_id => $song->id) %>">
-            <%= $song->title %>
+    % if ( $clickable_titles ) {
         </a>
+    % }
+    <h2 class="title rounded-top">
+        % if ( $clickable_titles ) {
+            <a href="<%= url_for('view_song', song_id => $song->id) %>">
+        % }
+            <%= $song->title %>
+        % if ( $clickable_titles ) {
+            </a>
+        % }
     </h2>
     <h3 class="artist">
         <%= $song->artist %>

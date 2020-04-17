@@ -4,7 +4,7 @@
 
 <section class="song row">
     %= include 'song/_navigation'
-    %= include 'song/_header'
+    %= include 'song/_header', clickable_titles => 0
     <div class="description col-12">
         %= include 'song/_youtube'
         <%== $song->full_html %>
