@@ -1,6 +1,6 @@
 
 <section class="song row rounded">
-    %= include 'song/_header'
+    %= include 'song/_header', clickable_titles => 1
     <div class="description col-12">
         <%== $song->summary_html %>
         <p class="more">
