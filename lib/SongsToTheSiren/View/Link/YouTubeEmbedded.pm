@@ -11,12 +11,9 @@ with 'SongsToTheSiren::View::Link::Role';
 sub render {
     my $self = shift;
 
-    my $link = $self->link;
+    my $url = $self->link->url;
 
-    return sprintf(
-        '<iframe class="yt-embedded" style="float:right" width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        $link->url
-    );
+    return qq{<div class="embed-container"><iframe src="${url}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>};
 }
 
 1;
