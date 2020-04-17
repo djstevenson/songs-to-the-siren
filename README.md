@@ -1,7 +1,7 @@
 The code behing the "Songs To The Siren" blog
 ---------------------------------------------
 
-songstothesiren.com is intended to go live early March 2020. 
+https://songstothesiren.com went live at Easter 2020. This is the code that manages the blog.
 
 INIT test DB
 ============
