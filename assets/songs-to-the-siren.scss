@@ -2,7 +2,6 @@ $col-Background: #1d1f21;
 $col-BorderSong: black;
 $col-BackgroundSong: #242425;
 $col-BackgroundComments:#29292a;
-$col-Title: #d2b40a;
 $col-TitleBackground: #0d0c02;
 $col-Text: #d0d0d0;
 $col-HeaderSeparator: #222005;
@@ -118,11 +117,19 @@ h2.title {
     font-weight: 800;
     font-size: 2rem;
     display:  block;
-    color: $col-Title;
     background-color: $col-TitleBackground;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 3px solid $col-ContentUnderline;
+
+    a {
+        &:visited, &:link {
+            color: $col-ContentHeader;
+        }
+        &:hover {
+            color: $col-ContentHeaderLighter;
+        }
+    }
 }
 
 h3.artist {
@@ -276,7 +283,6 @@ tr.song-is-not-published {
     font-weight: bold;
 
     &:hover {
-        text-decoration: none;
         color: $col-ContentHeaderLighter;
     }
 }
