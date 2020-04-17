@@ -285,7 +285,7 @@ ul.link-list {
     list-style: none;
     
     li {
-        height: 32px;
+        min-height: 32px;
         margin-bottom: 12px;
         padding-left: 48px;
     }
