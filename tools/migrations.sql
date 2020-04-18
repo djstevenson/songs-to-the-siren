@@ -163,18 +163,28 @@ DROP TABLE IF EXISTS users;
 ALTER TABLE links ADD COLUMN title TEXT NOT NULL DEFAULT '';
 ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
 
---2 down 
+-- 2 down
 ALTER TABLE links DROP COLUMN title;
 ALTER TABLE links DROP COLUMN link_text;
 
---3 up Add css class name to links
+-- 3 up Add css class name to links
 ALTER TABLE links ADD COLUMN css TEXT NOT NULL DEFAULT 'default';
 
---3 down 
+-- 3 down
 ALTER TABLE links DROP COLUMN css;
 
---4 up Drop link_text, we're using "Description" for that
-ALTER TABLE links DROP COLUMN link_text;
+-- 4 up Drop link_text, we're using "Description" for that
+ALTER TABLE links DROP COLUMN IF EXISTS link_text;
 
---4 up
+-- 4 down
+ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
+
+-- Repeat the '4' migration cos I originally messed it up in production
+-- (I had '4 up' twice, instead of a '4 up' and a '4 down').
+
+-- 5 up
+ALTER TABLE links DROP COLUMN IF EXISTS link_text;
+
+-- 5 down
+ALTER TABLE links DROP COLUMN IF EXISTS link_text;
 ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';

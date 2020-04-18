@@ -25,13 +25,13 @@ __PACKAGE__->add_columns(
     # 0 = don't put link in the list.
     priority         => {data_type => 'INTEGER'},
 
-    link_text        => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
 
-    # JSON e.g. {"ratio": "16x9", "start": "01:10"} for the youtubes.
+    # Not currently used. Maybe in the future for things like
+    # embedded video size/aspect-ration, etc
     extras           => {data_type => 'TEXT'},
 
-    # CSS class for the <a> link in the list. NULL = none
+    # CSS class for the <a> link in the list.
     css              => {data_type => 'TEXT'},
 );
 
