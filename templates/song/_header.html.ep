@@ -7,10 +7,9 @@
             alt="record sleeve image" height="160" width="160"
             src="<%= $image_root %>-1x.png 1x.jpg"
             srcset="
-                <%= $image_root %>-4x.jpg 4x,
-                <%= $image_root %>-3x.jpg 3x,
-                <%= $image_root %>-2x.jpg 2x,
-                <%= $image_root %>-1x.jpg 1x
+                % foreach my $i ( 1 .. $song->max_resolution ) {
+                    <%= $image_root %>-<%= $i %>x.jpg <%= $i %>x
+                % }
             "
         />
     % if ( $clickable_titles ) {
