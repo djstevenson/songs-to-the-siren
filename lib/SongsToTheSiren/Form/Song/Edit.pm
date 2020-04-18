@@ -49,7 +49,7 @@ has_field max_resolution => (
     selections  => sub {
 
         return [
-            map { { value => $_, text => $_ . 'x' } } 1 .. 4
+            map { { value => $_, text => $_ . 'x' } } 4, 3, 2, 1
         ];
     },
 );
