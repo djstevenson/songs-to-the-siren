@@ -20,7 +20,20 @@ __PACKAGE__->add_columns(
     artist           => {data_type => 'TEXT'},
     title            => {data_type => 'TEXT'},
     album            => {data_type => 'TEXT'},
+
+    # Image name, and available resolutions.
+    # Image files should be in 
+    # public/images/artwork
+    #
+    # Each file should be:
+    # <name>-1x.jpg etc
+    #
+    # The highest resolution available is stored
+    # in max_resolution. So, if that is 4, then
+    # we will expect 1x, 2x, 3x, and 4x images.
     image            => {data_type => 'TEXT'},
+    max_resolution   => {data_type => 'INTEGER'},
+
     country_id       => {data_type => 'INTEGER'},
 
     summary_markdown => {data_type => 'TEXT'},

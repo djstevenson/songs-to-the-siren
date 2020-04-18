@@ -43,6 +43,17 @@ has_field image => (
     autocapitalize => 'off',
 );
 
+has_field max_resolution => (
+    type        => 'Select',
+    label       => 'Max Resolution',
+    selections  => sub {
+
+        return [
+            map { { value => $_, text => $_ . 'x' } } 1 .. 4
+        ];
+    },
+);
+
 has_field country_id => (
     type        => 'Select',
     label       => 'Country',
@@ -125,8 +136,8 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-        my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown /);
-    
+        my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown max_resolution /);
+
         # Create or update?
         if ( $self->is_update ) {
             # Update

@@ -12,13 +12,20 @@ sub render {
 
     my $s;
 
+    use Data::Dumper;
+    print Dumper($buttons);
     foreach my $button (@$buttons) {
         my $value    = $button->{value};
-        my $checked  = $button->{checked} ? 'checked="checked"' : '';
+        my $checked  = $button->{checked} ? 'checked' : '';
         my $label    = $button->{text} // '';
 
-        # TODO Use CSS rather than a BR...
-        $s .= qq{ <label><input type="radio" value="${value}" name="${name}" ${checked}>${label}</label><br /> };
+        $s .= qq{
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ${checked} value="${value}" name="${name}">${label}
+                </label>
+            </div>
+        };
     }
 
     # Wrap in a fieldset for styling?
