@@ -19,14 +19,6 @@ has_column name => ();
 
 has_column emoji => ();
 
-has_column display => (
-    content => sub {
-        my ($col, $table, $row) = @_;
-
-        return $row->emoji;
-    }
-);
-
 has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
