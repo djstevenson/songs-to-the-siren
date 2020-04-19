@@ -6,8 +6,7 @@ export class ListCountryRow extends RowBase {
         super(tableId, rowIndex);
         this._columns.name      = new TableColumn(1)
         this._columns.emoji     = new TableColumn(2)
-        this._columns.display   = new TableColumn(3)
-        this._columns.edit      = new TableColumn(4)
-        this._columns.delete    = new TableColumn(5)
+        this._columns.edit      = new TableColumn(3)
+        this._columns.delete    = new TableColumn(4)
     }
 }
