@@ -1,0 +1,11 @@
+% layout 'default';
+% title 'Not Found';
+
+
+<section class="row">
+    <div class="col-12 content content-not-found">
+        <h2>404</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/e3-5YC_oHjE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p><a href="/">Home</a></p>
+    </div>
+</section>

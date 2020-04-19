@@ -1,0 +1,11 @@
+% layout 'default';
+% title 'Exception';
+
+
+<section class="row">
+    <div class="col-12 content content-exception">
+        <h2>Error</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/gqhy0gONfPo?start=10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p><a href="/">Home</a></p>
+    </div>
+</section>
