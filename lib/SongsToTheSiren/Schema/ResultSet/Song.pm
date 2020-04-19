@@ -46,8 +46,8 @@ sub select_metadata {
     my $self = shift;
 
     return $self->search(undef, {
-        select    => [qw/ id title album image country_id country.name country.emoji created_at updated_at published_at released_at author.name artist /],
-        as        => [qw/ id title album image country_id country_name country_emoji created_at updated_at published_at released_at author_name artist /],
+        select    => [qw/ id title album image max_resolution country_id country.name country.emoji created_at updated_at published_at released_at author.name artist /],
+        as        => [qw/ id title album image max_resolution country_id country_name country_emoji created_at updated_at published_at released_at author_name artist /],
         join      => [qw/ author country /],
     });
 }

@@ -5,12 +5,12 @@
         % my $image_root = '/images/artwork/' . $song->image;
         <img class="rounded float-left mr-3 mb-1"
             alt="record sleeve image" height="160" width="160"
-            src="<%= $image_root %>-1x.png 1x.jpg"
+            src="<%= $image_root %>-1x.jpg"
             srcset="
-                <%= $image_root %>-4x.jpg 4x,
-                <%= $image_root %>-3x.jpg 3x,
-                <%= $image_root %>-2x.jpg 2x,
-                <%= $image_root %>-1x.jpg 1x
+                % foreach my $i ( 1 .. $song->max_resolution-1 ) {
+                    <%= $image_root %>-<%= $i %>x.jpg <%= $i %>x,
+                % }
+                <%= $image_root %>-<%= $song->max_resolution %>x.jpg <%= $song->max_resolution %>x
             "
         />
     % if ( $clickable_titles ) {

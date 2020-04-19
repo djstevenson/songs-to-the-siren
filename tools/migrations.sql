@@ -188,3 +188,9 @@ ALTER TABLE links DROP COLUMN IF EXISTS link_text;
 -- 5 down
 ALTER TABLE links DROP COLUMN IF EXISTS link_text;
 ALTER TABLE links ADD COLUMN link_text TEXT NOT NULL DEFAULT 'link text here';
+
+-- 6 up Default = 1x thru 4x
+ALTER TABLE songs ADD COLUMN max_resolution INTEGER NOT NULL DEFAULT 4;
+
+-- 6 down
+ALTER TABLE songs DROP COLUMN IF EXISTS max_resolution;
