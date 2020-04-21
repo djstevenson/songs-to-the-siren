@@ -18,11 +18,14 @@ sub admin_create_song {
 
     croak $NOT_ADMIN unless $self->admin;
 
+    my $now = DateTime->now;
+
     my $full_args = {
         %$args,
         full_html    => '',
         summary_html => '',
-        created_at   => DateTime->now,
+        created_at   => $now,
+        updated_at   => $now,
     };
 
     my $song = $self->create_related('songs', $full_args);
@@ -38,7 +41,7 @@ sub admin_edit_song {
 
     my $full_args = {
         %$args,
-        updated_at   => DateTime->now,
+        updated_at => DateTime->now,
     };
 
     # TODO Record who did the update
