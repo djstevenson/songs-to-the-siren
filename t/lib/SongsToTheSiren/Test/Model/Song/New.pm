@@ -53,23 +53,29 @@ sub run {
 	is($song->released_at,   $release,              'Release date is correct');
 
 	my $dc  = $song->created_at;  # DateTime object
-	ok($dc,  'New song does have created_at set');
+	ok($dc,  'New song does have updated_at set');
+	my $uc  = $song->created_at;  # DateTime object
+	ok($uc,  'New song does have updated_at set');
 
 	my $now = DateTime->now(time_zone => 'Europe/London');
 	my $diff = $now->subtract_datetime($dc)->in_units('seconds');
 	ok($diff < 4 && $diff >= 0, 'Date created is very recent, using Europe/London');
+	$diff = $now->subtract_datetime($uc)->in_units('seconds');
+	ok($diff < 4 && $diff >= 0, 'Date updated is very recent, using Europe/London');
 
 	$now = DateTime->now(time_zone => 'America/Chicago');
 	$diff = $now->subtract_datetime($dc)->in_units('seconds');
 	ok($diff < 4 && $diff >= 0, 'Date created is very recent, using America/Chicago');
+	$diff = $now->subtract_datetime($uc)->in_units('seconds');
+	ok($diff < 4 && $diff >= 0, 'Date updated is very recent, using America/Chicago');
 
 	# Southern hemisphere, cos different DST.
 	# Though this is really testing DateTime rather than my code...
 	$now = DateTime->now(time_zone => 'Australia/Sydney');
 	$diff = $now->subtract_datetime($dc)->in_units('seconds');
 	ok($diff < 4 && $diff >= 0, 'Date created is very recent, using Australia/Sydney');
-
-	ok(!$song->updated_at, 'New song does not have updated_at set');
+	$diff = $now->subtract_datetime($uc)->in_units('seconds');
+	ok($diff < 4 && $diff >= 0, 'Date updated is very recent, using Australia/Sydney');
 	
 	is($song->tags->count, 0, 'New song has no tags');
 
