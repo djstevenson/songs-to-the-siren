@@ -11,12 +11,17 @@
         </p>
     % }
     <p class="metadata">
-        Uploaded at <%= datetime($song->created_at) %>
+        % if ( defined $song->published_at ) {
+            Published at <%= datetime_nosec($song->published_at) %>
+        % }
+        % else {
+            Uploaded at <%= datetime_nosec($song->created_at) %>
+        % }
     </p>
     % my $updated = $song->updated_at;
     % if ($updated) {
         <p class="metadata">
-            Last updated at <%= datetime($updated) %>
+            Updated at <%= datetime_nosec($updated) %>
         </p>
     % }
 </footer>
