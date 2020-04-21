@@ -1,7 +1,7 @@
 package SongsToTheSiren::Helper::Render;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use SongsToTheSiren::Util::Date qw/ format_date     /;
+use SongsToTheSiren::Util::Date qw/ format_date format_date_nosec format_date_compact /;
 
 use HTML::Entities        qw/ encode_entities /;
 
@@ -50,12 +50,38 @@ sub register {
     # datetime arg is a DateTime object. Can be NULL in which case
     # we return the default value (which itself defaults
     # to empty string).
+    # e.g. Sat, 18 Apr 2020 22:10:12
     $app->helper(datetime => sub {
         my ($c, $datetime, $default) = @_;
 
         return $default // '' unless $datetime;
 
         return format_date($datetime);
+    });
+
+    # datetime arg is a DateTime object. Can be NULL in which case
+    # we return the default value (which itself defaults
+    # to empty string). Format is like datetime but
+    # without the seconds
+    # e.g. 2020-04-18 22:10
+    $app->helper(datetime_nosec => sub {
+        my ($c, $datetime, $default) = @_;
+
+        return $default // '' unless $datetime;
+
+        return format_date_nosec($datetime);
+    });
+
+    # datetime arg is a DateTime object. Can be NULL in which case
+    # we return the default value (which itself defaults
+    # to empty string). Format is SQL-style
+    # e.g. 2020-04-18 22:10:12
+    $app->helper(datetime_compact => sub {
+        my ($c, $datetime, $default) = @_;
+
+        return $default // '' unless $datetime;
+
+        return format_date_compact($datetime);
     });
 
     # Value arg is something we can evaluate to true or false,
