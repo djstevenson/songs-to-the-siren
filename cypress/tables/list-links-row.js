@@ -10,6 +10,7 @@ export class ListLinksRow extends RowBase {
         this._columns.description = new TableColumn(4)
         this._columns.edit        = new TableColumn(5)
         this._columns.delete      = new TableColumn(6)
+        this._columns.copy        = new TableColumn(7)
     }
 
 
