@@ -6,7 +6,7 @@
             % foreach my $tag ( @song_tags ) {
                 % my $query_string = add_tag_to_query_params($tag);
                 % my $href = $base_url . $query_string;
-                <a class="btn btn-outline-dark btn-sm song-tag" href="<%= $href %>" role="button"><%= $tag->name %></a>
+                <a class="btn btn-outline-secondary btn-sm song-tag" href="<%= $href %>" role="button"><%= $tag->name %></a>
             % }
         </p>
     % }
