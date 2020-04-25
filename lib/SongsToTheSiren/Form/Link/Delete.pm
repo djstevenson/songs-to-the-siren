@@ -3,8 +3,8 @@ use Moose;
 use namespace::autoclean;
 
 # TODO Be more consistent.  Link forms are 
-# under NT::Form::Link but link tables are
-# under NT::Table::Song::Link  - ie one
+# under STTS::Form::Link but link tables are
+# under STTS::Table::Song::Link  - ie one
 # includes Song in the chain and one doesn't.
 
 use SongsToTheSiren::Form::Moose;

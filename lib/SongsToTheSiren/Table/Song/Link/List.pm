@@ -35,7 +35,7 @@ has_column edit => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        my $url = $table->c->url_for('admin_edit_list_song_link',
+        my $url = $table->c->url_for('admin_edit_song_link',
             song_id => $table->song->id,
             link_id => $row->id,
         );
@@ -58,6 +58,21 @@ has_column delete => (
         };
     },
 );
+
+has_column copy => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        my $url = $table->c->url_for('admin_copy_song_link',
+            song_id => $table->song->id,
+            link_id => $row->id,
+        );
+        return qq{
+            <a href="${url}">Copy</a>
+        };
+    },
+);
+
 has '+empty_text' => (default => 'No links for this song');
 
 __PACKAGE__->meta->make_immutable;

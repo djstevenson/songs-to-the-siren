@@ -60,4 +60,12 @@ export class ListLinksPage extends Admin {
         return new DeleteLinkPage()
     }
 
+    // Shortcut to hit the copy link in the 'n'th row
+    // Returns the Edit Link Page that copy redirects to
+    copyLink(rowIndex) {
+        this.getRow(rowIndex).click('copy')
+        return new EditLinkPage()
+    }
+
+
 }
