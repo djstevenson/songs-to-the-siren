@@ -25,4 +25,10 @@ export class ListLinksRow extends RowBase {
 
         return this // Chainable
     }
+
+    assertDescription(description) {
+        this.assertText('description', description)
+
+        return this // Chainable
+    }
 }

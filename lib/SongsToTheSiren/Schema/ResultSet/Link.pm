@@ -19,7 +19,7 @@ sub by_priority {
     my $self = shift;
 
     return $self->search(undef, {
-        order_by => { -asc => 'priority' },
+        order_by => { -asc => [qw/ priority id /] },
     });
 }
 
