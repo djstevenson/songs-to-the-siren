@@ -2,4 +2,4 @@
 <%= $song->title %>
 </a>
 -
-<%= $song->artist %> : <span class="date"><%= datetime($song->created_at) %></span>
+<%= $song->artist %> : <span class="date"><%= datetime($song->published_at) %></span>
