@@ -1,11 +1,11 @@
 $(function() {
     $('.song-tag').hover( function() {
         $(this).toggleClass('btn-primary')
-        $(this).toggleClass('btn-outline-dark')
+        $(this).toggleClass('btn-outline-secondary')
     })
     $('.song-tag-remove').hover( function() {
         $(this).toggleClass('btn-danger')
-        $(this).toggleClass('btn-outline-dark')
+        $(this).toggleClass('btn-outline-secondary')
     })
 
     
