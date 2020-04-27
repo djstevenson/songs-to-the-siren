@@ -1,0 +1,6 @@
+There is a new comment for <%= $song_title %>.
+
+To moderate it, go to:
+
+<%= $domain %>/song/<%= $song_id %>/view
+
