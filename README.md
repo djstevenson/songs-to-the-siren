@@ -45,7 +45,7 @@ export MOJO_MODE=development ; \
 export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
-carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
+carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@example.com; \
 psql -Usongstothesiren songstothesiren_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
 DBIC_TRACE=0 carton exec -- morbo script/songs-to-the-siren
 ```
@@ -62,7 +62,7 @@ export MOJO_MODE=test ; \
 export MOJO_LOG_LEVEL=debug ; \
 export TEST_BCRYPT_COST=4 ; \
 sh tools/initdb.$MOJO_MODE.sh ; \
-carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@ytfc.com; \
+carton exec -- script/songs-to-the-siren newadmin --name=admin --password=xyzzy --email=admin@example.com; \
 psql -Usongstothesiren songstothesiren_$MOJO_MODE < tools/$MOJO_MODE\_data.sql ; \
 DBIC_TRACE=0 carton exec -- morbo script/songs-to-the-siren
 ```

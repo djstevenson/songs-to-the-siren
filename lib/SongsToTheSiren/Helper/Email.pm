@@ -68,11 +68,17 @@ sub register {
 	$app->helper(send_comment_notification => sub {
 		my ($c, $comment) = @_;
     
-        $c->send_email(comment_notification => {
-            to         => $c->app->config->{comment_notifications_to},
-            song_title => $comment->song->title,
-            song_id    => $comment->song->id,
-        });
+        # Send to each admin user
+        my $rs = $c->schema->resultset('User');
+        my $admin_users_rs = $rs->admin_users;
+
+        while (my $user = $admin_users_rs->next) {
+            $c->send_email(comment_notification => {
+                to         => lc($user->email),
+                song_title => $comment->song->title,
+                song_id    => $comment->song->id,
+            });
+        }
 	});
 
 }
