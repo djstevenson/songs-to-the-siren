@@ -55,7 +55,7 @@ sub register {
 	});
 }
 
-sub find_by_email{
+sub find_by_email {
 	my ($self, $email) = @_;
 
 	return $self->search(
@@ -66,7 +66,7 @@ sub find_by_email{
 	)->first;
 }
 
-sub find_by_name{
+sub find_by_name {
 	my ($self, $name) = @_;
 
 	return $self->search(
@@ -75,6 +75,12 @@ sub find_by_name{
 			rows => 1
 		}
 	)->first;
+}
+
+sub admin_users {
+	my ($self) = @_;
+
+	return $self->search({ admin => 1 });
 }
 
 ##########################

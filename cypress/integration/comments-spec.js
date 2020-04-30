@@ -231,5 +231,38 @@ context('Comments are shown (or hidden) correctly', () => {
             })
 
     })
+})
+
+context('New comments/replies generate admin notifications', () => {
+    it('New comment generates notifications', () => {
+
+
+        const song = createSong()
+
+        const admin1    = userFactory.getNextSignedInUser(true)
+        const admin2    = userFactory.getNextSignedInUser(true)
+        const author    = userFactory.getNextSignedInUser(false)
+        const other     = userFactory.getNextSignedInUser(false)
+
+        const bb1 = 'test abc bbcode 5'
+
+        // "author" creates comment
+        visitSong()
+            .createRootComment(bb1)
+
+        // Email notifications were generate for both admins
+        // but not for author or other non-admin user
+
+        admin1.getEmailPage('comment_notification')
+            .assertData('song_title', song.getTitle())
+
+        admin2.getEmailPage('comment_notification')
+            .assertData('song_title', song.getTitle())
+        
+        author.assertHasNoEmail('comment_notification')
+        other.assertHasNoEmail('comment_notification')
+
+    })
+
 
 })

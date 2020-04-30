@@ -43,7 +43,8 @@ override posted => sub {
         my $fields = $self->form_hash(qw/ comment_bbcode /);
 
         my $parent = $self->has_parent_comment ? $self->parent_comment : undef;
-        $user->new_song_comment($self->song, $parent, $fields);
+        my $comment = $user->new_song_comment($self->song, $parent, $fields);
+        $self->c->send_comment_notification($comment);
     }
 
     return 1;

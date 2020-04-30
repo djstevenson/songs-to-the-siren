@@ -86,6 +86,11 @@ export class User {
         return this
     }
 
+    getEmailPage(type) {
+        this.assertHasEmail(type)
+        return new TestEmailPage(type, this.getName()).visit()
+    }
+    
     assertHasNoEmail(type) {
         cy.assertUserHasNoEmail(this, type)
         return this
@@ -97,15 +102,14 @@ export class User {
             .visit()
             .forgotPassword(this.getEmail())
 
-        return new TestEmailPage('password_reset', this.getName())
-            .visit()
+        return this.getEmailPage('password_reset')
 
     }
 
     signIn() {
         new SignInPage()
-        .visit()
-        .signIn(this.getName(), this.getPassword())
+            .visit()
+            .signIn(this.getName(), this.getPassword())
 
         return this
     }

@@ -65,6 +65,22 @@ sub register {
         });
 	});
 
+	$app->helper(send_comment_notification => sub {
+		my ($c, $comment) = @_;
+    
+        # Send to each admin user
+        my $rs = $c->schema->resultset('User');
+        my $admin_users_rs = $rs->admin_users;
+
+        while (my $user = $admin_users_rs->next) {
+            $c->send_email(comment_notification => {
+                to         => lc($user->email),
+                song_title => $comment->song->title,
+                song_id    => $comment->song->id,
+            });
+        }
+	});
+
 }
 
 1;
@@ -85,6 +101,7 @@ SongsToTheSiren::Helper::Email : Helpers for sending emails from blog app
     $app->send_registration_email($user);
     $app->send_name_reminder($user);
     $app->send_password_reset($user);
+    $app->send_comment_notification($comment);
 
 =head1 DESCRIPTION
 
