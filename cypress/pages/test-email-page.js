@@ -15,6 +15,12 @@ export class TestEmailPage extends Public {
         return this._name
     }
     
+    assertData(field, text) {
+        const sel = 'td#email-data-' + field
+        cy.get(sel).contains(text)
+        return this
+    }
+
     pageUrl() {
         const type = this.getType()
         const name = this.getName()
