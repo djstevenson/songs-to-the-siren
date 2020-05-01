@@ -18,10 +18,4 @@
             Uploaded at <%= datetime_nosec($song->created_at) %>
         % }
     </p>
-    % my $updated = $song->updated_at;
-    % if ($updated) {
-        <p class="metadata">
-            Updated at <%= datetime_nosec($updated) %>
-        </p>
-    % }
 </footer>
