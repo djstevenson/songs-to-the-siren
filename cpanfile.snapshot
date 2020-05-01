@@ -1659,10 +1659,10 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  JSON-MaybeXS-1.004000
-    pathname: H/HA/HAARG/JSON-MaybeXS-1.004000.tar.gz
+  JSON-MaybeXS-1.004001
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004001.tar.gz
     provides:
-      JSON::MaybeXS 1.004000
+      JSON::MaybeXS 1.004001
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -1878,8 +1878,8 @@ DISTRIBUTIONS
       Mojolicious 8.03
       SQL::Abstract 1.86
       perl 5.010001
-  Mojolicious-8.40
-    pathname: S/SR/SRI/Mojolicious-8.40.tar.gz
+  Mojolicious-8.41
+    pathname: S/SR/SRI/Mojolicious-8.41.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1948,7 +1948,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.40
+      Mojolicious 8.41
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
