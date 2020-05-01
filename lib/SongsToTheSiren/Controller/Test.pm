@@ -73,7 +73,7 @@ sub create_song {
         artist           => $c->param('artist'),
         album            => $c->param('album'),
         image            => $c->param('image'),
-        country_id       => $c->param('country_id'),
+        country          => $c->param('country'),
         released_at      => $c->param('released_at'),
         summary_markdown => $c->param('summary'),
         full_markdown    => $c->param('full'),

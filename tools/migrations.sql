@@ -52,7 +52,7 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     title TEXT NOT NULL,
     album TEXT NOT NULL,
-    "image" TEXT NOT NULL,    -- /public/images/160/${image} - size is 160x160
+    "image" TEXT NOT NULL,
     country_id INTEGER NOT NULL REFERENCES countries(id) ON DELETE RESTRICT,
 
     summary_markdown TEXT NOT NULL,
@@ -194,3 +194,43 @@ ALTER TABLE songs ADD COLUMN max_resolution INTEGER NOT NULL DEFAULT 4;
 
 -- 6 down
 ALTER TABLE songs DROP COLUMN IF EXISTS max_resolution;
+
+-- 7 up Change countries to a text field
+ALTER TABLE songs ADD COLUMN country TEXT NOT NULL DEFAULT '';
+UPDATE songs SET country='🇬🇧' where country_id=1;
+UPDATE songs SET country='🇺🇸' where country_id=2;
+UPDATE songs SET country='🇨🇦' where country_id=3;
+UPDATE songs SET country='🇬🇧 🇺🇸' where country_id=4;
+UPDATE songs SET country='🇸🇪' where country_id=5;
+UPDATE songs SET country='🇦🇺' where country_id=6;
+UPDATE songs SET country='🇯🇲' where country_id=7;
+UPDATE songs SET country='🇮🇪' where country_id=8;
+UPDATE songs SET country='🇧🇪' where country_id=9;
+UPDATE songs SET country='🇫🇷' where country_id=10;
+UPDATE songs SET country='🇩🇪' where country_id=11;
+UPDATE songs SET country='🇮🇸' where country_id=12;
+ALTER TABLE songs DROP COLUMN country_id;
+
+-- 7 down
+DROP TABLE IF EXISTS countries;
+CREATE TABLE countries (
+    id SERIAL NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    emoji TEXT NOT NULL
+);
+CREATE UNIQUE INDEX countries_name_unique_idx ON countries USING BTREE("name");
+INSERT INTO countries (name, emoji) VALUES
+('UK',    '🇬🇧'),
+('US',    '🇺🇸'),
+('CA',    '🇨🇦'),
+('UK/US', '🇬🇧 🇺🇸'),
+('SE',    '🇸🇪'),
+('AU',    '🇦🇺'),
+('JM',    '🇯🇲'),
+('IE',    '🇮🇪'),
+('BE',    '🇧🇪'),
+('FR',    '🇫🇷'),
+('DE',    '🇩🇪'),
+('IS',    '🇮🇸');
+ALTER TABLE songs ADD COLUMN country_id INTEGER NOT NULL DEFAULT 1 REFERENCES countries(id) ON DELETE RESTRICT;
+ALTER TABLE songs DROP COLUMN country;
