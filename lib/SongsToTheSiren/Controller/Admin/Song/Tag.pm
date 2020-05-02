@@ -24,9 +24,14 @@ sub edit {
     my $song = $c->stash->{song};
     my $form = $c->form('Tag::Create', song => $song);
     
+    my $all_tags_rs = $c->schema->resultset('Tag')
+        ->by_name
+        ->fetch_counts;
+
     $c->stash(
-        tags => [ $song->tags->all ],
-        form => $form,
+        song_tags  => [ $song->tags->all ],
+        other_tags => [ $all_tags_rs->all ],
+        form       => $form,
     );
     if ($form->process) {
         $c->flash(msg => 'Tag added');

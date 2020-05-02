@@ -23,6 +23,7 @@ $(function() {
         })
     }))
 
+    // Page for editing song's tags - delete an existing tag
     $('[data-delete-song-tag]').on('click', function() {
         const data = $(this).data()
         const tagId = data['tagId']
@@ -41,5 +42,14 @@ $(function() {
         })
     })
 
+    // Page for editing song's tags - add an existing tag
+    // This just fills in the input field, the user then
+    // clicks the submit button to actually add it.
+    $('[data-add-song-tag]').on('click', function() {
+        const data = $(this).data()
+        const tagName = data['tagName']
+
+        $('#add-tag-name').val(tagName)
+    })
 })
 
