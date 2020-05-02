@@ -6,7 +6,7 @@
 <%== $form->render %>
 
 <h4>Song tags</h4>
-<ul class="tag-list">
+<ul class="tag-list song-tag-list">
     % foreach my $tag ( @$song_tags ) {
         <li id="song-tag-<%= $song->id %>-<%= $tag->id %>-li">
             <button id="song-tag-<%= $song->id %>-<%= $tag->id %>" data-delete-song-tag="1" data-tag-id="<%= $tag->id %>" data-song-id="<%= $song->id %>" class="btn btn-danger rounded-pill tag-button">
@@ -17,7 +17,7 @@
 </ul>
 
 <h4>All tags</h4>
-<ul class="tag-list">
+<ul class="tag-list other-tag-list">
     % foreach my $tag ( @$other_tags ) {
         <li id="song-tag-<%= $song->id %>-<%= $tag->id %>-li">
             <button id="song-tag-<%= $song->id %>-<%= $tag->id %>" data-add-song-tag="1" data-tag-name="<%= $tag->name %>" class="btn btn-warning rounded-pill tag-button">

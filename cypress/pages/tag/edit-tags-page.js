@@ -20,7 +20,7 @@ export class EditTagsPage extends Admin {
 
     // Helper, gets tag-delete button selector from index, starting at 1
     _buttonSelector(nth) {
-        return `ul.tag-list > li:nth-child(${nth}) > button`
+        return `ul.song-tag-list > li:nth-child(${nth}) > button`
     }
 
     // By index. TODO should this be by name?
@@ -37,7 +37,7 @@ export class EditTagsPage extends Admin {
     }
 
     assertTagCount(c) {
-        const f = cy.get('ul.tag-list').find('li')
+        const f = cy.get('ul.song-tag-list').find('li')
         if ( c == 0 ) {
             f.should('not.exist')
         }
