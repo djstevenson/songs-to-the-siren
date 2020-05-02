@@ -3,7 +3,6 @@ use Mojo::Base 'Mojolicious::Controller';
 
 use SongsToTheSiren::Controller::Admin::Song;
 use SongsToTheSiren::Controller::Admin::Content;
-use SongsToTheSiren::Controller::Admin::Country;
 
 sub add_routes {
     my ($c, $r) = @_;
@@ -14,7 +13,6 @@ sub add_routes {
 
     SongsToTheSiren::Controller::Admin::Song    ->new ->add_routes($a);
     SongsToTheSiren::Controller::Admin::Content ->new ->add_routes($a);
-    SongsToTheSiren::Controller::Admin::Country ->new ->add_routes($a);
 }
 
 1;

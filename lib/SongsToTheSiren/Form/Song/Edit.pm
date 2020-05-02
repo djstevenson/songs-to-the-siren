@@ -54,16 +54,10 @@ has_field max_resolution => (
     },
 );
 
-has_field country_id => (
-    type        => 'Select',
-    label       => 'Country',
-    selections  => sub {
-        my ($field, $form) = @_;
-
-        return $form->c->schema
-            ->resultset('Country')
-            ->as_select_options;
-    },
+has_field country => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+    validators  => [qw/ Required  /],
 );
 
 has_field released_at => (
@@ -136,7 +130,7 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-        my $fields = $self->form_hash(qw/ title album artist image country_id released_at summary_markdown full_markdown max_resolution /);
+        my $fields = $self->form_hash(qw/ title album artist image country released_at summary_markdown full_markdown max_resolution /);
 
         # Create or update?
         if ( $self->is_update ) {

@@ -29,7 +29,7 @@ sub run {
 		artist           => 'artist',
 		album            => 'album',
 		image            => 'image',
-		country          => $self->create_country('CO'),
+		country          => '🇨🇴',
 		released_at      => 'release',
 	};
 

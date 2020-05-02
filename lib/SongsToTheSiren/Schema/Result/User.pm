@@ -11,7 +11,6 @@ extends 'SongsToTheSiren::Schema::Base::Result';
 with 'SongsToTheSiren::Schema::Role::User::Auth';
 with 'SongsToTheSiren::Schema::Role::User::Song';
 with 'SongsToTheSiren::Schema::Role::User::Content';
-with 'SongsToTheSiren::Schema::Role::User::Country';
 with 'SongsToTheSiren::Schema::Role::User::Comment';
 
 __PACKAGE__->load_components('InflateColumn::DateTime');

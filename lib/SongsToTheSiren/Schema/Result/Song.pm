@@ -34,7 +34,7 @@ __PACKAGE__->add_columns(
     image            => {data_type => 'TEXT'},
     max_resolution   => {data_type => 'INTEGER'},
 
-    country_id       => {data_type => 'INTEGER'},
+    country          => {data_type => 'TEXT'},
 
     summary_markdown => {data_type => 'TEXT'},
     summary_html     => {data_type => 'TEXT'},
@@ -54,7 +54,6 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key('id');
 
 __PACKAGE__->belongs_to( author    => 'SongsToTheSiren::Schema::Result::User',     { 'foreign.id' => 'self.author_id'  }, { join_type	=> 'LEFT' } );
-__PACKAGE__->belongs_to( country   => 'SongsToTheSiren::Schema::Result::Country',  { 'foreign.id' => 'self.country_id' }, { join_type	=> 'LEFT' } );
 
 __PACKAGE__->has_many  ( song_tags => 'SongsToTheSiren::Schema::Result::SongTag',  { 'foreign.song_id' => 'self.id'    });
 __PACKAGE__->has_many  ( comments  => 'SongsToTheSiren::Schema::Result::Comment',  { 'foreign.song_id' => 'self.id'    });
