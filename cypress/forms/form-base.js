@@ -44,4 +44,16 @@ export class FormBase {
         this.getButton('submit').click()
     }
 
+    getValue(name) {
+        return this
+            .getField('name')
+            .get()
+            .invoke('val')
+    }
+
+    assertValue(name, val) {
+        this
+            .getValue(name)
+            .should('eq', val)
+    }
 }
