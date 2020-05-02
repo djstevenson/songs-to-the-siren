@@ -9,4 +9,5 @@ export class EditTagsForm extends FormBase {
 
         this._buttons.submit = new FormButton('create-tag-button')
     }
+
 }

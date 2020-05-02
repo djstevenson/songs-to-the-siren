@@ -19,15 +19,15 @@ export class EditTagsPage extends Admin {
     }
 
     // Helper, gets tag-delete button selector from index, starting at 1
-    _buttonSelector(nth) {
-        return `ul.tag-list > li:nth-child(${nth}) > button`
+    _buttonSelector(nth, which) {
+        return `ul.${which}-tag-list > li:nth-child(${nth}) > button`
     }
 
     // By index. TODO should this be by name?
     // Probably doesn't really matter
     // Tags numbered from 1
-    deleteTag(nth) {
-        const sel = this._buttonSelector(nth)
+    clickTag(nth, which) {
+        const sel = this._buttonSelector(nth, which)
         cy
             .get(sel)
             .click()
@@ -36,8 +36,8 @@ export class EditTagsPage extends Admin {
         return this
     }
 
-    assertTagCount(c) {
-        const f = cy.get('ul.tag-list').find('li')
+    assertTagCount(c, which) {
+        const f = cy.get(`ul.${which}-tag-list`).find('li')
         if ( c == 0 ) {
             f.should('not.exist')
         }
@@ -49,8 +49,8 @@ export class EditTagsPage extends Admin {
     }
 
     // Counts from 1
-    assertTagName(nth, name) {
-        const sel = this._buttonSelector(nth) + ' > span.tag-name'
+    assertTagName(nth, which, name) {
+        const sel = this._buttonSelector(nth, which) + ' > span.tag-name'
         cy
             .get(sel)
             .should('have.text', name)

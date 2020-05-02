@@ -25,6 +25,24 @@ sub search_by_ids {
     ];
 }
 
+sub by_name {
+    my ($self) = @_;
+
+    return $self->search(undef, {
+        order_by => 'name'
+    });
+}
+
+sub fetch_counts {
+    my ($self, $song) = @_;
+
+    return $self->search(undef, {
+        '+select' => \q/ (SELECT COUNT(*) FROM song_tags WHERE tag_id=me.id) /,
+        '+as'     => 'song_count',
+    });
+}
+
+
 
 
 __PACKAGE__->meta->make_immutable;
@@ -60,6 +78,16 @@ Otherwise, we return an arrayref of matchings tags.
 Note: Normally, a resultset method would return a 
 new resultset for chaining, but returning an
 array(ref) works ok here.
+
+=item by_name
+
+Returns a resultset representing a search by
+ascending name.
+
+=item fetch_counts
+
+Returns a resultset representing a search that includes
+usage count (number of songs) for each tag.
 
 =back
 

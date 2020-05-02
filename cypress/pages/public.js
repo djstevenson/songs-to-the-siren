@@ -58,6 +58,11 @@ export class Public {
         return this
     }
 
+    assertFormValue(field, expected) {
+        this.getForm().assertValue(field, expected)
+        return this
+    }
+
     // rowIndex counts from 1
     assertCell(row, colName, text) {
         return this.getTable().assertCell(row, colName, text)
