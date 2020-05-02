@@ -166,7 +166,7 @@ context('Song CRUD tests', () => {
                     artist:          '',
                     album:           '',
                     image:           '',
-                    countryId:       'zz',
+                    country:         '',
                     releasedAt:      '',
                     summaryMarkdown: '',
                     fullMarkdown:    ''
@@ -175,6 +175,7 @@ context('Song CRUD tests', () => {
                 .assertFormError('artist',          'Required')
                 .assertFormError('album',           'Required')
                 .assertFormError('image',           'Required')
+                .assertFormError('country',         'Required')
                 .assertFormError('releasedAt',      'Required')
                 .assertFormError('summaryMarkdown', 'Required')
                 .assertFormError('fullMarkdown',    'Required')

@@ -19,7 +19,7 @@ sub run {
 	
     my $user = $self->create_admin_user;
 
-	my $country = $self->create_country('CO');
+	my $country = '🇨🇴';
 
 	my $song1 = $user->admin_create_song({
 		summary_markdown => 'summary',

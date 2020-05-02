@@ -24,7 +24,7 @@ sub run {
 	my $full    = 'This is the full article about the song';
 	my $title   = 'The song title';
 	my $artist  = 'The artist name';
-	my $country = $self->create_country('CO');
+	my $country = '🇨🇴';
 	my $album   = 'Greatest hits';
 	my $image   = 'Album artwork';
 	my $release = 'Last week';
@@ -47,7 +47,7 @@ sub run {
 	is($song->full_html,     "<p>${full}</p>\n",    'Full html is correct');
 	is($song->title,         $title,                'Title is correct');
 	is($song->artist,        $artist,               'Artist is correct');
-	is($song->country->name, $country->name,        'Country is correct');
+	is($song->country,       $country,              'Country is correct');
 	is($song->album,         $album,                'Album is correct');
 	is($song->image,         $image,                'Image is correct');
 	is($song->released_at,   $release,              'Release date is correct');
