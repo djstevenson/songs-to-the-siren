@@ -4,6 +4,7 @@ use namespace::autoclean;
 use Text::Markdown;
 
 use SongsToTheSiren::Markdown::Link;
+use SongsToTheSiren::Markdown::TimeSignature;
 
 # An extension to Text::Markdown - POD docs at end of file
 
@@ -22,11 +23,10 @@ has _preprocessors => (
 
         my $args = $self->has_song ? {song => $self->song} : {};
 
-        my @classes = (
-            'SongsToTheSiren::Markdown::Link',
-        );
+        my @classes = ( qw/ Link TimeSignature / );
+
         return [
-            map { $_->new( $args ) } @classes
+            map { "SongsToTheSiren::Markdown::$_"->new( $args ) } @classes
         ];
     }
 );
@@ -102,6 +102,11 @@ The sequence ^^identifier^^ is replaced by a link from the database.
 
 Placeholder text is used if the identifier is not found, e.g. when creating
 a new song where we haven't set up the links yet.
+
+=item Time Signatures
+
+The sequence ^$n/m$^ is replaced by markup representing a time signature,
+e.g. ^$5/4$^ for Juliana Hatfield's Spin the Bottle.
 
 =back
 

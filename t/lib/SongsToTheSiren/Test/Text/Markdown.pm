@@ -139,6 +139,32 @@ sub run {
 			input     => q{abc ^^identifier4^^ def},
 			expected  => q{<p>abc <div class="embed-container"><iframe src="https://id4.example.com/test.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> def</p>},
 		},
+
+		# Time Signatures
+		{
+			test_name => q{Single time-sig 4/4},
+			input     => q{abc ^$4|4$^ def},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>4</i></b></sup></span><sub><b><i>4</i></b></sub></span> def</p>},
+		},
+
+		{
+			test_name => q{Single time-sig 5/8},
+			input     => q{abc ^$5|8$^ def},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>5</i></b></sup></span><sub><b><i>8</i></b></sub></span> def</p>},
+		},
+
+		{
+			test_name => q{Non-digits not supported},
+			input     => q{abc ^$a|8$^ def},
+			expected  => q{<p>abc ^$a|8$^ def</p>},
+		},
+
+		{
+			test_name => q{Can have two time sigs 3/4 and 7/12},
+			input     => q{abc ^$3|4$^ and ^$7|12$^ def},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>3</i></b></sup></span><sub><b><i>4</i></b></sub></span> and <span class="time-signature"><sup><b><i>7</i></b></sup></span><sub><b><i>12</i></b></sub></span> def</p>},
+		},
+
 	];
 
 	my $p = SongsToTheSiren::Markdown->new( song => $song1 );
@@ -148,7 +174,7 @@ sub run {
 		is($actual, $test->{expected}, $test->{test_name});
 	}
 	
-	# Test with title added to identifier2 link
+	# Test links with title added to identifier2 link
 	$link2->update({title => 'the title'});
 	$p = SongsToTheSiren::Markdown->new(song => $song1);
 	my $actual = $p->markdown(q{abc ^^identifier1^^ ^^identifier2^^ def});
@@ -156,7 +182,7 @@ sub run {
 	my $expected = q{<p>abc <a href="https://id1.example.com/test.html" target="_blank">description 1</a> <a href="https://id2.example.com/test.html" target="_blank" title="the title">description <em>2</em> embeds markdown</a> def</p>};
 	is($actual, $expected, 'Same as both found test, but 2nd one has title');
 
-	# Test with no song object, all lookups will fail:
+	# Test links with no song object, all lookups will fail:
 	$p = SongsToTheSiren::Markdown->new;
 	is($p->markdown('abc ^^identifier1^^ def'), qq{<p>abc <strong>LINK IDENTIFIER NOT FOUND: identifier1</strong> def</p>\n}, 'All links fail lookup without a song');
 
