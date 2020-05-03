@@ -56,11 +56,11 @@ __END__
 
 =head1 NAME
 
-SongsToTheSiren::Markdown::Links : Processes links for SongsToTheSiren::Markdown
+SongsToTheSiren::Markdown::Link : Processes links for SongsToTheSiren::Markdown
 
 =head1 SYNOPSIS
 
-    my $p = SongsToTheSiren::Markdown::Links->new(
+    my $p = SongsToTheSiren::Markdown::Link->new(
         song => $song
     );
 
