@@ -29,7 +29,7 @@ sub by_name {
     my ($self) = @_;
 
     return $self->search(undef, {
-        order_by => 'name'
+        order_by => \'LOWER(name)'   # Case-insensitive
     });
 }
 

@@ -4,8 +4,8 @@
 <%== $form->render %>
 
 <p>
-    <a target="_blank" href="<%= url_for('admin_list_song_links', song_id => $song->id) %>">Edit links for <%= $song->title %></a>.
+    <a target="_blank" href="<%= url_for('admin_list_song_links', song_id => $song->id) %>">Edit links for <%= $song->title %></a>
 </p>
 <p>
-    <a target="_blank" href="<%= url_for('admin_edit_song_tags', song_id => $song->id) %>">Edit tabs for <%= $song->title %></a>.
+    <a target="_blank" href="<%= url_for('admin_edit_song_tags', song_id => $song->id) %>">Edit tabs for <%= $song->title %></a>
 </p>
