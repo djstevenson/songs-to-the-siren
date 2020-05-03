@@ -37,39 +37,35 @@ sub run {
 	my $song2 = $user->admin_create_song($song_data);
 
 	$song1->create_related('links', {
-		identifier  => 'identifier1',
-		class       => 'Default',
-		url         => "https://id1.example.com/test.html",
-		description => 'description 1',
-		priority    => 0,
-		extras      => undef,
+		embed_identifier  => 'identifier1',
+		embed_class       => 'Default',
+		embed_url         => "https://id1.example.com/test.html",
+		embed_description => 'description 1',
+		list_priority     => 0,
 	});
 
 	my $link2 = $song1->create_related('links', {
-		identifier  => 'identifier2',
-		class       => 'Default',
-		url         => "https://id2.example.com/test.html",
-		description => 'description *2* embeds markdown',
-		priority    => 0,
-		extras      => undef,
+		embed_identifier  => 'identifier2',
+		embed_class       => 'Default',
+		embed_url         => "https://id2.example.com/test.html",
+		embed_description => 'description *2* embeds markdown',
+		list_priority     => 0,
 	});
 
 	$song2->create_related('links', {
-		identifier  => 'identifier3',
-		class       => 'Default',
-		url         => "https://id3.example.com/test.html",
-		description => 'identifier3 only exists for a different song',
-		priority    => 0,
-		extras      => undef,
+		embed_identifier  => 'identifier3',
+		embed_class       => 'Default',
+		embed_url         => "https://id3.example.com/test.html",
+		embed_description => 'identifier3 only exists for a different song',
+		list_priority     => 0,
 	});
 
 	$song1->create_related('links', {
-		identifier  => 'identifier4',
-		class       => 'YouTubeEmbedded',
-		url         => "https://id4.example.com/test.html",
-		description => 'description 4',
-		priority    => 0,
-		extras      => undef,
+		embed_identifier  => 'identifier4',
+		embed_class       => 'YouTubeEmbedded',
+		embed_url         => "https://id4.example.com/test.html",
+		embed_description => 'description 4',
+		list_priority     => 0,
 	});
 
 
@@ -174,13 +170,6 @@ sub run {
 		is($actual, $test->{expected}, $test->{test_name});
 	}
 	
-	# Test links with title added to identifier2 link
-	$link2->update({title => 'the title'});
-	$p = SongsToTheSiren::Markdown->new(song => $song1);
-	my $actual = $p->markdown(q{abc ^^identifier1^^ ^^identifier2^^ def});
-	chomp $actual;
-	my $expected = q{<p>abc <a href="https://id1.example.com/test.html" target="_blank">description 1</a> <a href="https://id2.example.com/test.html" target="_blank" title="the title">description <em>2</em> embeds markdown</a> def</p>};
-	is($actual, $expected, 'Same as both found test, but 2nd one has title');
 
 	# Test links with no song object, all lookups will fail:
 	$p = SongsToTheSiren::Markdown->new;

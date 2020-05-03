@@ -11,7 +11,7 @@ with 'SongsToTheSiren::View::Link::Role';
 sub render {
     my $self = shift;
 
-    my $url = $self->link->url;
+    my $url = $self->link->embed_url;
 
     return qq{<div class="embed-container"><iframe src="${url}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>};
 }

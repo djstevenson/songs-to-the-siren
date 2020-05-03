@@ -117,13 +117,14 @@ sub add_link {
     my ($self, $values) = @_;
 
     return $self->links->create({
-        identifier  => $values->{identifier},
-        class       => $values->{class},
-        url         => $values->{url},
-        description => $values->{description},
-        priority    => $values->{priority},
-        extras      => $values->{extras},
-        css         => $values->{css},
+        embed_identifier  => $values->{embed_identifier} || '',
+        embed_class       => $values->{embed_class} || '',
+        embed_url         => $values->{embed_url} || '',
+        embed_description => $values->{embed_description} || '',
+        list_url          => $values->{list_url} || '',
+        list_description  => $values->{list_description} || '',
+        list_priority     => $values->{list_priority},
+        list_css          => $values->{list_css} || '',
     });
 }
 

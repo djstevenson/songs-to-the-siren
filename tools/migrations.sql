@@ -210,6 +210,7 @@ UPDATE songs SET country='🇫🇷' where country_id=10;
 UPDATE songs SET country='🇩🇪' where country_id=11;
 UPDATE songs SET country='🇮🇸' where country_id=12;
 ALTER TABLE songs DROP COLUMN country_id;
+DROP TABLE IF EXISTS countries;
 
 -- 7 down
 DROP TABLE IF EXISTS countries;
@@ -234,3 +235,39 @@ INSERT INTO countries (name, emoji) VALUES
 ('IS',    '🇮🇸');
 ALTER TABLE songs ADD COLUMN country_id INTEGER NOT NULL DEFAULT 1 REFERENCES countries(id) ON DELETE RESTRICT;
 ALTER TABLE songs DROP COLUMN country;
+
+-- 8 up Links table refactor
+DROP TABLE IF EXISTS countries;  -- originally missed this from the '7' migration
+ALTER TABLE links RENAME COLUMN identifier TO embed_identifier;
+ALTER TABLE links RENAME COLUMN class TO embed_class;
+ALTER TABLE links ADD COLUMN embed_url TEXT NOT NULL DEFAULT '';
+ALTER TABLE links ADD COLUMN embed_description TEXT NOT NULL DEFAULT '';
+ALTER TABLE links RENAME COLUMN "priority" TO list_priority;
+ALTER TABLE links ADD COLUMN list_url TEXT NOT NULL DEFAULT '';
+ALTER TABLE links ADD COLUMN list_description TEXT NOT NULL DEFAULT '';
+ALTER TABLE links RENAME COLUMN css TO list_css;
+
+UPDATE links SET embed_url = url, embed_description = description WHERE list_priority = 0;
+UPDATE links SET list_url = url, list_description = description WHERE list_priority <> 0;
+ALTER TABLE links DROP COLUMN "url";
+ALTER TABLE links DROP COLUMN title;
+ALTER TABLE links DROP COLUMN extras;
+ALTER TABLE links DROP COLUMN description;
+
+-- 8 down
+ALTER TABLE links ADD COLUMN description TEXT DEFAULT '';
+ALTER TABLE links ADD COLUMN "extras" TEXT DEFAULT NULL;
+ALTER TABLE links ADD COLUMN "title" TEXT NOT NULL DEFAULT '';
+ALTER TABLE links ADD COLUMN "url" TEXT NOT NULL DEFAULT '';
+
+UPDATE links SET url = embed_url, description = embed_description WHERE list_priority = 0;
+UPDATE links SET url = list_url, description = list_description WHERE list_priority <> 0;
+
+ALTER TABLE links RENAME COLUMN list_css TO css;
+ALTER TABLE links DROP COLUMN list_description;
+ALTER TABLE links DROP COLUMN list_url;
+ALTER TABLE links RENAME COLUMN list_priority TO "priority";
+ALTER TABLE links DROP COLUMN embed_description;
+ALTER TABLE links DROP COLUMN embed_url;
+ALTER TABLE links RENAME COLUMN embed_class TO class;
+ALTER TABLE links RENAME COLUMN embed_identifier TO identifier;

@@ -25,11 +25,10 @@ has_column id => (
     header       => 'ID',
 );
 
-has_column priority => ();
+has_column embed_identifier => ();
 
-has_column identifier => ();
+has_column list_priority => ();
 
-has_column description => ();
 
 has_column edit => (
     content => sub {

@@ -7,11 +7,11 @@ extends 'DBIx::Class::ResultSet';
 
 use Carp qw/ croak /;
 
-sub in_list {
+sub list_links {
     my $self = shift;
 
     return $self->search({
-        priority => { '>' => 0 },
+        list_priority => { '>' => 0 },
     });
 }
 
@@ -19,21 +19,29 @@ sub by_priority {
     my $self = shift;
 
     return $self->search(undef, {
-        order_by => { -asc => [qw/ priority id /] },
+        order_by => { -asc => [qw/ list_priority id /] },
     });
 }
 
-sub links_by_identifier {
+sub embedded_links {
+    my $self = shift;
+
+    return $self->search({
+        embed_identifier => { '!=' => '' },
+    });
+}
+
+sub by_identifier {
     my $self = shift;
 
     my %links = map {
-        ($_->identifier => $_)
+        ($_->embed_identifier => $_)
     } $self->all;
 
     return \%links;
 }
 
-# TODO Viewing an article will call both links_by_identifier
+# TODO Viewing an article will call both by_identifier
 # and list_links.  Therefore two queries. If the blog
 # gets remotely busy, sort this out, do a single query
 # for both views.
@@ -67,11 +75,10 @@ ResultSet methods for Links
 
 =over
 
-=item in_list
+=item list_links
 
-A simple helper, for readability, to select only links
-that appear in the list at the end of an article.
-Basically just does (where) "priority > 0"
+Returns a resultset that includes only embedded links,
+ie with a non-zero list_priority.
 
 =item by_priority
 
@@ -79,7 +86,12 @@ A simple helper, for readability, to order
 links by priority. Low number = high priority,
 so sort is 'ascending'.
 
-=item links_by_identifier
+=item embedded_links
+
+Returns a resultset that includes only embedded links,
+ie with a non-empty embed_identifier string.
+
+=item by_identifier
 
 Returns the links in the current result set as
 a hash, keyed by link identifier. Values are result
@@ -89,7 +101,7 @@ So, this will return an HASHREF of records,
 keyed by identifier. So this only makes sense if the
 resultset is already constrainted by song_id.
 
-e.g. $song->links_by_identifier;
+e.g. $song->by_identifier;
 
 =item links_list 
 

@@ -17,7 +17,10 @@ has _links => (
 
         return {} unless $self->has_song;
 
-        return $self->song->links->links_by_identifier;
+        return $self->song
+            ->links
+            ->embedded_links
+            ->by_identifier;
     }
 );
 
