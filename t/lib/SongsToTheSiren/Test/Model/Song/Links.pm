@@ -109,14 +109,14 @@ sub run {
 	$song1->add_link($link1);
 	is($song1->links->count, 1, 'After link1, song has one link');
 	is($song1->links->embedded_links->count, 1, 'After link1, song has one embedded link');
-	is($song1->links->list_links->count, 0, 'After link1, song has zero list links');
+	is($song1->links->in_list->count, 0, 'After link1, song has zero list links');
 	is($song2->links->count, 0, 'Song2 has no links');
 
 
 	my $link2_obj = $song1->add_link($link2);
 	is($song1->links->count, 2, 'After link2, song has two links');
 	is($song1->links->embedded_links->count, 1, 'After link2, song has one embedded link');
-	is($song1->links->list_links->count, 1, 'After link2, song has one list link');
+	is($song1->links->in_list->count, 1, 'After link2, song has one list link');
 	is($song2->links->count, 0, 'Song2 still has no links');
 
 	# Can add the same embedded link to another song, but it'll be
@@ -126,21 +126,21 @@ sub run {
 	$song1->add_link($link3);
 	is($song1->links->count, 3, 'After adding link 3, song1 has three links');
 	is($song1->links->embedded_links->count, 2, 'After adding link 3, song1 has two embedded links');
-	is($song1->links->list_links->count, 2, 'After adding link 3, song1 has two list links');
+	is($song1->links->in_list->count, 2, 'After adding link 3, song1 has two list links');
 	$song1->add_link($link4);
 	is($song1->links->count, 4, 'After adding link 4, song1 has four links');
 	is($song1->links->embedded_links->count, 3, 'After adding link 3, song1 has three embedded links');
-	is($song1->links->list_links->count, 2, 'After adding link 3, song1 has two list links');
+	is($song1->links->in_list->count, 2, 'After adding link 3, song1 has two list links');
 
     # Second, add link 4 to song2
 	$song2->add_link($link3);
 	is($song1->links->count, 4, 'After adding link 4 to song2, song1 has four links');
 	is($song1->links->embedded_links->count, 3, 'After adding link 3 to song2, song1 has three embedded links');
-	is($song1->links->list_links->count, 2, 'After adding link 3 to song2, song1 has two list links');
+	is($song1->links->in_list->count, 2, 'After adding link 3 to song2, song1 has two list links');
 
 	is($song2->links->count, 1, 'After adding link 4 to song2, song2 has one link');
 	is($song2->links->embedded_links->count, 1, 'After adding link 3 to song2, song2 has one embedded link');
-	is($song2->links->list_links->count, 1, 'After adding link 3 to song2, song2 has one list link');
+	is($song2->links->in_list->count, 1, 'After adding link 3 to song2, song2 has one list link');
 
 
 	# # Database should have five links
@@ -149,7 +149,7 @@ sub run {
 	is($rs->count, 5, 'Five links are in the DB');
 
 	# get song1 list links by priority order
-	my @links = $song1->links->list_links->by_priority->all;
+	my @links = $song1->links->in_list->by_priority->all;
 	is($links[0]->list_priority, $link2->{list_priority}, 'Song1 link1 has right priority');
 	is($links[0]->list_url, $link2->{list_url}, 'Song1 link1 has right url');
 	is($links[0]->list_description, $link2->{list_description}, 'Song1 link1 has right description');
@@ -161,7 +161,7 @@ sub run {
     ok(!defined($links[2]), 'Song1 link3 does not exist');
 
 	# get song2 list links by priority order
-	@links = $song2->links->list_links->by_priority->all;
+	@links = $song2->links->in_list->by_priority->all;
 	is($links[0]->list_priority, $link3->{list_priority}, 'Song2 link1 has right priority');
 	is($links[0]->list_url, $link3->{list_url}, 'Song2 link1 has right url');
 	is($links[0]->list_description, $link3->{list_description}, 'Song2 link1 has right description');

@@ -48,7 +48,7 @@ sub view {
 
     $c->stash(
         embed_links => $song->links->embedded_links->by_identifier,
-        list_links  => scalar $song->links->links_list,
+        list_links  => scalar $song->links->in_list,
         forest      => $song->get_comment_forest($user),
         navigation  => $song->get_navigation,
     );

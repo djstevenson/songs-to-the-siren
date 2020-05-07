@@ -7,7 +7,7 @@ extends 'DBIx::Class::ResultSet';
 
 use Carp qw/ croak /;
 
-sub list_links {
+sub in_list {
     my $self = shift;
 
     return $self->search({
@@ -44,7 +44,9 @@ sub by_identifier {
 # TODO Viewing an article will call both by_identifier
 # and list_links.  Therefore two queries. If the blog
 # gets remotely busy, sort this out, do a single query
-# for both views.
+# for both views.  NB Making this a single query is
+# much easier as issue #294 is addressed.
+#
 # This method returns a resultset
 sub links_list {
     my $self = shift;
@@ -90,6 +92,11 @@ so sort is 'ascending'.
 
 Returns a resultset that includes only embedded links,
 ie with a non-empty embed_identifier string.
+
+=item in_list
+
+Returns a resultset that includes only link-list links,
+ie with a non-zero list_priority value.
 
 =item by_identifier
 

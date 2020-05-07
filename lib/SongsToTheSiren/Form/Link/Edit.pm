@@ -21,17 +21,21 @@ has link => (
 );
 
 
-has_field identifier => (
+has_field embed_identifier => (
     type           => 'Input::Text',
     autofocus      => 1,
     filters        => [qw/ TrimEdges /],
-    validators     => [qw/ Required /],
     autocomplete   => 'off',
     spellcheck     => 'false',
     autocapitalize => 'off',
 );
 
-has_field class => (
+has_field embed_url => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
+);
+
+has_field embed_class => (
     type        => 'Select',
     selections  => sub {
         my ($field, $form) = @_;
@@ -44,36 +48,25 @@ has_field class => (
     },
 );
 
-# TODO Add URL validation
-has_field url => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
-);
-
-has_field priority => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  ValidInteger /],
-);
-
-has_field title => (
+has_field embed_description => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
 );
 
-has_field description => (
+
+
+has_field list_priority => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    validators  => [qw/ ValidInteger /],
 );
 
-has_field extras => (
+has_field list_url => (
     type        => 'Input::Text',
     filters     => [qw/ TrimEdges /],
 );
 
-has_field css => (
+has_field list_css => (
     type        => 'Select',
     selections  => sub {
         my ($field, $form) = @_;
@@ -84,6 +77,11 @@ has_field css => (
             map { { value => $_, text => $_ } } @$css
         ];
     },
+);
+
+has_field list_description => (
+    type        => 'Input::Text',
+    filters     => [qw/ TrimEdges /],
 );
 
 has_button submit => ();
@@ -104,7 +102,7 @@ after extra_validation => sub {
         ->embedded_links
         ->by_identifier;
     
-    my $identifier_field = $self->find_field('identifier');
+    my $identifier_field = $self->find_field('embed_identifier');
     my $identifier_value = lc $identifier_field->value;
 
     $fail = 'Identifier already used for this song'
@@ -125,7 +123,7 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-    	my $fields = $self->form_hash(qw/ identifier class url description priority extras title css /);
+    	my $fields = $self->form_hash(qw/ embed_identifier embed_class embed_url embed_description list_priority list_url list_description list_css /);
 
         # Create or update?
         if ( $self->is_update ) {
