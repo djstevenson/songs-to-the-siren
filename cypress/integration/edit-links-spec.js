@@ -28,10 +28,11 @@ function createSongListLinks() {
     return song1
 }
 
-function makeEmbedLinkData() {
+function makeEmbedLinkData(n) {
+    const ns = n.toString()
 
     return {
-        list_priority: 0,
+        list_priority: '0',
         embed_class: 'Default',
         embed_identifier: 'identifier ' + ns,
         embed_url: 'http://example.com/embed_link' + ns + '.html',
@@ -43,7 +44,7 @@ function makeListLinkData(n) {
     const ns = n.toString()
 
     return {
-        embed_identifier: ''
+        embed_identifier: '',
         list_priority: n,
         list_css: 'default',
         list_url: 'http://example.com/list_link' + ns + '.html',
@@ -88,29 +89,26 @@ context('Song links CRUD tests', () => {
 
     describe('Create form validation', () => {
         it('Create form rejects empty fields', () => {
+            // Since moving to a single record for both types
+            // of links, most fields are now allowed to be empty
             createSongListLinks()
             
             new ListLinksPage()
                 .clickNew()
                 .createLink({})
-                .assertFormError('identifier',  'Required')
-                .assertFormError('url',         'Required')
-                .assertFormError('description', 'Required')
-                .assertFormError('priority',    'Required')
-                .assertNoFormError('title')
-                .assertNoFormError('extras')
+                .assertFormError('list_priority', 'Invalid number')
         })
 
         it('Create form rejects existing identifiers', () => {
             createSongListLinks()
             
-            const linkData = makeLinkData(10)
+            const linkData = makeBothLinkData(10)
 
             new ListLinksPage()
                 .createLink(linkData)
                 .clickNew()
                 .createLink(linkData)
-                .assertFormError('identifier', 'Identifier already used for this song');
+                .assertFormError('embed_identifier', 'Identifier already used for this song');
         })
 
         it('Create form non-integer priority', () => {
@@ -121,18 +119,13 @@ context('Song links CRUD tests', () => {
 
             new CreateLinkPage()
                 .createLink({
-                    identifier: 'id1',
-                    class: 'YouTubeEmbedded',
-                    url:  'http://example.com/',
-                    priority: 'arse',
-                    description: 'also arse',
-                    css: 'youtube'
+                    embed_identifier: 'id1',
+                    embed_class: 'YouTubeEmbedded',
+                    embed_url:  'http://example.com/',
+                    list_priority: 'arse',
+                    embed_description: 'also arse'
                 })
-                .assertNoFormError('identifier')
-                .assertNoFormError('url')
-                .assertNoFormError('description')
-                .assertFormError  ('priority', 'Invalid number')
-                .assertNoFormError('extras')
+                .assertFormError  ('list_priority', 'Invalid number')
         })
     })
 
@@ -150,13 +143,13 @@ context('Song links CRUD tests', () => {
             createSongListLinks()
             
             const listPage = new ListLinksPage()
-                .createLink(makeLinkData(10))
+                .createLink(makeBothLinkData(10))
                 .assertLinkCount(1)
 
-                .createLink(makeLinkData(20))
+                .createLink(makeBothLinkData(20))
                 .assertLinkCount(2)
 
-                .createLink(makeLinkData(5))
+                .createLink(makeBothLinkData(5))
                 .assertLinkCount(3)
 
             // Check ordering
@@ -177,43 +170,22 @@ context('Song links CRUD tests', () => {
 
     describe('Edit form validation', () => {
 
-        it('Edit form rejects empty fields', () => {
-            createSongListLinks()
-            
-            const listPage = new ListLinksPage()
-
-            listPage.createLink(makeLinkData(10))
-            listPage
-                .edit(1)
-                .editLink({
-                    class: 'YouTubeEmbedded',
-                    identifier: '',
-                    url: '',
-                    priority: '',
-                    description: ''
-                })
-                .assertFormError('identifier',  'Required')
-                .assertFormError('url',         'Required')
-                .assertFormError('priority',    'Required')
-                .assertFormError('description', 'Required')
-                .assertNoFormError('extras')
-        })
 
         it('Edit form does not reject existing identifier from the link we are editing', () => {
             createSongListLinks()
             
             const listPage = new ListLinksPage()
 
-            const linkData = makeLinkData(10)
+            const linkData = makeBothLinkData(10)
 
             // Test form is not rejected due to existing identifier
             // when the existing identifier is our own! i.e., edit
             // a link without changing the identifier
             listPage
-                .createLink(makeLinkData(10))
+                .createLink(makeBothLinkData(10))
                 .edit(1)
-                .editLink({description: ''})
-                .assertNoFormError('identifier')
+                .editLink({list_priority: ''})  // Something invalid
+                .assertNoFormError('embed_identifier')
         })
 
         it('Edit form rejects existing identifier from other links', () => {
@@ -221,8 +193,8 @@ context('Song links CRUD tests', () => {
             
             const listPage = new ListLinksPage()
 
-            const linkData10 = makeLinkData(10)
-            const linkData20 = makeLinkData(20)
+            const linkData10 = makeBothLinkData(10)
+            const linkData20 = makeBothLinkData(20)
 
             // Create two links
             listPage.createLink(linkData10)
@@ -230,8 +202,8 @@ context('Song links CRUD tests', () => {
 
             // Edit the second and attempt to set its identifier to the first
             listPage.edit(2)
-                .editLink({identifier: linkData10.identifier})
-                .assertFormError('identifier', 'Identifier already used for this song')
+                .editLink({embed_identifier: linkData10.embed_identifier})
+                .assertFormError('embed_identifier', 'Identifier already used for this song')
         })
 
         it('Edit form non-integer priority', () => {
@@ -239,21 +211,17 @@ context('Song links CRUD tests', () => {
             
             const listPage = new ListLinksPage()
 
-            listPage.createLink(makeLinkData(10))
+            listPage.createLink(makeEmbedLinkData(100))
             listPage
                 .edit(1)
                 .editLink({
-                    class: 'Default',
-                    identifier: 'identifier1',
-                    url:  'http://example.com/',
-                    priority: 'arse',
-                    description: 'also arse'
+                    embed_class: 'Default',
+                    embed_identifier: 'identifier1',
+                    embed_url:  'http://example.com/',
+                    list_priority: 'arse',
+                    embed_description: 'also arse'
                 })
-                .assertNoFormError('identifier')
-                .assertNoFormError('url')
-                .assertNoFormError('description')
-                .assertFormError  ('priority', 'Invalid number')
-                .assertNoFormError('extras')
+                .assertFormError('list_priority', 'Invalid number')
         })
 
     })
@@ -265,7 +233,7 @@ context('Song links CRUD tests', () => {
             const listPage = new ListLinksPage()
 
             listPage
-                .createLink(makeLinkData(10))
+                .createLink(makeBothLinkData(10))
 
             listPage
                 .edit(1)
@@ -278,20 +246,20 @@ context('Song links CRUD tests', () => {
             
             const listPage = new ListLinksPage()
     
-            const data20 = makeLinkData(20)
-            listPage.createLink(makeLinkData(10))
+            const data20 = makeBothLinkData(20)
+            listPage.createLink(makeBothLinkData(10))
             listPage.createLink(data20)
             listPage
                 .edit(1)
                 .editLink({
-                    identifier: 'new identifier 30',
-                    priority: 30
+                    embed_identifier: 'new identifier 30',
+                    list_priority: 30
                 })
     
             // Link '20' should now be first, and the edited
             // link '30' second
-            listPage.getRow(1).assertText('identifier', data20.identifier)
-            listPage.getRow(2).assertText('identifier', 'new identifier 30')
+            listPage.getRow(1).assertText('embed_identifier', data20.embed_identifier)
+            listPage.getRow(2).assertText('embed_identifier', 'new identifier 30')
         })
     })
 
@@ -301,8 +269,8 @@ context('Song links CRUD tests', () => {
             createSongListLinks()
             
             const listPage = new ListLinksPage()
-                .createLink(makeLinkData(10))
-                .createLink(makeLinkData(20))
+                .createLink(makeEmbedLinkData(110))
+                .createLink(makeEmbedLinkData(120))
 
             // Can cancel delete
             listPage
@@ -317,8 +285,8 @@ context('Song links CRUD tests', () => {
             createSongListLinks()
             
             const listPage = new ListLinksPage()
-                .createLink(makeLinkData(10))
-                .createLink(makeLinkData(20))
+                .createLink(makeListLinkData(101))
+                .createLink(makeListLinkData(201))
 
             listPage
                 .delete(2)

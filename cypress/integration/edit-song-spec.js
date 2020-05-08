@@ -336,14 +336,11 @@ context('Song CRUD tests', () => {
                 .links(1)
                 .clickNew()
                 .createLink({
-                    identifier: "link1",
-                    url: url1,
-                    description: desc1,
-                    class: "Default",
-                    priority: 10,
-                    css: "default",
-                    extras: "",
-                    title:"title"
+                    embed_identifier: "link1",
+                    embed_url: url1,
+                    embed_description: desc1,
+                    embed_class: "Default",
+                    list_priority: '0'
                 })
             
             // Revisit song page and check link

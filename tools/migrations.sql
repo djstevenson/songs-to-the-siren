@@ -254,7 +254,14 @@ ALTER TABLE links DROP COLUMN title;
 ALTER TABLE links DROP COLUMN extras;
 ALTER TABLE links DROP COLUMN description;
 
+-- Recreate index without unique constraint
+DROP INDEX IF EXISTS links_song_id_identifier_idx;
+CREATE INDEX links_song_id_identifier_idx ON links USING BTREE(song_id, embed_identifier);
+
 -- 8 down
+DROP INDEX IF EXISTS links_song_id_identifier_idx;
+CREATE UNIQUE INDEX links_song_id_identifier_idx ON links USING BTREE(song_id, embed_identifier);
+
 ALTER TABLE links ADD COLUMN description TEXT DEFAULT '';
 ALTER TABLE links ADD COLUMN "extras" TEXT DEFAULT NULL;
 ALTER TABLE links ADD COLUMN "title" TEXT NOT NULL DEFAULT '';
