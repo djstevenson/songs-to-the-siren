@@ -100,7 +100,7 @@ sub copy {
         embed_class       => $link->embed_class,
         embed_url         => $link->embed_url,
         embed_description => $link->embed_description,
-        list_priority     => $link->priority,
+        list_priority     => $link->list_priority,
         list_css          => $link->list_css,
         list_url          => $link->list_url,
         list_description  => $link->list_description,

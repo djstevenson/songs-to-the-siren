@@ -28,18 +28,41 @@ function createSongListLinks() {
     return song1
 }
 
-function makeLinkData(n) {
+function makeEmbedLinkData() {
+
+    return {
+        list_priority: 0,
+        embed_class: 'Default',
+        embed_identifier: 'identifier ' + ns,
+        embed_url: 'http://example.com/embed_link' + ns + '.html',
+        embed_description: 'embed desc of 12" version' + ns,
+    }
+}
+
+function makeListLinkData(n) {
     const ns = n.toString()
 
     return {
-        priority: n,
-        class: 'Default',
-        identifier: 'identifier ' + ns,
-        url: 'http://example.com/link' + ns + '.html',
-        description: 'desc of 12" version' + ns,
-        extras: ns + 'x' + ns,
-        title: 'title' + ns,
-        css: 'default',
+        embed_identifier: ''
+        list_priority: n,
+        list_css: 'default',
+        list_url: 'http://example.com/list_link' + ns + '.html',
+        list_description: 'list desc of 12" version' + ns,
+    }
+}
+
+function makeBothLinkData(n) {
+    const ns = n.toString()
+
+    return {
+        embed_class: 'Default',
+        embed_identifier: 'identifier ' + ns,
+        embed_url: 'http://example.com/embed_link' + ns + '.html',
+        embed_description: 'embed desc of 12" version' + ns,
+        list_priority: n,
+        list_css: 'default',
+        list_url: 'http://example.com/list_link' + ns + '.html',
+        list_description: 'list desc of 12" version' + ns,
     }
 }
 
