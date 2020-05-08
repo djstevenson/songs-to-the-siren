@@ -90,14 +90,6 @@ Cypress.Commands.add('assertUserHasNoEmail', (user, type) => {
         .assertVisitError(404)
 })
 
-// TODO Will need to trigger events if any code relies on them
-//      Source: https://github.com/cypress-io/cypress/issues/566
-Cypress.Commands.add('fill', {
-    prevSubject: 'element'
-}, (subject, value) => {
-    cy.wrap(subject).invoke('val', value)
-});
-
 Cypress.Commands.add('publishSong', (title, flag) => {
 
     const url = '/test/publish_song'

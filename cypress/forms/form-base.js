@@ -30,7 +30,7 @@ export class FormBase {
             const sel = field.get()
             sel.clear();
             if (value) {
-                sel.fill(value)
+                sel.type(value)
             }
         }
         return this
