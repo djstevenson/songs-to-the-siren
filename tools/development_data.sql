@@ -1,11 +1,7 @@
 INSERT INTO content ("name", author_id, title, markdown, html, updated_at) VALUES ('about', 1, 'About page title', 'The about page', '<p>The about page</p>', NOW());
 
-INSERT INTO countries ("name", emoji) VALUES ('UK', '&#x1F1EC;&#x1F1E7;');
-INSERT INTO countries ("name", emoji) VALUES ('US', '&#x1F1FA;&#x1F1F8;');
-INSERT INTO countries ("name", emoji) VALUES ('CA', '&#x1F1E8;&#x1F1E6;');
-
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('The Dears', 'Lost in the Plot', 'No Cities Left',  'lost-in-the-plot', 3,
+('The Dears', 'Lost in the Plot', 'No Cities Left',  'lost-in-the-plot', '🇨🇦',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
@@ -18,7 +14,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 1, NOW(), NULL, '2003', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('Flowered Up', 'It''s On', 'A Life with Brian, 1991', 'its-on', 1,
+('Flowered Up', 'It''s On', 'A Life with Brian, 1991', 'its-on', '🇬🇧',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
@@ -31,7 +27,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 1, NOW(), NULL, '1990 (single)', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('Throwing Muses', 'Fish', 'Lonely Is An Eyesore (various artists)', 'lonely-is-an-eyesore', 2,
+('Throwing Muses', 'Fish', 'Lonely Is An Eyesore (various artists)', 'lonely-is-an-eyesore', '🇺🇸',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam.',
 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Ut enim ad minim veniam</p>',
@@ -44,7 +40,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 1, NOW(), NULL, 'June 1987', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('The Heart Throbs', 'Tiny Feet', 'Jubilee Twist', 'jubilee-twist', 1,
+('The Heart Throbs', 'Tiny Feet', 'Jubilee Twist', 'jubilee-twist', '🇬🇧',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.',
 '<p>Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit.</p>',
 'Nulla porttitor massa id neque aliquam vestibulum morbi. Curabitur vitae nunc sed velit. Sit amet nisl suscipit adipiscing bibendum est ultricies. Eu scelerisque felis imperdiet proin fermentum leo vel. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Aliquet risus feugiat in ante. Purus sit amet luctus venenatis. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Phasellus egestas tellus rutrum tellus pellentesque. Sed pulvinar proin gravida hendrerit lectus a. Libero justo laoreet sit amet cursus sit amet dictum sit. Condimentum id venenatis a condimentum vitae sapien pellentesque.
@@ -54,7 +50,7 @@ Arcu vitae elementum curabitur vitae nunc sed velit dignissim. Ultrices sagittis
 1, NOW(), NULL, 'Summer 1992', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('Pixies', 'Planet of Sound', 'Trompe le Monde', 'planet-of-sound', 2,
+('Pixies', 'Planet of Sound', 'Trompe le Monde', 'planet-of-sound', '🇺🇸',
 'I met this guy in a rover',
 '<p>I met this guy in a rover</p>',
 'I met this guy in a rover. He said it''s one more over',
@@ -62,7 +58,7 @@ INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summar
 1, NOW(), NULL, '28th May 1991 (single), 23rd September 1991 (LP)', NOW());
 
 INSERT INTO songs (artist,title,album,"image",country_id,summary_markdown,summary_html,full_markdown,full_html,author_id,created_at,updated_at,released_at,published_at) VALUES
-('This Mortal Coil', 'Song to the Siren', 'It''ll End in Tears', 'song-to-the-siren', 1,
+('This Mortal Coil', 'Song to the Siren', 'It''ll End in Tears', 'song-to-the-siren', '🇬🇧',
 'I met this guy in a rover...',
 '<p>I met this guy in a rover...</p>',
 'I met this guy in a rover. He said it''s one song over',
@@ -139,8 +135,9 @@ VALUES
 
 INSERT INTO links (song_id, identifier, "class", "url", description, title, extras, priority, css)
 VALUES
-(6, 'official_youtube', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '', '16by9', 10, 'youtube'),
+(6, 'official-youtube', 'Default', 'https://www.youtube.com/embed/HFWKJ2FUiAQ', 'Official video', '', '16by9', 0, 'youtube'),
+(6, 'official-youtube-embedded', 'YouTubeEmbedded', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Official video', '', '16by9', 10, 'youtube'),
 (6, 'spotify', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Spotify', '', '', 20, 'spotify'),
-(6, 'itunes_store', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'iTunes Store', '', '', 30, 'itunes-store'),
-(6, 'apple_music', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Apple Music', '', '', 40, 'apple-music'),
+(6, 'itunes-store', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'iTunes Store', '', '', 30, 'itunes-store'),
+(6, 'apple-music', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Apple Music', '', '', 40, 'apple-music'),
 (6, 'vimeo', 'Default', 'https://www.youtube-nocookie.com/embed/HFWKJ2FUiAQ', 'Vimeo', '', '', 50, 'vimeo');

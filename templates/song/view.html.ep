@@ -6,7 +6,6 @@
     %= include 'song/_navigation'
     %= include 'song/_header', clickable_titles => 0
     <div class="description col-12">
-        %= include 'song/_youtube'
         <%== $song->full_html %>
         % if ( stash 'admin_user' ) {
             <p><a href="<%= url_for('admin_edit_song', song_id => $song->id) %>">Edit song</a></p>

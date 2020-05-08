@@ -28,18 +28,20 @@ function createSongListLinks() {
     return song1
 }
 
-function makeLinkData(n) {
+// TODO Also exists in edit-links-spec, move it somewhere
+//      so we don't repeat code
+function makeBothLinkData(n) {
     const ns = n.toString()
 
     return {
-        priority: n,
-        class: 'Default',
-        identifier: 'identifier ' + ns,
-        url: 'http://example.com/link' + ns + '.html',
-        description: 'desc of 12" version' + ns,
-        extras: ns + 'x' + ns,
-        title: 'title' + ns,
-        css: 'default',
+        embed_class: 'Default',
+        embed_identifier: 'identifier ' + ns,
+        embed_url: 'http://example.com/embed_link' + ns + '.html',
+        embed_description: 'embed desc of 12" version' + ns,
+        list_priority: n,
+        list_css: 'default',
+        list_url: 'http://example.com/list_link' + ns + '.html',
+        list_description: 'list desc of 12" version' + ns,
     }
 }
 
@@ -50,7 +52,7 @@ context('Copy song link tests', () => {
             createSongListLinks()
             
             const listPage = new ListLinksPage()
-                .createLink(makeLinkData(10))
+                .createLink(makeBothLinkData(10))
                 .assertLinkCount(1)
                 .copyLink(1)
                 .cancel()
@@ -65,7 +67,7 @@ context('Copy song link tests', () => {
 
             createSongListLinks()
             
-            const oldLink = makeLinkData(20)
+            const oldLink = makeBothLinkData(20)
             const listPage = new ListLinksPage()
                 .createLink(oldLink)
                 .assertLinkCount(1)
@@ -73,18 +75,16 @@ context('Copy song link tests', () => {
                 .cancel()
             
             listPage.getRow(2)
-                .assertPriority(oldLink.priority)
-                .assertIdentifier(oldLink.identifier + '-copy')
-                .assertDescription(oldLink.description)
-
-
+                .assertPriority(oldLink.list_priority)
+                .assertIdentifier(oldLink.embed_identifier + '-copy')
+                .assertDescription('L: ' + oldLink.list_description)
         })
 
         it('Copied link is immediately editable', () => {
 
             createSongListLinks()
             
-            const oldLink = makeLinkData(30)
+            const oldLink = makeBothLinkData(30)
             const newIdentifier = 'my-new-test-identifier'
 
             const listPage = new ListLinksPage()
@@ -93,14 +93,12 @@ context('Copy song link tests', () => {
             
             listPage
                 .copyLink(1)
-                .editLink({identifier: newIdentifier})
+                .editLink({embed_identifier: newIdentifier})
             
             listPage.getRow(2)
-                .assertPriority(oldLink.priority)
+                .assertPriority(oldLink.list_priority)
                 .assertIdentifier(newIdentifier)
-                .assertDescription(oldLink.description)
-
-
+                .assertDescription('L: ' + oldLink.list_description)
         })
     })
     

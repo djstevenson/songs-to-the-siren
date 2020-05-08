@@ -47,7 +47,7 @@ sub as_html {
     # about 0.16ms to build new objects in the future, so that's
     # fine for this site.
     my $link = $self->link;
-    my $role_name = 'SongsToTheSiren::View::Link::' . $link->class;
+    my $role_name = 'SongsToTheSiren::View::Link::' . $link->embed_class;
     apply_all_roles($self, $role_name);
 
     return $self->render;

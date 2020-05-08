@@ -96,14 +96,14 @@ sub copy {
     my $link = $c->stash->{link};
 
     my $fields = {
-        identifier  => $link->identifier . '-copy',
-        class       => $link->class,
-        url         => $link->url,
-        description => $link->description,
-        priority    => $link->priority,
-        extras      => $link->extras,
-        title       => $link->title,
-        css         => $link->css,
+        embed_identifier  => $link->embed_identifier . '-copy',
+        embed_class       => $link->embed_class,
+        embed_url         => $link->embed_url,
+        embed_description => $link->embed_description,
+        list_priority     => $link->list_priority,
+        list_css          => $link->list_css,
+        list_url          => $link->list_url,
+        list_description  => $link->list_description,
     };
     my $new_link = $song->add_link($fields);
     $song->render_markdown;

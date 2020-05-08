@@ -1,12 +1,12 @@
-% if ( scalar keys %$links ) {
+% if ( scalar keys %$list_links ) {
     <div class="links">
         <h4>Links</h4>
         <p>
             <ul class="link-list">
                 % while ( my $link = $list_links->next ) {
-                    <li class="<%= $link->css %>">
-                        <a href="<%= $link->url %>">
-                            % my $logo_root = '/images/logos/' . $link->css;
+                    <li class="<%= $link->list_css %>">
+                        <a href="<%= $link->list_url %>">
+                            % my $logo_root = '/images/logos/' . $link->list_css;
                             <img src="<%= $logo_root %>-1x.png" height="32" width="32"
                                 srcset="
                                     <%= $logo_root %>-4x.png 4x,
@@ -14,7 +14,7 @@
                                     <%= $logo_root %>-2x.png 2x,
                                     <%= $logo_root %>-1x.png 1x
                                 "/>
-                            <%= $link->description %>
+                            <%= $link->list_description %>
                         </a>
                     </li>
                 % }

@@ -5,14 +5,15 @@ import { FormButton } from './form-button'
 export class EditLinkForm extends FormBase {
     constructor() {
         super();
-        this._fields.identifier  = new FormField('text',   'edit-link-identifier')
-        this._fields.class       = new FormField('select', 'edit-link-class')
-        this._fields.url         = new FormField('text',   'edit-link-url')
-        this._fields.priority    = new FormField('text',   'edit-link-priority')
-        this._fields.description = new FormField('text',   'edit-link-description')
-        this._fields.title       = new FormField('text',   'edit-link-title')
-        this._fields.extras      = new FormField('text',   'edit-link-extras')
-        this._fields.css         = new FormField('select', 'edit-link-css')
+        this._fields.embed_identifier  = new FormField('text',   'edit-link-embed-identifier')
+        this._fields.embed_url         = new FormField('text',   'edit-link-embed-url')
+        this._fields.embed_class       = new FormField('select', 'edit-link-embed-class')
+        this._fields.embed_description = new FormField('text',   'edit-link-embed-description')
+
+        this._fields.list_priority     = new FormField('text',   'edit-link-list-priority')
+        this._fields.list_url          = new FormField('text',   'edit-link-list-url')
+        this._fields.list_css          = new FormField('select', 'edit-link-list-css')
+        this._fields.list_description  = new FormField('text',   'edit-link-list-description')
 
         this._buttons.submit     = new FormButton('submit-button')
         this._buttons.cancel     = new FormButton('cancel-button')

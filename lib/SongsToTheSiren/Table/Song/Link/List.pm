@@ -25,11 +25,23 @@ has_column id => (
     header       => 'ID',
 );
 
-has_column priority => ();
+has_column embed_identifier => ();
 
-has_column identifier => ();
+has_column list_priority => ();
 
-has_column description => ();
+has_column description => (
+    content => sub {
+        my ($col, $table, $row) = @_;
+
+        if ( $row->list_priority ) {
+            return 'L: ' . ($row->list_description // '');
+        }
+        else {
+            return 'E: ' . ($row->embed_description // '');
+        }
+    },
+);
+
 
 has_column edit => (
     content => sub {
