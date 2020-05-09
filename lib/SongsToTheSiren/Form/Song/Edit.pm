@@ -16,10 +16,11 @@ has song => (
 );
 
 has_field title => (
-    type        => 'Input::Text',
-    autofocus   => 1,
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    type         => 'Input::Text',
+    autofocus    => 1,
+    autocomplete => 'off',
+    filters      => [qw/ TrimEdges /],
+    validators   => [qw/ Required  /],
 );
 
 has_field artist => (
