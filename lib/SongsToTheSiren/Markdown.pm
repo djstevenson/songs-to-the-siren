@@ -5,6 +5,7 @@ use Text::Markdown;
 
 use SongsToTheSiren::Markdown::Link;
 use SongsToTheSiren::Markdown::TimeSignature;
+use SongsToTheSiren::Markdown::Shortcut;
 
 # An extension to Text::Markdown - POD docs at end of file
 
@@ -23,7 +24,9 @@ has _preprocessors => (
 
         my $args = $self->has_song ? {song => $self->song} : {};
 
-        my @classes = ( qw/ Link TimeSignature / );
+        my @classes = ( qw/ Link TimeSignature Shortcut / );
+
+        # TODO Load the classes here so we don't have to declare them at the top
 
         return [
             map { "SongsToTheSiren::Markdown::$_"->new( $args ) } @classes
