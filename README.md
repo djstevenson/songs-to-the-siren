@@ -84,11 +84,13 @@ TESTS
 
 To run the Perl unit test suite:
 
-`carton exec -- forkprove -MMoose -MDBIx::Class -I. -j8 -lr t`
+`carton exec -- forkprove -MMoose -MDBIx::Class -MSongsToTheSiren -I. -j12 -lr t`
 
-(-j8 is the level of parallelism, you can change this depending on core count of your CPU)
+(-j12 is the level of parallelism, you can change this depending on core count of your CPU. 12 seems to be a sweet spot for my 6-core laptop)
 
 ### Cypress.io functional tests
+
+`nvm use` to load the right node.js
 
 `npm i` to install
 

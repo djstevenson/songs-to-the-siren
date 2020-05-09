@@ -197,4 +197,19 @@ export class ViewSongPage extends Public {
         return this
     }
 
+    assertLinkListCount(c) {
+        cy
+            .get('ul.link-list li')
+            .its('length').should('eq', c)
+
+        return this
+    }
+
+    assertLinkListItem(nth, link_data) {
+        const li = cy.get(`ul.link-list li:nth-child(${nth})`)
+        li.should('have.class', 'youtube')
+        li.find('span.link-description').contains(link_data.list_description)
+
+        return this
+    }
 }

@@ -5,6 +5,7 @@ import { UserFactory    } from '../support/user-factory'
 import { SongFactory    } from '../support/song-factory'
 import { ListLinksPage  } from '../pages/link/list-links-page'
 import { CreateLinkPage } from '../pages/link/create-link-page'
+import { ViewSongPage   } from '../pages/song/view-song-page'
 
 const label = 'editlinks'
 const userFactory = new UserFactory(label)
@@ -46,7 +47,7 @@ function makeListLinkData(n) {
     return {
         embed_identifier: '',
         list_priority: n,
-        list_css: 'default',
+        list_css: 'youtube',
         list_url: 'http://example.com/list_link' + ns + '.html',
         list_description: 'list desc of 12" version' + ns,
     }
@@ -61,7 +62,7 @@ function makeBothLinkData(n) {
         embed_url: 'http://example.com/embed_link' + ns + '.html',
         embed_description: 'embed desc of 12" version' + ns,
         list_priority: n,
-        list_css: 'default',
+        list_css: 'youtube',
         list_url: 'http://example.com/list_link' + ns + '.html',
         list_description: 'list desc of 12" version' + ns,
     }
@@ -260,6 +261,37 @@ context('Song links CRUD tests', () => {
             // link '30' second
             listPage.getRow(1).assertText('embed_identifier', data20.embed_identifier)
             listPage.getRow(2).assertText('embed_identifier', 'new identifier 30')
+        })
+
+        it('List links shown in right order', () => {
+            createSongListLinks()
+            
+            const listPage = new ListLinksPage()
+
+            const linkData1 = makeBothLinkData(1001)
+            const linkData2 = makeBothLinkData(1002)
+            const linkData3 = makeEmbedLinkData(1003)
+            const linkData4 = makeListLinkData(1004)
+
+            //Create links in arbitrary order
+            listPage
+                .createLink(linkData2)
+                .createLink(linkData4)
+                .createLink(linkData3)
+                .createLink(linkData1)
+                .assertLinkCount(4)
+
+            new ListSongsPage()
+                .visit()
+                .getRow(1)
+                .click('title')
+
+            new ViewSongPage()
+                .assertLinkListCount(3)
+                .assertLinkListItem(1, linkData1)
+                .assertLinkListItem(2, linkData2)
+                .assertLinkListItem(3, linkData4)
+        
         })
     })
 
