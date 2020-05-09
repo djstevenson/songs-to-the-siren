@@ -49,8 +49,9 @@ has_field embed_class => (
 );
 
 has_field embed_description => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    autocomplete => 'off',
 );
 
 
@@ -80,8 +81,9 @@ has_field list_css => (
 );
 
 has_field list_description => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    autocomplete => 'off',
 );
 
 has_button submit => ();
