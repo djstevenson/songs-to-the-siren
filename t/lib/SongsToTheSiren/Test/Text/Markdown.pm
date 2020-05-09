@@ -161,6 +161,19 @@ sub run {
 			expected  => q{<p>abc <span class="time-signature"><sup><b><i>3</i></b></sup></span><sub><b><i>4</i></b></sub></span> and <span class="time-signature"><sup><b><i>7</i></b></sup></span><sub><b><i>12</i></b></sub></span> def</p>},
 		},
 
+		# Shortcut expansions
+		{
+			test_name => q{Expansion not found},
+			input     => q{abc ^~xyzzy~^ def},
+			expected  => q{<p>abc ^~NOT MATCHED: xyzzy~^ def</p>},
+		},
+
+		{
+			test_name => q{Expansion found for shrug},
+			input     => q{abc ^~shrug~^ def},
+			expected  => q{<p>abc &macr;&bsol;&lowbar;&lpar;&#x30C4;&rpar;&lowbar;&sol;&macr; def</p>},
+		},
+
 	];
 
 	my $p = SongsToTheSiren::Markdown->new( song => $song1 );
