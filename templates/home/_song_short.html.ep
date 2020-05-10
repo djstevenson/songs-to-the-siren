@@ -1,5 +1,5 @@
 <a href="<%= url_for('view_song', song_id => $song->id) %>">
-<%= $song->title %>
+<span class="title"><%= $song->title %></span>
 </a>
 -
-<%= $song->artist %> : <span class="date"><%= datetime($song->published_at) %></span>
+<span class="artist"><%= $song->artist %></span> : <span class="date"><%= datetime($song->published_at) %></span>

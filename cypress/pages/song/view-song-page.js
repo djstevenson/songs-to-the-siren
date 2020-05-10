@@ -212,4 +212,46 @@ export class ViewSongPage extends Public {
 
         return this
     }
+
+    assertNoPrevSong() {
+        cy
+            .get('nav.nav-location-top > p.prev')
+            .should('not.exist')
+        return this
+    }
+
+    assertPrevSong(t) {
+        cy
+            .get('nav.nav-location-top > p.prev > a')
+            .contains(t)
+        return this
+    }
+
+    assertNoNextSong() {
+        cy
+            .get('nav.nav-location-top > p.next')
+            .should('not.exist')
+        return this
+    }
+
+    assertNextSong(t) {
+        cy
+            .get('nav.nav-location-top > p.next > a')
+            .contains(t)
+        return this
+    }
+
+    clickPrevSong(t) {
+        cy
+            .get('nav.nav-location-top > p.prev > a')
+            .click()
+        return new ViewSongPage()
+    }
+
+    clickNextSong(t) {
+        cy
+            .get('nav.nav-location-top > p.next > a')
+            .click()
+        return new ViewSongPage()
+    }
 }

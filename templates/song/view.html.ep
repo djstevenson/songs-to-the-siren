@@ -3,7 +3,7 @@
 
 
 <section class="song row">
-    %= include 'song/_navigation'
+    %= include 'song/_navigation', location => 'top'
     %= include 'song/_header', clickable_titles => 0
     <div class="description col-12">
         <%== $song->full_html %>
@@ -14,5 +14,5 @@
     %= include 'song/_links'
     %= include 'song/_comments'
     %= include 'song/_footer'
-    %= include 'song/_navigation'
+    %= include 'song/_navigation', location => 'bottom'
 </section>

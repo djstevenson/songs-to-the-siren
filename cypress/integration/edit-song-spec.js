@@ -5,6 +5,7 @@ import { SongFactory    } from '../support/song-factory'
 import { ListSongsPage  } from '../pages/song/list-songs-page'
 import { CreateSongPage } from '../pages/song/create-song-page'
 import { EditSongPage   } from '../pages/song/edit-song-page'
+import { HomePage       } from '../pages/home-page'
 
 const label = 'listsong';
 const userFactory = new UserFactory(label);
@@ -253,6 +254,99 @@ context('Song CRUD tests', () => {
 
             listPage.assertSongPublished(1)
         })
+
+        it('Front page ordered by published_date', () => {
+            const user = userFactory.getNextSignedInUser(true)
+
+            // Songs will be published in the order (from oldest):
+            // song 2
+            // song 1
+            // song 4 NOT PUBLISHED
+            // song 5
+            // song 3
+            // song 6
+            //
+            // Therefore, front page should see 6 at the top, then
+            // 3 then 5. The 'previous' links should contain 1 then 2.
+            //
+            // The 'song list' admin page is ordered by id desc, however
+
+            const song1 = songFactory.getNextSong(user)
+            const song2 = songFactory.getNextSong(user)
+            const song3 = songFactory.getNextSong(user)
+            const song4 = songFactory.getNextSong(user)
+            const song5 = songFactory.getNextSong(user)
+            const song6 = songFactory.getNextSong(user)
+            
+            song2.publish()
+            song1.publish()
+            song5.publish()
+            song3.publish()
+            song6.publish()
+
+            // Check all six are in the admin list in right order
+            new ListSongsPage()
+                .visit()
+                .assertSongTitle(1, song6.getTitle())
+                .assertSongTitle(2, song5.getTitle())
+                .assertSongTitle(3, song4.getTitle())
+                .assertSongTitle(4, song3.getTitle())
+                .assertSongTitle(5, song2.getTitle())
+                .assertSongTitle(6, song1.getTitle())
+            
+            const home = new HomePage()
+                .visit()
+                .assertSongCount(3)     // Cos we only show three in full
+                .assertSongLinkCount(2) // The rest
+            
+            // Check the three highlighted songs in right order
+            home.findSong(1)
+                .assertSongTitle(song6.getTitle())
+
+            home.findSong(2)
+                .assertSongTitle(song3.getTitle())
+
+            home.findSong(3)
+                .assertSongTitle(song5.getTitle())
+
+            // Check the two link songs in right order
+            home.findLinkSong(1)
+                .assertSongTitle(song1.getTitle())
+
+            home.findLinkSong(2)
+                .assertSongTitle(song2.getTitle())
+
+            // Open the first song, and follow the 'previous' links in order
+            home
+                .findSong(1).visit()                // Song 6
+                .clickPrevSong()
+                .assertSongTitle(song3.getTitle())  // Song 6 prev is song 3
+
+                .clickPrevSong()
+                .assertSongTitle(song5.getTitle())  // Song 3 prev is song 5
+
+                .clickPrevSong()
+                .assertSongTitle(song1.getTitle())  // Song 5 prev is song 1
+
+                .clickPrevSong()
+                .assertSongTitle(song2.getTitle())  // Song 1 prev is song 2
+                .assertNoPrevSong()                 // Chain ends here
+
+                // Follow the 'next' links back to the start
+                .clickNextSong()
+                .assertSongTitle(song1.getTitle())  // Song 2 prev is song 1
+
+                .clickNextSong()
+                .assertSongTitle(song5.getTitle())  // Song 1 prev is song 5
+
+                .clickNextSong()
+                .assertSongTitle(song3.getTitle())  // Song 5 prev is song 3
+
+                .clickNextSong()
+                .assertSongTitle(song6.getTitle())  // Song 3 prev is song 6
+                .assertNoNextSong()                 // Chain ends here
+
+        })
     })
 
     describe('Delete songs from song-list page', () => {
@@ -349,6 +443,6 @@ context('Song CRUD tests', () => {
                 .view(1)
                 .assertDescriptionLink(1, url1, desc1)
         })
-   });
+    })
 
 })
