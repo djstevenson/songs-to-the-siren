@@ -137,10 +137,11 @@ sub by_publication_date {
 sub newer {
     my ($self, $song) = @_;
 
+    my $subsel = q{(SELECT published_at FROM songs WHERE id=?)};
     return $self->search({
-        id => { '>' => $song->id }
+        published_at => { '>' => \[ $subsel, $song->id] }
     }, {
-        order_by => { -asc => 'id' },
+        order_by => { -asc => 'published_at' },
         rows     => 1,
     });
 }
@@ -148,10 +149,11 @@ sub newer {
 sub older {
     my ($self, $song) = @_;
 
+    my $subsel = q{(SELECT published_at FROM songs WHERE id=?)};
     return $self->search({
-        id => { '<' => $song->id }
+        published_at => { '<' => \[ $subsel, $song->id] }
     }, {
-        order_by => { -desc => 'id' },
+        order_by => { -desc => 'published_at' },
         rows     => 1,
     });
 }
