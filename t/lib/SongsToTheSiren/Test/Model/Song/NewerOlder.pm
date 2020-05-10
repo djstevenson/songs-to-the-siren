@@ -57,7 +57,7 @@ sub run {
 	ok(! $nav->{older}, 'Unpublished song 2: song 1 has no older');
 	$nav = $song2->get_navigation;
 	ok(! $nav->{newer}, 'Unpublished song 2: song 2 has no newer');
-	is( $nav->{older}->id, $song1->id, 'Unpublished song 2: song 2 has song1 as older');
+	ok(! $nav->{older}, 'Unpublished song 2: song 2 has no older');
 
 	# Publish 2, so it now shows up as newer for song 1
 	$song2->show;
@@ -93,7 +93,7 @@ sub run {
 	ok(! $nav->{newer}, 'Published song 3: song 3 has no newer');
 	is( $nav->{older}->id, $song2->id, 'Published song 3: song 3 has song2 as older');
 
-	# Finally, unpublish song2 to show that we skip it, e.g. 
+	# Unpublish song2 to show that we skip it, e.g. 
 	# song3 older is song1
 	$song2->hide;
 	$nav = $song1->get_navigation;
@@ -103,6 +103,16 @@ sub run {
 	$nav = $song3->get_navigation;
 	ok(! $nav->{newer}, 'Hidden song 2: song 3 has no newer');
 	is( $nav->{older}->id, $song1->id, 'Hidden song 2: song 3 has song1 as older');
+
+	# REpublish song2 - it should now be the NEWEST
+	$song2->show;
+	$nav = $song2->get_navigation;
+	is( $nav->{older}->id, $song3->id, 'Republished song 2: song 2 has song3 as older');
+	ok(! $nav->{newer}, 'Republished song 2: song2 has no newer');
+
+	$nav = $song3->get_navigation;
+	is( $nav->{newer}->id, $song2->id, 'Republished song 2: song 3 has song2 newer');
+	is( $nav->{older}->id, $song1->id, 'Republished song 2: song 3 has song1 as older');
 
     done_testing;
 }
