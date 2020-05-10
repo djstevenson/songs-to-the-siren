@@ -156,6 +156,9 @@ sub get_navigation {
 sub newer {
     my $self = shift;
 
+    # Nothing if this song isn't published
+    return undef unless $self->published_at;
+
     return $self
         ->result_source
         ->resultset
@@ -166,6 +169,9 @@ sub newer {
 
 sub older {
     my $self = shift;
+
+    # Nothing if this song isn't published
+    return undef unless $self->published_at;
 
     return $self
         ->result_source
