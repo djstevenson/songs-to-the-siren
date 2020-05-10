@@ -1,4 +1,4 @@
-<nav class="col-12">
+<nav class="col-12 nav-location-<%= $location %>">
     % if (my $song = $navigation->{newer}) {
         <p class="next float-md-left float-sm-none">&laquo; <a href="<%= url_for 'view_song', song_id => $song->id %>"><%= $song->title %></a> &laquo;</p>
     % }

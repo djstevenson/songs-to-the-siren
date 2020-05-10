@@ -1,3 +1,5 @@
+import { ViewSongPage  } from './song/view-song-page'
+
 export class HomePageSong {
     constructor(n) {
         const nth = n.toString()
@@ -6,9 +8,11 @@ export class HomePageSong {
 
     assertSongTitle(expected) {
         this._dom.find('h2.title').contains(expected)
+        return this
     }
 
     visit() {
         this._dom.find('p.more > a').click()
+        return new ViewSongPage()
     }
 }
