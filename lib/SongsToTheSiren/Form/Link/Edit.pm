@@ -57,9 +57,10 @@ has_field embed_description => (
 
 
 has_field list_priority => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ ValidInteger /],
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    validators   => [qw/ ValidInteger /],
+    autocomplete => 'off',
 );
 
 has_field list_url => (
