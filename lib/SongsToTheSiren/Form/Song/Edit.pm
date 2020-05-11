@@ -62,10 +62,11 @@ has_field country => (
 );
 
 has_field released_at => (
-    label       => 'Date Released',
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-    validators  => [qw/ Required  /],
+    label        => 'Date Released',
+    autocomplete => 'off',
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    validators   => [qw/ Required  /],
 );
 
 
