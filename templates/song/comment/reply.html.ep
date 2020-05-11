@@ -3,25 +3,6 @@
 
 <h2 class="notification-title">Add reply for <%= $song->title %></h2>
 
-<!-- TODO Gonna need this a few times, put in a partial -->
-<blockquote class="alert alert-secondary">
-    <p>
-        <strong>Note: </strong>All comments are moderated, so not be visible to other
-        site users until Admin marks it as 'public'.
-    </p>
-    <p>
-        Nothing spammy, abusive, profane, offensive, etc will be accepted, obviously.
-    </p>
-    <p>
-        Disagreeing is fine, just be nice about it :)
-    </p>
-</blockquote>
-
-<!-- p>TODO: Soon I Will add a facility to let you know if/when your message is posted. Or rejected.</p -->
-<!-- p>TODO: To reduce high-volume spam attempts, don't accept more than, say, two comments awaiting moderation.</p -->
-
-<!-- TODO Surely BBCode is better for end-users? -->
-
-<!-- TODO Show the comment that we're replying to? -->
+%= include 'song/comment/_moderation'
 
 <%== $form->render %>
