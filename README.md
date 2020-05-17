@@ -3,8 +3,8 @@ The code behing the "Songs To The Siren" blog
 
 https://songstothesiren.com went live at Easter 2020. This is the code that manages the blog.
 
-INIT test DB
-============
+INIT dev DB
+===========
 
 Create a dev database `songstothesiren_development` - deleting any existing content.
 
