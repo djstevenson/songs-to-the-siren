@@ -390,11 +390,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.12.0
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.12.0.tar.gz
+  DBD-Pg-3.12.3
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.12.3.tar.gz
     provides:
-      Bundle::DBD::Pg v3.12.0
-      DBD::Pg v3.12.0
+      Bundle::DBD::Pg v3.12.3
+      DBD::Pg v3.12.3
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
@@ -1718,13 +1718,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.04
-    pathname: S/SR/SRI/Minion-10.04.tar.gz
+  Minion-10.06
+    pathname: S/SR/SRI/Minion-10.06.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.04
+      Minion 10.06
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1737,8 +1737,8 @@ DISTRIBUTIONS
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
       ExtUtils::MakeMaker 0
-      Mojolicious 8.27
-      perl 5.010001
+      Mojolicious 8.50
+      perl 5.016
   Module-Build-0.4231
     pathname: L/LE/LEONT/Module-Build-0.4231.tar.gz
     provides:
@@ -1868,10 +1868,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.18
-    pathname: S/SR/SRI/Mojo-Pg-4.18.tar.gz
+  Mojo-Pg-4.19
+    pathname: S/SR/SRI/Mojo-Pg-4.19.tar.gz
     provides:
-      Mojo::Pg 4.18
+      Mojo::Pg 4.19
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -1881,11 +1881,11 @@ DISTRIBUTIONS
     requirements:
       DBD::Pg 3.007004
       ExtUtils::MakeMaker 0
-      Mojolicious 8.03
+      Mojolicious 8.50
       SQL::Abstract 1.86
-      perl 5.010001
-  Mojolicious-8.43
-    pathname: S/SR/SRI/Mojolicious-8.43.tar.gz
+      perl 5.016
+  Mojolicious-8.52
+    pathname: S/SR/SRI/Mojolicious-8.52.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1954,7 +1954,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.43
+      Mojolicious 8.52
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -1999,24 +1999,22 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       IO::Socket::IP 0.37
-      JSON::PP 2.27103
-      List::Util 1.41
-      Time::Local 1.2
-      perl 5.010001
-  Mojolicious-Plugin-Status-1.08
-    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.08.tar.gz
+      Sub::Util 1.41
+      perl 5.016
+  Mojolicious-Plugin-Status-1.11
+    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.11.tar.gz
     provides:
       Mojo::MemoryMap undef
       Mojo::MemoryMap::Writer undef
-      Mojolicious::Plugin::Status 1.08
+      Mojolicious::Plugin::Status 1.11
     requirements:
       BSD::Resource 0
+      Cpanel::JSON::XS 4.09
       ExtUtils::MakeMaker 0
       File::Map 0
       File::Temp 0.2308
-      Mojolicious 8.33
-      Sereal 0
-      perl 5.010001
+      Mojolicious 8.50
+      perl 5.016
   Moo-2.004000
     pathname: H/HA/HAARG/Moo-2.004000.tar.gz
     provides:
@@ -2777,10 +2775,10 @@ DISTRIBUTIONS
     requirements:
       Exporter 5.57
       perl 5.006
-  SQL-Abstract-1.86
-    pathname: I/IL/ILMARI/SQL-Abstract-1.86.tar.gz
+  SQL-Abstract-1.87
+    pathname: I/IL/ILMARI/SQL-Abstract-1.87.tar.gz
     provides:
-      SQL::Abstract 1.86
+      SQL::Abstract 1.87
       SQL::Abstract::Test undef
       SQL::Abstract::Tree undef
     requirements:
@@ -2792,6 +2790,8 @@ DISTRIBUTIONS
       Moo 2.000001
       Scalar::Util 0
       Sub::Quote 2.000001
+      Test::Builder::Module 0.84
+      Test::Deep 0.101
       Text::Balanced 2.00
       perl 5.006
   Scalar-String-0.003
@@ -2818,40 +2818,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
-  Sereal-4.011
-    pathname: Y/YV/YVES/Sereal-4.011.tar.gz
-    provides:
-      Sereal 4.011
-    requirements:
-      ExtUtils::MakeMaker 0
-      Sereal::Decoder 4.011
-      Sereal::Encoder 4.011
-      perl 5.008
-  Sereal-Decoder-4.011
-    pathname: Y/YV/YVES/Sereal-Decoder-4.011.tar.gz
-    provides:
-      Sereal::Decoder 4.011
-      Sereal::Decoder::Constants 4.011
-      Sereal::Performance undef
-    requirements:
-      ExtUtils::MakeMaker 7.0
-      ExtUtils::ParseXS 2.21
-      File::Find 0
-      File::Path 0
-      XSLoader 0
-      perl 5.008
-  Sereal-Encoder-4.011
-    pathname: Y/YV/YVES/Sereal-Encoder-4.011.tar.gz
-    provides:
-      Sereal::Encoder 4.011
-      Sereal::Encoder::Constants 4.011
-    requirements:
-      ExtUtils::MakeMaker 7.0
-      ExtUtils::ParseXS 2.21
-      File::Find 0
-      File::Path 0
-      XSLoader 0
-      perl 5.008
   Specio-0.46
     pathname: D/DR/DROLSKY/Specio-0.46.tar.gz
     provides:
