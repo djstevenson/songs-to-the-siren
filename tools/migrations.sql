@@ -278,3 +278,12 @@ ALTER TABLE links DROP COLUMN embed_description;
 ALTER TABLE links DROP COLUMN embed_url;
 ALTER TABLE links RENAME COLUMN embed_class TO class;
 ALTER TABLE links RENAME COLUMN embed_identifier TO identifier;
+
+-- 9 up : list_css is default NULL
+ALTER TABLE links ALTER COLUMN list_css DROP NOT NULL;
+UPDATE links SET list_css = 'songs-to-the-siren' WHERE list_css = 'default';
+
+-- 9 down : list_css is default 'null'
+UPDATE links SET list_css = 'default' WHERE list_css = 'songs-to-the-siren';
+ALTER TABLE links ALTER COLUMN list_css SET NOT NULL;
+

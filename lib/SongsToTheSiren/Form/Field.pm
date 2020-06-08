@@ -91,7 +91,7 @@ has selections => (
 
 has value => (
     is          => 'rw',
-    isa         => 'Str',
+    isa         => 'Maybe[Str]',
     clearer     => 'clear_value',
     predicate   => 'has_value',
 );

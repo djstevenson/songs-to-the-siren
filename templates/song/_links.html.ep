@@ -4,16 +4,18 @@
         <p>
             <ul class="link-list">
                 % while ( my $link = $list_links->next ) {
-                    <li class="<%= $link->list_css %>">
+                    <li class="<%= $link->list_css // 'noclass' %>">
                         <a href="<%= $link->list_url %>">
-                            % my $logo_root = '/images/logos/' . $link->list_css;
-                            <img src="<%= $logo_root %>-1x.png" height="32" width="32"
-                                srcset="
-                                    <%= $logo_root %>-4x.png 4x,
-                                    <%= $logo_root %>-3x.png 3x,
-                                    <%= $logo_root %>-2x.png 2x,
-                                    <%= $logo_root %>-1x.png 1x
-                                "/>
+                            % if  ( $link->list_css ) {
+                                % my $logo_root = '/images/logos/' . $link->list_css;
+                                <img src="<%= $logo_root %>-1x.png" height="32" width="32"
+                                    srcset="
+                                        <%= $logo_root %>-4x.png 4x,
+                                        <%= $logo_root %>-3x.png 3x,
+                                        <%= $logo_root %>-2x.png 2x,
+                                        <%= $logo_root %>-1x.png 1x
+                                    "/>
+                            % }
                             <span class="link-description"><%= $link->list_description %></span>
                         </a>
                     </li>
