@@ -12,8 +12,6 @@ sub render {
 
     my $s;
 
-    use Data::Dumper;
-    print Dumper($buttons);
     foreach my $button (@$buttons) {
         my $value    = $button->{value};
         my $checked  = $button->{checked} ? 'checked' : '';
