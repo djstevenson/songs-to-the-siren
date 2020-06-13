@@ -17,7 +17,7 @@ Moose::Exporter->setup_import_methods(
     also => 'Moose',
 );
 
-sub init_meta{
+sub init_meta {
     my ($class, %options) = @_;
 
     # Setting up the moose stuff
@@ -25,14 +25,12 @@ sub init_meta{
 
     # Apply the role to the caller class's metaclass object
     Moose::Util::MetaRole::apply_metaroles(
-        for				=> $options{for_class},
-        class_metaroles => {
-            class => ['SongsToTheSiren::Table::Meta::Table'],
-        },
+        for             => $options{for_class},
+        class_metaroles => {class => ['SongsToTheSiren::Table::Meta::Table'],},
     );
 }
 
-sub has_column{
+sub has_column {
     my ($meta, $name, %options) = @_;
 
     my $class_name = delete $options{column_class};
@@ -44,10 +42,7 @@ sub has_column{
         $class_name = 'SongsToTheSiren::Table::Column';
     }
 
-    my $column = $class_name->new(
-        name    => $name,
-        %options,
-    );
+    my $column = $class_name->new(name => $name, %options,);
 
     $meta->add_column($column);
     return $column;

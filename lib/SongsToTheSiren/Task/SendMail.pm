@@ -11,7 +11,7 @@ use Mojo::JSON qw/ decode_json /;
 
 use Net::SMTP::TLS;
 
-has home        => sub { Mojo::Home->new; };
+has home => sub { Mojo::Home->new; };
 
 has host        => undef;
 has user        => undef;
@@ -27,76 +27,75 @@ sub register {
     my $mode = uc $app->mode;
 
     my $env_name = "SONGSTOTHESIREN_${mode}_CONFIG";
-    $self->json_conf( decode_json($ENV{$env_name}) )
-        if exists $ENV{$env_name};
+    $self->json_conf(decode_json($ENV{$env_name})) if exists $ENV{$env_name};
 
-    $self->host       ( $self->_conf('host',     $app) );
-    $self->user       ( $self->_conf('user',     $app) );
-    $self->password   ( $self->_conf('password', $app) );
-    $self->from       ( $self->_conf('from',     $app) );
-    $self->site_domain( $self->_conf('domain',   $app) );
+    $self->host($self->_conf('host', $app));
+    $self->user($self->_conf('user', $app));
+    $self->password($self->_conf('password', $app));
+    $self->from($self->_conf('from', $app));
+    $self->site_domain($self->_conf('domain', $app));
 
 
     $self->home->detect;
 
     # Create a minion task to send an email
-    $app->minion->add_task(smtp => sub {
-        my ($job, $email_id) = @_;
+    $app->minion->add_task(
+        smtp => sub {
+            my ($job, $email_id) = @_;
 
-        my $app = $job->app;
-        my $schema = $app->schema;
-        my $email_rs = $schema->resultset('Email');
-        my $email = $email_rs->find($email_id);
+            my $app      = $job->app;
+            my $schema   = $app->schema;
+            my $email_rs = $schema->resultset('Email');
+            my $email    = $email_rs->find($email_id);
 
-        return unless $email;
+            return unless $email;
 
-        my $template = $email->template_name;
-        my $data     = $email->data;
+            my $template = $email->template_name;
+            my $data     = $email->data;
 
-        $data->{domain} = $self->site_domain;
+            $data->{domain} = $self->site_domain;
 
-        my $mt = Mojo::Template->new;
-        my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
-        my $body    = $mt->vars(1)->render_file($self->_file(body    => $template), $data);
-        
-        my $from = $self->from;
-        my $to   = $email->email_to;
+            my $mt      = Mojo::Template->new;
+            my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
+            my $body    = $mt->vars(1)->render_file($self->_file(body => $template), $data);
 
-        my ($localpart, $from_domain) = split(/\@/, $from);
+            my $from = $self->from;
+            my $to   = $email->email_to;
 
-        # TODO Default TLS config doesn't work with my 
-        #      ESP. Work out what does, and make it 
-        #      configurable.
-        my $smtp = Net::SMTP::TLS->new(
-            $self->host,
-            NoTLS    => 1,
-            Hello    => $from_domain,
-            Timeout  => 60,
-            User     => $self->user,
-            Password => $self->password,
-        );
+            my ($localpart, $from_domain) = split(/\@/, $from);
 
-        $smtp->mail($from);
-        $smtp->recipient($to);
-        $smtp->data;
-        $smtp->datasend("From: ${from}\n");
-        $smtp->datasend("To: ${to}\n");
-        $smtp->datasend("Subject: ${subject}\n\n");
-        $smtp->datasend("${body}\n\n");
-        $smtp->dataend;
-        $smtp->quit;
-    });
+            # TODO Default TLS config doesn't work with my
+            #      ESP. Work out what does, and make it
+            #      configurable.
+            my $smtp = Net::SMTP::TLS->new(
+                $self->host,
+                NoTLS    => 1,
+                Hello    => $from_domain,
+                Timeout  => 60,
+                User     => $self->user,
+                Password => $self->password,
+            );
+
+            $smtp->mail($from);
+            $smtp->recipient($to);
+            $smtp->data;
+            $smtp->datasend("From: ${from}\n");
+            $smtp->datasend("To: ${to}\n");
+            $smtp->datasend("Subject: ${subject}\n\n");
+            $smtp->datasend("${body}\n\n");
+            $smtp->dataend;
+            $smtp->quit;
+        }
+    );
 }
 
 # See POD for details on how we pick up config
 sub _conf {
     my ($self, $key, $app) = @_;
 
-    return $self->json_conf->{$key}
-        if exists $self->json_conf->{$key};
+    return $self->json_conf->{$key} if exists $self->json_conf->{$key};
 
-    return $app->config->{smtp}->{$key}
-        if exists $app->config->{smtp}->{$key};
+    return $app->config->{smtp}->{$key} if exists $app->config->{smtp}->{$key};
 
     die "Not found smtp config for '$key'";
 }
@@ -105,12 +104,7 @@ sub _conf {
 sub _file {
     my ($self, $type, $template) = @_;
 
-    return $self->home->child(
-        'templates',
-        'email',
-        $template,
-        "${type}.text.ep"
-    );
+    return $self->home->child('templates', 'email', $template, "${type}.text.ep");
 
 }
 

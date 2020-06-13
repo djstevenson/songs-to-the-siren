@@ -8,11 +8,13 @@ use SongsToTheSiren::Form::Factory;
 sub register {
     my ($self, $app) = @_;
 
-	$app->helper(form => sub {
-		my ($c, $name, @args) = @_;
-		state $form_factory = SongsToTheSiren::Form::Factory->new;
-		return $form_factory->form($name, {c => $c, @args});
-	});
+    $app->helper(
+        form => sub {
+            my ($c, $name, @args) = @_;
+            state $form_factory = SongsToTheSiren::Form::Factory->new;
+            return $form_factory->form($name, {c => $c, @args});
+        }
+    );
 }
 
 1;

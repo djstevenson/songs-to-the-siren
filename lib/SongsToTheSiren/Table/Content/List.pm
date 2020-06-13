@@ -10,13 +10,11 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    return $self->c->schema
-        ->resultset('Content')
-        ->search(undef, { order_by => 'name'}); # Resultset helper
+    return $self->c->schema->resultset('Content')->search(undef, {order_by => 'name'});    # Resultset helper
 }
 
 has_column name => (
-    link         => sub {
+    link => sub {
         my ($col, $table, $row) = @_;
 
         return $table->c->url_for('view_content', name => $row->name);

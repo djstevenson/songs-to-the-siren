@@ -21,7 +21,7 @@ __PACKAGE__->add_columns(
     id            => {data_type => 'INTEGER'},
     name          => {data_type => 'TEXT'},
     email         => {data_type => 'TEXT'},
-    password_hash => {data_type => 'TEXT'},   # Bcrypt 2a with random salt
+    password_hash => {data_type => 'TEXT'},       # Bcrypt 2a with random salt
     admin         => {data_type => 'BOOLEAN'},
     registered_at => {data_type => 'DATETIME'},
     confirmed_at  => {data_type => 'DATETIME'},
@@ -30,10 +30,13 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key('id');
 
-__PACKAGE__->has_many(content       => 'SongsToTheSiren::Schema::Result::Content',     { 'foreign.author_id' => 'self.id' });
-__PACKAGE__->has_many(songs         => 'SongsToTheSiren::Schema::Result::Song',        { 'foreign.author_id' => 'self.id' });
-__PACKAGE__->has_many(comments      => 'SongsToTheSiren::Schema::Result::Comment',     { 'foreign.author_id' => 'self.id' });
-__PACKAGE__->has_many(comment_edits => 'SongsToTheSiren::Schema::Result::CommentEdit', { 'foreign.editor_id' => 'self.id' });
+__PACKAGE__->has_many(content  => 'SongsToTheSiren::Schema::Result::Content', {'foreign.author_id' => 'self.id'});
+__PACKAGE__->has_many(songs    => 'SongsToTheSiren::Schema::Result::Song',    {'foreign.author_id' => 'self.id'});
+__PACKAGE__->has_many(comments => 'SongsToTheSiren::Schema::Result::Comment', {'foreign.author_id' => 'self.id'});
+__PACKAGE__->has_many(
+    comment_edits => 'SongsToTheSiren::Schema::Result::CommentEdit',
+    {'foreign.editor_id' => 'self.id'}
+);
 
 
 no Moose;

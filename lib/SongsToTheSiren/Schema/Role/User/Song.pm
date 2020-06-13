@@ -20,13 +20,7 @@ sub admin_create_song {
 
     my $now = DateTime->now;
 
-    my $full_args = {
-        %$args,
-        full_html    => '',
-        summary_html => '',
-        created_at   => $now,
-        updated_at   => $now,
-    };
+    my $full_args = {%$args, full_html => '', summary_html => '', created_at => $now, updated_at => $now,};
 
     my $song = $self->create_related('songs', $full_args);
     $song->render_markdown;
@@ -39,10 +33,7 @@ sub admin_edit_song {
 
     croak $NOT_ADMIN unless $self->admin;
 
-    my $full_args = {
-        %$args,
-        updated_at => DateTime->now,
-    };
+    my $full_args = {%$args, updated_at => DateTime->now,};
 
     # TODO Record who did the update
     $song->update($full_args);
@@ -57,7 +48,7 @@ sub approve_comment {
     croak $NOT_ADMIN unless $self->admin;
 
     # TODO Add 'approved_by'
-    $comment->update({ approved_at  => DateTime->now });
+    $comment->update({approved_at => DateTime->now});
 
     return $comment;
 }

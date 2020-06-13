@@ -5,12 +5,7 @@ use Parse::BBCode;
 
 # Encapsulates BBCode rendering.
 
-has renderer => (
-    is          => 'ro',
-    isa         => 'Parse::BBCode',
-    lazy        => 1,
-    builder     => '_build_renderer',
-);
+has renderer => (is => 'ro', isa => 'Parse::BBCode', lazy => 1, builder => '_build_renderer',);
 
 sub render {
     my ($self, $raw_bbcode) = @_;
@@ -19,7 +14,7 @@ sub render {
 
     # We will try to detect URLs and make them links IF the
     # text has no explicit BBCode links in it.
-    if ( $raw_bbcode !~ /\[(url|img|email)/i ) {
+    if ($raw_bbcode !~ /\[(url|img|email)/i) {
         $rendered = $self->_gruber_links($rendered);
     }
 
@@ -41,19 +36,19 @@ sub _build_renderer {
 
     return Parse::BBCode->new({
         close_open_tags => 1,
-        tags => {
+        tags            => {
             %defaults,
             '' => sub {
                 my $e = $_[2];
                 $e =~ s/>/&gt;/g;
                 $e =~ s/</&lt;/g;
                 $e =~ s/\r?\n|\r/<br \/>/g;
-                $e
+                $e;
             },
-            's' => q(<s>%s</s>),
-            'sub' => q(<sub>%s</sub>),
-            'sup' => q(<sup>%s</sup>),
-            'code' => q(<pre>%s</pre>),
+            's'     => q(<s>%s</s>),
+            'sub'   => q(<sub>%s</sub>),
+            'sup'   => q(<sup>%s</sup>),
+            'code'  => q(<pre>%s</pre>),
             'quote' => q(<blockquote>%s</blockquote>),
         }
     });
@@ -105,7 +100,7 @@ sub _gruber_links {
 sub __form_link {
     my ($s) = @_;
 
-    my $max = 45;
+    my $max       = 45;
     my $show_link = length($s) > $max ? substr($s, 0, $max) . '...' : $s;
 
     $s = qq(<a href="http://$1">$show_link</a>);

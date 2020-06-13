@@ -12,10 +12,7 @@ use DateTime;
 sub home_page_songs {
     my ($self, $tags) = @_;
 
-    my $rs = $self->select_metadata
-        ->select_text(summary => 'html')
-        ->where_published
-        ->by_publication_date;
+    my $rs = $self->select_metadata->select_text(summary => 'html')->where_published->by_publication_date;
 
     if ($tags) {
         foreach my $tag (@$tags) {
@@ -30,13 +27,9 @@ sub full_song_data {
     my ($self, $song_id, $is_admin) = @_;
 
     # TODO Prefetch tags?
-    my $rs =  $self
-        ->select_metadata
-        ->select_text(summary => 'markdown')
-        ->select_text(full    => 'markdown')
-        ->select_text(full    => 'html')
-        ->select_comment_count('approved');
-    
+    my $rs = $self->select_metadata->select_text(summary => 'markdown')->select_text(full => 'markdown')
+        ->select_text(full => 'html')->select_comment_count('approved');
+
     $rs = $rs->where_published unless $is_admin;
 
     return $rs->find($song_id);
@@ -45,26 +38,28 @@ sub full_song_data {
 sub select_metadata {
     my $self = shift;
 
-    return $self->search(undef, {
-        select    => [qw/ id title album image max_resolution country created_at updated_at published_at released_at author.name artist /],
-        as        => [qw/ id title album image max_resolution country created_at updated_at published_at released_at author_name artist /],
-        join      => [qw/ author /],
-    });
+    return $self->search(
+        undef,
+        {
+            select => [
+                qw/ id title album image max_resolution country created_at updated_at published_at released_at author.name artist /
+            ],
+            as => [
+                qw/ id title album image max_resolution country created_at updated_at published_at released_at author_name artist /
+            ],
+            join => [qw/ author /],
+        }
+    );
 }
 
 sub select_text {
     my ($self, $version, $format) = @_;
 
-    croak 'Bad text version request'
-        unless $version eq 'summary' || $version eq 'full';
-    croak 'Bad text format request'
-        unless $format eq 'html' || $format eq 'markdown';
+    croak 'Bad text version request' unless $version eq 'summary' || $version eq 'full';
+    croak 'Bad text format request'  unless $format eq 'html'     || $format eq 'markdown';
 
     my $field = $version . '_' . $format;
-    return $self->search(undef, {
-        '+select' => [ $field ],
-        '+as'     => [ $field ],
-    });
+    return $self->search(undef, {'+select' => [$field], '+as' => [$field],});
 }
 
 sub select_comment_count {
@@ -72,29 +67,19 @@ sub select_comment_count {
 
     $approved_option //= 'all';
 
-    my $sql_map = {
-        approved   => 'AND C.approved_at IS NOT NULL',
-        unapproved => 'AND C.approved_at IS NULL',
-    };
+    my $sql_map = {approved => 'AND C.approved_at IS NOT NULL', unapproved => 'AND C.approved_at IS NULL',};
 
-    my $approved_sql = exists $sql_map->{$approved_option}
-        ? $sql_map->{$approved_option}
-        : '';
+    my $approved_sql = exists $sql_map->{$approved_option} ? $sql_map->{$approved_option} : '';
 
     my $sql = qq{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id ${approved_sql}) AS comment_count };
 
-    return $self->search(undef, {
-        '+select' => [ \$sql ],
-        '+as'     => [ 'comment_count' ],
-    });
+    return $self->search(undef, {'+select' => [\$sql], '+as' => ['comment_count'],});
 }
 
 sub where_published {
     my $self = shift;
 
-    return $self->search({
-        published_at => \' <= NOW()'
-    });
+    return $self->search({published_at => \' <= NOW()'});
 }
 
 sub where_has_tag {
@@ -102,9 +87,7 @@ sub where_has_tag {
 
     my $tag_sql = '(SELECT 1 FROM song_tags ST WHERE ST.tag_id=? AND ST.song_id=me.id)';
 
-    return $self->search({
-        '-exists' => \[$tag_sql, $tag->id]
-    });
+    return $self->search({'-exists' => \[$tag_sql, $tag->id]});
 }
 
 sub by_id {
@@ -112,15 +95,13 @@ sub by_id {
 
     $order //= '-desc';
 
-    return $self->search(undef, {
-        order_by => { $order => 'id' }
-    });
+    return $self->search(undef, {order_by => {$order => 'id'}});
 }
 
 sub by_publication_date {
-     my ($self, $order) = @_;
+    my ($self, $order) = @_;
 
-     $order //= '-desc';
+    $order //= '-desc';
 
     # Make some plain SQL so we can do NULLS FIRST
     # We won't see the NULL (unpublished) cases if
@@ -129,33 +110,23 @@ sub by_publication_date {
     # we want the unpublished ones at the top.
     # Secondary sort is by id in the same order
     my $sql_order = $order eq '-desc' ? 'DESC' : 'ASC';
-    return $self->search(undef, {
-        order_by => \" published_at ${sql_order} NULLS FIRST, id ${sql_order}",
-    });
+    return $self->search(undef, {order_by => \" published_at ${sql_order} NULLS FIRST, id ${sql_order}",});
 }
 
 sub newer {
     my ($self, $song) = @_;
 
     my $subsel = q{(SELECT published_at FROM songs WHERE id=?)};
-    return $self->search({
-        published_at => { '>' => \[ $subsel, $song->id] }
-    }, {
-        order_by => { -asc => 'published_at' },
-        rows     => 1,
-    });
+    return $self->search({published_at => {'>' => \[$subsel, $song->id]}},
+        {order_by => {-asc => 'published_at'}, rows => 1,});
 }
 
 sub older {
     my ($self, $song) = @_;
 
     my $subsel = q{(SELECT published_at FROM songs WHERE id=?)};
-    return $self->search({
-        published_at => { '<' => \[ $subsel, $song->id] }
-    }, {
-        order_by => { -desc => 'published_at' },
-        rows     => 1,
-    });
+    return $self->search({published_at => {'<' => \[$subsel, $song->id]}},
+        {order_by => {-desc => 'published_at'}, rows => 1,});
 }
 
 __PACKAGE__->meta->make_immutable;

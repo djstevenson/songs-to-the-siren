@@ -14,7 +14,7 @@ sub add_routes {
 
     $song_action_u->route('/view')->name('view_song')->via('GET')->to(action => 'view');
 
-    SongsToTheSiren::Controller::Song::Comment ->new ->add_routes($song_action_u);
+    SongsToTheSiren::Controller::Song::Comment->new->add_routes($song_action_u);
 }
 
 sub capture {
@@ -26,8 +26,8 @@ sub capture {
     # we're admin, in which case we don't care
 
     my $song_id = $c->stash->{song_id};
-    my $rs = $c->schema->resultset('Song');
-    my $admin = exists $c->stash->{admin_user};
+    my $rs      = $c->schema->resultset('Song');
+    my $admin   = exists $c->stash->{admin_user};
     if (my $song = $rs->full_song_data($song_id, $admin)) {
         $c->stash(song => $song);
     }

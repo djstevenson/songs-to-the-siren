@@ -5,12 +5,12 @@ use Moose;
 extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';
 
- 
-sub validate{
-	my ($self, $value) = @_;
+
+sub validate {
+    my ($self, $value) = @_;
 
     return "Required" unless length($value);
-	return undef;
+    return undef;
 }
 
 

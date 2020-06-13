@@ -10,19 +10,13 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    return $self->c->schema
-        ->resultset('Song')
-        ->select_metadata
-        ->select_comment_count('unapproved')
-        ->by_id;
+    return $self->c->schema->resultset('Song')->select_metadata->select_comment_count('unapproved')->by_id;
 }
 
-has_column id => (
-    header       => 'ID',
-);
+has_column id => (header => 'ID',);
 
 has_column title => (
-    link         => sub {
+    link => sub {
         my ($col, $table, $row) = @_;
 
         return $table->c->url_for('view_song', song_id => $row->id);
@@ -30,7 +24,7 @@ has_column title => (
 );
 
 has_column comment_count => (
-    header       => 'Unapproved',
+    header  => 'Unapproved',
     content => sub {
         my ($col, $table, $row) = @_;
 
@@ -45,7 +39,7 @@ has_column publish => (
     content => sub {
         my ($col, $table, $row) = @_;
 
-        if ( defined $row->published_at ) {
+        if (defined $row->published_at) {
             my $url = $table->c->url_for('admin_unpublish_song', song_id => $row->id);
             return qq{<a href="${url}">Hide</a>};
         }
@@ -110,9 +104,8 @@ has '+empty_text' => (default => 'No songs yet defined');
 override class_for_row_data => sub {
     my ($self, $row_data) = @_;
 
-    return 'song-is-not-published' 
-        unless $row_data->published_at;
-    
+    return 'song-is-not-published' unless $row_data->published_at;
+
     return undef;
 };
 

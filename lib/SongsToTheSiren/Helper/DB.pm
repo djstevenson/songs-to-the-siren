@@ -8,23 +8,30 @@ use SongsToTheSiren::Schema;
 sub register {
     my ($self, $app) = @_;
 
-    $app->helper(db_name => sub {
-        my $c = shift;
+    $app->helper(
+        db_name => sub {
+            my $c = shift;
 
-        return $c->config->{db_name};
-    });
+            return $c->config->{db_name};
+        }
+    );
 
-    $app->helper(db_dsn => sub {
-        my $c = shift;
+    $app->helper(
+        db_dsn => sub {
+            my $c = shift;
 
-        return 'postgresql://songstothesiren@localhost/' . $c->db_name
-    });
-    
+            return 'postgresql://songstothesiren@localhost/' . $c->db_name;
+        }
+    );
+
     my $conn = SongsToTheSiren::Schema->connect('dbi:Pg:dbname=' . $app->db_name, 'songstothesiren', undef);
-    $app->helper(schema => sub {
-        # TODO Check connection is still alive, reconnect if not?
-        return $conn;
-    });
+    $app->helper(
+        schema => sub {
+
+            # TODO Check connection is still alive, reconnect if not?
+            return $conn;
+        }
+    );
 
 }
 

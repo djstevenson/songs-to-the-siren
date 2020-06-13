@@ -21,7 +21,7 @@ sub startup {
     $app->plugin('Config');
 
     # Command-line plugins:
-    push @{ $app->commands->namespaces }, 'SongsToTheSiren::Command';
+    push @{$app->commands->namespaces}, 'SongsToTheSiren::Command';
 
     $app->secrets($app->config->{secrets});
 
@@ -40,12 +40,12 @@ sub startup {
     my $route = $app->_base_route;
 
     # Status page, if admin
-    my $a = $route->any('/')->require_admin;
+    my $a            = $route->any('/')->require_admin;
     my $status_route = $a->name('status_home')->any('/status');
     $app->plugin('Status' => {route => $status_route});
 
     my $user_controller = SongsToTheSiren::Controller::User->new;
-	$user_controller->add_routes($route);
+    $user_controller->add_routes($route);
 
     my $home_controller = SongsToTheSiren::Controller::Home->new;
     $home_controller->add_routes($route);
@@ -65,8 +65,8 @@ sub startup {
     # Two conditions required for enabling test endpoints
     # MOJO_MODE=TEST and the db name must be songstothesiren_test
     if ($app->mode eq 'test' && $app->db_name eq 'songstothesiren_test') {
-    	my $test_controller = SongsToTheSiren::Controller::Test->new;
-	    $test_controller->add_routes($route);
+        my $test_controller = SongsToTheSiren::Controller::Test->new;
+        $test_controller->add_routes($route);
     }
 }
 
@@ -92,38 +92,40 @@ sub _base_route {
     # user (if exists) in $c->stash->{auth_user}. If that user
     # is admin, it's also stored in $c->stash->{admin_user}
 
-    return $app->routes->under('/' => sub {
-    	my $c = shift;
+    return $app->routes->under(
+        '/' => sub {
+            my $c = shift;
 
-        # Logged in?
-        if (my $user_id = $c->session->{user}) {
-            if (my $user = $c->schema->resultset('User')->find($user_id)) {
-                $c->stash->{auth_user} = $user;
-                $c->stash->{admin_user} = $user if $user->admin;
-                return 1;
+            # Logged in?
+            if (my $user_id = $c->session->{user}) {
+                if (my $user = $c->schema->resultset('User')->find($user_id)) {
+                    $c->stash->{auth_user}  = $user;
+                    $c->stash->{admin_user} = $user if $user->admin;
+                    return 1;
+                }
             }
+
+            # Not logged in. Delete any lingering user data
+            # in session.
+            delete $c->session->{user};
+
+            return 1;
         }
-
-        # Not logged in. Delete any lingering user data
-        # in session.
-        delete $c->session->{user};
-
-        return 1;
-    });
+    );
 }
 
 # Private method to apply migrations from tools/migrations.sql
 sub _migrate_db {
     my $app = shift;
 
-    my $schema = $app->schema;
+    my $schema  = $app->schema;
     my $db_name = $app->db_name;
 
-    my $pg = Mojo::Pg->new("postgresql://songstothesiren\@localhost/$db_name");
+    my $pg         = Mojo::Pg->new("postgresql://songstothesiren\@localhost/$db_name");
     my $migrations = Mojo::Pg::Migrations->new(pg => $pg);
 
     my $home = Mojo::Home->new->detect;
-    my $sql = $home->child('tools', 'migrations.sql');
+    my $sql  = $home->child('tools', 'migrations.sql');
 
     print "Applying migrations from $sql\n";
     $migrations->from_file($sql)->migrate;

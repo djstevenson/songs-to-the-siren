@@ -8,25 +8,27 @@ sub register {
 
     # $tag is a Tag result object
     # Returns '' or '?tags=n,m,p'
-    $app->helper(remove_tag_from_query_params => sub {
-        my ($c, $tag) = @_;
+    $app->helper(
+        remove_tag_from_query_params => sub {
+            my ($c, $tag) = @_;
 
-        return remove_id_from_param($c->param('tags'), 'tags', $tag->id);
-    });
+            return remove_id_from_param($c->param('tags'), 'tags', $tag->id);
+        }
+    );
 
     # $tag is a Tag result object
     # Returns ?tags=n,m,p'
-    $app->helper(add_tag_to_query_params => sub {
-        my ($c, $tag) = @_;
+    $app->helper(
+        add_tag_to_query_params => sub {
+            my ($c, $tag) = @_;
 
-        return add_id_to_param($c->param('tags'), 'tags', $tag->id);
-    });
+            return add_id_to_param($c->param('tags'), 'tags', $tag->id);
+        }
+    );
 
-  
 
     # TODO Tests for helpers
 }
-
 
 
 1;

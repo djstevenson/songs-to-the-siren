@@ -8,21 +8,17 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'delete-song');
 
-has song => (
-    is          => 'ro',
-    isa         => 'SongsToTheSiren::Schema::Result::Song',
-    required    => 1,
-);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
 
 has_button delete_song => ();
-has_button cancel => (style => 'light', skip_validation => 1);
+has_button cancel      => (style => 'light', skip_validation => 1);
 
 # TODO maybe implement these as callbacks on the buttons?
 override posted => sub {
-	my $self = shift;
-	
+    my $self = shift;
+
     my $delete_button = $self->find_button('delete_song');
-    if ( $delete_button->clicked ) {
+    if ($delete_button->clicked) {
         $self->song->delete;
         $self->action('deleted');
     }

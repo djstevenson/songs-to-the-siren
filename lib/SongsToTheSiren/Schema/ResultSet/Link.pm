@@ -10,33 +10,25 @@ use Carp qw/ croak /;
 sub in_list {
     my $self = shift;
 
-    return $self->search({
-        list_priority => { '>' => 0 },
-    });
+    return $self->search({list_priority => {'>' => 0},});
 }
 
 sub by_priority {
     my $self = shift;
 
-    return $self->search(undef, {
-        order_by => { -asc => [qw/ list_priority id /] },
-    });
+    return $self->search(undef, {order_by => {-asc => [qw/ list_priority id /]},});
 }
 
 sub embedded_links {
     my $self = shift;
 
-    return $self->search({
-        embed_identifier => { '!=' => '' },
-    });
+    return $self->search({embed_identifier => {'!=' => ''},});
 }
 
 sub by_identifier {
     my $self = shift;
 
-    my %links = map {
-        ($_->embed_identifier => $_)
-    } $self->all;
+    my %links = map { ($_->embed_identifier => $_) } $self->all;
 
     return \%links;
 }
@@ -53,7 +45,6 @@ sub links_list {
 
     return $self->in_list->by_priority;
 }
-
 
 
 __PACKAGE__->meta->make_immutable;

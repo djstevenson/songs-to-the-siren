@@ -2,10 +2,11 @@ package SongsToTheSiren::Form::Render::Checkbox;
 use Moose::Role;
 use namespace::autoclean;
 
-sub render{
+sub render {
     my $self = shift;
 
-	die "Checkbox not yet implemented";
+    die "Checkbox not yet implemented";
+
     # my $name = $self->name;
     # my $id = $form->id . '_' . $name;
     # my $value = $form->escaped_value_for($name);

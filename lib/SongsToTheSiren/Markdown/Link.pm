@@ -9,18 +9,15 @@ use SongsToTheSiren::View::Link::Render;
 # An extension to Text::Markdown - POD docs at end of file
 
 has _links => (
-    is          => 'ro',
-    isa         => 'HashRef[SongsToTheSiren::Schema::Result::Link]',
-    lazy        => 1,
-    default     => sub {
+    is      => 'ro',
+    isa     => 'HashRef[SongsToTheSiren::Schema::Result::Link]',
+    lazy    => 1,
+    default => sub {
         my $self = shift;
 
         return {} unless $self->has_song;
 
-        return $self->song
-            ->links
-            ->embedded_links
-            ->by_identifier;
+        return $self->song->links->embedded_links->by_identifier;
     }
 );
 
@@ -40,10 +37,9 @@ sub process {
 sub _replacement_link {
     my ($self, $identifier) = @_;
 
-    return "**LINK IDENTIFIER NOT FOUND: $identifier**"
-        unless exists $self->_links->{$identifier};
-    
-    my $args = { link => $self->_links->{$identifier} };
+    return "**LINK IDENTIFIER NOT FOUND: $identifier**" unless exists $self->_links->{$identifier};
+
+    my $args = {link => $self->_links->{$identifier}};
     $args->{song} = $self->song if $self->has_song;
     my $renderer = SongsToTheSiren::View::Link::Render->new($args);
     return $renderer->as_html;

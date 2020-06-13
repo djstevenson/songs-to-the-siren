@@ -4,9 +4,7 @@ use warnings;
 
 
 # TODO POD
-use Sub::Exporter -setup => {
-    exports => [qw/ add_id_to_list remove_id_from_list /]
-};
+use Sub::Exporter -setup => {exports => [qw/ add_id_to_list remove_id_from_list /]};
 
 
 sub add_id_to_list {

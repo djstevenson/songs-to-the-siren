@@ -43,15 +43,12 @@ sub create_user {
     my $name     = $c->param('name')     or die;
     my $email    = $c->param('email')    or die;
     my $password = $c->param('password') or die;
-    my $admin    = $c->param('admin')    // 0;
+    my $admin = $c->param('admin') // 0;
 
-    my $rs = $c->schema->resultset('User');
+    my $rs   = $c->schema->resultset('User');
     my $user = $rs->create_test_user($name, $email, $password, $admin);
 
-    $c->stash(
-        user     => $user,
-        template => 'test/user',
-    );
+    $c->stash(user => $user, template => 'test/user',);
 }
 
 sub create_song {
@@ -61,9 +58,7 @@ sub create_song {
     my $user     = $c->_find_user_by_name($username);
     die unless $user->admin;
 
-    my $published = $c->param('published')
-        ? DateTime->now
-        : undef;
+    my $published = $c->param('published') ? DateTime->now : undef;
 
     my $fields = {
         title            => $c->param('title'),
@@ -76,7 +71,7 @@ sub create_song {
         full_markdown    => $c->param('full'),
         published_at     => $published,
     };
-	$user->admin_create_song($fields);
+    $user->admin_create_song($fields);
 
     $c->redirect_to('home');
 }
@@ -88,12 +83,8 @@ sub create_content {
     my $user     = $c->_find_user_by_name($username);
     die unless $user->admin;
 
-    my $fields = {
-        name             => $c->param('name'),
-        title            => $c->param('title'),
-        markdown         => $c->param('markdown'),
-    };
-	$user->admin_create_content($fields);
+    my $fields = {name => $c->param('name'), title => $c->param('title'), markdown => $c->param('markdown'),};
+    $user->admin_create_content($fields);
 
     $c->redirect_to('home');
 }
@@ -119,14 +110,14 @@ sub _find_user_by_name {
     my ($c, $username) = @_;
 
     my $rs = $c->schema->resultset('User');
-    return $rs->search({ name => $username })->single;
+    return $rs->search({name => $username})->single;
 }
 
 sub _find_song_by_title {
     my ($c, $title) = @_;
 
     my $rs = $c->schema->resultset('Song');
-    return $rs->search({ title => $title })->single;
+    return $rs->search({title => $title})->single;
 }
 
 sub view_user {
@@ -135,10 +126,7 @@ sub view_user {
     my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
-        $c->stash(
-            user     => $user,
-            template => 'test/user',
-        );
+        $c->stash(user => $user, template => 'test/user',);
         return 1;
     }
 
@@ -151,18 +139,10 @@ sub view_email {
     my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
-        my $email = $c->schema
-            ->resultset('Email')
-            ->latest_email(
-                $c->stash->{type},
-                $user->email,
-            );
+        my $email = $c->schema->resultset('Email')->latest_email($c->stash->{type}, $user->email,);
 
         if ($email) {
-            $c->stash(
-                email    => $email,
-                template => 'test/email',
-            );
+            $c->stash(email => $email, template => 'test/email',);
             return 1;
         }
     }
