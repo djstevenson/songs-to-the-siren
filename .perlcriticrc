@@ -1,0 +1,34 @@
+[ControlStructures::ProhibitPostfixControls]
+allow = if unless 
+severity = cruel
+[-Documentation::RequirePodSections]
+# RequirePodSections needs some work we need a lib_sections 
+[InputOutput::RequireCheckedSyscalls]
+functions = :builtins
+exclude_functions = print close say sleep
+[-InputOutput::RequireCheckedClose]
+[-CodeLayout::ProhibitParensWithBuiltins]
+[Variables::ProhibitPunctuationVars]
+# allow the common ones
+allow = $@ $!
+[-ControlStructures::ProhibitUnlessBlocks]
+[-RegularExpressions::RequireDotMatchAnything]
+[-RegularExpressions::RequireLineBoundaryMatching]
+[-Documentation::RequirePodAtEnd]
+[-CodeLayout::ProhibitHardTabs]
+[-Modules::RequireVersionVar]
+[-Subroutines::ProhibitExplicitReturnUndef]
+[RegularExpressions::RequireExtendedFormatting]
+# don't need it for short ones
+minimum_regex_length_to_complain_about = 10
+[TestingAndDebugging::RequireUseStrict]
+# add some modules that import the strict pragma
+equivalent_modules = MessageFocus::API::Moose MessageFocus::Web::Form::Moose CatalystX::Tabset::Moose CatalystX::Table::Moose
+[TestingAndDebugging::RequireUseWarnings]
+# add some modules that import the warnings pragma
+equivalent_modules = MessageFocus::API::Moose MessageFocus::Web::Form::Moose CatalystX::Tabset::Moose CatalystX::Table::Moose
+[Subroutines::ProhibitUnusedPrivateSubroutines]
+# Allow private subs that begin _build
+private_name_regex = _(?!(_|build))\w+
+[ValuesAndExpressions::ProhibitMagicNumbers]
+allowed_values = 0 1 2 0.5 7 24 60 100 1000 3600 86400 1000000 1000000000
