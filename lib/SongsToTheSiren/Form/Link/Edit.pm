@@ -91,13 +91,9 @@ override posted => sub {
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-        my $fields
-            = $self->form_hash(
+        my $fields = $self->form_hash(
             qw/ embed_identifier embed_class embed_url embed_description list_priority list_url list_description list_css /
-            );
-
-        # Handle special case list_css: 'default' means NULL
-        $fields->{list_css} = undef if $fields->{list_css} eq 'default';
+        );
 
         # Create or update?
         if ($self->is_update) {
