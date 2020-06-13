@@ -2001,12 +2001,12 @@ DISTRIBUTIONS
       IO::Socket::IP 0.37
       Sub::Util 1.41
       perl 5.016
-  Mojolicious-Plugin-Status-1.11
-    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.11.tar.gz
+  Mojolicious-Plugin-Status-1.12
+    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.12.tar.gz
     provides:
       Mojo::MemoryMap undef
       Mojo::MemoryMap::Writer undef
-      Mojolicious::Plugin::Status 1.11
+      Mojolicious::Plugin::Status 1.12
     requirements:
       BSD::Resource 0
       Cpanel::JSON::XS 4.09
