@@ -287,3 +287,11 @@ UPDATE links SET list_css = 'songs-to-the-siren' WHERE list_css = 'default';
 UPDATE links SET list_css = 'default' WHERE list_css = 'songs-to-the-siren';
 ALTER TABLE links ALTER COLUMN list_css SET NOT NULL;
 
+-- 10 up : reverse 9, that was a bad idea
+UPDATE links SET list_css = 'default' WHERE list_css IS NULL;
+ALTER TABLE links ALTER COLUMN list_css SET NOT NULL;
+
+-- 10 down : reverse 9, that was a bad idea
+ALTER TABLE links ALTER COLUMN list_css DROP NOT NULL;
+UPDATE links SET list_css = NULL WHERE list_css = 'default';
+
