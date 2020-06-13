@@ -7,19 +7,19 @@ sub add_routes {
     # $song_action has checked that we're logged-in, but not that we're admin
 
     my $u = $song_action->require_admin->any('/comment')->to(controller => 'admin-song-comment');
-    
+
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
     $comment_action->route('/approve')->name('admin_approve_comment')->via('GET', 'POST')->to(action => 'approve');
-    $comment_action->route('/reject') ->name('admin_reject_comment') ->via('GET', 'POST')->to(action => 'reject');
-    $comment_action->route('/edit')   ->name('admin_edit_comment')   ->via('GET', 'POST')->to(action => 'edit');
+    $comment_action->route('/reject')->name('admin_reject_comment')->via('GET', 'POST')->to(action   => 'reject');
+    $comment_action->route('/edit')->name('admin_edit_comment')->via('GET', 'POST')->to(action       => 'edit');
 }
 
 sub capture {
     my $c = shift;
 
     my $comment_id = $c->stash->{comment_id};
-    my $rs = $c->schema->resultset('Comment');
+    my $rs         = $c->schema->resultset('Comment');
     if (my $comment = $rs->find($comment_id)) {
         $c->stash(comment => $comment);
     }
@@ -37,8 +37,8 @@ sub approve {
     my $comment = $c->stash->{comment};
     my $song    = $comment->song;
 
-    my $form = $c->form( 'Song::Comment::Approve', comment => $comment );
-    
+    my $form = $c->form('Song::Comment::Approve', comment => $comment);
+
     if ($form->process) {
         $c->flash(msg => 'Comment approved');
 
@@ -55,8 +55,8 @@ sub reject {
     my $comment = $c->stash->{comment};
     my $song    = $comment->song;
 
-    my $form = $c->form( 'Song::Comment::Reject', comment => $comment );
-    
+    my $form = $c->form('Song::Comment::Reject', comment => $comment);
+
     if ($form->process) {
         $c->flash(msg => 'Comment rejected');
 
@@ -66,14 +66,15 @@ sub reject {
         $c->stash(form => $form);
     }
 }
+
 sub edit {
     my $c = shift;
 
     my $comment = $c->stash->{comment};
     my $song    = $comment->song;
 
-    my $form = $c->form( 'Song::Comment::Edit', comment => $comment );
-    
+    my $form = $c->form('Song::Comment::Edit', comment => $comment);
+
     if ($form->process) {
         $c->flash(msg => 'Comment edited');
 

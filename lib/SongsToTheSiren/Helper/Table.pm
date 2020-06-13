@@ -8,11 +8,13 @@ use SongsToTheSiren::Table::Factory;
 sub register {
     my ($self, $app) = @_;
 
-	$app->helper(table => sub {
-		my ($c, $name, @args) = @_;
-		state $table_factory = SongsToTheSiren::Table::Factory->new;
-		return $table_factory->table($name, {c => $c, @args});
-	});
+    $app->helper(
+        table => sub {
+            my ($c, $name, @args) = @_;
+            state $table_factory = SongsToTheSiren::Table::Factory->new;
+            return $table_factory->table($name, {c => $c, @args});
+        }
+    );
 
 }
 

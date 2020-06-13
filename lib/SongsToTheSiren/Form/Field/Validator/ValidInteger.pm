@@ -6,8 +6,8 @@ extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';
 
 
-sub validate{
-	my ($self, $value) = @_;
+sub validate {
+    my ($self, $value) = @_;
 
     return undef if $value =~ m{^[0-9]{1,}$}i;
 

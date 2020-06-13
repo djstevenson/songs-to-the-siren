@@ -4,8 +4,8 @@ use namespace::autoclean;
 
 with 'SongsToTheSiren::Form::Render::Input::Generic';
 
-sub render{
-	my ($self, $form) = @_;
+sub render {
+    my ($self, $form) = @_;
     return $self->_input_render($form, 'password');
 }
 

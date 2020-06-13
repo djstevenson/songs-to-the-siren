@@ -11,23 +11,23 @@ sub latest_email {
 
     $self->_assert_test_db;
 
-    return $self->search({
-        template_name => $type,
-        email_to      => $address,
-    }, {
-        rows          => 1,
-        order_by      => { -desc => 'id' },  # Most recent
-    })->single;
+    return $self->search(
+        {template_name => $type, email_to => $address,},
+        {
+            rows     => 1,
+            order_by => {-desc => 'id'},    # Most recent
+        }
+    )->single;
 }
 
 # TODO Create a common base class for resultsets and
 # move this there
 sub _assert_test_db {
-	my $self = shift;
+    my $self = shift;
 
-	my $dbh = $self->result_source->schema->storage->dbh;
-	my ($k, $name) = split(/=/, $dbh->{Name});
-	die unless $name eq 'songstothesiren_test';
+    my $dbh = $self->result_source->schema->storage->dbh;
+    my ($k, $name) = split(/=/, $dbh->{Name});
+    die unless $name eq 'songstothesiren_test';
 }
 
 __PACKAGE__->meta->make_immutable;

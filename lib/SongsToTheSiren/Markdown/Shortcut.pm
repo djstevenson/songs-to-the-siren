@@ -23,13 +23,11 @@ sub process {
 
 # TODO Put this in the database or (better) a config file
 has _expansions => (
-    is          => 'ro',
-    isa         => 'HashRef[Str]',
-    lazy        => 1,
-    default     => sub {
-        return {
-            shrug => '&macr;&bsol;&lowbar;&lpar;&#x30C4;&rpar;&lowbar;&sol;&macr;',
-        };
+    is      => 'ro',
+    isa     => 'HashRef[Str]',
+    lazy    => 1,
+    default => sub {
+        return {shrug => '&macr;&bsol;&lowbar;&lpar;&#x30C4;&rpar;&lowbar;&sol;&macr;',};
     },
 );
 

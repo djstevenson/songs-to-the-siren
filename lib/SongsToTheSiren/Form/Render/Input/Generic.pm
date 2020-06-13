@@ -13,9 +13,9 @@ sub _name_to_id {
 sub _input_render {
     my ($self, $form, $type) = @_;
 
-    my $name        = $self->name;
-    my $id          = $self->_name_to_id($form, $name);
-    my $label       = $self->label;
+    my $name  = $self->name;
+    my $id    = $self->_name_to_id($form, $name);
+    my $label = $self->label;
 
     my $value       = '';
     my $input_class = 'form-control';
@@ -55,17 +55,15 @@ sub _get_auto_attributes {
 
     my %attrs;
 
-    # autofocus HTML5 is a boolean (present or not). 
+    # autofocus HTML5 is a boolean (present or not).
     # The others here take a value.
     $attrs{autofocus}      = undef                 if $self->autofocus;
     $attrs{autocomplete}   = $self->autocomplete   if $self->has_autocomplete;
     $attrs{autocorrect}    = $self->autocorrect    if $self->has_autocorrect;
     $attrs{autocapitalize} = $self->autocapitalize if $self->has_autocapitalize;
     $attrs{spellcheck}     = $self->spellcheck     if $self->has_spellcheck;
-    
-    return join(' ', map {
-        defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_
-    } keys %attrs);
+
+    return join(' ', map { defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_ } keys %attrs);
 }
 
 no Moose::Role;

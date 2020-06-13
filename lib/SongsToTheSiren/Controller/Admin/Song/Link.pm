@@ -12,8 +12,9 @@ sub add_routes {
 
     # Admin routes that capture a link id
     my $link_action = $u->under('/:link_id')->to(action => 'capture');
-    $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action => 'edit');
-    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete'); # DELETE method?
+    $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action     => 'edit');
+    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete')
+        ;    # DELETE method?
     $link_action->route('/copy')->name('admin_copy_song_link')->to(action => 'copy');
 }
 
@@ -21,7 +22,7 @@ sub add_routes {
 sub list {
     my $c = shift;
 
-    my $song = $c->stash->{song};
+    my $song  = $c->stash->{song};
     my $table = $c->table('Song::Link::List', song => $song);
 
     $c->stash(table => $table);
@@ -32,7 +33,7 @@ sub create {
 
     my $song = $c->stash->{song};
     my $form = $c->form('Link::Edit', song => $song);
-    
+
     if ($form->process) {
         $c->flash(msg => 'Link added') if $form->action eq 'created';
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
@@ -63,13 +64,13 @@ sub edit {
     my $song = $c->stash->{song};
     my $link = $c->stash->{link};
     my $form = $c->form('Link::Edit', song => $song, link => $link);
-    
+
     if ($form->process) {
         $c->flash(msg => 'Link updated') if $form->action eq 'updated';
         $c->redirect_to('admin_list_song_links', song_id => $song->id);
     }
     else {
-            $c->stash(form => $form);
+        $c->stash(form => $form);
     }
 }
 

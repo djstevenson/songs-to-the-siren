@@ -6,9 +6,7 @@ use warnings;
 
 # TODO Tests
 # TODO Tests that take different timezones into account
-use Sub::Exporter -setup => {
-    exports => [qw/ format_date format_date_nosec format_pg_date format_date_compact /]
-};
+use Sub::Exporter -setup => {exports => [qw/ format_date format_date_nosec format_pg_date format_date_compact /]};
 
 use DateTime::Format::Pg;
 

@@ -13,9 +13,9 @@ sub render {
     my $s;
 
     foreach my $button (@$buttons) {
-        my $value    = $button->{value};
-        my $checked  = $button->{checked} ? 'checked' : '';
-        my $label    = $button->{text} // '';
+        my $value   = $button->{value};
+        my $checked = $button->{checked} ? 'checked' : '';
+        my $label   = $button->{text} // '';
 
         $s .= qq{
             <div class="form-check-inline">

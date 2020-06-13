@@ -17,9 +17,9 @@ sub capture {
     my $c = shift;
 
     my $name = $c->stash->{name};
-    my $rs = $c->schema->resultset('Content');
-    if ( my $content = $rs->find($name) ) {
-        $c->stash( content => $content );
+    my $rs   = $c->schema->resultset('Content');
+    if (my $content = $rs->find($name)) {
+        $c->stash(content => $content);
     }
     else {
         $c->reply->not_found;
@@ -30,6 +30,6 @@ sub capture {
 }
 
 
-sub view {}
+sub view { }
 
 1;

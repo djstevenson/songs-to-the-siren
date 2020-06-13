@@ -8,17 +8,9 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'edit-link');
 
-has song => (
-    is          => 'ro',
-    isa         => 'SongsToTheSiren::Schema::Result::Song',
-    required    => 1,
-);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
 
-has link => (
-    is          => 'ro',
-    isa         => 'SongsToTheSiren::Schema::Result::Link',
-    predicate   => 'is_update',
-);
+has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', predicate => 'is_update',);
 
 
 has_field embed_identifier => (
@@ -30,62 +22,39 @@ has_field embed_identifier => (
     autocapitalize => 'off',
 );
 
-has_field embed_url => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-);
+has_field embed_url => (type => 'Input::Text', filters => [qw/ TrimEdges /],);
 
 has_field embed_class => (
-    type        => 'Select',
-    selections  => sub {
+    type       => 'Select',
+    selections => sub {
         my ($field, $form) = @_;
 
         my $roles = $form->c->app->config->{link_roles};
 
-        return [
-            map { { value => $_, text => $_ } } @$roles
-        ];
+        return [map { {value => $_, text => $_} } @$roles];
     },
 );
 
-has_field embed_description => (
-    type         => 'Input::Text',
-    filters      => [qw/ TrimEdges /],
-    autocomplete => 'off',
-);
+has_field embed_description => (type => 'Input::Text', filters => [qw/ TrimEdges /], autocomplete => 'off',);
 
 
+has_field list_priority =>
+    (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ ValidInteger /], autocomplete => 'off',);
 
-has_field list_priority => (
-    type         => 'Input::Text',
-    filters      => [qw/ TrimEdges /],
-    validators   => [qw/ ValidInteger /],
-    autocomplete => 'off',
-);
-
-has_field list_url => (
-    type        => 'Input::Text',
-    filters     => [qw/ TrimEdges /],
-);
+has_field list_url => (type => 'Input::Text', filters => [qw/ TrimEdges /],);
 
 has_field list_css => (
-    type        => 'Select',
-    selections  => sub {
+    type       => 'Select',
+    selections => sub {
         my ($field, $form) = @_;
 
         my $css = $form->c->app->config->{link_css};
 
-        return [
-            map { { value => $_, text => $_ } } @$css
-        ];
+        return [map { {value => $_, text => $_} } @$css];
     },
 );
 
-has_field list_description => (
-    type         => 'Input::Text',
-    filters      => [qw/ TrimEdges /],
-    autocomplete => 'off',
-);
+has_field list_description => (type => 'Input::Text', filters => [qw/ TrimEdges /], autocomplete => 'off',);
 
 has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
@@ -100,39 +69,39 @@ after extra_validation => sub {
 
     my $fail;
 
-    my $identifiers = $self->song
-        ->links
-        ->embedded_links
-        ->by_identifier;
-    
+    my $identifiers = $self->song->links->embedded_links->by_identifier;
+
     my $identifier_field = $self->find_field('embed_identifier');
     my $identifier_value = lc $identifier_field->value;
 
     $fail = 'Identifier already used for this song'
         if exists $identifiers->{$identifier_value}
-            && (! $self->is_update || $identifiers->{$identifier_value}->id != $self->link->id);
+        && (!$self->is_update || $identifiers->{$identifier_value}->id != $self->link->id);
 
     # Set the error on 'identifier' if we don't already have one
-    $identifier_field->error($fail)
-        if $fail && !$identifier_field->has_error;
+    $identifier_field->error($fail) if $fail && !$identifier_field->has_error;
 };
 
 override posted => sub {
-	my $self = shift;
+    my $self = shift;
 
     my $update_button = $self->find_button('submit');
-    if ( $update_button->clicked ) {
+    if ($update_button->clicked) {
 
         my $user = $self->c->stash->{auth_user};
 
         # Whitelist what we extract from the submitted form
-    	my $fields = $self->form_hash(qw/ embed_identifier embed_class embed_url embed_description list_priority list_url list_description list_css /);
+        my $fields
+            = $self->form_hash(
+            qw/ embed_identifier embed_class embed_url embed_description list_priority list_url list_description list_css /
+            );
 
         # Handle special case list_css: 'default' means NULL
         $fields->{list_css} = undef if $fields->{list_css} eq 'default';
-        
+
         # Create or update?
-        if ( $self->is_update ) {
+        if ($self->is_update) {
+
             # Update
             $self->link->update($fields);
             $self->song->render_markdown;
@@ -152,8 +121,8 @@ override posted => sub {
 sub BUILD {
     my $self = shift;
 
-    if ( $self->is_update ) {
-     	$self->data_object($self->link);
+    if ($self->is_update) {
+        $self->data_object($self->link);
     }
 }
 

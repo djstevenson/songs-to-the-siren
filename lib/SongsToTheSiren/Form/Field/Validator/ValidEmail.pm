@@ -6,10 +6,12 @@ extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';
 
 
-sub validate{
-	my ($self, $value) = @_;
+sub validate {
+    my ($self, $value) = @_;
 
-    return undef if $value =~ m{^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$}i;
+    return undef
+        if $value
+        =~ m{^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$}i;
 
     return 'Invalid email address';
 

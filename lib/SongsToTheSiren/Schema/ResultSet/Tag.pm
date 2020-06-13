@@ -18,31 +18,26 @@ sub search_by_ids {
     return [] unless scalar @ids;
 
 
-    return [
-        $self->search({
-            id => { -in => \@ids }
-        })->all
-    ];
+    return [$self->search({id => {-in => \@ids}})->all];
 }
 
 sub by_name {
     my ($self) = @_;
 
-    return $self->search(undef, {
-        order_by => \'LOWER(name)'   # Case-insensitive
-    });
+    return $self->search(
+        undef,
+        {
+            order_by => \'LOWER(name)'    # Case-insensitive
+        }
+    );
 }
 
 sub fetch_counts {
     my ($self, $song) = @_;
 
-    return $self->search(undef, {
-        '+select' => \q/ (SELECT COUNT(*) FROM song_tags WHERE tag_id=me.id) /,
-        '+as'     => 'song_count',
-    });
+    return $self->search(undef,
+        {'+select' => \q/ (SELECT COUNT(*) FROM song_tags WHERE tag_id=me.id) /, '+as' => 'song_count',});
 }
-
-
 
 
 __PACKAGE__->meta->make_immutable;

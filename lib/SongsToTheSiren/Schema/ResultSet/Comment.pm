@@ -16,11 +16,7 @@ sub for_display {
     my $self = shift;
 
     # Add the author name to the search
-    return $self->search(undef, {
-        '+select' => [ 'author.name' ],
-        '+as'     => [ 'author_name' ],
-        join      => 'author',
-    });
+    return $self->search(undef, {'+select' => ['author.name'], '+as' => ['author_name'], join => 'author',});
 }
 
 sub for_user {
@@ -29,25 +25,19 @@ sub for_user {
     my $rs;
     if ($user) {
         if ($user->admin) {
+
             # Admin user sees everything
             $rs = $self;
         }
         else {
             # Non-admin user sees modded comments
             # and OWN non-modded ones.
-            $rs = $self->search({
-                -or => [
-                    { approved_at => { '!=' => undef } },
-                    { author_id   => $user->id         },
-                ]
-            });
+            $rs = $self->search({-or => [{approved_at => {'!=' => undef}}, {author_id => $user->id},]});
         }
     }
     else {
         # Not logged-in, sees modded comments only
-        $rs = $self->search({
-            approved_at => { '!=' => undef }
-        });
+        $rs = $self->search({approved_at => {'!=' => undef}});
     }
 
     return $rs;
@@ -56,9 +46,7 @@ sub for_user {
 sub id_order {
     my $self = shift;
 
-    return $self->search(undef, {
-        order_by => { -asc => 'id' }
-    });
+    return $self->search(undef, {order_by => {-asc => 'id'}});
 }
 
 __PACKAGE__->meta->make_immutable;

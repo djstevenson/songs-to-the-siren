@@ -22,12 +22,13 @@ sub add_routes {
     $song_a->route('/publish')->name('admin_publish_song')->via('GET')->to(action => 'publish');
     $song_a->route('/unpublish')->name('admin_unpublish_song')->via('GET')->to(action => 'unpublish');
     $song_a->route('/edit')->name('admin_edit_song')->via('GET', 'POST')->to(action => 'edit');
+
     # Method=DELETE?
     $song_a->route('/delete')->name('admin_delete_song')->via('GET', 'POST')->to(action => 'delete');
 
-    SongsToTheSiren::Controller::Admin::Song::Comment ->new ->add_routes($song_a);
-    SongsToTheSiren::Controller::Admin::Song::Link    ->new ->add_routes($song_a);
-    SongsToTheSiren::Controller::Admin::Song::Tag     ->new ->add_routes($song_a);
+    SongsToTheSiren::Controller::Admin::Song::Comment->new->add_routes($song_a);
+    SongsToTheSiren::Controller::Admin::Song::Link->new->add_routes($song_a);
+    SongsToTheSiren::Controller::Admin::Song::Tag->new->add_routes($song_a);
 }
 
 sub create {
@@ -61,8 +62,8 @@ sub capture {
     # we're admin, in which case we don't care
 
     my $song_id = $c->stash->{song_id};
-    my $rs = $c->schema->resultset('Song');
-    my $admin = exists $c->stash->{admin_user};
+    my $rs      = $c->schema->resultset('Song');
+    my $admin   = exists $c->stash->{admin_user};
     if (my $song = $rs->full_song_data($song_id, $admin)) {
         $c->stash(song => $song);
     }
@@ -95,7 +96,7 @@ sub edit {
 
     my $song = $c->stash->{song};
     my $form = $c->form('Song::Edit', song => $song);
-    
+
     if ($form->process) {
         $c->flash(msg => 'Song updated') if $form->action eq 'updated';
 

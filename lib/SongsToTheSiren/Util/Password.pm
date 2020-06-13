@@ -3,12 +3,14 @@ use strict;
 use warnings;
 
 use Sub::Exporter -setup => {
-    exports => [qw/
-        new_password_hash
-        check_password_hash
-        random_user_key
-        message_digest
-    /],
+    exports => [
+        qw/
+            new_password_hash
+            check_password_hash
+            random_user_key
+            message_digest
+            /
+    ],
 };
 
 use feature 'state';
@@ -26,11 +28,7 @@ sub new_password_hash {
     # TODO If it changes, automatically upgrade hashes on login.
     my $default_cost = $ENV{TEST_BCRYPT_COST} // 13;
 
-    my $ppr = Authen::Passphrase::BlowfishCrypt->new(
-        cost => $default_cost,
-        salt_random => 1,
-        passphrase => $password,
-    );
+    my $ppr = Authen::Passphrase::BlowfishCrypt->new(cost => $default_cost, salt_random => 1, passphrase => $password,);
 
     return $ppr->as_crypt;
 }
@@ -49,7 +47,7 @@ sub random_user_key {
 
     # TODO make it congif, not hard-coded at 16 chars
     my $s;
-    foreach my $i ( 1 .. 16 ) {
+    foreach my $i (1 .. 16) {
         $s .= $charset->[int(rand $charcnt)];
     }
 

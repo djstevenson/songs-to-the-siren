@@ -5,19 +5,15 @@ use Moose;
 extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';
 
-has min => (
-	is          => 'ro',
-	isa         => 'Int',
-	required    => 1,
-);
+has min => (is => 'ro', isa => 'Int', required => 1,);
 
-sub validate{
-	my ($self, $value) = @_;
+sub validate {
+    my ($self, $value) = @_;
 
-	my $min = $self->min;
-	
+    my $min = $self->min;
+
     return "Minimum length $min" if length($value // '') < $min;
-	return undef;
+    return undef;
 }
 
 

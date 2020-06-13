@@ -5,7 +5,7 @@ sub add_routes {
     my ($c, $song_action) = @_;
 
     my $u = $song_action->require_sign_in->any('/comment')->to(controller => 'song-comment');
-    
+
     $u->route('/create')->name('new_song_comment')->via('GET', 'POST')->to(action => 'create');
 
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
@@ -18,7 +18,7 @@ sub create {
 
     my $song = $c->stash->{song};
     my $form = $c->form('Song::Comment::Create', song => $song);
-    
+
     if ($form->process) {
         $c->flash(msg => 'Commented added - subject to moderation');
 
@@ -33,7 +33,7 @@ sub capture {
     my $c = shift;
 
     my $comment_id = $c->stash->{comment_id};
-    my $rs = $c->schema->resultset('Comment');
+    my $rs         = $c->schema->resultset('Comment');
     if (my $comment = $rs->find($comment_id)) {
         $c->stash(comment => $comment);
     }
@@ -55,11 +55,8 @@ sub reply {
 
     my $song = $parent_comment->song;
 
-    my $form = $c->form('Song::Comment::Create',
-        song           => $song,
-        parent_comment => $parent_comment,
-    );
-    
+    my $form = $c->form('Song::Comment::Create', song => $song, parent_comment => $parent_comment,);
+
     if ($form->process) {
         $c->flash(msg => 'Reply added - subject to moderation');
 

@@ -9,35 +9,29 @@ use SongsToTheSiren::Markdown::Shortcut;
 
 # An extension to Text::Markdown - POD docs at end of file
 
-has song => (
-    is          => 'ro',
-    isa         => 'SongsToTheSiren::Schema::Result::Song',
-    predicate   => 'has_song',
-);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song',);
 
 has _preprocessors => (
-    is          => 'ro',
-    isa         => 'ArrayRef[SongsToTheSiren::Markdown::Role]',
-    lazy        => 1,
-    default     => sub {
+    is      => 'ro',
+    isa     => 'ArrayRef[SongsToTheSiren::Markdown::Role]',
+    lazy    => 1,
+    default => sub {
         my $self = shift;
 
         my $args = $self->has_song ? {song => $self->song} : {};
 
-        my @classes = ( qw/ Link TimeSignature Shortcut / );
+        my @classes = (qw/ Link TimeSignature Shortcut /);
 
         # TODO Load the classes here so we don't have to declare them at the top
 
-        return [
-            map { "SongsToTheSiren::Markdown::$_"->new( $args ) } @classes
-        ];
+        return [map { "SongsToTheSiren::Markdown::$_"->new($args) } @classes];
     }
 );
 
 sub markdown {
     my ($self, $text) = @_;
 
-    foreach my $processor (@{ $self->_preprocessors }) {
+    foreach my $processor (@{$self->_preprocessors}) {
         $text = $processor->process($text);
     }
 

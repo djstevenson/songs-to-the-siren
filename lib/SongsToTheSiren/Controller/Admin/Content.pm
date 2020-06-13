@@ -47,9 +47,9 @@ sub capture {
     my $c = shift;
 
     my $name = $c->stash->{name};
-    my $rs = $c->schema->resultset('Content');
-    if ( my $content = $rs->find($name) ) {
-        $c->stash( content => $content );
+    my $rs   = $c->schema->resultset('Content');
+    if (my $content = $rs->find($name)) {
+        $c->stash(content => $content);
     }
     else {
         $c->reply->not_found;
@@ -64,8 +64,8 @@ sub edit {
     my $c = shift;
 
     my $content = $c->stash->{content};
-    my $form = $c->form('Content::Edit', content => $content);
-    
+    my $form    = $c->form('Content::Edit', content => $content);
+
     if ($form->process) {
         $c->flash(msg => 'Content updated') if $form->action eq 'updated';
         $c->redirect_to('admin_list_content');

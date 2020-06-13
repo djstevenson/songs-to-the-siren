@@ -4,18 +4,14 @@ use namespace::autoclean;
 
 use HTML::Entities qw/ encode_entities /;
 
-has name => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    required	=> 1,
-);
+has name => (is => 'ro', isa => 'Str', required => 1,);
 
 has label => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    lazy        => 1,
-    default     => sub {
-        my $self = shift;
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self  = shift;
         my $label = ucfirst($self->name);
 
         $label =~ s/[_\-]/ /g;
@@ -24,84 +20,33 @@ has label => (
     },
 );
 
-has type => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    required	=> 1,
-);
+has type => (is => 'ro', isa => 'Str', required => 1,);
 
-has validators => (
-    is          => 'ro',
-    isa         => 'ArrayRef',
-    default     => sub{ return []; },
-);
+has validators => (is => 'ro', isa => 'ArrayRef', default => sub { return []; },);
 
-has filters => (
-    is          => 'ro',
-    isa         => 'ArrayRef',
-    default     => sub{ return []; },
-);
+has filters => (is => 'ro', isa => 'ArrayRef', default => sub { return []; },);
 
-has autofocus => (
-    is			=> 'ro',
-    isa			=> 'Bool',
-    required    => 1,
-    default     => 0,
-);
+has autofocus => (is => 'ro', isa => 'Bool', required => 1, default => 0,);
 
-has autocomplete => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    predicate   => 'has_autocomplete',
-);
+has autocomplete => (is => 'ro', isa => 'Str', predicate => 'has_autocomplete',);
 
-has autocorrect => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    predicate   => 'has_autocorrect',
-);
+has autocorrect => (is => 'ro', isa => 'Str', predicate => 'has_autocorrect',);
 
-has autocapitalize => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    predicate   => 'has_autocapitalize',
-);
+has autocapitalize => (is => 'ro', isa => 'Str', predicate => 'has_autocapitalize',);
 
-has spellcheck => (
-    is			=> 'ro',
-    isa			=> 'Str',
-    predicate   => 'has_spellcheck',
-);
+has spellcheck => (is => 'ro', isa => 'Str', predicate => 'has_spellcheck',);
 
 # Hashref, or coderef that returns hashref.
 # Coderef is called with ($self, $form)
 # $self being the field object
-has options => (
-    is          => 'ro',
-    isa         => 'HashRef|CodeRef',
-    default     => sub { return {}; },
-);
+has options => (is => 'ro', isa => 'HashRef|CodeRef', default => sub { return {}; },);
 
 # For radio buttons and select menus
-has selections => (
-    is          => 'ro',
-    isa         => 'CodeRef',
-    predicate   => 'has_selections',
-);
+has selections => (is => 'ro', isa => 'CodeRef', predicate => 'has_selections',);
 
-has value => (
-    is          => 'rw',
-    isa         => 'Maybe[Str]',
-    clearer     => 'clear_value',
-    predicate   => 'has_value',
-);
+has value => (is => 'rw', isa => 'Maybe[Str]', clearer => 'clear_value', predicate => 'has_value',);
 
-has error => (
-    is          => 'rw',
-    isa         => 'Str',
-    clearer     => 'clear_error',
-    predicate   => 'has_error',
-);
+has error => (is => 'rw', isa => 'Str', clearer => 'clear_error', predicate => 'has_error',);
 
 # Document this. If present, then
 # { abc => 1, def => 'blah', ghi => undef }
@@ -109,17 +54,13 @@ has error => (
 # <tag data-abc="1" data-def="blah" data-ghi>
 #
 # Defined values are stringified.
-has data => (
-    is          => 'ro',
-    isa         => 'HashRef|CodeRef',
-    predicate   => 'has_data',
-);
+has data => (is => 'ro', isa => 'HashRef|CodeRef', predicate => 'has_data',);
 
 sub process {
     my ($self, $schema, $value) = @_;
 
     my $filtered_value = $value // '';
-    my $filters = SongsToTheSiren::Form::Utils::load_form_objects(
+    my $filters        = SongsToTheSiren::Form::Utils::load_form_objects(
         $self->filters,
         'SongsToTheSiren::Form::Field::Filter',
         {schema => $schema},
@@ -142,7 +83,7 @@ sub process {
     $self->clear_error;
     foreach my $validator (@$validators) {
         my $error_value = $validator->validate($filtered_value);
-        if ($error_value){
+        if ($error_value) {
             $self->error($error_value);
             last;
         }
@@ -152,15 +93,15 @@ sub process {
 # Assumes that we are in a GET operation, i.e. we need to
 # make an initial value for a field
 sub set_initial_value {
-	my ($self, $form) = @_;
+    my ($self, $form) = @_;
 
-	my $v = $self->_get_initial_value($form);
+    my $v = $self->_get_initial_value($form);
 
-	$self->value($v);
+    $self->value($v);
 }
 
 sub _get_initial_value {
-	my ($self, $form) = @_;
+    my ($self, $form) = @_;
 
     my $s = $self->_get_initial_value_unencoded($form);
 
@@ -168,22 +109,20 @@ sub _get_initial_value {
 }
 
 sub _get_initial_value_unencoded {
-	my ($self, $form) = @_;
+    my ($self, $form) = @_;
 
     return '' if $self->type eq 'Html';
 
-	# Get from initial_value option if we have one.
-	# Else get from data_object if we have one.
-	# Else blank.
+    # Get from initial_value option if we have one.
+    # Else get from data_object if we have one.
+    # Else blank.
 
     my $options = $self->_get_options($form);
-	return $options->{initial_value}
-		if exists $options->{initial_value};
+    return $options->{initial_value} if exists $options->{initial_value};
 
-	return $form->data_object->get_column($self->name)
-		if $form->has_data_object;
+    return $form->data_object->get_column($self->name) if $form->has_data_object;
 
-	return '';
+    return '';
 }
 
 sub _get_options {
@@ -219,24 +158,24 @@ sub render_data {
     return '' unless $self->has_data;
 
     my $data = $self->data;
-    if ( ref($data) eq 'CODE' ) {
+    if (ref($data) eq 'CODE') {
         $data = $data->($self, $form);
     }
 
     my @attrs;
-    
-    my %data = %{ $data };
-    for my $k ( keys %data ) {
+
+    my %data = %{$data};
+    for my $k (keys %data) {
         my $v = $data{$k};
 
-        if ( defined($v) ) {
+        if (defined($v)) {
             push @attrs, qq{data-${k}="$v"};
         }
         else {
-            push @attrs, qq{data-${k}}; # Undef value, just return attr name
+            push @attrs, qq{data-${k}};    # Undef value, just return attr name
         }
     }
-    
+
     return join(' ', @attrs);
 }
 

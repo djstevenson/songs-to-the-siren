@@ -4,82 +4,76 @@ use Mojo::Base 'Mojolicious::Plugin';
 # POD docs at end of file
 
 use DateTime::Duration;
+
 sub register {
     my ($self, $app, $conf) = @_;
 
-    $app->helper(send_email => sub {
-        my ($c, $template_name, $data) = @_;
+    $app->helper(
+        send_email => sub {
+            my ($c, $template_name, $data) = @_;
 
-        # Keeping a DB record of emails for test etc.
-        my $email_rs = $c->schema->resultset('Email');
-        my $to       = lc($data->{to});
+            # Keeping a DB record of emails for test etc.
+            my $email_rs = $c->schema->resultset('Email');
+            my $to       = lc($data->{to});
 
-        my $email = $email_rs->create({
-            email_to      => $to,
-            template_name => $template_name,
-            data          => $data,
-            queued_at     => DateTime->now,
-        });
+            my $email
+                = $email_rs->create({
+                email_to => $to, template_name => $template_name, data => $data, queued_at => DateTime->now,
+                });
 
-        if ($app->mode ne 'test') {
-            $app->minion->enqueue(smtp => [ $email->id ]);
+            if ($app->mode ne 'test') {
+                $app->minion->enqueue(smtp => [$email->id]);
 
-            # TODO Start a daemon rather than this:
-            $app->minion->perform_jobs;
+                # TODO Start a daemon rather than this:
+                $app->minion->perform_jobs;
+            }
         }
-    });
+    );
 
-	$app->helper(send_registration_email => sub {
-		my ($c, $user) = @_;
+    $app->helper(
+        send_registration_email => sub {
+            my ($c, $user) = @_;
 
-        my $duration = DateTime::Duration->new(hours => 1); # TODO Configurable
-        my $user_key = $user->generate_new_user_key('registration', $duration);
+            my $duration = DateTime::Duration->new(hours => 1);                       # TODO Configurable
+            my $user_key = $user->generate_new_user_key('registration', $duration);
 
-        $c->send_email(registration => {
-            to   => lc($user->email),
-            user => $user->id,
-            key  => $user_key,
-        });
-	});
-
-	$app->helper(send_name_reminder => sub {
-		my ($c, $user) = @_;
-
-        $c->send_email(name_reminder => {
-            to   => lc($user->email),
-            user => $user->id,
-            name => $user->name,
-        });
-	});
-
-	$app->helper(send_password_reset => sub {
-		my ($c, $user) = @_;
-    
-        my $duration = DateTime::Duration->new(hours => 1); # TODO Configurable
-        my $user_key = $user->generate_new_user_key('password_reset', $duration);
-
-        $c->send_email(password_reset => {
-            to   => lc($user->email),
-            user => $user->id,
-            key  => $user_key,
-        });
-	});
-
-	$app->helper(send_comment_notification => sub {
-		my ($c, $comment) = @_;
-    
-        # Send to each admin user
-        my $rs = $c->schema->resultset('User');
-        my $admin_users_rs = $rs->admin_users;
-
-        while (my $user = $admin_users_rs->next) {
-            $c->send_email(comment_notification => {
-                to         => lc($user->email),
-                song_title => $comment->song->title,
-                song_id    => $comment->song->id,
-            });
+            $c->send_email(registration => {to => lc($user->email), user => $user->id, key => $user_key,});
         }
-	});
+    );
+
+    $app->helper(
+        send_name_reminder => sub {
+            my ($c, $user) = @_;
+
+            $c->send_email(name_reminder => {to => lc($user->email), user => $user->id, name => $user->name,});
+        }
+    );
+
+    $app->helper(
+        send_password_reset => sub {
+            my ($c, $user) = @_;
+
+            my $duration = DateTime::Duration->new(hours => 1);                         # TODO Configurable
+            my $user_key = $user->generate_new_user_key('password_reset', $duration);
+
+            $c->send_email(password_reset => {to => lc($user->email), user => $user->id, key => $user_key,});
+        }
+    );
+
+    $app->helper(
+        send_comment_notification => sub {
+            my ($c, $comment) = @_;
+
+            # Send to each admin user
+            my $rs             = $c->schema->resultset('User');
+            my $admin_users_rs = $rs->admin_users;
+
+            while (my $user = $admin_users_rs->next) {
+                $c->send_email(comment_notification =>
+                        {to => lc($user->email), song_title => $comment->song->title, song_id => $comment->song->id,});
+            }
+        }
+    );
 
 }
 

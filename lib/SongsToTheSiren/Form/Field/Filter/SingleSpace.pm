@@ -6,9 +6,9 @@ extends 'SongsToTheSiren::Form::Field::Filter::Base';
 with 'SongsToTheSiren::Form::Field::Filter::Role';
 
 
-sub filter{
-	my ($self, $value) = @_;
-	
+sub filter {
+    my ($self, $value) = @_;
+
     $value =~ s/\s+/ /g;
 
     return $value;

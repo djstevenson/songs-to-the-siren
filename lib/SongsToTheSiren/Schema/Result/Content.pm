@@ -13,15 +13,15 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('content');
 
 __PACKAGE__->add_columns(
-    name             => {data_type => 'TEXT'},
-    title            => {data_type => 'TEXT'},
+    name  => {data_type => 'TEXT'},
+    title => {data_type => 'TEXT'},
 
-    markdown         => {data_type => 'TEXT'},
-    html             => {data_type => 'TEXT'},
+    markdown => {data_type => 'TEXT'},
+    html     => {data_type => 'TEXT'},
 
-    author_id        => {data_type => 'INTEGER'},
-    
-    updated_at       => {data_type => 'DATETIME'},
+    author_id => {data_type => 'INTEGER'},
+
+    updated_at => {data_type => 'DATETIME'},
 );
 
 __PACKAGE__->set_primary_key('name');

@@ -10,15 +10,19 @@ sub register {
 
     my $root = $app->routes;
 
-    $root->add_shortcut(require_sign_in => sub {
-        my ($r, @args) = @_;
-        return $r->under(@args)->to(cb => \&_require_sign_in);
-    });
+    $root->add_shortcut(
+        require_sign_in => sub {
+            my ($r, @args) = @_;
+            return $r->under(@args)->to(cb => \&_require_sign_in);
+        }
+    );
 
-    $root->add_shortcut(require_admin => sub {
-        my ($r, @args) = @_;
-        return $r->under(@args)->to(cb => \&_require_admin);
-    });
+    $root->add_shortcut(
+        require_admin => sub {
+            my ($r, @args) = @_;
+            return $r->under(@args)->to(cb => \&_require_admin);
+        }
+    );
 
     return;
 }

@@ -20,7 +20,7 @@ sub new_song_comment {
         $parent_id = $parent->id;
     }
 
-    my $renderer = SongsToTheSiren::BBCode->new;
+    my $renderer      = SongsToTheSiren::BBCode->new;
     my $rendered_html = $renderer->render($data->{comment_bbcode});
 
     my $full_args = {
@@ -39,18 +39,12 @@ sub edit_song_comment {
 
     my $reason = delete $data->{reason};
 
-    my $renderer = SongsToTheSiren::BBCode->new;
+    my $renderer      = SongsToTheSiren::BBCode->new;
     my $rendered_html = $renderer->render($data->{comment_bbcode});
 
-    my $full_args = {
-        %$data,
-        comment_html => $rendered_html,
-    };
+    my $full_args = {%$data, comment_html => $rendered_html,};
 
-    $comment->create_related(edits => {
-        editor_id => $self->id,
-        reason    => $reason,
-    });
+    $comment->create_related(edits => {editor_id => $self->id, reason => $reason,});
     return $comment->update($full_args);
 }
 

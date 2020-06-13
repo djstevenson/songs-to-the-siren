@@ -14,15 +14,18 @@ sub add_routes {
     $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
 
     $u->route('/forgot_password')->name('forgot_password')->via('GET', 'POST')->to(action => 'forgot_password');
-    $u->route('/forgot_password/reset_sent')->name('password_reset_sent')->via('GET')->to(action => 'password_reset_sent');
+    $u->route('/forgot_password/reset_sent')->name('password_reset_sent')->via('GET')
+        ->to(action => 'password_reset_sent');
     $u->route('/reset/done')->name('password_reset_done')->via('GET')->to(action => 'password_reset_done');
 
     $u->route('/forgot_name')->name('forgot_name')->via('GET', 'POST')->to(action => 'forgot_name');
     $u->route('/forgot_name/reminder_sent')->name('name_reminder_sent')->via('GET')->to(action => 'name_reminder_sent');
 
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
-    $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')->to(action => 'confirm_registration');
-    $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')->to(action => 'decline_registration');
+    $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')
+        ->to(action => 'confirm_registration');
+    $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')
+        ->to(action => 'decline_registration');
     $user_action->get('/reset/:user_key')->name('password_reset')->via('GET', 'POST')->to(action => 'password_reset');
 }
 
@@ -52,6 +55,7 @@ sub sign_in {
     if (my $user = $form->process) {
         $c->session->{user} = $user->id;
         if ($user->admin) {
+
             # Admin user wants to go do admin index
             $c->redirect_to('admin_home');
         }
@@ -122,10 +126,9 @@ sub capture {
 sub confirm_registration {
     my $c = shift;
 
-    my $user = $c->stash->{target_user};
+    my $user     = $c->stash->{target_user};
     my $user_key = $c->stash->{user_key};
-    return $c->reply->not_found
-        unless $user->confirm_registration($user_key);
+    return $c->reply->not_found unless $user->confirm_registration($user_key);
 
     $c->flash(msg => 'Signup confirmed');
     $c->redirect_to('confirmed');
@@ -134,10 +137,9 @@ sub confirm_registration {
 sub decline_registration {
     my $c = shift;
 
-    my $user = $c->stash->{target_user};
+    my $user     = $c->stash->{target_user};
     my $user_key = $c->stash->{user_key};
-    return $c->reply->not_found
-        unless $user->decline_registration($user_key);
+    return $c->reply->not_found unless $user->decline_registration($user_key);
 
     $c->flash(msg => 'Signup declined - your details are deleted');
     $c->redirect_to('declined');
@@ -149,8 +151,7 @@ sub password_reset {
     my $user_key    = $c->stash->{user_key};
     my $target_user = $c->stash->{target_user};
 
-    return $c->reply->not_found
-        unless $target_user->check_key('password_reset', $user_key);
+    return $c->reply->not_found unless $target_user->check_key('password_reset', $user_key);
 
     my $form = $c->form('User::ResetPassword');
     if ($form->process) {
@@ -158,6 +159,7 @@ sub password_reset {
 
         $c->flash(msg => 'Your password has been reset');
         $c->redirect_to('password_reset_done');
+
         # TODO Send an email notification when password is updated?
     }
     else {
