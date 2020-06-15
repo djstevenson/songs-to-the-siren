@@ -11,6 +11,8 @@ use Mojo::JSON qw/ decode_json /;
 
 use Net::SMTP::TLS;
 
+use DateTime;
+
 has home => sub { Mojo::Home->new; };
 
 has host        => undef;
@@ -76,6 +78,10 @@ sub register {
                 Password => $self->password,
             );
 
+            # TODO How do we make this task testable?
+            # Plug in a mock object compatible with Net::SMTP::TLS?
+            # It could simulate fails (e.g send to error503@example.com
+            # to simulate that specific error?)
             $smtp->mail($from);
             $smtp->recipient($to);
             $smtp->data;
@@ -85,6 +91,10 @@ sub register {
             $smtp->datasend("${body}\n\n");
             $smtp->dataend;
             $smtp->quit;
+
+            $email->update({
+                sent_at =>  DateTime->now,
+            });
         }
     );
 }
