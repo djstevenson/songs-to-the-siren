@@ -16,15 +16,13 @@ sub register {
             my $email_rs = $c->schema->resultset('Email');
             my $to       = lc($data->{to});
 
-            my $email
-                = $email_rs->create({
+            my $email = $email_rs->create({
                 email_to => $to, template_name => $template_name, data => $data, queued_at => DateTime->now,
-                });
+            });
 
             if ($app->mode ne 'test') {
                 $app->minion->enqueue(smtp => [$email->id]);
 
-                # TODO Start a daemon rather than this:
                 $app->minion->perform_jobs;
             }
         }
@@ -37,7 +35,11 @@ sub register {
             my $duration = DateTime::Duration->new(hours => 1);                       # TODO Configurable
             my $user_key = $user->generate_new_user_key('registration', $duration);
 
-            $c->send_email(registration => {to => lc($user->email), user => $user->id, key => $user_key,});
+            $c->send_email(registration => {
+                to   => lc($user->email),
+                user => $user->id,
+                key  => $user_key
+            });
         }
     );
 
@@ -45,7 +47,11 @@ sub register {
         send_name_reminder => sub {
             my ($c, $user) = @_;
 
-            $c->send_email(name_reminder => {to => lc($user->email), user => $user->id, name => $user->name,});
+            $c->send_email(name_reminder => {
+                to   => lc($user->email),
+                user => $user->id,
+                name => $user->name
+            });
         }
     );
 
@@ -56,7 +62,11 @@ sub register {
             my $duration = DateTime::Duration->new(hours => 1);                         # TODO Configurable
             my $user_key = $user->generate_new_user_key('password_reset', $duration);
 
-            $c->send_email(password_reset => {to => lc($user->email), user => $user->id, key => $user_key,});
+            $c->send_email(password_reset => {
+                to   => lc($user->email),
+                user => $user->id,
+                key  => $user_key
+            });
         }
     );
 
@@ -69,8 +79,11 @@ sub register {
             my $admin_users_rs = $rs->admin_users;
 
             while (my $user = $admin_users_rs->next) {
-                $c->send_email(comment_notification =>
-                        {to => lc($user->email), song_title => $comment->song->title, song_id => $comment->song->id,});
+                $c->send_email(comment_notification => {
+                    to         => lc($user->email),
+                    song_title => $comment->song->title,
+                    song_id    => $comment->song->id
+                });
             }
         }
     );
