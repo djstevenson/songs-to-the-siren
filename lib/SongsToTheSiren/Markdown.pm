@@ -3,13 +3,16 @@ use Moose;
 use namespace::autoclean;
 use Text::Markdown;
 
-use SongsToTheSiren::Markdown::Link;
-use SongsToTheSiren::Markdown::TimeSignature;
-use SongsToTheSiren::Markdown::Shortcut;
+use Class::Load;
+use SongsToTheSiren::Markdown::Role;
 
 # An extension to Text::Markdown - POD docs at end of file
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song',);
+has song => (
+    is        => 'ro',
+    isa       => 'SongsToTheSiren::Schema::Result::Song',
+    predicate => 'has_song'
+);
 
 has _preprocessors => (
     is      => 'ro',
@@ -22,9 +25,15 @@ has _preprocessors => (
 
         my @classes = (qw/ Link TimeSignature Shortcut /);
 
-        # TODO Load the classes here so we don't have to declare them at the top
+        my @result;
 
-        return [map { "SongsToTheSiren::Markdown::$_"->new($args) } @classes];
+        return [
+            map {
+                my $class_name = "SongsToTheSiren::Markdown::$_";
+                Class::Load::load_class($class_name);
+                $class_name->new($args);
+            } @classes
+        ];
     }
 );
 
