@@ -142,14 +142,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       base 1.01
-  Class-Accessor-Chained-0.01
-    pathname: R/RC/RCLAMP/Class-Accessor-Chained-0.01.tar.gz
-    provides:
-      Class::Accessor::Chained 0.01
-      Class::Accessor::Chained::Fast undef
-    requirements:
-      Class::Accessor 0
-      Test::More 0
   Class-Accessor-Grouped-0.10014
     pathname: H/HA/HAARG/Class-Accessor-Grouped-0.10014.tar.gz
     provides:
@@ -420,11 +412,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.12.3
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.12.3.tar.gz
+  DBD-Pg-3.13.0
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.13.0.tar.gz
     provides:
-      Bundle::DBD::Pg v3.12.3
-      DBD::Pg v3.12.3
+      Bundle::DBD::Pg v3.13.0
+      DBD::Pg v3.13.0
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
@@ -552,10 +544,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
       perl 5.008001
-  DBIx-Class-0.082841
-    pathname: R/RI/RIBASUSHI/DBIx-Class-0.082841.tar.gz
+  DBIx-Class-0.082842
+    pathname: R/RI/RIBASUSHI/DBIx-Class-0.082842.tar.gz
     provides:
-      DBIx::Class 0.082841
+      DBIx::Class 0.082842
       DBIx::Class::AccessorGroup undef
       DBIx::Class::Admin undef
       DBIx::Class::CDBICompat undef
@@ -575,6 +567,7 @@ DISTRIBUTIONS
       DBIx::Class::Relationship::Base undef
       DBIx::Class::ResultClass::HashRefInflator undef
       DBIx::Class::ResultSet undef
+      DBIx::Class::ResultSet::Pager undef
       DBIx::Class::ResultSetColumn undef
       DBIx::Class::ResultSetManager undef
       DBIx::Class::ResultSource undef
@@ -584,6 +577,7 @@ DISTRIBUTIONS
       DBIx::Class::ResultSourceProxy::Table undef
       DBIx::Class::Row undef
       DBIx::Class::SQLMaker undef
+      DBIx::Class::SQLMaker::ClassicExtensions undef
       DBIx::Class::SQLMaker::LimitDialects undef
       DBIx::Class::SQLMaker::OracleJoins undef
       DBIx::Class::Schema undef
@@ -637,6 +631,7 @@ DISTRIBUTIONS
       DBIx::Class::Storage::DBI::Sybase::Microsoft_SQL_Server::NoBindVars undef
       DBIx::Class::Storage::DBI::UniqueIdentifier undef
       DBIx::Class::Storage::DBI::mysql undef
+      DBIx::Class::Storage::Debug::PrettyTrace undef
       DBIx::Class::Storage::Statistics undef
       DBIx::Class::Storage::TxnScopeGuard undef
       DBIx::Class::UTF8Columns undef
@@ -651,18 +646,16 @@ DISTRIBUTIONS
       DBD::SQLite 1.29
       DBI 1.57
       Data::Dumper::Concise 2.020
-      Data::Page 2.00
       Devel::GlobalDestruction 0.09
       ExtUtils::MakeMaker 6.59
       File::Temp 0.22
       Hash::Merge 0.12
-      List::Util 1.16
       MRO::Compat 0.12
       Module::Find 0.07
       Moo 2.000
       Package::Stash 0.28
       Path::Class 0.18
-      SQL::Abstract 1.81
+      SQL::Abstract::Classic 1.91
       Scope::Guard 0.03
       Sub::Name 0.04
       Test::Deep 0.101
@@ -752,18 +745,6 @@ DISTRIBUTIONS
       Sub::Install 0.921
       strict 0
       warnings 0
-  Data-Page-2.03
-    pathname: E/ET/ETHER/Data-Page-2.03.tar.gz
-    provides:
-      Data::Page 2.03
-    requirements:
-      Carp 0
-      Class::Accessor::Chained::Fast 0
-      ExtUtils::MakeMaker 0
-      base 0
-      integer 0
-      perl 5.006
-      strict 0
   DateTime-1.52
     pathname: D/DR/DROLSKY/DateTime-1.52.tar.gz
     provides:
@@ -1768,13 +1749,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.06
-    pathname: S/SR/SRI/Minion-10.06.tar.gz
+  Minion-10.08
+    pathname: S/SR/SRI/Minion-10.08.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.06
+      Minion 10.08
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1934,8 +1915,8 @@ DISTRIBUTIONS
       Mojolicious 8.50
       SQL::Abstract 1.86
       perl 5.016
-  Mojolicious-8.54
-    pathname: S/SR/SRI/Mojolicious-8.54.tar.gz
+  Mojolicious-8.55
+    pathname: S/SR/SRI/Mojolicious-8.55.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -2004,7 +1985,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.54
+      Mojolicious 8.55
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -3218,27 +3199,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20200110
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20200110.tar.gz
+  Perl-Tidy-20200619
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20200619.tar.gz
     provides:
-      Perl::Tidy 20200110
-      Perl::Tidy::Debugger 20200110
-      Perl::Tidy::DevNull 20200110
-      Perl::Tidy::Diagnostics 20200110
-      Perl::Tidy::FileWriter 20200110
-      Perl::Tidy::Formatter 20200110
-      Perl::Tidy::HtmlWriter 20200110
-      Perl::Tidy::IOScalar 20200110
-      Perl::Tidy::IOScalarArray 20200110
-      Perl::Tidy::IndentationItem 20200110
-      Perl::Tidy::LineBuffer 20200110
-      Perl::Tidy::LineSink 20200110
-      Perl::Tidy::LineSource 20200110
-      Perl::Tidy::Logger 20200110
-      Perl::Tidy::Tokenizer 20200110
-      Perl::Tidy::VerticalAligner 20200110
-      Perl::Tidy::VerticalAligner::Alignment 20200110
-      Perl::Tidy::VerticalAligner::Line 20200110
+      Perl::Tidy 20200619
+      Perl::Tidy::Debugger 20200619
+      Perl::Tidy::DevNull 20200619
+      Perl::Tidy::Diagnostics 20200619
+      Perl::Tidy::FileWriter 20200619
+      Perl::Tidy::Formatter 20200619
+      Perl::Tidy::HtmlWriter 20200619
+      Perl::Tidy::IOScalar 20200619
+      Perl::Tidy::IOScalarArray 20200619
+      Perl::Tidy::IndentationItem 20200619
+      Perl::Tidy::LineBuffer 20200619
+      Perl::Tidy::LineSink 20200619
+      Perl::Tidy::LineSource 20200619
+      Perl::Tidy::Logger 20200619
+      Perl::Tidy::Tokenizer 20200619
+      Perl::Tidy::VerticalAligner 20200619
+      Perl::Tidy::VerticalAligner::Alignment 20200619
+      Perl::Tidy::VerticalAligner::Line 20200619
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-Layers-0.012
@@ -3413,6 +3394,25 @@ DISTRIBUTIONS
       Sub::Quote 2.000001
       Test::Builder::Module 0.84
       Test::Deep 0.101
+      Text::Balanced 2.00
+      perl 5.006
+  SQL-Abstract-Classic-1.91
+    pathname: R/RI/RIBASUSHI/SQL-Abstract-Classic-1.91.tar.gz
+    provides:
+      SQL::Abstract::Classic 1.91
+      SQL::Abstract::Util undef
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.59
+      List::Util 0
+      MRO::Compat 0.12
+      SQL::Abstract 1.79
+      Scalar::Util 0
+      Storable 0
+      Test::Deep 0.101
+      Test::Exception 0.31
+      Test::More 0.88
+      Test::Warn 0
       Text::Balanced 2.00
       perl 5.006
   Scalar-String-0.003
