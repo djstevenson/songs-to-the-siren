@@ -13,7 +13,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('links');
 
 __PACKAGE__->add_columns(
-    id      => {data_type => 'INTEGER'},
+    id      => {data_type => 'INTEGER', is_auto_increment => 1 },
     song_id => {data_type => 'INTEGER'},
 
     # Embedded link stuff. Igored if embed_identifier is ''

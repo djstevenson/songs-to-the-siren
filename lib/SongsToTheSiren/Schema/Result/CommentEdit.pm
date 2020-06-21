@@ -13,7 +13,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('comment_edits');
 
 __PACKAGE__->add_columns(
-    id         => {data_type => 'INTEGER'},
+    id         => {data_type => 'INTEGER', is_auto_increment => 1 },
     comment_id => {data_type => 'INTEGER'},
     reason     => {data_type => 'TEXT'},
 
