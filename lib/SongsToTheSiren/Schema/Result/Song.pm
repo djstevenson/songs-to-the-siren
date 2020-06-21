@@ -16,7 +16,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('songs');
 
 __PACKAGE__->add_columns(
-    id     => {data_type => 'INTEGER'},
+    id     => {data_type => 'INTEGER', is_auto_increment => 1 },
     artist => {data_type => 'TEXT'},
     title  => {data_type => 'TEXT'},
     album  => {data_type => 'TEXT'},

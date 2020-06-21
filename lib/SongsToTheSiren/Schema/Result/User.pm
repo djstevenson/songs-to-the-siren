@@ -18,7 +18,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('users');
 
 __PACKAGE__->add_columns(
-    id            => {data_type => 'INTEGER'},
+    id            => {data_type => 'INTEGER', is_auto_increment => 1 },
     name          => {data_type => 'TEXT'},
     email         => {data_type => 'TEXT'},
     password_hash => {data_type => 'TEXT'},       # Bcrypt 2a with random salt
