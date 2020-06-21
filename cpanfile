@@ -26,3 +26,4 @@ requires 'IO::Socket::SSL';
 requires 'Parse::BBCode';
 requires 'Perl::Tidy';
 requires 'Perl::Critic';
+requires 'Pod::Parser';
