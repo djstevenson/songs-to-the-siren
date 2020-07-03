@@ -841,22 +841,22 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.25
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.25.tar.gz
+  DateTime-Locale-1.26
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.26.tar.gz
     provides:
-      DateTime::Locale 1.25
-      DateTime::Locale::Base 1.25
-      DateTime::Locale::Catalog 1.25
-      DateTime::Locale::Data 1.25
-      DateTime::Locale::FromData 1.25
-      DateTime::Locale::Util 1.25
+      DateTime::Locale 1.26
+      DateTime::Locale::Base 1.26
+      DateTime::Locale::Catalog 1.26
+      DateTime::Locale::Data 1.26
+      DateTime::Locale::FromData 1.26
+      DateTime::Locale::Util 1.26
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
       Exporter 0
       ExtUtils::MakeMaker 0
       File::ShareDir 0
-      File::ShareDir::Install 0.03
+      File::ShareDir::Install 0.06
       List::Util 1.45
       Params::ValidationCompiler 0.13
       Specio::Declare 0
