@@ -1,6 +1,11 @@
 {
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:djstevenson/songs-to-the-siren.git"
+  },
   "name": "songs-to-the-siren",
   "version": "1.0.0",
+  "private": true,
   "description": "Cypress tests for the SongsToTheSiren blog",
   "main": "index.js",
   "scripts": {
@@ -10,7 +15,8 @@
   "author": "David Stevenson <david@ytfc.com>",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.9.0",
+    "lodash": "^4.17.19",
+    "cypress": "^4.10.0",
     "randomatic": "^3.1.1",
     "reverse-string": "^0.0.6",
     "minimist": "^1.2.5"
