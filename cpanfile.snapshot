@@ -1554,10 +1554,10 @@ DISTRIBUTIONS
       Time::Zone 0
       perl 5.006002
       strict 0
-  HTTP-Entity-Parser-0.22
-    pathname: K/KA/KAZEBURO/HTTP-Entity-Parser-0.22.tar.gz
+  HTTP-Entity-Parser-0.23
+    pathname: K/KA/KAZEBURO/HTTP-Entity-Parser-0.23.tar.gz
     provides:
-      HTTP::Entity::Parser 0.22
+      HTTP::Entity::Parser 0.23
       HTTP::Entity::Parser::JSON undef
       HTTP::Entity::Parser::MultiPart undef
       HTTP::Entity::Parser::OctetStream undef
@@ -1640,10 +1640,10 @@ DISTRIBUTIONS
       Test::Deep 0
       Test::More 0.88
       perl 5.008001
-  Hash-Merge-0.300
-    pathname: R/RE/REHSACK/Hash-Merge-0.300.tar.gz
+  Hash-Merge-0.301
+    pathname: H/HE/HERMES/Hash-Merge-0.301.tar.gz
     provides:
-      Hash::Merge 0.300
+      Hash::Merge 0.301
     requirements:
       Clone::Choose 0.008
       ExtUtils::MakeMaker 6.64
@@ -1748,13 +1748,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.08
-    pathname: S/SR/SRI/Minion-10.08.tar.gz
+  Minion-10.10
+    pathname: S/SR/SRI/Minion-10.10.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.08
+      Minion 10.10
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1914,8 +1914,8 @@ DISTRIBUTIONS
       Mojolicious 8.50
       SQL::Abstract 1.86
       perl 5.016
-  Mojolicious-8.56
-    pathname: S/SR/SRI/Mojolicious-8.56.tar.gz
+  Mojolicious-8.57
+    pathname: S/SR/SRI/Mojolicious-8.57.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1984,7 +1984,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.56
+      Mojolicious 8.57
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -2012,6 +2012,7 @@ DISTRIBUTIONS
       Mojolicious::Plugin::HeaderCondition undef
       Mojolicious::Plugin::JSONConfig undef
       Mojolicious::Plugin::Mount undef
+      Mojolicious::Plugin::NotYAMLConfig undef
       Mojolicious::Plugin::TagHelpers undef
       Mojolicious::Plugins undef
       Mojolicious::Renderer undef
