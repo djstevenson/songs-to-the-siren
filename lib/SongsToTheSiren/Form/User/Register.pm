@@ -23,7 +23,7 @@ has_field email => (
     autocomplete => 'email',
 );
 
-has_field 'password' => (
+has_field 'new-password' => (
     type         => 'Input::Password',
     filters      => [],
     validators   => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
