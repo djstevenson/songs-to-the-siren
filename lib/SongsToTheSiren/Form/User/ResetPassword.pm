@@ -9,11 +9,12 @@ with 'SongsToTheSiren::Form::Role';
 has '+id' => (default => 'user-new-password');
 
 has_field password => (
-    type       => 'Input::Password',
-    label      => 'New password',
-    autofocus  => 1,
-    filters    => [],
-    validators => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
+    type         => 'Input::Password',
+    label        => 'New password',
+    autofocus    => 1,
+    filters      => [],
+    validators   => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
+    autocomplete => 'new-password',
 );
 
 has_button set_new_password => ();

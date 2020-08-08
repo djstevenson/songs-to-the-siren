@@ -11,16 +11,18 @@ use SongsToTheSiren::Util::Password qw/ check_password_hash new_password_hash /;
 has '+id' => (default => 'user-sign-in');
 
 has_field name => (
-    type       => 'Input::Text',
-    autofocus  => 1,
-    filters    => ['TrimEdges', 'SingleSpace',],
-    validators => ['Required', [MinLength => {min => 3}], [MaxLength => {max => 30}],],
+    type         => 'Input::Text',
+    autofocus    => 1,
+    filters      => ['TrimEdges', 'SingleSpace',],
+    validators   => ['Required', [MinLength => {min => 3}], [MaxLength => {max => 30}] ],
+    autocomplete => 'username',
 );
 
 has_field password => (
-    type       => 'Input::Password',
-    filters    => [],
-    validators => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
+    type         => 'Input::Password',
+    filters      => [],
+    validators   => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}] ],
+    autocomplete => 'current-password',
 );
 
 has_button sign_in => ();

@@ -9,10 +9,11 @@ with 'SongsToTheSiren::Form::Role';
 has '+id' => (default => 'user-forgot-name');
 
 has_field email => (
-    type       => 'Input::Email',
-    autofocus  => 1,
-    filters    => ['TrimEdges',],
-    validators => ['Required', [MaxLength => {max => 999}], 'ValidEmail',],
+    type         => 'Input::Email',
+    autofocus    => 1,
+    filters      => ['TrimEdges',],
+    validators   => ['Required', [MaxLength => {max => 999}], 'ValidEmail'],
+    autocomplete => 'email',
 );
 
 has_button send_me_my_user_name => ();

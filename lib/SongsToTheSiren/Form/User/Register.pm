@@ -9,22 +9,25 @@ with 'SongsToTheSiren::Form::Role';
 has '+id' => (default => 'user-register');
 
 has_field name => (
-    type       => 'Input::Text',
-    autofocus  => 1,
-    filters    => ['TrimEdges', 'SingleSpace',],
-    validators => ['Required', [MinLength => {min => 3}], [MaxLength => {max => 30}], 'UniqueUserName',],
+    type         => 'Input::Text',
+    autofocus    => 1,
+    filters      => ['TrimEdges', 'SingleSpace',],
+    validators   => ['Required', [MinLength => {min => 3}], [MaxLength => {max => 30}], 'UniqueUserName'],
+    autocomplete => 'username',
 );
 
 has_field email => (
-    type       => 'Input::Email',
-    filters    => ['TrimEdges',],
-    validators => ['Required', [MaxLength => {max => 999}], 'ValidEmail', 'UniqueUserEmail',],
+    type         => 'Input::Email',
+    filters      => ['TrimEdges',],
+    validators   => ['Required', [MaxLength => {max => 999}], 'ValidEmail', 'UniqueUserEmail'],
+    autocomplete => 'email',
 );
 
-has_field password => (
-    type       => 'Input::Password',
-    filters    => [],
-    validators => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
+has_field 'new-password' => (
+    type         => 'Input::Password',
+    filters      => [],
+    validators   => ['Required', [MinLength => {min => 5}], [MaxLength => {max => 99}],],
+    autocomplete => 'new-password',
 );
 
 has_button sign_up => (id => 'user-sign-up-button');
