@@ -63,6 +63,33 @@ sub run {
         });
     };
 
+    # Autocomplete can be set to values other than off,
+    # e.g. new-password for sign-up form
+    subtest 'Input::Password new password' => sub {
+        $self->_run_test('Input::Password', {
+            field_args      => {
+                name           => 'your-pw',
+                autocomplete   => 'new-password',
+                autocorrect    => 'off',
+                autocapitalize => 'none',
+                spellcheck     => 'false',
+            },
+            field_type      => 'input',
+            exp_label_attrs => {for => 'test-form-your-pw'},
+            exp_label       => 'Your pw',
+            exp_input_attrs => {
+                type => 'password',
+                name => 'your-pw',
+                class => 'form-control',
+                value => '',
+                autocomplete => 'new-password',
+                autocorrect => 'off',
+                autocapitalize => 'none',
+                spellcheck => 'false',
+                id => 'test-form-your-pw',
+            },
+        });
+    };
     done_testing;
 }
 
