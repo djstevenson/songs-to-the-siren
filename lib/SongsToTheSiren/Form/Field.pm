@@ -4,7 +4,7 @@ use namespace::autoclean;
 
 use HTML::Entities qw/ encode_entities /;
 
-has name => (is => 'ro', isa => 'Str', required => 1,);
+has name => (is => 'ro', isa => 'Str', required => 1);
 
 has label => (
     is      => 'ro',
@@ -20,33 +20,35 @@ has label => (
     },
 );
 
-has type => (is => 'ro', isa => 'Str', required => 1,);
+has type => (is => 'ro', isa => 'Str', required => 1);
 
-has validators => (is => 'ro', isa => 'ArrayRef', default => sub { return []; },);
+has validators => (is => 'ro', isa => 'ArrayRef', default => sub { return []; });
 
-has filters => (is => 'ro', isa => 'ArrayRef', default => sub { return []; },);
+has filters => (is => 'ro', isa => 'ArrayRef', default => sub { return []; });
 
-has autofocus => (is => 'ro', isa => 'Bool', required => 1, default => 0,);
+has autofocus => (is => 'ro', isa => 'Bool', required => 1, default => 0);
 
-has autocomplete => (is => 'ro', isa => 'Str', predicate => 'has_autocomplete',);
+has autocomplete => (is => 'ro', isa => 'Str', predicate => 'has_autocomplete');
 
-has autocorrect => (is => 'ro', isa => 'Str', predicate => 'has_autocorrect',);
+has autocorrect => (is => 'ro', isa => 'Str', predicate => 'has_autocorrect');
 
-has autocapitalize => (is => 'ro', isa => 'Str', predicate => 'has_autocapitalize',);
+has autocapitalize => (is => 'ro', isa => 'Str', predicate => 'has_autocapitalize');
 
-has spellcheck => (is => 'ro', isa => 'Str', predicate => 'has_spellcheck',);
+has spellcheck => (is => 'ro', isa => 'Str', predicate => 'has_spellcheck');
+
+has inputmode => (is => 'ro', isa => 'Str', predicate => 'has_inputmode');
 
 # Hashref, or coderef that returns hashref.
 # Coderef is called with ($self, $form)
 # $self being the field object
-has options => (is => 'ro', isa => 'HashRef|CodeRef', default => sub { return {}; },);
+has options => (is => 'ro', isa => 'HashRef|CodeRef', default => sub { return {}; });
 
 # For radio buttons and select menus
-has selections => (is => 'ro', isa => 'CodeRef', predicate => 'has_selections',);
+has selections => (is => 'ro', isa => 'CodeRef', predicate => 'has_selections');
 
-has value => (is => 'rw', isa => 'Maybe[Str]', clearer => 'clear_value', predicate => 'has_value',);
+has value => (is => 'rw', isa => 'Maybe[Str]', clearer => 'clear_value', predicate => 'has_value');
 
-has error => (is => 'rw', isa => 'Str', clearer => 'clear_error', predicate => 'has_error',);
+has error => (is => 'rw', isa => 'Str', clearer => 'clear_error', predicate => 'has_error');
 
 # Document this. If present, then
 # { abc => 1, def => 'blah', ghi => undef }
@@ -54,7 +56,7 @@ has error => (is => 'rw', isa => 'Str', clearer => 'clear_error', predicate => '
 # <tag data-abc="1" data-def="blah" data-ghi>
 #
 # Defined values are stringified.
-has data => (is => 'ro', isa => 'HashRef|CodeRef', predicate => 'has_data',);
+has data => (is => 'ro', isa => 'HashRef|CodeRef', predicate => 'has_data');
 
 sub process {
     my ($self, $schema, $value) = @_;
@@ -419,7 +421,7 @@ If true, the field gets an autofocus HTML attribute
 Optional, value is a string. If present, an autocomplete attribute
 is rendered with the given value.
 
-  has field_name => ( autocomplete => 'off', ... ));
+  has field_name => ( autocomplete => 'new-password', ... ));
 
 =item autocorrect
 
