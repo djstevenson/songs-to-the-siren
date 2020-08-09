@@ -8,9 +8,17 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'edit-link');
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
+has song => (
+    is        => 'ro',
+    isa       => 'SongsToTheSiren::Schema::Result::Song',
+    required  => 1,
+);
 
-has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', predicate => 'is_update',);
+has link => (
+    is        => 'ro',
+    isa       => 'SongsToTheSiren::Schema::Result::Link',
+    predicate => 'is_update',
+);
 
 
 has_field embed_identifier => (
@@ -22,7 +30,10 @@ has_field embed_identifier => (
     autocapitalize => 'off',
 );
 
-has_field embed_url => (type => 'Input::Text', filters => [qw/ TrimEdges /],);
+has_field embed_url => (
+    type    => 'Input::Text',
+    filters => [qw/ TrimEdges /],
+);
 
 has_field embed_class => (
     type       => 'Select',
@@ -35,13 +46,25 @@ has_field embed_class => (
     },
 );
 
-has_field embed_description => (type => 'Input::Text', filters => [qw/ TrimEdges /], autocomplete => 'off',);
+has_field embed_description => (
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    autocomplete => 'off',
+);
 
 
-has_field list_priority =>
-    (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ ValidInteger /], autocomplete => 'off',);
+has_field list_priority => (
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    validators   => [qw/ ValidInteger /],
+    autocomplete => 'off',
+    inputmode    => 'numeric',
+);
 
-has_field list_url => (type => 'Input::Text', filters => [qw/ TrimEdges /],);
+has_field list_url => (
+    type    => 'Input::Text',
+    filters => [qw/ TrimEdges /]
+);
 
 has_field list_css => (
     type       => 'Select',
@@ -54,7 +77,11 @@ has_field list_css => (
     },
 );
 
-has_field list_description => (type => 'Input::Text', filters => [qw/ TrimEdges /], autocomplete => 'off',);
+has_field list_description => (
+    type         => 'Input::Text',
+    filters      => [qw/ TrimEdges /],
+    autocomplete => 'off',
+);
 
 has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);

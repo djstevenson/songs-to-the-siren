@@ -55,6 +55,10 @@ sub _get_auto_attributes {
     $attrs{autocapitalize} = $self->autocapitalize if $self->has_autocapitalize;
     $attrs{spellcheck}     = $self->spellcheck     if $self->has_spellcheck;
 
+    # Not sure this makes sense for a textarea...
+    $attrs{inputmode}      = $self->inputmode      if $self->has_inputmode;
+
+
     return join(' ', map { defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_ } keys %attrs);
 }
 
