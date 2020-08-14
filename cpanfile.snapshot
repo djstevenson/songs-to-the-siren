@@ -412,11 +412,11 @@ DISTRIBUTIONS
       Crypt::UnixCrypt_XS 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  DBD-Pg-3.14.1
-    pathname: T/TU/TURNSTEP/DBD-Pg-3.14.1.tar.gz
+  DBD-Pg-3.14.2
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.14.2.tar.gz
     provides:
-      Bundle::DBD::Pg v3.14.1
-      DBD::Pg v3.14.1
+      Bundle::DBD::Pg v3.14.2
+      DBD::Pg v3.14.2
     requirements:
       DBI 1.614
       ExtUtils::MakeMaker 6.11
