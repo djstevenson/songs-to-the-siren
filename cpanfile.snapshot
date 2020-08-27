@@ -1521,16 +1521,16 @@ DISTRIBUTIONS
       Test::More 0
       strict 0
       version 0
-  HTML-Parser-3.72
-    pathname: G/GA/GAAS/HTML-Parser-3.72.tar.gz
+  HTML-Parser-3.73
+    pathname: C/CA/CAPOEIRAB/HTML-Parser-3.73.tar.gz
     provides:
-      HTML::Entities 3.69
-      HTML::Filter 3.72
-      HTML::HeadParser 3.71
-      HTML::LinkExtor 3.69
-      HTML::Parser 3.72
-      HTML::PullParser 3.57
-      HTML::TokeParser 3.69
+      HTML::Entities 3.73
+      HTML::Filter 3.73
+      HTML::HeadParser 3.73
+      HTML::LinkExtor 3.73
+      HTML::Parser 3.73
+      HTML::PullParser 3.73
+      HTML::TokeParser 3.73
     requirements:
       ExtUtils::MakeMaker 0
       HTML::Tagset 3
@@ -3198,27 +3198,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20200619
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20200619.tar.gz
+  Perl-Tidy-20200822
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20200822.tar.gz
     provides:
-      Perl::Tidy 20200619
-      Perl::Tidy::Debugger 20200619
-      Perl::Tidy::DevNull 20200619
-      Perl::Tidy::Diagnostics 20200619
-      Perl::Tidy::FileWriter 20200619
-      Perl::Tidy::Formatter 20200619
-      Perl::Tidy::HtmlWriter 20200619
-      Perl::Tidy::IOScalar 20200619
-      Perl::Tidy::IOScalarArray 20200619
-      Perl::Tidy::IndentationItem 20200619
-      Perl::Tidy::LineBuffer 20200619
-      Perl::Tidy::LineSink 20200619
-      Perl::Tidy::LineSource 20200619
-      Perl::Tidy::Logger 20200619
-      Perl::Tidy::Tokenizer 20200619
-      Perl::Tidy::VerticalAligner 20200619
-      Perl::Tidy::VerticalAligner::Alignment 20200619
-      Perl::Tidy::VerticalAligner::Line 20200619
+      Perl::Tidy 20200822
+      Perl::Tidy::Debugger 20200822
+      Perl::Tidy::DevNull 20200822
+      Perl::Tidy::Diagnostics 20200822
+      Perl::Tidy::FileWriter 20200822
+      Perl::Tidy::Formatter 20200822
+      Perl::Tidy::HtmlWriter 20200822
+      Perl::Tidy::IOScalar 20200822
+      Perl::Tidy::IOScalarArray 20200822
+      Perl::Tidy::IndentationItem 20200822
+      Perl::Tidy::LineBuffer 20200822
+      Perl::Tidy::LineSink 20200822
+      Perl::Tidy::LineSource 20200822
+      Perl::Tidy::Logger 20200822
+      Perl::Tidy::Tokenizer 20200822
+      Perl::Tidy::VerticalAligner 20200822
+      Perl::Tidy::VerticalAligner::Alignment 20200822
+      Perl::Tidy::VerticalAligner::Line 20200822
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-Layers-0.012
