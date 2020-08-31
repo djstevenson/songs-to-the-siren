@@ -423,14 +423,14 @@ DISTRIBUTIONS
       Test::More 0.88
       Time::HiRes 0
       version 0
-  DBD-SQLite-1.64
-    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.64.tar.gz
+  DBD-SQLite-1.66
+    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.66.tar.gz
     provides:
-      DBD::SQLite 1.64
+      DBD::SQLite 1.66
       DBD::SQLite::Constants undef
       DBD::SQLite::GetInfo undef
-      DBD::SQLite::VirtualTable 1.64
-      DBD::SQLite::VirtualTable::Cursor 1.64
+      DBD::SQLite::VirtualTable 1.66
+      DBD::SQLite::VirtualTable::Cursor 1.66
       DBD::SQLite::VirtualTable::FileContent undef
       DBD::SQLite::VirtualTable::FileContent::Cursor undef
       DBD::SQLite::VirtualTable::PerlData undef
@@ -1523,21 +1523,28 @@ DISTRIBUTIONS
       Test::More 0
       strict 0
       version 0
-  HTML-Parser-3.73
-    pathname: C/CA/CAPOEIRAB/HTML-Parser-3.73.tar.gz
+  HTML-Parser-3.75
+    pathname: C/CA/CAPOEIRAB/HTML-Parser-3.75.tar.gz
     provides:
-      HTML::Entities 3.73
-      HTML::Filter 3.73
-      HTML::HeadParser 3.73
-      HTML::LinkExtor 3.73
-      HTML::Parser 3.73
-      HTML::PullParser 3.73
-      HTML::TokeParser 3.73
+      HTML::Entities 3.75
+      HTML::Filter 3.75
+      HTML::HeadParser 3.75
+      HTML::LinkExtor 3.75
+      HTML::Parser 3.75
+      HTML::PullParser 3.75
+      HTML::TokeParser 3.75
     requirements:
-      ExtUtils::MakeMaker 0
-      HTML::Tagset 3
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.52
+      HTML::Tagset 0
+      HTTP::Headers 0
+      IO::File 0
+      URI 0
+      URI::URL 0
       XSLoader 0
-      perl 5.008
+      strict 0
+      vars 0
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
     provides:
