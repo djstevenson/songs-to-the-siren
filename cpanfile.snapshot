@@ -255,11 +255,11 @@ DISTRIBUTIONS
       Class::Singleton 1.5
     requirements:
       ExtUtils::MakeMaker 0
-  Class-Tiny-1.006
-    pathname: D/DA/DAGOLDEN/Class-Tiny-1.006.tar.gz
+  Class-Tiny-1.008
+    pathname: D/DA/DAGOLDEN/Class-Tiny-1.008.tar.gz
     provides:
-      Class::Tiny 1.006
-      Class::Tiny::Object 1.006
+      Class::Tiny 1.008
+      Class::Tiny::Object 1.008
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -337,10 +337,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.21
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.21.tar.gz
+  Cpanel-JSON-XS-4.23
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.23.tar.gz
     provides:
-      Cpanel::JSON::XS 4.21
+      Cpanel::JSON::XS 4.23
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
