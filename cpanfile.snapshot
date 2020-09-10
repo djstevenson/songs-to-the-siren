@@ -1600,19 +1600,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.25
-    pathname: E/ET/ETHER/HTTP-Message-6.25.tar.gz
+  HTTP-Message-6.26
+    pathname: O/OA/OALDERS/HTTP-Message-6.26.tar.gz
     provides:
-      HTTP::Config 6.25
-      HTTP::Headers 6.25
-      HTTP::Headers::Auth 6.25
-      HTTP::Headers::ETag 6.25
-      HTTP::Headers::Util 6.25
-      HTTP::Message 6.25
-      HTTP::Request 6.25
-      HTTP::Request::Common 6.25
-      HTTP::Response 6.25
-      HTTP::Status 6.25
+      HTTP::Config 6.26
+      HTTP::Headers 6.26
+      HTTP::Headers::Auth 6.26
+      HTTP::Headers::ETag 6.26
+      HTTP::Headers::Util 6.26
+      HTTP::Message 6.26
+      HTTP::Request 6.26
+      HTTP::Request::Common 6.26
+      HTTP::Response 6.26
+      HTTP::Status 6.26
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -2675,71 +2675,70 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  PPIx-Regexp-0.073
-    pathname: W/WY/WYANT/PPIx-Regexp-0.073.tar.gz
+  PPIx-Regexp-0.074
+    pathname: W/WY/WYANT/PPIx-Regexp-0.074.tar.gz
     provides:
-      PPIx::Regexp 0.073
-      PPIx::Regexp::Constant 0.073
-      PPIx::Regexp::Dumper 0.073
-      PPIx::Regexp::Element 0.073
-      PPIx::Regexp::Lexer 0.073
-      PPIx::Regexp::Node 0.073
-      PPIx::Regexp::Node::Range 0.073
-      PPIx::Regexp::Node::Unknown 0.073
-      PPIx::Regexp::StringTokenizer 0.073
-      PPIx::Regexp::Structure 0.073
-      PPIx::Regexp::Structure::Assertion 0.073
-      PPIx::Regexp::Structure::BranchReset 0.073
-      PPIx::Regexp::Structure::Capture 0.073
-      PPIx::Regexp::Structure::CharClass 0.073
-      PPIx::Regexp::Structure::Code 0.073
-      PPIx::Regexp::Structure::Main 0.073
-      PPIx::Regexp::Structure::Modifier 0.073
-      PPIx::Regexp::Structure::NamedCapture 0.073
-      PPIx::Regexp::Structure::Quantifier 0.073
-      PPIx::Regexp::Structure::RegexSet 0.073
-      PPIx::Regexp::Structure::Regexp 0.073
-      PPIx::Regexp::Structure::Replacement 0.073
-      PPIx::Regexp::Structure::Subexpression 0.073
-      PPIx::Regexp::Structure::Switch 0.073
-      PPIx::Regexp::Structure::Unknown 0.073
-      PPIx::Regexp::Support 0.073
-      PPIx::Regexp::Token 0.073
-      PPIx::Regexp::Token::Assertion 0.073
-      PPIx::Regexp::Token::Backreference 0.073
-      PPIx::Regexp::Token::Backtrack 0.073
-      PPIx::Regexp::Token::CharClass 0.073
-      PPIx::Regexp::Token::CharClass::POSIX 0.073
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.073
-      PPIx::Regexp::Token::CharClass::Simple 0.073
-      PPIx::Regexp::Token::Code 0.073
-      PPIx::Regexp::Token::Comment 0.073
-      PPIx::Regexp::Token::Condition 0.073
-      PPIx::Regexp::Token::Control 0.073
-      PPIx::Regexp::Token::Delimiter 0.073
-      PPIx::Regexp::Token::Greediness 0.073
-      PPIx::Regexp::Token::GroupType 0.073
-      PPIx::Regexp::Token::GroupType::Assertion 0.073
-      PPIx::Regexp::Token::GroupType::BranchReset 0.073
-      PPIx::Regexp::Token::GroupType::Code 0.073
-      PPIx::Regexp::Token::GroupType::Modifier 0.073
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.073
-      PPIx::Regexp::Token::GroupType::Subexpression 0.073
-      PPIx::Regexp::Token::GroupType::Switch 0.073
-      PPIx::Regexp::Token::Interpolation 0.073
-      PPIx::Regexp::Token::Literal 0.073
-      PPIx::Regexp::Token::Modifier 0.073
-      PPIx::Regexp::Token::NoOp 0.073
-      PPIx::Regexp::Token::Operator 0.073
-      PPIx::Regexp::Token::Quantifier 0.073
-      PPIx::Regexp::Token::Recursion 0.073
-      PPIx::Regexp::Token::Reference 0.073
-      PPIx::Regexp::Token::Structure 0.073
-      PPIx::Regexp::Token::Unknown 0.073
-      PPIx::Regexp::Token::Unmatched 0.073
-      PPIx::Regexp::Token::Whitespace 0.073
-      PPIx::Regexp::Tokenizer 0.073
-      PPIx::Regexp::Util 0.073
+      PPIx::Regexp 0.074
+      PPIx::Regexp::Constant 0.074
+      PPIx::Regexp::Dumper 0.074
+      PPIx::Regexp::Element 0.074
+      PPIx::Regexp::Lexer 0.074
+      PPIx::Regexp::Node 0.074
+      PPIx::Regexp::Node::Range 0.074
+      PPIx::Regexp::Node::Unknown 0.074
+      PPIx::Regexp::Structure 0.074
+      PPIx::Regexp::Structure::Assertion 0.074
+      PPIx::Regexp::Structure::BranchReset 0.074
+      PPIx::Regexp::Structure::Capture 0.074
+      PPIx::Regexp::Structure::CharClass 0.074
+      PPIx::Regexp::Structure::Code 0.074
+      PPIx::Regexp::Structure::Main 0.074
+      PPIx::Regexp::Structure::Modifier 0.074
+      PPIx::Regexp::Structure::NamedCapture 0.074
+      PPIx::Regexp::Structure::Quantifier 0.074
+      PPIx::Regexp::Structure::RegexSet 0.074
+      PPIx::Regexp::Structure::Regexp 0.074
+      PPIx::Regexp::Structure::Replacement 0.074
+      PPIx::Regexp::Structure::Subexpression 0.074
+      PPIx::Regexp::Structure::Switch 0.074
+      PPIx::Regexp::Structure::Unknown 0.074
+      PPIx::Regexp::Support 0.074
+      PPIx::Regexp::Token 0.074
+      PPIx::Regexp::Token::Assertion 0.074
+      PPIx::Regexp::Token::Backreference 0.074
+      PPIx::Regexp::Token::Backtrack 0.074
+      PPIx::Regexp::Token::CharClass 0.074
+      PPIx::Regexp::Token::CharClass::POSIX 0.074
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.074
+      PPIx::Regexp::Token::CharClass::Simple 0.074
+      PPIx::Regexp::Token::Code 0.074
+      PPIx::Regexp::Token::Comment 0.074
+      PPIx::Regexp::Token::Condition 0.074
+      PPIx::Regexp::Token::Control 0.074
+      PPIx::Regexp::Token::Delimiter 0.074
+      PPIx::Regexp::Token::Greediness 0.074
+      PPIx::Regexp::Token::GroupType 0.074
+      PPIx::Regexp::Token::GroupType::Assertion 0.074
+      PPIx::Regexp::Token::GroupType::BranchReset 0.074
+      PPIx::Regexp::Token::GroupType::Code 0.074
+      PPIx::Regexp::Token::GroupType::Modifier 0.074
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.074
+      PPIx::Regexp::Token::GroupType::Subexpression 0.074
+      PPIx::Regexp::Token::GroupType::Switch 0.074
+      PPIx::Regexp::Token::Interpolation 0.074
+      PPIx::Regexp::Token::Literal 0.074
+      PPIx::Regexp::Token::Modifier 0.074
+      PPIx::Regexp::Token::NoOp 0.074
+      PPIx::Regexp::Token::Operator 0.074
+      PPIx::Regexp::Token::Quantifier 0.074
+      PPIx::Regexp::Token::Recursion 0.074
+      PPIx::Regexp::Token::Reference 0.074
+      PPIx::Regexp::Token::Structure 0.074
+      PPIx::Regexp::Token::Unknown 0.074
+      PPIx::Regexp::Token::Unmatched 0.074
+      PPIx::Regexp::Token::Whitespace 0.074
+      PPIx::Regexp::Tokenizer 0.074
+      PPIx::Regexp::Util 0.074
     requirements:
       Carp 0
       Exporter 0
@@ -3207,27 +3206,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20200822
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20200822.tar.gz
+  Perl-Tidy-20200907
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20200907.tar.gz
     provides:
-      Perl::Tidy 20200822
-      Perl::Tidy::Debugger 20200822
-      Perl::Tidy::DevNull 20200822
-      Perl::Tidy::Diagnostics 20200822
-      Perl::Tidy::FileWriter 20200822
-      Perl::Tidy::Formatter 20200822
-      Perl::Tidy::HtmlWriter 20200822
-      Perl::Tidy::IOScalar 20200822
-      Perl::Tidy::IOScalarArray 20200822
-      Perl::Tidy::IndentationItem 20200822
-      Perl::Tidy::LineBuffer 20200822
-      Perl::Tidy::LineSink 20200822
-      Perl::Tidy::LineSource 20200822
-      Perl::Tidy::Logger 20200822
-      Perl::Tidy::Tokenizer 20200822
-      Perl::Tidy::VerticalAligner 20200822
-      Perl::Tidy::VerticalAligner::Alignment 20200822
-      Perl::Tidy::VerticalAligner::Line 20200822
+      Perl::Tidy 20200907
+      Perl::Tidy::Debugger 20200907
+      Perl::Tidy::DevNull 20200907
+      Perl::Tidy::Diagnostics 20200907
+      Perl::Tidy::FileWriter 20200907
+      Perl::Tidy::Formatter 20200907
+      Perl::Tidy::HtmlWriter 20200907
+      Perl::Tidy::IOScalar 20200907
+      Perl::Tidy::IOScalarArray 20200907
+      Perl::Tidy::IndentationItem 20200907
+      Perl::Tidy::LineBuffer 20200907
+      Perl::Tidy::LineSink 20200907
+      Perl::Tidy::LineSource 20200907
+      Perl::Tidy::Logger 20200907
+      Perl::Tidy::Tokenizer 20200907
+      Perl::Tidy::VerticalAligner 20200907
+      Perl::Tidy::VerticalAligner::Alignment 20200907
+      Perl::Tidy::VerticalAligner::Line 20200907
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-Layers-0.012
