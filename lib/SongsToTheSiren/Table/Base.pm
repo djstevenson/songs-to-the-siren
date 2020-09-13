@@ -5,7 +5,7 @@ use namespace::autoclean;
 use Scalar::Util qw/ blessed /;
 
 use Readonly;
-Readonly $DEFAULT_PAGE_SIZE => 12;
+Readonly my $DEFAULT_PAGE_SIZE => 12;
 
 has c => (is => 'ro', isa => 'Mojolicious::Controller', required => 1);
 
