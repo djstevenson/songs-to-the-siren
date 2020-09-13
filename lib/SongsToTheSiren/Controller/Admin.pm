@@ -9,10 +9,12 @@ sub add_routes {
 
     my $a = $r->any('/admin')->require_admin;
 
-    $a->get('/')->name('admin_home')->to('admin#home');
+    $a->get(q{/})->name('admin_home')->to('admin#home');
 
     SongsToTheSiren::Controller::Admin::Song->new->add_routes($a);
     SongsToTheSiren::Controller::Admin::Content->new->add_routes($a);
+    
+    return;
 }
 
 1;

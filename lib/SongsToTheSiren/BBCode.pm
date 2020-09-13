@@ -7,6 +7,9 @@ use Parse::BBCode;
 
 has renderer => (is => 'ro', isa => 'Parse::BBCode', lazy => 1, builder => '_build_renderer',);
 
+use Readonly;
+Readonly my $MAX_DETECT_LINK => 45;
+
 sub render {
     my ($self, $raw_bbcode) = @_;
 
@@ -14,13 +17,13 @@ sub render {
 
     # We will try to detect URLs and make them links IF the
     # text has no explicit BBCode links in it.
-    if ($raw_bbcode !~ /\[(url|img|email)/i) {
+    if ($raw_bbcode !~ /\[(?:url|img|email)/ix) {
         $rendered = $self->_gruber_links($rendered);
     }
 
     # Dbl line break to end/start para
     # Then wrap the result in para tags
-    $rendered =~ s{<br /><br />}{</p><p>}g;
+    $rendered =~ s{<br\s/><br\s/>}{</p><p>}gx;
     return '<p>' . $rendered . '</p>';
 }
 
@@ -38,7 +41,7 @@ sub _build_renderer {
         close_open_tags => 1,
         tags            => {
             %defaults,
-            '' => sub {
+            q{} => sub {
                 my $e = $_[2];
                 $e =~ s/>/&gt;/g;
                 $e =~ s/</&lt;/g;
@@ -60,6 +63,7 @@ sub _gruber_links {
     # Credit to John Gruber for URL matcher:
     # http://daringfireball.net/2009/11/liberal_regex_for_matching_urls
     # http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+    ## no critic (RegularExpressions::ProhibitComplexRegexes)
     $text =~ s{
         (?xi)
         \b
@@ -91,8 +95,9 @@ sub _gruber_links {
     }{__form_link($1)}gex;
 
     # Some bodging/unbodging some link types that this code mangles
-    $text =~ s{http://http://}{http://}g;
-    $text =~ s{http://https://}{https://}g;
+    $text =~ s{http://http://}{http://}gx;
+    $text =~ s{http://https://}{https://}gx;
+    ## use critic
 
     return $text;
 }
@@ -100,10 +105,10 @@ sub _gruber_links {
 sub __form_link {
     my ($s) = @_;
 
-    my $max       = 45;
+    my $max       = $MAX_DETECT_LINK;
     my $show_link = length($s) > $max ? substr($s, 0, $max) . '...' : $s;
 
-    $s = qq(<a href="http://$1">$show_link</a>);
+    return qq(<a href="http://$1">$show_link</a>);
 }
 
 __PACKAGE__->meta->make_immutable;

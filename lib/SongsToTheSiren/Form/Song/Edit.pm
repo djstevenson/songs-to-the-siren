@@ -7,9 +7,13 @@ use SongsToTheSiren::Form::Moose;
 extends 'SongsToTheSiren::Form::Base';
 with 'SongsToTheSiren::Form::Role';
 
+use Readonly;
+
+Readonly::Array my @RESOLUTIONS => (4, 3, 2, 1);
+
 has '+id' => (default => 'edit-song');
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'is_update',);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'is_update');
 
 has_field title => (
     type         => 'Input::Text',
@@ -19,9 +23,9 @@ has_field title => (
     validators   => [qw/ Required  /],
 );
 
-has_field artist => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /],);
+has_field artist => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /]);
 
-has_field album => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /],);
+has_field album  => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /]);
 
 has_field image => (
     type           => 'Input::Text',
@@ -37,11 +41,11 @@ has_field max_resolution => (
     label      => 'Max Resolution',
     selections => sub {
 
-        return [map { {value => $_, text => $_ . 'x'} } 4, 3, 2, 1];
+        return [map { {value => $_, text => $_ . 'x'} } @RESOLUTIONS];
     },
 );
 
-has_field country => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /],);
+has_field country => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /]);
 
 has_field released_at => (
     label        => 'Date Released',
@@ -137,6 +141,7 @@ sub BUILD {
     if ($self->is_update) {
         $self->data_object($self->song);
     }
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;

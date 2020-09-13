@@ -8,6 +8,8 @@ use SongsToTheSiren::Controller::Admin::Song::Tag;
 sub add_routes {
     my ($c, $r) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
+
     # $r already has 'require_admin' check applied
 
     my $a = $r->any('song')->to(controller => 'admin-song');
@@ -24,11 +26,14 @@ sub add_routes {
     $song_a->route('/edit')->name('admin_edit_song')->via('GET', 'POST')->to(action => 'edit');
 
     # Method=DELETE?
-    $song_a->route('/delete')->name('admin_delete_song')->via('GET', 'POST')->to(action => 'delete');
+    $song_a->route('/delete')->name('admin_delete_song')->via('GET', 'POST')->to(action => 'do_delete');
 
     SongsToTheSiren::Controller::Admin::Song::Comment->new->add_routes($song_a);
     SongsToTheSiren::Controller::Admin::Song::Link->new->add_routes($song_a);
     SongsToTheSiren::Controller::Admin::Song::Tag->new->add_routes($song_a);
+    ## use critic
+    
+    return;
 }
 
 sub create {
@@ -43,6 +48,8 @@ sub create {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub list {
@@ -51,6 +58,8 @@ sub list {
     my $table = $c->table('Song::List');
 
     $c->stash(table => $table);
+
+    return;
 }
 
 sub capture {
@@ -81,6 +90,8 @@ sub publish {
     $c->stash->{song}->show;
 
     $c->redirect_to('admin_list_songs');
+
+    return;
 }
 
 sub unpublish {
@@ -89,6 +100,8 @@ sub unpublish {
     $c->stash->{song}->hide;
 
     $c->redirect_to('admin_list_songs');
+
+    return;
 }
 
 sub edit {
@@ -105,9 +118,11 @@ sub edit {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
-sub delete {
+sub do_delete {
     my $c = shift;
 
     my $form = $c->form('Song::Delete', song => $c->stash->{song});
@@ -118,6 +133,8 @@ sub delete {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 

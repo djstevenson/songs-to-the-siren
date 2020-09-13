@@ -6,6 +6,7 @@ extends 'DBIx::Class::ResultSet';
 use SongsToTheSiren::Util::Password qw/ new_password_hash /;
 
 use DateTime;
+use Carp;
 
 # TODO POD
 
@@ -82,7 +83,7 @@ sub admin_users {
 sub create_test_user {
     my ($self, $username, $email, $password, $admin) = @_;
 
-    $self->_assert_test_db;
+    $self->assert_test_db;
 
     my $passwd = new_password_hash($password);
 
@@ -100,14 +101,18 @@ sub create_test_user {
     return $user;
 }
 
-sub _assert_test_db {
+sub assert_test_db {
     my $self = shift;
 
-    die unless $ENV{MOJO_MODE} eq 'test';
+    croak unless $ENV{MOJO_MODE} eq 'test';
 
-    my $dbh = $self->result_source->schema->storage->dbh;
+    my $schema = $self->result_source->schema;
+    my $dbh    = $schema->storage->dbh;
+
     my ($k, $name) = split(/=/, $dbh->{Name});
-    die unless $name eq 'songstothesiren_test';
+    croak unless $name eq 'songstothesiren_test';
+
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -5,23 +5,23 @@ use namespace::autoclean;
 sub _name_to_id {
     my ($self, $form, $name) = @_;
 
-    my $id = $form->id . '-' . $name;
+    my $id = $form->id . q{-} . $name;
     $id =~ s/_/-/g;
     return $id;
 }
 
-sub _input_render {
+sub input_render {
     my ($self, $form, $type) = @_;
 
     my $name  = $self->name;
     my $id    = $self->_name_to_id($form, $name);
     my $label = $self->label;
 
-    my $value       = '';
+    my $value       = q{};
     my $input_class = 'form-control';
-    my $error_class = '';
+    my $error_class = q{};
     my $error_id    = 'error-' . $id;
-    my $text        = '';
+    my $text        = q{};
 
     if ($self->has_error) {
         $text = $self->error;
@@ -38,13 +38,13 @@ sub _input_render {
 
     # TODO If the form has errors, consider patching autofocus to go to the first error field?
     my $autofocus_etc = $self->_get_auto_attributes;
-    return qq{
+    return <<"FORM_GROUP";
         <div class="form-group">
             <label for="${id}">${label}</label>
             <input type="${type}" id="${id}" ${data} name="${name}" ${autofocus_etc} class="${input_class}" value="${value}"/>
             ${error}
         </div>
-    };
+FORM_GROUP
 }
 
 # TODO This is also in the textarea renderer.
@@ -64,7 +64,7 @@ sub _get_auto_attributes {
     $attrs{spellcheck}     = $self->spellcheck     if $self->has_spellcheck;
     $attrs{inputmode}      = $self->inputmode      if $self->has_inputmode;
 
-    return join(' ', map { defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_ } keys %attrs);
+    return join(q{ }, map { defined($attrs{$_}) ? $_ . q{="} . $attrs{$_} . q{"} : $_ } keys %attrs);
 }
 
 no Moose::Role;

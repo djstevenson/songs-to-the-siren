@@ -6,6 +6,7 @@ use SongsToTheSiren::Controller::Song::Comment;
 sub add_routes {
     my ($c, $r) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $r->any('/song')->to(controller => 'song');
     my $a = $u->require_admin;
 
@@ -15,6 +16,9 @@ sub add_routes {
     $song_action_u->route('/view')->name('view_song')->via('GET')->to(action => 'view');
 
     SongsToTheSiren::Controller::Song::Comment->new->add_routes($song_action_u);
+    ## use critic
+    
+    return;
 }
 
 sub capture {
@@ -52,6 +56,8 @@ sub view {
         forest      => $song->get_comment_forest($user),
         navigation  => $song->get_navigation,
     );
+
+    return;
 }
 
 1;

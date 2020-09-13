@@ -8,7 +8,7 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'approve-comment');
 
-has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1,);
+has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1);
 
 has_button approve_comment => ();
 has_button cancel          => (style => 'light');

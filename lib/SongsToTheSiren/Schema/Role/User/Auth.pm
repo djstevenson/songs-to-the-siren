@@ -3,6 +3,7 @@ use Moose::Role;
 
 # TODO Add pod
 
+use Carp;
 use DateTime;
 use DateTime::Duration;
 use SongsToTheSiren::Util::Password 'new_password_hash',
@@ -18,7 +19,7 @@ use SongsToTheSiren::Util::Password 'new_password_hash',
 sub check_key {
     my ($self, $purpose, $user_user_key) = @_;
 
-    die 'Missing registration key' unless $user_user_key;
+    croak 'Missing registration key' unless $user_user_key;
 
     my $user_key_rs = $self->result_source->schema->resultset('UserKey');
     my $key_obj     = $user_key_rs->find_key($self, $purpose);
@@ -47,6 +48,8 @@ sub delete_key {
 
     my $k = $self->find_key($purpose);
     $k->delete if $k;
+
+    return;
 }
 
 sub update_password {
@@ -56,6 +59,8 @@ sub update_password {
 
     # Delete key to prevent re-use
     $self->delete_key('password_reset');
+
+    return;
 }
 
 sub generate_new_user_key {

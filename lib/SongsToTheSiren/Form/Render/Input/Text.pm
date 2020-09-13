@@ -6,7 +6,7 @@ with 'SongsToTheSiren::Form::Render::Input::Generic';
 
 sub render {
     my ($self, $form) = @_;
-    return $self->_input_render($form, 'text');
+    return $self->input_render($form, 'text');
 }
 
 1;

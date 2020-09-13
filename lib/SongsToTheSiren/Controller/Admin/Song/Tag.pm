@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $song_action->require_admin->any('/tag')->to(controller => 'admin-song-tag');
 
     # Actions that do not capture a tag_id
@@ -13,8 +14,10 @@ sub add_routes {
     my $tag_action = $u->under('/:tag_id')->to(action => 'capture');
 
     # Remove a tag from a song
-    $tag_action->route->name('admin_delete_song_tag')->via('DELETE')->to(action => 'delete');
-
+    $tag_action->route->name('admin_delete_song_tag')->via('DELETE')->to(action => 'do_delete');
+    ## use critic
+    
+    return;
 }
 
 
@@ -24,15 +27,18 @@ sub edit {
     my $song = $c->stash->{song};
     my $form = $c->form('Tag::Create', song => $song);
 
-    my $all_tags_rs = $c->schema->resultset('Tag')->by_name->fetch_counts;
+    my $tags_rs = $c->schema->resultset('Tag');
+    my $all_tags_rs = $tags_rs->by_name->fetch_counts;
 
-    $c->stash(song_tags => [$song->tags->all], other_tags => [$all_tags_rs->all], form => $form,);
+    $c->stash(song_tags => [$song->tags->all], other_tags => [$all_tags_rs->all], form => $form);
     if ($form->process) {
         $c->flash(msg => 'Tag added');
 
         # Redirect so that form is reinitialised
         $c->redirect_to('admin_edit_song_tags', song_id => $song->id);
     }
+
+    return;
 
 }
 
@@ -48,15 +54,19 @@ sub capture {
         $c->reply->not_found;
         return undef;
     }
+
+    return;
 }
 
-sub delete {
+sub do_delete {
     my $c = shift;
 
     my $tag = $c->stash->{tag};
     $c->stash->{song}->delete_tag($tag);
 
-    $c->render(text => '');
+    $c->render(text => q{});
+
+    return;
 }
 
 1;

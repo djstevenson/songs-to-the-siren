@@ -15,6 +15,8 @@ sub register {
             return $form_factory->form($name, {c => $c, @args});
         }
     );
+
+    return;
 }
 
 1;

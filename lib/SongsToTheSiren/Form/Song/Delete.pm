@@ -8,7 +8,7 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'delete-song');
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1);
 
 has_button delete_song => ();
 has_button cancel      => (style => 'light', skip_validation => 1);

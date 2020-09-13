@@ -4,6 +4,10 @@ use namespace::autoclean;
 
 with 'SongsToTheSiren::Form::Render::Input::Generic';
 
+use Readonly;
+
+Readonly my $DEFAULT_ROWS => 6;
+
 sub render {
     my ($self, $form) = @_;
 
@@ -11,11 +15,11 @@ sub render {
     my $id    = $self->_name_to_id($form, $name);
     my $label = $self->label;
 
-    my $value       = $self->has_value ? $self->value : '';
+    my $value       = $self->has_value ? $self->value : q{};
     my $input_class = 'form-control';
-    my $error_class = '';
+    my $error_class = q{};
     my $error_id    = 'error-' . $id;
-    my $text        = '';
+    my $text        = q{};
     if ($self->has_error) {
         $text = $self->error;
         $input_class .= ' is-invalid';
@@ -26,17 +30,18 @@ sub render {
     my $autofocus_etc = $self->_get_auto_attributes;
 
     my $options = $self->_get_options;
-    my $rows    = exists $options->{rows} ? $options->{rows} : 6;
+    my $rows    = exists $options->{rows} ? $options->{rows} : $DEFAULT_ROWS;
 
     my $data = $self->render_data($form);
 
-    return qq{
+    # TODO Move to tt2 template file?
+    return <<"END_FORM_GROUP";
 		<div class="form-group">
 			<label for="${id}">${label}</label>
 			<textarea id="${id}" name="${name}" ${data} ${autofocus_etc} class="${input_class}" rows="${rows}" >${value}</textarea>
 			${error}
 		</div>
-	};
+END_FORM_GROUP
 }
 
 # TODO This is also in the generic input renderer.
@@ -59,7 +64,7 @@ sub _get_auto_attributes {
     $attrs{inputmode}      = $self->inputmode      if $self->has_inputmode;
 
 
-    return join(' ', map { defined($attrs{$_}) ? $_ . '="' . $attrs{$_} . '"' : $_ } keys %attrs);
+    return join(q{ }, map { defined($attrs{$_}) ? $_ . q{="} . $attrs{$_} . q{"} : $_ } keys %attrs);
 }
 
 no Moose::Role;

@@ -9,7 +9,7 @@ with 'SongsToTheSiren::Form::Field::Validator::Role';
 sub validate {
     my ($self, $value) = @_;
 
-    return undef if $value =~ m{^[0-9]{1,}$}i;
+    return undef if $value =~ m{ \A [0-9]{1,} \Z }ix;
 
     return 'Invalid number';
 

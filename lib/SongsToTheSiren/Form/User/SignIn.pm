@@ -63,7 +63,6 @@ after extra_validation => sub {
     my $user_rs = $self->c->schema->resultset('User');
     my $user    = $user_rs->find_by_name($name_field->value);
     if ($user) {
-        my $password_field = $self->find_field('password');
         my $plain          = $password_field->value;
         my $hash           = $user->password_hash;
         if (check_password_hash($plain, $hash)) {

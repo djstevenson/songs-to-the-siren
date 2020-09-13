@@ -27,14 +27,16 @@ sub init_meta {
     # Apply the role to the caller class's metaclass object
     Moose::Util::MetaRole::apply_metaroles(
         for             => $options{for_class},
-        class_metaroles => {class => ['SongsToTheSiren::Form::Meta::Form'],},
+        class_metaroles => { class => ['SongsToTheSiren::Form::Meta::Form'] },
     );
+
+    return;
 }
 
 sub has_field {
     my ($meta, $name, %options) = @_;
 
-    my $field = SongsToTheSiren::Form::Field->new(name => $name, %options,);
+    my $field = SongsToTheSiren::Form::Field->new(name => $name, %options);
 
     # Set the right render method for the type
     Moose::Util::apply_all_roles($field, 'SongsToTheSiren::Form::Render::' . $options{type});
@@ -46,7 +48,7 @@ sub has_field {
 sub has_button {
     my ($meta, $name, %options) = @_;
 
-    my $button = SongsToTheSiren::Form::Button->new(name => $name, %options,);
+    my $button = SongsToTheSiren::Form::Button->new(name => $name, %options);
 
     $meta->add_button($button);
     return $button;

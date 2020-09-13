@@ -1,4 +1,5 @@
 requires 'namespace::autoclean';
+requires 'Carp';
 requires 'Readonly';
 requires 'FindBin::libs';
 requires 'Cpanel::JSON::XS';

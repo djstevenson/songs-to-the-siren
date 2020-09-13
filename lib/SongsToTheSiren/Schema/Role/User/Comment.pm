@@ -7,6 +7,7 @@ use SongsToTheSiren::BBCode;
 
 use DateTime;
 use Parse::BBCode;
+use Carp;
 
 # This exists just to keep Result::User down to a more manageable size.
 # It extracts the methods relating to comments etc
@@ -16,7 +17,7 @@ sub new_song_comment {
 
     my $parent_id;
     if ($parent) {
-        die 'Cannot reply to unapproved article' unless $parent->approved_at;
+        croak 'Cannot reply to unapproved article' unless $parent->approved_at;
         $parent_id = $parent->id;
     }
 
@@ -24,7 +25,7 @@ sub new_song_comment {
     my $rendered_html = $renderer->render($data->{comment_bbcode});
 
     my $full_args = {
-        %$data,
+        %{ $data },
         parent_id    => $parent_id,
         song_id      => $song->id,
         comment_html => $rendered_html,
@@ -42,9 +43,9 @@ sub edit_song_comment {
     my $renderer      = SongsToTheSiren::BBCode->new;
     my $rendered_html = $renderer->render($data->{comment_bbcode});
 
-    my $full_args = {%$data, comment_html => $rendered_html,};
+    my $full_args = {%{ $data }, comment_html => $rendered_html};
 
-    $comment->create_related(edits => {editor_id => $self->id, reason => $reason,});
+    $comment->create_related(edits => {editor_id => $self->id, reason => $reason});
     return $comment->update($full_args);
 }
 

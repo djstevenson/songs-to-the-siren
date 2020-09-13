@@ -6,6 +6,7 @@ sub add_routes {
 
     # $song_action has checked that we're logged-in, but not that we're admin
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $song_action->require_admin->any('/comment')->to(controller => 'admin-song-comment');
 
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
@@ -13,6 +14,9 @@ sub add_routes {
     $comment_action->route('/approve')->name('admin_approve_comment')->via('GET', 'POST')->to(action => 'approve');
     $comment_action->route('/reject')->name('admin_reject_comment')->via('GET', 'POST')->to(action   => 'reject');
     $comment_action->route('/edit')->name('admin_edit_comment')->via('GET', 'POST')->to(action       => 'edit');
+    ## use critic
+
+    return;
 }
 
 sub capture {
@@ -47,6 +51,8 @@ sub approve {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub reject {
@@ -65,6 +71,8 @@ sub reject {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub edit {
@@ -83,6 +91,8 @@ sub edit {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 

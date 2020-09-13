@@ -7,6 +7,7 @@ use warnings;
 use SongsToTheSiren::Model::Comment::Node;
 
 use Sub::Exporter -setup => {exports => [qw/ make_forest /]};
+use Carp;
 
 # Called as a class method
 # $song is a SongsToTheSiren::Schema::ResultSet::Comment
@@ -24,7 +25,13 @@ sub make_forest {
     # or to their parent's children list, in reverse
     # order (unshift rather than push).
     # This gives us the right order for display.
-    my $comment_rs = $song->comments->for_display->for_user($user)->id_order;
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
+    my $comment_rs = $song
+        ->comments
+        ->for_display
+        ->for_user($user)
+        ->id_order;
+    ## use critic
 
     my $root_nodes = [];
     my $all_nodes  = {};
@@ -37,7 +44,7 @@ sub make_forest {
 
             # Fail if the parent isn't found, we have inconsistent
             # data. The DB schema ensures his shouldn't happen.
-            die 'Invalid comment tree for song: ' . $song->id unless exists $all_nodes->{$parent_id};
+            croak 'Invalid comment tree for song: ' . $song->id unless exists $all_nodes->{$parent_id};
 
             $all_nodes->{$parent_id}->add_child($node);
         }

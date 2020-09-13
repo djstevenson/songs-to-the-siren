@@ -77,7 +77,7 @@ sub _make_field {
     my ($self, $type, $args) = @_;
 
     my $field = SongsToTheSiren::Form::Field->new({
-       %$args,
+       %{ $args },
        type => $type,
     });
 

@@ -14,7 +14,7 @@ sub render {
 
     my $link = $self->link;
 
-    return sprintf('<a href="%s" target="_blank">%s</a>', $link->embed_url, $link->embed_description,);
+    return sprintf('<a href="%s" target="_blank">%s</a>', $link->embed_url, $link->embed_description);
 }
 
 1;

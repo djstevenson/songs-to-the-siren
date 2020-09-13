@@ -28,6 +28,8 @@ sub init_meta {
         for             => $options{for_class},
         class_metaroles => {class => ['SongsToTheSiren::Table::Meta::Table'],},
     );
+
+    return;
 }
 
 sub has_column {
@@ -42,7 +44,7 @@ sub has_column {
         $class_name = 'SongsToTheSiren::Table::Column';
     }
 
-    my $column = $class_name->new(name => $name, %options,);
+    my $column = $class_name->new(name => $name, %options);
 
     $meta->add_column($column);
     return $column;

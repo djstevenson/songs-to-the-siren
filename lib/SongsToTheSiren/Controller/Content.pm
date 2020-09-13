@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $r) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $r->any('/content')->to(controller => 'content');
 
     # Capturing the content name
@@ -11,6 +12,9 @@ sub add_routes {
 
     # Non-admin content, with a capture
     $content_action_u->route('/view')->name('view_content')->via('GET')->to(action => 'view');
+    ## use critic
+    
+    return;
 }
 
 sub capture {

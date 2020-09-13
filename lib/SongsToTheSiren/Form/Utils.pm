@@ -11,18 +11,18 @@ sub load_form_objects {
 
     my @o;
 
-    foreach my $source_item (@$source_data) {
+    foreach my $source_item ( @{ $source_data } ) {
         my $class_name;
-        my %xargs = %$args;
+        my %xargs = %{ $args };
         if (ref($source_item) eq 'ARRAY') {
             $class_name = $source_item->[0];
-            %xargs      = (%xargs, %{$source_item->[1]}),;
+            %xargs      = (%xargs, %{ $source_item->[1]});
         }
         else {
             $class_name = $source_item;
         }
 
-        my $full_class_name = $class_prefix . '::' . $class_name;
+        my $full_class_name = $class_prefix . q{::} . $class_name;
         Class::Load::load_class($full_class_name);
 
         push @o, $full_class_name->new(%xargs);

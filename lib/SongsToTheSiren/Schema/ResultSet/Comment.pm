@@ -32,12 +32,19 @@ sub for_user {
         else {
             # Non-admin user sees modded comments
             # and OWN non-modded ones.
-            $rs = $self->search({-or => [{approved_at => {'!=' => undef}}, {author_id => $user->id},]});
+            $rs = $self->search({
+                -or => [
+                    { approved_at => { q{!=} => undef} },
+                    { author_id   => $user->id         }
+                ]
+            });
         }
     }
     else {
         # Not logged-in, sees modded comments only
-        $rs = $self->search({approved_at => {'!=' => undef}});
+        $rs = $self->search({
+            approved_at => { q{!=} => undef}
+        });
     }
 
     return $rs;

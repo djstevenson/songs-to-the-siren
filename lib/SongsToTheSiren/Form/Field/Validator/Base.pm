@@ -4,6 +4,6 @@ use Moose;
 
 #  TODO Consider using Mojolicious validations
 
-has schema => (is => 'ro', isa => 'SongsToTheSiren::Schema', required => 1,);
+has schema => (is => 'ro', isa => 'SongsToTheSiren::Schema', required => 1);
 
 1;

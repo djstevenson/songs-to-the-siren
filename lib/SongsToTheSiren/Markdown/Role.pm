@@ -3,7 +3,7 @@ use Moose::Role;
 
 # An role to define an interface to markdown pre-processors
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song',);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song');
 
 requires 'process';
 

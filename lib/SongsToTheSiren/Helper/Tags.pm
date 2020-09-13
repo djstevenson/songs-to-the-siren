@@ -28,6 +28,8 @@ sub register {
 
 
     # TODO Tests for helpers
+
+    return;
 }
 
 

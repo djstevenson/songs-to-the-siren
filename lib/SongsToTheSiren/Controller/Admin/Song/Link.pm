@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub add_routes {
     my ($c, $song_action) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $song_action->require_admin->any('/link')->to(controller => 'admin-song-link');
 
     # Admin routes that do not capture a link id
@@ -13,9 +14,12 @@ sub add_routes {
     # Admin routes that capture a link id
     my $link_action = $u->under('/:link_id')->to(action => 'capture');
     $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action     => 'edit');
-    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'delete')
+    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'do_delete')
         ;    # DELETE method?
     $link_action->route('/copy')->name('admin_copy_song_link')->to(action => 'copy');
+    ## use critic
+    
+    return;
 }
 
 
@@ -26,6 +30,8 @@ sub list {
     my $table = $c->table('Song::Link::List', song => $song);
 
     $c->stash(table => $table);
+
+    return;
 }
 
 sub create {
@@ -42,6 +48,8 @@ sub create {
         $c->stash(form => $form);
     }
 
+    return;
+
 }
 
 sub capture {
@@ -56,6 +64,8 @@ sub capture {
         $c->reply->not_found;
         return undef;
     }
+
+    return;
 }
 
 sub edit {
@@ -72,9 +82,11 @@ sub edit {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
-sub delete {
+sub do_delete {
     my $c = shift;
 
     my $song = $c->stash->{song};
@@ -88,6 +100,8 @@ sub delete {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub copy {
@@ -112,6 +126,7 @@ sub copy {
     # We're gonna want to edit the new link, so redirect there
     $c->redirect_to('admin_edit_song_link', song_id => $song->id, link_id => $new_link->id);
 
+    return;
 }
 
 1;
