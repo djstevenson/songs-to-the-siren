@@ -1,8 +1,11 @@
 package SongsToTheSiren::Form::Field;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
 use HTML::Entities qw/ encode_entities /;
+
+use Carp;
 
 has name => (is => 'ro', isa => 'Str', required => 1);
 
@@ -61,14 +64,14 @@ has data => (is => 'ro', isa => 'HashRef|CodeRef', predicate => 'has_data');
 sub process {
     my ($self, $schema, $value) = @_;
 
-    my $filtered_value = $value // '';
+    my $filtered_value = $value // q{};
     my $filters        = SongsToTheSiren::Form::Utils::load_form_objects(
         $self->filters,
         'SongsToTheSiren::Form::Field::Filter',
         {schema => $schema},
     );
 
-    foreach my $filter (@$filters) {
+    foreach my $filter ( @{ $filters } ) {
         $filtered_value = $filter->filter($filtered_value);
     }
     $self->value($filtered_value);
@@ -83,13 +86,15 @@ sub process {
         {schema => $schema},
     );
     $self->clear_error;
-    foreach my $validator (@$validators) {
+    foreach my $validator ( @{ $validators } ) {
         my $error_value = $validator->validate($filtered_value);
         if ($error_value) {
             $self->error($error_value);
             last;
         }
     }
+
+    return;
 }
 
 # Assumes that we are in a GET operation, i.e. we need to
@@ -100,6 +105,8 @@ sub set_initial_value {
     my $v = $self->_get_initial_value($form);
 
     $self->value($v);
+
+    return;
 }
 
 sub _get_initial_value {
@@ -113,7 +120,7 @@ sub _get_initial_value {
 sub _get_initial_value_unencoded {
     my ($self, $form) = @_;
 
-    return '' if $self->type eq 'Html';
+    return q{} if $self->type eq 'Html';  # return empty string
 
     # Get from initial_value option if we have one.
     # Else get from data_object if we have one.
@@ -124,7 +131,7 @@ sub _get_initial_value_unencoded {
 
     return $form->data_object->get_column($self->name) if $form->has_data_object;
 
-    return '';
+    return q{};  # return empty string
 }
 
 sub _get_options {
@@ -135,21 +142,21 @@ sub _get_options {
         $options = $options->($self, $form);
     }
 
-    die 'Invalid options' unless ref($options) eq 'HASH';
+    croak 'Invalid options' unless ref($options) eq 'HASH';
     return $options;
 }
 
-sub _get_selections {
+sub get_selections {
     my ($self, $form) = @_;
 
-    die unless $self->has_selections;
+    croak unless $self->has_selections;
 
     my $selections = $self->selections;
     if (ref($selections) eq 'CODE') {
         $selections = $selections->($self, $form);
     }
 
-    die 'Invalid selections' unless ref($selections) eq 'ARRAY';
+    croak 'Invalid selections' unless ref($selections) eq 'ARRAY';
     return $selections;
 }
 
@@ -157,7 +164,7 @@ sub _get_selections {
 sub render_data {
     my ($self, $form) = @_;
 
-    return '' unless $self->has_data;
+    return q{} unless $self->has_data;  # return empty string
 
     my $data = $self->data;
     if (ref($data) eq 'CODE') {
@@ -178,7 +185,7 @@ sub render_data {
         }
     }
 
-    return join(' ', @attrs);
+    return join(q{ }, @attrs); # Join by single-space 
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -186,7 +193,7 @@ __PACKAGE__->meta->make_immutable;
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

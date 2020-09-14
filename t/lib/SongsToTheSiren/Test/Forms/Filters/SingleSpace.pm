@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Filters::SingleSpace;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -18,7 +19,7 @@ sub run {
 	my $self = shift;
 	
 	my $tests = [
-		{ data => '',         expected => ''      },
+		{ data => q{},        expected => q{},    },  # Empty string
 		{ data => 'abcdef',   expected => 'abcdef'},
 		{ data => 'abc ef',   expected => 'abc ef'},
 		{ data => ' bcdef',   expected => ' bcdef'},
@@ -26,8 +27,8 @@ sub run {
 		{ data => 'abc   ef', expected => 'abc ef'},
 		{ data => '   bcdef', expected => ' bcdef'},
 		{ data => 'abcde   ', expected => 'abcde '},
-		{ data => 'a  b   c', expected => 'a b c'},
-		{ data => '        ', expected => ' '},
+		{ data => 'a  b   c', expected => 'a b c' },
+		{ data => q{       }, expected => q{ }    }, #  Multiple spaces collapsed to one
 	];
 
 	my $filter = SongsToTheSiren::Form::Field::Filter::SingleSpace->new(schema => $self->schema);

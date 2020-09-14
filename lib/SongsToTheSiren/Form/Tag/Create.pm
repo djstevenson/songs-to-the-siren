@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Tag::Create;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -13,10 +14,12 @@ has_field name => (
     autofocus  => 1,
     filters    => [qw/ TrimEdges /],
     validators => [qw/ Required  /],
-    options    => {initial_value => '',},
+    options    => {
+        initial_value => q{}
+    },
 );
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1);
 
 has_button create_tag => ();
 

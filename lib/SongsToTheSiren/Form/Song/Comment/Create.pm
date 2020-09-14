@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Song::Comment::Create;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -19,10 +20,10 @@ has_field comment_bbcode => (
 has_button submit => ();
 has_button cancel => (style => 'light', skip_validation => 1);
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1);
 
 has parent_comment =>
-    (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', predicate => 'has_parent_comment',);
+    (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', predicate => 'has_parent_comment');
 
 override posted => sub {
     my $self = shift;

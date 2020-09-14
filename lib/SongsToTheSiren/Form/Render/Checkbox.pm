@@ -1,11 +1,14 @@
 package SongsToTheSiren::Form::Render::Checkbox;
+use utf8;
 use Moose::Role;
 use namespace::autoclean;
+
+use Carp;
 
 sub render {
     my $self = shift;
 
-    die "Checkbox not yet implemented";
+    croak "Checkbox not yet implemented";
 
     # my $name = $self->name;
     # my $id = $form->id . '_' . $name;

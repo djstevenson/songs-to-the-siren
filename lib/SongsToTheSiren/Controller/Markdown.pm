@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Markdown;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 use SongsToTheSiren::Markdown;
@@ -7,6 +8,8 @@ sub add_routes {
     my ($c, $r) = @_;
 
     $r->route('/markdown')->via('POST')->to('markdown#render_markdown');
+    
+    return;
 }
 
 sub render_markdown {
@@ -32,6 +35,8 @@ sub render_markdown {
     my $markdown  = $c->param('markdown');
     my $html      = $processor->markdown($markdown);
     $c->render(text => $html);
+
+    return;
 }
 
 

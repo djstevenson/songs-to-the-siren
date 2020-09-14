@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use utf8;
 
 use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }

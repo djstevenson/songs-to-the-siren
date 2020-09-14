@@ -1,8 +1,11 @@
 package SongsToTheSiren::Controller::Admin::Content;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
     my ($c, $r) = @_;
+
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
 
     # $r already has 'require_admin' check applied
     my $a = $r->any('/content')->to(controller => 'admin-content');
@@ -18,8 +21,10 @@ sub add_routes {
     $content_action_a->route('/edit')->name('admin_edit_content')->via('GET', 'POST')->to(action => 'edit');
 
     # Method=DELETE?
-    $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'delete');
-
+    $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'do_delete');
+    ## use critic
+    
+    return;
 }
 
 sub create {
@@ -33,6 +38,8 @@ sub create {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub list {
@@ -41,6 +48,8 @@ sub list {
     my $table = $c->table('Content::List');
 
     $c->stash(table => $table);
+
+    return;
 }
 
 sub capture {
@@ -73,9 +82,11 @@ sub edit {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
-sub delete {
+sub do_delete {
     my $c = shift;
 
     my $form = $c->form('Content::Delete', content => $c->stash->{content});
@@ -86,6 +97,8 @@ sub delete {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 

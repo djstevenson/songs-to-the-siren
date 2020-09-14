@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Base;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

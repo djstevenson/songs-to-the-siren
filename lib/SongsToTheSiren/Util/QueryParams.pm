@@ -1,6 +1,7 @@
 package SongsToTheSiren::Util::QueryParams;
 use strict;
 use warnings;
+use utf8;
 
 # TODO POD
 use Sub::Exporter -setup => {exports => [qw/ add_id_to_param remove_id_from_param /]};
@@ -16,9 +17,9 @@ sub add_id_to_param {
 sub _join_tags {
     my ($name, @tags) = @_;
 
-    return '' unless scalar(@tags);
+    return q{} unless scalar(@tags);
 
-    return '?' . $name . '=' . join(',', @tags);
+    return q{?} . $name . q{=} . join(q{,}, @tags);
 }
 
 sub remove_id_from_param {

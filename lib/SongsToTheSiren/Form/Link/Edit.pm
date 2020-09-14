@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Link::Edit;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -40,9 +41,10 @@ has_field embed_class => (
     selections => sub {
         my ($field, $form) = @_;
 
-        my $roles = $form->c->app->config->{link_roles};
+        my $app   = $form->c->app;
+        my $roles = $app->config->{link_roles};
 
-        return [map { {value => $_, text => $_} } @$roles];
+        return [map { {value => $_, text => $_} } @{ $roles }];
     },
 );
 
@@ -71,9 +73,10 @@ has_field list_css => (
     selections => sub {
         my ($field, $form) = @_;
 
-        my $css = $form->c->app->config->{link_css};
+        my $app   = $form->c->app;
+        my $css   = $app->config->{link_css};
 
-        return [map { {value => $_, text => $_} } @$css];
+        return [map { {value => $_, text => $_} } @{ $css }];
     },
 );
 
@@ -96,7 +99,8 @@ after extra_validation => sub {
 
     my $fail;
 
-    my $identifiers = $self->song->links->embedded_links->by_identifier;
+    my $links       = $self->song->links;
+    my $identifiers = $links->embedded_links->by_identifier;
 
     my $identifier_field = $self->find_field('embed_identifier');
     my $identifier_value = lc $identifier_field->value;
@@ -147,6 +151,8 @@ sub BUILD {
     if ($self->is_update) {
         $self->data_object($self->link);
     }
+
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;

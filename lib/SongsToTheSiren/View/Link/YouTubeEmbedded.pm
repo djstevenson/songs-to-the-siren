@@ -1,4 +1,5 @@
 package SongsToTheSiren::View::Link::YouTubeEmbedded;
+use utf8;
 use Moose::Role;
 
 with 'SongsToTheSiren::View::Link::Role';
@@ -21,7 +22,7 @@ sub render {
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

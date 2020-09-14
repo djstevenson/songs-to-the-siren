@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Content::Edit;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -8,9 +9,9 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'edit-content');
 
-has content => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Content', predicate => 'is_update',);
+has content => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Content', predicate => 'is_update');
 
-has_field title => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /],);
+has_field title => (type => 'Input::Text', filters => [qw/ TrimEdges /], validators => [qw/ Required  /]);
 
 has_field markdown => (
     label      => 'Summary',
@@ -63,6 +64,8 @@ sub BUILD {
     if ($self->is_update) {
         $self->data_object($self->content);
     }
+
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -1,4 +1,5 @@
 package SongsToTheSiren::View::Link::Render;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -22,7 +23,7 @@ use Moose::Util qw/ apply_all_roles /;
 #  my $link_html = $renderer->as_html;
 
 # Link object is required.
-has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', required => 1,);
+has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', required => 1);
 
 # Supply a song object in the constructor if you already
 # have one, otherwise it wil be lazily fetched from the

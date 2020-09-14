@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Song::Comment::Edit;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -9,7 +10,7 @@ with 'SongsToTheSiren::Form::Role';
 has '+id' => (default => 'edit-comment');
 
 # The comment object that we are editing.
-has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1,);
+has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1);
 
 
 has_field comment_bbcode => (
@@ -25,7 +26,9 @@ has_field reason => (
     label      => 'Reason for edit',
     filters    => [qw/ TrimEdges /],
     validators => [qw/ Required  /],
-    options    => {initial_value => '',}
+    options    => {
+        initial_value => q{}
+    },
 );
 
 has_button submit => ();
@@ -53,6 +56,8 @@ sub BUILD {
     my $self = shift;
 
     $self->data_object($self->comment);
+
+    return;
 }
 
 

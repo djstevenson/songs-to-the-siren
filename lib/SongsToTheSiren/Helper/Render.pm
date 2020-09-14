@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Render;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use SongsToTheSiren::Util::Date qw/ format_date format_date_nosec format_date_compact /;
@@ -23,7 +24,7 @@ sub register {
 
             my $id = $self->_label_to_id($label);
             return
-                sprintf(q{<span id="%s">%d</span> %s%s}, $id, $value, encode_entities($label), $value == 1 ? '' : 's');
+                sprintf(q{<span id="%s">%d</span> %s%s}, $id, $value, encode_entities($label), $value == 1 ? q{} : 's');
         }
     );
 
@@ -54,7 +55,7 @@ sub register {
         datetime => sub {
             my ($c, $datetime, $default) = @_;
 
-            return $default // '' unless $datetime;
+            return $default // q{} unless $datetime;
 
             return format_date($datetime);
         }
@@ -69,7 +70,7 @@ sub register {
         datetime_nosec => sub {
             my ($c, $datetime, $default) = @_;
 
-            return $default // '' unless $datetime;
+            return $default // q{} unless $datetime;
 
             return format_date_nosec($datetime);
         }
@@ -83,7 +84,7 @@ sub register {
         datetime_compact => sub {
             my ($c, $datetime, $default) = @_;
 
-            return $default // '' unless $datetime;
+            return $default // q{} unless $datetime;
 
             return format_date_compact($datetime);
         }
@@ -104,6 +105,8 @@ sub register {
             }
         }
     );
+
+    return;
 }
 
 # TODO Tests for helpers

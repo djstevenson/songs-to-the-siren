@@ -1,11 +1,12 @@
 package SongsToTheSiren::Model::Comment::Node;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
 # TODO POD
 
 # Required constructor arg
-has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1,);
+has comment => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Comment', required => 1);
 
 has children => (
     traits   => ['Array'],
@@ -28,7 +29,7 @@ sub evaluate {
 
     my $s = $coderef->($self);
     if (scalar @{$self->children}) {
-        $s .= join('', map { $coderef->($_) } @{$self->children});
+        $s .= join(q{}, map { $coderef->($_) } @{ $self->children });
     }
     return $s;
 }

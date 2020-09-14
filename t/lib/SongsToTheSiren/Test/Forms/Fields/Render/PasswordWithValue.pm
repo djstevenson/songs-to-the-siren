@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Fields::Render::PasswordWithValue;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

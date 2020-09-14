@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Link::Delete;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -13,9 +14,9 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'delete-link');
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1,);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', required => 1);
 
-has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', required => 1,);
+has link => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Link', required => 1);
 
 has_button delete_link => ();
 has_button cancel      => (style => 'light');

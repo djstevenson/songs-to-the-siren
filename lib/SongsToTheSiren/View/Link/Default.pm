@@ -1,4 +1,5 @@
 package SongsToTheSiren::View::Link::Default;
+use utf8;
 use Moose::Role;
 
 with 'SongsToTheSiren::View::Link::Role';
@@ -14,14 +15,14 @@ sub render {
 
     my $link = $self->link;
 
-    return sprintf('<a href="%s" target="_blank">%s</a>', $link->embed_url, $link->embed_description,);
+    return sprintf('<a href="%s" target="_blank">%s</a>', $link->embed_url, $link->embed_description);
 }
 
 1;
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren;
+use utf8;
 use Mojo::Base 'Mojolicious';
 
 # POD docs at end of source
@@ -40,7 +41,7 @@ sub startup {
     my $route = $app->_base_route;
 
     # Status page, if admin
-    my $a            = $route->any('/')->require_admin;
+    my $a            = $route->any(q{/})->require_admin;
     my $status_route = $a->name('status_home')->any('/status');
     $app->plugin('Status' => {route => $status_route});
 
@@ -68,6 +69,8 @@ sub startup {
         my $test_controller = SongsToTheSiren::Controller::Test->new;
         $test_controller->add_routes($route);
     }
+
+    return;
 }
 
 use Mojo::Pg;
@@ -93,7 +96,7 @@ sub _base_route {
     # is admin, it's also stored in $c->stash->{admin_user}
 
     return $app->routes->under(
-        '/' => sub {
+        q{/} => sub {
             my $c = shift;
 
             # Logged in?
@@ -129,11 +132,13 @@ sub _migrate_db {
 
     print "Applying migrations from $sql\n";
     $migrations->from_file($sql)->migrate;
+
+    return;
 }
 
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

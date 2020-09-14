@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Validators::UniqueUserEmail;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

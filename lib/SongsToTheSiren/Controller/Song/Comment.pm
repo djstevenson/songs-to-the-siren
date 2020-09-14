@@ -1,9 +1,13 @@
 package SongsToTheSiren::Controller::Song::Comment;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
+
+use Carp;
 
 sub add_routes {
     my ($c, $song_action) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $song_action->require_sign_in->any('/comment')->to(controller => 'song-comment');
 
     $u->route('/create')->name('new_song_comment')->via('GET', 'POST')->to(action => 'create');
@@ -11,6 +15,9 @@ sub add_routes {
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
     $comment_action->route('/reply')->name('new_song_reply')->via('GET', 'POST')->to(action => 'reply');
+    ## use critic
+    
+    return;
 }
 
 sub create {
@@ -27,6 +34,8 @@ sub create {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub capture {
@@ -51,11 +60,11 @@ sub reply {
     my $parent_comment = $c->stash->{comment};
 
     # TODO Redirect somewhere instead of throwing exception
-    die unless $parent_comment->approved_at;
+    croak unless $parent_comment->approved_at;
 
     my $song = $parent_comment->song;
 
-    my $form = $c->form('Song::Comment::Create', song => $song, parent_comment => $parent_comment,);
+    my $form = $c->form('Song::Comment::Create', song => $song, parent_comment => $parent_comment);
 
     if ($form->process) {
         $c->flash(msg => 'Reply added - subject to moderation');
@@ -65,6 +74,8 @@ sub reply {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 1;

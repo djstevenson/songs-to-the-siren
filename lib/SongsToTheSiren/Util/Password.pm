@@ -1,6 +1,11 @@
 package SongsToTheSiren::Util::Password;
 use strict;
 use warnings;
+use utf8;
+
+use Readonly;
+Readonly my $DEFAULT_BCRYPT_COST => 13;
+Readonly my $USER_KEY_LENGTH     => 16;
 
 use Sub::Exporter -setup => {
     exports => [
@@ -26,9 +31,9 @@ sub new_password_hash {
     # 13 is a decent bet for production in 2019
     # TODO Put this in app config.
     # TODO If it changes, automatically upgrade hashes on login.
-    my $default_cost = $ENV{TEST_BCRYPT_COST} // 13;
+    my $default_cost = $ENV{TEST_BCRYPT_COST} // $DEFAULT_BCRYPT_COST;
 
-    my $ppr = Authen::Passphrase::BlowfishCrypt->new(cost => $default_cost, salt_random => 1, passphrase => $password,);
+    my $ppr = Authen::Passphrase::BlowfishCrypt->new(cost => $default_cost, salt_random => 1, passphrase => $password);
 
     return $ppr->as_crypt;
 }
@@ -43,11 +48,11 @@ sub check_password_hash {
 # A random alphanumeric string is good enough for this
 sub random_user_key {
     state $charset = ["A" .. "Z", "a" .. "z", "0" .. "9"];
-    state $charcnt = scalar @$charset;
+    state $charcnt = scalar @{ $charset };
 
     # TODO make it congif, not hard-coded at 16 chars
     my $s;
-    foreach my $i (1 .. 16) {
+    foreach my $i (1 .. $USER_KEY_LENGTH) {
         $s .= $charset->[int(rand $charcnt)];
     }
 

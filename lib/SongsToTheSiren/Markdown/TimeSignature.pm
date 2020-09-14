@@ -1,4 +1,5 @@
 package SongsToTheSiren::Markdown::TimeSignature;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -34,7 +35,7 @@ __PACKAGE__->meta->make_immutable;
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

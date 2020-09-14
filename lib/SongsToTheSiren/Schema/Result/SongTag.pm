@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Result::SongTag;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -10,7 +11,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 
 __PACKAGE__->table('song_tags');
 
-__PACKAGE__->add_columns(tag_id => {data_type => 'INTEGER'}, song_id => {data_type => 'INTEGER'},);
+__PACKAGE__->add_columns(tag_id => {data_type => 'INTEGER'}, song_id => {data_type => 'INTEGER'});
 
 __PACKAGE__->set_primary_key(qw/ tag_id song_id /);
 

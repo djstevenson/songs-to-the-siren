@@ -98,6 +98,12 @@ To run the Perl unit test suite:
 
 `npx cypress run` to run headless.
 
+Percritic
+=========
+
+carton exec -- perlcritic --gentle -l --statistics lib/
+
+The config is in .perlcriticrc, and follows the practices required by my $dayjob, which is basically the PBP book with a few tweaks.
 
 FAQ
 ===

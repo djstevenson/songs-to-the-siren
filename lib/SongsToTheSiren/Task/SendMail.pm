@@ -1,4 +1,5 @@
 package SongsToTheSiren::Task::SendMail;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD docs at end of file
@@ -10,7 +11,7 @@ use Mojo::URL;
 use Mojo::JSON qw/ decode_json /;
 
 use Net::SMTP::TLS;
-
+use Carp;
 use DateTime;
 
 has home => sub { Mojo::Home->new; };
@@ -45,8 +46,8 @@ sub register {
         smtp => sub {
             my ($job, $email_id) = @_;
 
-            my $app      = $job->app;
-            my $schema   = $app->schema;
+            my $japp     = $job->app;
+            my $schema   = $japp->schema;
             my $email_rs = $schema->resultset('Email');
             my $email    = $email_rs->find($email_id);
 
@@ -97,6 +98,7 @@ sub register {
             });
         }
     );
+    return;
 }
 
 # See POD for details on how we pick up config
@@ -107,7 +109,7 @@ sub _conf {
 
     return $app->config->{smtp}->{$key} if exists $app->config->{smtp}->{$key};
 
-    die "Not found smtp config for '$key'";
+    croak "Not found smtp config for '$key'";
 }
 
 # Locates a template file
@@ -121,7 +123,7 @@ sub _file {
 1;
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

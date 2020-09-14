@@ -1,4 +1,5 @@
 package SongsToTheSiren::Markdown;
+use utf8;
 use Moose;
 use namespace::autoclean;
 use Text::Markdown;
@@ -25,17 +26,21 @@ has _preprocessors => (
 
         my @classes = (qw/ Link TimeSignature Shortcut /);
 
-        my @result;
-
         return [
             map {
-                my $class_name = "SongsToTheSiren::Markdown::$_";
-                Class::Load::load_class($class_name);
-                $class_name->new($args);
+                $self->_load_and_instantiate_class($_, $args)
             } @classes
         ];
     }
 );
+
+sub _load_and_instantiate_class {
+    my ($self, $partial, $args) = @_;
+
+    my $class_name = "SongsToTheSiren::Markdown::${partial}";
+    Class::Load::load_class($class_name);
+    return $class_name->new($args);
+}
 
 sub markdown {
     my ($self, $text) = @_;
@@ -53,7 +58,7 @@ __PACKAGE__->meta->make_immutable;
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

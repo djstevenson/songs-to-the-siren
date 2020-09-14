@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Tags;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use SongsToTheSiren::Util::QueryParams qw/ add_id_to_param remove_id_from_param /;
@@ -28,6 +29,8 @@ sub register {
 
 
     # TODO Tests for helpers
+
+    return;
 }
 
 
@@ -36,7 +39,7 @@ sub register {
 __END__
 
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

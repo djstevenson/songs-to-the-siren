@@ -1,13 +1,17 @@
 package SongsToTheSiren::Table::Base;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
 use Scalar::Util qw/ blessed /;
 
-has c => (is => 'ro', isa => 'Mojolicious::Controller', required => 1,);
+use Readonly;
+Readonly my $DEFAULT_PAGE_SIZE => 12;
+
+has c => (is => 'ro', isa => 'Mojolicious::Controller', required => 1);
 
 has resultset =>
-    (is => 'ro', isa => 'DBIx::Class::ResultSet', required => 1, builder => '_build_resultset', lazy => 1,);
+    (is => 'ro', isa => 'DBIx::Class::ResultSet', required => 1, builder => '_build_resultset', lazy => 1);
 
 has table_columns => (
     is       => 'ro',
@@ -17,7 +21,7 @@ has table_columns => (
     lazy     => 1,
 );
 
-has show_header => (is => 'ro', isa => 'Bool', lazy => 1, init_arg => undef, default => 1,);
+has show_header => (is => 'ro', isa => 'Bool', lazy => 1, init_arg => undef, default => 1);
 
 has page => (
     is       => 'ro',
@@ -33,15 +37,15 @@ has page_size => (
     isa      => 'Int',
     lazy     => 1,
     init_arg => undef,
-    default  => sub { return shift->c->req->param('page_size') || 12; },
+    default  => sub { return shift->c->req->param('page_size') || $DEFAULT_PAGE_SIZE; },
 );
 
 # Override default
-has empty_text => (is => 'ro', isa => 'Str', default => 'No data',);
+has empty_text => (is => 'ro', isa => 'Str', default => 'No data');
 
-has row_count => (is => 'ro', isa => 'Int', lazy => 1, init_arg => undef, builder => '_build_row_count',);
+has row_count => (is => 'ro', isa => 'Int', lazy => 1, init_arg => undef, builder => '_build_row_count');
 
-has id => (is => 'ro', isa => 'Str', lazy => 1, init_arg => undef, builder => '_build_id',);
+has id => (is => 'ro', isa => 'Str', lazy => 1, init_arg => undef, builder => '_build_id');
 
 # So SongsToTheSiren::Table::Announcement::List
 # becomes
@@ -50,9 +54,9 @@ sub _build_id {
     my $self = shift;
 
     my $class = blessed($self);
-    $class =~ s/^SongsToTheSiren:://;
+    $class =~ s/^SongsToTheSiren:://x;
 
-    $class =~ s/::/-/g;
+    $class =~ s/::/-/gx;
 
     return lc $class;
 }
@@ -81,7 +85,7 @@ sub render {
 sub _data_render {
     my $self = shift;
 
-    my $header = $self->show_header ? $self->_render_header : '';
+    my $header = $self->show_header ? $self->_render_header() : q{};
 
     return
           '<table class="table table-striped table-dark table-borderless">'
@@ -108,7 +112,7 @@ sub _render_body {
 
     my $rs = $self->resultset;
     while (my $row = $rs->next) {
-        my $row_class = '';
+        my $row_class = q{};
         if (my $class = $self->class_for_row_data($row)) {
             $row_class = qq{class="$class"};
         }

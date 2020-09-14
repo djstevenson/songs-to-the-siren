@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Content::Delete;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -8,7 +9,7 @@ with 'SongsToTheSiren::Form::Role';
 
 has '+id' => (default => 'delete-content');
 
-has content => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Content', required => 1,);
+has content => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Content', required => 1);
 
 has_button delete_content => ();
 has_button cancel         => (style => 'light', skip_validation => 1);

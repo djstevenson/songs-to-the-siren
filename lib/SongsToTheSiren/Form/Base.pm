@@ -1,8 +1,11 @@
 package SongsToTheSiren::Form::Base;
 use namespace::autoclean;
+use utf8;
 use Moose;
 
 use SongsToTheSiren::Form::Utils;
+
+use Carp;
 
 # This just defines filtering/validation for now.
 # A more complete form package would include
@@ -17,7 +20,7 @@ has c => (
     required => 1,
 );
 
-has id => (is => 'ro', isa => 'Str', required => 1,);
+has id => (is => 'ro', isa => 'Str', required => 1);
 
 has form_fields => (
     is       => 'ro',
@@ -33,7 +36,7 @@ has form_buttons => (
     default  => sub { ref(shift)->meta->form_buttons },
 );
 
-has data_object => (is => 'rw', isa => 'Object', predicate => 'has_data_object',);
+has data_object => (is => 'rw', isa => 'Object', predicate => 'has_data_object');
 
 # Populate fields from an object if we have one.
 # Only on GET though, as on POST we'll populate from
@@ -46,6 +49,8 @@ sub prepare {
     foreach my $field (@{$self->form_fields}) {
         $field->set_initial_value($self);
     }
+
+    return;
 }
 
 sub process {
@@ -74,7 +79,7 @@ sub process {
             $button->clicked(0);
         }
     }
-    die unless $selected_button;
+    croak unless $selected_button;
     return $self->posted if $selected_button->skip_validation;
 
     # Get the list of params and filter and validate each one
@@ -96,7 +101,7 @@ sub process {
     return $result;
 }
 
-has action => (is => 'rw', isa => 'Str', default => 'cancel',);
+has action => (is => 'rw', isa => 'Str', default => 'cancel');
 
 # Does a linear search of fields. The list is short, so this is good enough.
 sub find_field {
@@ -139,6 +144,8 @@ sub clear_errors {
     foreach my $field (@{$self->form_fields}) {
         $field->clear_error;
     }
+
+    return;
 }
 
 sub clear_values {
@@ -147,6 +154,8 @@ sub clear_values {
     foreach my $field (@{$self->form_fields}) {
         $field->clear_value;
     }
+
+    return;
 }
 
 # Maybe implement your own version of this. Probably use 'after'
@@ -178,18 +187,18 @@ sub render {
     my $fields  = $self->_fieldset($self->_render_fields);
     my $buttons = $self->_fieldset($self->_render_buttons);
     my $id      = $self->id . '-form';
-    return qq{
+    return <<"FORM";
 		<form accept-charset="utf-8" method="POST" novalidate id="${id}">
 			$fields
 			$buttons
 		</form>
-	};
+FORM
 }
 
 sub _fieldset {
     my ($self, $s) = @_;
 
-    return '' unless defined $s;
+    return q{} unless defined $s;
 
     return '<fieldset>' . $s . '</fieldset>';
 }

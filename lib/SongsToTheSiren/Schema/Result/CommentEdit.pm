@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Result::CommentEdit;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

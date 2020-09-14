@@ -1305,6 +1305,16 @@ DISTRIBUTIONS
     requirements:
       Devel::StackTrace 0
       ExtUtils::MakeMaker 0
+  Devel-Symdump-2.18
+    pathname: A/AN/ANDK/Devel-Symdump-2.18.tar.gz
+    provides:
+      Devel::Symdump 2.18
+      Devel::Symdump::Export undef
+    requirements:
+      Compress::Zlib 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      perl 5.004
   Digest-CRC-0.22.2
     pathname: O/OL/OLIMAUL/Digest-CRC-0.22.2.tar.gz
     provides:
@@ -3206,6 +3216,170 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
+  Perl-Critic-Dynamic-0.05
+    pathname: T/TH/THALJEF/Perl-Critic-Dynamic-0.05.tar.gz
+    provides:
+      Perl::Critic::Dynamic 0.05
+      Perl::Critic::DynamicPolicy 0.05
+      Perl::Critic::Policy::Dynamic::ValidateAgainstSymbolTable 0.05
+    requirements:
+      Devel::Symdump 2.07
+      Perl::Critic::Policy 1.108
+      Perl::Critic::Utils 1.108
+      Readonly 0
+      Storable 2.16
+      Test::More 0
+  Perl-Critic-Freenode-0.032
+    pathname: D/DB/DBOOK/Perl-Critic-Freenode-0.032.tar.gz
+    provides:
+      Perl::Critic::Freenode 0.032
+      Perl::Critic::Freenode::Utils 0.032
+      Perl::Critic::Policy::Freenode::AmpersandSubCalls 0.032
+      Perl::Critic::Policy::Freenode::ArrayAssignAref 0.032
+      Perl::Critic::Policy::Freenode::BarewordFilehandles 0.032
+      Perl::Critic::Policy::Freenode::ConditionalDeclarations 0.032
+      Perl::Critic::Policy::Freenode::ConditionalImplicitReturn 0.032
+      Perl::Critic::Policy::Freenode::DeprecatedFeatures 0.032
+      Perl::Critic::Policy::Freenode::DiscouragedModules 0.032
+      Perl::Critic::Policy::Freenode::DollarAB 0.032
+      Perl::Critic::Policy::Freenode::Each 0.032
+      Perl::Critic::Policy::Freenode::EmptyReturn 0.032
+      Perl::Critic::Policy::Freenode::IndirectObjectNotation 0.032
+      Perl::Critic::Policy::Freenode::LexicalForeachIterator 0.032
+      Perl::Critic::Policy::Freenode::LoopOnHash 0.032
+      Perl::Critic::Policy::Freenode::ModPerl 0.032
+      Perl::Critic::Policy::Freenode::MultidimensionalArrayEmulation 0.032
+      Perl::Critic::Policy::Freenode::OpenArgs 0.032
+      Perl::Critic::Policy::Freenode::OverloadOptions 0.032
+      Perl::Critic::Policy::Freenode::POSIXImports 0.032
+      Perl::Critic::Policy::Freenode::PackageMatchesFilename 0.032
+      Perl::Critic::Policy::Freenode::PreferredAlternatives 0.032
+      Perl::Critic::Policy::Freenode::Prototypes 0.032
+      Perl::Critic::Policy::Freenode::StrictWarnings 0.032
+      Perl::Critic::Policy::Freenode::Threads 0.032
+      Perl::Critic::Policy::Freenode::Wantarray 0.032
+      Perl::Critic::Policy::Freenode::WarningsSwitch 0.032
+      Perl::Critic::Policy::Freenode::WhileDiamondDefaultAssignment 0.032
+    requirements:
+      Carp 0
+      Exporter 0
+      List::Util 1.33
+      Module::Build::Tiny 0.034
+      PPI 1.254
+      Path::Tiny 0.101
+      Perl::Critic 1.126
+      Perl::Critic::Policy::Objects::ProhibitIndirectSyntax 1.126
+      Perl::Critic::Policy::Subroutines::ProhibitAmpersandSigils 1.126
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitArrayAssignAref 90
+      Perl::Critic::Policy::Variables::ProhibitConditionalDeclarations 1.126
+      Perl::Critic::Policy::Variables::ProhibitLoopOnHash 0.005
+      Perl::Critic::Policy::Variables::RequireLexicalLoopIterators 1.126
+      Scalar::Util 0
+      parent 0
+      perl 5.010001
+      version 0
+  Perl-Critic-Policy-Dynamic-NoIndirect-0.06
+    pathname: V/VP/VPIT/Perl-Critic-Policy-Dynamic-NoIndirect-0.06.tar.gz
+    provides:
+      Perl::Critic::Policy::Dynamic::NoIndirect 0.06
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Perl::Critic::DynamicPolicy 0
+      Perl::Critic::Utils 0
+      base 0
+      indirect 0.25
+      perl 5.008
+  Perl-Critic-Policy-Variables-ProhibitLoopOnHash-0.008
+    pathname: X/XS/XSAWYERX/Perl-Critic-Policy-Variables-ProhibitLoopOnHash-0.008.tar.gz
+    provides:
+      Perl::Critic::Policy::Variables::ProhibitLoopOnHash 0.008
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      List::Util 1.33
+      Perl::Critic 1.126
+      parent 0
+  Perl-Critic-Pulp-97
+    pathname: K/KR/KRYDE/Perl-Critic-Pulp-97.tar.gz
+    provides:
+      Perl::Critic::PodParser::ProhibitVerbatimMarkup 97
+      Perl::Critic::Policy::CodeLayout::ProhibitFatCommaNewline 97
+      Perl::Critic::Policy::CodeLayout::ProhibitIfIfSameLine 97
+      Perl::Critic::Policy::CodeLayout::RequireFinalSemicolon 97
+      Perl::Critic::Policy::CodeLayout::RequireTrailingCommaAtNewline 97
+      Perl::Critic::Policy::Compatibility::ConstantLeadingUnderscore 97
+      Perl::Critic::Policy::Compatibility::ConstantPragmaHash 97
+      Perl::Critic::Policy::Compatibility::Gtk2Constants 97
+      Perl::Critic::Policy::Compatibility::PerlMinimumVersionAndWhy 97
+      Perl::Critic::Policy::Compatibility::PodMinimumVersion 97
+      Perl::Critic::Policy::Compatibility::ProhibitUnixDevNull 97
+      Perl::Critic::Policy::Documentation::ProhibitAdjacentLinks 97
+      Perl::Critic::Policy::Documentation::ProhibitAdjacentLinks::Parser 97
+      Perl::Critic::Policy::Documentation::ProhibitBadAproposMarkup 97
+      Perl::Critic::Policy::Documentation::ProhibitDuplicateHeadings 97
+      Perl::Critic::Policy::Documentation::ProhibitDuplicateSeeAlso 97
+      Perl::Critic::Policy::Documentation::ProhibitLinkToSelf 97
+      Perl::Critic::Policy::Documentation::ProhibitParagraphEndComma 97
+      Perl::Critic::Policy::Documentation::ProhibitParagraphTwoDots 97
+      Perl::Critic::Policy::Documentation::ProhibitUnbalancedParens 97
+      Perl::Critic::Policy::Documentation::ProhibitVerbatimMarkup 97
+      Perl::Critic::Policy::Documentation::RequireEndBeforeLastPod 97
+      Perl::Critic::Policy::Documentation::RequireFilenameMarkup 97
+      Perl::Critic::Policy::Documentation::RequireFinalCut 97
+      Perl::Critic::Policy::Documentation::RequireLinkedURLs 97
+      Perl::Critic::Policy::Miscellanea::TextDomainPlaceholders 97
+      Perl::Critic::Policy::Miscellanea::TextDomainUnused 97
+      Perl::Critic::Policy::Modules::ProhibitModuleShebang 97
+      Perl::Critic::Policy::Modules::ProhibitPOSIXimport 97
+      Perl::Critic::Policy::Modules::ProhibitUseQuotedVersion 97
+      Perl::Critic::Policy::ValuesAndExpressions::ConstantBeforeLt 97
+      Perl::Critic::Policy::ValuesAndExpressions::NotWithCompare 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitArrayAssignAref 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitBarewordDoubleColon 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitDuplicateHashKeys 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyCommas 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitFiletest_f 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitNullStatements 97
+      Perl::Critic::Policy::ValuesAndExpressions::ProhibitUnknownBackslash 97
+      Perl::Critic::Policy::ValuesAndExpressions::RequireNumericVersion 97
+      Perl::Critic::Policy::ValuesAndExpressions::UnexpandedSpecialLiteral 97
+      Perl::Critic::Pulp 97
+      Perl::Critic::Pulp::PodMinimumVersionViolation 97
+      Perl::Critic::Pulp::PodParser 97
+      Perl::Critic::Pulp::PodParser::ProhibitBadAproposMarkup 97
+      Perl::Critic::Pulp::PodParser::ProhibitDuplicateHeadings 97
+      Perl::Critic::Pulp::PodParser::ProhibitDuplicateSeeAlso 97
+      Perl::Critic::Pulp::PodParser::ProhibitLinkToSelf 97
+      Perl::Critic::Pulp::PodParser::ProhibitParagraphEndComma 97
+      Perl::Critic::Pulp::PodParser::ProhibitParagraphTwoDots 97
+      Perl::Critic::Pulp::PodParser::ProhibitUnbalancedParens 97
+      Perl::Critic::Pulp::PodParser::RequireFilenameMarkup 97
+      Perl::Critic::Pulp::PodParser::RequireFinalCut 97
+      Perl::Critic::Pulp::PodParser::RequireLinkedURLs 97
+      Perl::Critic::Pulp::ProhibitDuplicateHashKeys::Qword 97
+      Perl::Critic::Pulp::Utils 97
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::String 1.02
+      List::MoreUtils 0.24
+      List::Util 0
+      PPI 1.220
+      PPI::Document 0
+      PPI::Dumper 0
+      Perl::Critic 1.084
+      Perl::Critic::Policy 1.084
+      Perl::Critic::Utils 1.100
+      Perl::Critic::Utils::PPI 0
+      Perl::Critic::Violation 0
+      Pod::Escapes 0
+      Pod::MinimumVersion 50
+      Pod::ParseLink 0
+      Pod::Parser 0
+      Scalar::Util 0
+      Test::More 0
+      perl 5.006
+      version 0
   Perl-Tidy-20200907
     pathname: S/SH/SHANCOCK/Perl-Tidy-20200907.tar.gz
     provides:
@@ -3343,6 +3517,20 @@ DISTRIBUTIONS
       WWW::Form::UrlEncoded 0.23
       parent 0
       perl 5.008001
+  Pod-MinimumVersion-50
+    pathname: K/KR/KRYDE/Pod-MinimumVersion-50.tar.gz
+    provides:
+      Pod::MinimumVersion 50
+      Pod::MinimumVersion::Parser 50
+      Pod::MinimumVersion::Report 50
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::String 1.02
+      List::Util 0
+      Pod::Parser 0
+      Test 0
+      perl 5.004
+      version 0
   Pod-Parser-1.63
     pathname: M/MA/MAREKR/Pod-Parser-1.63.tar.gz
     provides:
@@ -3965,6 +4153,24 @@ DISTRIBUTIONS
       TAP::Harness 3.25
       parent 0.221
       version 0.77
+  indirect-0.39
+    pathname: V/VP/VPIT/indirect-0.39.tar.gz
+    provides:
+      indirect 0.39
+    requirements:
+      Carp 0
+      Config 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::Handle 0
+      IO::Select 0
+      IPC::Open3 0
+      POSIX 0
+      Socket 0
+      Test::More 0
+      XSLoader 0
+      lib 0
+      perl 5.008001
   namespace-autoclean-0.29
     pathname: E/ET/ETHER/namespace-autoclean-0.29.tar.gz
     provides:

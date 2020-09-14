@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Result::Song;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -67,17 +68,23 @@ __PACKAGE__->many_to_many(tags => song_tags => 'tags');
 sub approved_comments {
     my $self = shift;
 
-    return $self->comments->search({approved_at => {'!=' => undef}});
+    return $self->comments->search({
+        approved_at => { q{!=} => undef }
+    });
 }
 
 sub show {
     my $self = shift;
     $self->update({published_at => \'NOW()'});
     $self->discard_changes;
+
+    return;
 }
 
 sub hide {
     shift->update({published_at => undef});
+
+    return;
 }
 
 sub add_tag {
@@ -97,6 +104,8 @@ sub delete_tag {
 
     # Remove if no-longer associated with any songs
     $tag->delete if $tag->songs->count == 0;
+
+    return;
 }
 
 # TODO DOCUMENT THIS
@@ -115,14 +124,14 @@ sub add_link {
     my ($self, $values) = @_;
 
     return $self->links->create({
-        embed_identifier  => $values->{embed_identifier}  || '',
-        embed_class       => $values->{embed_class}       || '',
-        embed_url         => $values->{embed_url}         || '',
-        embed_description => $values->{embed_description} || '',
-        list_url          => $values->{list_url}          || '',
-        list_description  => $values->{list_description}  || '',
+        embed_identifier  => $values->{embed_identifier}  || q{},
+        embed_class       => $values->{embed_class}       || q{},
+        embed_url         => $values->{embed_url}         || q{},
+        embed_description => $values->{embed_description} || q{},
+        list_url          => $values->{list_url}          || q{},
+        list_description  => $values->{list_description}  || q{},
         list_priority     => $values->{list_priority},
-        list_css => $values->{list_css} || '',
+        list_css          => $values->{list_css}          || q{},
     });
 }
 
@@ -134,6 +143,8 @@ sub render_markdown {
         full_html    => $processor->markdown($self->full_markdown),
         summary_html => $processor->markdown($self->summary_markdown),
     });
+
+    return;
 }
 
 # returns {

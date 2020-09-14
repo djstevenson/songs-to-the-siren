@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Role::User::Content;
+use utf8;
 use Moose::Role;
 
 # TODO Add pod
@@ -20,7 +21,7 @@ sub admin_create_content {
     croak $NOT_ADMIN unless $self->admin;
 
     my $processor = SongsToTheSiren::Markdown->new;
-    my $full_args = {%$args, html => $processor->markdown($args->{markdown}), updated_at => DateTime->now,};
+    my $full_args = {%{ $args }, html => $processor->markdown($args->{markdown}), updated_at => DateTime->now,};
 
     return $self->create_related('content', $full_args);
 }
@@ -31,7 +32,7 @@ sub admin_edit_content {
     croak $NOT_ADMIN unless $self->admin;
 
     my $processor = SongsToTheSiren::Markdown->new;
-    my $full_args = {%$args, html => $processor->markdown($args->{markdown}), updated_at => DateTime->now,};
+    my $full_args = {%{ $args} , html => $processor->markdown($args->{markdown}), updated_at => DateTime->now,};
 
     # TODO Record who did the update
     $content->update($full_args);

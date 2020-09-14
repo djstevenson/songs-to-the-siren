@@ -1,3 +1,4 @@
+use utf8;
 package SongsToTheSiren::View::Link::Role;
 use Moose::Role;
 

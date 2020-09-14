@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Model::Song::NewerOlder;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::DB;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD at end of source file
@@ -33,6 +34,7 @@ sub register {
         }
     );
 
+    return;
 }
 
 1;
@@ -40,7 +42,7 @@ sub register {
 __END__
 
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::ResultSet::Song;
+use utf8;
 use Moose;
 use MooseX::NonMoose;
 extends 'DBIx::Class::ResultSet';
@@ -12,13 +13,18 @@ use DateTime;
 sub home_page_songs {
     my ($self, $tags) = @_;
 
-    my $rs = $self->select_metadata->select_text(summary => 'html')->where_published->by_publication_date;
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
+    my $rs = $self->select_metadata
+        ->select_text(summary => 'html')
+        ->where_published
+        ->by_publication_date;
 
     if ($tags) {
-        foreach my $tag (@$tags) {
+        foreach my $tag (@{ $tags }) {
             $rs = $rs->where_has_tag($tag);
         }
     }
+    ## use critic
 
     return $rs;
 }
@@ -26,9 +32,14 @@ sub home_page_songs {
 sub full_song_data {
     my ($self, $song_id, $is_admin) = @_;
 
-    # TODO Prefetch tags?
-    my $rs = $self->select_metadata->select_text(summary => 'markdown')->select_text(full => 'markdown')
-        ->select_text(full => 'html')->select_comment_count('approved');
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
+    my $rs = $self
+        ->select_metadata
+        ->select_text(summary => 'markdown')
+        ->select_text(full => 'markdown')
+        ->select_text(full => 'html')
+        ->select_comment_count('approved');
+    ## use critic
 
     $rs = $rs->where_published unless $is_admin;
 
@@ -58,7 +69,7 @@ sub select_text {
     croak 'Bad text version request' unless $version eq 'summary' || $version eq 'full';
     croak 'Bad text format request'  unless $format eq 'html'     || $format eq 'markdown';
 
-    my $field = $version . '_' . $format;
+    my $field = $version . q{_} . $format;
     return $self->search(undef, {'+select' => [$field], '+as' => [$field],});
 }
 
@@ -69,7 +80,7 @@ sub select_comment_count {
 
     my $sql_map = {approved => 'AND C.approved_at IS NOT NULL', unapproved => 'AND C.approved_at IS NULL',};
 
-    my $approved_sql = exists $sql_map->{$approved_option} ? $sql_map->{$approved_option} : '';
+    my $approved_sql = exists $sql_map->{$approved_option} ? $sql_map->{$approved_option} : q{};
 
     my $sql = qq{ (SELECT COUNT(*) FROM comments C WHERE C.song_id=me.id ${approved_sql}) AS comment_count };
 
@@ -132,7 +143,7 @@ sub older {
 __PACKAGE__->meta->make_immutable;
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

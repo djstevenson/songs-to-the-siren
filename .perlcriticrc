@@ -26,7 +26,7 @@ minimum_regex_length_to_complain_about = 10
 equivalent_modules = MessageFocus::API::Moose MessageFocus::Web::Form::Moose CatalystX::Tabset::Moose CatalystX::Table::Moose
 [TestingAndDebugging::RequireUseWarnings]
 # add some modules that import the warnings pragma
-equivalent_modules = MessageFocus::API::Moose MessageFocus::Web::Form::Moose CatalystX::Tabset::Moose CatalystX::Table::Moose
+equivalent_modules = Mojolicious::Plugin
 [Subroutines::ProhibitUnusedPrivateSubroutines]
 # Allow private subs that begin _build
 private_name_regex = _(?!(_|build))\w+

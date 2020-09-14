@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Fields::Render::Base;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -77,7 +78,7 @@ sub _make_field {
     my ($self, $type, $args) = @_;
 
     my $field = SongsToTheSiren::Form::Field->new({
-       %$args,
+       %{ $args },
        type => $type,
     });
 

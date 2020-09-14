@@ -1,9 +1,11 @@
 package SongsToTheSiren::Controller::User;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
     my ($c, $r) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $r->any('/user')->to(controller => 'user');
 
     $u->route('/register')->name('register')->via('GET', 'POST')->to(action => 'register');
@@ -27,6 +29,9 @@ sub add_routes {
     $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')
         ->to(action => 'decline_registration');
     $user_action->get('/reset/:user_key')->name('password_reset')->via('GET', 'POST')->to(action => 'password_reset');
+    ## use critic
+    
+    return;
 }
 
 sub register {
@@ -40,6 +45,8 @@ sub register {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub sign_in {
@@ -68,6 +75,8 @@ sub sign_in {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub sign_out {
@@ -75,6 +84,8 @@ sub sign_out {
 
     delete $c->session->{user};
     $c->redirect_to('home');
+
+    return;
 }
 
 sub forgot_name {
@@ -88,6 +99,8 @@ sub forgot_name {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 sub forgot_password {
@@ -101,6 +114,8 @@ sub forgot_password {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 
 
@@ -132,6 +147,8 @@ sub confirm_registration {
 
     $c->flash(msg => 'Signup confirmed');
     $c->redirect_to('confirmed');
+
+    return;
 }
 
 sub decline_registration {
@@ -143,6 +160,8 @@ sub decline_registration {
 
     $c->flash(msg => 'Signup declined - your details are deleted');
     $c->redirect_to('declined');
+
+    return;
 }
 
 sub password_reset {
@@ -165,5 +184,7 @@ sub password_reset {
     else {
         $c->stash(form => $form);
     }
+
+    return;
 }
 1;

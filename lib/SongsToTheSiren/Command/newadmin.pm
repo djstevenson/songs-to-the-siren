@@ -1,4 +1,5 @@
 package SongsToTheSiren::Command::newadmin;
+use utf8;
 use Mojo::Base 'Mojolicious::Command';
 
 use Mojo::Util 'getopt';
@@ -11,7 +12,7 @@ has usage => sub { shift->extract_usage };
 sub run {
     my ($self, @args) = @_;
 
-    getopt(\@args, 'n|name=s' => \my $name, 'e|email=s' => \my $email, 'p|password=s' => \my $password,);
+    getopt(\@args, 'n|name=s' => \my $name, 'e|email=s' => \my $email, 'p|password=s' => \my $password);
 
     if ($name && $email && $password) {
         my $app     = $self->app;
@@ -20,6 +21,8 @@ sub run {
 
         $user_rs->create_user({name => $name, email => $email, password => $password, admin => 1,});
     }
+
+    return;
 }
 
 =head1 SYNOPSIS

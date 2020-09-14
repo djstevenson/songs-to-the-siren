@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Email;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD docs at end of file
@@ -88,12 +89,13 @@ sub register {
         }
     );
 
+    return;
 }
 
 1;
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

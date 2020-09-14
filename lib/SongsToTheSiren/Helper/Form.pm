@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Form;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD at end of source file
@@ -15,12 +16,14 @@ sub register {
             return $form_factory->form($name, {c => $c, @args});
         }
     );
+
+    return;
 }
 
 1;
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

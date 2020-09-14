@@ -1,4 +1,5 @@
 package SongsToTheSiren::Table::Content::List;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -10,7 +11,8 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    return $self->c->schema->resultset('Content')->search(undef, {order_by => 'name'});    # Resultset helper
+    my $rs = $self->c->schema->resultset('Content');
+    return $rs->search(undef, {order_by => 'name'});    # Resultset helper
 }
 
 has_column name => (
@@ -30,9 +32,7 @@ has_column edit => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_edit_content', name => $row->name);
-        return qq{
-            <a href="${url}">Edit</a>
-        };
+        return qq{<a href="${url}">Edit</a>};
     },
 
 );
@@ -42,9 +42,7 @@ has_column delete => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_delete_content', name => $row->name);
-        return qq{
-            <a href="${url}">Delete</a>
-        };
+        return qq{<a href="${url}">Delete</a>};
     },
 
 );

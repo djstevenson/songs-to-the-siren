@@ -1,15 +1,16 @@
 package SongsToTheSiren::Schema::ResultSet::Email;
+use utf8;
 use Moose;
 use MooseX::NonMoose;
 extends 'DBIx::Class::ResultSet';
 
 # POD docs at end of this source file
-
+use Carp;
 
 sub latest_email {
     my ($self, $type, $address) = @_;
 
-    $self->_assert_test_db;
+    $self->assert_test_db;
 
     return $self->search(
         {template_name => $type, email_to => $address,},
@@ -22,19 +23,22 @@ sub latest_email {
 
 # TODO Create a common base class for resultsets and
 # move this there
-sub _assert_test_db {
+sub assert_test_db {
     my $self = shift;
 
-    my $dbh = $self->result_source->schema->storage->dbh;
+    my $schema = $self->result_source->schema;
+    my $dbh    = $schema->storage->dbh;
     my ($k, $name) = split(/=/, $dbh->{Name});
-    die unless $name eq 'songstothesiren_test';
+    croak unless $name eq 'songstothesiren_test';
+
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
 1;
 
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

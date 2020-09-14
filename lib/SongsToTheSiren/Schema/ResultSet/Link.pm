@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::ResultSet::Link;
+use utf8;
 use Moose;
 use MooseX::NonMoose;
 extends 'DBIx::Class::ResultSet';
@@ -10,19 +11,25 @@ use Carp qw/ croak /;
 sub in_list {
     my $self = shift;
 
-    return $self->search({list_priority => {'>' => 0},});
+    return $self->search({
+        list_priority => {'>' => 0}
+    });
 }
 
 sub by_priority {
     my $self = shift;
 
-    return $self->search(undef, {order_by => {-asc => [qw/ list_priority id /]},});
+    return $self->search(undef, {
+        order_by => {-asc => [qw/ list_priority id /]}
+    });
 }
 
 sub embedded_links {
     my $self = shift;
 
-    return $self->search({embed_identifier => {'!=' => ''},});
+    return $self->search({
+        embed_identifier => { q{!=} => q{} }
+    });
 }
 
 sub by_identifier {
@@ -50,7 +57,7 @@ sub links_list {
 __PACKAGE__->meta->make_immutable;
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

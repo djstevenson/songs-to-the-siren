@@ -1,8 +1,9 @@
 package SongsToTheSiren::Form::Button;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
-has name => (is => 'ro', isa => 'Str', required => 1,);
+has name => (is => 'ro', isa => 'Str', required => 1);
 
 has label => (
     is      => 'ro',
@@ -35,14 +36,14 @@ has id => (
 
 # Bootstrap 4 name, like 'primary'. Lower case only.
 # TODO Maybe make this an "enum"?
-has style => (is => 'ro', isa => 'Str', required => 1, default => 'primary',);
+has style => (is => 'ro', isa => 'Str', required => 1, default => 'primary');
 
 # e.g. "submit"
-has type => (is => 'ro', isa => 'Str', default => 'submit',);
+has type => (is => 'ro', isa => 'Str', default => 'submit');
 
-has clicked => (is => 'rw', isa => 'Bool', default => 0,);
+has clicked => (is => 'rw', isa => 'Bool', default => 0);
 
-has skip_validation => (is => 'rw', isa => 'Bool', default => 0,);
+has skip_validation => (is => 'rw', isa => 'Bool', default => 0);
 
 __PACKAGE__->meta->make_immutable;
 1;

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Validators::MinLength;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

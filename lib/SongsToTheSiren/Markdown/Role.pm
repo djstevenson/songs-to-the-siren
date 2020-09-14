@@ -1,9 +1,10 @@
 package SongsToTheSiren::Markdown::Role;
+use utf8;
 use Moose::Role;
 
 # An role to define an interface to markdown pre-processors
 
-has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song',);
+has song => (is => 'ro', isa => 'SongsToTheSiren::Schema::Result::Song', predicate => 'has_song');
 
 requires 'process';
 
@@ -13,7 +14,7 @@ no Moose::Role;
 
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 
@@ -22,6 +23,7 @@ SongsToTheSiren::Markdown::Role : Interface for Markdown pre-processors
 =head1 SYNOPSIS
 
     package MyPreprocessor;
+    use utf8;
     use Moose;
     use namespace::autoclean;
 

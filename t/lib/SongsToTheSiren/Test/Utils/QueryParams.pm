@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Utils::QueryParams;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

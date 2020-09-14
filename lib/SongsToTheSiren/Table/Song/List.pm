@@ -1,4 +1,5 @@
 package SongsToTheSiren::Table::Song::List;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -10,10 +11,11 @@ use DateTime;
 sub _build_resultset {
     my $self = shift;
 
-    return $self->c->schema->resultset('Song')->select_metadata->select_comment_count('unapproved')->by_id;
+    my $rs = $self->c->schema->resultset('Song');
+    return $rs->select_metadata->select_comment_count('unapproved')->by_id;
 }
 
-has_column id => (header => 'ID',);
+has_column id => (header => 'ID');
 
 has_column title => (
     link => sub {
@@ -56,9 +58,7 @@ has_column tags => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_edit_song_tags', song_id => $row->id);
-        return qq{
-            <a href="${url}">Tags</a>
-        };
+        return qq{<a href="${url}">Tags</a>};
     },
 
 );
@@ -68,9 +68,7 @@ has_column links => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_list_song_links', song_id => $row->id);
-        return qq{
-            <a href="${url}">Links</a>
-        };
+        return qq{<a href="${url}">Links</a>};
     },
 
 );
@@ -80,9 +78,7 @@ has_column edit => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_edit_song', song_id => $row->id);
-        return qq{
-            <a href="${url}">Edit</a>
-        };
+        return qq{<a href="${url}">Edit</a>};
     },
 
 );
@@ -92,9 +88,7 @@ has_column delete => (
         my ($col, $table, $row) = @_;
 
         my $url = $table->c->url_for('admin_delete_song', song_id => $row->id);
-        return qq{
-            <a href="${url}">Delete</a>
-        };
+        return qq{<a href="${url}">Delete</a>};
     },
 
 );

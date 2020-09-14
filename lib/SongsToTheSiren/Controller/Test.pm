@@ -1,9 +1,12 @@
 package SongsToTheSiren::Controller::Test;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 # See end of source file for POD docs
 
 use DateTime;
+
+use Carp;
 
 ######################################################
 ####### ONLY VALID ON songstothesiren_test DB  #######
@@ -15,19 +18,24 @@ use DateTime;
 sub add_routes {
     my ($c, $route) = @_;
 
+    ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
+
     # Don't need to be logged in for these actions
     my $t = $route->any('/test')->to(controller => 'test');
 
-    $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'reset');
+    $t->route('/reset')->name('test_reset')->via('POST')->to(action => 'do_reset');
     $t->route('/create_user')->name('test_create_user')->via('POST')->to(action => 'create_user');
     $t->route('/create_song')->name('test_create_song')->via('POST')->to(action => 'create_song');
     $t->route('/admin_create_content')->name('test_admin_create_content')->via('POST')->to(action => 'create_content');
     $t->route('/publish_song')->name('test_publish_song')->via('POST')->to(action => 'publish_song');
     $t->route('/view_user/:username')->name('test_view_user')->via('GET')->to(action => 'view_user');
     $t->route('/view_email/:type/:username')->name('test_view_email')->via('GET')->to(action => 'view_email');
+    ## use critic
+    
+    return;
 }
 
-sub reset {
+sub do_reset {
     my $c = shift;
 
     $c->schema->resultset('Tag')->delete;
@@ -35,28 +43,30 @@ sub reset {
     $c->schema->resultset('Song')->delete;
     $c->schema->resultset('Content')->delete;
     $c->redirect_to('home');
+    return;
 }
 
 sub create_user {
     my $c = shift;
 
-    my $name     = $c->param('name')     or die;
-    my $email    = $c->param('email')    or die;
-    my $password = $c->param('password') or die;
+    my $name     = $c->param('name')     or croak;
+    my $email    = $c->param('email')    or croak;
+    my $password = $c->param('password') or croak;
     my $admin = $c->param('admin') // 0;
 
     my $rs   = $c->schema->resultset('User');
     my $user = $rs->create_test_user($name, $email, $password, $admin);
 
-    $c->stash(user => $user, template => 'test/user',);
+    $c->stash(user => $user, template => 'test/user');
+    return;
 }
 
 sub create_song {
     my $c = shift;
 
-    my $username = $c->param('username') || die;
+    my $username = $c->param('username') || croak;
     my $user     = $c->_find_user_by_name($username);
-    die unless $user->admin;
+    croak unless $user->admin;
 
     my $published = $c->param('published') ? DateTime->now : undef;
 
@@ -74,25 +84,27 @@ sub create_song {
     $user->admin_create_song($fields);
 
     $c->redirect_to('home');
+    return;
 }
 
 sub create_content {
     my $c = shift;
 
-    my $username = $c->param('username') || die;
+    my $username = $c->param('username') || croak;
     my $user     = $c->_find_user_by_name($username);
-    die unless $user->admin;
+    croak unless $user->admin;
 
     my $fields = {name => $c->param('name'), title => $c->param('title'), markdown => $c->param('markdown'),};
     $user->admin_create_content($fields);
 
     $c->redirect_to('home');
+    return;
 }
 
 sub publish_song {
     my $c = shift;
 
-    my $title = $c->param('title') || die;
+    my $title = $c->param('title') || croak;
     my $song  = $c->_find_song_by_title($title);
     my $flag  = $c->param('published');
 
@@ -104,6 +116,7 @@ sub publish_song {
     }
 
     $c->redirect_to('home');
+    return;
 }
 
 sub _find_user_by_name {
@@ -126,11 +139,12 @@ sub view_user {
     my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
-        $c->stash(user => $user, template => 'test/user',);
+        $c->stash(user => $user, template => 'test/user');
         return 1;
     }
 
     $c->reply->not_found;
+    return;
 }
 
 sub view_email {
@@ -139,20 +153,21 @@ sub view_email {
     my $user = $c->_find_user_by_name($c->stash->{username});
 
     if ($user) {
-        my $email = $c->schema->resultset('Email')->latest_email($c->stash->{type}, $user->email,);
+        my $email = $c->schema->resultset('Email')->latest_email($c->stash->{type}, $user->email);
 
         if ($email) {
-            $c->stash(email => $email, template => 'test/email',);
+            $c->stash(email => $email, template => 'test/email');
             return 1;
         }
     }
 
     $c->reply->not_found;
+    return;
 }
 
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 
