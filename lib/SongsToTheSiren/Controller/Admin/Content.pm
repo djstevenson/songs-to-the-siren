@@ -20,7 +20,7 @@ sub add_routes {
     $content_action_a->route('/edit')->name('admin_edit_content')->via('GET', 'POST')->to(action => 'edit');
 
     # Method=DELETE?
-    $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'content_delete');
+    $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'do_delete');
     ## use critic
     
     return;
@@ -85,7 +85,7 @@ sub edit {
     return;
 }
 
-sub content_delete {
+sub do_delete {
     my $c = shift;
 
     my $form = $c->form('Content::Delete', content => $c->stash->{content});
