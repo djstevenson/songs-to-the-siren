@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Result::SongTag;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

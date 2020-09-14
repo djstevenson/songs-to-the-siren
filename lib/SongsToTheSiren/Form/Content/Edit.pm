@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Content::Edit;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

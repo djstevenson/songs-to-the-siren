@@ -1,6 +1,7 @@
 package SongsToTheSiren::Form::Field::Validator::ValidEmail;
-use namespace::autoclean;
+use utf8;
 use Moose;
+use namespace::autoclean;
 
 extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';

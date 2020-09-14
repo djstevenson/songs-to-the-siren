@@ -1,6 +1,7 @@
 package SongsToTheSiren::Form::Field::Filter::TrimEdges;
-use namespace::autoclean;
+use utf8;
 use Moose;
+use namespace::autoclean;
 
 extends 'SongsToTheSiren::Form::Field::Filter::Base';
 with 'SongsToTheSiren::Form::Field::Filter::Role';

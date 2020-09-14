@@ -1,4 +1,5 @@
 package SongsToTheSiren::Table::Moose;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

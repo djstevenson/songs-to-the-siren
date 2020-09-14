@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Role::User::Content;
+use utf8;
 use Moose::Role;
 
 # TODO Add pod

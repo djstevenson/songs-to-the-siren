@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Model::Song::NonAdmin;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

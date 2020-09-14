@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Utils::BBCode::Render;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

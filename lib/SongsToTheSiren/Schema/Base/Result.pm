@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Base::Result;
+use utf8;
 use base 'DBIx::Class::Core';
 
 use strict;

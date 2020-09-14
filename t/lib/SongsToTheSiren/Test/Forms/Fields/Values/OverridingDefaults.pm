@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Fields::Values::OverridingDefaults;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

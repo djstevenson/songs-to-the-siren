@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::User::ResetPassword;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Forms::Fields::Render::WithAutofocus;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren::BBCode;
+use utf8;
 use Moose;
 use namespace::autoclean;
 use Parse::BBCode;

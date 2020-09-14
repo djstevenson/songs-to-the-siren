@@ -1,6 +1,7 @@
 package SongsToTheSiren::Model::Comment::Forest;
 use strict;
 use warnings;
+use utf8;
 
 # TODO POD
 

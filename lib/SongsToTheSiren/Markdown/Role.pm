@@ -1,4 +1,5 @@
 package SongsToTheSiren::Markdown::Role;
+use utf8;
 use Moose::Role;
 
 # An role to define an interface to markdown pre-processors
@@ -22,6 +23,7 @@ SongsToTheSiren::Markdown::Role : Interface for Markdown pre-processors
 =head1 SYNOPSIS
 
     package MyPreprocessor;
+    use utf8;
     use Moose;
     use namespace::autoclean;
 

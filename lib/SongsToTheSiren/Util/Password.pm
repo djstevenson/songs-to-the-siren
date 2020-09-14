@@ -1,6 +1,7 @@
 package SongsToTheSiren::Util::Password;
 use strict;
 use warnings;
+use utf8;
 
 use Readonly;
 Readonly my $DEFAULT_BCRYPT_COST => 13;

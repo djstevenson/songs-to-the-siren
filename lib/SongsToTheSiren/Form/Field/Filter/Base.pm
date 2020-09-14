@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Field::Filter::Base;
+use utf8;
 use namespace::autoclean;
 use Moose;
 

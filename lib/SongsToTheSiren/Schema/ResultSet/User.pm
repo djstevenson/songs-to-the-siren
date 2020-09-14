@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::ResultSet::User;
+use utf8;
 use Moose;
 use MooseX::NonMoose;
 extends 'DBIx::Class::ResultSet';

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Table::Column;
+use utf8;
 use Moose;
 use namespace::autoclean;
 
@@ -7,7 +8,6 @@ with 'MooseX::Traits';
 use SongsToTheSiren::Util::Date qw/ format_date /;
 use HTML::Entities qw/ encode_entities /;
 use URI::Escape;
-use utf8;
 
 # Name. By default, used as the DB field.
 has name => (is => 'ro', isa => 'Str', required => 1);

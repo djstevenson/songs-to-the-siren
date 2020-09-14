@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Form;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD at end of source file

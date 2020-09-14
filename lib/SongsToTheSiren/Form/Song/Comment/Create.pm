@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Song::Comment::Create;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Command::newadmin;
+use utf8;
 use Mojo::Base 'Mojolicious::Command';
 
 use Mojo::Util 'getopt';

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Tag::Create;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

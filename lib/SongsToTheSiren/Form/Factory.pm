@@ -1,5 +1,6 @@
 package SongsToTheSiren::Form::Factory;
 use namespace::autoclean;
+use utf8;
 use Moose;
 
 use Class::Load;

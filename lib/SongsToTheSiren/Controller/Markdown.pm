@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Markdown;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 use SongsToTheSiren::Markdown;

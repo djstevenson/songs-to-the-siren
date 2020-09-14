@@ -1,4 +1,5 @@
 package SongsToTheSiren::Markdown;
+use utf8;
 use Moose;
 use namespace::autoclean;
 use Text::Markdown;

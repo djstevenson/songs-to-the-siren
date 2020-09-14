@@ -1,6 +1,7 @@
 package SongsToTheSiren::Util::Date;
 use strict;
 use warnings;
+use utf8;
 
 # TODO POD docs
 

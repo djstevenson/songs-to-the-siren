@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Admin::Song::Link;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
@@ -14,8 +15,7 @@ sub add_routes {
     # Admin routes that capture a link id
     my $link_action = $u->under('/:link_id')->to(action => 'capture');
     $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action     => 'edit');
-    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'do_delete')
-        ;    # DELETE method?
+    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'do_delete');   # DELETE method?
     $link_action->route('/copy')->name('admin_copy_song_link')->to(action => 'copy');
     ## use critic
     

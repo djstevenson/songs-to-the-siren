@@ -1,6 +1,7 @@
 package SongsToTheSiren::Util::QueryParams;
 use strict;
 use warnings;
+use utf8;
 
 # TODO POD
 use Sub::Exporter -setup => {exports => [qw/ add_id_to_param remove_id_from_param /]};

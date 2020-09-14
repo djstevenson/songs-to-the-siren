@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Tags;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use SongsToTheSiren::Util::QueryParams qw/ add_id_to_param remove_id_from_param /;

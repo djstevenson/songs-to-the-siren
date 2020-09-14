@@ -1,5 +1,5 @@
 package SongsToTheSiren::Plugin::Auth;
-
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 use Carp;
 

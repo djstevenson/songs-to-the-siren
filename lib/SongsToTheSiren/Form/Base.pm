@@ -1,5 +1,6 @@
 package SongsToTheSiren::Form::Base;
 use namespace::autoclean;
+use utf8;
 use Moose;
 
 use SongsToTheSiren::Form::Utils;

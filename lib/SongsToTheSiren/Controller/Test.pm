@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Test;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 # See end of source file for POD docs

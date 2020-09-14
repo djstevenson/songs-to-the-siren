@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Role;
+use utf8;
 use Moose::Role;
 
 requires 'posted';

@@ -1,4 +1,5 @@
 package SongsToTheSiren::Test::Model::Comment::ForestAdmin;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

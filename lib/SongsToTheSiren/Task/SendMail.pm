@@ -1,4 +1,5 @@
 package SongsToTheSiren::Task::SendMail;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 # POD docs at end of file

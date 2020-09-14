@@ -1,4 +1,5 @@
 package SongsToTheSiren::Helper::Render;
+use utf8;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use SongsToTheSiren::Util::Date qw/ format_date format_date_nosec format_date_compact /;

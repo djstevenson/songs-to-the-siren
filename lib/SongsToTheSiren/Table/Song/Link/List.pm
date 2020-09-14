@@ -1,4 +1,5 @@
 package SongsToTheSiren::Table::Song::Link::List;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

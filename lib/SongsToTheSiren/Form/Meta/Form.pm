@@ -1,5 +1,5 @@
 package SongsToTheSiren::Form::Meta::Form;
-
+use utf8;
 use Moose::Role;
 
 has form_fields => (

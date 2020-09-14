@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Song::Comment;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 use Carp;

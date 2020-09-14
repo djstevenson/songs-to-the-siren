@@ -1,5 +1,5 @@
 package SongsToTheSiren::Table::Meta::Table;
-
+use utf8;
 use Moose::Role;
 
 has table_columns => (

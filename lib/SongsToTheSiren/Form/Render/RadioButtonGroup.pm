@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Render::RadioButtonGroup;
+use utf8;
 use Moose::Role;
 use namespace::autoclean;
 

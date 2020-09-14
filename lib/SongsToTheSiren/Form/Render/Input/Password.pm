@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Render::Input::Password;
+use utf8;
 use Moose::Role;
 use namespace::autoclean;
 

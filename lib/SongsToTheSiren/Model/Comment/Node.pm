@@ -1,4 +1,5 @@
 package SongsToTheSiren::Model::Comment::Node;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

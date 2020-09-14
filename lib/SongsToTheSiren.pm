@@ -1,4 +1,5 @@
 package SongsToTheSiren;
+use utf8;
 use Mojo::Base 'Mojolicious';
 
 # POD docs at end of source

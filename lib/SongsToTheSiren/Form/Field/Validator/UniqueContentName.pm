@@ -1,5 +1,7 @@
 package SongsToTheSiren::Form::Field::Validator::UniqueContentName;
+use utf8;
 use Moose;
+use namespace::autoclean;
 
 extends 'SongsToTheSiren::Form::Field::Validator::Base';
 with 'SongsToTheSiren::Form::Field::Validator::Role';

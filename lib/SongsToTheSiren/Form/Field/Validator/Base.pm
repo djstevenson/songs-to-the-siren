@@ -1,6 +1,7 @@
 package SongsToTheSiren::Form::Field::Validator::Base;
-use namespace::autoclean;
+use utf8;
 use Moose;
+use namespace::autoclean;
 
 #  TODO Consider using Mojolicious validations
 

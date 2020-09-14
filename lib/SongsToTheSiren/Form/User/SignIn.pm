@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::User::SignIn;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

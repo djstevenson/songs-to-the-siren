@@ -1,4 +1,5 @@
 package SongsToTheSiren::Form::Button;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

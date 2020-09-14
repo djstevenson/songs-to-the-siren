@@ -1,4 +1,5 @@
 package SongsToTheSiren::Schema::Result::User;
+use utf8;
 use Moose;
 use namespace::autoclean;
 

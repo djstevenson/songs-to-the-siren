@@ -1,4 +1,5 @@
 package SongsToTheSiren::Controller::Admin::Song::Tag;
+use utf8;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub add_routes {
