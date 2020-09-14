@@ -166,7 +166,7 @@ sub view_email {
 
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

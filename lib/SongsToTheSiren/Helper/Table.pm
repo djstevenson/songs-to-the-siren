@@ -24,7 +24,7 @@ sub register {
 __END__
 
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

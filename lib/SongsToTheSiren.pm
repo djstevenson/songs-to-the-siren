@@ -137,7 +137,7 @@ sub _migrate_db {
 
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

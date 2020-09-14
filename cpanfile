@@ -28,3 +28,6 @@ requires 'Parse::BBCode';
 requires 'Perl::Tidy';
 requires 'Perl::Critic';
 requires 'Pod::Parser';
+requires 'Perl::Critic::Policy::Dynamic::NoIndirect';
+requires 'Perl::Critic::Policy::Freenode::MultidimensionalArrayEmulation';
+requires 'Perl::Critic::Policy::Freenode::Prototypes';

@@ -59,7 +59,7 @@ sub id_order {
 __PACKAGE__->meta->make_immutable;
 1;
 
-=pod
+=encoding utf8
 
 =head1 NAME
 

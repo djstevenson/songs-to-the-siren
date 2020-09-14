@@ -48,7 +48,7 @@ sub _require_admin {
 1;
 __END__
 
-=pod
+=encoding utf8
 
 =head1 NAME
 
