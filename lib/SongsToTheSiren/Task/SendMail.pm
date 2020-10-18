@@ -10,17 +10,18 @@ use Mojo::UserAgent;
 use Mojo::URL;
 use Mojo::JSON qw/ decode_json /;
 
-use Net::SMTP::TLS;
 use Carp;
 use DateTime;
 
 has home => sub { Mojo::Home->new; };
 
 has host        => undef;
+has port        => undef;
 has user        => undef;
 has password    => undef;
 has from        => undef;
 has site_domain => undef;
+has sendemail   => undef;
 has json_conf   => undef;
 
 sub register {
@@ -33,10 +34,12 @@ sub register {
     $self->json_conf(decode_json($ENV{$env_name})) if exists $ENV{$env_name};
 
     $self->host($self->_conf('host', $app));
+    $self->port($self->_conf('port', $app));
     $self->user($self->_conf('user', $app));
     $self->password($self->_conf('password', $app));
     $self->from($self->_conf('from', $app));
     $self->site_domain($self->_conf('domain', $app));
+    $self->sendemail($self->_conf('sendemail', $app));
 
 
     $self->home->detect;
@@ -62,36 +65,27 @@ sub register {
             my $subject = $mt->vars(1)->render_file($self->_file(subject => $template), $data);
             my $body    = $mt->vars(1)->render_file($self->_file(body => $template), $data);
 
-            my $from = $self->from;
-            my $to   = $email->email_to;
+            chomp $subject;
 
-            my ($localpart, $from_domain) = split(/\@/, $from);
-
-            # TODO Default TLS config doesn't work with my
-            #      ESP. Work out what does, and make it
-            #      configurable.
-            my $smtp = Net::SMTP::TLS->new(
-                $self->host,
-                NoTLS    => 1,
-                Hello    => $from_domain,
-                Timeout  => 60,
-                User     => $self->user,
-                Password => $self->password,
+            # Build a command to which we will pipe the body. We
+            # must use 'list' args to open so that no shell is involved
+            # (or then we have to worry about < or > chars etc).
+            my @args = (
+                $self->sendemail,
+                '-q',                            # quiet
+                '-f'  => $self->from,
+                '-t'  => $email->email_to,
+                '-u'  => $subject,
+                '-s'  => $self->host . ':' . $self->port,
+                '-o'  => 'tls=yes',
+                '-xu' => $self->user,
+                '-xp' => $self->password,
             );
 
-            # TODO How do we make this task testable?
-            # Plug in a mock object compatible with Net::SMTP::TLS?
-            # It could simulate fails (e.g send to error503@example.com
-            # to simulate that specific error?)
-            $smtp->mail($from);
-            $smtp->recipient($to);
-            $smtp->data;
-            $smtp->datasend("From: ${from}\n");
-            $smtp->datasend("To: ${to}\n");
-            $smtp->datasend("Subject: ${subject}\n\n");
-            $smtp->datasend("${body}\n\n");
-            $smtp->dataend;
-            $smtp->quit;
+            if (open(my $fh, '|-', @args)) {
+                print $fh $body;
+                $fh->close;
+            }
 
             $email->update({
                 sent_at =>  DateTime->now,
@@ -184,6 +178,18 @@ set via the app config file, e.g.
 
     smtp => {
         host => 'smtp.example.com',
+        ...
+    }
+
+=item port
+
+The port on which your SMTP host is listening, usually 587.
+
+Set via the env JSON, keyname is 'port', or
+set via the app config file, e.g.
+
+    smtp => {
+        port => 587,
         ...
     }
 

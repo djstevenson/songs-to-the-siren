@@ -13,7 +13,6 @@ requires 'Mojo::Pg';
 requires 'Mozilla::CA';
 requires 'Minion';
 requires 'Minion::Backend::Pg';
-requires 'Net::SMTP::TLS';
 requires 'DBIx::Class';
 requires 'DBD::Pg';
 requires 'DateTime';

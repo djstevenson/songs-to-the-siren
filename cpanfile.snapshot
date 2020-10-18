@@ -1321,17 +1321,6 @@ DISTRIBUTIONS
       Digest::CRC 0.22
     requirements:
       ExtUtils::MakeMaker 0
-  Digest-HMAC-1.03
-    pathname: G/GA/GAAS/Digest-HMAC-1.03.tar.gz
-    provides:
-      Digest::HMAC 1.03
-      Digest::HMAC_MD5 1.01
-      Digest::HMAC_SHA1 1.03
-    requirements:
-      Digest::MD5 2
-      Digest::SHA 1
-      ExtUtils::MakeMaker 0
-      perl 5.004
   Digest-MD4-1.9
     pathname: M/MI/MIKEM/DigestMD4/Digest-MD4-1.9.tar.gz
     provides:
@@ -2511,18 +2500,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test 0
       perl 5.006
-  Net-SMTP-TLS-0.12
-    pathname: A/AW/AWESTHOLM/Net-SMTP-TLS-0.12.tar.gz
-    provides:
-      Net::SMTP::TLS 0.12
-    requirements:
-      Digest::HMAC_MD5 0
-      ExtUtils::MakeMaker 0
-      IO::Socket::INET 0
-      IO::Socket::SSL 0
-      MIME::Base64 0
-      Net::SSLeay 0
-      Test::More 0
   Net-SSLeay-1.88
     pathname: C/CH/CHRISN/Net-SSLeay-1.88.tar.gz
     provides:
@@ -2857,18 +2834,18 @@ DISTRIBUTIONS
       Scalar::Util 1.18
       Test::More 0.42
       perl 5.00503
-  Params-Validate-1.29
-    pathname: D/DR/DROLSKY/Params-Validate-1.29.tar.gz
+  Params-Validate-1.30
+    pathname: D/DR/DROLSKY/Params-Validate-1.30.tar.gz
     provides:
-      Params::Validate 1.29
-      Params::Validate::Constants 1.29
-      Params::Validate::PP 1.29
-      Params::Validate::XS 1.29
+      Params::Validate 1.30
+      Params::Validate::Constants 1.30
+      Params::Validate::PP 1.30
+      Params::Validate::XS 1.30
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::CBuilder 0
-      Module::Build 0.28
+      Module::Build 0.4227
       Module::Implementation 0
       Scalar::Util 1.10
       XSLoader 0
