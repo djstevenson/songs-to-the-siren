@@ -30,7 +30,6 @@ sub startup {
     $app->plugin('SongsToTheSiren::Helper::Form');
     $app->plugin('SongsToTheSiren::Helper::Table');
     $app->plugin('SongsToTheSiren::Helper::Render');
-    $app->plugin('SongsToTheSiren::Helper::Tags');
     $app->plugin('SongsToTheSiren::Plugin::Auth');
     $app->plugin(Minion => {Pg => $app->db_dsn});
     $app->plugin('SongsToTheSiren::Helper::Email');

@@ -28,41 +28,25 @@ sub run {
 
 	my %tests = (
 		'Tag does not exist' => {
-			tags => '9',
-			expected => [],
+			tag      => '9',
+			expected => undef,
 		},
 		'Tag 1' => {
-			tags => '1',
-			expected => [1],
+			tag      => $tag1->id,
+			expected => $tag1->id,
 		},
-		'Tag 1,2' => {
-			tags => '1,2',
-			expected => [1,2],
-		},
-		'Tag 2,1' => {
-			tags => '2,1',
-			expected => [1,2],
-		},
-		'All tags' => {
-			tags => '4,5,2,1,3',
-			expected => [1,2,3,4,5],
-		},
-		'All tags - different order' => {
-			tags => '1,2,3,4,5',
-			expected => [1,2,3,4,5],
-		},
-		'Some good tags plus bad one' => {
-			tags => '9,3,4,5',
-			expected => [3,4,5],
+		'Tag 5' => {
+			tag      => $tag5->id,
+			expected => $tag5->id,
 		},
 	);
 
 	foreach my $desc ( keys %tests ) {
 		my $t = $tests{$desc};
-		my $res = $rs->search_by_ids( $t->{tags} );
-		my @actual = map {$_->id} @{ $res };
-		my @expected = @{ $t->{expected} };
-		cmp_deeply([sort @actual], [sort @expected], $desc);
+		my $res = $rs->find( $t->{tag} );
+		my $actual = $res ? $res->id : undef;
+		my $expected = $t->{expected};
+		is($actual, $expected, $desc);
 	}
 
 

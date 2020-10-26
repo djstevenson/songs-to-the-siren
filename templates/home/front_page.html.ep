@@ -1,16 +1,9 @@
 % layout 'default';
 % title "Songs to the Siren";
 
-% my $tag_count = scalar @$tags;
-% if ( $tag_count ) {
+% if ( defined $tag ) {
     <p class="filter-tags">
-        Filtered by:
-        % my $base_url = url_for('home');
-        % foreach my $tag (@$tags) {
-            % my $query_string = remove_tag_from_query_params($tag);
-            % my $href = $base_url . $query_string;
-            <a class="btn btn-outline-secondary btn-sm song-tag-remove" href="<%= $href %>"><sup>✕</sup> <%= $tag->name %></a>
-        % }
+        Filtered by tag: <%= $tag->name %> - <a href="<%= url_for('home') %>">Show all</a>
     </p>
 % }
 

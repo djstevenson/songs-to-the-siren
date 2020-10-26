@@ -10,18 +10,6 @@ use Carp qw/ croak /;
 
 use DateTime;
 
-sub search_by_ids {
-    my ($self, $tag_ids) = @_;
-
-    return [] unless $tag_ids;
-
-    my @ids = split(/,\s*/, $tag_ids);
-    return [] unless scalar @ids;
-
-
-    return [$self->search({id => {-in => \@ids}})->all];
-}
-
 sub by_name {
     my ($self) = @_;
 
