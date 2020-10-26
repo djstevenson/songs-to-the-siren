@@ -4,7 +4,7 @@
         % my $base_url = url_for('home');
         <p class="song-tags">Tags:
             % foreach my $tag ( @song_tags ) {
-                % my $href = $base_url . '?tags=' . $tag->id;
+                % my $href = $base_url . '?tag=' . $tag->id;
                 <a class="btn btn-outline-secondary btn-sm song-tag" href="<%= $href %>" role="button"><%= $tag->name %></a>
             % }
         </p>

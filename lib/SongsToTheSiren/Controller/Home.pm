@@ -14,12 +14,12 @@ sub front_page {
     my $c = shift;
 
     # TODO Add pagination
-    my $tags = $c->schema->resultset('Tag')->search_by_ids($c->param('tags'));
+    my $tag = $c->schema->resultset('Tag')->find($c->param('tag'));
 
     my $songs_rs = $c->schema->resultset('Song');
-    my $songs = $songs_rs->home_page_songs($tags)->select_comment_count('approved');
+    my $songs = $songs_rs->home_page_songs($tag)->select_comment_count('approved');
 
-    $c->stash(songs => $songs, tags => $tags);
+    $c->stash(songs => $songs, tag => $tag);
 
     return;
 }

@@ -11,21 +11,16 @@ use Carp qw/ croak /;
 use DateTime;
 
 sub home_page_songs {
-    my ($self, $tags) = @_;
+    my ($self, $tag) = @_;
 
     ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $rs = $self->select_metadata
         ->select_text(summary => 'html')
         ->where_published
-        ->by_publication_date;
+        ->by_publication_date
+        ->where_has_tag($tag);
 
-    if ($tags) {
-        foreach my $tag (@{ $tags }) {
-            $rs = $rs->where_has_tag($tag);
-        }
-    }
     ## use critic
-
     return $rs;
 }
 
@@ -167,13 +162,12 @@ ResultSet methods for Songs
 Shortcut for getting all the songs you want to list on the 
 home page. Returns a result set.
 
-Optional arg: tags, a reference to an array of Tag
-result objects. Restricts the songs to ones that have
-one or more of these tags.
+Optional arg: tag, a Tag result objects. Restricts the songs
+to ones that has this tag, if present
 
-    $song_rs->home_page_songs($tags);
+    $song_rs->home_page_songs($tag);
 
-Leave out $tags, or pass undef, to search for all songs
+Leave out $tag, or pass undef, to search for all songs
 regardless of tags.
 
 Usage:
