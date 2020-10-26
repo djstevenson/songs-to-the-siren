@@ -14,7 +14,8 @@ sub front_page {
     my $c = shift;
 
     # TODO Add pagination
-    my $tag = $c->schema->resultset('Tag')->find($c->param('tag'));
+    my $tag_id = $c->param('tag');
+    my $tag = $tag_id ? $c->schema->resultset('Tag')->find($tag_id) : undef;
 
     my $songs_rs = $c->schema->resultset('Song');
     my $songs = $songs_rs->home_page_songs($tag)->select_comment_count('approved');

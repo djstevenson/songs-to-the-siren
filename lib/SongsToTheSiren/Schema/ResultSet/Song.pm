@@ -17,8 +17,8 @@ sub home_page_songs {
     my $rs = $self->select_metadata
         ->select_text(summary => 'html')
         ->where_published
-        ->by_publication_date
-        ->where_has_tag($tag);
+        ->where_has_tag($tag)
+        ->by_publication_date;
 
     ## use critic
     return $rs;
@@ -90,6 +90,8 @@ sub where_published {
 
 sub where_has_tag {
     my ($self, $tag) = @_;
+
+    return $self unless $tag;
 
     my $tag_sql = '(SELECT 1 FROM song_tags ST WHERE ST.tag_id=? AND ST.song_id=me.id)';
 
