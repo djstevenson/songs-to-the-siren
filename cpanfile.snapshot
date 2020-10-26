@@ -1756,13 +1756,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.13
-    pathname: S/SR/SRI/Minion-10.13.tar.gz
+  Minion-10.14
+    pathname: S/SR/SRI/Minion-10.14.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.13
+      Minion 10.14
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1906,10 +1906,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.20
-    pathname: S/SR/SRI/Mojo-Pg-4.20.tar.gz
+  Mojo-Pg-4.21
+    pathname: S/SR/SRI/Mojo-Pg-4.21.tar.gz
     provides:
-      Mojo::Pg 4.20
+      Mojo::Pg 4.21
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
