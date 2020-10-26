@@ -7,8 +7,7 @@
         Filtered by:
         % my $base_url = url_for('home');
         % foreach my $tag (@$tags) {
-            % my $query_string = remove_tag_from_query_params($tag);
-            % my $href = $base_url . $query_string;
+            % my $href = $base_url;
             <a class="btn btn-outline-secondary btn-sm song-tag-remove" href="<%= $href %>"><sup>✕</sup> <%= $tag->name %></a>
         % }
     </p>
