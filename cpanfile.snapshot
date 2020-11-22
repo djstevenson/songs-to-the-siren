@@ -1,13 +1,12 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  Algorithm-C3-0.10
-    pathname: H/HA/HAARG/Algorithm-C3-0.10.tar.gz
+  Algorithm-C3-0.11
+    pathname: H/HA/HAARG/Algorithm-C3-0.11.tar.gz
     provides:
-      Algorithm::C3 0.10
+      Algorithm::C3 0.11
     requirements:
       Carp 0.01
       ExtUtils::MakeMaker 0
-      Test::More 0.47
       perl 5.006
   Algorithm-Diff-1.200
     pathname: R/RJ/RJBS/Algorithm-Diff-1.200.tar.gz
@@ -154,10 +153,10 @@ DISTRIBUTIONS
       Scalar::Util 0
       Sub::Name 0.05
       perl 5.006
-  Class-C3-0.34
-    pathname: H/HA/HAARG/Class-C3-0.34.tar.gz
+  Class-C3-0.35
+    pathname: H/HA/HAARG/Class-C3-0.35.tar.gz
     provides:
-      Class::C3 0.34
+      Class::C3 0.35
     requirements:
       Algorithm::C3 0.07
       ExtUtils::MakeMaker 0
@@ -745,23 +744,23 @@ DISTRIBUTIONS
       Sub::Install 0.921
       strict 0
       warnings 0
-  DateTime-1.52
-    pathname: D/DR/DROLSKY/DateTime-1.52.tar.gz
+  DateTime-1.53
+    pathname: D/DR/DROLSKY/DateTime-1.53.tar.gz
     provides:
-      DateTime 1.52
-      DateTime::Duration 1.52
-      DateTime::Helpers 1.52
-      DateTime::Infinite 1.52
-      DateTime::Infinite::Future 1.52
-      DateTime::Infinite::Past 1.52
-      DateTime::LeapSecond 1.52
-      DateTime::PP 1.52
-      DateTime::PPExtra 1.52
-      DateTime::Types 1.52
+      DateTime 1.53
+      DateTime::Duration 1.53
+      DateTime::Helpers 1.53
+      DateTime::Infinite 1.53
+      DateTime::Infinite::Future 1.53
+      DateTime::Infinite::Past 1.53
+      DateTime::LeapSecond 1.53
+      DateTime::PP 1.53
+      DateTime::PPExtra 1.53
+      DateTime::Types 1.53
     requirements:
       Carp 0
       DateTime::Locale 1.06
-      DateTime::TimeZone 2.02
+      DateTime::TimeZone 2.44
       Dist::CheckConflicts 0.02
       ExtUtils::MakeMaker 0
       POSIX 0
@@ -1696,10 +1695,10 @@ DISTRIBUTIONS
       IO::String 1.08
     requirements:
       ExtUtils::MakeMaker 0
-  JSON-MaybeXS-1.004002
-    pathname: E/ET/ETHER/JSON-MaybeXS-1.004002.tar.gz
+  JSON-MaybeXS-1.004003
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004003.tar.gz
     provides:
-      JSON::MaybeXS 1.004002
+      JSON::MaybeXS 1.004003
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -1922,8 +1921,8 @@ DISTRIBUTIONS
       Mojolicious 8.50
       SQL::Abstract 1.86
       perl 5.016
-  Mojolicious-8.64
-    pathname: S/SR/SRI/Mojolicious-8.64.tar.gz
+  Mojolicious-8.65
+    pathname: S/SR/SRI/Mojolicious-8.65.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1992,11 +1991,12 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.64
+      Mojolicious 8.65
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
       Mojolicious::Command::Author::generate::app undef
+      Mojolicious::Command::Author::generate::dockerfile undef
       Mojolicious::Command::Author::generate::lite_app undef
       Mojolicious::Command::Author::generate::makefile undef
       Mojolicious::Command::Author::generate::plugin undef
@@ -2054,20 +2054,20 @@ DISTRIBUTIONS
       File::Temp 0.2308
       Mojolicious 8.50
       perl 5.016
-  Moo-2.004000
-    pathname: H/HA/HAARG/Moo-2.004000.tar.gz
+  Moo-2.004003
+    pathname: H/HA/HAARG/Moo-2.004003.tar.gz
     provides:
       Method::Generate::Accessor undef
       Method::Generate::BuildAll undef
       Method::Generate::Constructor undef
       Method::Generate::DemolishAll undef
-      Moo 2.004000
+      Moo 2.004003
       Moo::HandleMoose undef
       Moo::HandleMoose::FakeConstructor undef
       Moo::HandleMoose::FakeMetaClass undef
       Moo::HandleMoose::_TypeMap undef
       Moo::Object undef
-      Moo::Role 2.004000
+      Moo::Role 2.004003
       Moo::_Utils undef
       Moo::_mro undef
       Moo::_strictures undef
@@ -2077,7 +2077,6 @@ DISTRIBUTIONS
       Class::Method::Modifiers 1.10
       Exporter 5.57
       ExtUtils::MakeMaker 0
-      Module::Runtime 0.014
       Role::Tiny 2.001004
       Scalar::Util 1.00
       Sub::Defer 2.006006
@@ -2778,18 +2777,16 @@ DISTRIBUTIONS
       Sub::Name 0
       strict 0
       warnings 0
-  Package-Stash-0.38
-    pathname: E/ET/ETHER/Package-Stash-0.38.tar.gz
+  Package-Stash-0.39
+    pathname: E/ET/ETHER/Package-Stash-0.39.tar.gz
     provides:
-      Package::Stash 0.38
-      Package::Stash::PP 0.38
+      Package::Stash 0.39
+      Package::Stash::PP 0.39
     requirements:
       B 0
       Carp 0
-      Config 0
       Dist::CheckConflicts 0.02
       ExtUtils::MakeMaker 0
-      File::Spec 0
       Getopt::Long 0
       Module::Implementation 0.06
       Package::Stash::XS 0.26
