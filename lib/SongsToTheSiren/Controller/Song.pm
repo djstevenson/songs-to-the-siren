@@ -14,7 +14,7 @@ sub add_routes {
     # Routes that capture a song id
     my $song_action_u = $u->under('/:song_id')->to(action => 'capture');
 
-    $song_action_u->route('/view')->name('view_song')->via('GET')->to(action => 'view');
+    $song_action_u->get('/view')->name('view_song')->to(action => 'view');
 
     SongsToTheSiren::Controller::Song::Comment->new->add_routes($song_action_u);
     ## use critic

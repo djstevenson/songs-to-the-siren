@@ -16,18 +16,18 @@ sub add_routes {
     my $a = $r->any('song')->to(controller => 'admin-song');
 
     # Routes that do not capture a song id
-    $a->route('/list')->name('admin_list_songs')->via('GET')->to(action => 'list');
-    $a->route('/create')->name('admin_create_song')->via('GET', 'POST')->to(action => 'create');
+    $a->get('/list')->name('admin_list_songs')->to(action => 'list');
+    $a->any(['GET', 'POST'] => '/create')->name('admin_create_song')->to(action => 'create');
 
     # # Routes that capture a song id
     my $song_a = $a->under('/:song_id')->to(action => 'capture');
 
-    $song_a->route('/publish')->name('admin_publish_song')->via('GET')->to(action => 'publish');
-    $song_a->route('/unpublish')->name('admin_unpublish_song')->via('GET')->to(action => 'unpublish');
-    $song_a->route('/edit')->name('admin_edit_song')->via('GET', 'POST')->to(action => 'edit');
+    $song_a->get('/publish')->name('admin_publish_song')->to(action => 'publish');
+    $song_a->get('/unpublish')->name('admin_unpublish_song')->to(action => 'unpublish');
+    $song_a->any(['GET', 'POST'] => '/edit')->name('admin_edit_song')->to(action => 'edit');
 
     # Method=DELETE?
-    $song_a->route('/delete')->name('admin_delete_song')->via('GET', 'POST')->to(action => 'do_delete');
+    $song_a->any(['GET', 'POST'] => '/delete')->name('admin_delete_song')->to(action => 'do_delete');
 
     SongsToTheSiren::Controller::Admin::Song::Comment->new->add_routes($song_a);
     SongsToTheSiren::Controller::Admin::Song::Link->new->add_routes($song_a);

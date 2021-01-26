@@ -8,27 +8,24 @@ sub add_routes {
     ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $r->any('/user')->to(controller => 'user');
 
-    $u->route('/register')->name('register')->via('GET', 'POST')->to(action => 'register');
-    $u->route('/registered')->name('registered')->via('GET')->to(action => 'registered');
-    $u->route('/sign_in')->name('sign_in')->via('GET', 'POST')->to(action => 'sign_in');
-    $u->route('/sign_out')->name('sign_out')->via('GET')->to(action => 'sign_out');
-    $u->route('/confirmed')->name('confirmed')->via('GET')->to(action => 'confirmed');
-    $u->route('/declined')->name('declined')->via('GET')->to(action => 'declined');
+    $u->any(['GET', 'POST'] => '/register')->name('register')->to(action => 'register');
+    $u->get('/registered')->name('registered')->to(action => 'registered');
+    $u->any(['GET', 'POST'] => '/sign_in')->name('sign_in')->to(action => 'sign_in');
+    $u->get('/sign_out')->name('sign_out')->to(action => 'sign_out');
+    $u->get('/confirmed')->name('confirmed')->to(action => 'confirmed');
+    $u->get('/declined')->name('declined')->to(action => 'declined');
 
-    $u->route('/forgot_password')->name('forgot_password')->via('GET', 'POST')->to(action => 'forgot_password');
-    $u->route('/forgot_password/reset_sent')->name('password_reset_sent')->via('GET')
-        ->to(action => 'password_reset_sent');
-    $u->route('/reset/done')->name('password_reset_done')->via('GET')->to(action => 'password_reset_done');
+    $u->any(['GET', 'POST'] => '/forgot_password')->name('forgot_password')->to(action => 'forgot_password');
+    $u->get('/forgot_password/reset_sent')->name('password_reset_sent')->to(action => 'password_reset_sent');
+    $u->get('/reset/done')->name('password_reset_done')->to(action => 'password_reset_done');
 
-    $u->route('/forgot_name')->name('forgot_name')->via('GET', 'POST')->to(action => 'forgot_name');
-    $u->route('/forgot_name/reminder_sent')->name('name_reminder_sent')->via('GET')->to(action => 'name_reminder_sent');
+    $u->any(['GET', 'POST'] => '/forgot_name')->name('forgot_name')->to(action => 'forgot_name');
+    $u->get('/forgot_name/reminder_sent')->name('name_reminder_sent')->to(action => 'name_reminder_sent');
 
     my $user_action = $u->under('/:user_id')->to(action => 'capture');
-    $user_action->get('/confirm/:user_key')->name('confirm_registration')->via('GET')
-        ->to(action => 'confirm_registration');
-    $user_action->get('/decline/:user_key')->name('decline_registration')->via('GET')
-        ->to(action => 'decline_registration');
-    $user_action->get('/reset/:user_key')->name('password_reset')->via('GET', 'POST')->to(action => 'password_reset');
+    $user_action->get('/confirm/:user_key')->name('confirm_registration')->to(action => 'confirm_registration');
+    $user_action->get('/decline/:user_key')->name('decline_registration')->to(action => 'decline_registration');
+    $user_action->any(['GET', 'POST'] => '/reset/:user_key')->name('password_reset')->to(action => 'password_reset');
     ## use critic
     
     return;

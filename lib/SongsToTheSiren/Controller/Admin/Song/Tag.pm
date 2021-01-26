@@ -9,13 +9,13 @@ sub add_routes {
     my $u = $song_action->require_admin->any('/tag')->to(controller => 'admin-song-tag');
 
     # Actions that do not capture a tag_id
-    $u->route('/edit')->name('admin_edit_song_tags')->via('GET', 'POST')->to(action => 'edit');
+    $u->any(['GET', 'POST'] => '/edit')->name('admin_edit_song_tags')->to(action => 'edit');
 
     # Actions that DO capture a tag_id
     my $tag_action = $u->under('/:tag_id')->to(action => 'capture');
 
     # Remove a tag from a song
-    $tag_action->route->name('admin_delete_song_tag')->via('DELETE')->to(action => 'do_delete');
+    $tag_action->delete->name('admin_delete_song_tag')->to(action => 'do_delete');
     ## use critic
     
     return;

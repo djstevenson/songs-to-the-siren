@@ -12,9 +12,9 @@ sub add_routes {
 
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
-    $comment_action->route('/approve')->name('admin_approve_comment')->via('GET', 'POST')->to(action => 'approve');
-    $comment_action->route('/reject')->name('admin_reject_comment')->via('GET', 'POST')->to(action   => 'reject');
-    $comment_action->route('/edit')->name('admin_edit_comment')->via('GET', 'POST')->to(action       => 'edit');
+    $comment_action->any(['GET', 'POST'] => '/approve')->name('admin_approve_comment')->to(action => 'approve');
+    $comment_action->any(['GET', 'POST'] => '/reject')->name('admin_reject_comment')->to(action   => 'reject');
+    $comment_action->any(['GET', 'POST'] => '/edit')->name('admin_edit_comment')->to(action       => 'edit');
     ## use critic
 
     return;

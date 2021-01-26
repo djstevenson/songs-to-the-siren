@@ -12,7 +12,7 @@ sub add_routes {
     my $content_action_u = $u->under('/:name')->to(action => 'capture');
 
     # Non-admin content, with a capture
-    $content_action_u->route('/view')->name('view_content')->via('GET')->to(action => 'view');
+    $content_action_u->get('/view')->name('view_content')->to(action => 'view');
     ## use critic
     
     return;
