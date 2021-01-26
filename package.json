@@ -15,7 +15,7 @@
   "author": "David Stevenson <david@ytfc.com>",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^6.0.0",
+    "cypress": "^6.3.0",
     "randomatic": "^3.1.1",
     "reverse-string": "^0.0.6"
   }
