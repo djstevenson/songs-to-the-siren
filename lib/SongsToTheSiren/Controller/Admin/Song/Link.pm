@@ -9,14 +9,14 @@ sub add_routes {
     my $u = $song_action->require_admin->any('/link')->to(controller => 'admin-song-link');
 
     # Admin routes that do not capture a link id
-    $u->route('/list')->name('admin_list_song_links')->via('GET')->to(action => 'list');
-    $u->route('/create')->name('admin_create_song_link')->via('GET', 'POST')->to(action => 'create');
+    $u->get('/list')->name('admin_list_song_links')->to(action => 'list');
+    $u->any(['GET', 'POST'] => '/create')->name('admin_create_song_link')->to(action => 'create');
 
     # Admin routes that capture a link id
     my $link_action = $u->under('/:link_id')->to(action => 'capture');
-    $link_action->route('/edit')->name('admin_edit_song_link')->via('GET', 'POST')->to(action     => 'edit');
-    $link_action->route('/delete')->name('admin_delete_song_link')->via('GET', 'POST')->to(action => 'do_delete');   # DELETE method?
-    $link_action->route('/copy')->name('admin_copy_song_link')->to(action => 'copy');
+    $link_action->any(['GET', 'POST'] => '/edit')->name('admin_edit_song_link')->to(action     => 'edit');
+    $link_action->any(['GET', 'POST'] => '/delete')->name('admin_delete_song_link')->to(action => 'do_delete');   # DELETE method?
+    $link_action->get('/copy')->name('admin_copy_song_link')->to(action => 'copy');
     ## use critic
     
     return;

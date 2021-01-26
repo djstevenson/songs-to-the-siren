@@ -7,7 +7,7 @@ use SongsToTheSiren::Markdown;
 sub add_routes {
     my ($c, $r) = @_;
 
-    $r->route('/markdown')->via('POST')->to('markdown#render_markdown');
+    $r->post('/markdown')->to('markdown#render_markdown');
     
     return;
 }

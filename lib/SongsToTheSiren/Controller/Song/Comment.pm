@@ -10,11 +10,11 @@ sub add_routes {
     ## no critic (ValuesAndExpressions::ProhibitLongChainsOfMethodCalls)
     my $u = $song_action->require_sign_in->any('/comment')->to(controller => 'song-comment');
 
-    $u->route('/create')->name('new_song_comment')->via('GET', 'POST')->to(action => 'create');
+    $u->any(['GET', 'POST'] => '/create')->name('new_song_comment')->to(action => 'create');
 
     my $comment_action = $u->under('/:comment_id')->to(action => 'capture');
 
-    $comment_action->route('/reply')->name('new_song_reply')->via('GET', 'POST')->to(action => 'reply');
+    $comment_action->any(['GET', 'POST'] => '/reply')->name('new_song_reply')->to(action => 'reply');
     ## use critic
     
     return;

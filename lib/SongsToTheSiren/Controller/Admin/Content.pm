@@ -14,14 +14,14 @@ sub add_routes {
     my $content_action_a = $a->under('/:name')->to(action => 'capture');
 
     # Admin routes, no capture:
-    $a->route('/list')->name('admin_list_content')->via('GET')->to(action => 'list');
-    $a->route('/create')->name('admin_create_content')->via('GET', 'POST')->to(action => 'create');
+    $a->get('/list')->name('admin_list_content')->to(action => 'list');
+    $a->any(['GET', 'POST'] => '/create')->name('admin_create_content')->to(action => 'create');
 
     # Admin content, with a capture
-    $content_action_a->route('/edit')->name('admin_edit_content')->via('GET', 'POST')->to(action => 'edit');
+    $content_action_a->any(['GET', 'POST'] => '/edit')->name('admin_edit_content')->to(action => 'edit');
 
     # Method=DELETE?
-    $content_action_a->route('/delete')->name('admin_delete_content')->via('GET', 'POST')->to(action => 'do_delete');
+    $content_action_a->any(['GET', 'POST'] => '/delete')->name('admin_delete_content')->to(action => 'do_delete');
     ## use critic
     
     return;
