@@ -306,16 +306,15 @@ DISTRIBUTIONS
       Config::Any::YAML undef
     requirements:
       Module::Pluggable::Object 3.6
-  Config-Tiny-2.24
-    pathname: R/RS/RSAVAGE/Config-Tiny-2.24.tgz
+  Config-Tiny-2.26
+    pathname: R/RS/RSAVAGE/Config-Tiny-2.26.tgz
     provides:
-      Config::Tiny 2.24
+      Config::Tiny 2.26
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 3.3
       File::Temp 0.22
       Test::More 0.47
-      UNIVERSAL 0
       strict 0
       utf8 0
   Context-Preserve-0.03
@@ -391,14 +390,13 @@ DISTRIBUTIONS
       Digest::SHA1 0
       ExtUtils::CBuilder 0
       Test::More 0
-  Crypt-PasswdMD5-1.40
-    pathname: R/RS/RSAVAGE/Crypt-PasswdMD5-1.40.tgz
+  Crypt-PasswdMD5-1.41
+    pathname: R/RS/RSAVAGE/Crypt-PasswdMD5-1.41.tgz
     provides:
-      Crypt::PasswdMD5 1.40
+      Crypt::PasswdMD5 1.41
     requirements:
       Digest::MD5 2.53
-      Module::Build 0
-      Test::More 0.94
+      ExtUtils::MakeMaker 0
       strict 0
       warnings 0
   Crypt-Rijndael-1.15
@@ -1757,13 +1755,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-10.15
-    pathname: S/SR/SRI/Minion-10.15.tar.gz
+  Minion-10.16
+    pathname: S/SR/SRI/Minion-10.16.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 10.15
+      Minion 10.16
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1907,10 +1905,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-4.23
-    pathname: S/SR/SRI/Mojo-Pg-4.23.tar.gz
+  Mojo-Pg-4.24
+    pathname: S/SR/SRI/Mojo-Pg-4.24.tar.gz
     provides:
-      Mojo::Pg 4.23
+      Mojo::Pg 4.24
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -1923,8 +1921,8 @@ DISTRIBUTIONS
       Mojolicious 8.50
       SQL::Abstract 1.86
       perl 5.016
-  Mojolicious-8.71
-    pathname: S/SR/SRI/Mojolicious-8.71.tar.gz
+  Mojolicious-9.01
+    pathname: S/SR/SRI/Mojolicious-9.01.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1953,7 +1951,6 @@ DISTRIBUTIONS
       Mojo::Home undef
       Mojo::IOLoop undef
       Mojo::IOLoop::Client undef
-      Mojo::IOLoop::Delay undef
       Mojo::IOLoop::Server undef
       Mojo::IOLoop::Stream undef
       Mojo::IOLoop::Subprocess undef
@@ -1993,7 +1990,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.71
+      Mojolicious 9.01
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -2042,19 +2039,19 @@ DISTRIBUTIONS
       IO::Socket::IP 0.37
       Sub::Util 1.41
       perl 5.016
-  Mojolicious-Plugin-Status-1.13
-    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.13.tar.gz
+  Mojolicious-Plugin-Status-1.14
+    pathname: S/SR/SRI/Mojolicious-Plugin-Status-1.14.tar.gz
     provides:
       Mojo::MemoryMap undef
       Mojo::MemoryMap::Writer undef
-      Mojolicious::Plugin::Status 1.13
+      Mojolicious::Plugin::Status 1.14
     requirements:
       BSD::Resource 0
-      Cpanel::JSON::XS 4.09
       ExtUtils::MakeMaker 0
       File::Map 0
       File::Temp 0.2308
       Mojolicious 8.50
+      Sereal 0
       perl 5.016
   Moo-2.004004
     pathname: H/HA/HAARG/Moo-2.004004.tar.gz
@@ -2722,21 +2719,21 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
-  PPIx-QuoteLike-0.014
-    pathname: W/WY/WYANT/PPIx-QuoteLike-0.014.tar.gz
+  PPIx-QuoteLike-0.015
+    pathname: W/WY/WYANT/PPIx-QuoteLike-0.015.tar.gz
     provides:
-      PPIx::QuoteLike 0.014
-      PPIx::QuoteLike::Constant 0.014
-      PPIx::QuoteLike::Dumper 0.014
-      PPIx::QuoteLike::Token 0.014
-      PPIx::QuoteLike::Token::Control 0.014
-      PPIx::QuoteLike::Token::Delimiter 0.014
-      PPIx::QuoteLike::Token::Interpolation 0.014
-      PPIx::QuoteLike::Token::String 0.014
-      PPIx::QuoteLike::Token::Structure 0.014
-      PPIx::QuoteLike::Token::Unknown 0.014
-      PPIx::QuoteLike::Token::Whitespace 0.014
-      PPIx::QuoteLike::Utils 0.014
+      PPIx::QuoteLike 0.015
+      PPIx::QuoteLike::Constant 0.015
+      PPIx::QuoteLike::Dumper 0.015
+      PPIx::QuoteLike::Token 0.015
+      PPIx::QuoteLike::Token::Control 0.015
+      PPIx::QuoteLike::Token::Delimiter 0.015
+      PPIx::QuoteLike::Token::Interpolation 0.015
+      PPIx::QuoteLike::Token::String 0.015
+      PPIx::QuoteLike::Token::Structure 0.015
+      PPIx::QuoteLike::Token::Unknown 0.015
+      PPIx::QuoteLike::Token::Whitespace 0.015
+      PPIx::QuoteLike::Utils 0.015
     requirements:
       Carp 0
       Encode 0
@@ -2753,81 +2750,89 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  PPIx-Regexp-0.077
-    pathname: W/WY/WYANT/PPIx-Regexp-0.077.tar.gz
+  PPIx-Regexp-0.078
+    pathname: W/WY/WYANT/PPIx-Regexp-0.078.tar.gz
     provides:
-      PPIx::Regexp 0.077
-      PPIx::Regexp::Constant 0.077
-      PPIx::Regexp::Dumper 0.077
-      PPIx::Regexp::Element 0.077
-      PPIx::Regexp::Lexer 0.077
-      PPIx::Regexp::Node 0.077
-      PPIx::Regexp::Node::Range 0.077
-      PPIx::Regexp::Node::Unknown 0.077
-      PPIx::Regexp::Structure 0.077
-      PPIx::Regexp::Structure::Assertion 0.077
-      PPIx::Regexp::Structure::BranchReset 0.077
-      PPIx::Regexp::Structure::Capture 0.077
-      PPIx::Regexp::Structure::CharClass 0.077
-      PPIx::Regexp::Structure::Code 0.077
-      PPIx::Regexp::Structure::Main 0.077
-      PPIx::Regexp::Structure::Modifier 0.077
-      PPIx::Regexp::Structure::NamedCapture 0.077
-      PPIx::Regexp::Structure::Quantifier 0.077
-      PPIx::Regexp::Structure::RegexSet 0.077
-      PPIx::Regexp::Structure::Regexp 0.077
-      PPIx::Regexp::Structure::Replacement 0.077
-      PPIx::Regexp::Structure::Subexpression 0.077
-      PPIx::Regexp::Structure::Switch 0.077
-      PPIx::Regexp::Structure::Unknown 0.077
-      PPIx::Regexp::Support 0.077
-      PPIx::Regexp::Token 0.077
-      PPIx::Regexp::Token::Assertion 0.077
-      PPIx::Regexp::Token::Backreference 0.077
-      PPIx::Regexp::Token::Backtrack 0.077
-      PPIx::Regexp::Token::CharClass 0.077
-      PPIx::Regexp::Token::CharClass::POSIX 0.077
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.077
-      PPIx::Regexp::Token::CharClass::Simple 0.077
-      PPIx::Regexp::Token::Code 0.077
-      PPIx::Regexp::Token::Comment 0.077
-      PPIx::Regexp::Token::Condition 0.077
-      PPIx::Regexp::Token::Control 0.077
-      PPIx::Regexp::Token::Delimiter 0.077
-      PPIx::Regexp::Token::Greediness 0.077
-      PPIx::Regexp::Token::GroupType 0.077
-      PPIx::Regexp::Token::GroupType::Assertion 0.077
-      PPIx::Regexp::Token::GroupType::BranchReset 0.077
-      PPIx::Regexp::Token::GroupType::Code 0.077
-      PPIx::Regexp::Token::GroupType::Modifier 0.077
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.077
-      PPIx::Regexp::Token::GroupType::Subexpression 0.077
-      PPIx::Regexp::Token::GroupType::Switch 0.077
-      PPIx::Regexp::Token::Interpolation 0.077
-      PPIx::Regexp::Token::Literal 0.077
-      PPIx::Regexp::Token::Modifier 0.077
-      PPIx::Regexp::Token::NoOp 0.077
-      PPIx::Regexp::Token::Operator 0.077
-      PPIx::Regexp::Token::Quantifier 0.077
-      PPIx::Regexp::Token::Recursion 0.077
-      PPIx::Regexp::Token::Reference 0.077
-      PPIx::Regexp::Token::Structure 0.077
-      PPIx::Regexp::Token::Unknown 0.077
-      PPIx::Regexp::Token::Unmatched 0.077
-      PPIx::Regexp::Token::Whitespace 0.077
-      PPIx::Regexp::Tokenizer 0.077
-      PPIx::Regexp::Util 0.077
+      PPIx::Regexp 0.078
+      PPIx::Regexp::Constant 0.078
+      PPIx::Regexp::Dumper 0.078
+      PPIx::Regexp::Element 0.078
+      PPIx::Regexp::Lexer 0.078
+      PPIx::Regexp::Node 0.078
+      PPIx::Regexp::Node::Range 0.078
+      PPIx::Regexp::Node::Unknown 0.078
+      PPIx::Regexp::Structure 0.078
+      PPIx::Regexp::Structure::Assertion 0.078
+      PPIx::Regexp::Structure::Atomic_Script_Run 0.078
+      PPIx::Regexp::Structure::BranchReset 0.078
+      PPIx::Regexp::Structure::Capture 0.078
+      PPIx::Regexp::Structure::CharClass 0.078
+      PPIx::Regexp::Structure::Code 0.078
+      PPIx::Regexp::Structure::Main 0.078
+      PPIx::Regexp::Structure::Modifier 0.078
+      PPIx::Regexp::Structure::NamedCapture 0.078
+      PPIx::Regexp::Structure::Quantifier 0.078
+      PPIx::Regexp::Structure::RegexSet 0.078
+      PPIx::Regexp::Structure::Regexp 0.078
+      PPIx::Regexp::Structure::Replacement 0.078
+      PPIx::Regexp::Structure::Script_Run 0.078
+      PPIx::Regexp::Structure::Subexpression 0.078
+      PPIx::Regexp::Structure::Switch 0.078
+      PPIx::Regexp::Structure::Unknown 0.078
+      PPIx::Regexp::Support 0.078
+      PPIx::Regexp::Token 0.078
+      PPIx::Regexp::Token::Assertion 0.078
+      PPIx::Regexp::Token::Backreference 0.078
+      PPIx::Regexp::Token::Backtrack 0.078
+      PPIx::Regexp::Token::CharClass 0.078
+      PPIx::Regexp::Token::CharClass::POSIX 0.078
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.078
+      PPIx::Regexp::Token::CharClass::Simple 0.078
+      PPIx::Regexp::Token::Code 0.078
+      PPIx::Regexp::Token::Comment 0.078
+      PPIx::Regexp::Token::Condition 0.078
+      PPIx::Regexp::Token::Control 0.078
+      PPIx::Regexp::Token::Delimiter 0.078
+      PPIx::Regexp::Token::Greediness 0.078
+      PPIx::Regexp::Token::GroupType 0.078
+      PPIx::Regexp::Token::GroupType::Assertion 0.078
+      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.078
+      PPIx::Regexp::Token::GroupType::BranchReset 0.078
+      PPIx::Regexp::Token::GroupType::Code 0.078
+      PPIx::Regexp::Token::GroupType::Modifier 0.078
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.078
+      PPIx::Regexp::Token::GroupType::Script_Run 0.078
+      PPIx::Regexp::Token::GroupType::Subexpression 0.078
+      PPIx::Regexp::Token::GroupType::Switch 0.078
+      PPIx::Regexp::Token::Interpolation 0.078
+      PPIx::Regexp::Token::Literal 0.078
+      PPIx::Regexp::Token::Modifier 0.078
+      PPIx::Regexp::Token::NoOp 0.078
+      PPIx::Regexp::Token::Operator 0.078
+      PPIx::Regexp::Token::Quantifier 0.078
+      PPIx::Regexp::Token::Recursion 0.078
+      PPIx::Regexp::Token::Reference 0.078
+      PPIx::Regexp::Token::Structure 0.078
+      PPIx::Regexp::Token::Unknown 0.078
+      PPIx::Regexp::Token::Unmatched 0.078
+      PPIx::Regexp::Token::Whitespace 0.078
+      PPIx::Regexp::Tokenizer 0.078
+      PPIx::Regexp::Util 0.078
     requirements:
       Carp 0
+      Encode 0
       Exporter 0
       List::Util 0
       PPI::Document 1.117
+      PPI::Dumper 1.117
       Scalar::Util 0
       Task::Weaken 0
       Test::More 0.88
       Text::Tabs 0
       base 0
+      charnames 0
       constant 0
+      lib 0
       perl 5.006
       strict 0
       warnings 0
@@ -3007,11 +3012,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.116
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.116.tar.gz
+  Path-Tiny-0.118
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.118.tar.gz
     provides:
-      Path::Tiny 0.116
-      Path::Tiny::Error 0.116
+      Path::Tiny 0.118
+      Path::Tiny::Error 0.118
     requirements:
       Carp 0
       Cwd 0
@@ -3735,49 +3740,85 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
-  Specio-0.46
-    pathname: D/DR/DROLSKY/Specio-0.46.tar.gz
+  Sereal-4.018
+    pathname: Y/YV/YVES/Sereal-4.018.tar.gz
     provides:
-      Specio 0.46
-      Specio::Coercion 0.46
-      Specio::Constraint::AnyCan 0.46
-      Specio::Constraint::AnyDoes 0.46
-      Specio::Constraint::AnyIsa 0.46
-      Specio::Constraint::Enum 0.46
-      Specio::Constraint::Intersection 0.46
-      Specio::Constraint::ObjectCan 0.46
-      Specio::Constraint::ObjectDoes 0.46
-      Specio::Constraint::ObjectIsa 0.46
-      Specio::Constraint::Parameterizable 0.46
-      Specio::Constraint::Parameterized 0.46
-      Specio::Constraint::Role::CanType 0.46
-      Specio::Constraint::Role::DoesType 0.46
-      Specio::Constraint::Role::Interface 0.46
-      Specio::Constraint::Role::IsaType 0.46
-      Specio::Constraint::Simple 0.46
-      Specio::Constraint::Structurable 0.46
-      Specio::Constraint::Structured 0.46
-      Specio::Constraint::Union 0.46
-      Specio::Declare 0.46
-      Specio::DeclaredAt 0.46
-      Specio::Exception 0.46
-      Specio::Exporter 0.46
-      Specio::Helpers 0.46
-      Specio::Library::Builtins 0.46
-      Specio::Library::Numeric 0.46
-      Specio::Library::Perl 0.46
-      Specio::Library::String 0.46
-      Specio::Library::Structured 0.46
-      Specio::Library::Structured::Dict 0.46
-      Specio::Library::Structured::Map 0.46
-      Specio::Library::Structured::Tuple 0.46
-      Specio::OO 0.46
-      Specio::PartialDump 0.46
-      Specio::Registry 0.46
-      Specio::Role::Inlinable 0.46
-      Specio::Subs 0.46
-      Specio::TypeChecks 0.46
-      Test::Specio 0.46
+      Sereal 4.018
+    requirements:
+      ExtUtils::MakeMaker 0
+      Sereal::Decoder 4.018
+      Sereal::Encoder 4.018
+      perl 5.008
+  Sereal-Decoder-4.018
+    pathname: Y/YV/YVES/Sereal-Decoder-4.018.tar.gz
+    provides:
+      Sereal::Decoder 4.018
+      Sereal::Decoder::Constants 4.018
+      Sereal::Performance undef
+    requirements:
+      ExtUtils::MakeMaker 7.0
+      ExtUtils::ParseXS 2.21
+      File::Find 0
+      File::Path 0
+      Test::LongString 0
+      XSLoader 0
+      perl 5.008
+  Sereal-Encoder-4.018
+    pathname: Y/YV/YVES/Sereal-Encoder-4.018.tar.gz
+    provides:
+      Sereal::Encoder 4.018
+      Sereal::Encoder::Constants 4.018
+    requirements:
+      ExtUtils::MakeMaker 7.0
+      ExtUtils::ParseXS 2.21
+      File::Find 0
+      File::Path 0
+      Test::LongString 0
+      XSLoader 0
+      perl 5.008
+  Specio-0.47
+    pathname: D/DR/DROLSKY/Specio-0.47.tar.gz
+    provides:
+      Specio 0.47
+      Specio::Coercion 0.47
+      Specio::Constraint::AnyCan 0.47
+      Specio::Constraint::AnyDoes 0.47
+      Specio::Constraint::AnyIsa 0.47
+      Specio::Constraint::Enum 0.47
+      Specio::Constraint::Intersection 0.47
+      Specio::Constraint::ObjectCan 0.47
+      Specio::Constraint::ObjectDoes 0.47
+      Specio::Constraint::ObjectIsa 0.47
+      Specio::Constraint::Parameterizable 0.47
+      Specio::Constraint::Parameterized 0.47
+      Specio::Constraint::Role::CanType 0.47
+      Specio::Constraint::Role::DoesType 0.47
+      Specio::Constraint::Role::Interface 0.47
+      Specio::Constraint::Role::IsaType 0.47
+      Specio::Constraint::Simple 0.47
+      Specio::Constraint::Structurable 0.47
+      Specio::Constraint::Structured 0.47
+      Specio::Constraint::Union 0.47
+      Specio::Declare 0.47
+      Specio::DeclaredAt 0.47
+      Specio::Exception 0.47
+      Specio::Exporter 0.47
+      Specio::Helpers 0.47
+      Specio::Library::Builtins 0.47
+      Specio::Library::Numeric 0.47
+      Specio::Library::Perl 0.47
+      Specio::Library::String 0.47
+      Specio::Library::Structured 0.47
+      Specio::Library::Structured::Dict 0.47
+      Specio::Library::Structured::Map 0.47
+      Specio::Library::Structured::Tuple 0.47
+      Specio::OO 0.47
+      Specio::PartialDump 0.47
+      Specio::Registry 0.47
+      Specio::Role::Inlinable 0.47
+      Specio::Subs 0.47
+      Specio::TypeChecks 0.47
+      Test::Specio 0.47
     requirements:
       B 0
       Carp 0
@@ -3998,6 +4039,14 @@ DISTRIBUTIONS
       Try::Tiny 0.07
       strict 0
       warnings 0
+  Test-LongString-0.17
+    pathname: R/RG/RGARCIA/Test-LongString-0.17.tar.gz
+    provides:
+      Test::LongString 0.17
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::Builder 0.12
+      Test::Builder::Tester 1.04
   Test-SharedFork-0.35
     pathname: E/EX/EXODIST/Test-SharedFork-0.35.tar.gz
     provides:
@@ -4120,52 +4169,52 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  URI-5.06
-    pathname: O/OA/OALDERS/URI-5.06.tar.gz
+  URI-5.07
+    pathname: O/OA/OALDERS/URI-5.07.tar.gz
     provides:
-      URI 5.06
-      URI::Escape 5.06
-      URI::Heuristic 5.06
-      URI::IRI 5.06
-      URI::QueryParam 5.06
-      URI::Split 5.06
-      URI::URL 5.06
-      URI::WithBase 5.06
-      URI::data 5.06
-      URI::file 5.06
-      URI::file::Base 5.06
-      URI::file::FAT 5.06
-      URI::file::Mac 5.06
-      URI::file::OS2 5.06
-      URI::file::QNX 5.06
-      URI::file::Unix 5.06
-      URI::file::Win32 5.06
-      URI::ftp 5.06
-      URI::gopher 5.06
-      URI::http 5.06
-      URI::https 5.06
-      URI::ldap 5.06
-      URI::ldapi 5.06
-      URI::ldaps 5.06
-      URI::mailto 5.06
-      URI::mms 5.06
-      URI::news 5.06
-      URI::nntp 5.06
-      URI::pop 5.06
-      URI::rlogin 5.06
-      URI::rsync 5.06
-      URI::rtsp 5.06
-      URI::rtspu 5.06
-      URI::sftp 5.06
-      URI::sip 5.06
-      URI::sips 5.06
-      URI::snews 5.06
-      URI::ssh 5.06
-      URI::telnet 5.06
-      URI::tn3270 5.06
-      URI::urn 5.06
-      URI::urn::isbn 5.06
-      URI::urn::oid 5.06
+      URI 5.07
+      URI::Escape 5.07
+      URI::Heuristic 5.07
+      URI::IRI 5.07
+      URI::QueryParam 5.07
+      URI::Split 5.07
+      URI::URL 5.07
+      URI::WithBase 5.07
+      URI::data 5.07
+      URI::file 5.07
+      URI::file::Base 5.07
+      URI::file::FAT 5.07
+      URI::file::Mac 5.07
+      URI::file::OS2 5.07
+      URI::file::QNX 5.07
+      URI::file::Unix 5.07
+      URI::file::Win32 5.07
+      URI::ftp 5.07
+      URI::gopher 5.07
+      URI::http 5.07
+      URI::https 5.07
+      URI::ldap 5.07
+      URI::ldapi 5.07
+      URI::ldaps 5.07
+      URI::mailto 5.07
+      URI::mms 5.07
+      URI::news 5.07
+      URI::nntp 5.07
+      URI::pop 5.07
+      URI::rlogin 5.07
+      URI::rsync 5.07
+      URI::rtsp 5.07
+      URI::rtspu 5.07
+      URI::sftp 5.07
+      URI::sip 5.07
+      URI::sips 5.07
+      URI::snews 5.07
+      URI::ssh 5.07
+      URI::telnet 5.07
+      URI::tn3270 5.07
+      URI::urn 5.07
+      URI::urn::isbn 5.07
+      URI::urn::oid 5.07
     requirements:
       Carp 0
       Cwd 0
