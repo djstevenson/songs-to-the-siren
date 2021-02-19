@@ -132,3 +132,8 @@ VALUES
 (2, 2, NULL, '2nd thread c5', '<p>2nd thread c5</p>', NOW(), NOW()),
 (2, 1, NULL, '3rd thread c6', '<p>3rd thread c6</p>', NOW(), NOW()),
 (2, 2,    5, 'reply to c5 = c7', '<p>reply to c5 = c7</p>', NOW(), NOW());
+
+INSERT INTO links (song_id, embed_identifier, embed_class, list_priority, list_css, embed_url, embed_description, list_url, list_description) VALUES 
+(1, 'lost-in-the-plot', 'YouTubeEmbedded', 0, 'youtube', 'https://www.youtube-nocookie.com/embed/u0zRxxBKZ1A', 'Lost in the Plot - The Dears (Official Video)', '', ''),
+(1, 'extra-info', 'Default', 10, 'youtube', '', '', 'https://www.youtube-nocookie.com/embed/LINKCODE2', 'Link Description for list');
+

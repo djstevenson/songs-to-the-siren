@@ -30,3 +30,5 @@ requires 'Pod::Parser';
 requires 'Perl::Critic::Policy::Dynamic::NoIndirect';
 requires 'Perl::Critic::Policy::Freenode::MultidimensionalArrayEmulation';
 requires 'Perl::Critic::Policy::Freenode::Prototypes';
+requires 'File::Path';
+requires 'IO::File';
