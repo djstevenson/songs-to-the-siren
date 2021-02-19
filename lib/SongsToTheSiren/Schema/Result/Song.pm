@@ -11,6 +11,8 @@ use SongsToTheSiren::Model::Comment::Forest qw/ make_forest /;
 
 use DateTime;
 use Text::Markdown qw/ markdown /;
+use IO::File;
+use File::Path qw/ mkpath /;
 
 __PACKAGE__->load_components('InflateColumn::DateTime');
 
@@ -175,6 +177,207 @@ sub older {
     return undef unless $self->published_at;
 
     return $self->result_source->resultset->older($self)->where_published->single;
+}
+
+sub export {
+    my ($self, $root_dir) = @_;
+
+    my $song_dir = $self->_title_to_dirname($root_dir);
+    $self->_export_markdown($song_dir);
+}
+
+sub _title_to_dirname {
+    my ($self, $root_dir) = @_;
+
+    # Remove anything that's not A-za-z0-9,
+    # Convert to Pascal case
+
+    my $full_path = $root_dir . '/' . $self->_title_to_relative_dirname;
+
+    mkpath($full_path, { mode => 0775 });
+    return $full_path;
+}
+
+sub _title_to_relative_dirname {
+    my ($self) = @_;
+
+    # Remove anything that's not A-za-z0-9,
+    # Convert to Pascal case
+
+    return join('', map {
+            $self->_convert_word($_)
+        } split(/\s+/, $self->title)
+    );
+}
+
+sub _convert_word {
+    my ($self, $word) = @_;
+
+    $word =~ s/[^0-9A-Za-z]//g;
+    return ucfirst($word);
+}
+
+sub _export_markdown {
+    my ($self, $song_dir) = @_;
+
+    $self->_export_markdown_file($song_dir, 'summary', $self->summary_markdown);
+    $self->_export_markdown_file($song_dir, 'article', $self->full_markdown);
+    $self->_export_swift($song_dir);
+}
+
+sub _export_markdown_file {
+    my ($self, $song_dir, $file, $md) = @_;
+
+    # Old format: ^^somecode^^
+    # New format: ^link(somecode)
+    $md =~ s/\^\^(.*?)\^\^/^link($1)/g;
+
+    my $full_file = "${song_dir}/${file}.md";
+    my $fh = IO::File->new($full_file, ">:utf8");
+    $fh->print($md, "\n") or die;
+    $fh->close;
+}
+
+# Move this to a mixin role or something, it's a lotta shiz
+# messing up the model class
+sub _export_swift {
+    my ($self, $song_dir) = @_;
+
+    my $file = $self->_title_to_relative_dirname;
+
+    my $full_file = "${song_dir}/${file}.swift";
+    my $fh = IO::File->new($full_file, ">:utf8");
+    $fh->print($self->_to_swift) or die;
+    $fh->close;
+}
+
+sub _to_swift {
+    my ($self) = @_;
+
+    my $songFunc = lcfirst $self->_title_to_relative_dirname;
+    my $tags     = $self->_convert_tags;
+
+    my $pattern = <<"EOF";
+extension Song {
+    static func %s() -> Song {
+        Song (
+            id:       %d,
+            style:    .listing,
+            dir:      String.folderFromFunctionName(name: #function),
+            artist:   "%s",
+            title:    "%s",
+            album:    "%s",
+            released: "%s",
+            maxRez:   %d,
+            tags:     [ %s ],
+            country:  ["%s"],
+            video:    %s,
+            links:    [
+%s
+            ]
+        )
+    }
+}
+EOF
+    return sprintf($pattern,
+        $songFunc,
+        $self->id,
+        $self->artist,
+        $self->title,
+        $self->album,
+        $self->released_at,
+        $self->max_resolution,
+        $self->_convert_tags,
+        $self->country,
+        $self->_convert_video,
+        $self->_convert_links,
+    );
+}
+
+sub _convert_tags {
+    my ($self) = @_;
+
+    return join(', ', map {
+            $self->_convert_tag($_)
+        } $self->tags->by_name->all
+    );
+}
+
+sub _convert_tag {
+    my ($self, $tag) = @_;
+
+    my $name = join('', map {
+            $self->_convert_word($_)
+        } split(/\s+/, $tag->name)
+    );
+
+    return '.' . lcfirst($name);
+}
+
+sub _convert_video {
+    my ($self) = @_;
+
+    my $video_link = $self->links->search({
+        embed_class      => 'YouTubeEmbedded',
+        embed_identifier => { '!=' => undef },
+    }, {
+        order_by => 'id'
+    })->first;
+
+    return 'nil' unless $video_link;
+
+    my $url = $video_link->embed_url;
+    $url =~ s{^https://www.youtube-nocookie.com/embed/}{};
+
+    my $pattern = <<'EOF';
+.youtube(
+                            data: SongVideo.Common(
+                                id:   "video",
+                                desc: "%s"
+                            ),
+                            code: "%s"
+                      )
+EOF
+    my $res = sprintf($pattern, $video_link->embed_identifier, $url);
+    chomp $res;
+    return $res;
+}
+
+sub _convert_links {
+    my ($self) = @_;
+
+    my @links = $self->links->search(undef, {
+        order_by => 'id'
+    })->all;
+
+    return '' unless scalar @links;
+    return join(",\n", map { $self->_convert_link($_)}  @links);
+}
+
+sub _convert_link {
+    my ($self, $link) = @_;
+
+    my @links;
+
+    my $link_pattern = <<'EOF';
+                .youtube(
+                    %s
+                    code:     "%s"
+                )
+EOF
+    chomp $link_pattern;
+    if ($link->embed_url) {
+        my $embedded_pattern = 'embedded: ["%s": "%s"]';
+        my $ll = sprintf($embedded_pattern, $link->embed_identifier, $link->embed_description);
+        push @links, sprintf($link_pattern, $ll, $link->list_url);
+    }
+    else {
+        my $listing_pattern  = 'listing:  "%s"';
+        my $ll = sprintf($listing_pattern, $link->list_description);
+        push @links, sprintf($link_pattern, $ll, $link->list_url)
+    }
+
+    return @links;
 }
 
 no Moose;
