@@ -271,10 +271,9 @@ extension Song {
             maxRez:   %d,
             tags:     [ %s ],
             country:  ["%s"],
-            video:    %s,
-            links:    [
+            links:    SongLinks(links: [
 %s
-            ]
+            ])
         )
     }
 }
@@ -289,7 +288,6 @@ EOF
         $self->max_resolution,
         $self->_convert_tags,
         $self->country,
-        $self->_convert_video,
         $self->_convert_links,
     );
 }
@@ -314,35 +312,6 @@ sub _convert_tag {
     return '.' . lcfirst($name);
 }
 
-sub _convert_video {
-    my ($self) = @_;
-
-    my $video_link = $self->links->search({
-        embed_class      => 'YouTubeEmbedded',
-        embed_identifier => { '!=' => undef },
-    }, {
-        order_by => 'id'
-    })->first;
-
-    return 'nil' unless $video_link;
-
-    my $url = $video_link->embed_url;
-    $url =~ s{^https://www.youtube-nocookie.com/embed/}{};
-
-    my $pattern = <<'EOF';
-.youtube(
-                            data: SongVideo.Common(
-                                id:   "video",
-                                desc: "%s"
-                            ),
-                            code: "%s"
-                      )
-EOF
-    my $res = sprintf($pattern, $video_link->embed_identifier, $url);
-    chomp $res;
-    return $res;
-}
-
 sub _convert_links {
     my ($self) = @_;
 
@@ -360,22 +329,22 @@ sub _convert_link {
     my @links;
 
     my $link_pattern = <<'EOF';
-                .youtube(
-                    %s
-                    code:     "%s"
+                SongLink(
+                    id:        "%s",
+                    embedText: "%s",
+                    listText:  "%s",
+                    linkType:  .youtubeLink(code: "%s")
                 )
 EOF
     chomp $link_pattern;
-    if ($link->embed_url) {
-        my $embedded_pattern = 'embedded: ["%s": "%s"]';
-        my $ll = sprintf($embedded_pattern, $link->embed_identifier, $link->embed_description);
-        push @links, sprintf($link_pattern, $ll, $link->list_url);
-    }
-    else {
-        my $listing_pattern  = 'listing:  "%s"';
-        my $ll = sprintf($listing_pattern, $link->list_description);
-        push @links, sprintf($link_pattern, $ll, $link->list_url)
-    }
+
+    push @links, sprintf(
+        $link_pattern,
+        $link->embed_identifier,
+        $link->embed_description,
+        $link->list_description,
+        $link->list_url
+    );
 
     return @links;
 }
