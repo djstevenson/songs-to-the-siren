@@ -261,17 +261,19 @@ sub _to_swift {
 extension Song {
     static func %s() -> Song {
         Song (
-            id:       %d,
-            style:    .listing,
-            dir:      String.folderFromFunctionName(name: #function),
-            artist:   "%s",
-            title:    "%s",
-            album:    "%s",
-            released: "%s",
-            maxRez:   %d,
-            tags:     [ %s ],
-            country:  ["%s"],
-            links:    SongLinks(links: [
+            id:        %d,
+            style:     .listing,
+            dir:       String.folderFromFunctionName(name: #function),
+            artist:    "%s",
+            title:     "%s",
+            album:     "%s",
+            released:  "%s",
+            maxRez:    %d,
+            createdAt: Date(timeIntervalSince1970: %d),
+            updatedAt: Date(timeIntervalSince1970: %d),
+            tags:      [%s],
+            country:   ["%s"],
+            links:     SongLinks(links: [
 %s
             ])
         )
@@ -286,6 +288,8 @@ EOF
         $self->album,
         $self->released_at,
         $self->max_resolution,
+        $self->created_at->epoch,
+        $self->created_at->epoch,  # Yes, created_at as our update time
         $self->_convert_tags,
         $self->country,
         $self->_convert_links,
