@@ -257,6 +257,8 @@ sub _to_swift {
     my $songFunc = lcfirst $self->_title_to_relative_dirname;
     my $tags     = $self->_convert_tags;
 
+    my $timestamp = $self->created_at->set_time_zone("Europe/London")->epoch;
+
     my $pattern = <<"EOF";
 extension Song {
     static func %s() -> Song {
@@ -288,8 +290,8 @@ EOF
         $self->album,
         $self->released_at,
         $self->max_resolution,
-        $self->created_at->epoch,
-        $self->created_at->epoch,  # Yes, created_at as our update time
+        $timestamp,
+        $timestamp,
         $self->_convert_tags,
         $self->country,
         $self->_convert_links,
