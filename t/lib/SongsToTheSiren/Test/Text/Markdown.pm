@@ -141,13 +141,13 @@ sub run {
 		{
 			test_name => q{Single time-sig 4/4},
 			input     => q{abc ^$4|4$^ def},
-			expected  => q{<p>abc <span class="time-signature"><sup><b><i>4</i></b></sup></span><sub><b><i>4</i></b></sub></span> def</p>},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>4</i></b></sup><sub><b><i>4</i></b></sub></span> def</p>},
 		},
 
 		{
 			test_name => q{Single time-sig 5/8},
 			input     => q{abc ^$5|8$^ def},
-			expected  => q{<p>abc <span class="time-signature"><sup><b><i>5</i></b></sup></span><sub><b><i>8</i></b></sub></span> def</p>},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>5</i></b></sup><sub><b><i>8</i></b></sub></span> def</p>},
 		},
 
 		{
@@ -159,7 +159,7 @@ sub run {
 		{
 			test_name => q{Can have two time sigs 3/4 and 7/12},
 			input     => q{abc ^$3|4$^ and ^$7|12$^ def},
-			expected  => q{<p>abc <span class="time-signature"><sup><b><i>3</i></b></sup></span><sub><b><i>4</i></b></sub></span> and <span class="time-signature"><sup><b><i>7</i></b></sup></span><sub><b><i>12</i></b></sub></span> def</p>},
+			expected  => q{<p>abc <span class="time-signature"><sup><b><i>3</i></b></sup><sub><b><i>4</i></b></sub></span> and <span class="time-signature"><sup><b><i>7</i></b></sup><sub><b><i>12</i></b></sub></span> def</p>},
 		},
 
 		# Shortcut expansions

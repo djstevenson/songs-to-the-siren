@@ -26,7 +26,7 @@ sub _time_signature {
     my ($self, $upper, $lower) = @_;
 
     return
-        qq{<span class="time-signature"><sup><b><i>${upper}</i></b></sup></span><sub><b><i>${lower}</i></b></sub></span>};
+        qq{<span class="time-signature"><sup><b><i>${upper}</i></b></sup><sub><b><i>${lower}</i></b></sub></span>};
 }
 
 __PACKAGE__->meta->make_immutable;
