@@ -257,9 +257,10 @@ sub _to_swift {
     my $songFunc = lcfirst $self->_title_to_relative_dirname;
     my $tags     = $self->_convert_tags;
 
-    my $timestamp = $self->created_at->set_time_zone("Europe/London")->epoch;
+    my $timestamp = $self->published_at->set_time_zone("Europe/London")->epoch;
 
     my $pattern = <<"EOF";
+import Foundation
 extension Song {
     static func %s() -> Song {
         Song (
