@@ -232,6 +232,10 @@ sub _export_markdown_file {
     # New format: ^link(somecode)
     $md =~ s/\^\^(.*?)\^\^/^link($1)/g;
 
+    # Old format: ^$3|4$^
+    # New format: ^time(3|4)
+    $md =~ s/\^\$(.*?)\$\^/^time($1)/g;
+
     my $full_file = "${song_dir}/${file}.md";
     my $fh = IO::File->new($full_file, ">:utf8");
     $fh->print($md, "\n") or die;
@@ -275,7 +279,7 @@ extension Song {
             createdAt: Date(timeIntervalSince1970: %d),
             updatedAt: Date(timeIntervalSince1970: %d),
             tags:      [%s],
-            country:   ["%s"],
+            country:   [%s],
             links:     SongLinks(links: [
 %s
             ])
@@ -294,9 +298,36 @@ EOF
         $timestamp,
         $timestamp,
         $self->_convert_tags,
-        $self->country,
+        $self->_convert_country,
         $self->_convert_links,
     );
+}
+
+sub _convert_country {
+    my ($self) = @_;
+
+    my %mapping = (
+        '🇮🇸' => '.iceland',
+        '🇮🇹' => '.italy',
+        '🇵🇱' => '.poland',
+        '🇸🇪' => '.sweden',
+        '🇯🇲' => '.jamaica',
+        '🇬🇧' => '.uk',
+        '🇺🇸' => '.usa',
+        '🇦🇺' => '.australia',
+        '🇨🇦' => '.canada',
+        '🇧🇪' => '.belgium',
+        '🇮🇪' => '.ireland',
+    );
+
+    my @res;
+    
+    my @flags = split(/\s/, $self->country);
+    for my $flag (@flags) {
+        my $country = exists($mapping{$flag}) ? $mapping{$flag} : $flag;
+        push @res, $country;
+    }
+    return join(', ', @res);
 }
 
 sub _convert_tags {
@@ -316,6 +347,9 @@ sub _convert_tag {
         } split(/\s+/, $tag->name)
     );
 
+    if ($name =~ /^[0-9]/) {
+        $name = 'decade' . $name;
+    }
     return '.' . lcfirst($name);
 }
 
