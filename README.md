@@ -1,7 +1,16 @@
+THIS IS ABANDONED
+-----------------
+
+This has been replaced by a Swift-based static site generator, and this project is no longer maintained.
+
+See instead: https://github.com/djstevenson/songs-to-the-siren-swift-static
+
+
+
 The code behing the "Songs To The Siren" blog
 ---------------------------------------------
 
-https://songstothesiren.com went live at Easter 2020. This is the code that manages the blog.
+https://songstothesiren.com went live at Easter 2020. This WAS the code that manages the blog.
 
 INIT dev DB
 ===========
