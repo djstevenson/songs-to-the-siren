@@ -1,4 +1,4 @@
-The code behing the "Songs To The Siren" blog
+The code behind the "Songs To The Siren" blog
 ---------------------------------------------
 
 https://songstothesiren.com went live at Easter 2020. This is the code that manages the blog.

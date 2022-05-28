@@ -73,7 +73,7 @@ sub meta_db_action {
     my ($self, $sql) = @_;
 
     my $data_source = 'dbi:Pg:database=postgres';
-    my $dbh = DBI->connect($data_source, 'postgres', undef, {RaiseError => 1});
+    my $dbh = DBI->connect($data_source, 'songstothesiren', undef, {RaiseError => 1});
 
    $dbh->do($sql);
 }
